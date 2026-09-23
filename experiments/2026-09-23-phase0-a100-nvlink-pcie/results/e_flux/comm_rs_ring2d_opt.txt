@@ -1,0 +1,1 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 test/python/gemm_rs/test_comm_rs.py 4096 12288 49152 --iters=20 --warmup=5 --exp=ring2d_single_node_opt --with_cudaMemcpyAsync

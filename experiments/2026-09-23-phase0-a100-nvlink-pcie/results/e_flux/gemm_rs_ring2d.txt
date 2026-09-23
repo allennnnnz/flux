@@ -1,0 +1,35 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 test/python/gemm_rs/test_gemm_rs.py 4096 12288 49152 --dtype=float16 --iters=20 --warmup=5 --ring_mode=ring2d
+torch #2: gemm 2.781 ms, comm 0.541 ms, total 3.322 mstorch #1: gemm 2.783 ms, comm 0.539 ms, total 3.321 ms
+
+torch #4: gemm 2.797 ms, comm 0.525 ms, total 3.322 mstorch #3: gemm 2.697 ms, comm 0.624 ms, total 3.322 mstorch #5: gemm 2.782 ms, comm 0.540 ms, total 3.322 ms
+
+
+torch #6: gemm 2.774 ms, comm 0.548 ms, total 3.322 ms
+torch #7: gemm 2.779 ms, comm 0.543 ms, total 3.323 ms
+flux  #2: gemm 2.804 ms, comm 0.001 ms, total 2.805 ms
+flux  #1: gemm 2.805 ms, comm 0.000 ms, total 2.806 ms
+flux  #5: gemm 2.803 ms, comm 0.003 ms, total 2.806 msflux  #3: gemm 2.801 ms, comm 0.004 ms, total 2.805 ms
+
+flux  #6: gemm 2.799 ms, comm 0.006 ms, total 2.805 ms
+flux  #4: gemm 2.821 ms, comm -0.015 ms, total 2.806 ms
+flux  #7: gemm 2.801 ms, comm 0.005 ms, total 2.806 ms
+SOL gemm TensorCore 1.982ms Memory read: 0.099ms write: 0.049ms
+torch #0: gemm 2.780 ms, comm 0.543 ms, total 3.323 ms
+flux  #0: gemm 2.800 ms, comm 0.005 ms, total 2.806 ms
+all close!
+✅ flux check passed
+all close!
+✅ flux check passed
+all close!
+✅ flux check passed
+all close!
+✅ flux check passed
+all close!
+✅ flux check passed
+all close!
+✅ flux check passed
+all close!
+✅ flux check passed
+all close!
+✅ flux check passed
+❌ flux vs torch bitwise check failed

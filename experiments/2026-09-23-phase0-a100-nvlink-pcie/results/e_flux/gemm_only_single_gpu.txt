@@ -1,0 +1,5 @@
+SOL gemm TensorCore 15.858ms Memory read: 0.642ms write: 0.197ms
+torch: gemm 20.351 ms
+flux: gemm 20.918 ms
+is bitwise match:  False
+all close!

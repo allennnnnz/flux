@@ -1,0 +1,1 @@
+summary,op=rs,world=8,M=4096,N=12288,K=49152,dtype=float16,warmup=5,iters=20,median_ms=0.666624,stdev_ms=0.036774,bytes_per_rank=100663296

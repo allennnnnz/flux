@@ -1,0 +1,51 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 test/python/ag_gemm/test_ag_kernel.py 4096 49152 12288 --dtype=float16 --iters=20 --warmup=5 --ring_mode=ring2d
+is bitwise match:  False
+SOL gemm TensorCore 1.982ms Memory read: 0.599ms write: 0.025ms
+torch #0: total 3.307 ms, gemm 2.749 ms, comm 0.558 ms
+flux  #0: total 2.894 ms, gemm 2.457 ms, comm 0.437 ms, gemm_only 2.641 ms
+flux(no-overlap) #0: total 3.401 ms, gemm 2.495 ms, comm 0.906 ms
+torch #1: total 3.308 ms, gemm 2.751 ms, comm 0.557 ms
+flux  #1: total 2.892 ms, gemm 2.424 ms, comm 0.468 ms, gemm_only 2.534 ms
+flux(no-overlap) #1: total 3.403 ms, gemm 2.443 ms, comm 0.960 ms
+torch #2: total 3.308 ms, gemm 2.750 ms, comm 0.558 ms
+flux  #2: total 2.885 ms, gemm 2.595 ms, comm 0.291 ms, gemm_only 2.840 ms
+flux(no-overlap) #2: total 3.398 ms, gemm 2.842 ms, comm 0.557 ms
+torch #3: total 3.308 ms, gemm 2.747 ms, comm 0.560 ms
+flux  #3: total 2.885 ms, gemm 2.620 ms, comm 0.266 ms, gemm_only 2.877 ms
+flux(no-overlap) #3: total 3.399 ms, gemm 2.878 ms, comm 0.520 ms
+torch #4: total 3.308 ms, gemm 2.767 ms, comm 0.540 ms
+flux  #4: total 2.894 ms, gemm 2.442 ms, comm 0.452 ms, gemm_only 2.519 ms
+flux(no-overlap) #4: total 3.402 ms, gemm 2.476 ms, comm 0.926 ms
+torch #5: total 3.308 ms, gemm 2.750 ms, comm 0.558 ms
+flux  #5: total 2.888 ms, gemm 2.459 ms, comm 0.429 ms, gemm_only 2.519 ms
+flux(no-overlap) #5: total 3.400 ms, gemm 2.494 ms, comm 0.906 ms
+torch #6: total 3.307 ms, gemm 2.746 ms, comm 0.561 ms
+flux  #6: total 2.885 ms, gemm 2.583 ms, comm 0.302 ms, gemm_only 2.839 ms
+flux(no-overlap) #6: total 3.399 ms, gemm 2.841 ms, comm 0.559 ms
+torch #7: total 3.307 ms, gemm 2.748 ms, comm 0.559 ms
+flux  #7: total 2.885 ms, gemm 2.621 ms, comm 0.265 ms, gemm_only 2.876 ms
+flux(no-overlap) #7: total 3.401 ms, gemm 2.450 ms, comm 0.951 ms
+✅  torch vs flux bitwise match✅  torch vs flux bitwise match✅  torch vs flux bitwise match✅  torch vs flux bitwise match✅  torch vs flux bitwise match
+
+✅  torch vs flux bitwise match✅  torch vs flux bitwise match
+✅  torch vs flux bitwise match
+
+
+
+
+all close!
+✅ flux check passed
+all close!
+all close!✅ flux check passed
+
+✅ flux check passed
+all close!
+✅ flux check passed
+all close!
+✅ flux check passed
+all close!all close!
+
+✅ flux check passed✅ flux check passed
+
+all close!
+✅ flux check passed
