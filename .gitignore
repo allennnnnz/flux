@@ -24,3 +24,25 @@ python/flux/version.py
 
 # due to using tox and pytest and clangd
 .tox
+
+# Local environments
+.pixi/
+.venv/
+venv/
+.env
+.env.local
+.env.*.local
+
+# Python tooling caches and reports
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store

@@ -2,8 +2,10 @@
 set -x
 set -e
 
-## Change export PATH if cuda is not at default path
-export PATH=/usr/local/cuda/bin:$PATH
+## Change export PATH if CUDA is not at the default path.
+CUDA_HOME=${CUDA_HOME:-/usr/local/cuda}
+export CUDA_HOME
+export PATH=${CUDA_HOME}/bin:$PATH
 CMAKE=${CMAKE:-cmake}
 
 ARCH=""
@@ -162,6 +164,9 @@ function build_flux_cuda() {
             -DENABLE_NVSHMEM=${ENABLE_NVSHMEM}
             -DNVSHMEM_HOME=${NVSHMEM_HOME}
             -DCUDAARCHS=${ARCH}
+            -DCUDA_NVRTC_LIB=${CUDA_HOME}/lib/libnvrtc.so
+            -DCMAKE_CXX_FLAGS=-I${CUDA_HOME}/targets/x86_64-linux/include
+            -DCMAKE_CUDA_FLAGS=-I${CUDA_HOME}/targets/x86_64-linux/include
             -DGPU_SM_CORES=${SM_CORES}
             -DCMAKE_EXPORT_COMPILE_COMMANDS=1
             -DBUILD_TEST=${BUILD_TEST}
@@ -194,9 +199,11 @@ function build_flux_cuda() {
 
 function merge_compile_commands() {
     cd $SCRIPT_DIR
-    if command -v ninja >/dev/null 2>&1; then
+    local ths_ninja_file
+    ths_ninja_file=$(find ./build -path './build/temp.*/build.ninja' -print -quit 2>/dev/null || true)
+    if command -v ninja >/dev/null 2>&1 && [[ -n "$ths_ninja_file" ]] && [[ -f ./build/compile_commands.json ]]; then
         # generate compile_commands.json
-        ninja -f $(ls ./build/temp.*/build.ninja) -t compdb >build/compile_commands_ths_op.json
+        ninja -f "$ths_ninja_file" -t compdb >build/compile_commands_ths_op.json
         cat >build/merge_compile_commands.py <<EOF
 import json
 with open("build/compile_commands.json") as f:
@@ -210,7 +217,7 @@ EOF
         python3 build/merge_compile_commands.py
         echo "merge compile_commands.json done"
     else
-        echo "Ninja is not installed. Ninja is required for flux_ths_pybind's compile_commands.json. run 'pip3 install ninja'"
+        echo "Skipping flux_ths_pybind compile_commands merge."
     fi
 }
 
@@ -224,7 +231,17 @@ function build_flux_py {
     fi
     popd
     ##### build flux torch bindings #####
-    MAX_JOBS=${JOBS} python3 setup.py develop --user
+    if [[ -n "${CONDA_PREFIX:-}" ]]; then
+        if [[ -f /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1 ]]; then
+            mkdir -p "${CUDA_HOME}/lib64"
+            if [[ ! -e "${CUDA_HOME}/lib64/libnvidia-ml.so" ]]; then
+                ln -s /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1 "${CUDA_HOME}/lib64/libnvidia-ml.so"
+            fi
+        fi
+        MAX_JOBS=${JOBS} python3 -m pip install --no-build-isolation --no-deps -e .
+    else
+        MAX_JOBS=${JOBS} python3 setup.py develop --user
+    fi
     if [ $BDIST_WHEEL == "ON" ]; then
         MAX_JOBS=${JOBS} python3 setup.py bdist_wheel
     fi
@@ -239,9 +256,11 @@ if [ $ENABLE_NVSHMEM == "ON" ]; then
         echo "Found NVSHMEM_HOME from environment variable: $NVSHMEM_HOME. skip install..."
     else
         echo "NVSHMEM_HOME is not set, try using NVSHMEM from pip..."
-        # if not installed, install it from pip
-        if [ -z "$(pip3 list | grep nvidia-nvshmem-cu12)" ]; then
-            pip3 install nvidia-nvshmem-cu12==3.3.9
+        # Keep the wheel aligned with the NVSHMEM version used by this repo.
+        NVSHMEM_PIP_VERSION=${NVSHMEM_PIP_VERSION:-3.2.5}
+        installed_nvshmem_version=$(python3 -c "import importlib.metadata as m; print(m.version('nvidia-nvshmem-cu12'))" 2>/dev/null || true)
+        if [ "$installed_nvshmem_version" != "$NVSHMEM_PIP_VERSION" ]; then
+            pip3 install "nvidia-nvshmem-cu12==${NVSHMEM_PIP_VERSION}"
         fi
         NVSHMEM_HOME=$(python3 -c "import nvidia.nvshmem, pathlib; print(pathlib.Path(nvidia.nvshmem.__path__[0]))" 2>/dev/null)
         pushd $NVSHMEM_HOME/lib

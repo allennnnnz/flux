@@ -88,7 +88,8 @@ nvshmem_create_tensor(const std::vector<int64_t> &shape, c10::ScalarType dtype, 
         at::cuda::device_synchronize();
         nvshmem_free(ptr);
       },
-      option_gpu);
+      option_gpu,
+      at::Device(at::kCUDA, current_device));
 }
 
 std::vector<torch::Tensor>
@@ -135,11 +136,16 @@ nvshmem_create_tensor_list(
                 at::cuda::device_synchronize();
                 // std::cerr << "exit nvshmem_free " << ptr << "\n";
               },
-              option_gpu));
+              option_gpu,
+              at::Device(at::kCUDA, current_device)));
     } else {
       void *rptr = nvshmem_ptr(ptr, rank_global);
       FLUX_CHECK(rptr != nullptr) << "rank " << rank;
-      tensors.emplace_back(at::from_blob(rptr, shape, option_gpu));
+      tensors.emplace_back(
+          at::for_blob(rptr, shape)
+              .options(option_gpu)
+              .target_device(at::Device(at::kCUDA, current_device))
+              .make_tensor());
     }
   }
 
@@ -219,7 +225,11 @@ class C10dProcessGroup::Impl {
   broadcast_cpu_by_gpu(void *ptr, int64_t nbytes, int root_rank) {
     cudaStream_t stream = at::cuda::getCurrentCUDAStream();
     auto tensors = std::vector<torch::Tensor>{
-        at::empty({nbytes}, at::TensorOptions(torch::kUInt8).device(at::kCUDA))};
+        at::empty(
+            {nbytes},
+            at::TensorOptions(torch::kUInt8)
+                .device(at::kCUDA)
+                .device_index(c10::cuda::current_device()))};
     auto opt = c10d::BroadcastOptions();
     opt.rootRank = root_rank;
     CUDA_CHECK(
@@ -378,6 +388,10 @@ cudaipc_create_tensor_list(
 
 void
 init_flux_shm(Group *group) {
+  // NVSHMEM initialization may temporarily change CUDA's current device. Keep
+  // the per-rank PyTorch device active for subsequent Flux allocations.
+  at::cuda::CUDAGuard device_guard(c10::cuda::current_device());
+
   // Guarantee that cudaCtx has been created. If cudaCtx is not created on some ranks, which may
   // cause nvshmemx_init_attr to hang. Empirically, we can try to create a cudaCtx on the device by
   // calling cudaFree(0), although the offical doc describes that no operation is performed.

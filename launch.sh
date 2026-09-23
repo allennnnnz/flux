@@ -1,12 +1,19 @@
 #!/bin/bash
-# libflux_cuda.so maybe installed under /usr/local/lib or ~/.local/lib/ by pip3
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:~/.local/lib/
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 FLUX_SRC_DIR=${SCRIPT_DIR}
+
+# Prefer the user-local pixi and Flux libraries when running without sudo.
+if [[ -n "${CONDA_PREFIX:-}" ]]; then
+  export LD_LIBRARY_PATH="${FLUX_SRC_DIR}/build/lib:${FLUX_SRC_DIR}/python/flux/lib:${CONDA_PREFIX}/lib:${CONDA_PREFIX}/lib64:${LD_LIBRARY_PATH:-}"
+else
+  # libflux_cuda.so may be installed under /usr/local/lib or ~/.local/lib/ by pip3.
+  export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:/usr/local/lib:${HOME}/.local/lib"
+fi
 
 # add flux python package to PYTHONPATH
 export NVSHMEM_BOOTSTRAP=UID
 export NVSHMEM_DISABLE_CUDA_VMM=1 # moving from cpp to shell
+export NVSHMEM_REMOTE_TRANSPORT=${NVSHMEM_REMOTE_TRANSPORT:-none}
 export CUDA_DEVICE_MAX_CONNECTIONS=${CUDA_DEVICE_MAX_CONNECTIONS:-1}
 export CUDA_MODULE_LOADING=LAZY # EAGER if launch the consumer kernel before the producer kernel on host
 

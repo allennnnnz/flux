@@ -1,0 +1,36 @@
+[workspace]
+name = "flux"
+channels = ["nvidia", "conda-forge"]
+platforms = ["linux-64"]
+
+[dependencies]
+python = "3.11.*"
+pip = "*"
+packaging = "*"
+setuptools = "*"
+wheel = "*"
+ninja = "*"
+cmake = ">=3.28"
+cuda-nvcc = "12.4.131.*"
+cuda-cudart-dev = "12.4.127.*"
+numpy = ">=2.4.6,<3"
+cuda-cccl = "12.4.127.*"
+cuda-cudart-static = "12.4.127.*"
+cuda-cudart = "12.4.127.*"
+cuda-nvrtc = "12.4.127.*"
+cuda-nvrtc-dev = "12.4.127.*"
+cuda-nvtx = "12.4.127.*"
+cuda-nvml-dev = "12.4.127.*"
+libcurand = "10.3.5.147.*"
+libcurand-dev = "10.3.5.147.*"
+libcusparse = "12.4.1.24.*"
+libcusparse-dev = "12.4.1.24.*"
+libcublas = "12.4.5.8.*"
+libcublas-dev = "12.4.5.8.*"
+libcusolver = "11.6.1.9.*"
+libcusolver-dev = "11.6.1.9.*"
+
+[tasks]
+build = { cmd = "CUDA_HOME=\"$CONDA_PREFIX\" ./build.sh --arch 80 --nvshmem --no_test --jobs 16" }
+benchmark-ag = { cmd = "CUDA_HOME=\"$CONDA_PREFIX\" NVSHMEM_REMOTE_TRANSPORT=none ./launch.sh test/python/ag_gemm/test_ag_kernel.py 4096 49152 12288 --dtype=float16 --iters=10" }
+benchmark-rs = { cmd = "CUDA_HOME=\"$CONDA_PREFIX\" NVSHMEM_REMOTE_TRANSPORT=none ./launch.sh test/python/gemm_rs/test_gemm_rs.py 4096 12288 49152 --dtype=float16 --iters=10" }

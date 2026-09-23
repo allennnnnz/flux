@@ -384,7 +384,10 @@ lazy_init_buffer_tensor(torch::Tensor *tensor, int64_t buffer_size) {
 
   if (!tensor->defined() || buffer_size > tensor->numel()) {
     auto options =
-        torch::TensorOptions().dtype(c10::ScalarType::Byte).device(torch::Device(torch::kCUDA));
+        torch::TensorOptions()
+            .dtype(c10::ScalarType::Byte)
+            .device(torch::Device(torch::kCUDA))
+            .device_index(c10::cuda::current_device());
     *tensor = torch::empty({buffer_size}, options);
   }
 }
