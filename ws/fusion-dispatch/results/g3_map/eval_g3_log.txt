@@ -1,0 +1,253 @@
+G3: 320 measured points matched to 320 pre-registered predictions
+
+[ag all] 160 points  arm MAPE A 5.3%  B 6.7%  C 5.2%  D 3.7%  fused-vs-off accuracy (non-tie) 102/120
+    policy      regret   decode  prefill     worst  point                   >5%   probes
+    on           3.79%   23.98%    1.61%    224.9%  L8-QKV@tp8@16            75    0/160
+    off          4.88%    5.24%    4.84%     42.3%  L8-QKV@tp8@8192          53    0/160
+    thr512       1.97%    5.24%    1.61%     37.9%  L8-QKV@tp8@1024          28    0/160
+    pred         1.76%    2.60%    1.67%     30.5%  L8-GU@tp2@136            19    0/160
+    hyb          1.21%    1.81%    1.14%     30.5%  L8-GU@tp2@136            11   80/160
+    hyb+pcie     1.21%    1.81%    1.14%     30.5%  L8-GU@tp2@136            11   80/160
+    hyb5+pcie    1.31%    1.95%    1.24%     30.5%  L8-GU@tp2@136            13   51/160
+
+[ag TP=8] 60 points  arm MAPE A 4.4%  B 6.5%  C 4.7%  D 3.3%  fused-vs-off accuracy (non-tie) 50/54
+    policy      regret   decode  prefill     worst  point                   >5%   probes
+    on           7.62%   58.09%    1.02%    224.9%  L8-QKV@tp8@16            37    0/60
+    off          8.73%    0.18%    9.85%     42.3%  L8-QKV@tp8@8192          18    0/60
+    thr512       0.92%    0.18%    1.02%     37.9%  L8-QKV@tp8@1024           8    0/60
+    pred         0.89%    0.18%    0.98%     19.1%  L8-GU@tp8@2048            5    0/60
+    hyb          0.26%    0.18%    0.27%     16.3%  L8-GU@tp8@1024            2   14/60
+    hyb+pcie     0.26%    0.18%    0.27%     16.3%  L8-GU@tp8@1024            2   14/60
+    hyb5+pcie    0.67%    0.18%    0.73%     19.1%  L8-GU@tp8@2048            4    6/60
+
+[ag TP=4] 60 points  arm MAPE A 4.9%  B 6.2%  C 5.4%  D 3.4%  fused-vs-off accuracy (non-tie) 30/38
+    policy      regret   decode  prefill     worst  point                   >5%   probes
+    on           2.50%   12.16%    1.54%    101.2%  L-QKV@tp4@16             24    0/60
+    off          3.35%    5.06%    3.18%     29.1%  L-QKV@tp4@4096           21    0/60
+    thr512       1.86%    5.06%    1.54%     15.6%  L-GU@tp4@136             11    0/60
+    pred         1.77%    3.09%    1.64%     15.6%  L-GU@tp4@136             10    0/60
+    hyb          1.36%    1.71%    1.33%     15.6%  L-GU@tp4@136              5   37/60
+    hyb+pcie     1.36%    1.71%    1.33%     15.6%  L-GU@tp4@136              5   37/60
+    hyb5+pcie    1.38%    1.94%    1.33%     15.6%  L-GU@tp4@136              5   26/60
+
+[ag TP=2] 40 points  arm MAPE A 7.1%  B 7.6%  C 5.8%  D 4.8%  fused-vs-off accuracy (non-tie) 22/28
+    policy      regret   decode  prefill     worst  point                   >5%   probes
+    on           3.57%   12.35%    2.60%     82.6%  L8-QKV@tp2@16            14    0/40
+    off          5.46%   13.13%    4.61%     36.6%  L8-GU@tp2@256            14    0/40
+    thr512       3.65%   13.13%    2.60%     36.6%  L8-GU@tp2@256             9    0/40
+    pred         2.81%    4.50%    2.62%     30.5%  L8-GU@tp2@136             4    0/40
+    hyb          1.84%    4.49%    1.54%     30.5%  L8-GU@tp2@136             4   29/40
+    hyb+pcie     1.84%    4.49%    1.54%     30.5%  L8-GU@tp2@136             4   29/40
+    hyb5+pcie    1.84%    4.50%    1.54%     30.5%  L8-GU@tp2@136             4   19/40
+
+[ag mode=gpu] 80 points  arm MAPE A 5.3%  B 5.2%  C 4.6%  D 3.8%  fused-vs-off accuracy (non-tie) 48/56
+    policy      regret   decode  prefill     worst  point                   >5%   probes
+    on           3.24%   23.35%    0.97%    185.7%  L8-QKV@tp8@16            39    0/80
+    off          4.59%    3.82%    4.67%     30.8%  L8-QKV@tp8@8192          24    0/80
+    thr512       1.26%    3.82%    0.97%     33.8%  L8-QKV@tp8@1024          12    0/80
+    pred         1.16%    2.25%    1.04%     28.5%  L8-GU@tp2@136             9    0/80
+    hyb          0.24%    1.32%    0.12%     28.5%  L8-GU@tp2@136             4   39/80
+    hyb+pcie     0.24%    1.32%    0.12%     28.5%  L8-GU@tp2@136             4   39/80
+    hyb5+pcie    0.35%    1.58%    0.21%     28.5%  L8-GU@tp2@136             5   25/80
+
+[ag mode=steady] 80 points  arm MAPE A 5.2%  B 8.1%  C 5.8%  D 3.6%  fused-vs-off accuracy (non-tie) 54/64
+    policy      regret   decode  prefill     worst  point                   >5%   probes
+    on           4.32%   24.65%    2.23%    224.9%  L8-QKV@tp8@16            36    0/80
+    off          5.17%    6.77%    5.00%     42.3%  L8-QKV@tp8@8192          29    0/80
+    thr512       2.66%    6.77%    2.23%     37.9%  L8-QKV@tp8@1024          16    0/80
+    pred         2.35%    2.97%    2.29%     30.5%  L8-GU@tp2@136            10    0/80
+    hyb          2.15%    2.34%    2.14%     30.5%  L8-GU@tp2@136             7   41/80
+    hyb+pcie     2.15%    2.34%    2.14%     30.5%  L8-GU@tp2@136             7   41/80
+    hyb5+pcie    2.25%    2.34%    2.24%     30.5%  L8-GU@tp2@136             8   26/80
+
+[rs all] 160 points  arm MAPE A 8.3%  B 6.8%  fused-vs-off accuracy (non-tie) 119/126
+    policy      regret   decode  prefill     worst  point                   >5%   probes
+    on           0.86%    7.59%    0.03%     45.1%  L8-down@tp2@16           37    0/160
+    off         13.92%   12.64%   14.08%     52.7%  L8-down@tp8@1024        109    0/160
+    thr512       1.42%   12.64%    0.03%     47.7%  L-O@tp4@512              35    0/160
+    pred         0.37%    1.54%    0.23%     42.7%  L8-O@tp8@16              12    0/160
+    hyb          0.08%    0.77%    0.00%     42.7%  L8-O@tp8@16               6   51/160
+    hyb+pcie     0.08%    0.77%    0.00%     42.7%  L8-O@tp8@16               6   51/160
+    hyb5+pcie    0.11%    0.99%    0.00%     42.7%  L8-O@tp8@16               7   28/160
+
+[rs TP=8] 60 points  arm MAPE A 10.4%  B 7.7%  fused-vs-off accuracy (non-tie) 38/41
+    policy      regret   decode  prefill     worst  point                   >5%   probes
+    on           0.81%    5.77%    0.00%     33.2%  L8-down@tp8@16           11    0/60
+    off         24.26%   15.24%   25.72%     52.7%  L8-down@tp8@1024         45    0/60
+    thr512       2.13%   15.24%    0.00%     42.7%  L8-O@tp8@16              15    0/60
+    pred         0.59%    4.20%    0.00%     42.7%  L8-O@tp8@16               8    0/60
+    hyb          0.36%    2.58%    0.00%     42.7%  L8-O@tp8@16               6   11/60
+    hyb+pcie     0.36%    2.58%    0.00%     42.7%  L8-O@tp8@16               6   11/60
+    hyb5+pcie    0.38%    2.74%    0.00%     42.7%  L8-O@tp8@16               6    4/60
+
+[rs TP=4] 60 points  arm MAPE A 6.4%  B 5.1%  fused-vs-off accuracy (non-tie) 54/54
+    policy      regret   decode  prefill     worst  point                   >5%   probes
+    on           0.73%    7.65%    0.00%     32.9%  L-down@tp4@16            16    0/60
+    off         11.54%   13.87%   11.30%     47.7%  L-O@tp4@512              40    0/60
+    thr512       1.32%   13.87%    0.00%     47.7%  L-O@tp4@512              14    0/60
+    pred         0.00%    0.00%    0.00%      0.0%  L-O@tp4@16                0    0/60
+    hyb          0.00%    0.00%    0.00%      0.0%  L-O@tp4@16                0   20/60
+    hyb+pcie     0.00%    0.00%    0.00%      0.0%  L-O@tp4@16                0   20/60
+    hyb5+pcie    0.00%    0.00%    0.00%      0.0%  L-O@tp4@16                0   10/60
+
+[rs TP=2] 40 points  arm MAPE A 8.1%  B 7.9%  fused-vs-off accuracy (non-tie) 27/31
+    policy      regret   decode  prefill     worst  point                   >5%   probes
+    on           1.36%    9.95%    0.17%     45.1%  L8-down@tp2@16           10    0/40
+    off          9.23%    5.86%    9.69%     47.9%  L8-O@tp2@1024            24    0/40
+    thr512       0.86%    5.86%    0.17%     33.8%  L8-O@tp2@512              6    0/40
+    pred         1.32%    1.81%    1.25%     28.4%  L8-down@tp2@1024          4    0/40
+    hyb          0.03%    0.24%    0.00%      3.9%  L8-O@tp2@136              0   20/40
+    hyb+pcie     0.03%    0.24%    0.00%      3.9%  L8-O@tp2@136              0   20/40
+    hyb5+pcie    0.14%    1.13%    0.00%     22.5%  L8-O@tp2@136              1   14/40
+
+[rs mode=gpu] 80 points  arm MAPE A 9.5%  B 5.5%  fused-vs-off accuracy (non-tie) 58/63
+    policy      regret   decode  prefill     worst  point                   >5%   probes
+    on           0.95%    7.63%    0.06%     41.1%  L8-O@tp2@16              21    0/80
+    off         13.37%   11.21%   13.65%     50.4%  L8-down@tp8@1024         51    0/80
+    thr512       1.36%   11.21%    0.06%     41.8%  Q-down@tp8@512           14    0/80
+    pred         0.56%    1.29%    0.46%     28.4%  L8-down@tp2@1024          5    0/80
+    hyb          0.01%    0.10%    0.00%      3.9%  L8-O@tp2@136              0   22/80
+    hyb+pcie     0.01%    0.10%    0.00%      3.9%  L8-O@tp2@136              0   22/80
+    hyb5+pcie    0.03%    0.25%    0.00%      4.3%  L8-O@tp8@64               0   12/80
+
+[rs mode=steady] 80 points  arm MAPE A 7.1%  B 8.0%  fused-vs-off accuracy (non-tie) 61/63
+    policy      regret   decode  prefill     worst  point                   >5%   probes
+    on           0.78%    7.54%    0.00%     45.1%  L8-down@tp2@16           16    0/80
+    off         14.47%   14.23%   14.50%     52.7%  L8-down@tp8@1024         58    0/80
+    thr512       1.47%   14.23%    0.00%     47.7%  L-O@tp4@512              21    0/80
+    pred         0.19%    1.82%    0.00%     42.7%  L8-O@tp8@16               7    0/80
+    hyb          0.16%    1.51%    0.00%     42.7%  L8-O@tp8@16               6   29/80
+    hyb+pcie     0.16%    1.51%    0.00%     42.7%  L8-O@tp8@16               6   29/80
+    hyb5+pcie    0.19%    1.82%    0.00%     42.7%  L8-O@tp8@16               7   16/80
+
+[PCIe-tuned config rule, pre-registered flags]
+  picks tp8 L8-GU    gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     B     B     A     A     A     A     A
+                           pred:       B     B     B     B     B     B     B     B     A     A
+                           verdict:  off   off   off   off   off   tie fused fused fused fused
+  picks tp8 L8-GU    steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     B     B     A     A     A     A     A
+                           pred:       B     B     B     B     B     B     B     A     A     A
+                           verdict:  off   off   off   off   off fused fused fused fused fused
+  picks tp8 L8-QKV   gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     B     B     B     B     B     B     A
+                           pred:       B     B     B     B     B     B     B     B     B     A
+                           verdict:  off   off   off   off   off   off   off   off   off fused
+  picks tp8 L8-QKV   steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     B     B     B     B     B     B     A
+                           pred:       B     B     B     B     B     B     B     B     B     A
+                           verdict:  off   off   off   off   off   off   off   off   off fused
+  picks tp8 Q-GU     gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     B     B     B     B     A     A     A
+                           pred:       B     B     B     B     B     B     B     A     A     A
+                           verdict:  off   off   off   off   tie   tie   tie fused fused fused
+  picks tp8 Q-GU     steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     B     D     A     A     A     A     A
+                           pred:       B     B     B     B     B     B     A     A     A     A
+                           verdict:  off   off   off   off   off   tie   tie fused fused fused
+  picks tp4 L-GU     gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     D     D     D     A     A     A     A     A
+                           pred:       B     B     B     A     A     B     A     A     A     A
+                           verdict:  off   off   off   off   tie   tie fused   tie   tie   tie
+  picks tp4 L-GU     steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     D     D     A     A     A     C     C     C
+                           pred:       B     B     B     A     A     A     A     A     A     A
+                           verdict:  off   off   off   off   tie fused   tie   tie   tie   off
+  picks tp4 L-QKV    gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     B     B     B     A     A     A     A
+                           pred:       B     B     B     B     B     B     A     A     A     A
+                           verdict:  off   off   off   tie   tie   tie fused fused fused fused
+  picks tp4 L-QKV    steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     B     A     A     A     A     A     A
+                           pred:       B     B     B     B     B     B     A     A     A     A
+                           verdict:  off   off   off   tie   tie   tie fused fused fused fused
+  picks tp4 Q-GU     gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     D     D     B     A     A     C     A     C
+                           pred:       B     B     B     A     A     B     A     A     A     A
+                           verdict:  off   off   off   off   tie   tie   tie   off fused   tie
+  picks tp4 Q-GU     steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     D     D     A     A     A     C     C     C
+                           pred:       B     B     B     A     A     A     A     A     A     A
+                           verdict:  off   off   off   off fused   tie   tie   off   tie   off
+  picks tp2 L8-GU    gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     A     A     A     A     A     C     C     C
+                           pred:       B     B     B     A     A     B     A     A     A     A
+                           verdict:  off   off fused   tie   tie   tie fused   tie   off   off
+  picks tp2 L8-GU    steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     A     A     A     A     A     C     C     C
+                           pred:       B     B     B     A     A     A     A     A     A     A
+                           verdict:  off   off fused fused fused fused fused   tie   off   off
+  picks tp2 L8-QKV   gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     B     B     B     B     A     A     A
+                           pred:       B     B     B     B     B     B     C     A     A     A
+                           verdict:  off   off   off   tie   tie   tie   tie fused fused fused
+  picks tp2 L8-QKV   steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     A     A     C     C     A     A     A
+                           pred:       B     B     B     B     B     C     C     A     A     A
+                           verdict:  off   off   off   tie   tie   off   tie fused fused fused
+  picks tp8 L8-O     gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     A     A     A     A     A     A     A
+                           pred:       B     A     A     A     A     A     A     A     A     A
+                           verdict:  tie   tie   tie   tie   tie fused fused fused fused fused
+  picks tp8 L8-O     steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     A     A     A     A     A     A     A     A     A     A
+                           pred:       B     B     B     B     A     A     A     A     A     A
+                           verdict:fused fused   tie   tie fused fused fused fused fused fused
+  picks tp8 L8-down  gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     A     A     A     A     A     A     A
+                           pred:       B     B     A     A     A     A     A     A     A     A
+                           verdict:  off   tie   tie   tie fused fused fused fused fused fused
+  picks tp8 L8-down  steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     A     A     B     A     A     A     A     A     A     A
+                           pred:       B     B     B     B     A     A     A     A     A     A
+                           verdict:  tie   tie   tie   tie fused fused fused fused fused fused
+  picks tp8 Q-down   gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     A     A     A     A     A     A     A
+                           pred:       B     B     B     B     A     A     A     A     A     A
+                           verdict:  off   tie   tie fused fused fused fused fused fused fused
+  picks tp8 Q-down   steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     A     A     A     A     A     A     A
+                           pred:       B     B     B     A     A     A     A     A     A     A
+                           verdict:  tie   tie   tie fused fused fused fused fused fused fused
+  picks tp4 L-O      gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     A     A     A     A     A     A     A     A
+                           pred:       B     B     A     A     A     A     A     A     A     A
+                           verdict:  off   tie fused fused fused fused fused fused fused fused
+  picks tp4 L-O      steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     A     A     A     A     A     A     A     A
+                           pred:       B     B     A     A     A     A     A     A     A     A
+                           verdict:  off   tie fused fused fused fused fused fused fused fused
+  picks tp4 L-down   gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     A     A     A     A     A     A     A
+                           pred:       B     B     B     A     A     A     A     A     A     A
+                           verdict:  off   off   tie fused fused fused fused fused fused fused
+  picks tp4 L-down   steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     A     A     A     A     A     A     A
+                           pred:       B     B     B     A     A     A     A     A     A     A
+                           verdict:  off   off   off fused fused fused fused fused fused   tie
+  picks tp4 Q-down   gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     A     A     A     A     A     A     A
+                           pred:       B     B     B     A     A     A     A     A     A     A
+                           verdict:  off   off   tie fused fused fused fused fused fused fused
+  picks tp4 Q-down   steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     A     A     A     A     A     A     A
+                           pred:       B     B     B     A     A     A     A     A     A     A
+                           verdict:  off   off   off fused fused fused fused fused fused   tie
+  picks tp2 L8-O     gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     A     A     A     A     A     A     A
+                           pred:       B     A     A     A     A     A     A     A     A     A
+                           verdict:  off   off   tie   tie fused fused fused fused fused fused
+  picks tp2 L8-O     steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     A     A     B     A     A     A     A     A     A     A
+                           pred:       A     A     A     A     A     A     A     A     A     A
+                           verdict:  tie   tie   tie fused fused fused fused fused fused fused
+  picks tp2 L8-down  gpu    M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     B     A     A     A     A     B     A
+                           pred:       B     B     B     B     B     B     B     A     A     A
+                           verdict:  off   off   off   tie   tie fused fused fused   off fused
+  picks tp2 L8-down  steady M:         16    64   136   256   512  1024  2048  3072  4096  8192
+                           oracle:     B     B     B     B     A     A     A     A     A     A
+                           pred:       B     B     B     A     A     A     A     A     A     A
+                           verdict:  off   off   off   tie fused fused fused fused   tie fused
+
+wrote ws/fusion-dispatch/results/g3_map/eval_g3_log.txt, eval_g3_summary.csv, eval_g3_points.csv

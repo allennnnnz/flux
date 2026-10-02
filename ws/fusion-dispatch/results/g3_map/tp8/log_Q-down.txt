@@ -1,0 +1,36 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/dispatch_map_rs_v1.py --layer Q-down --Ms 16,64,136,256,512,1024,2048,3072,4096,8192 --modes gpu,steady --rounds 200 --warmup 30 --clock_period 0.02 --out_dir ws/fusion-dispatch/results/g3_map/tp8
+W1002 18:10:30.732000 198670 site-packages/torch/distributed/run.py:792] 
+W1002 18:10:30.732000 198670 site-packages/torch/distributed/run.py:792] *****************************************
+W1002 18:10:30.732000 198670 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1002 18:10:30.732000 198670 site-packages/torch/distributed/run.py:792] *****************************************
+[Q-down M=16] correctness: all ok 
+[Q-down M=16 gpu] kept 144/200  A_fused=0.1055  B_nccl_cublas=0.0891  E_allreduce=0.1034  c_cublas=0.0645  c_nccl_rs=0.0297  c_nccl_ar=0.0410  c_fluxgemm=0.0748
+[Q-down M=16 steady] kept 200/200  A_fused=0.0918  B_nccl_cublas=0.0733  E_allreduce=0.0833  c_cublas=0.0488  c_nccl_rs=0.0199  c_nccl_ar=0.0296  c_fluxgemm=0.0632
+[Q-down M=64] correctness: all ok 
+[Q-down M=64 gpu] kept 200/200  A_fused=0.1167  B_nccl_cublas=0.1050  E_allreduce=0.1157  c_cublas=0.0614  c_nccl_rs=0.0461  c_nccl_ar=0.0563  c_fluxgemm=0.0768
+[Q-down M=64 steady] kept 200/200  A_fused=0.0968  B_nccl_cublas=0.0827  E_allreduce=0.0921  c_cublas=0.0475  c_nccl_rs=0.0280  c_nccl_ar=0.0369  c_fluxgemm=0.0655
+[Q-down M=136] correctness: all ok 
+[Q-down M=136 gpu] kept 200/200  A_fused=0.1372  B_nccl_cublas=0.1249  E_allreduce=0.1516  c_cublas=0.0727  c_nccl_rs=0.0573  c_nccl_ar=0.0819  c_fluxgemm=0.1034
+[Q-down M=136 steady] kept 200/200  A_fused=0.1232  B_nccl_cublas=0.1071  E_allreduce=0.1377  c_cublas=0.0603  c_nccl_rs=0.0369  c_nccl_ar=0.0644  c_fluxgemm=0.0956
+[Q-down M=256] correctness: all ok 
+[Q-down M=256 gpu] kept 200/200  A_fused=0.1444  B_nccl_cublas=0.1710  E_allreduce=0.1951  c_cublas=0.0983  c_nccl_rs=0.0758  c_nccl_ar=0.1014  c_fluxgemm=0.1065
+[Q-down M=256 steady] kept 200/200  A_fused=0.1366  B_nccl_cublas=0.1585  E_allreduce=0.1843  c_cublas=0.0886  c_nccl_rs=0.0573  c_nccl_ar=0.0820  c_fluxgemm=0.0984
+[Q-down M=512] correctness: all ok 
+[Q-down M=512 gpu] kept 200/200  A_fused=0.2079  B_nccl_cublas=0.2949  E_allreduce=0.3420  c_cublas=0.1935  c_nccl_rs=0.1019  c_nccl_ar=0.1464  c_fluxgemm=0.1802
+[Q-down M=512 steady] kept 200/200  A_fused=0.2020  B_nccl_cublas=0.2810  E_allreduce=0.3257  c_cublas=0.1901  c_nccl_rs=0.0812  c_nccl_ar=0.1271  c_fluxgemm=0.1763
+[Q-down M=1024] correctness: all ok 
+[Q-down M=1024 gpu] kept 200/200  A_fused=0.3384  B_nccl_cublas=0.4301  E_allreduce=0.5304  c_cublas=0.2877  c_nccl_rs=0.1434  c_nccl_ar=0.2376  c_fluxgemm=0.3103
+[Q-down M=1024 steady] kept 200/200  A_fused=0.3268  B_nccl_cublas=0.4286  E_allreduce=0.5211  c_cublas=0.2908  c_nccl_rs=0.1261  c_nccl_ar=0.2257  c_fluxgemm=0.3220
+[Q-down M=2048] correctness: all ok 
+[Q-down M=2048 gpu] kept 200/200  A_fused=0.5919  B_nccl_cublas=0.7050  E_allreduce=0.8622  c_cublas=0.4772  c_nccl_rs=0.2284  c_nccl_ar=0.3901  c_fluxgemm=0.5765
+[Q-down M=2048 steady] kept 165/200  A_fused=0.6004  B_nccl_cublas=0.7263  E_allreduce=0.8870  c_cublas=0.4989  c_nccl_rs=0.2193  c_nccl_ar=0.3833  c_fluxgemm=0.6161
+[Q-down M=3072] correctness: all ok 
+[Q-down M=3072 gpu] kept 200/200  A_fused=0.8433  B_nccl_cublas=1.0301  E_allreduce=1.2293  c_cublas=0.7598  c_nccl_rs=0.2714  c_nccl_ar=0.4721  c_fluxgemm=0.8612
+[Q-down M=3072 steady] kept 114/200  A_fused=0.8608  B_nccl_cublas=1.0788  E_allreduce=1.2849  c_cublas=0.8022  c_nccl_rs=0.2674  c_nccl_ar=0.4729  c_fluxgemm=0.9026
+[Q-down M=4096] correctness: all ok 
+[Q-down M=4096 gpu] kept 200/200  A_fused=1.1008  B_nccl_cublas=1.2923  E_allreduce=1.5636  c_cublas=0.9544  c_nccl_rs=0.3451  c_nccl_ar=0.6139  c_fluxgemm=1.1059
+[Q-down M=4096 steady] kept 97/200  A_fused=1.1382  B_nccl_cublas=1.3598  E_allreduce=1.6417  c_cublas=1.0115  c_nccl_rs=0.3425  c_nccl_ar=0.6212  c_fluxgemm=1.1796
+[Q-down M=8192] correctness: all ok 
+[Q-down M=8192 gpu] kept 200/200  A_fused=2.1565  B_nccl_cublas=2.5068  E_allreduce=3.0525  c_cublas=1.8637  c_nccl_rs=0.6518  c_nccl_ar=1.2042  c_fluxgemm=2.2610
+[Q-down M=8192 steady] kept 191/200  A_fused=2.2612  B_nccl_cublas=2.6258  E_allreduce=3.1562  c_cublas=1.9452  c_nccl_rs=0.6524  c_nccl_ar=1.2120  c_fluxgemm=2.3656
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=ws/fusion-dispatch/results/g3_map/tp8/guard_Q-down.log

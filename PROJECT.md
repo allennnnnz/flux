@@ -16,15 +16,19 @@ Phase 0 結案。A100 雙通道方案取消（DECISIONS D-001）。2026-09-29 �
 第三階段（泛用決策器，D-008）**G1、G2 完成**：
 - G1：物理模型預測器在沒看過的模型 / 量測模式上 op 層級 regret 0.03–2.29%（關卡 ≤ 3% 通過）；
 - 融合 kernel 的重疊可由 tile 排程模擬算出，順帶解釋了 diag-overlap 的 N=4096 現象 **[推論]**；
-- G2：**只用 4 分鐘的校準微基準**建參數檔，對全部 320 個既有實測點：AG 1.15–1.74%、RS 0.10–0.36%；加少量實測把關後 ≤ 0.12%。
+- G2：**只用 4 分鐘的校準微基準**建參數檔，對全部 320 個既有實測點：AG 1.15–1.74%、RS 0.10–0.36%；加少量實測把關後 ≤ 0.12%；
+- G3：新模型與 4 卡 / 2 卡，**預測在量測前 push**。只用預測器：
+  - AG 1.76%（8 卡 0.89%、4 卡 1.77%、2 卡 2.81%），RS 0.37%；
+  - 錯誤來自 cuBLAS 斷崖；
+  - 事後分析：GEMM 改實測後 AG 0.27%。
 
-下一步 G3（新模型與 TP=4 / 2，約 2–3 小時 GPU）。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
+下一步 G4（決策器 v2 + block 驗證）。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
 
 ## 2. Workstream 總表
 
 | workstream | 優先 | 狀態 | 依賴 | 負責 session | 最近更新 |
 | --- | --- | --- | --- | --- | --- |
-| `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器，G0–G2 完成（`reports/20261002_g1_predictor.md`、`20261002_g2_calibration.md`），下一步 G3**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-02 |
+| `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器，G0–G3 完成（`reports/20261002_g1_predictor.md`、`20261002_g2_calibration.md`、`20261002_g3_unseen.md`），下一步 G4**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-02 |
 | `ws/diag-overlap` | 第二 | 未開始 | — | 未指派 | — |
 | `ws/hetero-proxy` | 第二，可與上並行 | 未開始 | — | 未指派 | — |
 | `ws/cost-model` | 第三 | 模型目標由 fusion-dispatch 第三階段執行；預測器 v1 已建於 `common/cost_model/predictor/`（G1），校準參數檔在 `common/cost_model/hw_profiles/`（G2）（D-008） | — | 未指派 | 2026-10-02 |
@@ -77,8 +81,8 @@ worker 在 JOURNAL 標「需 boss 裁決」的事項會被 boss 搬到這裡。
 ## 4. 下一步（boss）
 
 0. `ws/fusion-dispatch`：
-   - 第三階段 G3（新模型、TP=4 / 2；先預測後量測），之後 G4–G6；
-   - 安排 auditor 審 E0、E1–E3、G1、G2 報告。
+   - 第三階段 G4（決策器 v2：模型 + 實測單卡 GEMM + 少量探測；block 驗證含 TP=4），之後 G5–G6；
+   - 安排 auditor 審 E0、E1–E3、G1、G2、G3 報告。
 1. 指派第一個 worker session 到 `ws/diag-overlap`。
 2. `ws/hetero-proxy` 可同時開一個 worker，先做 1a/1b 兩項補充量測。
 3. 兩者各有第一份 report 後，安排 auditor。

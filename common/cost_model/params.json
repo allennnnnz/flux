@@ -396,5 +396,63 @@
       },
       "source": "results/g2_calibration/eval_summary.csv"
     }
+  },
+  "flux_dispatch_g3": {
+    "_source": "ws/fusion-dispatch/reports/20261002_g3_unseen.md; results/g3_map/, results/g3_predictions/",
+    "_date": "2026-10-02",
+    "_status": "measured (op maps, guard CLEAN) vs pre-registered predictions; NOT yet audited",
+    "hw_profiles_added": [
+      "common/cost_model/hw_profiles/css-host-158_tp4_{gpu,steady}.json",
+      "common/cost_model/hw_profiles/css-host-158_tp2_{gpu,steady}.json"
+    ],
+    "calibration_wall_clock_min": {
+      "tp4": 3.07,
+      "tp2": 2.55,
+      "source": "results/g3_calibration_tp{4,2}/run_log.txt"
+    },
+    "flux_allgather_sync_ms_by_tp": {
+      "value": {
+        "8": 0.053,
+        "4": 0.033,
+        "2": 0.014
+      },
+      "status": "derived",
+      "method": "gpu mode, median over M<=64 of c_flux_ag - W/(W-1) * (W-1 serial peer copies), per-TP calibration",
+      "note": "not a constant: ~proportional to log2(TP) [inferred from 3 points]"
+    },
+    "preregistered_op_regret_pct": {
+      "_note": "predictor alone, AG / RS; 320 points, predictions pushed before measuring (642bf6a)",
+      "all": [
+        1.76,
+        0.37
+      ],
+      "tp8_new_models": [
+        0.89,
+        0.59
+      ],
+      "tp4": [
+        1.77,
+        0.0
+      ],
+      "tp2": [
+        2.81,
+        1.32
+      ],
+      "fixed_threshold_M512_all": [
+        1.97,
+        1.42
+      ],
+      "source": "results/g3_map/eval_g3_summary.csv"
+    },
+    "cublas_cliffs": {
+      "value": "cuBLAS is up to 22-53% slower than the roofline+tile model at specific shape x M (e.g. TP2 n=14336 K=4096 M=136; TP8 n=3584 K=4096 M=1024)",
+      "status": "measured",
+      "source": "results/g3_map/tp*/summary_items.csv (c_cublas)"
+    },
+    "posthoc_measured_gemm_diag": {
+      "value": "measured standalone GEMMs + modelled comm/overlap: AG regret 0.27% (vs 1.76% model-only)",
+      "status": "derived, POST-HOC (for G4 design)",
+      "source": "results/g3_map/gemm_probe_diag_log.txt"
+    }
   }
 }

@@ -1,6 +1,7 @@
 Supersedes: （無）
 
-> 狀態：**已核准（使用者，2026-10-02）**；執行中：G0、G1、G2 完成（`reports/20261002_g1_predictor.md` 關卡通過；`reports/20261002_g2_calibration.md` 校準 4 分鐘），下一步 G3。
+> 狀態：**已核准（使用者，2026-10-02）**；執行中：G0–G3 完成（`reports/20261002_g1_predictor.md` 關卡通過；`20261002_g2_calibration.md` 校準 4 分鐘；`20261002_g3_unseen.md` 預先登記的新情境），下一步 G4。
+> G3 修正：G4 的決策器改為「模型（通訊 + 重疊）+ 實測單卡 GEMM + 少量探測」（G3 的錯誤來自 cuBLAS 斷崖）；G3 的 block 驗證移到 G4 一起做。
 > G1 修正：計劃第 3 節第 3 步「非 registry config 一律探測」實測太貴（42–62%），且真正的斷崖來自登錄表 PCIe 區段的 config；改為「PCIe 調校 config 才探測」，G3 重驗。
 > 原始計劃檔：`~/.claude/plans/jazzy-gliding-blossom.md`（本檔為 repo 內權威副本）。
 > 新 session：先讀本檔與 `STATUS.md` §0，再讀 `reports/20261002_related_work.md`。

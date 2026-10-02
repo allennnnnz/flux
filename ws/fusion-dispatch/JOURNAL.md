@@ -215,3 +215,28 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   - 模型預測 4 卡 / 2 卡時 Flux 在 M = 256–512 起就勝出（8 卡要到 3072）。
 - 下一步：`tmux new -d -s g3map 'bash ws/fusion-dispatch/scripts/run_g3_map_v1.sh ws/fusion-dispatch/results/g3_map'`（約 1 小時），
   完成後 `python3 ws/fusion-dispatch/scripts/eval_g3_v1.py`。
+
+## 2026-10-02（晚）· boss 兼 worker · G3 完成：預先登記的新情境
+
+- **量測**：`run_g3_map_v1.sh` 跑 16 組（8 卡：Qwen2.5-72B gate-up / down、Llama-3-8B 四層；4 卡：Llama-3-70B 四層、Qwen 兩層；2 卡：Llama-3-8B 四層）。
+  - 每組 10 個 M × gpu / steady，200 輪；
+  - 18:05–18:59，16 段守衛全 CLEAN；
+  - 51 / 320 點因時脈過濾少於 200 輪（最少 96）。
+- **比對**（`eval_g3_v1.py`，對照量測前 push 的預測 `642bf6a`）：
+  - 只用預測器：AG 1.76%（8 / 4 / 2 卡：0.89 / 1.77 / 2.81%），RS 0.37%；
+  - 固定門檻：AG 1.97%、RS 1.42%；
+  - 預先登記的把關：AG 1.21%（探測 80 / 160）。
+- **原因**：cuBLAS 斷崖（某些形狀 × M 比模型慢 22–53%）；通訊、Flux gemm_only、重疊都準。
+  把關規則只在「差距小」時探測，抓不到有信心的錯。
+- **事後分析**（`g3_gemm_probe_diag_v1.py`，標明為事後，只用來定 G4 設計）：
+  單卡 GEMM 用實測 + 通訊 / 重疊用模型 → AG 0.27%；RS 需搭配 GemmRS 模型修正。
+- 模型的大膽預測正確：4 卡 / 2 卡時 Flux 系路徑從 M=136–512 起最快。
+- PCIe 規則在 G3 沒測到（無登錄表點）。
+- 另寫 `build_table_v2.py`（G4 準備）：用預測器產生 v1 格式的表。
+  - 對 Llama-70B 8 卡與 v1 實測表一致 71 / 80，不一致多為平手；
+  - 探測後只剩 3 點，差距 ≤ 3.5%。
+- 報告：`reports/20261002_g3_unseen.md`。
+- **留給下個 session**：G4，照 STATUS §4 的 6 點。
+  - 最重要：決策器 v2 加入「實測單卡 GEMM」；
+  - GemmRS 改共用 gemm_only 參數；
+  - block 驗證（vLLM 環境，含 TP=4）。

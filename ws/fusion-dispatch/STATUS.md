@@ -3,8 +3,8 @@
 **本 workstream 唯一權威。** 第 1 節由 boss 寫入，worker 不改；第 2 節起由 worker 維護。
 
 建立：2026-09-29（boss）
-最後更新：2026-10-02（boss 兼 worker，G2 完成）
-狀態：**第三階段（泛用決策器）G2 完成，下一步 G3**（D-006 / D-008：最高優先；有證據前不改 `src/`）
+最後更新：2026-10-02（boss 兼 worker，G3 完成）
+狀態：**第三階段（泛用決策器）G3 完成，下一步 G4**（D-006 / D-008：最高優先；有證據前不改 `src/`）
 
 ---
 
@@ -13,36 +13,33 @@
 最後更新：2026-10-02
 
 **一句話**：查表版決策器已完成並驗證（對真 vLLM 0.8.5：prefill 快 9.3–17.7%，decode M ≤ 384 同速、M=512 快 10–14%，regret ≈ 0）。
-第三階段（泛用決策器）**G0、G1、G2 完成**：
-- **只用 4 分鐘的校準微基準**（形狀避開評估層，不用任何決策表的點）建出參數檔；
-- 預測全部 320 個既有實測點：
-  - op 層級 regret：AG 1.15% / 1.74%（gpu / steady），RS 0.36% / 0.10%；
-  - 加少量實測把關後 ≤ 0.12%；
-- 探測量 22–23%，仍高於 G4 目標 15%。
+第三階段（泛用決策器）**G0–G3 完成**：
+- G2：只用 4 分鐘校準微基準建參數檔，對全部 320 個既有實測點 regret AG 1.15–1.74%、RS 0.10–0.36%；
+- G3：在沒量過的模型與卡數上**先預測、後量測**（預測在量測前 push）。只用預測器：
+  - AG 1.76%（8 卡新模型 0.89%、4 卡 1.77%、2 卡 2.81%）；
+  - RS 0.37%。
+- G3 錯誤幾乎全來自 **cuBLAS 自己的斷崖**（某些形狀 × M 慢 22–53%），通訊與重疊模型都準。
+  事後分析：GEMM 改成實測（單卡、便宜）、通訊 / 重疊用模型，AG regret 1.76% → 0.27%。
 
-**G3 進行中（2026-10-02 18:05 起）**：
-- 4 卡 / 2 卡校準完成；
-- 預測已預先登記並 push（`results/g3_predictions/`）；
-- op 地圖量測在 tmux `g3map` 中跑（`results/g3_map/run_log.txt`，可中斷續跑），完成後跑 `scripts/eval_g3_v1.py`。
+**下一步：G4**（`reports/20261002_g3_unseen.md` 第 0 節）：
+- 決策 = 模型（通訊 + 重疊）+ 實測單卡 GEMM + 少量多卡探測；
+- GemmRS 改用 gemm_only 家族參數；
+- 用 `scripts/build_table_v2.py` 產生 `dispatcher_v1` 格式的表；
+- 在 vLLM 環境做 block 驗證（含 TP=4），比較所有對照組。
 
-**G3 原計劃**（需 GPU 約 1–2 小時）。
-- 新模型（Qwen2.5-72B、Llama-3-8B）與 TP=4 / 2 的 op 地圖（M 子集）+ 一組 block 驗證；
-- 先寫 `scripts/launch_tp.sh`（不要改 `launch.sh`）；
-- TP=4 / 2 先跑 4 分鐘校準（`run_calibration_v1.sh` 加卡數參數）；
-- **量測前把預測寫成檔案並提交**，量完才比對，不得回頭調參。
-
-**G1 / G2 的重點**（`reports/20261002_g1_predictor.md`、`reports/20261002_g2_calibration.md`）：
+**G1–G3 的重點**（`reports/20261002_g1_predictor.md`、`reports/20261002_g2_calibration.md`、`reports/20261002_g3_unseen.md`）：
 1. 融合 kernel 能否「邊傳邊算」，可從 CUTLASS stream-K 的 tile 排程直接模擬：
    - 自己算出 M ≤ 2048 不重疊、≥ 3072 才重疊；
    - 對沒看過的 Phase 0 形狀也對 → 可能就是 diag-overlap 要找的原因 **[推論]**。
 2. 剩下的大錯誤都是 Flux 登錄表「PCIe 區段」的 config（本機慢 12–58%）。
-   用它當風險訊號實測可抓到；這條規則是看過結果才定的，G3 要重新驗證。
+   用它當風險訊號實測可抓到；這條規則是看過結果才定的，G3 沒測到（G3 的點都沒命中登錄表），仍待驗證。
 3. 隨機森林在量過的形狀上準，換新形狀就退化。
 4. 坑：同一 process 換一組 Flux op 會隨機卡死 → 校準一組形狀一個 process。
+5. G3 證實模型的大膽預測：4 卡 / 2 卡時 Flux 在 M=136–512 就勝出（8 卡要到 1024–3072）。
 
 計劃：`reports/20261002_plan_general_dispatcher.md`（含附錄 A）。文獻：`reports/20261002_related_work.md`。
 
-**決策器怎麼決定**：查表，全部來自實測。
+**決策器 v1（目前可用的版本）怎麼決定**：查表，全部來自實測。
 - 離線校準：每種層形狀 × 每個 M，量每條路徑，排序存成 JSON；
 - 執行時：
   1. 依 M 選切法：TP+AllReduce 或序列平行；
@@ -64,6 +61,7 @@
 | `reports/20261002_plan_general_dispatcher.md` | **第三階段計劃（泛用決策器）** |
 | `reports/20261002_g1_predictor.md` | **G1：預測器與推廣測試（關卡通過）；融合 kernel 排程模擬** |
 | `reports/20261002_g2_calibration.md` | **G2：4 分鐘校準 → 只用微基準的參數檔，對全部實測評估** |
+| `reports/20261002_g3_unseen.md` | **G3：新模型 / 4 卡 / 2 卡，預先登記的預測 vs 實測；cuBLAS 斷崖** |
 
 **環境**：
 - Flux 量測：`pixi run --manifest-path pixi.toml ./launch.sh <script>`。
@@ -322,6 +320,29 @@ E5 的 Llama 兩層結果在 `results/e5_rs_map_v1/`。**全部尚未經 auditor
     - 證據：`results/g2_smoke/debug_hang2/log.txt`；
     - 建議加進 `CLAUDE.md` 陷阱表。
 
+### 第三階段 G3（2026-10-02，`reports/20261002_g3_unseen.md`，尚未經 auditor 審查）
+
+來源：`results/g3_predictions/`（量測前 push，`642bf6a`）、`results/g3_map/`、`results/g3_calibration_tp{4,2}/`。
+
+40. **4 卡 / 2 卡校準**：3 分 4 秒 / 2 分 33 秒，守衛 CLEAN。
+    Flux AG 同步成本隨卡數變化（8 / 4 / 2 卡：0.053 / 0.033 / 0.014 ms）。
+41. **預先登記的結果**（16 組 × 10 個 M × 2 模式 = 320 點，量測 54 分鐘，守衛全 CLEAN）。只用預測器的 regret：
+
+    | 組 | AG | 固定門檻（AG） | RS |
+    | --- | --- | --- | --- |
+    | 全部 | 1.76% | 1.97% | 0.37% |
+    | 8 卡（新模型） | 0.89% | 0.92% | — |
+    | 4 卡 | 1.77% | 1.86% | 0.00% |
+    | 2 卡 | 2.81% | 3.65% | — |
+
+    - 預先登記的把關規則量一半的點，只降到 AG 1.21%。
+42. **錯誤來源**：cuBLAS 斷崖（2 卡 L8-GU M=136 慢 49%、8 卡 L8-GU M=1024 慢 53%、4 卡 L-GU M=136 慢 22%）。
+    - 通訊（NCCL 0–10%、Flux AG 1–8%）與 Flux gemm_only 都準；
+    - 斷崖的預測差距大，所以「差距小才探測」抓不到。
+43. **模型的大膽預測正確**：4 卡 / 2 卡時 Flux 系路徑從 M=136–512 起就最快。
+44. **事後分析**（G4 設計用）：單卡 GEMM 用實測、通訊 / 重疊用模型，AG regret 1.76% → 0.27%（2 卡 2.81 → 0.13%）；RS 沒改善（GemmRS 模型待修）。
+45. PCIe 調校 config 規則在 G3 沒有被測到（沒有點命中登錄表）。
+
 ## 3. 撤回表（worker 維護）
 
 | 撤回主張 | 出處 | 原因 | 替代 |
@@ -341,20 +362,22 @@ E5 的 Llama 兩層結果在 `results/e5_rs_map_v1/`。**全部尚未經 auditor
 - ✅ G0 文獻（`reports/20261002_related_work.md`）。
 - ✅ G1 預測器（`reports/20261002_g1_predictor.md`），關卡通過。
 - ✅ G2 校準（`reports/20261002_g2_calibration.md`）：4 分鐘校準，只用微基準評估全部實測，AG 1.15–1.74%、RS 0.10–0.36%。
-- **G3（下一個，需 GPU 約 2–3 小時，放 tmux，經守衛）**：
-  1. 寫 `scripts/launch_tp.sh <TP> <script> ...`：設 `CUDA_VISIBLE_DEVICES`、`--nproc_per_node=<TP>`；不要改 `launch.sh`。
-  2. 新模型形狀加進兩個 harness 的 `LAYERS`（附錄 A.4）：
-     - Qwen2.5-72B：hidden 8192、ffn 29568、heads 64、kv 8；
-     - Llama-3-8B：hidden 4096、ffn 14336、heads 32、kv 8。
-  3. TP=4 / 2：用 `run_calibration_v1.sh` 跑校準（需加卡數參數；預設 config 檔改讀 tp4 版）→ 參數檔 `css-host-158_tp{4,2}_*.json`。
-  4. **量測前**：用參數檔對 G3 的全部點產生預測與決策，寫成 `results/g3_*/predictions_*.csv` 並 commit（預先登記）。
-  5. 用 E1 協定量 op 地圖（M 子集），再比對：regret、MAPE、PCIe 規則是否仍有效。
-- G4 要處理的遺留：
-  1. ε 的決定方式（校準集內交叉驗證）；
-  2. GemmRS 的 GEMM 改用 gemm_only 家族參數；
-  3. κ 不穩定；
-  4. 多 block 共用 SM 時低估重疊。
-- G3：PCIe 調校 config 規則，在新模型與 TP=4 上**先預測、後量測**，不得回頭調參。
+- ✅ G3 新模型 / 4 卡 / 2 卡（`reports/20261002_g3_unseen.md`）：預先登記；只用預測器 AG 1.76%、RS 0.37%；錯誤來自 cuBLAS 斷崖。
+- **G4（下一個）**：
+  1. 決策器 v2 = 模型（通訊 + 重疊排程模擬）+ **實測單卡 GEMM**（cuBLAS、Flux gemm_only，每個部署形狀 × M 桶，幾秒）+ 少量多卡探測。
+     - 用 `scripts/build_table_v2.py`（已寫好、只用預測器的版本）產生 `dispatcher_v1` 格式的表；
+     - 加 GEMM 實測輸入與探測執行器。
+  2. GemmRS 改用 gemm_only 家族參數（只擬合 α、β）。G2 舊數據：RS 路徑 A MAPE 16.4% → 7.2%。
+  3. 探測規則：
+     - 差距 < ε；
+     - 風險訊號：PCIe 調校 config、GEMM 實測與模型差很多（斷崖指標）；
+     - ε 用校準集內交叉驗證決定。
+  4. 切法層級（TP+AR vs SP）：寫 `predictor/block.py`（AR 模型 + norm / residual 頻寬項），用 `results/v3_block_vllm_ar/` 驗證。
+  5. block 驗證：`validate_block_v4.py`（由 v3 改：模型維度與卡數可設定、讀 v2 表）。
+     - 至少 Llama-3-70B TP=4 與 Qwen2.5-72B TP=8；
+     - vLLM 環境；校準 / 驗證分開；守衛 + tmux。
+  6. 成功標準（計劃）：沒量過的形狀 / 卡數上 block regret ≤ 2%、校準 ≤ 10 分鐘、探測 ≤ 15%、接近切換點誤差 ≤ 10%。
+- 其他遺留：κ 不穩定；多 block 共用 SM 時低估重疊；steady 參數檔的 NCCL 誤差；極小形狀的串行組合誤差（G3 第 3 節）。
 
 **0. ✅ 驗證輪完成（2026-10-02）**，見 `reports/20260930_verification.md`。下一步前需使用者確認。
 影響後續設計的結論：
