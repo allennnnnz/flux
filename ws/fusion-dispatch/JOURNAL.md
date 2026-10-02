@@ -129,4 +129,7 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   包含 CLAUDE.md、PROJECT.md、docs、common、ws 與 Phase 0 檔案庫的變更。
   第三方 tokenizer 不提交（.gitignore），由 setup 腳本下載。
 - 留給下個 session：先讀 STATUS 第 0 節。F4 實作要等使用者確認；做法見可行性報告的「整合計劃」。
+- 補記（push）：origin 是 HTTPS，這個環境沒有 GitHub 憑證，所以 push 失敗。
+  已改用 SSH 金鑰推送（`git push git@github.com:allennnnnz/flux.git fusion-dispatch`，金鑰認證為 allennnnnz），**沒有修改 remote 設定**。
+  之後的 session 也照這個方式 push。分支：https://github.com/allennnnnz/flux/tree/fusion-dispatch
 

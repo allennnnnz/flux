@@ -44,6 +44,7 @@
   venv 在 repo 外；不見了就跑 `scripts/setup_vllm_venv.sh`。
 - **所有量測都要經 `common/measure/exclusive_guard.py`**，確保無其他使用者 / 程序。
 - 長時間工作放 tmux（例如 `tmux new -d -s X 'bash ...'`），斷線也不會停。
+- git：工作分支 `fusion-dispatch`；push 用 SSH 網址 `git@github.com:allennnnnz/flux.git`（origin 的 HTTPS 沒有憑證）。
 
 **待使用者 / boss 決定**（細節見 PROJECT.md 第 3 節）：
 1. 是否開始 F4（vLLM 端到端）；
