@@ -39,13 +39,16 @@
 | `profile.py` | 參數檔（JSON，附來源）與擬合 |
 
 - 設計與驗證：`ws/fusion-dispatch/reports/20261002_plan_general_dispatcher.md`、`20261002_g1_predictor.md`。
-- 校準後的參數檔放 `hw_profiles/<host>_tp<W>_<state>.json`（G2 建立）。
+- 校準後的參數檔：`hw_profiles/<host>_tp<W>_<mode>.json`（G2，2026-10-02：`css-host-158_tp8_{gpu,steady}.json`）。
+  - 只用約 4 分鐘的校準微基準擬合：`ws/fusion-dispatch/scripts/run_calibration_v1.sh` → `fit_calibration_v1.py`；
+  - gpu = 單次（padded）量測方式，steady = 連發 16 次；
+  - 報告：`ws/fusion-dispatch/reports/20261002_g2_calibration.md`。
 - G1 的參數（用決策表元件擬合，僅供對照）在 `ws/fusion-dispatch/results/g1_predictor/`。
 - 使用範例：
 
 ```python
 import sys; sys.path.insert(0, "common/cost_model")
 from predictor import HardwareProfile, FluxConfigs, predict_ag
-prof = HardwareProfile.load("ws/fusion-dispatch/results/g1_predictor/profile_g1_all_gpu.json")
+prof = HardwareProfile.load("common/cost_model/hw_profiles/css-host-158_tp8_gpu.json")
 arms, comps, cfg = predict_ag(prof, FluxConfigs(8), M=4096, n=1280, K=8192)  # ms per path
 ```

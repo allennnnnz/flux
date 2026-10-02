@@ -169,3 +169,31 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - **卡在哪 / 留給下個 session**：
   - G2 要 GPU，約 10 分鐘量測：照 STATUS §4 的 G2 清單寫 `calibrate_hw_v1.py`，只用微基準擬合後重跑評估；
   - 記得經 `exclusive_guard.py`、放 tmux。
+
+## 2026-10-02（晚）· boss 兼 worker · 第三階段 G2：4 分鐘校準 → 只用微基準的參數檔
+
+- **做了什麼**：
+  - 寫 `scripts/calibrate_hw_v1.py`（重用 `dispatch_map_v2.run_mode`），量：
+    - 通訊：hidden 6144 × 13 個大小；
+    - 3 個 AG 形狀與 2 個 RS 形狀 × 5 個 M，形狀都避開評估層與 Flux 登錄表；
+  - `run_calibration_v1.sh`：每組一個 process、各經守衛；
+  - `fit_calibration_v1.py`：只用校準數據擬合 → `common/cost_model/hw_profiles/css-host-158_tp8_{gpu,steady}.json`；
+  - `eval_profile_v1.py`：對全部 320 個既有實測評估；
+  - 報告 `reports/20261002_g2_calibration.md`。
+- **結果**：
+  - 校準 4 分 2 秒，守衛全 CLEAN；
+  - 只用預測器：AG 1.15% / 1.74%（gpu / steady）、RS 0.36% / 0.10%；
+  - 混合把關：AG ≤ 0.12%、RS 0.09%，探測 22–23%；
+  - 錨點 < 10%；
+  - kernel 啟動常數（來自評估層 nsys）敏感度：regret 變化 ≤ 0.11 個百分點。
+- **踩到的坑**：
+  - 第一版校準在同一 process 依序建立 / 銷毀多組 Flux op，跑到第二個 AG 形狀時隨機卡死
+    （8 rank 都在 `torch.cuda.synchronize`，GPU 100% 空轉）；
+  - 單獨跑同形狀正常 → 改成一組一個 process，之後全部正常；
+  - 第二次重現的堆疊在 `results/g2_smoke/debug_hang2/log.txt`；
+  - **第一次卡住的部分 log 在除錯時被我刪掉了**（未提交），只保留重現版。
+  - **需 boss 裁決**：建議把「同一 process 換一組 Flux op 可能卡死」加進 `CLAUDE.md` 陷阱表。
+- **待改進**：
+  - 探測量 > 15%（ε 掃描：5% 時 10–16%）；
+  - GemmRS 參數抵換（gpu 版 η = 1.000 碰上限，RS 路徑 A MAPE 16.4%）→ G4 改用 gemm_only 家族參數。
+- **留給下個 session**：G3，照 STATUS §4 的 5 步。重點是量測前先把預測寫成檔案並 commit。

@@ -3,8 +3,8 @@
 **本 workstream 唯一權威。** 第 1 節由 boss 寫入，worker 不改；第 2 節起由 worker 維護。
 
 建立：2026-09-29（boss）
-最後更新：2026-10-02（boss 兼 worker，G1 完成）
-狀態：**第三階段（泛用決策器）G1 完成，下一步 G2**（D-006 / D-008：最高優先；有證據前不改 `src/`）
+最後更新：2026-10-02（boss 兼 worker，G2 完成）
+狀態：**第三階段（泛用決策器）G2 完成，下一步 G3**（D-006 / D-008：最高優先；有證據前不改 `src/`）
 
 ---
 
@@ -13,24 +13,27 @@
 最後更新：2026-10-02
 
 **一句話**：查表版決策器已完成並驗證（對真 vLLM 0.8.5：prefill 快 9.3–17.7%，decode M ≤ 384 同速、M=512 快 10–14%，regret ≈ 0）。
-第三階段（泛用決策器）**G0、G1 完成**：
-- 只用物理模型的預測器，在沒看過的模型（GPT-3 ↔ Llama）與另一種量測模式上，op 層級 regret 為 0.03–2.29%；
-- **G1 關卡（≤ 3%）通過**；
-- 加少量實測把關後，AG 側降到 0.08–0.25%，但探測量 14–28%，高於 G4 目標 15%。
+第三階段（泛用決策器）**G0、G1、G2 完成**：
+- **只用 4 分鐘的校準微基準**（形狀避開評估層，不用任何決策表的點）建出參數檔；
+- 預測全部 320 個既有實測點：
+  - op 層級 regret：AG 1.15% / 1.74%（gpu / steady），RS 0.36% / 0.10%；
+  - 加少量實測把關後 ≤ 0.12%；
+- 探測量 22–23%，仍高於 G4 目標 15%。
 
-**下一步：G2**（需要 GPU，約 10 分鐘量測）。
-- 寫 `scripts/calibrate_hw_v1.py`：通訊每種原語掃約 15 個大小、GEMM 少數形狀，gpu / steady 兩種狀態；
-- 改成**只用微基準**擬合（不再用決策表的元件欄），重跑 `scripts/eval_predictor_v1.py` 的評估；
-- 一律經 `exclusive_guard.py`，放 tmux。
+**下一步：G3**（需 GPU 約 2–3 小時）。
+- 新模型（Qwen2.5-72B、Llama-3-8B）與 TP=4 / 2 的 op 地圖（M 子集）+ 一組 block 驗證；
+- 先寫 `scripts/launch_tp.sh`（不要改 `launch.sh`）；
+- TP=4 / 2 先跑 4 分鐘校準（`run_calibration_v1.sh` 加卡數參數）；
+- **量測前把預測寫成檔案並提交**，量完才比對，不得回頭調參。
 
-**G1 的重點**（`reports/20261002_g1_predictor.md`）：
-1. 融合 kernel 能否「邊傳邊算」，可從 CUTLASS stream-K 的 tile 排程直接模擬出來，不必擬合重疊比例：
-   - 融合時間中位誤差 0.8–1.6%；
+**G1 / G2 的重點**（`reports/20261002_g1_predictor.md`、`reports/20261002_g2_calibration.md`）：
+1. 融合 kernel 能否「邊傳邊算」，可從 CUTLASS stream-K 的 tile 排程直接模擬：
    - 自己算出 M ≤ 2048 不重疊、≥ 3072 才重疊；
-   - 對沒看過的 Phase 0 形狀也對（N=4096 藏住 3% vs 實測 7%；N=8192 70% vs 65%）。
-2. 剩下的大錯誤都是 Flux 登錄表中「PCIe 區段」的 config，在本機慢 12–58%。
-   用它當風險訊號實測可抓到，但這條規則是看過結果才定的，要在 G3 重新驗證。
-3. 隨機森林在量過的形狀上準，換新形狀就退化（3.6–4.7%）；預測器維持 1.4–2.3%。
+   - 對沒看過的 Phase 0 形狀也對 → 可能就是 diag-overlap 要找的原因 **[推論]**。
+2. 剩下的大錯誤都是 Flux 登錄表「PCIe 區段」的 config（本機慢 12–58%）。
+   用它當風險訊號實測可抓到；這條規則是看過結果才定的，G3 要重新驗證。
+3. 隨機森林在量過的形狀上準，換新形狀就退化。
+4. 坑：同一 process 換一組 Flux op 會隨機卡死 → 校準一組形狀一個 process。
 
 計劃：`reports/20261002_plan_general_dispatcher.md`（含附錄 A）。文獻：`reports/20261002_related_work.md`。
 
@@ -55,6 +58,7 @@
 | `reports/20261002_related_work.md` | 約 100 篇相關工作；缺口與定位 |
 | `reports/20261002_plan_general_dispatcher.md` | **第三階段計劃（泛用決策器）** |
 | `reports/20261002_g1_predictor.md` | **G1：預測器與推廣測試（關卡通過）；融合 kernel 排程模擬** |
+| `reports/20261002_g2_calibration.md` | **G2：4 分鐘校準 → 只用微基準的參數檔，對全部實測評估** |
 
 **環境**：
 - Flux 量測：`pixi run --manifest-path pixi.toml ./launch.sh <script>`。
@@ -65,8 +69,9 @@
 - git：工作分支 `fusion-dispatch`；push 用 SSH 網址 `git@github.com:allennnnnz/flux.git`（origin 的 HTTPS 沒有憑證）。
 
 **預測器怎麼用**：`common/cost_model/predictor/`（純 Python，系統 python3 即可）。
-- 重跑 G1 評估：`python3 ws/fusion-dispatch/scripts/eval_predictor_v1.py`，約 45 秒，結果寫到 `results/g1_predictor/`；
-- 參數檔：`results/g1_predictor/profile_g1_all_{gpu,steady}.json`。
+- 校準（GPU，約 4 分鐘）：`tmux new -d -s g2cal 'bash ws/fusion-dispatch/scripts/run_calibration_v1.sh <out_dir>'`；
+- 擬合：`python3 ws/fusion-dispatch/scripts/fit_calibration_v1.py <out_dir>`，寫到 `common/cost_model/hw_profiles/css-host-158_tp8_{gpu,steady}.json`；
+- 評估：`python3 ws/fusion-dispatch/scripts/eval_profile_v1.py`（G2）；`eval_predictor_v1.py`（G1，用決策表元件擬合的對照）。
 
 **待使用者 / boss 決定**（細節見 PROJECT.md 第 3 節）：
 1. 是否有其他型號 GPU 可做跨機器驗證（問教授）；
@@ -281,6 +286,37 @@ E5 的 Llama 兩層結果在 `results/e5_rs_map_v1/`。**全部尚未經 auditor
     - 每 SM 多個 block 時低估重疊；
     - gpu ↔ steady 的差異主要是量測方式而非時脈，NCCL 時脈修正無法從 E1 數據擬合（γ = 0）。
 
+### 第三階段 G2（2026-10-02，`reports/20261002_g2_calibration.md`，尚未經 auditor 審查）
+
+來源：`results/g2_calibration/`；參數檔 `common/cost_model/hw_profiles/css-host-158_tp8_{gpu,steady}.json`。
+
+34. **校準 4 分 2 秒**（6 個 process 含啟動），守衛 6 段 CLEAN，正確性檢查全過。
+    - 形狀避開 8 個評估層，也不命中 Flux 登錄表；
+    - 內容：通訊 hidden 6144 × 13 個大小；GEMM / 融合 3 個 AG 形狀 + 2 個 RS 形狀 × 5 個 M。
+35. **只用校準數據擬合，評估全部 320 個既有實測點**：
+
+    | 參數檔 → 數據 | AG 只用預測 | AG 混合（hyb+pcie） | RS 只用預測 | RS 混合 |
+    | --- | --- | --- | --- | --- |
+    | gpu → gpu | 1.15% | 0.12% | 0.36% | 0.09% |
+    | steady → steady | 1.74% | 0.06% | 0.10% | 0.09% |
+    | 交叉 | 1.30–1.88% | — | 0.08–0.40% | — |
+
+    - 與 G1 用決策表元件擬合的樣本內結果相當；
+    - 錨點全部 < 10%。
+36. **預測誤差**：
+    - AG 路徑 MAPE 4–7%，接近切換點 4–5%；
+    - RS 路徑 A 為 16.4%（gpu）/ 8.2%（steady）：GemmRS 參數抵換，gpu 版 η = 1.000 碰上限，不可當物理效率；
+    - RS 的決策仍準，但預測的切換點偏晚（G-FC2、L-down）。
+37. **探測量**：
+    - 事先規則（ε = 校準殘差 p90 ≈ 10.7%）要量 22–23%；
+    - ε 掃描顯示 ε ≈ 5% 只需 10–16%，regret ≤ 0.32%；
+    - G4 要用不看測試集的方式定 ε。
+38. **nsys 的 kernel 啟動常數**（唯一不是來自校準集的輸入）：±30% 或改常數，regret 變化 ≤ 0.11 個百分點，沒有實質洩漏。
+39. **坑**：同一 process 先建立再銷毀一組 Flux op、再建第二組，會隨機卡死（8 rank 都在 synchronize）。
+    - 一組一個 process 即正常；
+    - 證據：`results/g2_smoke/debug_hang2/log.txt`；
+    - 建議加進 `CLAUDE.md` 陷阱表。
+
 ## 3. 撤回表（worker 維護）
 
 | 撤回主張 | 出處 | 原因 | 替代 |
@@ -299,21 +335,20 @@ E5 的 Llama 兩層結果在 `results/e5_rs_map_v1/`。**全部尚未經 auditor
 
 - ✅ G0 文獻（`reports/20261002_related_work.md`）。
 - ✅ G1 預測器（`reports/20261002_g1_predictor.md`），關卡通過。
-- **G2（下一個，需 GPU 約 10 分鐘）**：
-  - 寫 `scripts/calibrate_hw_v1.py`：
-    - 通訊：重用 `ag_latency_v1.py`，NCCL AG / RS / AR 與 Flux AG 各約 15 個大小；
-    - Flux 單筆 copy 的掃描（給 TP 外推用）；
-    - GEMM：cuBLAS、Flux gemm_only、GemmRS 在 2–3 個形狀 × 少數 M（重用 `dispatch_map_v2.run_mode`）；
-    - gpu 與 steady 兩種狀態各一次。
-  - 產生 `common/cost_model/hw_profiles/css-host-158_tp8_{light,sustained}.json`。
-  - 用 `predictor.profile.fit_profile` **只用微基準**擬合，對全部既有實測重跑 `eval_predictor_v1.py`
-    （加一個「profile 從檔案讀入」的選項）。
-  - 一律經 `exclusive_guard.py`、放 tmux。
-- G2 / G4 要處理的 G1 遺留：
-  1. 探測量降到 ≤ 15%：較小的 ε 或「預期損失」規則；
-  2. κ 的不穩定（考慮讓競爭項依形狀而定）；
-  3. 多 block 共用 SM 時重疊低估；
-  4. GemmRS 參數抵換。
+- ✅ G2 校準（`reports/20261002_g2_calibration.md`）：4 分鐘校準，只用微基準評估全部實測，AG 1.15–1.74%、RS 0.10–0.36%。
+- **G3（下一個，需 GPU 約 2–3 小時，放 tmux，經守衛）**：
+  1. 寫 `scripts/launch_tp.sh <TP> <script> ...`：設 `CUDA_VISIBLE_DEVICES`、`--nproc_per_node=<TP>`；不要改 `launch.sh`。
+  2. 新模型形狀加進兩個 harness 的 `LAYERS`（附錄 A.4）：
+     - Qwen2.5-72B：hidden 8192、ffn 29568、heads 64、kv 8；
+     - Llama-3-8B：hidden 4096、ffn 14336、heads 32、kv 8。
+  3. TP=4 / 2：用 `run_calibration_v1.sh` 跑校準（需加卡數參數；預設 config 檔改讀 tp4 版）→ 參數檔 `css-host-158_tp{4,2}_*.json`。
+  4. **量測前**：用參數檔對 G3 的全部點產生預測與決策，寫成 `results/g3_*/predictions_*.csv` 並 commit（預先登記）。
+  5. 用 E1 協定量 op 地圖（M 子集），再比對：regret、MAPE、PCIe 規則是否仍有效。
+- G4 要處理的遺留：
+  1. ε 的決定方式（校準集內交叉驗證）；
+  2. GemmRS 的 GEMM 改用 gemm_only 家族參數；
+  3. κ 不穩定；
+  4. 多 block 共用 SM 時低估重疊。
 - G3：PCIe 調校 config 規則，在新模型與 TP=4 上**先預測、後量測**，不得回頭調參。
 
 **0. ✅ 驗證輪完成（2026-10-02）**，見 `reports/20260930_verification.md`。下一步前需使用者確認。

@@ -348,5 +348,53 @@
       ],
       "source": "results/g1_predictor/eval_summary.csv (policy=pred)"
     }
+  },
+  "flux_dispatch_g2": {
+    "_source": "ws/fusion-dispatch/reports/20261002_g2_calibration.md; results/g2_calibration/",
+    "_date": "2026-10-02",
+    "_status": "measured (calibration microbenchmarks, exclusive_guard CLEAN) + derived (model fit); NOT yet audited",
+    "hw_profiles": {
+      "value": [
+        "common/cost_model/hw_profiles/css-host-158_tp8_gpu.json",
+        "common/cost_model/hw_profiles/css-host-158_tp8_steady.json"
+      ],
+      "method": "predictor fitted ONLY from calibrate_hw_v1.py microbenchmarks (shapes avoid all evaluation layers and Flux registry entries)"
+    },
+    "calibration_wall_clock_min": {
+      "value": 4.03,
+      "status": "measured",
+      "source": "results/g2_calibration/run_log.txt",
+      "method": "6 processes (comm, 3 AG shapes, 2 RS shapes), gpu+steady modes, including process start-up"
+    },
+    "flux_allgather_sync_ms": {
+      "value": 0.053,
+      "status": "derived",
+      "source": "results/g2_calibration/raw_comm.csv",
+      "method": "gpu mode, median over M<=64 of c_flux_ag - 8/7 * (7 serial peer copies); G1 got 0.0533 from F2 data"
+    },
+    "predictor_op_regret_pct_all_320_points": {
+      "_note": "calibration-only profiles, predictor alone (pred) and with probes (hyb+pcie), AG / RS side",
+      "gpu_profile_gpu_rows": {
+        "pred": [
+          1.15,
+          0.36
+        ],
+        "hyb_pcie": [
+          0.12,
+          0.09
+        ]
+      },
+      "steady_profile_steady_rows": {
+        "pred": [
+          1.74,
+          0.1
+        ],
+        "hyb_pcie": [
+          0.06,
+          0.09
+        ]
+      },
+      "source": "results/g2_calibration/eval_summary.csv"
+    }
   }
 }

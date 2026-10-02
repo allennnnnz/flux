@@ -1,0 +1,8 @@
+[G2] start 2026-10-02 17:45:13  extra args: --rounds 5 --rounds_steady_comm 3 --rounds_steady_gemm 3 --warmup 2 --warmup_first 5
+[G2] comm exit 0 17:45:36 2026-10-02 17:45:36 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G2] ag_2560x5120 exit 0 17:45:55 2026-10-02 17:45:55 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G2] ag_5120x10240 exit 0 17:46:15 2026-10-02 17:46:15 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G2] ag_1536x16384 exit 0 17:46:34 2026-10-02 17:46:34 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G2] rs_6144x2560 exit 0 17:46:53 2026-10-02 17:46:53 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G2] rs_10240x1280 exit 0 17:47:12 2026-10-02 17:47:12 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G2] done 2026-10-02 17:47:12

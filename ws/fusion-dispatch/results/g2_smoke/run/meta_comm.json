@@ -1,0 +1,595 @@
+{
+ "script": "ws/fusion-dispatch/scripts/calibrate_hw_v1.py",
+ "args": {
+  "modes": "gpu,steady",
+  "groups": "comm",
+  "tag": "comm",
+  "rounds": 5,
+  "rounds_steady_comm": 3,
+  "rounds_steady_gemm": 3,
+  "warmup": 2,
+  "warmup_first": 5,
+  "steady_L": 16,
+  "pad_cycles": 400000,
+  "flush_mb": 128,
+  "clock_period": 0.02,
+  "seed": 20261002,
+  "atol": 0.05,
+  "rtol": 0.05,
+  "out_dir": "ws/fusion-dispatch/results/g2_smoke/run",
+  "ag_shapes": "",
+  "rs_shapes": "",
+  "gemm_ms": "",
+  "hang_dump_s": 0
+ },
+ "date": "2026-10-02 17:45:28",
+ "world": 8,
+ "torch": "2.6.0+cu124",
+ "nccl": "2.21.5",
+ "cublas_settings": {
+  "CUBLAS_WORKSPACE_CONFIG": null,
+  "deterministic": false,
+  "allow_bf16_reduced_precision_reduction": true
+ },
+ "comm_K": 6144,
+ "ag_shapes": [
+  [
+   2560,
+   5120
+  ],
+  [
+   5120,
+   10240
+  ],
+  [
+   1536,
+   16384
+  ]
+ ],
+ "rs_shapes": [
+  [
+   6144,
+   2560
+  ],
+  [
+   10240,
+   1280
+  ]
+ ],
+ "cases": [
+  {
+   "group": "comm",
+   "shape": [
+    8,
+    6144
+   ],
+   "M": 8,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "comm",
+   "shape": [
+    16,
+    6144
+   ],
+   "M": 16,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "comm",
+   "shape": [
+    32,
+    6144
+   ],
+   "M": 32,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "comm",
+   "shape": [
+    64,
+    6144
+   ],
+   "M": 64,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "comm",
+   "shape": [
+    128,
+    6144
+   ],
+   "M": 128,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "comm",
+   "shape": [
+    256,
+    6144
+   ],
+   "M": 256,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "comm",
+   "shape": [
+    512,
+    6144
+   ],
+   "M": 512,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "comm",
+   "shape": [
+    1024,
+    6144
+   ],
+   "M": 1024,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "comm",
+   "shape": [
+    2048,
+    6144
+   ],
+   "M": 2048,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "comm",
+   "shape": [
+    4096,
+    6144
+   ],
+   "M": 4096,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      1410,
+      null,
+      1410,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "comm",
+   "shape": [
+    8192,
+    6144
+   ],
+   "M": 8192,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      1410,
+      null,
+      1410,
+      null,
+      null,
+      1410,
+      1410,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "comm",
+   "shape": [
+    16384,
+    6144
+   ],
+   "M": 16384,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      1410,
+      1410,
+      1410,
+      1410,
+      1410,
+      1410,
+      1410,
+      1410
+     ]
+    }
+   }
+  },
+  {
+   "group": "comm",
+   "shape": [
+    32768,
+    6144
+   ],
+   "M": 32768,
+   "check": {
+    "c_flux_ag_equals_nccl": true
+   },
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      1410,
+      1410,
+      1410,
+      1410,
+      1410,
+      1410,
+      1410,
+      1410
+     ]
+    }
+   }
+  }
+ ],
+ "wall_s": 5.280551910400391
+}

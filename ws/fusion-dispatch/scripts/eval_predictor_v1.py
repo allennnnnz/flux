@@ -135,7 +135,7 @@ def mixed_regret(points):
     return num / den if den else None
 
 
-def anchors(prof, cfgs, rows, say):
+def anchors(prof, cfgs, rows, say, label="profile fit on all gpu rows"):
     """CLAUDE.md 5.1.2: compare model outputs with known anchors (params.json) and physical bounds."""
     import json
     P = json.load(open(os.path.join(REPO, "common", "cost_model", "params.json")))
@@ -157,7 +157,7 @@ def anchors(prof, cfgs, rows, say):
         t = prof.comm.nccl("ag", big) if name == "NCCL" else prof.comm.flux_ag(big, W_)
         checks.append((f"{name} AG ingress/GPU at 403 MB [GB/s]", big * (W_ - 1) / W_ / t / 1e6,
                        P["nvlink"]["all_to_all_per_gpu_GBps"]["value"], "params nvlink all_to_all (1 GiB/GPU)"))
-    say("[anchors, profile fit on all gpu rows] (flag if |dev| > 20%)")
+    say(f"[anchors, {label}] (flag if |dev| > 20%)")
     for name, v, ref, src in checks:
         dev = v / ref - 1
         say(f"    {name:<38} model {v:9.4f}  anchor {ref:9.4f}  dev {dev * 100:+6.1f}% {'<-- CHECK' if abs(dev) > 0.2 else ''}  ({src})")
@@ -174,7 +174,7 @@ def anchors(prof, cfgs, rows, say):
         say(f"      {lay:<6} M={M:<5} cfg={r['cfg']['source']:<8} measured {hm * 100:6.1f}%   model {hp * 100:6.1f}%")
 
 
-def p0_crosscheck(prof, cfgs, say):
+def p0_crosscheck(prof, cfgs, say, label="profile fit on all gpu rows"):
     """Shapes the model never saw: Phase 0 anchors P0-4096 / P0-8192 (E0 v2, gpu mode), and the
     diag-overlap question (N=4096 overlaps ~2% in Phase 0, N=8192 76%)."""
     it = {}
@@ -182,7 +182,7 @@ def p0_crosscheck(prof, cfgs, say):
         if r["layer"].startswith("P0") and r["mode"] == "gpu":
             it[(r["layer"], int(r["M"]), r["item"])] = float(r["median_ms"])
     names = {"A": "A_fused", "B": "B_nccl_cublas", "C": "C_fluxag_cublas", "D": "D_fluxag_fluxgemm"}
-    say("[unseen shapes: Phase 0 anchors, results/e0_anchor_v2 gpu] hidden comm = (D - A) / Flux AG")
+    say(f"[unseen shapes: Phase 0 anchors, results/e0_anchor_v2 gpu; {label}] hidden comm = (D - A) / Flux AG")
     for lay, N in (("P0-4096", 4096), ("P0-8192", 8192)):
         n, K = N // W, 12288
         for M in sorted({k[1] for k in it if k[0] == lay}):

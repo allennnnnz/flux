@@ -1,0 +1,221 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/calibrate_hw_v1.py --modes gpu,steady --rounds 5 --rounds_steady_comm 3 --rounds_steady_gemm 3 --warmup 2 --warmup_first 5 --hang_dump_s 150 --out_dir ws/fusion-dispatch/results/g2_smoke/debug_hang2
+W1002 17:41:27.339000 99465 site-packages/torch/distributed/run.py:792] 
+W1002 17:41:27.339000 99465 site-packages/torch/distributed/run.py:792] *****************************************
+W1002 17:41:27.339000 99465 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1002 17:41:27.339000 99465 site-packages/torch/distributed/run.py:792] *****************************************
+[comm (1, 6144) M=8 gpu] kept 5/5  c_nccl_ag=0.0348  c_nccl_rs=0.0358  c_nccl_ar=0.0512  c_flux_ag=0.1076  ce_copy1=0.0119  ce_copy7=0.0391
+[comm (1, 6144) M=8 steady] kept 3/3  c_nccl_ag=0.0738  c_nccl_rs=0.0633  c_nccl_ar=0.0813  c_flux_ag=0.1103  ce_copy1=0.0198  ce_copy7=0.1465
+[comm (2, 6144) M=16 gpu] kept 5/5  c_nccl_ag=0.0328  c_nccl_rs=0.0358  c_nccl_ar=0.0440  c_flux_ag=0.1060  ce_copy1=0.0108  ce_copy7=0.0376
+[comm (2, 6144) M=16 steady] kept 3/3  c_nccl_ag=0.0889  c_nccl_rs=0.0979  c_nccl_ar=0.1050  c_flux_ag=0.1103  ce_copy1=0.0330  ce_copy7=0.2038
+[comm (4, 6144) M=32 gpu] kept 5/5  c_nccl_ag=0.0348  c_nccl_rs=0.0369  c_nccl_ar=0.0461  c_flux_ag=0.1052  ce_copy1=0.0106  ce_copy7=0.1150
+[comm (4, 6144) M=32 steady] kept 3/3  c_nccl_ag=0.1182  c_nccl_rs=0.1175  c_nccl_ar=0.1273  c_flux_ag=0.1384  ce_copy1=0.0381  ce_copy7=0.2216
+[comm (8, 6144) M=64 gpu] kept 5/5  c_nccl_ag=0.0860  c_nccl_rs=0.0676  c_nccl_ar=0.0625  c_flux_ag=0.1034  ce_copy1=0.0191  ce_copy7=0.1930
+[comm (8, 6144) M=64 steady] kept 3/3  c_nccl_ag=0.1107  c_nccl_rs=0.1242  c_nccl_ar=0.1307  c_flux_ag=0.1546  ce_copy1=0.0455  ce_copy7=0.2945
+[comm (16, 6144) M=128 gpu] kept 5/5  c_nccl_ag=0.0860  c_nccl_rs=0.0686  c_nccl_ar=0.0676  c_flux_ag=0.1093  ce_copy1=0.0131  ce_copy7=0.2355
+[comm (16, 6144) M=128 steady] kept 3/3  c_nccl_ag=0.1285  c_nccl_rs=0.1277  c_nccl_ar=0.1308  c_flux_ag=0.1416  ce_copy1=0.0434  ce_copy7=0.2333
+[comm (32, 6144) M=256 gpu] kept 5/5  c_nccl_ag=0.0625  c_nccl_rs=0.0573  c_nccl_ar=0.0788  c_flux_ag=0.1086  ce_copy1=0.0135  ce_copy7=0.0672
+[comm (32, 6144) M=256 steady] kept 3/3  c_nccl_ag=0.0937  c_nccl_rs=0.1028  c_nccl_ar=0.1068  c_flux_ag=0.1279  ce_copy1=0.0313  ce_copy7=0.1966
+[comm (64, 6144) M=512 gpu] kept 5/5  c_nccl_ag=0.0696  c_nccl_rs=0.0768  c_nccl_ar=0.1208  c_flux_ag=0.1260  ce_copy1=0.0160  ce_copy7=0.0656
+[comm (64, 6144) M=512 steady] kept 3/3  c_nccl_ag=0.1130  c_nccl_rs=0.1219  c_nccl_ar=0.1260  c_flux_ag=0.1385  ce_copy1=0.0365  ce_copy7=0.2367
+[comm (128, 6144) M=1024 gpu] kept 5/5  c_nccl_ag=0.1106  c_nccl_rs=0.1219  c_nccl_ar=0.1761  c_flux_ag=0.1398  ce_copy1=0.0259  ce_copy7=0.0890
+[comm (128, 6144) M=1024 steady] kept 3/3  c_nccl_ag=0.1054  c_nccl_rs=0.1024  c_nccl_ar=0.1769  c_flux_ag=0.1405  ce_copy1=0.0376  ce_copy7=0.2312
+[comm (256, 6144) M=2048 gpu] kept 5/5  c_nccl_ag=0.1772  c_nccl_rs=0.1700  c_nccl_ar=0.2816  c_flux_ag=0.1862  ce_copy1=0.0390  ce_copy7=0.2484
+[comm (256, 6144) M=2048 steady] kept 3/3  c_nccl_ag=0.1672  c_nccl_rs=0.1585  c_nccl_ar=0.2682  c_flux_ag=0.1803  ce_copy1=0.0168  ce_copy7=0.1404
+[comm (512, 6144) M=4096 gpu] kept 5/5  c_nccl_ag=0.2673  c_nccl_rs=0.2642  c_nccl_ar=0.4649  c_flux_ag=0.2702  ce_copy1=0.0893  ce_copy7=0.2264
+[comm (512, 6144) M=4096 steady] kept 3/3  c_nccl_ag=0.2598  c_nccl_rs=0.2540  c_nccl_ar=0.4529  c_flux_ag=0.2642  ce_copy1=0.0285  ce_copy7=0.2714
+[comm (1024, 6144) M=8192 gpu] kept 5/5  c_nccl_ag=0.4792  c_nccl_rs=0.4649  c_nccl_ar=0.8520  c_flux_ag=0.4442  ce_copy1=0.0598  ce_copy7=0.3686
+[comm (1024, 6144) M=8192 steady] kept 3/3  c_nccl_ag=0.4687  c_nccl_rs=0.4579  c_nccl_ar=0.8434  c_flux_ag=0.4419  ce_copy1=0.0522  ce_copy7=0.3634
+[comm (2048, 6144) M=16384 gpu] kept 5/5  c_nccl_ag=0.9236  c_nccl_rs=0.8745  c_nccl_ar=1.6456  c_flux_ag=0.7884  ce_copy1=0.1071  ce_copy7=0.7031
+[comm (2048, 6144) M=16384 steady] kept 3/3  c_nccl_ag=0.9086  c_nccl_rs=0.8652  c_nccl_ar=1.6275  c_flux_ag=0.7891  ce_copy1=0.0995  ce_copy7=0.9293
+[comm (4096, 6144) M=32768 gpu] kept 5/5  c_nccl_ag=1.7295  c_nccl_rs=1.6527  c_nccl_ar=3.1601  c_flux_ag=1.4795  ce_copy1=0.2013  ce_copy7=1.3652
+[comm (4096, 6144) M=32768 steady] kept 3/3  c_nccl_ag=1.7162  c_nccl_rs=1.6437  c_nccl_ar=3.1484  c_flux_ag=1.4797  ce_copy1=0.1941  ce_copy7=1.3592
+[ag 2560x5120 M=16] setup + check
+[ag (2560, 5120) M=16 gpu] kept 5/5  c_cublas=0.0358  c_fluxgemm=0.0655  c_flux_ag=0.1092  A_fused=0.1505
+[ag (2560, 5120) M=16 steady] kept 3/3  c_cublas=0.0276  c_fluxgemm=0.0557  c_flux_ag=0.0925  A_fused=0.1366
+[ag 2560x5120 M=128] setup + check
+[ag (2560, 5120) M=128 gpu] kept 5/5  c_cublas=0.0430  c_fluxgemm=0.0666  c_flux_ag=0.1067  A_fused=0.1638
+[ag (2560, 5120) M=128 steady] kept 3/3  c_cublas=0.0581  c_fluxgemm=0.0693  c_flux_ag=0.1685  A_fused=0.1942
+[ag 2560x5120 M=512] setup + check
+[ag (2560, 5120) M=512 gpu] kept 5/5  c_cublas=0.0799  c_fluxgemm=0.0829  c_flux_ag=0.1379  A_fused=0.2028
+[ag (2560, 5120) M=512 steady] kept 3/3  c_cublas=0.0742  c_fluxgemm=0.0813  c_flux_ag=0.1542  A_fused=0.1844
+[ag 2560x5120 M=2048] setup + check
+[ag (2560, 5120) M=2048 gpu] kept 5/5  c_cublas=0.2591  c_fluxgemm=0.2222  c_flux_ag=0.2298  A_fused=0.3451
+[ag (2560, 5120) M=2048 steady] kept 3/3  c_cublas=0.2584  c_fluxgemm=0.2184  c_flux_ag=0.1891  A_fused=0.3241
+[ag 2560x5120 M=8192] setup + check
+[ag (2560, 5120) M=8192 gpu] kept 5/5  c_cublas=0.7660  c_fluxgemm=0.8571  c_flux_ag=0.4225  A_fused=0.9830
+[ag (2560, 5120) M=8192 steady] kept 3/3  c_cublas=0.8529  c_fluxgemm=0.9318  c_flux_ag=0.4029  A_fused=1.0414
+[ag 5120x10240 M=16] setup + check
+Timeout (0:02:30)!
+Thread 0xTimeout (0:02:30)!
+Timeout (0:02:30)!
+000071eda3fff6c0Thread 0xThread 0x (most recent call first):
+0000728edf97e6c0000074a11b97e6c0 (most recent call first):
+  File  (most recent call first):
+  File "  File /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py"""/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py, line /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py"1311", line  in , line 1696_on_error_fd_closer1696 in 
+ in _get_handles  File _get_handles
+"
+  File /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/contextlib.py  File """/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py, line /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py"105" in __init__, line 
+992, line   File  in 992"__init__ in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/contextlib.py
+__init__"  File 
+, line "  File 301/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py" in "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.pyhelper, line "
+548  File , line  in "548run/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py in 
+"  File run, line "
+1696/home/rogerlee/flux/common/measure/clock_logger.py  File  in "_get_handles", line 
+/home/rogerlee/flux/common/measure/clock_logger.py37  File " in "_run, line /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py
+37"  File  in ", line /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py_run992"
+ in , line   File __init__982
+ in "  File run/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py"
+"/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py  File , line ""982/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py, line  in "548run, line  in 
+1045run  File  in 
+"_bootstrap_inner  File /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py
+""  File /home/rogerlee/flux/common/measure/clock_logger.py, line ""1045/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py, line  in "37_bootstrap_inner, line  in 
+1002_run  File  in 
+"_bootstrap  File /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py
+""
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.pyThread 0x, line "000074a701d747401002, line  (most recent call first):
+ in 982  File _bootstrap in "
+run/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/__init__.py
+
+"Thread 0x  File , line 00007294c62ea740"985 (most recent call first):
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py in "synchronize  File , line 
+Timeout (0:02:30)!
+1045  File "Thread 0x in "_bootstrap_inner/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/__init__.py00007f488e8de6c0/home/rogerlee/flux/ws/fusion-dispatch/scripts/dispatch_map_v2.pyTimeout (0:02:30)!
+
+" (most recent call first):
+"Thread 0x  File , line   File , line "00007c08d1da26c0985231/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py" (most recent call first):
+ in  in "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.pysynchronizerun_mode, line "  File , line 
+
+1002597  File   File  in " in ""_bootstrap/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.pyset/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py/home/rogerlee/flux/ws/fusion-dispatch/scripts/dispatch_map_v2.py
+"
+""
+, line   File , line Thread 0x, line 1311"164000071f38ab35740231 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py in  (most recent call first):
+ in _on_error_fd_closerrun_mode"time_case  File 
+
+, line 
+"  File   File 1034  File /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/__init__.py in """"_bootstrap_inner/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/contextlib.py/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py, line 
+"""985  File , line , line  in , line "105164231synchronize/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py in  in  in 
+"__init__time_casemain  File , line 
+
+
+"1002  File   File   File /home/rogerlee/flux/ws/fusion-dispatch/scripts/dispatch_map_v2.py in """"_bootstrap/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/contextlib.py/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py
+, line """
+231 in , line , line Timeout (0:02:30)!
+Thread 0xrun_mode301, line 308Thread 0x00007f4e79acc740
+ in 231 in 0000757d4d1766c0 (most recent call first):
+  File helper in <module> (most recent call first):
+  File "
+
+main  File "/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py  File 
+"/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py""  File /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/selectors.py", line /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py"", line 164"/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py327 in , line " in , line time_case1696wait415, line 
+ in 
+ in 308  File Timeout (0:02:30)!
+_get_handles  File Thread 0xselect in "
+"
+00007797828de6c0/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py<module>  File /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py  File  (most recent call first):
+"
+"""  File , line /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py, line /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py231""629" in , line /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py in , line main992"wait2115
+ in , line 
+ in   File __init__597  File _communicate"
+ in "Timeout (0:02:30)!
+
+/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py  File set/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py  File Thread 0x"
+"""000071e3228de6c0  File , line /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py, line /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py (most recent call first):
+"308"969"/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py  File  in  in <module>, line ", line start
+"548, line 1209
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py in 1034 in   File " in runcommunicate"_bootstrap_inner, line 
+
+/home/rogerlee/flux/common/measure/clock_logger.py
+1020  File   File "  File  in "", line "_set_tstate_lock/home/rogerlee/flux/common/measure/clock_logger.py/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/subprocess.py48/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py
+"" in "  File , line , line __enter__, line "37550
+1002/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py in  in   File  in ""_runrun_bootstrap/home/rogerlee/flux/ws/fusion-dispatch/scripts/dispatch_map_v2.py, line 
+
+
+"1031  File   File 
+, line  in ""Thread 0x224_bootstrap_inner/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py/home/rogerlee/flux/common/measure/clock_logger.py0000779d695c9740 in 
+"" (most recent call first):
+, line   File run_mode  File , line 37"
+"982 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py  File /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py in _run"", line "run
+, line 327/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py
+  File 1002 in "  File  in ""wait, line _bootstrap/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py
+164
+""  File  in 
+, line , line "time_caseThread 0x9821045/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py
+000071e909556740 in  in "_bootstrap_inner  File  (most recent call first):
+run, line 
+"
+  File 629  File /home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py  File " in """/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.pywait/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py, line "
+""231  File , line , line , line  in "32710021045/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.pymain in  in  in "
+wait_bootstrap_bootstrap_inner, line   File 
+
+
+969"  File 
+  File  in /home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py"Thread 0x"start"/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py00007c0eb86f8740/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py
+, line " (most recent call first):
+"  File 308, line , line   File " in 6291002/home/rogerlee/flux/common/measure/clock_logger.py"<module> in  in "/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py
+wait_bootstrap, line "
+
+48  File , line 
+ in "109Thread 0x__enter__/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/threading.py in 0000758324f40740
+"<lambda> (most recent call first):
+  File , line 
+  File 969"  File  in "/home/rogerlee/flux/ws/fusion-dispatch/scripts/dispatch_map_v2.pystart"/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/__init__.py"
+/home/rogerlee/flux/ws/fusion-dispatch/scripts/dispatch_map_v2.py", line   File ", line 224", line 985 in /home/rogerlee/flux/common/measure/clock_logger.py205 in run_mode" in synchronize
+, line 
+one_round  File 48  File 
+" in "  File /home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py__enter__/home/rogerlee/flux/ws/fusion-dispatch/scripts/dispatch_map_v2.py""
+"/home/rogerlee/flux/ws/fusion-dispatch/scripts/dispatch_map_v2.py, line   File , line "164"231 in , line /home/rogerlee/flux/ws/fusion-dispatch/scripts/dispatch_map_v2.py in time_case230"run_mode
+ in , line run_mode
+  File 224
+  File " in   File "/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.pyrun_mode"/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py"
+/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py"  File , line ", line "231, line 164/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py in 164 in "main in time_case, line 
+time_case
+164  File 
+  File  in "  File ""time_case/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py
+"""  File , line , line "308231/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py, line  in  in "main231<module>
+, line  in 
+main  File 231
+" in   File /home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.pymain""
+/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py  File , line ""308/home/rogerlee/flux/ws/fusion-dispatch/scripts/calibrate_hw_v1.py in , line "<module>308
+, line  in 308<module> in 
+<module>
+W1002 17:44:09.973000 99465 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 99607 closing signal SIGTERM
+W1002 17:44:09.973000 99465 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 99608 closing signal SIGTERM
+W1002 17:44:09.973000 99465 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 99609 closing signal SIGTERM
+W1002 17:44:09.973000 99465 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 99610 closing signal SIGTERM
+W1002 17:44:09.974000 99465 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 99611 closing signal SIGTERM
+W1002 17:44:09.974000 99465 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 99612 closing signal SIGTERM
+W1002 17:44:09.974000 99465 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 99613 closing signal SIGTERM
+E1002 17:44:11.216000 99465 site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 0 (pid: 99606) of binary: /home/rogerlee/flux/.pixi/envs/default/bin/python
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/.pixi/envs/default/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+ws/fusion-dispatch/scripts/calibrate_hw_v1.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-02_17:44:09
+  host      : css-host-158
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 99606)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=ws/fusion-dispatch/results/g2_smoke/debug_hang2/guard.log

@@ -1,0 +1,312 @@
+{
+ "script": "ws/fusion-dispatch/scripts/calibrate_hw_v1.py",
+ "args": {
+  "modes": "gpu,steady",
+  "groups": "ag",
+  "tag": "ag_1536x16384",
+  "rounds": 5,
+  "rounds_steady_comm": 3,
+  "rounds_steady_gemm": 3,
+  "warmup": 2,
+  "warmup_first": 5,
+  "steady_L": 16,
+  "pad_cycles": 400000,
+  "flush_mb": 128,
+  "clock_period": 0.02,
+  "seed": 20261002,
+  "atol": 0.05,
+  "rtol": 0.05,
+  "out_dir": "ws/fusion-dispatch/results/g2_smoke/run",
+  "ag_shapes": "1536x16384",
+  "rs_shapes": "",
+  "gemm_ms": "",
+  "hang_dump_s": 0
+ },
+ "date": "2026-10-02 17:46:29",
+ "world": 8,
+ "torch": "2.6.0+cu124",
+ "nccl": "2.21.5",
+ "cublas_settings": {
+  "CUBLAS_WORKSPACE_CONFIG": null,
+  "deterministic": false,
+  "allow_bf16_reduced_precision_reduction": true
+ },
+ "comm_K": 6144,
+ "ag_shapes": [
+  [
+   2560,
+   5120
+  ],
+  [
+   5120,
+   10240
+  ],
+  [
+   1536,
+   16384
+  ]
+ ],
+ "rs_shapes": [
+  [
+   6144,
+   2560
+  ],
+  [
+   10240,
+   1280
+  ]
+ ],
+ "cases": [
+  {
+   "group": "ag",
+   "shape": [
+    1536,
+    16384
+   ],
+   "M": 16,
+   "check": {
+    "A_fused": true,
+    "c_fluxgemm": true,
+    "c_cublas": true,
+    "c_flux_ag": true
+   },
+   "timed": [
+    "c_cublas",
+    "c_fluxgemm",
+    "c_flux_ag",
+    "A_fused"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "ag",
+   "shape": [
+    1536,
+    16384
+   ],
+   "M": 128,
+   "check": {
+    "A_fused": true,
+    "c_fluxgemm": true,
+    "c_cublas": true,
+    "c_flux_ag": true
+   },
+   "timed": [
+    "c_cublas",
+    "c_fluxgemm",
+    "c_flux_ag",
+    "A_fused"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "ag",
+   "shape": [
+    1536,
+    16384
+   ],
+   "M": 512,
+   "check": {
+    "A_fused": true,
+    "c_fluxgemm": true,
+    "c_cublas": true,
+    "c_flux_ag": true
+   },
+   "timed": [
+    "c_cublas",
+    "c_fluxgemm",
+    "c_flux_ag",
+    "A_fused"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   }
+  },
+  {
+   "group": "ag",
+   "shape": [
+    1536,
+    16384
+   ],
+   "M": 2048,
+   "check": {
+    "A_fused": true,
+    "c_fluxgemm": true,
+    "c_cublas": true,
+    "c_flux_ag": true
+   },
+   "timed": [
+    "c_cublas",
+    "c_fluxgemm",
+    "c_flux_ag",
+    "A_fused"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      1380
+     ]
+    }
+   }
+  },
+  {
+   "group": "ag",
+   "shape": [
+    1536,
+    16384
+   ],
+   "M": 8192,
+   "check": {
+    "A_fused": true,
+    "c_fluxgemm": true,
+    "c_cublas": true,
+    "c_flux_ag": true
+   },
+   "timed": [
+    "c_cublas",
+    "c_fluxgemm",
+    "c_flux_ag",
+    "A_fused"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 5,
+     "kept": 5,
+     "modal_sm_clock_per_rank": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    "steady": {
+     "rounds": 3,
+     "kept": 3,
+     "modal_sm_clock_per_rank": [
+      1245,
+      1365,
+      1290,
+      1245,
+      1230,
+      1350,
+      1290,
+      1230
+     ]
+    }
+   }
+  }
+ ],
+ "wall_s": 2.71868896484375
+}
