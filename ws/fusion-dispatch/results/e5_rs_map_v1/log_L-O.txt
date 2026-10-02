@@ -1,0 +1,65 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/dispatch_map_rs_v1.py --layer L-O --Ms 8,16,24,32,64,72,128,136,256,264,512,520,1024,1032,2048,3072,4096,6144,8192,16384 --max_m 16384 --modes gpu,steady --rounds 200 --warmup 30 --clock_period 0.02 --out_dir ws/fusion-dispatch/results/e5_rs_map_v1
+W0930 06:06:05.787000 725556 site-packages/torch/distributed/run.py:792] 
+W0930 06:06:05.787000 725556 site-packages/torch/distributed/run.py:792] *****************************************
+W0930 06:06:05.787000 725556 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0930 06:06:05.787000 725556 site-packages/torch/distributed/run.py:792] *****************************************
+[L-O M=8] correctness: all ok 
+[L-O M=8 gpu] kept 131/200  A_fused=0.0625  B_nccl_cublas=0.0492  E_allreduce=0.0625  c_cublas=0.0246  c_nccl_rs=0.0317  c_nccl_ar=0.0440  c_fluxgemm=0.0338
+[L-O M=8 steady] kept 200/200  A_fused=0.0495  B_nccl_cublas=0.0545  E_allreduce=0.0584  c_cublas=0.0173  c_nccl_rs=0.0308  c_nccl_ar=0.0322  c_fluxgemm=0.0263
+[L-O M=16] correctness: all ok 
+[L-O M=16 gpu] kept 200/200  A_fused=0.0614  B_nccl_cublas=0.0492  E_allreduce=0.0625  c_cublas=0.0246  c_nccl_rs=0.0297  c_nccl_ar=0.0399  c_fluxgemm=0.0338
+[L-O M=16 steady] kept 200/200  A_fused=0.0491  B_nccl_cublas=0.0536  E_allreduce=0.0568  c_cublas=0.0174  c_nccl_rs=0.0307  c_nccl_ar=0.0324  c_fluxgemm=0.0265
+[L-O M=24] correctness: all ok 
+[L-O M=24 gpu] kept 200/200  A_fused=0.0614  B_nccl_cublas=0.0543  E_allreduce=0.0666  c_cublas=0.0246  c_nccl_rs=0.0323  c_nccl_ar=0.0420  c_fluxgemm=0.0338
+[L-O M=24 steady] kept 200/200  A_fused=0.0494  B_nccl_cublas=0.0522  E_allreduce=0.0584  c_cublas=0.0167  c_nccl_rs=0.0317  c_nccl_ar=0.0336  c_fluxgemm=0.0267
+[L-O M=32] correctness: all ok 
+[L-O M=32 gpu] kept 200/200  A_fused=0.0614  B_nccl_cublas=0.0594  E_allreduce=0.0686  c_cublas=0.0246  c_nccl_rs=0.0369  c_nccl_ar=0.0466  c_fluxgemm=0.0338
+[L-O M=32 steady] kept 200/200  A_fused=0.0500  B_nccl_cublas=0.0530  E_allreduce=0.0586  c_cublas=0.0167  c_nccl_rs=0.0297  c_nccl_ar=0.0338  c_fluxgemm=0.0268
+[L-O M=64] correctness: all ok 
+[L-O M=64 gpu] kept 200/200  A_fused=0.0727  B_nccl_cublas=0.0676  E_allreduce=0.0788  c_cublas=0.0246  c_nccl_rs=0.0451  c_nccl_ar=0.0563  c_fluxgemm=0.0348
+[L-O M=64 steady] kept 200/200  A_fused=0.0531  B_nccl_cublas=0.0553  E_allreduce=0.0608  c_cublas=0.0168  c_nccl_rs=0.0306  c_nccl_ar=0.0368  c_fluxgemm=0.0273
+[L-O M=72] correctness: all ok 
+[L-O M=72 gpu] kept 200/200  A_fused=0.0727  B_nccl_cublas=0.0727  E_allreduce=0.0840  c_cublas=0.0297  c_nccl_rs=0.0471  c_nccl_ar=0.0594  c_fluxgemm=0.0348
+[L-O M=72 steady] kept 200/200  A_fused=0.0540  B_nccl_cublas=0.0566  E_allreduce=0.0663  c_cublas=0.0207  c_nccl_rs=0.0312  c_nccl_ar=0.0384  c_fluxgemm=0.0275
+[L-O M=128] correctness: all ok 
+[L-O M=128 gpu] kept 200/200  A_fused=0.0788  B_nccl_cublas=0.0799  E_allreduce=0.0983  c_cublas=0.0287  c_nccl_rs=0.0563  c_nccl_ar=0.0748  c_fluxgemm=0.0358
+[L-O M=128 steady] kept 200/200  A_fused=0.0613  B_nccl_cublas=0.0609  E_allreduce=0.0802  c_cublas=0.0208  c_nccl_rs=0.0350  c_nccl_ar=0.0544  c_fluxgemm=0.0285
+[L-O M=136] correctness: all ok 
+[L-O M=136 gpu] kept 200/200  A_fused=0.0768  B_nccl_cublas=0.0829  E_allreduce=0.1106  c_cublas=0.0307  c_nccl_rs=0.0584  c_nccl_ar=0.0814  c_fluxgemm=0.0399
+[L-O M=136 steady] kept 200/200  A_fused=0.0630  B_nccl_cublas=0.0637  E_allreduce=0.0912  c_cublas=0.0235  c_nccl_rs=0.0362  c_nccl_ar=0.0619  c_fluxgemm=0.0343
+[L-O M=256] correctness: all ok 
+[L-O M=256 gpu] kept 200/200  A_fused=0.0870  B_nccl_cublas=0.1137  E_allreduce=0.1388  c_cublas=0.0399  c_nccl_rs=0.0758  c_nccl_ar=0.1034  c_fluxgemm=0.0420
+[L-O M=256 steady] kept 200/200  A_fused=0.0752  B_nccl_cublas=0.0996  E_allreduce=0.1249  c_cublas=0.0327  c_nccl_rs=0.0567  c_nccl_ar=0.0824  c_fluxgemm=0.0354
+[L-O M=264] correctness: all ok 
+[L-O M=264 gpu] kept 200/200  A_fused=0.0942  B_nccl_cublas=0.1137  E_allreduce=0.1393  c_cublas=0.0410  c_nccl_rs=0.0748  c_nccl_ar=0.1004  c_fluxgemm=0.0430
+[L-O M=264 steady] kept 200/200  A_fused=0.0757  B_nccl_cublas=0.0997  E_allreduce=0.1256  c_cublas=0.0331  c_nccl_rs=0.0567  c_nccl_ar=0.0836  c_fluxgemm=0.0433
+[L-O M=512] correctness: all ok 
+[L-O M=512 gpu] kept 200/200  A_fused=0.1249  B_nccl_cublas=0.1710  E_allreduce=0.2171  c_cublas=0.0696  c_nccl_rs=0.1065  c_nccl_ar=0.1475  c_fluxgemm=0.0614
+[L-O M=512 steady] kept 200/200  A_fused=0.1115  B_nccl_cublas=0.1558  E_allreduce=0.2000  c_cublas=0.0627  c_nccl_rs=0.0815  c_nccl_ar=0.1256  c_fluxgemm=0.0572
+[L-O M=520] correctness: all ok 
+[L-O M=520 gpu] kept 200/200  A_fused=0.1260  B_nccl_cublas=0.1731  E_allreduce=0.2176  c_cublas=0.0707  c_nccl_rs=0.1034  c_nccl_ar=0.1485  c_fluxgemm=0.0604
+[L-O M=520 steady] kept 200/200  A_fused=0.1073  B_nccl_cublas=0.1576  E_allreduce=0.2016  c_cublas=0.0628  c_nccl_rs=0.0820  c_nccl_ar=0.1270  c_fluxgemm=0.0682
+[L-O M=1024] correctness: all ok 
+[L-O M=1024 gpu] kept 200/200  A_fused=0.1731  B_nccl_cublas=0.2381  E_allreduce=0.3369  c_cublas=0.0963  c_nccl_rs=0.1423  c_nccl_ar=0.2355  c_fluxgemm=0.0952
+[L-O M=1024 steady] kept 200/200  A_fused=0.1506  B_nccl_cublas=0.2257  E_allreduce=0.3128  c_cublas=0.0921  c_nccl_rs=0.1229  c_nccl_ar=0.2164  c_fluxgemm=0.0919
+[L-O M=1032] correctness: all ok 
+[L-O M=1032 gpu] kept 200/200  A_fused=0.1782  B_nccl_cublas=0.2386  E_allreduce=0.3348  c_cublas=0.0963  c_nccl_rs=0.1434  c_nccl_ar=0.2386  c_fluxgemm=0.1044
+[L-O M=1032 steady] kept 200/200  A_fused=0.1612  B_nccl_cublas=0.2271  E_allreduce=0.3160  c_cublas=0.0924  c_nccl_rs=0.1233  c_nccl_ar=0.2186  c_fluxgemm=0.1002
+[L-O M=2048] correctness: all ok 
+[L-O M=2048 gpu] kept 200/200  A_fused=0.2601  B_nccl_cublas=0.3871  E_allreduce=0.5458  c_cublas=0.1567  c_nccl_rs=0.2294  c_nccl_ar=0.3881  c_fluxgemm=0.1679
+[L-O M=2048 steady] kept 200/200  A_fused=0.2383  B_nccl_cublas=0.3705  E_allreduce=0.5261  c_cublas=0.1529  c_nccl_rs=0.2114  c_nccl_ar=0.3689  c_fluxgemm=0.1684
+[L-O M=3072] correctness: all ok 
+[L-O M=3072 gpu] kept 200/200  A_fused=0.3615  B_nccl_cublas=0.5140  E_allreduce=0.7137  c_cublas=0.2417  c_nccl_rs=0.2724  c_nccl_ar=0.4731  c_fluxgemm=0.2447
+[L-O M=3072 steady] kept 200/200  A_fused=0.3348  B_nccl_cublas=0.4965  E_allreduce=0.6954  c_cublas=0.2386  c_nccl_rs=0.2547  c_nccl_ar=0.4543  c_fluxgemm=0.2444
+[L-O M=4096] correctness: all ok 
+[L-O M=4096 gpu] kept 200/200  A_fused=0.4531  B_nccl_cublas=0.6451  E_allreduce=0.9170  c_cublas=0.3011  c_nccl_rs=0.3441  c_nccl_ar=0.6144  c_fluxgemm=0.3092
+[L-O M=4096 steady] kept 196/200  A_fused=0.4299  B_nccl_cublas=0.6318  E_allreduce=0.9026  c_cublas=0.3008  c_nccl_rs=0.3278  c_nccl_ar=0.5988  c_fluxgemm=0.3109
+[L-O M=6144] correctness: all ok 
+[L-O M=6144 gpu] kept 200/200  A_fused=0.6369  B_nccl_cublas=0.8940  E_allreduce=1.2800  c_cublas=0.4250  c_nccl_rs=0.4731  c_nccl_ar=0.8586  c_fluxgemm=0.4618
+[L-O M=6144 steady] kept 146/200  A_fused=0.6296  B_nccl_cublas=0.8925  E_allreduce=1.2772  c_cublas=0.4274  c_nccl_rs=0.4607  c_nccl_ar=0.8481  c_fluxgemm=0.4700
+[L-O M=8192] correctness: all ok 
+[L-O M=8192 gpu] kept 200/200  A_fused=0.8509  B_nccl_cublas=1.2058  E_allreduce=1.7572  c_cublas=0.5693  c_nccl_rs=0.6374  c_nccl_ar=1.1878  c_fluxgemm=0.6072
+[L-O M=8192 steady] kept 135/200  A_fused=0.8304  B_nccl_cublas=1.2067  E_allreduce=1.7512  c_cublas=0.5753  c_nccl_rs=0.6273  c_nccl_ar=1.1735  c_fluxgemm=0.6115
+[L-O M=16384] correctness: all ok 
+[L-O M=16384 gpu] kept 200/200  A_fused=1.5785  B_nccl_cublas=2.2508  E_allreduce=3.2891  c_cublas=1.1069  c_nccl_rs=1.1540  c_nccl_ar=2.1975  c_fluxgemm=1.1991
+[L-O M=16384 steady] kept 6/200  A_fused=1.6022  B_nccl_cublas=2.2559  E_allreduce=3.3090  c_cublas=1.1173  c_nccl_rs=1.1461  c_nccl_ar=2.1738  c_fluxgemm=1.2135

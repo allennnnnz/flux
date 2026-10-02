@@ -1,0 +1,6 @@
+1 torchrun, NCCL initialized                 mm_out: med   70.5 max   73.0  F.linear: med   72.6 max   83.7
+2 after AGKernel + AllGatherOp created       mm_out: med   70.5 max   74.0  F.linear: med   72.9 max   76.4
+3 after AGKernel.forward has run             mm_out: med   70.3 max   73.5  F.linear: med   72.7 max   76.0
+4 harness sequence (flush, sleep, allreduce) mm_out: med   87.4 max   94.4  F.linear: med   94.6 max  100.6
+5 same without allreduce                     mm_out: med   70.7 max   74.6  F.linear: med   73.4 max   77.0
+6 right after allreduce (no flush)           mm_out: med   79.5 max   84.3  F.linear: med   85.2 max   88.5

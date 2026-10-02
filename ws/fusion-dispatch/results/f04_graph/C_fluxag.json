@@ -1,0 +1,22 @@
+{
+ "item": "C_fluxag",
+ "date": "2026-09-30 06:04:28",
+ "cases": {
+  "64": {
+   "capture_ok": true,
+   "capture_error_rank0": "",
+   "replay_allclose_all_ranks": true,
+   "replay_bitwise_all_ranks": true,
+   "eager_ms_rank_max_median": 0.1515520066022873,
+   "graph_ms_rank_max_median": 0.158720001578331
+  },
+  "1024": {
+   "capture_ok": true,
+   "capture_error_rank0": "",
+   "replay_allclose_all_ranks": true,
+   "replay_bitwise_all_ranks": true,
+   "eager_ms_rank_max_median": 0.289792001247406,
+   "graph_ms_rank_max_median": 0.2974720001220703
+  }
+ }
+}

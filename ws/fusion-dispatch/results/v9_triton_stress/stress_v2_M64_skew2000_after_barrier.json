@@ -1,0 +1,25 @@
+{
+ "args": {
+  "iters": 5000,
+  "M": 64,
+  "K": 8192,
+  "max_skew_us": 2000.0,
+  "skew_at": "after_barrier",
+  "out": "ws/fusion-dispatch/results/v9_triton_stress/stress_v2_M64_skew2000_after_barrier.json"
+ },
+ "results": {
+  "single": {
+   "iters": 5000,
+   "bad_elements_all_ranks": 8555579392,
+   "bad_rank_iterations": 33612,
+   "wall_s": 9.690429925918579
+  },
+  "double": {
+   "iters": 5000,
+   "bad_elements_all_ranks": 0,
+   "bad_rank_iterations": 0,
+   "wall_s": 9.259910583496094
+  }
+ },
+ "date": "2026-10-02 14:20:49"
+}

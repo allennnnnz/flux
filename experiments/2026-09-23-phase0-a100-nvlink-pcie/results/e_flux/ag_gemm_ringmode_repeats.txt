@@ -1,0 +1,11 @@
+all2all  run1  flux  #0: total 2.709 ms, gemm 2.505 ms, comm 0.205 ms, gemm_only 2.656 ms
+all2all  run2  flux  #0: total 2.897 ms, gemm 2.437 ms, comm 0.460 ms, gemm_only 2.528 ms
+all2all  run3  flux  #0: total 2.693 ms, gemm 2.513 ms, comm 0.180 ms, gemm_only 2.805 ms
+ring1d   run1  flux  #0: total 2.885 ms, gemm 2.623 ms, comm 0.262 ms, gemm_only 2.877 ms
+ring1d   run2  flux  #0: total 2.824 ms, gemm 2.462 ms, comm 0.363 ms, gemm_only 2.530 ms
+ring1d   run3  flux  #0: total 2.726 ms, gemm 2.619 ms, comm 0.106 ms, gemm_only 2.629 ms
+ring2d   run1  flux  #0: total 2.700 ms, gemm 2.433 ms, comm 0.267 ms, gemm_only 2.563 ms
+ring2d   run2  flux  #0: total 2.690 ms, gemm 2.460 ms, comm 0.230 ms, gemm_only 2.594 ms
+ring2d   run3  flux  #0: total 2.754 ms, gemm 2.467 ms, comm 0.287 ms, gemm_only 2.545 ms
+
+[exited with code 0]

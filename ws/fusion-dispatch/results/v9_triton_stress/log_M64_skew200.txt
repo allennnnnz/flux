@@ -1,0 +1,7 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/triton_ag_stress_v1.py --iters 5000 --M 64 --K 8192 --max_skew_us 200 --out ws/fusion-dispatch/results/v9_triton_stress/stress_M64_skew200.json
+W0930 10:55:11.206000 1768931 site-packages/torch/distributed/run.py:792] 
+W0930 10:55:11.206000 1768931 site-packages/torch/distributed/run.py:792] *****************************************
+W0930 10:55:11.206000 1768931 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0930 10:55:11.206000 1768931 site-packages/torch/distributed/run.py:792] *****************************************
+[single] iters=5000 M=64 K=8192 max_skew=200.0us  bad elements=0  bad (rank,iter) pairs=0  (1.8s)
+[double] iters=5000 M=64 K=8192 max_skew=200.0us  bad elements=0  bad (rank,iter) pairs=0  (1.3s)

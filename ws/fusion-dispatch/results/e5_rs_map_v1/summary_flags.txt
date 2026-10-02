@@ -1,0 +1,6 @@
+CONSISTENCY G-O M=128 steady: B_nccl_cublas - sum(parts) = 0.0124 ms (+12.4%)
+CONSISTENCY L-O M=8 steady: B_nccl_cublas - sum(parts) = 0.0069 ms (+12.7%)
+CONSISTENCY L-O M=8 steady: E_allreduce - sum(parts) = 0.0072 ms (+12.4%)
+CONSISTENCY L-O M=16 steady: B_nccl_cublas - sum(parts) = 0.0056 ms (+10.5%)
+CONSISTENCY L-O M=32 steady: B_nccl_cublas - sum(parts) = 0.0067 ms (+12.6%)
+CONSISTENCY L-O M=32 steady: E_allreduce - sum(parts) = 0.0061 ms (+10.3%)

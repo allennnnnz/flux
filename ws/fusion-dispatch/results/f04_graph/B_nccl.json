@@ -1,0 +1,22 @@
+{
+ "item": "B_nccl",
+ "date": "2026-09-30 05:51:09",
+ "cases": {
+  "64": {
+   "capture_ok": true,
+   "capture_error_rank0": "",
+   "replay_allclose_all_ranks": true,
+   "replay_bitwise_all_ranks": true,
+   "eager_ms_rank_max_median": 0.07782399654388428,
+   "graph_ms_rank_max_median": 0.09062400087714195
+  },
+  "1024": {
+   "capture_ok": true,
+   "capture_error_rank0": "",
+   "replay_allclose_all_ranks": true,
+   "replay_bitwise_all_ranks": true,
+   "eager_ms_rank_max_median": 0.2687999904155731,
+   "graph_ms_rank_max_median": 0.275968000292778
+  }
+ }
+}

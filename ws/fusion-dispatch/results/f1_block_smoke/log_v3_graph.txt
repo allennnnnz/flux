@@ -1,0 +1,65 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING 09-30 08:02:53 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:53 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:53 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:53 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:53 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:53 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:53 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:53 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:53 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:53 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:53 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:53 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:53 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:53 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:53 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:53 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:53 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:53 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:54 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:54 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:54 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:54 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:54 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:54 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:54 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:54 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:54 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:54 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:54 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:54 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:54 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:54 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:54 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:54 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:54 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:54 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:54 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:54 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:54 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:54 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:54 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:54 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:54 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:54 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:54 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:02:54 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:02:54 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:02:54 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+vLLM custom AR present=True disabled=False fully_connected=True max_size=8388608; pynccl disabled=False
+[decode graph L=4 M=64] kept 10  tp_ar=1.3486  tp_ar_vllm=1.1853  sp_nccl=1.5345  sp_rsflux=1.6471  sp_dispatch=1.5631  best=tp_ar_vllm  dispatch counts={'ag:nccl': 8, 'rs:nccl': 8} misses={}  check={'tp_ar_vllm': 0.0146, 'sp_nccl': 0.0146, 'sp_rsflux': 0.0146, 'sp_dispatch': 0.0146}
+[decode graph L=4 M=512] kept 10  tp_ar=4.5399  tp_ar_vllm=4.5184  sp_nccl=4.7012  sp_rsflux=4.1329  sp_dispatch=4.0709  best=sp_dispatch  dispatch counts={'ag:nccl': 4, 'rs:flux': 8, 'ag:fluxag_fluxgemm': 4} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0208, 'sp_rsflux': 0.0139, 'sp_dispatch': 0.0174}
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

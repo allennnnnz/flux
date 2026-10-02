@@ -1,0 +1,13 @@
+phase,mode,M,policy,predicted_ms,measured_ms
+decode,graph,64,sp_rsflux,0.0656,-10.5590
+decode,graph,64,sp_dispatch,0.0000,0.2888
+decode,graph,256,sp_rsflux,-0.2132,-16.3343
+decode,graph,256,sp_dispatch,-0.2132,-16.3768
+decode,graph,512,sp_rsflux,-0.5572,-21.0386
+decode,graph,512,sp_dispatch,-0.6144,-26.8114
+prefill,eager,1024,sp_flux,-0.8492,-16.2376
+prefill,eager,1024,sp_rsflux,-0.7276,-14.1711
+prefill,eager,1024,sp_dispatch,-0.8596,-16.2033
+prefill,eager,4096,sp_flux,-1.1428,3.1017
+prefill,eager,4096,sp_rsflux,-1.8740,-24.2468
+prefill,eager,4096,sp_dispatch,-2.7796,-36.9014

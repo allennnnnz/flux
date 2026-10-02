@@ -1,0 +1,14 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/tune_upside_v2.py --layer L-GU --Ms 8,64,256,512,1024,2048,4096,8192 --out ws/fusion-dispatch/results/v10_tune/tune_L-GU.json
+W0930 08:46:02.561000 1124363 site-packages/torch/distributed/run.py:792] 
+W0930 08:46:02.561000 1124363 site-packages/torch/distributed/run.py:792] *****************************************
+W0930 08:46:02.561000 1124363 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0930 08:46:02.561000 1124363 site-packages/torch/distributed/run.py:792] *****************************************
+[L-GU M=8] default 0.2127 (after 0.3363)  profiling top-k [0.227, 0.227, 0.236, 0.259, 0.306]  best/default 1.067  (65 s)
+[L-GU M=64] default 0.3541 (after 0.3572)  profiling top-k [0.31, 0.331, 0.353, 0.364, 0.37]  best/default 0.875  (64 s)
+[L-GU M=256] default 0.3165 (after 0.3296)  profiling top-k [0.333, 0.344, 0.36, 0.403, 0.405]  best/default 1.052  (65 s)
+[L-GU M=512] default 0.4391 (after 0.4347)  profiling top-k [0.467, 0.473, 0.488, 0.502, 0.533]  best/default 1.064  (65 s)
+[L-GU M=1024] default 0.7596 (after 0.7510)  profiling top-k [0.727, 0.732, 0.749, 0.75, 0.766]  best/default 0.957  (65 s)
+[L-GU M=2048] default 1.3647 (after 1.3636)  profiling top-k [1.17, 1.29, 1.31, 1.32, 1.33]  best/default 0.857  (66 s)
+[L-GU M=4096] default 3.0030 (after 3.0116)  profiling top-k [2.12, 2.17, 2.2, 2.24, 2.24]  best/default 0.706  (67 s)
+[L-GU M=8192] default 4.2410 (after 4.4623)  profiling top-k [4.14, 4.15, 4.2, 4.21, 4.21]  best/default 0.976  (69 s)
+wrote ws/fusion-dispatch/results/v10_tune/tune_L-GU.json

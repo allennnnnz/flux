@@ -1,0 +1,9 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/dispatch_map_rs_v1.py --layer L-down --Ms 8192,16384 --max_m 16384 --modes gpu --rounds 300 --warmup 30 --clock_period 0.02 --out_dir ws/fusion-dispatch/results/v7_rerun/rs
+W0930 10:39:03.171000 1698406 site-packages/torch/distributed/run.py:792] 
+W0930 10:39:03.171000 1698406 site-packages/torch/distributed/run.py:792] *****************************************
+W0930 10:39:03.171000 1698406 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0930 10:39:03.171000 1698406 site-packages/torch/distributed/run.py:792] *****************************************
+[L-down M=8192] correctness: all ok 
+[L-down M=8192 gpu] kept 300/300  A_fused=2.0009  B_nccl_cublas=2.4074  E_allreduce=2.9594  c_cublas=1.7766  c_nccl_rs=0.6477  c_nccl_ar=1.1991  c_fluxgemm=1.9272
+[L-down M=16384] correctness: all ok 
+[L-down M=16384 gpu] kept 300/300  A_fused=3.9660  B_nccl_cublas=4.8179  E_allreduce=5.8563  c_cublas=3.6567  c_nccl_rs=1.1663  c_nccl_ar=2.2262  c_fluxgemm=3.9434

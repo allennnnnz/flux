@@ -1,0 +1,15 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/validate_block_v1.py --phase decode --mode graph --Ms 64,512 --table ws/fusion-dispatch/results/f1_block_smoke/table_gpu.json --L 4 --rounds 20 --warmup 3 --out_dir ws/fusion-dispatch/results/f1_block_smoke
+W0930 06:16:36.176000 788063 site-packages/torch/distributed/run.py:792] 
+W0930 06:16:36.176000 788063 site-packages/torch/distributed/run.py:792] *****************************************
+W0930 06:16:36.176000 788063 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0930 06:16:36.176000 788063 site-packages/torch/distributed/run.py:792] *****************************************
+[rank5]:[W930 06:16:49.476902590 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank2]:[W930 06:16:49.497991858 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank1]:[W930 06:16:49.556105643 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank0]:[W930 06:16:49.556954399 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W930 06:16:49.564850637 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank3]:[W930 06:16:49.674153484 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[decode graph L=4 M=64] kept 20  tp_ar=1.5616  sp_nccl=1.7034  sp_rsflux=1.7981  sp_dispatch=1.7060  best=tp_ar  dispatch counts={'ag:nccl': 8, 'rs:nccl': 8} misses={}  check={'sp_nccl': 0.0164, 'sp_rsflux': 0.0146, 'sp_dispatch': 0.0164}
+[rank6]:[W930 06:16:50.362026321 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank4]:[W930 06:16:50.455563943 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[decode graph L=4 M=512] kept 20  tp_ar=5.2500  sp_nccl=4.9597  sp_rsflux=4.4063  sp_dispatch=4.3361  best=sp_dispatch  dispatch counts={'ag:nccl': 4, 'rs:flux': 8, 'ag:fluxag_fluxgemm': 4} misses={}  check={'sp_nccl': 0.0174, 'sp_rsflux': 0.0148, 'sp_dispatch': 0.0139}

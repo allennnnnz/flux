@@ -1,0 +1,300 @@
+{
+ "args": {
+  "phase": "decode",
+  "mode": "graph",
+  "Ms": "256,384,512",
+  "table": "ws/fusion-dispatch/results/v3_block_vllm_ar/table_gpu.json",
+  "L": 4,
+  "ctx": 1024,
+  "rounds": 200,
+  "warmup": 10,
+  "pad_cycles": 400000,
+  "rel_tol": 0.05,
+  "seed": 20261004,
+  "car_big_mib": 64,
+  "out_dir": "ws/fusion-dispatch/results/v3b_big_car"
+ },
+ "table_digest": "7bffbfc0c9e8459819c8e658cc922e861b4ccaf02e594bfdc62da6bf04321671",
+ "table_meta": {
+  "built": "2026-09-30 08:03:39",
+  "mode": "gpu",
+  "sources": [
+   "ws/fusion-dispatch/results/e1_merged_points.csv",
+   "ws/fusion-dispatch/results/e5_rs_map_v1/summary_points.csv"
+  ],
+  "host": "css-host-158",
+  "gpu": "NVIDIA A100-SXM4-80GB, 615.71.09",
+  "flux_git": "b410171",
+  "world": 8,
+  "dtype": "bf16",
+  "protocol": "dispatch_map_v2 / dispatch_map_rs_v1 (interleaved, >=200 rounds, rank-max median)"
+ },
+ "date": "2026-09-30 10:53:39",
+ "cases": {
+  "256": {
+   "check": {
+    "tp_ar_vllm": {
+     "max_abs_err": 1.25,
+     "rel_err": 0.01644736842105263,
+     "ok_all_ranks": true
+    },
+    "tp_ar_vllm_big": {
+     "max_abs_err": 1.25,
+     "rel_err": 0.01644736842105263,
+     "ok_all_ranks": true
+    },
+    "sp_nccl": {
+     "max_abs_err": 1.25,
+     "rel_err": 0.01644736842105263,
+     "ok_all_ranks": true
+    },
+    "sp_rsflux": {
+     "max_abs_err": 1.25,
+     "rel_err": 0.01644736842105263,
+     "ok_all_ranks": true
+    },
+    "sp_dispatch": {
+     "max_abs_err": 1.25,
+     "rel_err": 0.01644736842105263,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    },
+    "sp_flux": {},
+    "sp_rsflux": {
+     "ag:nccl": 8,
+     "rs:flux": 8
+    },
+    "sp_dispatch": {
+     "ag:nccl": 8,
+     "rs:flux": 8
+    }
+   },
+   "misses": {},
+   "kept": 200,
+   "median_ms": {
+    "tp_ar": 2.6163198947906494,
+    "tp_ar_vllm": 2.3214080333709717,
+    "tp_ar_vllm_big": 2.3167999982833862,
+    "sp_nccl": 2.8323841094970703,
+    "sp_rsflux": 2.6398720741271973,
+    "sp_dispatch": 2.6408960819244385
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     -0.014336109161376953,
+     0.026623964309692383,
+     0.062463998794555664
+    ],
+    "tp_ar_vllm": [
+     0.2744319438934326,
+     0.3220479488372803,
+     0.36044788360595703
+    ],
+    "tp_ar_vllm_big": [
+     0.26931190490722656,
+     0.3225599527359009,
+     0.37171220779418945
+    ],
+    "sp_nccl": [
+     -0.23654389381408691,
+     -0.18995201587677002,
+     -0.14847993850708008
+    ],
+    "sp_rsflux": [
+     -0.04505610466003418,
+     0.0005120038986206055,
+     0.0471038818359375
+    ],
+    "sp_dispatch": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "384": {
+   "check": {
+    "tp_ar_vllm": {
+     "max_abs_err": 1.0,
+     "rel_err": 0.013986013986013986,
+     "ok_all_ranks": true
+    },
+    "tp_ar_vllm_big": {
+     "max_abs_err": 1.0,
+     "rel_err": 0.013986013986013986,
+     "ok_all_ranks": true
+    },
+    "sp_nccl": {
+     "max_abs_err": 1.25,
+     "rel_err": 0.017482517482517484,
+     "ok_all_ranks": true
+    },
+    "sp_rsflux": {
+     "max_abs_err": 1.0,
+     "rel_err": 0.013986013986013986,
+     "ok_all_ranks": true
+    },
+    "sp_dispatch": {
+     "max_abs_err": 1.0,
+     "rel_err": 0.013986013986013986,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    },
+    "sp_flux": {},
+    "sp_rsflux": {
+     "ag:nccl": 8,
+     "rs:flux": 8
+    },
+    "sp_dispatch": {
+     "ag:nccl": 4,
+     "rs:flux": 8,
+     "ag:fluxag_fluxgemm": 4
+    }
+   },
+   "misses": {
+    "('ag', '1280x8192', 384)": 1,
+    "('rs', '8192x1024', 384)": 1,
+    "('ag', '7168x8192', 384)": 1,
+    "('rs', '8192x3584', 384)": 1
+   },
+   "kept": 200,
+   "median_ms": {
+    "tp_ar": 3.168768048286438,
+    "tp_ar_vllm": 2.8487679958343506,
+    "tp_ar_vllm_big": 2.846719980239868,
+    "sp_nccl": 3.375615954399109,
+    "sp_rsflux": 3.1989760398864746,
+    "sp_dispatch": 3.6382720470428467
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     0.42700815200805664,
+     0.4689919948577881,
+     0.5089278221130371
+    ],
+    "tp_ar_vllm": [
+     0.739328145980835,
+     0.7859200239181519,
+     0.8273921012878418
+    ],
+    "tp_ar_vllm_big": [
+     0.7485439777374268,
+     0.7874560356140137,
+     0.8345599174499512
+    ],
+    "sp_nccl": [
+     0.22118401527404785,
+     0.2631680965423584,
+     0.3082239627838135
+    ],
+    "sp_rsflux": [
+     0.3932161331176758,
+     0.43827199935913086,
+     0.48639988899230957
+    ],
+    "sp_dispatch": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "512": {
+   "check": {
+    "tp_ar_vllm": {
+     "max_abs_err": 0.0,
+     "rel_err": 0.0,
+     "ok_all_ranks": true
+    },
+    "tp_ar_vllm_big": {
+     "max_abs_err": 1.0625,
+     "rel_err": 0.01551094890510949,
+     "ok_all_ranks": true
+    },
+    "sp_nccl": {
+     "max_abs_err": 1.25,
+     "rel_err": 0.01824817518248175,
+     "ok_all_ranks": true
+    },
+    "sp_rsflux": {
+     "max_abs_err": 1.03125,
+     "rel_err": 0.015054744525547446,
+     "ok_all_ranks": true
+    },
+    "sp_dispatch": {
+     "max_abs_err": 1.125,
+     "rel_err": 0.016423357664233577,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    },
+    "sp_flux": {},
+    "sp_rsflux": {
+     "ag:nccl": 8,
+     "rs:flux": 8
+    },
+    "sp_dispatch": {
+     "ag:nccl": 4,
+     "rs:flux": 8,
+     "ag:fluxag_fluxgemm": 4
+    }
+   },
+   "misses": {},
+   "kept": 200,
+   "median_ms": {
+    "tp_ar": 4.553215980529785,
+    "tp_ar_vllm": 4.560895919799805,
+    "tp_ar_vllm_big": 4.185088157653809,
+    "sp_nccl": 4.7124481201171875,
+    "sp_rsflux": 4.166656017303467,
+    "sp_dispatch": 4.088320016860962
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     -0.5099520683288574,
+     -0.46387195587158203,
+     -0.40857601165771484
+    ],
+    "tp_ar_vllm": [
+     -0.5150723457336426,
+     -0.4736001491546631,
+     -0.4229116439819336
+    ],
+    "tp_ar_vllm_big": [
+     -0.14745569229125977,
+     -0.10035181045532227,
+     -0.03276824951171875
+    ],
+    "sp_nccl": [
+     -0.6696958541870117,
+     -0.6277120113372803,
+     -0.567296028137207
+    ],
+    "sp_rsflux": [
+     -0.12800025939941406,
+     -0.0747518539428711,
+     -0.02150440216064453
+    ],
+    "sp_dispatch": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  }
+ }
+}

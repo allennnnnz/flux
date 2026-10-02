@@ -1,0 +1,102 @@
+mode,layer,policy,eval_set,regret,worst_M,worst_rel,wrong,n
+steady,G-FC1,pi_on,grid(in-sample),0.03565,8,0.7413,8,12
+steady,G-FC1,pi_on,held-out,0.10927,136,0.4724,7,8
+steady,G-FC1,pi_on,decode<=512,0.38713,8,0.7413,11,11
+steady,G-FC1,pi_on,prefill>=1024,0.02899,1024,0.3303,3,8
+steady,G-FC1,pi_on,mixed 70/30,0.07228,,,,
+steady,G-FC1,pi_off,grid(in-sample),0.09635,4096,0.1642,4,12
+steady,G-FC1,pi_off,held-out,0.04014,6144,0.0631,1,8
+steady,G-FC1,pi_off,decode<=512,0.00000,8,0.0000,0,11
+steady,G-FC1,pi_off,prefill>=1024,0.08863,4096,0.1642,5,8
+steady,G-FC1,pi_off,mixed 70/30,0.07792,,,,
+steady,G-FC1,pi_thr,grid(in-sample),0.00000,8,0.0000,0,12
+steady,G-FC1,pi_thr,held-out,0.05612,3072,0.2120,1,8
+steady,G-FC1,pi_thr,decode<=512,0.00000,8,0.0000,0,11
+steady,G-FC1,pi_thr,prefill>=1024,0.01737,3072,0.2120,1,8
+steady,G-FC1,pi_thr,mixed 70/30,0.01527,,,,
+steady,G-FC1,pi_lut,grid(in-sample),0.00000,8,0.0000,0,12
+steady,G-FC1,pi_lut,held-out,0.05612,3072,0.2120,1,8
+steady,G-FC1,pi_lut,decode<=512,0.00000,8,0.0000,0,11
+steady,G-FC1,pi_lut,prefill>=1024,0.01737,3072,0.2120,1,8
+steady,G-FC1,pi_lut,mixed 70/30,0.01527,,,,
+steady,G-FC1,pi_lut_floor,grid(in-sample),0.00000,8,0.0000,0,12
+steady,G-FC1,pi_lut_floor,held-out,0.05612,3072,0.2120,1,8
+steady,G-FC1,pi_lut_floor,decode<=512,0.00000,8,0.0000,0,11
+steady,G-FC1,pi_lut_floor,prefill>=1024,0.01737,3072,0.2120,1,8
+steady,G-FC1,pi_lut_floor,mixed 70/30,0.01527,,,,
+steady,G-QKV,pi_on,grid(in-sample),0.03802,8,0.8358,9,12
+steady,G-QKV,pi_on,held-out,0.06432,24,0.6338,5,8
+steady,G-QKV,pi_on,decode<=512,0.41939,8,0.8358,11,11
+steady,G-QKV,pi_on,prefill>=1024,0.00975,1024,0.1382,2,8
+steady,G-QKV,pi_on,mixed 70/30,0.06176,,,,
+steady,G-QKV,pi_off,grid(in-sample),0.13398,4096,0.2636,3,12
+steady,G-QKV,pi_off,held-out,0.07101,3072,0.1007,2,8
+steady,G-QKV,pi_off,decode<=512,0.00000,8,0.0000,0,11
+steady,G-QKV,pi_off,prefill>=1024,0.12877,4096,0.2636,5,8
+steady,G-QKV,pi_off,mixed 70/30,0.11242,,,,
+steady,G-QKV,pi_thr,grid(in-sample),0.00209,2048,0.0286,0,12
+steady,G-QKV,pi_thr,held-out,0.02464,3072,0.1007,1,8
+steady,G-QKV,pi_thr,decode<=512,0.00000,8,0.0000,0,11
+steady,G-QKV,pi_thr,prefill>=1024,0.00925,3072,0.1007,1,8
+steady,G-QKV,pi_thr,mixed 70/30,0.00807,,,,
+steady,G-QKV,pi_lut,grid(in-sample),0.00000,8,0.0000,0,12
+steady,G-QKV,pi_lut,held-out,0.00000,24,0.0000,0,8
+steady,G-QKV,pi_lut,decode<=512,0.00000,8,0.0000,0,11
+steady,G-QKV,pi_lut,prefill>=1024,0.00000,1024,0.0000,0,8
+steady,G-QKV,pi_lut,mixed 70/30,0.00000,,,,
+steady,G-QKV,pi_lut_floor,grid(in-sample),0.00000,8,0.0000,0,12
+steady,G-QKV,pi_lut_floor,held-out,0.03391,3072,0.1386,1,8
+steady,G-QKV,pi_lut_floor,decode<=512,0.00000,8,0.0000,0,11
+steady,G-QKV,pi_lut_floor,prefill>=1024,0.01043,3072,0.1386,1,8
+steady,G-QKV,pi_lut_floor,mixed 70/30,0.00910,,,,
+steady,L-GU,pi_on,grid(in-sample),0.04674,8,0.7914,7,12
+steady,L-GU,pi_on,held-out,0.05606,136,0.6809,5,8
+steady,L-GU,pi_on,decode<=512,0.35900,8,0.7914,10,11
+steady,L-GU,pi_on,prefill>=1024,0.01895,4096,0.1749,1,8
+steady,L-GU,pi_on,mixed 70/30,0.06379,,,,
+steady,L-GU,pi_off,grid(in-sample),0.06274,16384,0.0970,4,12
+steady,L-GU,pi_off,held-out,0.05049,3072,0.1076,2,8
+steady,L-GU,pi_off,decode<=512,0.01393,512,0.0718,1,11
+steady,L-GU,pi_off,prefill>=1024,0.06450,3072,0.1076,5,8
+steady,L-GU,pi_off,mixed 70/30,0.05784,,,,
+steady,L-GU,pi_thr,grid(in-sample),0.00801,512,0.0718,3,12
+steady,L-GU,pi_thr,held-out,0.05049,3072,0.1076,2,8
+steady,L-GU,pi_thr,decode<=512,0.01393,512,0.0718,1,11
+steady,L-GU,pi_thr,prefill>=1024,0.02064,3072,0.1076,4,8
+steady,L-GU,pi_thr,mixed 70/30,0.01976,,,,
+steady,L-GU,pi_lut,grid(in-sample),0.00000,8,0.0000,0,12
+steady,L-GU,pi_lut,held-out,0.04221,520,0.1939,2,8
+steady,L-GU,pi_lut,decode<=512,0.00000,8,0.0000,0,11
+steady,L-GU,pi_lut,prefill>=1024,0.00938,3072,0.1174,1,8
+steady,L-GU,pi_lut,mixed 70/30,0.00814,,,,
+steady,L-GU,pi_lut_floor,grid(in-sample),0.00000,8,0.0000,0,12
+steady,L-GU,pi_lut_floor,held-out,0.03613,520,0.1939,1,8
+steady,L-GU,pi_lut_floor,decode<=512,0.00000,8,0.0000,0,11
+steady,L-GU,pi_lut_floor,prefill>=1024,0.00752,6144,0.0479,0,8
+steady,L-GU,pi_lut_floor,mixed 70/30,0.00653,,,,
+steady,L-QKV,pi_on,grid(in-sample),0.14599,8,2.0789,8,12
+steady,L-QKV,pi_on,held-out,0.20780,24,2.0000,5,8
+steady,L-QKV,pi_on,decode<=512,1.08416,8,2.0789,11,11
+steady,L-QKV,pi_on,prefill>=1024,0.00533,1024,0.0511,1,8
+steady,L-QKV,pi_on,mixed 70/30,0.24469,,,,
+steady,L-QKV,pi_off,grid(in-sample),0.41701,16384,0.6634,4,12
+steady,L-QKV,pi_off,held-out,0.28442,6144,0.5157,2,8
+steady,L-QKV,pi_off,decode<=512,0.00000,8,0.0000,0,11
+steady,L-QKV,pi_off,prefill>=1024,0.45042,16384,0.6634,6,8
+steady,L-QKV,pi_off,mixed 70/30,0.35048,,,,
+steady,L-QKV,pi_thr,grid(in-sample),0.00000,8,0.0000,0,12
+steady,L-QKV,pi_thr,held-out,0.00000,24,0.0000,0,8
+steady,L-QKV,pi_thr,decode<=512,0.00000,8,0.0000,0,11
+steady,L-QKV,pi_thr,prefill>=1024,0.00000,1024,0.0000,0,8
+steady,L-QKV,pi_thr,mixed 70/30,0.00000,,,,
+steady,L-QKV,pi_lut,grid(in-sample),0.00000,8,0.0000,0,12
+steady,L-QKV,pi_lut,held-out,0.00000,24,0.0000,0,8
+steady,L-QKV,pi_lut,decode<=512,0.00000,8,0.0000,0,11
+steady,L-QKV,pi_lut,prefill>=1024,0.00000,1024,0.0000,0,8
+steady,L-QKV,pi_lut,mixed 70/30,0.00000,,,,
+steady,L-QKV,pi_lut_floor,grid(in-sample),0.00000,8,0.0000,0,12
+steady,L-QKV,pi_lut_floor,held-out,0.00000,24,0.0000,0,8
+steady,L-QKV,pi_lut_floor,decode<=512,0.00000,8,0.0000,0,11
+steady,L-QKV,pi_lut_floor,prefill>=1024,0.00000,1024,0.0000,0,8
+steady,L-QKV,pi_lut_floor,mixed 70/30,0.00000,,,,
+overhead_us_per_call,0.2346

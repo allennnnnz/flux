@@ -1,0 +1,113 @@
+{
+ "args": {
+  "phase": "prefill",
+  "mode": "eager",
+  "Ms": "1024",
+  "table": "ws/fusion-dispatch/results/f1_block_smoke/table_steady.json",
+  "L": 4,
+  "ctx": 1024,
+  "rounds": 10,
+  "warmup": 2,
+  "pad_cycles": 400000,
+  "rel_tol": 0.05,
+  "seed": 20260930,
+  "out_dir": "ws/fusion-dispatch/results/f1_block_smoke/v2"
+ },
+ "table_digest": "c852682c0c724f5f91db7f4329ff3daaa539627bd4d3ad08dcaa4e800c0b149e",
+ "table_meta": {
+  "built": "2026-09-30 06:15:55",
+  "mode": "steady",
+  "sources": [
+   "ws/fusion-dispatch/results/e1_merged_points.csv",
+   "ws/fusion-dispatch/results/e5_rs_map_v1/summary_points.csv"
+  ],
+  "host": "css-host-158",
+  "gpu": "NVIDIA A100-SXM4-80GB, 615.71.09",
+  "flux_git": "b410171",
+  "world": 8,
+  "dtype": "bf16",
+  "protocol": "dispatch_map_v2 / dispatch_map_rs_v1 (interleaved, >=200 rounds, rank-max median)"
+ },
+ "date": "2026-09-30 06:25:06",
+ "cases": {
+  "1024": {
+   "check": {
+    "sp_nccl": {
+     "max_abs_err": 1.875,
+     "rel_err": 0.025,
+     "ok_all_ranks": true
+    },
+    "sp_flux": {
+     "max_abs_err": 1.875,
+     "rel_err": 0.025,
+     "ok_all_ranks": true
+    },
+    "sp_rsflux": {
+     "max_abs_err": 1.75,
+     "rel_err": 0.023333333333333334,
+     "ok_all_ranks": true
+    },
+    "sp_dispatch": {
+     "max_abs_err": 1.75,
+     "rel_err": 0.023333333333333334,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    },
+    "sp_flux": {
+     "ag:flux": 8,
+     "rs:flux": 8
+    },
+    "sp_rsflux": {
+     "ag:nccl": 8,
+     "rs:flux": 8
+    },
+    "sp_dispatch": {
+     "ag:nccl": 4,
+     "rs:flux": 8,
+     "ag:fluxag_fluxgemm": 4
+    }
+   },
+   "misses": {},
+   "kept": 10,
+   "median_ms": {
+    "tp_ar": 7.177215814590454,
+    "sp_nccl": 7.154688119888306,
+    "sp_flux": 6.242815971374512,
+    "sp_rsflux": 6.506495952606201,
+    "sp_dispatch": 6.330880165100098
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     -0.9502716064453125,
+     -0.7976958751678467,
+     -0.5754880905151367
+    ],
+    "sp_nccl": [
+     -1.3465595245361328,
+     -0.9518077373504639,
+     -0.49561643600463867
+    ],
+    "sp_flux": [
+     -0.014336109161376953,
+     0.04505610466003418,
+     0.2549757957458496
+    ],
+    "sp_rsflux": [
+     -0.2252798080444336,
+     -0.1597440242767334,
+     -0.03276824951171875
+    ],
+    "sp_dispatch": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  }
+ }
+}

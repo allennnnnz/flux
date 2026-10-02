@@ -1,0 +1,102 @@
+mode,layer,policy,eval_set,regret,worst_M,worst_rel,wrong,n
+gpu,G-FC1,pi_on,grid(in-sample),0.04134,8,0.6714,8,12
+gpu,G-FC1,pi_on,held-out,0.12853,136,0.4497,7,8
+gpu,G-FC1,pi_on,decode<=512,0.37780,8,0.6714,11,11
+gpu,G-FC1,pi_on,prefill>=1024,0.03666,1024,0.4372,3,8
+gpu,G-FC1,pi_on,mixed 70/30,0.08192,,,,
+gpu,G-FC1,pi_off,grid(in-sample),0.14513,4096,0.1806,3,12
+gpu,G-FC1,pi_off,held-out,0.06161,6144,0.1164,1,8
+gpu,G-FC1,pi_off,decode<=512,0.00000,8,0.0000,0,11
+gpu,G-FC1,pi_off,prefill>=1024,0.13496,4096,0.1806,4,8
+gpu,G-FC1,pi_off,mixed 70/30,0.11705,,,,
+gpu,G-FC1,pi_thr,grid(in-sample),0.00000,8,0.0000,0,12
+gpu,G-FC1,pi_thr,held-out,0.06389,3072,0.2408,1,8
+gpu,G-FC1,pi_thr,decode<=512,0.00000,8,0.0000,0,11
+gpu,G-FC1,pi_thr,prefill>=1024,0.02000,3072,0.2408,1,8
+gpu,G-FC1,pi_thr,mixed 70/30,0.01735,,,,
+gpu,G-FC1,pi_lut,grid(in-sample),0.00000,8,0.0000,0,12
+gpu,G-FC1,pi_lut,held-out,0.06389,3072,0.2408,1,8
+gpu,G-FC1,pi_lut,decode<=512,0.00000,8,0.0000,0,11
+gpu,G-FC1,pi_lut,prefill>=1024,0.02000,3072,0.2408,1,8
+gpu,G-FC1,pi_lut,mixed 70/30,0.01735,,,,
+gpu,G-FC1,pi_lut_floor,grid(in-sample),0.00000,8,0.0000,0,12
+gpu,G-FC1,pi_lut_floor,held-out,0.06389,3072,0.2408,1,8
+gpu,G-FC1,pi_lut_floor,decode<=512,0.00000,8,0.0000,0,11
+gpu,G-FC1,pi_lut_floor,prefill>=1024,0.02000,3072,0.2408,1,8
+gpu,G-FC1,pi_lut_floor,mixed 70/30,0.01735,,,,
+gpu,G-QKV,pi_on,grid(in-sample),0.04586,8,0.7347,9,12
+gpu,G-QKV,pi_on,held-out,0.07581,24,0.5469,6,8
+gpu,G-QKV,pi_on,decode<=512,0.39708,8,0.7347,11,11
+gpu,G-QKV,pi_on,prefill>=1024,0.01641,1024,0.2119,3,8
+gpu,G-QKV,pi_on,mixed 70/30,0.07089,,,,
+gpu,G-QKV,pi_off,grid(in-sample),0.19187,4096,0.2674,3,12
+gpu,G-QKV,pi_off,held-out,0.08158,6144,0.1374,2,8
+gpu,G-QKV,pi_off,decode<=512,0.00000,8,0.0000,0,11
+gpu,G-QKV,pi_off,prefill>=1024,0.18009,4096,0.2674,5,8
+gpu,G-QKV,pi_off,mixed 70/30,0.15431,,,,
+gpu,G-QKV,pi_thr,grid(in-sample),0.00000,8,0.0000,0,12
+gpu,G-QKV,pi_thr,held-out,0.01743,3072,0.0716,1,8
+gpu,G-QKV,pi_thr,decode<=512,0.00000,8,0.0000,0,11
+gpu,G-QKV,pi_thr,prefill>=1024,0.00548,3072,0.0716,1,8
+gpu,G-QKV,pi_thr,mixed 70/30,0.00470,,,,
+gpu,G-QKV,pi_lut,grid(in-sample),0.00000,8,0.0000,0,12
+gpu,G-QKV,pi_lut,held-out,0.00000,24,0.0000,0,8
+gpu,G-QKV,pi_lut,decode<=512,0.00000,8,0.0000,0,11
+gpu,G-QKV,pi_lut,prefill>=1024,0.00000,1024,0.0000,0,8
+gpu,G-QKV,pi_lut,mixed 70/30,0.00000,,,,
+gpu,G-QKV,pi_lut_floor,grid(in-sample),0.00000,8,0.0000,0,12
+gpu,G-QKV,pi_lut_floor,held-out,0.01743,3072,0.0716,1,8
+gpu,G-QKV,pi_lut_floor,decode<=512,0.00000,8,0.0000,0,11
+gpu,G-QKV,pi_lut_floor,prefill>=1024,0.00548,3072,0.0716,1,8
+gpu,G-QKV,pi_lut_floor,mixed 70/30,0.00470,,,,
+gpu,L-GU,pi_on,grid(in-sample),0.04545,8,0.6659,7,12
+gpu,L-GU,pi_on,held-out,0.06544,136,0.5767,6,8
+gpu,L-GU,pi_on,decode<=512,0.31743,8,0.6659,10,11
+gpu,L-GU,pi_on,prefill>=1024,0.02010,4096,0.1616,2,8
+gpu,L-GU,pi_on,mixed 70/30,0.06432,,,,
+gpu,L-GU,pi_off,grid(in-sample),0.09847,16384,0.1677,3,12
+gpu,L-GU,pi_off,held-out,0.05865,6144,0.0829,2,8
+gpu,L-GU,pi_off,decode<=512,0.00945,512,0.0516,1,11
+gpu,L-GU,pi_off,prefill>=1024,0.09712,16384,0.1677,4,8
+gpu,L-GU,pi_off,mixed 70/30,0.08408,,,,
+gpu,L-GU,pi_thr,grid(in-sample),0.00315,512,0.0516,1,12
+gpu,L-GU,pi_thr,held-out,0.05865,6144,0.0829,2,8
+gpu,L-GU,pi_thr,decode<=512,0.00945,512,0.0516,1,11
+gpu,L-GU,pi_thr,prefill>=1024,0.01981,6144,0.0829,2,8
+gpu,L-GU,pi_thr,mixed 70/30,0.01827,,,,
+gpu,L-GU,pi_lut,grid(in-sample),0.00000,8,0.0000,0,12
+gpu,L-GU,pi_lut,held-out,0.04254,520,0.2340,3,8
+gpu,L-GU,pi_lut,decode<=512,0.00000,8,0.0000,0,11
+gpu,L-GU,pi_lut,prefill>=1024,0.00880,3072,0.0819,2,8
+gpu,L-GU,pi_lut,mixed 70/30,0.00749,,,,
+gpu,L-GU,pi_lut_floor,grid(in-sample),0.00000,8,0.0000,0,12
+gpu,L-GU,pi_lut_floor,held-out,0.08499,520,0.2340,4,8
+gpu,L-GU,pi_lut_floor,decode<=512,0.00000,8,0.0000,0,11
+gpu,L-GU,pi_lut_floor,prefill>=1024,0.02199,3072,0.0976,3,8
+gpu,L-GU,pi_lut_floor,mixed 70/30,0.01872,,,,
+gpu,L-QKV,pi_on,grid(in-sample),0.14876,8,1.7346,8,12
+gpu,L-QKV,pi_on,held-out,0.20751,24,1.7071,6,8
+gpu,L-QKV,pi_on,decode<=512,0.92614,8,1.7346,11,11
+gpu,L-QKV,pi_on,prefill>=1024,0.01239,1024,0.1204,2,8
+gpu,L-QKV,pi_on,mixed 70/30,0.24076,,,,
+gpu,L-QKV,pi_off,grid(in-sample),0.38254,16384,0.6419,3,12
+gpu,L-QKV,pi_off,held-out,0.23708,6144,0.4346,2,8
+gpu,L-QKV,pi_off,decode<=512,0.00000,8,0.0000,0,11
+gpu,L-QKV,pi_off,prefill>=1024,0.41352,16384,0.6419,5,8
+gpu,L-QKV,pi_off,mixed 70/30,0.31017,,,,
+gpu,L-QKV,pi_thr,grid(in-sample),0.00000,8,0.0000,0,12
+gpu,L-QKV,pi_thr,held-out,0.00000,24,0.0000,0,8
+gpu,L-QKV,pi_thr,decode<=512,0.00000,8,0.0000,0,11
+gpu,L-QKV,pi_thr,prefill>=1024,0.00000,1024,0.0000,0,8
+gpu,L-QKV,pi_thr,mixed 70/30,0.00000,,,,
+gpu,L-QKV,pi_lut,grid(in-sample),0.00000,8,0.0000,0,12
+gpu,L-QKV,pi_lut,held-out,0.00000,24,0.0000,0,8
+gpu,L-QKV,pi_lut,decode<=512,0.00000,8,0.0000,0,11
+gpu,L-QKV,pi_lut,prefill>=1024,0.00000,1024,0.0000,0,8
+gpu,L-QKV,pi_lut,mixed 70/30,0.00000,,,,
+gpu,L-QKV,pi_lut_floor,grid(in-sample),0.00000,8,0.0000,0,12
+gpu,L-QKV,pi_lut_floor,held-out,0.00000,24,0.0000,0,8
+gpu,L-QKV,pi_lut_floor,decode<=512,0.00000,8,0.0000,0,11
+gpu,L-QKV,pi_lut_floor,prefill>=1024,0.00000,1024,0.0000,0,8
+gpu,L-QKV,pi_lut_floor,mixed 70/30,0.00000,,,,
+overhead_us_per_call,0.2366

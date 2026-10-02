@@ -1,0 +1,290 @@
+{
+  "_schema": {
+    "description": "Shared measured parameters. Every leaf is {value, unit, source, date, method, status}. status: 'measured' (raw output exists, cross-validated where possible) or 'inferred' (derived, not directly verified; see note). Only the workstream that measured a number may change it. Readers never edit.",
+    "source_root_phase0": "experiments/2026-09-23-phase0-a100-nvlink-pcie/",
+    "last_updated": "2026-09-30",
+    "updated_by": "boss (Phase 0 seed); fusion-dispatch added flux_dispatch and flux_dispatch_phase2 2026-09-30"
+  },
+
+  "machine": {
+    "host": "css-host-158",
+    "gpu": "8x NVIDIA A100-SXM4-80GB (GA100), NVSwitch, all pairs NV12",
+    "driver": "615.71.09",
+    "numa": {"node0_gpus": [0, 1, 2, 3], "node1_gpus": [4, 5, 6, 7]},
+    "pcie_switch_groups": [[0, 1], [2, 3], [4, 5], [6, 7]],
+    "pcie_link": "Gen4 x16 at root port and switch upstream (sysfs); switch-internal unconfirmed (no sudo)"
+  },
+
+  "nvlink": {
+    "all_to_all_per_gpu_GBps": {
+      "value": 217.66, "unit": "GB/s per GPU", "status": "measured",
+      "source": "D_CORRECTION.md D.1; results/d_dual_path/dual_path_v3_all8.csv",
+      "date": "2026-09-23",
+      "method": "8 GPUs, each pushes to 7 peers on source-device streams, 1024 MiB/GPU/iter, 20 copies, 5 warmup, 20 repeats, wall-clock median. nsys: 216.5 GB/s per copy, peak concurrency 8."
+    },
+    "single_pair_peer_copy_GBps": {
+      "value": 270.8, "unit": "GB/s", "status": "measured",
+      "source": "D_CORRECTION.md D.0", "date": "2026-09-23",
+      "method": "GPU1->GPU0, single stream, 20x256 MiB, CUDA events"
+    },
+    "per_copy_overhead_regime": {
+      "note": "Below ~1 GiB per GPU per iteration transfer is per-copy-overhead bound; stream count irrelevant. 64 MiB->34.7, 256 MiB->129.6, 1024 MiB->210.9 GB/s per GPU.",
+      "status": "measured", "source": "D_CORRECTION.md D.0", "date": "2026-09-23"
+    }
+  },
+
+  "pcie_unidirectional": {
+    "h2d_single_gpu_GBps": {
+      "value": 21.795, "unit": "GB/s", "status": "measured",
+      "source": "B_REDO.md B.5; results/b_redo/htod_local_gpu0.csv", "date": "2026-09-23",
+      "method": "1024 MiB x20 copies, 5 warmup, 20 repeats, NUMA-local. nvbandwidth cross-check: 21.82."
+    },
+    "d2h_single_gpu_GBps": {
+      "value": 23.924, "unit": "GB/s", "status": "measured",
+      "source": "B_REDO.md B.5; results/b_redo/dtoh_local_gpu0.csv", "date": "2026-09-23",
+      "method": "as above. nvbandwidth cross-check: 23.99."
+    },
+    "switch_uplink_pair_h2d_GBps": {
+      "value": 25.467, "unit": "GB/s aggregate for GPU0+GPU1", "status": "measured",
+      "source": "B_REDO.md B.4", "date": "2026-09-23",
+      "method": "two GPUs on the same switch concurrently; ~= one Gen4 x16 uplink"
+    },
+    "switch_uplink_pair_d2h_GBps": {
+      "value": 26.600, "unit": "GB/s aggregate for GPU0+GPU1", "status": "measured",
+      "source": "B_REDO.md B.4", "date": "2026-09-23"
+    },
+    "eight_gpu_numa_local_h2d_per_gpu_GBps": {
+      "value": 12.647, "unit": "GB/s per GPU", "status": "measured",
+      "source": "B_REDO.md B.3", "date": "2026-09-23", "aggregate_GBps": 101.173
+    },
+    "eight_gpu_numa_local_d2h_per_gpu_GBps": {
+      "value": 13.195, "unit": "GB/s per GPU", "status": "measured",
+      "source": "B_REDO.md B.3", "date": "2026-09-23", "aggregate_GBps": 105.560
+    },
+    "eight_gpu_numa_remote_h2d_per_gpu_GBps": {
+      "value": 10.302, "unit": "GB/s per GPU", "status": "measured",
+      "source": "B_REDO.md B.3", "date": "2026-09-23", "aggregate_GBps": 82.415
+    },
+    "eight_gpu_numa_remote_d2h_per_gpu_GBps": {
+      "value": 9.448, "unit": "GB/s per GPU", "status": "measured",
+      "source": "B_REDO.md B.3", "date": "2026-09-23", "aggregate_GBps": 75.583
+    }
+  },
+
+  "pcie_bidirectional": {
+    "h2d_uncontended_GBps": {
+      "value": 22.01, "unit": "GB/s", "status": "measured",
+      "source": "BIDIR_CORRECTION.md X.3 (nsys, GPU0)", "date": "2026-09-23",
+      "method": "per-copy classification by whether a D2H overlapped >50% of the copy"
+    },
+    "h2d_contended_by_d2h_GBps": {
+      "value": 6.46, "unit": "GB/s", "status": "measured",
+      "source": "BIDIR_CORRECTION.md X.3 (nsys, GPU0)", "date": "2026-09-23",
+      "method": "as above; overlap-window method gives 6.164, nvbandwidth gives 8.88 (different duty cycle). Use 6.46 for ring/gateway modelling.",
+      "note": "3.4x throttle. THE key asymmetry: D2H is immune, H2D collapses."
+    },
+    "d2h_contended_by_h2d_GBps": {
+      "value": 22.52, "unit": "GB/s", "status": "measured",
+      "source": "BIDIR_CORRECTION.md X.3 (nsys, GPU0)", "date": "2026-09-23",
+      "note": "unaffected by concurrent H2D. nvbandwidth 22.13."
+    },
+    "contention_locus": {
+      "value": "unknown", "status": "inferred",
+      "note": "Inferred to be at the GPU endpoint or its switch uplink, not the host memory controller. Direct test is ws/hetero-proxy step 1a. Update this entry with the verdict.",
+      "source": "PHASE0_FINDINGS.md 2.4", "date": "2026-09-23"
+    },
+    "overlap_window_fraction": {
+      "value": 0.57, "unit": "fraction of span in which both directions are in flight", "status": "measured",
+      "source": "BIDIR_CORRECTION.md X.1", "date": "2026-09-23",
+      "note": "57-60%. A wall-clock 'bidirectional' number blends two regimes; do not use one."
+    }
+  },
+
+  "staging": {
+    "pair_same_switch_best_GBps": {
+      "value": 13.913, "unit": "GB/s", "status": "measured",
+      "source": "BIDIR_CORRECTION.md X.5; results/c_staging/staging_v2_same_switch_chunk4m.csv",
+      "date": "2026-09-23", "method": "GPU0->GPU1, 1024 MiB, 4 MiB chunk, double-buffered cuStreamWaitValue32"
+    },
+    "pair_diff_switch_best_GBps": {
+      "value": 22.191, "unit": "GB/s", "status": "measured",
+      "source": "BIDIR_CORRECTION.md X.5; results/c_staging/staging_v2_diff_switch_chunk4m.csv",
+      "date": "2026-09-23", "method": "GPU0->GPU2, 4 MiB chunk. ~= unidirectional ceiling min(H2D, D2H) = 21.795."
+    },
+    "pair_cross_numa_best_GBps": {
+      "value": 18.6, "unit": "GB/s", "status": "measured",
+      "source": "BIDIR_CORRECTION.md X.5", "date": "2026-09-23",
+      "method": "GPU3->GPU4: 18.589; GPU0->GPU4: 18.674"
+    },
+    "ring8_per_gpu_GBps": {
+      "value": 5.874, "unit": "GB/s per GPU", "status": "measured",
+      "source": "CDE_REPORT.md C; results/c_staging/staging_ring8_chunk16m.csv", "date": "2026-09-23",
+      "aggregate_GBps": 46.988,
+      "method": "0->1->...->7->0, 16 MiB chunk. = 90.9% of contended-H2D ceiling 6.46. Switch-aware ring gives 5.20 (no improvement): every GPU is producer+consumer, so all sit in the contended regime."
+    },
+    "ring8_chunk_1mib_aggregate_GBps": {
+      "value": 18.727, "unit": "GB/s aggregate", "status": "measured",
+      "source": "CDE_REPORT.md C", "date": "2026-09-23", "note": "collapse; use >= 4 MiB when many pairs run concurrently"
+    },
+    "pair_0_1_chunk_1mib_GBps": {
+      "value": 13.656, "unit": "GB/s", "status": "measured",
+      "source": "CDE_REPORT.md C", "date": "2026-09-23", "note": "single pair tolerates 1 MiB"
+    },
+    "chain_d2h_leg_in_dualpath_GBps": {
+      "value": 10.9, "unit": "GB/s", "status": "measured",
+      "source": "D_CORRECTION.md D.3 (nsys, alpha=0.02)", "date": "2026-09-23",
+      "note": "D2H leg of the staging chain while NVLink all-to-all runs concurrently"
+    },
+    "chain_h2d_leg_in_dualpath_GBps": {
+      "value": 11.8, "unit": "GB/s", "status": "measured",
+      "source": "D_CORRECTION.md D.3 (nsys, alpha=0.02)", "date": "2026-09-23"
+    },
+    "fixed_overhead_ms": {
+      "value": null, "status": "not measured",
+      "note": "Cost of enabling the staging machinery at alpha=0 (streams, events, handshake). ws/hetero-proxy step 1b."
+    }
+  },
+
+  "dual_path_model": {
+    "formula": "t(alpha) = max((1-alpha)*S/B_nv, alpha*S*(1/B_d2h + 1/B_h2d))",
+    "validation": {
+      "alpha": 0.05, "predicted_GBps": 109, "measured_GBps": 106.64,
+      "source": "D_CORRECTION.md D.3", "date": "2026-09-23"
+    },
+    "best_case_gain_fraction": {
+      "value": 0.026, "status": "derived",
+      "note": "at alpha ~0.025 with B_nv=217.66, B_d2h=10.9, B_h2d=11.8. Measured: loss at every alpha."
+    },
+    "alpha_sweep_measured": {
+      "source": "results/d_dual_path/dual_path_v3_all8.csv", "date": "2026-09-23",
+      "per_gpu_GBps": {"0.00": 217.66, "0.01": 210.83, "0.02": 203.98, "0.03": 176.34, "0.05": 106.64, "0.08": 67.03, "0.10": 53.53}
+    }
+  },
+
+  "flux_ag_comm_ms": {
+    "_shape": "M=4096, K=12288, fp16, world 8; input shard 512x12288 per rank; 100,663,296 output bytes; rank-max median",
+    "_source": "E_CORRECTION.md E.1; results/e_flux/flux_ag_comm_M4096.csv",
+    "_date": "2026-09-23",
+    "nccl_all_gather": 0.569,
+    "flux_all2all_pull": 0.468,
+    "flux_all2all_push": 0.471,
+    "flux_ring1d_pull": 0.496,
+    "flux_ring1d_push": 0.565,
+    "flux_ring2d_push": 0.562,
+    "flux_ring2d_push_cudacore": 1.066,
+    "flux_all2all_pull_ingress_per_gpu_GBps": {
+      "value": 188.2, "status": "derived",
+      "note": "100,663,296 * 7/8 bytes / 0.468448 ms"
+    }
+  },
+
+  "flux_ag_gemm_ms": {
+    "_shape": "M=4096, K=12288, bf16, world 8, weight column-sharded (N/8, K), All2All pull unless noted",
+    "_method": "interleaved per-round ECT, 200 rounds, SM clock logged, 0 negative ECT in 1200 rounds",
+    "_source": "FLUX_BASELINE.md F.3; results/e_flux/ag_gemm_v2_N*_*.csv",
+    "_date": "2026-09-23",
+    "N4096":  {"overlap": 0.7363, "gemm_only": 0.2775, "ect": 0.4588, "comm_standalone": 0.468, "overlap_efficiency": 0.02, "ring2d_overlap": 0.8243},
+    "N8192":  {"overlap": 0.6769, "gemm_only": 0.5642, "ect": 0.1137, "comm_standalone": 0.468, "overlap_efficiency": 0.76, "ring2d_overlap": 0.7516},
+    "N49152": {"overlap": 2.7469, "gemm_only": 2.5620, "ect": 0.1638, "comm_standalone": 0.468, "overlap_efficiency": 0.60, "ring2d_overlap": 2.7720},
+    "_efficiency_definition": "(t_serial - t_measured) / (t_serial - t_perfect), t_serial = gemm + comm, t_perfect = max(gemm, comm)"
+  },
+
+  "flux_dispatch": {
+    "_source_root": "ws/fusion-dispatch/results/",
+    "_date": "2026-09-30",
+    "_method": "dispatch_map_v2.py: bf16, TP=8, All2All+use_read, production cuBLAS defaults (init_seed settings undone). Per (layer,M) all items interleaved in one round in random order, >=200 rounds (near-boundary points 350), 128 MB L2 flush before each item, per-round rank-max then median, SM-clock filter. gpu mode = GPU sleep pad + 1-elem NCCL all_reduce alignment, CPU runs ahead (GPU execution time). steady mode = same item x16 back-to-back with distinct weights (eager layer stack).",
+    "_status": "measured; NOT yet audited (D-004)",
+    "ag_latency_ms": {
+      "_note": "global M rows gathered, bf16. flux = flux.AllGatherOp.run All2All; nccl = dist.all_gather_into_tensor. Source: results/e1_merged_points.csv (layers G-FC1 for K=12288, L-QKV for K=8192).",
+      "K12288": {"M": [8, 64, 512, 1024, 4096, 16384],
+                  "flux_gpu": [0.0997, 0.1069, 0.1666, 0.2253, 0.4960, 1.5466], "nccl_gpu": [0.0328, 0.0512, 0.1198, 0.1864, 0.4987, 1.7971],
+                  "flux_steady": [0.0933, 0.0992, 0.1484, 0.2004, 0.4682, 1.5030], "nccl_steady": [0.0216, 0.0308, 0.1021, 0.1883, 0.5043, 1.7585]},
+      "K8192": {"M": [8, 64, 512, 1024, 4096, 16384],
+                 "flux_gpu": [0.0996, 0.1042, 0.1445, 0.1902, 0.3653, 1.0533], "nccl_gpu": [0.0317, 0.0471, 0.0973, 0.1546, 0.3471, 1.2145],
+                 "flux_steady": [0.0930, 0.0962, 0.1293, 0.1627, 0.3261, 1.0303], "nccl_steady": [0.0215, 0.0297, 0.0776, 0.1396, 0.3417, 1.2094]},
+      "flux_small_m_floor": {"value": 0.10, "unit": "ms", "note": "Flux All2All at M<=64: 8 serial cudaMemcpyAsync on one stream + 2 barriers (src/coll/ths_op/all_gather_op.cc:553-576; nsys results/e2_nsys/parse_G-FC1.txt: ~14 us per copy at M=64)"}
+    },
+    "nccl_ag_M4096_K12288_gpu_aligned_ms": {
+      "value": 0.478, "unit": "ms", "status": "measured",
+      "source": "results/e0_anchor_v2/summary_items.csv (P0-4096 M=4096 gpu)", "date": "2026-09-29",
+      "note": "vs Phase 0 anchor 0.569 (-16%); host-barrier alignment gives 0.509. Phase 0 claim 'Flux AG 13-22% faster than NCCL at M=1024-16384' holds only for M>=6144 under interleaved measurement. Pending boss ruling."
+    },
+    "crossover_ag_gemm": {
+      "_note": "verdict per M in gpu mode (steady in report). off = best non-fused path (almost always NCCL+cuBLAS). Non-monotone layers listed with exceptions. Source: reports/20260930_e1_e3_dispatch_map.md section 1.",
+      "G-FC1 (N=49152,K=12288)": "off for M<=1032; fused 2048; off 3072 (fallback-config cliff); fused >=4096",
+      "G-QKV (N=36864,K=12288)": "off for M<=2048; fused >=3072",
+      "L-QKV (N=10240,K=8192)": "off for M<=1032; tie 2048; fused >=3072",
+      "L-GU (N=57344,K=8192)": "off for M<=1032 (ties at 512,1024); tie 2048; fused 3072; off 4096 (registry-config cliff); fused >=6144"
+    },
+    "sustained_load_sm_clock_mhz": {
+      "value": [1140, 1245], "status": "measured", "source": "results/e1_map_v2/meta_*.json (steady mode, M>=4096)",
+      "note": "400 W power limit, no cap set. Short/padded runs sit at 1410 MHz. Phase 0 (1155-1200 MHz) was measured in this regime."
+    },
+    "cublas_under_flux_testing_init_seed": {
+      "status": "measured", "source": "results/e0_anchor/cublas_settings_v1.txt", "date": "2026-09-29",
+      "note": "flux.testing.initialize_distributed() -> init_seed(): CUBLAS_WORKSPACE_CONFIG=:16:8 makes torch.mm host launch 13 -> 71 us; disabling bf16 reduced-precision reduction adds up to +26% GPU time on some shapes. Undo before measuring any cuBLAS baseline."
+    }
+  },
+
+  "flux_dispatch_phase2": {
+    "_source_root": "ws/fusion-dispatch/results/",
+    "_date": "2026-09-30",
+    "_status": "measured; NOT yet audited (D-004)",
+    "cuda_graph_capture": {
+      "source": "results/f04_graph/*.json (graph_capture_v1.py)",
+      "flux_agkernel_forward": "NOT capturable: capturing stream has unjoined work (cp_stream copies never joined; src/ag_gemm/ths_op/all_gather_gemm_op.cc:271-276)",
+      "capturable_bitwise_replay": ["flux GemmRS.forward", "flux AllGatherOp.run + torch.mm", "NCCL all_gather + mm", "mm + NCCL reduce_scatter", "mm + NCCL all_reduce"],
+      "replay_minus_gpu_mode_eager_us": {"nccl_paths": [7.2, 14.8], "flux_gemm_rs": [2.6, 4.1]}
+    },
+    "gemm_rs_crossover": {
+      "source": "results/e5_rs_map_v1/summary_points.csv (dispatch_map_rs_v1.py, gpu mode)",
+      "L-O (N=8192,K=8192)": "off for M<=16; mostly tie 24-264; Flux GemmRS wins from M=256 (up to 30% at M=16384)",
+      "L-down (N=8192,K=28672)": "off for M<=24; mostly tie 32-264; Flux GemmRS wins from M=256",
+      "G-O (N=12288,K=12288)": "off for M<=16; tie 24-256; Flux GemmRS wins from M=264",
+      "G-FC2 (N=12288,K=49152)": "off for M<=72; tie 128-256; Flux GemmRS wins from M=264"
+    },
+    "block_level_llama70b_4blocks": {
+      "source": "results/f1_block_v2/block_summary.csv (validate_block_v2.py, eval run seed 20261001)",
+      "method": "4 Llama-3-70B blocks, fused Triton RMSNorm/SiLU*up, 200 interleaved rounds, rank-max median; layout chosen from calibration run seed 20260930",
+      "two_level_dispatch_vs_vllm_default_tp_allreduce_pct_saved": {"decode_graph": {"8-256": 0.0, "512": 10.0}, "prefill_eager": {"1024": 10.4, "2048": 14.0, "4096": 16.5, "8192": 18.3}},
+      "two_level_dispatch_vs_always_flux_prefill_pct_saved": {"1024": 0.2, "2048": 0.0, "4096": 7.6, "8192": 0.0},
+      "regret_vs_oracle_pct": {"decode_graph": 0.0, "prefill_eager": 0.02},
+      "op_table_predicts_block_delta": "prefill median rel err 5.5%, decode graph 9.0%, no sign errors; eager small-M decode fails (118%, 9 sign errors, CPU launch bound)"
+    },
+    "ag_latency_triton_prototype_us": {
+      "source": "results/f2_ag_latency_v1/log_K*.txt (ag_latency_v1.py, gpu mode)",
+      "note": "complete AllGather = parallel system-scope flag barrier + one P2P-load gather kernel (Triton); own shard assumed already in the IPC buffer. Epoch passed from host (not graph-safe yet).",
+      "M": [8, 64, 256, 512, 1024, 2048, 4096],
+      "K8192":  {"triton_full": [23.6, 42.0, 59.4, 79.9, 114.7, 178.2, 305.2], "nccl": [29.7, 46.1, 73.7, 96.3, 147.5, 218.1, 347.1], "flux_default": [98.7, 105.2, 122.1, 147.4, 186.1, 245.5, 357.3]},
+      "K12288": {"triton_full": [24.6, 45.1, 71.7, 98.3, 147.5, 246.3, 427.0], "nccl": [29.7, 50.2, 82.9, 114.7, 177.7, 267.3, 478.2], "flux_default": [98.8, 107.8, 132.1, 169.4, 216.4, 302.4, 467.3]},
+      "flux_sync_overhead_us_at_M8": {"value": 60, "note": "flux_default 98.7 - same 7 copies on one stream without sync 38.3"}
+    }
+  },
+
+  "flux_dispatch_verification": {
+    "_source": "ws/fusion-dispatch/reports/20260930_verification.md",
+    "_date": "2026-10-02",
+    "_status": "measured; NOT yet audited (D-004)",
+    "vllm_0_8_5_facts": {"default_tp_comm": "AllReduce after row-parallel", "custom_allreduce_max_bytes": 8388608,
+                         "llama70b_custom_ar_until_M": 511, "cudagraph_token_buckets": "[1,2,4]+range(8,513,8)",
+                         "graph_style": "piecewise, split at unified_attention", "sequence_parallel_default": false},
+    "block4_vs_real_vllm_pct_saved": {"source": "results/v3_block_vllm_ar/block_summary.csv",
+      "decode_graph": {"8-384": 0.0, "512": 10.1}, "prefill": {"1024": 9.8, "2048": 13.6, "4096": 16.1, "8192": 17.7}},
+    "block4_vs_vllm_custom_ar_64MiB_pct_saved": {"source": "results/v3b_big_car/", "decode_graph_512": 2.3, "prefill_1024": 5.1, "prefill_2048": 10.2},
+    "block80_vs_real_vllm_pct_saved": {"source": "results/v4_block_L80/block_summary.csv",
+      "decode_graph": {"64": 0.0, "256": 0.0, "384": 0.0, "512": 13.6}, "prefill": {"1024": 9.3, "4096": 12.0}},
+    "block80_over_20x_block4": {"vllm_custom_ar": [0.99, 1.01], "sp_all_c10d_nccl_decode_graph": [1.16, 1.57],
+      "note": "c10d NCCL collectives get more expensive per op in long CUDA graphs [inferred]; vLLM custom AR scales linearly"},
+    "nccl_vs_flux_ag_clock_dependence": {"source": "results/v6_phase0_repro/ (v6c_clock.csv)",
+      "note": "Phase 0 script measures NCCL while SM is at 1155 MHz (light load after idle): NCCL 0.565 ms at M=4096 K=12288; at 1410 MHz 0.475. Flux All2All (copy engine) ~0.47 in both. NCCL is SM-clock sensitive, Flux AG is not [inferred from timing correlation; clocks cannot be locked without sudo]."},
+    "triton_ag_prototype_correctness": {"source": "results/v9_triton_stress/", "single_buffer_bad_rank_iters_of_40000": [22142, 33612, 439],
+      "double_buffer_bad": 0, "note": "skew between barrier and gather; double buffering by epoch parity required"},
+    "exclusive_recheck": {"source": "results/v12_exclusive_recheck/", "max_abs_deviation_vs_2026_09_30_pct": 1.8, "guard": "CLEAN x3"}
+  },
+
+  "flux": {
+    "overlap": {
+      "_note": "ws/diag-overlap writes signal-arrival / CTA-start distributions and any recovered overlap numbers here."
+    }
+  }
+}

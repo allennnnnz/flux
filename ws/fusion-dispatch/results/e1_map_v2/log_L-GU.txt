@@ -1,0 +1,828 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/dispatch_map_v2.py --layer L-GU --Ms 8,16,24,32,64,72,128,136,256,264,512,520,1024,1032,2048,3072,4096,6144,8192,16384 --max_m 16384 --modes gpu,steady --rounds 200 --warmup 10 --clock_period 0.02 --out_dir ws/fusion-dispatch/results/e1_map_v2
+W0929 23:40:25.707000 526853 site-packages/torch/distributed/run.py:792] 
+W0929 23:40:25.707000 526853 site-packages/torch/distributed/run.py:792] *****************************************
+W0929 23:40:25.707000 526853 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0929 23:40:25.707000 526853 site-packages/torch/distributed/run.py:792] *****************************************
+[L-GU M=8] correctness: all ok
+
+[L-GU N=57344 K=8192 M=8 mode=gpu] kept 133/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2099    0.2038    0.2202    0.0887
+  B_nccl_cublas           0.1260    0.1208    0.1321    0.0892
+  C_fluxag_cublas         0.1997    0.1935    0.2099    0.1042
+  D_fluxag_fluxgemm       0.2253    0.2202    0.2376    0.1038
+  c_nccl_ag               0.0317    0.0256    0.0369    0.0524
+  c_flux_ag               0.0996    0.0942    0.1110    0.0689
+  c_cublas                0.0983    0.0973    0.1014    0.0385
+  c_fluxgemm              0.1249    0.1239    0.1270    0.0380
+  per-round diff                  median       p10       p90
+  A - B                           0.0850    0.0768    0.0952
+  A - C                           0.0113    0.0010    0.0225
+  A - D                          -0.0143   -0.0246   -0.0061
+  D - C                           0.0266    0.0174    0.0358
+  C - B                           0.0748    0.0645    0.0840
+  D - (fluxag+fluxgemm)           0.0000   -0.0119    0.0113
+  B - (ncclag+cublas)            -0.0051   -0.0133    0.0041
+  C - (fluxag+cublas)            -0.0005   -0.0115    0.0095
+
+[L-GU N=57344 K=8192 M=8 mode=steady] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.1958    0.1936    0.1983    0.0650
+  B_nccl_cublas           0.1093    0.1082    0.1123    0.0596
+  C_fluxag_cublas         0.1782    0.1761    0.1804    0.0786
+  D_fluxag_fluxgemm       0.2108    0.2084    0.2131    0.0808
+  c_nccl_ag               0.0215    0.0209    0.0336    0.0320
+  c_flux_ag               0.0933    0.0909    0.0953    0.0562
+  c_cublas                0.0820    0.0818    0.0825    0.0156
+  c_fluxgemm              0.1142    0.1139    0.1155    0.0192
+  per-round diff                  median       p10       p90
+  A - B                           0.0865    0.0829    0.0894
+  A - C                           0.0175    0.0145    0.0214
+  A - D                          -0.0152   -0.0185   -0.0112
+  D - C                           0.0329    0.0296    0.0361
+  C - B                           0.0686    0.0652    0.0717
+  D - (fluxag+fluxgemm)           0.0031   -0.0001    0.0066
+  B - (ncclag+cublas)             0.0055   -0.0061    0.0084
+  C - (fluxag+cublas)             0.0029   -0.0002    0.0061
+[L-GU M=16] correctness: all ok
+
+[L-GU N=57344 K=8192 M=16 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2099    0.2048    0.2191    0.0906
+  B_nccl_cublas           0.1270    0.1219    0.1341    0.0826
+  C_fluxag_cublas         0.1976    0.1935    0.2068    0.1065
+  D_fluxag_fluxgemm       0.2243    0.2191    0.2304    0.1059
+  c_nccl_ag               0.0338    0.0266    0.0389    0.0452
+  c_flux_ag               0.0998    0.0942    0.1088    0.0694
+  c_cublas                0.0983    0.0983    0.0993    0.0397
+  c_fluxgemm              0.1249    0.1239    0.1260    0.0396
+  per-round diff                  median       p10       p90
+  A - B                           0.0829    0.0737    0.0942
+  A - C                           0.0113    0.0010    0.0236
+  A - D                          -0.0143   -0.0246   -0.0020
+  D - C                           0.0261    0.0164    0.0358
+  C - B                           0.0717    0.0614    0.0829
+  D - (fluxag+fluxgemm)          -0.0001   -0.0108    0.0107
+  B - (ncclag+cublas)            -0.0041   -0.0143    0.0041
+  C - (fluxag+cublas)             0.0001   -0.0107    0.0110
+
+[L-GU N=57344 K=8192 M=16 mode=steady] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.1959    0.1942    0.1987    0.0669
+  B_nccl_cublas           0.1114    0.1101    0.1145    0.0612
+  C_fluxag_cublas         0.1797    0.1772    0.1825    0.0810
+  D_fluxag_fluxgemm       0.2114    0.2091    0.2143    0.0827
+  c_nccl_ag               0.0219    0.0212    0.0342    0.0325
+  c_flux_ag               0.0935    0.0912    0.0953    0.0573
+  c_cublas                0.0826    0.0824    0.0843    0.0160
+  c_fluxgemm              0.1144    0.1140    0.1148    0.0194
+  per-round diff                  median       p10       p90
+  A - B                           0.0845    0.0810    0.0876
+  A - C                           0.0164    0.0131    0.0204
+  A - D                          -0.0154   -0.0181   -0.0121
+  D - C                           0.0319    0.0282    0.0355
+  C - B                           0.0681    0.0641    0.0714
+  D - (fluxag+fluxgemm)           0.0035    0.0003    0.0071
+  B - (ncclag+cublas)             0.0062   -0.0049    0.0103
+  C - (fluxag+cublas)             0.0034   -0.0003    0.0073
+[L-GU M=24] correctness: all ok
+
+[L-GU N=57344 K=8192 M=24 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2120    0.2048    0.2212    0.0920
+  B_nccl_cublas           0.1434    0.1382    0.1516    0.0790
+  C_fluxag_cublas         0.2130    0.2089    0.2232    0.1048
+  D_fluxag_fluxgemm       0.2243    0.2202    0.2335    0.1074
+  c_nccl_ag               0.0348    0.0287    0.0410    0.0438
+  c_flux_ag               0.1008    0.0941    0.1106    0.0700
+  c_cublas                0.1137    0.1126    0.1147    0.0361
+  c_fluxgemm              0.1249    0.1239    0.1260    0.0402
+  per-round diff                  median       p10       p90
+  A - B                           0.0676    0.0563    0.0788
+  A - C                          -0.0036   -0.0143    0.0092
+  A - D                          -0.0133   -0.0236   -0.0020
+  D - C                           0.0102   -0.0010    0.0236
+  C - B                           0.0717    0.0604    0.0819
+  D - (fluxag+fluxgemm)          -0.0009   -0.0161    0.0122
+  B - (ncclag+cublas)            -0.0041   -0.0123    0.0041
+  C - (fluxag+cublas)            -0.0001   -0.0126    0.0126
+
+[L-GU N=57344 K=8192 M=24 mode=steady] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.1964    0.1944    0.1992    0.0667
+  B_nccl_cublas           0.1269    0.1252    0.1295    0.0567
+  C_fluxag_cublas         0.1946    0.1921    0.1967    0.0770
+  D_fluxag_fluxgemm       0.2117    0.2093    0.2145    0.0824
+  c_nccl_ag               0.0225    0.0216    0.0344    0.0330
+  c_flux_ag               0.0936    0.0917    0.0956    0.0571
+  c_cublas                0.0970    0.0969    0.0987    0.0130
+  c_fluxgemm              0.1145    0.1142    0.1161    0.0195
+  per-round diff                  median       p10       p90
+  A - B                           0.0693    0.0658    0.0730
+  A - C                           0.0020   -0.0010    0.0055
+  A - D                          -0.0153   -0.0191   -0.0116
+  D - C                           0.0173    0.0140    0.0209
+  C - B                           0.0675    0.0637    0.0705
+  D - (fluxag+fluxgemm)           0.0035    0.0003    0.0069
+  B - (ncclag+cublas)             0.0068   -0.0053    0.0103
+  C - (fluxag+cublas)             0.0035    0.0005    0.0064
+[L-GU M=32] correctness: all ok
+
+[L-GU N=57344 K=8192 M=32 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2109    0.2038    0.2232    0.0915
+  B_nccl_cublas           0.1475    0.1434    0.1567    0.0788
+  C_fluxag_cublas         0.2130    0.2089    0.2243    0.1039
+  D_fluxag_fluxgemm       0.2253    0.2202    0.2376    0.1070
+  c_nccl_ag               0.0379    0.0338    0.0461    0.0443
+  c_flux_ag               0.0997    0.0934    0.1096    0.0694
+  c_cublas                0.1137    0.1137    0.1147    0.0360
+  c_fluxgemm              0.1249    0.1239    0.1260    0.0403
+  per-round diff                  median       p10       p90
+  A - B                           0.0625    0.0522    0.0737
+  A - C                          -0.0036   -0.0154    0.0092
+  A - D                          -0.0143   -0.0287   -0.0020
+  D - C                           0.0113    0.0000    0.0246
+  C - B                           0.0666    0.0563    0.0768
+  D - (fluxag+fluxgemm)           0.0006   -0.0130    0.0133
+  B - (ncclag+cublas)            -0.0051   -0.0174    0.0072
+  C - (fluxag+cublas)             0.0008   -0.0132    0.0130
+
+[L-GU N=57344 K=8192 M=32 mode=steady] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.1974    0.1950    0.2001    0.0667
+  B_nccl_cublas           0.1295    0.1269    0.1321    0.0576
+  C_fluxag_cublas         0.1955    0.1930    0.1979    0.0776
+  D_fluxag_fluxgemm       0.2121    0.2097    0.2155    0.0824
+  c_nccl_ag               0.0232    0.0220    0.0357    0.0337
+  c_flux_ag               0.0938    0.0919    0.0963    0.0571
+  c_cublas                0.0974    0.0972    0.0991    0.0130
+  c_fluxgemm              0.1147    0.1144    0.1162    0.0193
+  per-round diff                  median       p10       p90
+  A - B                           0.0678    0.0645    0.0717
+  A - C                           0.0019   -0.0021    0.0060
+  A - D                          -0.0149   -0.0191   -0.0111
+  D - C                           0.0168    0.0133    0.0207
+  C - B                           0.0660    0.0620    0.0701
+  D - (fluxag+fluxgemm)           0.0033   -0.0002    0.0074
+  B - (ncclag+cublas)             0.0082   -0.0037    0.0115
+  C - (fluxag+cublas)             0.0038   -0.0001    0.0078
+[L-GU M=64] correctness: all ok
+
+[L-GU N=57344 K=8192 M=64 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2038    0.1956    0.2150    0.0933
+  B_nccl_cublas           0.1459    0.1331    0.1577    0.0774
+  C_fluxag_cublas         0.2089    0.2007    0.2222    0.1030
+  D_fluxag_fluxgemm       0.2191    0.2109    0.2335    0.1094
+  c_nccl_ag               0.0471    0.0379    0.0573    0.0445
+  c_flux_ag               0.1050    0.0984    0.1167    0.0701
+  c_cublas                0.1024    0.1014    0.1034    0.0345
+  c_fluxgemm              0.1137    0.1126    0.1147    0.0424
+  per-round diff                  median       p10       p90
+  A - B                           0.0584    0.0420    0.0727
+  A - C                          -0.0046   -0.0205    0.0092
+  A - D                          -0.0154   -0.0297   -0.0010
+  D - C                           0.0113   -0.0051    0.0287
+  C - B                           0.0625    0.0492    0.0788
+  D - (fluxag+fluxgemm)          -0.0001   -0.0150    0.0144
+  B - (ncclag+cublas)            -0.0041   -0.0195    0.0113
+  C - (fluxag+cublas)             0.0020   -0.0140    0.0179
+
+[L-GU N=57344 K=8192 M=64 mode=steady] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.1872    0.1847    0.1913    0.0692
+  B_nccl_cublas           0.1267    0.1233    0.1319    0.0569
+  C_fluxag_cublas         0.1886    0.1857    0.1915    0.0770
+  D_fluxag_fluxgemm       0.2016    0.1989    0.2051    0.0857
+  c_nccl_ag               0.0299    0.0282    0.0363    0.0339
+  c_flux_ag               0.0965    0.0944    0.0995    0.0572
+  c_cublas                0.0863    0.0861    0.0877    0.0125
+  c_fluxgemm              0.1004    0.1000    0.1023    0.0221
+  per-round diff                  median       p10       p90
+  A - B                           0.0606    0.0547    0.0668
+  A - C                          -0.0010   -0.0055    0.0038
+  A - D                          -0.0143   -0.0184   -0.0093
+  D - C                           0.0131    0.0083    0.0186
+  C - B                           0.0617    0.0551    0.0669
+  D - (fluxag+fluxgemm)           0.0042    0.0005    0.0087
+  B - (ncclag+cublas)             0.0098    0.0029    0.0157
+  C - (fluxag+cublas)             0.0051    0.0010    0.0098
+[L-GU M=72] correctness: all ok
+
+[L-GU N=57344 K=8192 M=72 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2156    0.2079    0.2284    0.0903
+  B_nccl_cublas           0.1905    0.1772    0.2058    0.0827
+  C_fluxag_cublas         0.2519    0.2447    0.2642    0.1067
+  D_fluxag_fluxgemm       0.2304    0.2232    0.2447    0.1061
+  c_nccl_ag               0.0502    0.0440    0.0604    0.0446
+  c_flux_ag               0.1056    0.0987    0.1222    0.0692
+  c_cublas                0.1485    0.1475    0.1495    0.0394
+  c_fluxgemm              0.1249    0.1239    0.1260    0.0398
+  per-round diff                  median       p10       p90
+  A - B                           0.0256    0.0113    0.0420
+  A - C                          -0.0369   -0.0512   -0.0225
+  A - D                          -0.0154   -0.0287    0.0000
+  D - C                          -0.0225   -0.0348   -0.0072
+  C - B                           0.0635    0.0481    0.0809
+  D - (fluxag+fluxgemm)          -0.0004   -0.0195    0.0156
+  B - (ncclag+cublas)            -0.0092   -0.0236    0.0113
+  C - (fluxag+cublas)            -0.0018   -0.0188    0.0135
+
+[L-GU N=57344 K=8192 M=72 mode=steady] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2020    0.1995    0.2060    0.0656
+  B_nccl_cublas           0.1732    0.1685    0.1773    0.0616
+  C_fluxag_cublas         0.2336    0.2303    0.2374    0.0788
+  D_fluxag_fluxgemm       0.2170    0.2139    0.2211    0.0811
+  c_nccl_ag               0.0299    0.0285    0.0362    0.0338
+  c_flux_ag               0.0971    0.0947    0.1015    0.0563
+  c_cublas                0.1318    0.1316    0.1335    0.0158
+  c_fluxgemm              0.1154    0.1151    0.1169    0.0193
+  per-round diff                  median       p10       p90
+  A - B                           0.0294    0.0228    0.0362
+  A - C                          -0.0313   -0.0370   -0.0257
+  A - D                          -0.0145   -0.0200   -0.0091
+  D - C                          -0.0166   -0.0227   -0.0109
+  C - B                           0.0606    0.0543    0.0669
+  D - (fluxag+fluxgemm)           0.0038   -0.0011    0.0089
+  B - (ncclag+cublas)             0.0101    0.0028    0.0159
+  C - (fluxag+cublas)             0.0042   -0.0021    0.0093
+[L-GU M=128] correctness: all ok
+
+[L-GU N=57344 K=8192 M=128 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2243    0.2150    0.2345    0.0900
+  B_nccl_cublas           0.1761    0.1608    0.1894    0.0821
+  C_fluxag_cublas         0.2330    0.2243    0.2458    0.1045
+  D_fluxag_fluxgemm       0.2376    0.2304    0.2478    0.1049
+  c_nccl_ag               0.0584    0.0522    0.0727    0.0463
+  c_flux_ag               0.1108    0.1043    0.1225    0.0697
+  c_cublas                0.1198    0.1188    0.1219    0.0378
+  c_fluxgemm              0.1260    0.1249    0.1270    0.0393
+  per-round diff                  median       p10       p90
+  A - B                           0.0492    0.0307    0.0676
+  A - C                          -0.0092   -0.0225    0.0041
+  A - D                          -0.0133   -0.0276    0.0000
+  D - C                           0.0041   -0.0113    0.0195
+  C - B                           0.0573    0.0410    0.0768
+  D - (fluxag+fluxgemm)          -0.0007   -0.0158    0.0129
+  B - (ncclag+cublas)            -0.0041   -0.0276    0.0143
+  C - (fluxag+cublas)             0.0001   -0.0160    0.0169
+
+[L-GU N=57344 K=8192 M=128 mode=steady] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2088    0.2051    0.2125    0.0656
+  B_nccl_cublas           0.1556    0.1507    0.1615    0.0609
+  C_fluxag_cublas         0.2126    0.2092    0.2163    0.0776
+  D_fluxag_fluxgemm       0.2234    0.2202    0.2269    0.0813
+  c_nccl_ag               0.0373    0.0358    0.0422    0.0343
+  c_flux_ag               0.1026    0.0998    0.1057    0.0562
+  c_cublas                0.1030    0.1028    0.1048    0.0152
+  c_fluxgemm              0.1167    0.1164    0.1181    0.0196
+  per-round diff                  median       p10       p90
+  A - B                           0.0532    0.0460    0.0595
+  A - C                          -0.0040   -0.0093    0.0014
+  A - D                          -0.0149   -0.0194   -0.0099
+  D - C                           0.0105    0.0058    0.0166
+  C - B                           0.0572    0.0502    0.0631
+  D - (fluxag+fluxgemm)           0.0041   -0.0017    0.0090
+  B - (ncclag+cublas)             0.0147    0.0074    0.0207
+  C - (fluxag+cublas)             0.0069    0.0012    0.0116
+[L-GU M=136] correctness: all ok
+
+[L-GU N=57344 K=8192 M=136 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2939    0.2857    0.3082    0.0889
+  B_nccl_cublas           0.1864    0.1772    0.2048    0.0789
+  C_fluxag_cublas         0.2437    0.2365    0.2560    0.1033
+  D_fluxag_fluxgemm       0.2703    0.2632    0.2826    0.1039
+  c_nccl_ag               0.0594    0.0522    0.0758    0.0454
+  c_flux_ag               0.1116    0.1045    0.1250    0.0692
+  c_cublas                0.1311    0.1300    0.1321    0.0354
+  c_fluxgemm              0.1577    0.1556    0.1587    0.0386
+  per-round diff                  median       p10       p90
+  A - B                           0.1075    0.0881    0.1260
+  A - C                           0.0517    0.0338    0.0655
+  A - D                           0.0236    0.0092    0.0379
+  D - C                           0.0266    0.0133    0.0410
+  C - B                           0.0579    0.0399    0.0727
+  D - (fluxag+fluxgemm)          -0.0005   -0.0164    0.0188
+  B - (ncclag+cublas)            -0.0067   -0.0246    0.0164
+  C - (fluxag+cublas)             0.0006   -0.0144    0.0158
+
+[L-GU N=57344 K=8192 M=136 mode=steady] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2792    0.2764    0.2822    0.0644
+  B_nccl_cublas           0.1661    0.1622    0.1743    0.0576
+  C_fluxag_cublas         0.2246    0.2216    0.2282    0.0758
+  D_fluxag_fluxgemm       0.2557    0.2522    0.2593    0.0801
+  c_nccl_ag               0.0380    0.0362    0.0425    0.0344
+  c_flux_ag               0.1034    0.1007    0.1071    0.0562
+  c_cublas                0.1180    0.1178    0.1188    0.0128
+  c_fluxgemm              0.1471    0.1467    0.1485    0.0185
+  per-round diff                  median       p10       p90
+  A - B                           0.1128    0.1045    0.1182
+  A - C                           0.0544    0.0495    0.0597
+  A - D                           0.0237    0.0186    0.0283
+  D - C                           0.0308    0.0250    0.0363
+  C - B                           0.0588    0.0494    0.0644
+  D - (fluxag+fluxgemm)           0.0048   -0.0002    0.0099
+  B - (ncclag+cublas)             0.0099    0.0036    0.0179
+  C - (fluxag+cublas)             0.0033   -0.0022    0.0084
+[L-GU M=256] correctness: all ok
+
+[L-GU N=57344 K=8192 M=256 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.3082    0.2980    0.3267    0.0895
+  B_nccl_cublas           0.2371    0.2284    0.2550    0.0816
+  C_fluxag_cublas         0.2908    0.2796    0.3072    0.1046
+  D_fluxag_fluxgemm       0.2836    0.2744    0.3000    0.1036
+  c_nccl_ag               0.0763    0.0686    0.0911    0.0452
+  c_flux_ag               0.1243    0.1108    0.1412    0.0686
+  c_cublas                0.1669    0.1659    0.1679    0.0385
+  c_fluxgemm              0.1597    0.1587    0.1608    0.0382
+  per-round diff                  median       p10       p90
+  A - B                           0.0717    0.0522    0.0952
+  A - C                           0.0179   -0.0020    0.0410
+  A - D                           0.0236    0.0051    0.0471
+  D - C                          -0.0077   -0.0276    0.0143
+  C - B                           0.0532    0.0338    0.0758
+  D - (fluxag+fluxgemm)          -0.0008   -0.0188    0.0203
+  B - (ncclag+cublas)            -0.0067   -0.0256    0.0143
+  C - (fluxag+cublas)             0.0009   -0.0216    0.0218
+
+[L-GU N=57344 K=8192 M=256 mode=steady] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2944    0.2899    0.2988    0.0654
+  B_nccl_cublas           0.2240    0.2193    0.2298    0.0612
+  C_fluxag_cublas         0.2749    0.2700    0.2793    0.0797
+  D_fluxag_fluxgemm       0.2693    0.2642    0.2744    0.0819
+  c_nccl_ag               0.0543    0.0525    0.0604    0.0340
+  c_flux_ag               0.1120    0.1094    0.1180    0.0572
+  c_cublas                0.1569    0.1560    0.1581    0.0153
+  c_fluxgemm              0.1506    0.1500    0.1520    0.0185
+  per-round diff                  median       p10       p90
+  A - B                           0.0706    0.0628    0.0774
+  A - C                           0.0193    0.0132    0.0268
+  A - D                           0.0251    0.0178    0.0323
+  D - C                          -0.0058   -0.0127    0.0017
+  C - B                           0.0502    0.0430    0.0580
+  D - (fluxag+fluxgemm)           0.0052   -0.0013    0.0120
+  B - (ncclag+cublas)             0.0118    0.0052    0.0187
+  C - (fluxag+cublas)             0.0048   -0.0026    0.0119
+[L-GU M=264] correctness: all ok
+
+[L-GU N=57344 K=8192 M=264 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.3717    0.3615    0.3891    0.0899
+  B_nccl_cublas           0.2918    0.2836    0.3092    0.0836
+  C_fluxag_cublas         0.3451    0.3338    0.3594    0.1073
+  D_fluxag_fluxgemm       0.3901    0.3789    0.4055    0.1047
+  c_nccl_ag               0.0778    0.0696    0.0942    0.0448
+  c_flux_ag               0.1241    0.1139    0.1407    0.0692
+  c_cublas                0.2181    0.2181    0.2202    0.0396
+  c_fluxgemm              0.2652    0.2632    0.2662    0.0386
+  per-round diff                  median       p10       p90
+  A - B                           0.0809    0.0604    0.0993
+  A - C                           0.0271    0.0082    0.0461
+  A - D                          -0.0184   -0.0369    0.0000
+  D - C                           0.0445    0.0276    0.0635
+  C - B                           0.0532    0.0297    0.0717
+  D - (fluxag+fluxgemm)           0.0024   -0.0192    0.0215
+  B - (ncclag+cublas)            -0.0041   -0.0256    0.0174
+  C - (fluxag+cublas)             0.0023   -0.0168    0.0224
+
+[L-GU N=57344 K=8192 M=264 mode=steady] kept 200/200  modal clock [1395, 1410, 1395, 1410, 1410, 1410, 1410, 1395]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.3592    0.3551    0.3635    0.0654
+  B_nccl_cublas           0.2797    0.2753    0.2848    0.0629
+  C_fluxag_cublas         0.3340    0.3280    0.3382    0.0808
+  D_fluxag_fluxgemm       0.3742    0.3697    0.3790    0.0816
+  c_nccl_ag               0.0549    0.0530    0.0618    0.0340
+  c_flux_ag               0.1133    0.1094    0.1187    0.0572
+  c_cublas                0.2156    0.2152    0.2179    0.0162
+  c_fluxgemm              0.2542    0.2533    0.2554    0.0185
+  per-round diff                  median       p10       p90
+  A - B                           0.0794    0.0723    0.0865
+  A - C                           0.0255    0.0184    0.0332
+  A - D                          -0.0149   -0.0211   -0.0086
+  D - C                           0.0404    0.0331    0.0484
+  C - B                           0.0539    0.0458    0.0613
+  D - (fluxag+fluxgemm)           0.0065   -0.0012    0.0136
+  B - (ncclag+cublas)             0.0072    0.0012    0.0143
+  C - (fluxag+cublas)             0.0035   -0.0026    0.0110
+[L-GU M=512] correctness: all ok
+
+[L-GU N=57344 K=8192 M=512 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.3973    0.3779    0.4209    0.0894
+  B_nccl_cublas           0.4178    0.4086    0.4383    0.0837
+  C_fluxag_cublas         0.4690    0.4495    0.4956    0.1066
+  D_fluxag_fluxgemm       0.4035    0.3860    0.4280    0.1047
+  c_nccl_ag               0.1014    0.0922    0.1208    0.0451
+  c_flux_ag               0.1480    0.1286    0.1730    0.0696
+  c_cublas                0.3215    0.3215    0.3226    0.0399
+  c_fluxgemm              0.2570    0.2560    0.2591    0.0383
+  per-round diff                  median       p10       p90
+  A - B                          -0.0205   -0.0492    0.0082
+  A - C                          -0.0737   -0.1055   -0.0410
+  A - D                          -0.0072   -0.0328    0.0246
+  D - C                          -0.0650   -0.0942   -0.0369
+  C - B                           0.0502    0.0236    0.0799
+  D - (fluxag+fluxgemm)          -0.0003   -0.0311    0.0316
+  B - (ncclag+cublas)            -0.0051   -0.0287    0.0225
+  C - (fluxag+cublas)             0.0007   -0.0317    0.0372
+
+[L-GU N=57344 K=8192 M=512 mode=steady] kept 200/200  modal clock [1380, 1395, 1380, 1395, 1395, 1395, 1395, 1380]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.3858    0.3778    0.3926    0.0652
+  B_nccl_cublas           0.4135    0.4076    0.4203    0.0629
+  C_fluxag_cublas         0.4634    0.4550    0.4711    0.0803
+  D_fluxag_fluxgemm       0.3946    0.3857    0.4002    0.0815
+  c_nccl_ag               0.0790    0.0774    0.0854    0.0342
+  c_flux_ag               0.1275    0.1231    0.1397    0.0571
+  c_cublas                0.3257    0.3231    0.3308    0.0160
+  c_fluxgemm              0.2568    0.2554    0.2595    0.0185
+  per-round diff                  median       p10       p90
+  A - B                          -0.0278   -0.0385   -0.0179
+  A - C                          -0.0774   -0.0877   -0.0660
+  A - D                          -0.0080   -0.0189    0.0021
+  D - C                          -0.0694   -0.0799   -0.0568
+  C - B                           0.0498    0.0403    0.0586
+  D - (fluxag+fluxgemm)           0.0077   -0.0078    0.0183
+  B - (ncclag+cublas)             0.0076   -0.0008    0.0140
+  C - (fluxag+cublas)             0.0087   -0.0074    0.0179
+[L-GU M=520] correctness: all ok
+
+[L-GU N=57344 K=8192 M=520 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.4915    0.4751    0.5181    0.0897
+  B_nccl_cublas           0.3983    0.3830    0.4178    0.0841
+  C_fluxag_cublas         0.4516    0.4342    0.4803    0.1072
+  D_fluxag_fluxgemm       0.5038    0.4833    0.5294    0.1051
+  c_nccl_ag               0.1014    0.0922    0.1188    0.0455
+  c_flux_ag               0.1460    0.1280    0.1756    0.0694
+  c_cublas                0.3031    0.3021    0.3041    0.0401
+  c_fluxgemm              0.3594    0.3584    0.3615    0.0385
+  per-round diff                  median       p10       p90
+  A - B                           0.0942    0.0707    0.1219
+  A - C                           0.0394    0.0113    0.0717
+  A - D                          -0.0113   -0.0389    0.0195
+  D - C                           0.0522    0.0215    0.0850
+  C - B                           0.0532    0.0276    0.0799
+  D - (fluxag+fluxgemm)          -0.0049   -0.0366    0.0275
+  B - (ncclag+cublas)            -0.0082   -0.0276    0.0174
+  C - (fluxag+cublas)             0.0040   -0.0333    0.0318
+
+[L-GU N=57344 K=8192 M=520 mode=steady] kept 200/200  modal clock [1320, 1365, 1335, 1350, 1350, 1350, 1365, 1335]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.4852    0.4778    0.4917    0.0654
+  B_nccl_cublas           0.4063    0.4013    0.4108    0.0633
+  C_fluxag_cublas         0.4548    0.4473    0.4644    0.0809
+  D_fluxag_fluxgemm       0.5023    0.4936    0.5075    0.0816
+  c_nccl_ag               0.0820    0.0803    0.0877    0.0345
+  c_flux_ag               0.1304    0.1262    0.1411    0.0572
+  c_cublas                0.3169    0.3134    0.3216    0.0163
+  c_fluxgemm              0.3597    0.3569    0.3630    0.0186
+  per-round diff                  median       p10       p90
+  A - B                           0.0786    0.0702    0.0866
+  A - C                           0.0295    0.0204    0.0401
+  A - D                          -0.0163   -0.0259   -0.0070
+  D - C                           0.0468    0.0354    0.0562
+  C - B                           0.0481    0.0390    0.0584
+  D - (fluxag+fluxgemm)           0.0103   -0.0024    0.0195
+  B - (ncclag+cublas)             0.0067   -0.0012    0.0127
+  C - (fluxag+cublas)             0.0067   -0.0055    0.0171
+[L-GU M=1024] correctness: all ok
+
+[L-GU N=57344 K=8192 M=1024 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.6707    0.6574    0.6963    0.0888
+  B_nccl_cublas           0.6840    0.6758    0.7137    0.0849
+  C_fluxag_cublas         0.7281    0.7045    0.7578    0.1075
+  D_fluxag_fluxgemm       0.6845    0.6625    0.7178    0.1051
+  c_nccl_ag               0.1587    0.1485    0.1946    0.0459
+  c_flux_ag               0.1965    0.1725    0.2317    0.0701
+  c_cublas                0.5335    0.5335    0.5356    0.0403
+  c_fluxgemm              0.4966    0.4946    0.4997    0.0382
+  per-round diff                  median       p10       p90
+  A - B                          -0.0148   -0.0430    0.0143
+  A - C                          -0.0563   -0.0901   -0.0236
+  A - D                          -0.0123   -0.0471    0.0266
+  D - C                          -0.0430   -0.0819    0.0000
+  C - B                           0.0410    0.0082    0.0737
+  D - (fluxag+fluxgemm)          -0.0085   -0.0496    0.0312
+  B - (ncclag+cublas)            -0.0102   -0.0389    0.0123
+  C - (fluxag+cublas)            -0.0035   -0.0485    0.0369
+
+[L-GU N=57344 K=8192 M=1024 mode=steady] kept 195/200  modal clock [1320, 1350, 1335, 1350, 1350, 1365, 1365, 1335]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.6738    0.6653    0.6847    0.0654
+  B_nccl_cublas           0.7183    0.7092    0.7306    0.0643
+  C_fluxag_cublas         0.7404    0.7284    0.7524    0.0810
+  D_fluxag_fluxgemm       0.6867    0.6762    0.6975    0.0816
+  c_nccl_ag               0.1515    0.1435    0.1627    0.0348
+  c_flux_ag               0.1725    0.1586    0.1810    0.0571
+  c_cublas                0.5615    0.5538    0.5725    0.0167
+  c_fluxgemm              0.5064    0.4991    0.5155    0.0186
+  per-round diff                  median       p10       p90
+  A - B                          -0.0456   -0.0561   -0.0333
+  A - C                          -0.0657   -0.0781   -0.0540
+  A - D                          -0.0128   -0.0248   -0.0011
+  D - C                          -0.0525   -0.0659   -0.0408
+  C - B                           0.0207    0.0090    0.0332
+  D - (fluxag+fluxgemm)           0.0087   -0.0088    0.0291
+  B - (ncclag+cublas)             0.0049   -0.0122    0.0200
+  C - (fluxag+cublas)             0.0061   -0.0102    0.0267
+[L-GU M=1032] correctness: all ok
+
+[L-GU N=57344 K=8192 M=1032 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.7404    0.7168    0.7762    0.0897
+  B_nccl_cublas           0.6861    0.6779    0.7219    0.0839
+  C_fluxag_cublas         0.7240    0.7035    0.7588    0.1073
+  D_fluxag_fluxgemm       0.7475    0.7229    0.7762    0.1046
+  c_nccl_ag               0.1567    0.1464    0.1894    0.0454
+  c_flux_ag               0.1977    0.1724    0.2340    0.0697
+  c_cublas                0.5345    0.5345    0.5356    0.0400
+  c_fluxgemm              0.5560    0.5540    0.5581    0.0384
+  per-round diff                  median       p10       p90
+  A - B                           0.0481    0.0164    0.0881
+  A - C                           0.0118   -0.0297    0.0625
+  A - D                          -0.0041   -0.0502    0.0399
+  D - C                           0.0195   -0.0195    0.0604
+  C - B                           0.0353    0.0010    0.0696
+  D - (fluxag+fluxgemm)          -0.0079   -0.0487    0.0350
+  B - (ncclag+cublas)            -0.0051   -0.0317    0.0307
+  C - (fluxag+cublas)            -0.0060   -0.0513    0.0351
+
+[L-GU N=57344 K=8192 M=1032 mode=steady] kept 197/200  modal clock [1305, 1335, 1305, 1320, 1320, 1335, 1335, 1305]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.7431    0.7345    0.7553    0.0655
+  B_nccl_cublas           0.7314    0.7199    0.7454    0.0647
+  C_fluxag_cublas         0.7520    0.7389    0.7645    0.0812
+  D_fluxag_fluxgemm       0.7600    0.7491    0.7710    0.0820
+  c_nccl_ag               0.1585    0.1469    0.1664    0.0347
+  c_flux_ag               0.1763    0.1684    0.1838    0.0575
+  c_cublas                0.5748    0.5635    0.5857    0.0168
+  c_fluxgemm              0.5791    0.5695    0.5884    0.0188
+  per-round diff                  median       p10       p90
+  A - B                           0.0127   -0.0008    0.0257
+  A - C                          -0.0077   -0.0205    0.0046
+  A - D                          -0.0150   -0.0295   -0.0020
+  D - C                           0.0081   -0.0050    0.0204
+  C - B                           0.0205    0.0057    0.0331
+  D - (fluxag+fluxgemm)           0.0052   -0.0090    0.0186
+  B - (ncclag+cublas)            -0.0003   -0.0169    0.0157
+  C - (fluxag+cublas)             0.0016   -0.0154    0.0171
+[L-GU M=2048] correctness: all ok
+
+[L-GU N=57344 K=8192 M=2048 mode=gpu] kept 200/200  modal clock [1410, 1410, 1410, 1410, 1410, 1410, 1410, 1395]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 1.2186    1.2022    1.2483    0.0897
+  B_nccl_cublas           1.2319    1.2247    1.2687    0.0808
+  C_fluxag_cublas         1.2621    1.2329    1.3107    0.1041
+  D_fluxag_fluxgemm       1.2119    1.1889    1.2728    0.1057
+  c_nccl_ag               0.2263    0.2191    0.2580    0.0457
+  c_flux_ag               0.2623    0.2331    0.3250    0.0700
+  c_cublas                1.0138    1.0097    1.0199    0.0363
+  c_fluxgemm              0.9605    0.9574    0.9646    0.0390
+  per-round diff                  median       p10       p90
+  A - B                          -0.0154   -0.0481    0.0174
+  A - C                          -0.0410   -0.0952    0.0010
+  A - D                           0.0077   -0.0492    0.0502
+  D - C                          -0.0486   -0.1044    0.0143
+  C - B                           0.0256   -0.0072    0.0799
+  D - (fluxag+fluxgemm)          -0.0105   -0.0719    0.0549
+  B - (ncclag+cublas)            -0.0092   -0.0369    0.0256
+  C - (fluxag+cublas)            -0.0147   -0.0892    0.0439
+
+[L-GU N=57344 K=8192 M=2048 mode=steady] kept 167/200  modal clock [1245, 1335, 1305, 1320, 1290, 1290, 1320, 1260]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 1.2611    1.2435    1.2817    0.0660
+  B_nccl_cublas           1.3279    1.2882    1.3643    0.0599
+  C_fluxag_cublas         1.3409    1.3085    1.3690    0.0786
+  D_fluxag_fluxgemm       1.2712    1.2385    1.2979    0.0823
+  c_nccl_ag               0.2258    0.2183    0.2368    0.0348
+  c_flux_ag               0.2259    0.2166    0.2405    0.0573
+  c_cublas                1.1028    1.0658    1.1331    0.0142
+  c_fluxgemm              1.0211    0.9962    1.0513    0.0191
+  per-round diff                  median       p10       p90
+  A - B                          -0.0658   -0.1012   -0.0281
+  A - C                          -0.0819   -0.1054   -0.0481
+  A - D                          -0.0088   -0.0444    0.0350
+  D - C                          -0.0688   -0.1099   -0.0332
+  C - B                           0.0170   -0.0285    0.0580
+  D - (fluxag+fluxgemm)           0.0215   -0.0178    0.0606
+  B - (ncclag+cublas)             0.0014   -0.0501    0.0470
+  C - (fluxag+cublas)             0.0142   -0.0297    0.0614
+[L-GU M=3072] correctness: all ok
+
+[L-GU N=57344 K=8192 M=3072 mode=gpu] kept 200/200  modal clock [1350, 1380, 1365, 1380, 1380, 1380, 1380, 1350]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 1.6005    1.5780    1.6108    0.0905
+  B_nccl_cublas           1.7316    1.7142    1.7562    0.0813
+  C_fluxag_cublas         1.7664    1.7377    1.8084    0.1046
+  D_fluxag_fluxgemm       1.7567    1.7295    1.8033    0.1065
+  c_nccl_ag               0.2775    0.2714    0.3031    0.0463
+  c_flux_ag               0.3146    0.2859    0.3843    0.0701
+  c_cublas                1.4602    1.4449    1.4612    0.0366
+  c_fluxgemm              1.4469    1.4428    1.4561    0.0391
+  per-round diff                  median       p10       p90
+  A - B                          -0.1311   -0.1628   -0.1126
+  A - C                          -0.1684   -0.2161   -0.1331
+  A - D                          -0.1567   -0.2109   -0.1280
+  D - C                          -0.0113   -0.0604    0.0440
+  C - B                           0.0338   -0.0031    0.0799
+  D - (fluxag+fluxgemm)          -0.0064   -0.0780    0.0507
+  B - (ncclag+cublas)            -0.0051   -0.0297    0.0225
+  C - (fluxag+cublas)            -0.0050   -0.0823    0.0481
+
+[L-GU N=57344 K=8192 M=3072 mode=steady] kept 190/200  modal clock [1200, 1290, 1245, 1260, 1245, 1245, 1290, 1215]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 1.6759    1.6475    1.7140    0.0662
+  B_nccl_cublas           1.8562    1.7963    1.9137    0.0601
+  C_fluxag_cublas         1.8726    1.8271    1.9185    0.0790
+  D_fluxag_fluxgemm       1.8595    1.8010    1.9142    0.0819
+  c_nccl_ag               0.2874    0.2786    0.2973    0.0351
+  c_flux_ag               0.2833    0.2748    0.2961    0.0573
+  c_cublas                1.5670    1.5178    1.6230    0.0141
+  c_fluxgemm              1.5358    1.5018    1.6008    0.0194
+  per-round diff                  median       p10       p90
+  A - B                          -0.1757   -0.2433   -0.1117
+  A - C                          -0.1948   -0.2528   -0.1220
+  A - D                          -0.1823   -0.2480   -0.1109
+  D - C                          -0.0132   -0.0851    0.0557
+  C - B                           0.0268   -0.0642    0.0840
+  D - (fluxag+fluxgemm)           0.0283   -0.0420    0.1089
+  B - (ncclag+cublas)            -0.0064   -0.0749    0.0741
+  C - (fluxag+cublas)             0.0220   -0.0566    0.0882
+[L-GU M=4096] correctness: all ok
+
+[L-GU N=57344 K=8192 M=4096 mode=gpu] kept 200/200  modal clock [1335, 1365, 1350, 1350, 1365, 1350, 1365, 1335]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 2.6061    2.5887    2.6286    0.0909
+  B_nccl_cublas           2.2436    2.2241    2.2702    0.0822
+  C_fluxag_cublas         2.2666    2.2313    2.3071    0.1045
+  D_fluxag_fluxgemm       2.9307    2.8959    2.9747    0.1046
+  c_nccl_ag               0.3589    0.3512    0.3881    0.0464
+  c_flux_ag               0.3825    0.3511    0.4360    0.0703
+  c_cublas                1.8964    1.8770    1.8995    0.0366
+  c_fluxgemm              2.5508    2.5344    2.5784    0.0386
+  per-round diff                  median       p10       p90
+  A - B                           0.3635    0.3348    0.3820
+  A - C                           0.3410    0.2970    0.3748
+  A - D                          -0.3226   -0.3656   -0.2898
+  D - C                           0.6661    0.6031    0.7209
+  C - B                           0.0195   -0.0133    0.0614
+  D - (fluxag+fluxgemm)          -0.0066   -0.0690    0.0431
+  B - (ncclag+cublas)            -0.0082   -0.0328    0.0195
+  C - (fluxag+cublas)            -0.0054   -0.0718    0.0506
+
+[L-GU N=57344 K=8192 M=4096 mode=steady] kept 200/200  modal clock [1245, 1290, 1260, 1275, 1275, 1275, 1290, 1260]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 2.7489    2.7022    2.7889    0.0664
+  B_nccl_cublas           2.3434    2.2927    2.3893    0.0612
+  C_fluxag_cublas         2.3397    2.2984    2.3739    0.0794
+  D_fluxag_fluxgemm       3.0446    2.9987    3.1070    0.0818
+  c_nccl_ag               0.3595    0.3531    0.3657    0.0354
+  c_flux_ag               0.3427    0.3328    0.3534    0.0576
+  c_cublas                1.9879    1.9482    2.0324    0.0143
+  c_fluxgemm              2.6822    2.6270    2.7477    0.0192
+  per-round diff                  median       p10       p90
+  A - B                           0.4046    0.3476    0.4688
+  A - C                           0.4073    0.3492    0.4744
+  A - D                          -0.2948   -0.3789   -0.2291
+  D - C                           0.7059    0.6425    0.7850
+  C - B                          -0.0001   -0.0657    0.0653
+  D - (fluxag+fluxgemm)           0.0226   -0.0604    0.1130
+  B - (ncclag+cublas)            -0.0021   -0.0687    0.0523
+  C - (fluxag+cublas)             0.0102   -0.0504    0.0607
+[L-GU M=6144] correctness: all ok
+
+[L-GU N=57344 K=8192 M=6144 mode=gpu] kept 200/200  modal clock [1290, 1335, 1305, 1320, 1305, 1320, 1335, 1305]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 3.0505    3.0188    3.0925    0.0911
+  B_nccl_cublas           3.3034    3.2686    3.3475    0.0830
+  C_fluxag_cublas         3.2978    3.2604    3.3638    0.1059
+  D_fluxag_fluxgemm       3.4739    3.4243    3.5246    0.1063
+  c_nccl_ag               0.5028    0.4925    0.5222    0.0462
+  c_flux_ag               0.4939    0.4661    0.5412    0.0703
+  c_cublas                2.8047    2.7761    2.8426    0.0375
+  c_fluxgemm              2.9676    2.9368    3.0116    0.0391
+  per-round diff                  median       p10       p90
+  A - B                          -0.2519   -0.2836   -0.2273
+  A - C                          -0.2499   -0.2990   -0.2038
+  A - D                          -0.4239   -0.4669   -0.3738
+  D - C                           0.1777    0.1044    0.2273
+  C - B                          -0.0082   -0.0430    0.0420
+  D - (fluxag+fluxgemm)           0.0085   -0.0542    0.0620
+  B - (ncclag+cublas)            -0.0092   -0.0399    0.0195
+  C - (fluxag+cublas)            -0.0038   -0.0666    0.0529
+
+[L-GU N=57344 K=8192 M=6144 mode=steady] kept 199/200  modal clock [1200, 1215, 1215, 1200, 1230, 1200, 1215, 1170]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 3.2445    3.1710    3.3069    0.0662
+  B_nccl_cublas           3.4077    3.3055    3.5274    0.0614
+  C_fluxag_cublas         3.3998    3.3124    3.5148    0.0797
+  D_fluxag_fluxgemm       3.5633    3.4869    3.7135    0.0823
+  c_nccl_ag               0.5064    0.4923    0.5219    0.0351
+  c_flux_ag               0.4690    0.4559    0.4828    0.0576
+  c_cublas                2.9213    2.8433    3.0564    0.0151
+  c_fluxgemm              3.1020    3.0228    3.2360    0.0190
+  per-round diff                  median       p10       p90
+  A - B                          -0.1679   -0.3071   -0.0419
+  A - C                          -0.1606   -0.2792   -0.0559
+  A - D                          -0.3232   -0.4823   -0.2356
+  D - C                           0.1650    0.0323    0.3356
+  C - B                          -0.0038   -0.1610    0.1406
+  D - (fluxag+fluxgemm)          -0.0073   -0.1532    0.1628
+  B - (ncclag+cublas)            -0.0413   -0.1885    0.1134
+  C - (fluxag+cublas)             0.0103   -0.1519    0.1263
+[L-GU M=8192] correctness: all ok
+
+[L-GU N=57344 K=8192 M=8192 mode=gpu] kept 200/200  modal clock [1275, 1320, 1290, 1290, 1305, 1290, 1320, 1275]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 4.0474    4.0110    4.1032    0.0920
+  B_nccl_cublas           4.4093    4.3715    4.4646    0.0841
+  C_fluxag_cublas         4.3402    4.2906    4.4073    0.1070
+  D_fluxag_fluxgemm       4.6182    4.5681    4.6797    0.1069
+  c_nccl_ag               0.6830    0.6728    0.6943    0.0466
+  c_flux_ag               0.6203    0.5822    0.6684    0.0705
+  c_cublas                3.7258    3.7038    3.7673    0.0375
+  c_fluxgemm              4.0069    3.9639    4.0581    0.0392
+  per-round diff                  median       p10       p90
+  A - B                          -0.3564   -0.3994   -0.3195
+  A - C                          -0.2924   -0.3533   -0.2406
+  A - D                          -0.5683   -0.6236   -0.5274
+  D - C                           0.2816    0.2150    0.3410
+  C - B                          -0.0671   -0.1106   -0.0123
+  D - (fluxag+fluxgemm)          -0.0115   -0.0690    0.0651
+  B - (ncclag+cublas)            -0.0082   -0.0358    0.0328
+  C - (fluxag+cublas)            -0.0087   -0.0796    0.0571
+
+[L-GU N=57344 K=8192 M=8192 mode=steady] kept 200/200  modal clock [1170, 1215, 1185, 1200, 1215, 1200, 1215, 1170]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 4.2882    4.1796    4.3725    0.0665
+  B_nccl_cublas           4.4866    4.3448    4.6118    0.0624
+  C_fluxag_cublas         4.4299    4.3224    4.5436    0.0805
+  D_fluxag_fluxgemm       4.7205    4.6253    4.8781    0.0826
+  c_nccl_ag               0.6776    0.6664    0.7023    0.0351
+  c_flux_ag               0.5858    0.5733    0.6036    0.0574
+  c_cublas                3.8435    3.7448    4.0006    0.0148
+  c_fluxgemm              4.1483    4.0374    4.2907    0.0195
+  per-round diff                  median       p10       p90
+  A - B                          -0.1954   -0.3722   -0.0130
+  A - C                          -0.1454   -0.2884   -0.0003
+  A - D                          -0.4480   -0.6256   -0.3054
+  D - C                           0.2869    0.1315    0.4892
+  C - B                          -0.0447   -0.2104    0.1193
+  D - (fluxag+fluxgemm)          -0.0120   -0.1637    0.1818
+  B - (ncclag+cublas)            -0.0648   -0.2247    0.1236
+  C - (fluxag+cublas)            -0.0294   -0.1768    0.1720
+[L-GU M=16384] correctness: all ok
+
+[L-GU N=57344 K=8192 M=16384 mode=gpu] kept 200/200  modal clock [1245, 1290, 1260, 1275, 1275, 1275, 1290, 1245]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 7.5546    7.4691    7.6513    0.0934
+  B_nccl_cublas           8.8212    8.7132    8.9641    0.0889
+  C_fluxag_cublas         8.6625    8.5545    8.7798    0.1111
+  D_fluxag_fluxgemm       8.5448    8.4337    8.6733    0.1071
+  c_nccl_ag               1.2390    1.2288    1.2524    0.0490
+  c_flux_ag               1.0873    1.0493    1.1137    0.0717
+  c_cublas                7.5735    7.4762    7.6595    0.0411
+  c_fluxgemm              7.4619    7.3738    7.5694    0.0409
+  per-round diff                  median       p10       p90
+  A - B                          -1.2718   -1.4070   -1.2022
+  A - C                          -1.1003   -1.2155   -1.0281
+  A - D                          -0.9882   -1.0895   -0.9001
+  D - C                          -0.1116   -0.2314    0.0020
+  C - B                          -0.1628   -0.2785   -0.0584
+  D - (fluxag+fluxgemm)          -0.0118   -0.1229    0.1229
+  B - (ncclag+cublas)            -0.0031   -0.0952    0.0870
+  C - (fluxag+cublas)            -0.0058   -0.1225    0.0860
+
+[L-GU N=57344 K=8192 M=16384 mode=steady] kept 197/200  modal clock [1155, 1215, 1170, 1200, 1185, 1200, 1215, 1170]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 7.9992    7.8435    8.1084    0.0661
+  B_nccl_cublas           8.7752    8.5967    8.8941    0.0638
+  C_fluxag_cublas         8.6516    8.4870    8.7804    0.0812
+  D_fluxag_fluxgemm       8.6805    8.5381    8.8269    0.0824
+  c_nccl_ag               1.2273    1.2141    1.2709    0.0353
+  c_flux_ag               1.0404    1.0311    1.0973    0.0574
+  c_cublas                7.6797    7.5205    7.8587    0.0165
+  c_fluxgemm              7.7501    7.5804    7.8808    0.0194
+  per-round diff                  median       p10       p90
+  A - B                          -0.7575   -0.9707   -0.5636
+  A - C                          -0.6594   -0.8514   -0.4392
+  A - D                          -0.6804   -0.8843   -0.5080
+  D - C                           0.0548   -0.1779    0.2465
+  C - B                          -0.1377   -0.3275    0.1203
+  D - (fluxag+fluxgemm)          -0.1052   -0.3132    0.0984
+  B - (ncclag+cublas)            -0.1622   -0.3926    0.0538
+  C - (fluxag+cublas)            -0.1150   -0.3363    0.1396
+
+wrote ws/fusion-dispatch/results/e1_map_v2/raw_L-GU.csv
+wrote ws/fusion-dispatch/results/e1_map_v2/meta_L-GU.json

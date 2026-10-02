@@ -1,0 +1,50 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/dispatch_map_v2.py --layer G-FC1 --Ms 264,16384 --max_m 16384 --modes steady --rounds 300 --warmup 30 --clock_period 0.02 --out_dir ws/fusion-dispatch/results/v7_rerun/ag
+W0930 09:16:08.788000 1136904 site-packages/torch/distributed/run.py:792] 
+W0930 09:16:08.788000 1136904 site-packages/torch/distributed/run.py:792] *****************************************
+W0930 09:16:08.788000 1136904 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0930 09:16:08.788000 1136904 site-packages/torch/distributed/run.py:792] *****************************************
+[G-FC1 M=264] correctness: all ok
+
+[G-FC1 N=49152 K=12288 M=264 mode=steady] kept 300/300  modal clock [1380, 1395, 1380, 1395, 1395, 1395, 1395, 1380]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.4343    0.4291    0.4393    0.0655
+  B_nccl_cublas           0.3014    0.2963    0.3075    0.0627
+  C_fluxag_cublas         0.3545    0.3470    0.3614    0.0802
+  D_fluxag_fluxgemm       0.3979    0.3901    0.4043    0.0827
+  c_nccl_ag               0.0667    0.0648    0.0742    0.0354
+  c_flux_ag               0.1227    0.1181    0.1330    0.0584
+  c_cublas                0.2253    0.2230    0.2280    0.0152
+  c_fluxgemm              0.2644    0.2629    0.2663    0.0186
+  per-round diff                  median       p10       p90
+  A - B                           0.1326    0.1252    0.1390
+  A - C                           0.0789    0.0708    0.0884
+  A - D                           0.0360    0.0285    0.0465
+  D - C                           0.0433    0.0316    0.0525
+  C - B                           0.0527    0.0426    0.0620
+  D - (fluxag+fluxgemm)           0.0095   -0.0029    0.0185
+  B - (ncclag+cublas)             0.0083   -0.0008    0.0157
+  C - (fluxag+cublas)             0.0053   -0.0068    0.0160
+[G-FC1 M=16384] correctness: all ok
+
+[G-FC1 N=49152 K=12288 M=16384 mode=steady] kept 298/300  modal clock [1155, 1215, 1170, 1200, 1185, 1200, 1200, 1170]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                10.2802   10.1039   10.4224    0.0661
+  B_nccl_cublas          11.3413   11.1241   11.4541    0.0636
+  C_fluxag_cublas        11.1496   10.9409   11.3020    0.0815
+  D_fluxag_fluxgemm      11.3018   11.1094   11.4499    0.0834
+  c_nccl_ag               1.7556    1.7318    1.8011    0.0359
+  c_flux_ag               1.5009    1.4848    1.5819    0.0587
+  c_cublas                9.7956    9.6075    9.9693    0.0158
+  c_fluxgemm              9.9456    9.7566   10.1114    0.0193
+  per-round diff                  median       p10       p90
+  A - B                          -1.0452   -1.2735   -0.8120
+  A - C                          -0.8680   -1.0968   -0.6148
+  A - D                          -1.0204   -1.2504   -0.7893
+  D - C                           0.1465   -0.1008    0.4296
+  C - B                          -0.2040   -0.4367    0.0826
+  D - (fluxag+fluxgemm)          -0.1725   -0.4295    0.0697
+  B - (ncclag+cublas)            -0.2476   -0.5002   -0.0038
+  C - (fluxag+cublas)            -0.1936   -0.4801    0.0829
+
+wrote ws/fusion-dispatch/results/v7_rerun/ag/raw_G-FC1.csv
+wrote ws/fusion-dispatch/results/v7_rerun/ag/meta_G-FC1.json

@@ -1,0 +1,25 @@
+{
+ "args": {
+  "iters": 5000,
+  "M": 1024,
+  "K": 8192,
+  "max_skew_us": 500.0,
+  "skew_at": "both",
+  "out": "ws/fusion-dispatch/results/v9_triton_stress/stress_v2_M1024_skew500_both.json"
+ },
+ "results": {
+  "single": {
+   "iters": 5000,
+   "bad_elements_all_ranks": 322963832,
+   "bad_rank_iterations": 439,
+   "wall_s": 6.538957118988037
+  },
+  "double": {
+   "iters": 5000,
+   "bad_elements_all_ranks": 0,
+   "bad_rank_iterations": 0,
+   "wall_s": 6.163805723190308
+  }
+ },
+ "date": "2026-10-02 14:21:17"
+}

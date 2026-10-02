@@ -1,0 +1,98 @@
+{
+ "args": {
+  "phase": "decode",
+  "mode": "graph",
+  "Ms": "64",
+  "table": "ws/fusion-dispatch/results/f1_block_smoke/table_gpu.json",
+  "L": 4,
+  "ctx": 1024,
+  "rounds": 10,
+  "warmup": 2,
+  "pad_cycles": 400000,
+  "rel_tol": 0.05,
+  "seed": 20260930,
+  "out_dir": "ws/fusion-dispatch/results/f1_block_smoke/v2"
+ },
+ "table_digest": "9019aadcd1029ffc2dede4e24302789960d4858242a1a2baca1d476d4787e630",
+ "table_meta": {
+  "built": "2026-09-30 06:15:55",
+  "mode": "gpu",
+  "sources": [
+   "ws/fusion-dispatch/results/e1_merged_points.csv",
+   "ws/fusion-dispatch/results/e5_rs_map_v1/summary_points.csv"
+  ],
+  "host": "css-host-158",
+  "gpu": "NVIDIA A100-SXM4-80GB, 615.71.09",
+  "flux_git": "b410171",
+  "world": 8,
+  "dtype": "bf16",
+  "protocol": "dispatch_map_v2 / dispatch_map_rs_v1 (interleaved, >=200 rounds, rank-max median)"
+ },
+ "date": "2026-09-30 06:24:49",
+ "cases": {
+  "64": {
+   "check": {
+    "sp_nccl": {
+     "max_abs_err": 1.0,
+     "rel_err": 0.014598540145985401,
+     "ok_all_ranks": true
+    },
+    "sp_rsflux": {
+     "max_abs_err": 1.0,
+     "rel_err": 0.014598540145985401,
+     "ok_all_ranks": true
+    },
+    "sp_dispatch": {
+     "max_abs_err": 1.0,
+     "rel_err": 0.014598540145985401,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    },
+    "sp_flux": {},
+    "sp_rsflux": {
+     "ag:nccl": 8,
+     "rs:flux": 8
+    },
+    "sp_dispatch": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    }
+   },
+   "misses": {},
+   "kept": 10,
+   "median_ms": {
+    "tp_ar": 1.3230080008506775,
+    "sp_nccl": 1.49452805519104,
+    "sp_rsflux": 1.59334397315979,
+    "sp_dispatch": 1.5022079944610596
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     0.14233601093292236,
+     0.18483197689056396,
+     0.3020799160003662
+    ],
+    "sp_nccl": [
+     -0.103424072265625,
+     -0.0035840272903442383,
+     0.11775994300842285
+    ],
+    "sp_rsflux": [
+     -0.12390398979187012,
+     -0.08857601881027222,
+     0.014335989952087402
+    ],
+    "sp_dispatch": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  }
+ }
+}

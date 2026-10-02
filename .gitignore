@@ -46,3 +46,6 @@ htmlcov/
 *.swp
 *.swo
 .DS_Store
+
+# fusion-dispatch: third-party tokenizer, fetched by ws/fusion-dispatch/scripts/setup_vllm_venv.sh
+ws/fusion-dispatch/models/qwen25-tokenizer/

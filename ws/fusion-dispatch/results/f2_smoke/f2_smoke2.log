@@ -1,0 +1,9 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/ag_latency_v1.py --K 8192 --n_cols 1280 --Ms 8,64 --modes gpu --items nccl,flux_default,proto_triton,proto_triton_bar --rounds 30 --warmup 5 --out_dir ws/fusion-dispatch/results/f2_smoke
+W0930 06:33:04.981000 863896 site-packages/torch/distributed/run.py:792] 
+W0930 06:33:04.981000 863896 site-packages/torch/distributed/run.py:792] *****************************************
+W0930 06:33:04.981000 863896 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0930 06:33:04.981000 863896 site-packages/torch/distributed/run.py:792] *****************************************
+[K=8192 M=8] check: all ok
+[K=8192 M=8 gpu] kept 30  nccl=33.8us  flux_default=108.1us  proto_triton=14.3us  proto_triton_bar=51.2us
+[K=8192 M=64] check: all ok
+[K=8192 M=64 gpu] kept 30  nccl=50.2us  flux_default=116.2us  proto_triton=32.3us  proto_triton_bar=66.6us

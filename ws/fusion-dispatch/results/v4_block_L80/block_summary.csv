@@ -1,0 +1,7 @@
+M,mode,phase,auto,auto_layout,auto_regret_vs_oracle_pct,auto_saving_vs_sp_flux_pct,auto_saving_vs_vllm_default_pct,oracle,oracle_policy,sp_dispatch,sp_flux,sp_nccl,sp_rsflux,tp_ar,tp_ar_vllm,vllm_default
+64,graph,decode,22.4082,tp_ar_vllm,0.0,,0.0,22.4082,tp_ar_vllm,44.9874,,44.7109,34.1248,29.1046,22.4082,tp_ar_vllm
+256,graph,decode,45.824,tp_ar_vllm,0.0,,0.0,45.824,tp_ar_vllm,56.3814,,72.7404,56.4127,55.7937,45.824,tp_ar_vllm
+384,graph,decode,57.7275,tp_ar_vllm,0.0,,0.0,57.7275,tp_ar_vllm,72.6927,,84.031,68.2506,67.7832,57.7275,tp_ar_vllm
+512,graph,decode,82.4387,sp_dispatch,0.0,,13.61,82.4387,sp_dispatch,82.4387,,109.077,88.0686,94.913,95.4286,tp_ar_vllm
+1024,eager,prefill,117.7416,sp_dispatch,0.08,-0.08,9.28,117.6504,sp_flux,117.7416,117.6504,133.8824,119.7916,129.9748,129.791,tp_ar_vllm
+4096,eager,prefill,395.5994,sp_dispatch,0.0,9.17,12.02,395.5994,sp_dispatch,395.5994,435.5349,432.9533,408.5064,449.0568,449.6691,tp_ar_vllm

@@ -1,0 +1,116 @@
+{
+ "args": {
+  "phase": "decode",
+  "mode": "graph",
+  "Ms": "384",
+  "table": "ws/fusion-dispatch/results/v4_block_L80/table_gpu.json",
+  "L": 80,
+  "ctx": 1024,
+  "rounds": 200,
+  "warmup": 5,
+  "pad_cycles": 400000,
+  "rel_tol": 0.05,
+  "seed": 20261001,
+  "car_big_mib": 0,
+  "out_dir": "ws/fusion-dispatch/results/v4_block_L80/eval_M384"
+ },
+ "table_digest": "7bffbfc0c9e8459819c8e658cc922e861b4ccaf02e594bfdc62da6bf04321671",
+ "table_meta": {
+  "built": "2026-09-30 08:03:39",
+  "mode": "gpu",
+  "sources": [
+   "ws/fusion-dispatch/results/e1_merged_points.csv",
+   "ws/fusion-dispatch/results/e5_rs_map_v1/summary_points.csv"
+  ],
+  "host": "css-host-158",
+  "gpu": "NVIDIA A100-SXM4-80GB, 615.71.09",
+  "flux_git": "b410171",
+  "world": 8,
+  "dtype": "bf16",
+  "protocol": "dispatch_map_v2 / dispatch_map_rs_v1 (interleaved, >=200 rounds, rank-max median)"
+ },
+ "date": "2026-09-30 10:48:22",
+ "cases": {
+  "384": {
+   "check": {
+    "tp_ar_vllm": {
+     "max_abs_err": 25.8125,
+     "rel_err": 0.07821969696969697,
+     "ok_all_ranks": false
+    },
+    "sp_nccl": {
+     "max_abs_err": 28.0,
+     "rel_err": 0.08484848484848485,
+     "ok_all_ranks": false
+    },
+    "sp_rsflux": {
+     "max_abs_err": 27.3125,
+     "rel_err": 0.08276515151515151,
+     "ok_all_ranks": false
+    },
+    "sp_dispatch": {
+     "max_abs_err": 25.75,
+     "rel_err": 0.07803030303030303,
+     "ok_all_ranks": false
+    }
+   },
+   "counts": {
+    "sp_nccl": {
+     "ag:nccl": 160,
+     "rs:nccl": 160
+    },
+    "sp_flux": {},
+    "sp_rsflux": {
+     "ag:nccl": 160,
+     "rs:flux": 160
+    },
+    "sp_dispatch": {
+     "ag:nccl": 80,
+     "rs:flux": 160,
+     "ag:fluxag_fluxgemm": 80
+    }
+   },
+   "misses": {
+    "('ag', '1280x8192', 384)": 1,
+    "('rs', '8192x1024', 384)": 1,
+    "('ag', '7168x8192', 384)": 1,
+    "('rs', '8192x3584', 384)": 1
+   },
+   "kept": 200,
+   "median_ms": {
+    "tp_ar": 67.78316879272461,
+    "tp_ar_vllm": 57.727487564086914,
+    "sp_nccl": 84.03097915649414,
+    "sp_rsflux": 68.25062561035156,
+    "sp_dispatch": 72.6927375793457
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     3.8881301879882812,
+     4.926464080810547,
+     5.605377197265625
+    ],
+    "tp_ar_vllm": [
+     14.610431671142578,
+     15.021570205688477,
+     15.504379272460938
+    ],
+    "sp_nccl": [
+     -12.281852722167969,
+     -11.281410217285156,
+     -10.636283874511719
+    ],
+    "sp_rsflux": [
+     3.5450897216796875,
+     4.492290496826172,
+     5.056510925292969
+    ],
+    "sp_dispatch": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  }
+ }
+}

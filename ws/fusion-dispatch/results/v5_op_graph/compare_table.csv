@@ -1,0 +1,33 @@
+layer,M,graph_best,table_choice,graph_margin,graph_medians_ms,kept
+L-QKV,8,nccl,nccl,decided,nccl=0.0696 fluxag=0.1449 fluxag_fluxgemm=0.1987,148
+L-QKV,16,nccl,nccl,decided,nccl=0.0645 fluxag=0.1382 fluxag_fluxgemm=0.1823,200
+L-QKV,32,nccl,nccl,decided,nccl=0.0707 fluxag=0.1393 fluxag_fluxgemm=0.1823,200
+L-QKV,64,nccl,nccl,decided,nccl=0.0829 fluxag=0.1444 fluxag_fluxgemm=0.1864,200
+L-QKV,128,nccl,nccl,decided,nccl=0.0983 fluxag=0.1562 fluxag_fluxgemm=0.1966,200
+L-QKV,256,nccl,nccl,decided,nccl=0.1219 fluxag=0.1761 fluxag_fluxgemm=0.1997,200
+L-QKV,384,nccl,,decided,nccl=0.1454 fluxag=0.1987 fluxag_fluxgemm=0.2202,200
+L-QKV,512,nccl,nccl,decided,nccl=0.1628 fluxag=0.2202 fluxag_fluxgemm=0.2355,200
+L-GU,8,nccl,nccl,decided,nccl=0.1321 fluxag=0.2048 fluxag_fluxgemm=0.2314,200
+L-GU,16,nccl,nccl,decided,nccl=0.1362 fluxag=0.2089 fluxag_fluxgemm=0.2324,200
+L-GU,32,nccl,nccl,decided,nccl=0.1556 fluxag=0.2222 fluxag_fluxgemm=0.2335,200
+L-GU,64,nccl,nccl,decided,nccl=0.1551 fluxag=0.2140 fluxag_fluxgemm=0.2253,200
+L-GU,128,nccl,nccl,decided,nccl=0.1853 fluxag=0.2386 fluxag_fluxgemm=0.2447,200
+L-GU,256,nccl,nccl,decided,nccl=0.2458 fluxag=0.2959 fluxag_fluxgemm=0.2903,200
+L-GU,384,nccl,,decided,nccl=0.2990 fluxag=0.3502 fluxag_fluxgemm=0.4147,200
+L-GU,512,fluxag_fluxgemm,fluxag_fluxgemm,tie,nccl=0.4291 fluxag=0.4792 fluxag_fluxgemm=0.4132,200
+L-O,8,nccl,nccl,decided,flux=0.0645 nccl=0.0553,200
+L-O,16,nccl,nccl,tie,flux=0.0645 nccl=0.0563,200
+L-O,32,flux,nccl,tie,flux=0.0655 nccl=0.0655,200
+L-O,64,flux,nccl,tie,flux=0.0758 nccl=0.0768,200
+L-O,128,flux,nccl,tie,flux=0.0829 nccl=0.0881,200
+L-O,256,flux,flux,decided,flux=0.0901 nccl=0.1208,200
+L-O,384,flux,,decided,flux=0.1085 nccl=0.1352,200
+L-O,512,flux,flux,decided,flux=0.1260 nccl=0.1761,200
+L-down,8,nccl,nccl,decided,flux=0.1065 nccl=0.0891,200
+L-down,16,nccl,nccl,decided,flux=0.1055 nccl=0.0906,200
+L-down,32,nccl,nccl,tie,flux=0.1065 nccl=0.1044,200
+L-down,64,nccl,nccl,tie,flux=0.1178 nccl=0.1116,200
+L-down,128,flux,nccl,tie,flux=0.1270 nccl=0.1311,200
+L-down,256,flux,flux,decided,flux=0.1505 nccl=0.1782,200
+L-down,384,flux,,decided,flux=0.1597 nccl=0.1925,200
+L-down,512,flux,flux,decided,flux=0.1976 nccl=0.2959,200

@@ -1,0 +1,7 @@
+CONSISTENCY G-FC1 M=64 host: B_nccl_cublas - sum(parts) = -0.0266 ms (-10.1%)
+CONSISTENCY G-FC1 M=64 host: C_fluxag_cublas - sum(parts) = -0.0476 ms (-17.2%)
+CONSISTENCY P0-4096 M=1024 host: D_fluxag_fluxgemm - sum(parts) = -0.0319 ms (-10.1%)
+CONSISTENCY P0-4096 M=1024 host: B_nccl_cublas - sum(parts) = -0.1055 ms (-35.0%)
+CONSISTENCY P0-4096 M=1024 host: C_fluxag_cublas - sum(parts) = -0.0969 ms (-30.6%)
+CONSISTENCY P0-4096 M=4096 host: B_nccl_cublas - sum(parts) = -0.1096 ms (-13.6%)
+CONSISTENCY P0-4096 M=4096 host: C_fluxag_cublas - sum(parts) = -0.1077 ms (-13.7%)

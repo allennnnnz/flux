@@ -1,0 +1,78 @@
+mode=gpu
+
+== G-FC1: fixed off arm B; threshold: M < 2048 -> B; LUT 8:B 16:B 32:B 64:B 128:B 256:B 512:B 1024:B 2048:A 4096:A 8192:A 16384:A
+  policy              grid(in-sample)              held-out           decode<=512         prefill>=1024           mixed 70/30
+  pi_on             4.13% (8/12 wrong)    12.85% (7/8 wrong)    37.78% (11/11 wrong)     3.67% (3/8 wrong)     8.19%             
+  pi_off           14.51% (3/12 wrong)     6.16% (1/8 wrong)     0.00% (0/11 wrong)    13.50% (4/8 wrong)    11.71%             
+  pi_thr            0.00% (0/12 wrong)     6.39% (1/8 wrong)     0.00% (0/11 wrong)     2.00% (1/8 wrong)     1.73%             
+  pi_lut            0.00% (0/12 wrong)     6.39% (1/8 wrong)     0.00% (0/11 wrong)     2.00% (1/8 wrong)     1.73%             
+  pi_lut_floor      0.00% (0/12 wrong)     6.39% (1/8 wrong)     0.00% (0/11 wrong)     2.00% (1/8 wrong)     1.73%             
+  pi_lut worst held-out point: M=3072 (+24.1% vs oracle)
+
+== G-QKV: fixed off arm B; threshold: M < 4096 -> B; LUT 8:B 16:B 32:B 64:B 128:B 256:B 512:B 1024:B 2048:B 4096:A 8192:A 16384:A
+  policy              grid(in-sample)              held-out           decode<=512         prefill>=1024           mixed 70/30
+  pi_on             4.59% (9/12 wrong)     7.58% (6/8 wrong)    39.71% (11/11 wrong)     1.64% (3/8 wrong)     7.09%             
+  pi_off           19.19% (3/12 wrong)     8.16% (2/8 wrong)     0.00% (0/11 wrong)    18.01% (5/8 wrong)    15.43%             
+  pi_thr            0.00% (0/12 wrong)     1.74% (1/8 wrong)     0.00% (0/11 wrong)     0.55% (1/8 wrong)     0.47%             
+  pi_lut            0.00% (0/12 wrong)     0.00% (0/8 wrong)     0.00% (0/11 wrong)     0.00% (0/8 wrong)     0.00%             
+  pi_lut_floor      0.00% (0/12 wrong)     1.74% (1/8 wrong)     0.00% (0/11 wrong)     0.55% (1/8 wrong)     0.47%             
+  pi_lut worst held-out point: M=24 (+0.0% vs oracle)
+
+== L-GU: fixed off arm B; threshold: M < 8192 -> B; LUT 8:B 16:B 32:B 64:B 128:B 256:B 512:A 1024:A 2048:D 4096:B 8192:A 16384:A
+  policy              grid(in-sample)              held-out           decode<=512         prefill>=1024           mixed 70/30
+  pi_on             4.55% (7/12 wrong)     6.54% (6/8 wrong)    31.74% (10/11 wrong)     2.01% (2/8 wrong)     6.43%             
+  pi_off            9.85% (3/12 wrong)     5.86% (2/8 wrong)     0.95% (1/11 wrong)     9.71% (4/8 wrong)     8.41%             
+  pi_thr            0.31% (1/12 wrong)     5.86% (2/8 wrong)     0.95% (1/11 wrong)     1.98% (2/8 wrong)     1.83%             
+  pi_lut            0.00% (0/12 wrong)     4.25% (3/8 wrong)     0.00% (0/11 wrong)     0.88% (2/8 wrong)     0.75%             
+  pi_lut_floor      0.00% (0/12 wrong)     8.50% (4/8 wrong)     0.00% (0/11 wrong)     2.20% (3/8 wrong)     1.87%             
+  pi_lut worst held-out point: M=520 (+23.4% vs oracle)
+
+== L-QKV: fixed off arm B; threshold: M < 2048 -> B; LUT 8:B 16:B 32:B 64:B 128:B 256:B 512:B 1024:B 2048:A 4096:A 8192:A 16384:A
+  policy              grid(in-sample)              held-out           decode<=512         prefill>=1024           mixed 70/30
+  pi_on            14.88% (8/12 wrong)    20.75% (6/8 wrong)    92.61% (11/11 wrong)     1.24% (2/8 wrong)    24.08%             
+  pi_off           38.25% (3/12 wrong)    23.71% (2/8 wrong)     0.00% (0/11 wrong)    41.35% (5/8 wrong)    31.02%             
+  pi_thr            0.00% (0/12 wrong)     0.00% (0/8 wrong)     0.00% (0/11 wrong)     0.00% (0/8 wrong)     0.00%             
+  pi_lut            0.00% (0/12 wrong)     0.00% (0/8 wrong)     0.00% (0/11 wrong)     0.00% (0/8 wrong)     0.00%             
+  pi_lut_floor      0.00% (0/12 wrong)     0.00% (0/8 wrong)     0.00% (0/11 wrong)     0.00% (0/8 wrong)     0.00%             
+  pi_lut worst held-out point: M=24 (+0.0% vs oracle)
+
+decision overhead (bisect + dict lookup, CPython): 0.237 us/call
+mode=steady
+
+== G-FC1: fixed off arm B; threshold: M < 2048 -> B; LUT 8:B 16:B 32:B 64:B 128:B 256:B 512:B 1024:B 2048:A 4096:A 8192:A 16384:A
+  policy              grid(in-sample)              held-out           decode<=512         prefill>=1024           mixed 70/30
+  pi_on             3.56% (8/12 wrong)    10.93% (7/8 wrong)    38.71% (11/11 wrong)     2.90% (3/8 wrong)     7.23%             
+  pi_off            9.64% (4/12 wrong)     4.01% (1/8 wrong)     0.00% (0/11 wrong)     8.86% (5/8 wrong)     7.79%             
+  pi_thr            0.00% (0/12 wrong)     5.61% (1/8 wrong)     0.00% (0/11 wrong)     1.74% (1/8 wrong)     1.53%             
+  pi_lut            0.00% (0/12 wrong)     5.61% (1/8 wrong)     0.00% (0/11 wrong)     1.74% (1/8 wrong)     1.53%             
+  pi_lut_floor      0.00% (0/12 wrong)     5.61% (1/8 wrong)     0.00% (0/11 wrong)     1.74% (1/8 wrong)     1.53%             
+  pi_lut worst held-out point: M=3072 (+21.2% vs oracle)
+
+== G-QKV: fixed off arm B; threshold: M < 4096 -> B; LUT 8:B 16:B 32:B 64:B 128:B 256:B 512:B 1024:B 2048:D 4096:A 8192:A 16384:A
+  policy              grid(in-sample)              held-out           decode<=512         prefill>=1024           mixed 70/30
+  pi_on             3.80% (9/12 wrong)     6.43% (5/8 wrong)    41.94% (11/11 wrong)     0.98% (2/8 wrong)     6.18%             
+  pi_off           13.40% (3/12 wrong)     7.10% (2/8 wrong)     0.00% (0/11 wrong)    12.88% (5/8 wrong)    11.24%             
+  pi_thr            0.21% (0/12 wrong)     2.46% (1/8 wrong)     0.00% (0/11 wrong)     0.92% (1/8 wrong)     0.81%             
+  pi_lut            0.00% (0/12 wrong)     0.00% (0/8 wrong)     0.00% (0/11 wrong)     0.00% (0/8 wrong)     0.00%             
+  pi_lut_floor      0.00% (0/12 wrong)     3.39% (1/8 wrong)     0.00% (0/11 wrong)     1.04% (1/8 wrong)     0.91%             
+  pi_lut worst held-out point: M=24 (+0.0% vs oracle)
+
+== L-GU: fixed off arm B; threshold: M < 8192 -> B; LUT 8:B 16:B 32:B 64:B 128:B 256:B 512:A 1024:A 2048:A 4096:C 8192:A 16384:A
+  policy              grid(in-sample)              held-out           decode<=512         prefill>=1024           mixed 70/30
+  pi_on             4.67% (7/12 wrong)     5.61% (5/8 wrong)    35.90% (10/11 wrong)     1.89% (1/8 wrong)     6.38%             
+  pi_off            6.27% (4/12 wrong)     5.05% (2/8 wrong)     1.39% (1/11 wrong)     6.45% (5/8 wrong)     5.78%             
+  pi_thr            0.80% (3/12 wrong)     5.05% (2/8 wrong)     1.39% (1/11 wrong)     2.06% (4/8 wrong)     1.98%             
+  pi_lut            0.00% (0/12 wrong)     4.22% (2/8 wrong)     0.00% (0/11 wrong)     0.94% (1/8 wrong)     0.81%             
+  pi_lut_floor      0.00% (0/12 wrong)     3.61% (1/8 wrong)     0.00% (0/11 wrong)     0.75% (0/8 wrong)     0.65%             
+  pi_lut worst held-out point: M=520 (+19.4% vs oracle)
+
+== L-QKV: fixed off arm B; threshold: M < 2048 -> B; LUT 8:B 16:B 32:B 64:B 128:B 256:B 512:B 1024:B 2048:A 4096:A 8192:A 16384:A
+  policy              grid(in-sample)              held-out           decode<=512         prefill>=1024           mixed 70/30
+  pi_on            14.60% (8/12 wrong)    20.78% (5/8 wrong)   108.42% (11/11 wrong)     0.53% (1/8 wrong)    24.47%             
+  pi_off           41.70% (4/12 wrong)    28.44% (2/8 wrong)     0.00% (0/11 wrong)    45.04% (6/8 wrong)    35.05%             
+  pi_thr            0.00% (0/12 wrong)     0.00% (0/8 wrong)     0.00% (0/11 wrong)     0.00% (0/8 wrong)     0.00%             
+  pi_lut            0.00% (0/12 wrong)     0.00% (0/8 wrong)     0.00% (0/11 wrong)     0.00% (0/8 wrong)     0.00%             
+  pi_lut_floor      0.00% (0/12 wrong)     0.00% (0/8 wrong)     0.00% (0/11 wrong)     0.00% (0/8 wrong)     0.00%             
+  pi_lut worst held-out point: M=24 (+0.0% vs oracle)
+
+decision overhead (bisect + dict lookup, CPython): 0.235 us/call

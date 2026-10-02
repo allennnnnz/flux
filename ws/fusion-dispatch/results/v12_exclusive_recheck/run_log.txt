@@ -1,0 +1,8 @@
+[V12] start 2026-10-02 14:25:51
+[V12] op exit 0 2026-10-02 14:26:15 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[V12] block decode graph exit 0 2026-10-02 14:26:49 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[decode graph L=4 M=64] kept 158  tp_ar=1.2739  tp_ar_vllm=1.1331  sp_nccl=1.4326  sp_rsflux=1.5247  sp_dispatch=1.4321  best=tp_ar_vllm 
+[decode graph L=4 M=512] kept 200  tp_ar=4.5558  tp_ar_vllm=4.5650  sp_nccl=4.7191  sp_rsflux=4.1841  sp_dispatch=4.0919  best=sp_dispatch 
+[V12] block prefill eager exit 0 2026-10-02 14:27:20 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[prefill eager L=4 M=1024] kept 200  tp_ar=6.4205  tp_ar_vllm=6.3990  sp_nccl=6.6202  sp_flux=5.7661  sp_rsflux=5.8977  sp_dispatch=5.7564  best=sp_dispatch 
+[V12] done 2026-10-02 14:27:20

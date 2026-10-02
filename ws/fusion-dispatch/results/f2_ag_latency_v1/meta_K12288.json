@@ -1,0 +1,593 @@
+{
+ "args": {
+  "K": 12288,
+  "n_cols": 6144,
+  "Ms": "8,64,256,512,1024,2048,4096",
+  "modes": "gpu,steady",
+  "items": "nccl,flux_default,flux_cclocal,flux_cclocal_fused,flux_copied,A_default,A_cclocal_fused,proto_ce_1s,proto_ce_7s,proto_triton,proto_triton_bar,proto_triton_parbar",
+  "rounds": 200,
+  "warmup": 30,
+  "steady_L": 16,
+  "pad_cycles": 400000,
+  "clock_period": 0.02,
+  "seed": 20260930,
+  "out_dir": "ws/fusion-dispatch/results/f2_ag_latency_v1"
+ },
+ "date": "2026-09-30 06:35:30",
+ "cases": {
+  "8": {
+   "check": {
+    "nccl": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_cclocal": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_copied": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "proto_ce_1s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_ce_7s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_bar": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_parbar": {
+     "ok_all_ranks": true,
+     "error": ""
+    }
+   },
+   "modes": {
+    "gpu": {
+     "kept": 165,
+     "median_ms": {
+      "nccl": 0.02969600073993206,
+      "flux_default": 0.09884800016880035,
+      "flux_copied": 0.09593600034713745,
+      "A_default": 0.23347200453281403,
+      "proto_ce_1s": 0.039135999977588654,
+      "proto_ce_7s": 0.050175998359918594,
+      "proto_triton": 0.014336000196635723,
+      "proto_triton_bar": 0.04710400104522705,
+      "proto_triton_parbar": 0.02457600086927414
+     }
+    },
+    "steady": {
+     "kept": 200,
+     "median_ms": {
+      "nccl": 0.021920000202953815,
+      "flux_default": 0.09349099919199944,
+      "flux_copied": 0.09066800028085709,
+      "A_default": 0.22233599424362183,
+      "proto_ce_1s": 0.046594999730587006,
+      "proto_ce_7s": 0.16355200111865997,
+      "proto_triton": 0.008735999930649996,
+      "proto_triton_bar": 0.03977600112557411,
+      "proto_triton_parbar": 0.03952000103890896
+     }
+    }
+   }
+  },
+  "64": {
+   "check": {
+    "nccl": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_cclocal": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_copied": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "proto_ce_1s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_ce_7s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_bar": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_parbar": {
+     "ok_all_ranks": true,
+     "error": ""
+    }
+   },
+   "modes": {
+    "gpu": {
+     "kept": 200,
+     "median_ms": {
+      "nccl": 0.050175998359918594,
+      "flux_default": 0.10780800133943558,
+      "flux_copied": 0.1045599989593029,
+      "A_default": 0.2303999960422516,
+      "proto_ce_1s": 0.05023999884724617,
+      "proto_ce_7s": 0.05939200147986412,
+      "proto_triton": 0.035840000957250595,
+      "proto_triton_bar": 0.06758400052785873,
+      "proto_triton_parbar": 0.04505600035190582
+     }
+    },
+    "steady": {
+     "kept": 200,
+     "median_ms": {
+      "nccl": 0.03270399942994118,
+      "flux_default": 0.10037799924612045,
+      "flux_copied": 0.0971050001680851,
+      "A_default": 0.21542400121688843,
+      "proto_ce_1s": 0.05487800016999245,
+      "proto_ce_7s": 0.12982399761676788,
+      "proto_triton": 0.01974399946630001,
+      "proto_triton_bar": 0.054976001381874084,
+      "proto_triton_parbar": 0.03155200183391571
+     }
+    }
+   }
+  },
+  "256": {
+   "check": {
+    "nccl": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_cclocal": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_copied": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "proto_ce_1s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_ce_7s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_bar": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_parbar": {
+     "ok_all_ranks": true,
+     "error": ""
+    }
+   },
+   "modes": {
+    "gpu": {
+     "kept": 200,
+     "median_ms": {
+      "nccl": 0.08294399827718735,
+      "flux_default": 0.132143996655941,
+      "flux_copied": 0.1308640018105507,
+      "A_default": 0.30822399258613586,
+      "proto_ce_1s": 0.07387199997901917,
+      "proto_ce_7s": 0.08396799862384796,
+      "proto_triton": 0.060416001826524734,
+      "proto_triton_bar": 0.09318400174379349,
+      "proto_triton_parbar": 0.07168000191450119
+     }
+    },
+    "steady": {
+     "kept": 200,
+     "median_ms": {
+      "nccl": 0.06464000046253204,
+      "flux_default": 0.12371199950575829,
+      "flux_copied": 0.11969799920916557,
+      "A_default": 0.30057600140571594,
+      "proto_ce_1s": 0.05457799881696701,
+      "proto_ce_7s": 0.09283199906349182,
+      "proto_triton": 0.03782400116324425,
+      "proto_triton_bar": 0.07212799787521362,
+      "proto_triton_parbar": 0.04508800059556961
+     }
+    }
+   }
+  },
+  "512": {
+   "check": {
+    "nccl": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_cclocal": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_copied": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "proto_ce_1s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_ce_7s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_bar": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_parbar": {
+     "ok_all_ranks": true,
+     "error": ""
+    }
+   },
+   "modes": {
+    "gpu": {
+     "kept": 200,
+     "median_ms": {
+      "nccl": 0.11468800157308578,
+      "flux_default": 0.16942399740219116,
+      "flux_copied": 0.1676959991455078,
+      "A_default": 0.5263360142707825,
+      "proto_ce_1s": 0.10584000125527382,
+      "proto_ce_7s": 0.11264000087976456,
+      "proto_triton": 0.08806400001049042,
+      "proto_triton_bar": 0.12083200365304947,
+      "proto_triton_parbar": 0.09830400347709656
+     }
+    },
+    "steady": {
+     "kept": 200,
+     "median_ms": {
+      "nccl": 0.09471999853849411,
+      "flux_default": 0.1456570029258728,
+      "flux_copied": 0.14327900111675262,
+      "A_default": 0.5219840109348297,
+      "proto_ce_1s": 0.08746900036931038,
+      "proto_ce_7s": 0.09036800265312195,
+      "proto_triton": 0.06464000046253204,
+      "proto_triton_bar": 0.09340800344944,
+      "proto_triton_parbar": 0.06831999868154526
+     }
+    }
+   }
+  },
+  "1024": {
+   "check": {
+    "nccl": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_cclocal": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_copied": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "proto_ce_1s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_ce_7s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_bar": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_parbar": {
+     "ok_all_ranks": true,
+     "error": ""
+    }
+   },
+   "modes": {
+    "gpu": {
+     "kept": 200,
+     "median_ms": {
+      "nccl": 0.17766399681568146,
+      "flux_default": 0.21643199771642685,
+      "flux_copied": 0.21083199977874756,
+      "A_default": 1.1156480312347412,
+      "proto_ce_1s": 0.15292799472808838,
+      "proto_ce_7s": 0.16281600296497345,
+      "proto_triton": 0.1372160017490387,
+      "proto_triton_bar": 0.16896000504493713,
+      "proto_triton_parbar": 0.14745600521564484
+     }
+    },
+    "steady": {
+     "kept": 187,
+     "median_ms": {
+      "nccl": 0.16915200650691986,
+      "flux_default": 0.1822659969329834,
+      "flux_copied": 0.17864200472831726,
+      "A_default": 1.0892800092697144,
+      "proto_ce_1s": 0.15185999870300293,
+      "proto_ce_7s": 0.15430399775505066,
+      "proto_triton": 0.10592000186443329,
+      "proto_triton_bar": 0.13766400516033173,
+      "proto_triton_parbar": 0.11488000303506851
+     }
+    }
+   }
+  },
+  "2048": {
+   "check": {
+    "nccl": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_cclocal": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_copied": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "proto_ce_1s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_ce_7s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_bar": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_parbar": {
+     "ok_all_ranks": true,
+     "error": ""
+    }
+   },
+   "modes": {
+    "gpu": {
+     "kept": 200,
+     "median_ms": {
+      "nccl": 0.2672640085220337,
+      "flux_default": 0.30236800014972687,
+      "flux_copied": 0.294064000248909,
+      "A_default": 1.418239951133728,
+      "proto_ce_1s": 0.2356800064444542,
+      "proto_ce_7s": 0.24371199309825897,
+      "proto_triton": 0.23552000522613525,
+      "proto_triton_bar": 0.2693119943141937,
+      "proto_triton_parbar": 0.2462719976902008
+     }
+    },
+    "steady": {
+     "kept": 61,
+     "median_ms": {
+      "nccl": 0.2726399898529053,
+      "flux_default": 0.2711380124092102,
+      "flux_copied": 0.26483601331710815,
+      "A_default": 1.441215991973877,
+      "proto_ce_1s": 0.22702999413013458,
+      "proto_ce_7s": 0.24063999950885773,
+      "proto_triton": 0.2006399929523468,
+      "proto_triton_bar": 0.2343679964542389,
+      "proto_triton_parbar": 0.20972800254821777
+     }
+    }
+   }
+  },
+  "4096": {
+   "check": {
+    "nccl": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_cclocal": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "flux_copied": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "A_cclocal_fused": {
+     "ok_all_ranks": false,
+     "error": "/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32"
+    },
+    "proto_ce_1s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_ce_7s": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_bar": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_parbar": {
+     "ok_all_ranks": true,
+     "error": ""
+    }
+   },
+   "modes": {
+    "gpu": {
+     "kept": 200,
+     "median_ms": {
+      "nccl": 0.4782080054283142,
+      "flux_default": 0.4673279970884323,
+      "flux_copied": 0.44780799746513367,
+      "A_default": 2.480128049850464,
+      "proto_ce_1s": 0.3932479918003082,
+      "proto_ce_7s": 0.4034560024738312,
+      "proto_triton": 0.41676801443099976,
+      "proto_triton_bar": 0.4485119879245758,
+      "proto_triton_parbar": 0.4270080029964447
+     }
+    },
+    "steady": {
+     "kept": 2,
+     "median_ms": {
+      "nccl": 0.47151999175548553,
+      "flux_default": 0.44842299818992615,
+      "flux_copied": 0.43448199331760406,
+      "A_default": 2.5278400182724,
+      "proto_ce_1s": 0.47753800451755524,
+      "proto_ce_7s": 0.5343040078878403,
+      "proto_triton": 0.3904639929533005,
+      "proto_triton_bar": 0.4211199879646301,
+      "proto_triton_parbar": 0.3986559957265854
+     }
+    }
+   }
+  }
+ }
+}

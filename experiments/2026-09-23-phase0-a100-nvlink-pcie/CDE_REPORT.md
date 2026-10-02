@@ -84,6 +84,13 @@ Staging efficiency versus that bidirectional per-direction baseline: 46.988 / 57
 
 ## D. Dual Path
 
+> **WITHDRAWN 2026-09-23 — see `D_CORRECTION.md`.**
+> The α=0 NVLink baseline below is 38.4 GB/s per GPU, about 5.7x slower than this machine's
+> actual capability (217.66 GB/s per GPU corrected; 270.8 GB/s for a single peer pair). The
+> cause was destination-stream placement of peer copies. Every gain figure here divides by
+> that baseline and is an artifact. Corrected: every α is a net loss. Kept verbatim for audit.
+
+
 Script: `scripts/dual_path_v2.py`.
 
 NVLink path: each GPU receives from 7 peer GPUs, so each GPU has 7 NVLink peer ingress streams.
@@ -122,6 +129,13 @@ than the ideal model. Larger alpha values rapidly become staging-bound.
 
 ## E. Flux Baselines
 
+> **WITHDRAWN 2026-09-23 — see `E_CORRECTION.md`.**
+> Every overlap-efficiency figure below divides a Flux time by an NCCL time. Worse, the
+> row labelled `Flux no-overlap ... comm` is itself NCCL `all_gather`, not Flux comm, so
+> no number in this section ever measured Flux's own communication path. The section is
+> kept verbatim for audit; use `E_CORRECTION.md` for the Flux-native measurements.
+
+
 All Flux runs used the same shapes as the pixi tasks unless noted.
 
 ### AG GEMM
@@ -154,6 +168,11 @@ This single-GPU GEMM-only shape is not directly comparable to the AG rank-local 
 because AG uses local `M/world_size` and local `N/world_size` shards.
 
 ### NCCL Pure Communication
+
+> **Mislabelled.** These are valid NCCL numbers but they are not a Flux baseline, and they
+> must not be used as the denominator of a Flux overlap efficiency. Flux's own AllGather is
+> measured in `E_CORRECTION.md` section E.1 via `flux.AllGatherOp`.
+
 
 Script: `scripts/nccl_collective_baseline.py`.
 

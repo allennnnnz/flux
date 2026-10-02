@@ -1,0 +1,1 @@
+CONSISTENCY L-O M=8 gpu: B_nccl_cublas - sum(parts) = -0.0051 ms (-10.6%)

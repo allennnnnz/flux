@@ -1,0 +1,134 @@
+{
+ "layer": "L-O",
+ "date": "2026-09-30 08:56:07",
+ "results": {
+  "8": {
+   "M": 8,
+   "default_backtoback_ms": 0.07464960217475891,
+   "default_backtoback_after_ms": 0.21780478954315186,
+   "profiling_topk_ms": [
+    0.074,
+    0.075,
+    0.077,
+    0.089,
+    0.113
+   ],
+   "best_ms": 0.074,
+   "best_over_default": 0.9912979820945574,
+   "profiling_wall_s": 6.027379512786865,
+   "raw": "GemmMeta(dtype=GemmDTypeConfig(a=BF16,b=BF16,c=Void,d=BF16,acc=FP32,blockscale=FP32),arch=Sm80,sm_core=A100,comm_op=ReduceScatter,gemm_layout=RCR,impl=GemmV2,impl_spec=GemmV2Meta(fast_accum=0),comm_spec=ReduceScatterMeta(fuse_reduction=0,comm_kind=IntraNode))\nRuntimeConfig(m=8,n=8192,k=1024,comm_spec=ReduceScatterRuntimeConfig(world_size=8,nnodes=1))\n * TopK=1 (0.074 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=2 (0.075 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=3 (0.077 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=4 (0.089 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=5 (0.113 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,256,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)"
+  },
+  "64": {
+   "M": 64,
+   "default_backtoback_ms": 0.2457600086927414,
+   "default_backtoback_after_ms": 0.24422399699687958,
+   "profiling_topk_ms": [
+    0.18,
+    0.194,
+    0.198,
+    0.2,
+    0.205
+   ],
+   "best_ms": 0.18,
+   "best_over_default": 0.7324218490936127,
+   "profiling_wall_s": 6.024307489395142,
+   "raw": "GemmMeta(dtype=GemmDTypeConfig(a=BF16,b=BF16,c=Void,d=BF16,acc=FP32,blockscale=FP32),arch=Sm80,sm_core=A100,comm_op=ReduceScatter,gemm_layout=RCR,impl=GemmV2,impl_spec=GemmV2Meta(fast_accum=0),comm_spec=ReduceScatterMeta(fuse_reduction=0,comm_kind=IntraNode))\nRuntimeConfig(m=64,n=8192,k=1024,comm_spec=ReduceScatterRuntimeConfig(world_size=8,nnodes=1))\n * TopK=1 (0.18 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=2 (0.194 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=3 (0.198 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=4 (0.2 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=5 (0.205 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,256,32),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)"
+  },
+  "256": {
+   "M": 256,
+   "default_backtoback_ms": 0.23224321007728577,
+   "default_backtoback_after_ms": 0.23214080929756165,
+   "profiling_topk_ms": [
+    0.183,
+    0.187,
+    0.187,
+    0.188,
+    0.196
+   ],
+   "best_ms": 0.183,
+   "best_over_default": 0.7879670623700963,
+   "profiling_wall_s": 6.025736331939697,
+   "raw": "GemmMeta(dtype=GemmDTypeConfig(a=BF16,b=BF16,c=Void,d=BF16,acc=FP32,blockscale=FP32),arch=Sm80,sm_core=A100,comm_op=ReduceScatter,gemm_layout=RCR,impl=GemmV2,impl_spec=GemmV2Meta(fast_accum=0),comm_spec=ReduceScatterMeta(fuse_reduction=0,comm_kind=IntraNode))\nRuntimeConfig(m=256,n=8192,k=1024,comm_spec=ReduceScatterRuntimeConfig(world_size=8,nnodes=1))\n * TopK=1 (0.183 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=2 (0.187 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=3 (0.187 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=4 (0.188 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=5 (0.196 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,256,32),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)"
+  },
+  "512": {
+   "M": 512,
+   "default_backtoback_ms": 0.2137088030576706,
+   "default_backtoback_after_ms": 0.21647360920906067,
+   "profiling_topk_ms": [
+    0.169,
+    0.174,
+    0.187,
+    0.188,
+    0.19
+   ],
+   "best_ms": 0.169,
+   "best_over_default": 0.7907956882543316,
+   "profiling_wall_s": 6.022549152374268,
+   "raw": "GemmMeta(dtype=GemmDTypeConfig(a=BF16,b=BF16,c=Void,d=BF16,acc=FP32,blockscale=FP32),arch=Sm80,sm_core=A100,comm_op=ReduceScatter,gemm_layout=RCR,impl=GemmV2,impl_spec=GemmV2Meta(fast_accum=0),comm_spec=ReduceScatterMeta(fuse_reduction=0,comm_kind=IntraNode))\nRuntimeConfig(m=512,n=8192,k=1024,comm_spec=ReduceScatterRuntimeConfig(world_size=8,nnodes=1))\n * TopK=1 (0.169 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=2 (0.174 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=3 (0.187 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=4 (0.188 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,256,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=5 (0.19 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)"
+  },
+  "1024": {
+   "M": 1024,
+   "default_backtoback_ms": 0.2151423990726471,
+   "default_backtoback_after_ms": 0.21688321232795715,
+   "profiling_topk_ms": [
+    0.223,
+    0.227,
+    0.227,
+    0.231,
+    0.241
+   ],
+   "best_ms": 0.223,
+   "best_over_default": 1.0365227912360484,
+   "profiling_wall_s": 6.026552200317383,
+   "raw": "GemmMeta(dtype=GemmDTypeConfig(a=BF16,b=BF16,c=Void,d=BF16,acc=FP32,blockscale=FP32),arch=Sm80,sm_core=A100,comm_op=ReduceScatter,gemm_layout=RCR,impl=GemmV2,impl_spec=GemmV2Meta(fast_accum=0),comm_spec=ReduceScatterMeta(fuse_reduction=0,comm_kind=IntraNode))\nRuntimeConfig(m=1024,n=8192,k=1024,comm_spec=ReduceScatterRuntimeConfig(world_size=8,nnodes=1))\n * TopK=1 (0.223 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=2 (0.227 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=3 (0.227 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=4 (0.231 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=5 (0.241 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,256,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)"
+  },
+  "2048": {
+   "M": 2048,
+   "default_backtoback_ms": 0.28334081172943115,
+   "default_backtoback_after_ms": 0.28467199206352234,
+   "profiling_topk_ms": [
+    0.335,
+    0.342,
+    0.347,
+    0.354,
+    0.362
+   ],
+   "best_ms": 0.335,
+   "best_over_default": 1.1823217345756016,
+   "profiling_wall_s": 6.036728143692017,
+   "raw": "GemmMeta(dtype=GemmDTypeConfig(a=BF16,b=BF16,c=Void,d=BF16,acc=FP32,blockscale=FP32),arch=Sm80,sm_core=A100,comm_op=ReduceScatter,gemm_layout=RCR,impl=GemmV2,impl_spec=GemmV2Meta(fast_accum=0),comm_spec=ReduceScatterMeta(fuse_reduction=0,comm_kind=IntraNode))\nRuntimeConfig(m=2048,n=8192,k=1024,comm_spec=ReduceScatterRuntimeConfig(world_size=8,nnodes=1))\n * TopK=1 (0.335 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=2 (0.342 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=3 (0.347 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,256,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=4 (0.354 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,256,32),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=5 (0.362 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)"
+  },
+  "4096": {
+   "M": 4096,
+   "default_backtoback_ms": 0.511897623538971,
+   "default_backtoback_after_ms": 0.5116928219795227,
+   "profiling_topk_ms": [
+    0.539,
+    0.552,
+    0.591,
+    0.598,
+    0.621
+   ],
+   "best_ms": 0.539,
+   "best_over_default": 1.0529449155744435,
+   "profiling_wall_s": 6.058047533035278,
+   "raw": "GemmMeta(dtype=GemmDTypeConfig(a=BF16,b=BF16,c=Void,d=BF16,acc=FP32,blockscale=FP32),arch=Sm80,sm_core=A100,comm_op=ReduceScatter,gemm_layout=RCR,impl=GemmV2,impl_spec=GemmV2Meta(fast_accum=0),comm_spec=ReduceScatterMeta(fuse_reduction=0,comm_kind=IntraNode))\nRuntimeConfig(m=4096,n=8192,k=1024,comm_spec=ReduceScatterRuntimeConfig(world_size=8,nnodes=1))\n * TopK=1 (0.539 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=2 (0.552 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=3 (0.591 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=4 (0.598 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=5 (0.621 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,256,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)"
+  },
+  "8192": {
+   "M": 8192,
+   "default_backtoback_ms": 0.9741312265396118,
+   "default_backtoback_after_ms": 0.9742336273193359,
+   "profiling_topk_ms": [
+    1.04,
+    1.07,
+    1.08,
+    1.1,
+    1.11
+   ],
+   "best_ms": 1.04,
+   "best_over_default": 1.0676179673393416,
+   "profiling_wall_s": 6.102531909942627,
+   "raw": "GemmMeta(dtype=GemmDTypeConfig(a=BF16,b=BF16,c=Void,d=BF16,acc=FP32,blockscale=FP32),arch=Sm80,sm_core=A100,comm_op=ReduceScatter,gemm_layout=RCR,impl=GemmV2,impl_spec=GemmV2Meta(fast_accum=0),comm_spec=ReduceScatterMeta(fuse_reduction=0,comm_kind=IntraNode))\nRuntimeConfig(m=8192,n=8192,k=1024,comm_spec=ReduceScatterRuntimeConfig(world_size=8,nnodes=1))\n * TopK=1 (1.04 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=2 (1.07 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,256,32),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=3 (1.08 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,256,32),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)\n * TopK=4 (1.1 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,64),gemm_kind=GemmStreamK,mainloop_stage=3,raster_order=RasterHeuristic)\n * TopK=5 (1.11 ms): GemmHParams(impl_spec=GemmV2HParams(warp_shape=(64,64,32),instruction_shape=(16,8,16),streamk_mode=StreamkSK),comm_spec=None,tile_shape=(128,128,32),gemm_kind=GemmStreamK,mainloop_stage=4,raster_order=RasterHeuristic)"
+  }
+ }
+}

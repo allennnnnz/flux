@@ -1,0 +1,22 @@
+{
+ "item": "R_fused",
+ "date": "2026-09-30 06:05:01",
+ "cases": {
+  "64": {
+   "capture_ok": true,
+   "capture_error_rank0": "",
+   "replay_allclose_all_ranks": true,
+   "replay_bitwise_all_ranks": true,
+   "eager_ms_rank_max_median": 0.0798719972372055,
+   "graph_ms_rank_max_median": 0.08396799862384796
+  },
+  "1024": {
+   "capture_ok": true,
+   "capture_error_rank0": "",
+   "replay_allclose_all_ranks": true,
+   "replay_bitwise_all_ranks": true,
+   "eager_ms_rank_max_median": 0.16486400365829468,
+   "graph_ms_rank_max_median": 0.16742400079965591
+  }
+ }
+}

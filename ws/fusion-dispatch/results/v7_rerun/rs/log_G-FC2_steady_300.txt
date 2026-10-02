@@ -1,0 +1,17 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/dispatch_map_rs_v1.py --layer G-FC2 --Ms 520,1024,4096,6144,8192,16384 --max_m 16384 --modes steady --rounds 300 --warmup 30 --clock_period 0.02 --out_dir ws/fusion-dispatch/results/v7_rerun/rs
+W0930 09:58:26.226000 1421373 site-packages/torch/distributed/run.py:792] 
+W0930 09:58:26.226000 1421373 site-packages/torch/distributed/run.py:792] *****************************************
+W0930 09:58:26.226000 1421373 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0930 09:58:26.226000 1421373 site-packages/torch/distributed/run.py:792] *****************************************
+[G-FC2 M=520] correctness: all ok 
+[G-FC2 M=520 steady] kept 298/300  A_fused=0.4787  B_nccl_cublas=0.5460  E_allreduce=0.6163  c_cublas=0.4323  c_nccl_rs=0.1088  c_nccl_ar=0.1789  c_fluxgemm=0.4725
+[G-FC2 M=1024] correctness: all ok 
+[G-FC2 M=1024 steady] kept 271/300  A_fused=0.6895  B_nccl_cublas=0.8340  E_allreduce=0.9547  c_cublas=0.6551  c_nccl_rs=0.1709  c_nccl_ar=0.2911  c_fluxgemm=0.6764
+[G-FC2 M=4096] correctness: all ok 
+[G-FC2 M=4096 steady] kept 291/300  A_fused=2.7114  B_nccl_cublas=3.0224  E_allreduce=3.3782  c_cublas=2.5117  c_nccl_rs=0.4825  c_nccl_ar=0.8967  c_fluxgemm=2.6765
+[G-FC2 M=6144] correctness: all ok 
+[G-FC2 M=6144 steady] kept 300/300  A_fused=4.0917  B_nccl_cublas=4.3973  E_allreduce=4.9647  c_cublas=3.6930  c_nccl_rs=0.6963  c_nccl_ar=1.2992  c_fluxgemm=4.0915
+[G-FC2 M=8192] correctness: all ok 
+[G-FC2 M=8192 steady] kept 300/300  A_fused=5.4664  B_nccl_cublas=5.7989  E_allreduce=6.5085  c_cublas=4.9034  c_nccl_rs=0.9024  c_nccl_ar=1.6790  c_fluxgemm=5.3801
+[G-FC2 M=16384] correctness: all ok 
+[G-FC2 M=16384 steady] kept 272/300  A_fused=11.0076  B_nccl_cublas=11.2691  E_allreduce=12.6447  c_cublas=9.7646  c_nccl_rs=1.6815  c_nccl_ar=3.2051  c_fluxgemm=10.8020

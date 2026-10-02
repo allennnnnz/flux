@@ -1,0 +1,13 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/graph_capture_v1.py --item AR_nccl --Ms 64,1024 --out ws/fusion-dispatch/results/f04_graph/AR_nccl.json
+W0930 06:04:00.173000 722059 site-packages/torch/distributed/run.py:792] 
+W0930 06:04:00.173000 722059 site-packages/torch/distributed/run.py:792] *****************************************
+W0930 06:04:00.173000 722059 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0930 06:04:00.173000 722059 site-packages/torch/distributed/run.py:792] *****************************************
+[rank6]:[W930 06:04:12.966610512 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W930 06:04:12.971836263 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[AR_nccl M=64] {'capture_ok': True, 'capture_error_rank0': '', 'replay_allclose_all_ranks': True, 'replay_bitwise_all_ranks': True, 'eager_ms_rank_max_median': 0.08499199897050858, 'graph_ms_rank_max_median': 0.09779200330376625}
+[rank3]:[W930 06:04:13.241997308 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank0]:[W930 06:04:13.244973044 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank1]:[W930 06:04:13.246276962 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank5]:[W930 06:04:13.257665758 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[AR_nccl M=1024] {'capture_ok': True, 'capture_error_rank0': '', 'replay_allclose_all_ranks': True, 'replay_bitwise_all_ranks': True, 'eager_ms_rank_max_median': 0.3461120128631592, 'graph_ms_rank_max_median': 0.3532800078392029}

@@ -1,0 +1,71 @@
+== G-QKV_M64
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0           231.1           180.9           116.9            96.8            31.1
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0           250.2            96.8           116.3           117.7           135.9
+c_flux_ag              20             2.0             8.0             1.0             8.0           129.7            16.6           111.1          -110.8           -17.6
+c_fluxgemm             20             2.0             0.0             1.0             0.0           105.4            96.3               -               -               -
+== G-QKV_M2048
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0          1380.5          1325.0           311.3          1054.0            38.3
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0          1350.8          1014.7           325.5          1033.0           344.8
+c_flux_ag              20             2.0             8.0             1.0             8.0           322.8            14.2           306.8          -305.9           -14.9
+c_fluxgemm             20             2.0             0.0             1.0             0.0          1023.3          1014.7               -               -               -
+== G-QKV_M4096
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0          2072.7          2011.2           520.3          1550.0            46.5
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0          2453.8          1927.8           485.7          1949.8           507.0
+c_flux_ag              20             2.0             8.0             1.0             8.0           505.5            14.9           490.0          -486.1           -14.2
+c_fluxgemm             20             2.0             0.0             1.0             0.0          1938.1          1929.4               -               -               -
+== L-QKV_M64
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0           201.5           152.8           111.4            73.9            32.9
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0           221.8            74.4           112.7            92.2           131.9
+c_flux_ag              20             2.0             8.0             1.0             8.0           127.0            17.4           110.1          -109.8           -18.5
+c_fluxgemm             20             2.0             0.0             1.0             0.0            83.3            74.5               -               -               -
+== L-QKV_M2048
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0           495.4           441.0           270.0           211.1            35.6
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0           519.0           218.5           267.8           237.0           286.6
+c_flux_ag              20             2.0             8.0             1.0             8.0           265.1            15.1           249.7          -241.1           -15.9
+c_fluxgemm             20             2.0             0.0             1.0             0.0           226.0           218.2               -               -               -
+== L-QKV_M4096
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0           634.5           575.5           383.3           235.3            41.0
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0           983.3           578.0           373.6           598.8           396.2
+c_flux_ag              20             2.0             8.0             1.0             8.0           381.8            16.2           363.4          -363.4           -17.0
+c_fluxgemm             20             2.0             0.0             1.0             0.0           565.2           555.2               -               -               -
+== L-GU_M512
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0           474.2           422.7           159.8           296.4            32.8
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0           489.3           295.3           156.1           316.2           175.2
+c_flux_ag              20             2.0             8.0             1.0             8.0           163.1            15.3           146.0          -145.4           -16.5
+c_fluxgemm             20             2.0             0.0             1.0             0.0           304.2           295.7               -               -               -
+== L-GU_M3072
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0          1802.4          1745.8           337.7          1431.4            39.2
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0          1985.1          1652.0           295.6          1671.6           317.3
+c_flux_ag              20             2.0             8.0             1.0             8.0           325.6            15.0           307.9          -293.1           -14.8
+c_fluxgemm             20             2.0             0.0             1.0             0.0          1657.9          1648.3               -               -               -
+== L-GU_M4096
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0          2569.6          2510.8           399.2          2152.7            40.3
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0          2877.1          2492.6           350.0          2510.7           369.7
+c_flux_ag              20             2.0             8.0             1.0             8.0           375.2            14.9           359.7          -355.6           -15.2
+c_fluxgemm             20             2.0             0.0             1.0             0.0          2507.6          2499.9               -               -               -
+== G-FC1_M4096
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0          2526.1          2464.2           521.3          1987.4            46.6
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0          2720.2          2219.3           464.9          2237.3           482.4
+c_flux_ag              20             2.0             8.0             1.0             8.0           518.7            15.3           502.2          -470.4             5.8
+c_fluxgemm             20             2.0             0.0             1.0             0.0          2226.8          2218.9               -               -               -
+# sqlite exports deleted (derived). Regenerate: nsys export --type sqlite -o X.sqlite X.nsys-rep

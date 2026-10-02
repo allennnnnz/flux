@@ -1,0 +1,2 @@
+M,N,K,dtype,ring_mode,use_read,world,rounds,kept,dropped_for_clock,modal_sm_clock_MHz,overlap_median_ms,overlap_p10_ms,overlap_p90_ms,gemm_only_median_ms,ect_median_ms,ect_p10_ms,ect_p90_ms,ect_stdev_ms,negative_ect_rounds
+4096,49152,12288,bfloat16,all2all,True,8,200,200,0,1200,2.7469,2.6890,2.8621,2.5620,0.1638,0.1290,0.2150,0.0432,0

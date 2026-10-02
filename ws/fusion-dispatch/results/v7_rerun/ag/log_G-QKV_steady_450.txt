@@ -1,0 +1,29 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/dispatch_map_v2.py --layer G-QKV --Ms 4096 --max_m 16384 --modes steady --rounds 450 --warmup 30 --clock_period 0.02 --out_dir ws/fusion-dispatch/results/v7_rerun/ag
+W0930 09:36:55.141000 1280246 site-packages/torch/distributed/run.py:792] 
+W0930 09:36:55.141000 1280246 site-packages/torch/distributed/run.py:792] *****************************************
+W0930 09:36:55.141000 1280246 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0930 09:36:55.141000 1280246 site-packages/torch/distributed/run.py:792] *****************************************
+[G-QKV M=4096] correctness: all ok
+
+[G-QKV N=36864 K=12288 M=4096 mode=steady] kept 255/450  modal clock [1215, 1245, 1275, 1230, 1230, 1290, 1290, 1215]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 1.9304    1.8877    1.9905    0.0683
+  B_nccl_cublas           2.4716    2.3981    2.5700    0.0634
+  C_fluxag_cublas         2.4375    2.3722    2.5329    0.0821
+  D_fluxag_fluxgemm       2.2517    2.1969    2.3626    0.0849
+  c_nccl_ag               0.4954    0.4849    0.5132    0.0370
+  c_flux_ag               0.4639    0.4509    0.4775    0.0600
+  c_cublas                1.9662    1.8954    2.0769    0.0144
+  c_fluxgemm              1.7814    1.7283    1.8780    0.0193
+  per-round diff                  median       p10       p90
+  A - B                          -0.5414   -0.6465   -0.4423
+  A - C                          -0.5179   -0.6153   -0.4034
+  A - D                          -0.3317   -0.4374   -0.2426
+  D - C                          -0.1770   -0.2867   -0.0700
+  C - B                          -0.0335   -0.1498    0.0968
+  D - (fluxag+fluxgemm)           0.0117   -0.1072    0.1261
+  B - (ncclag+cublas)            -0.0015   -0.1411    0.1291
+  C - (fluxag+cublas)             0.0147   -0.1307    0.1259
+
+wrote ws/fusion-dispatch/results/v7_rerun/ag/raw_G-QKV.csv
+wrote ws/fusion-dispatch/results/v7_rerun/ag/meta_G-QKV.json

@@ -1,0 +1,91 @@
+{
+ "args": {
+  "K": 8192,
+  "n_cols": 1280,
+  "Ms": "8,64",
+  "modes": "gpu",
+  "items": "nccl,flux_default,proto_triton,proto_triton_bar,proto_triton_parbar",
+  "rounds": 30,
+  "warmup": 5,
+  "steady_L": 16,
+  "pad_cycles": 400000,
+  "clock_period": 0.02,
+  "seed": 20260930,
+  "out_dir": "ws/fusion-dispatch/results/f2_smoke"
+ },
+ "date": "2026-09-30 06:33:56",
+ "cases": {
+  "8": {
+   "check": {
+    "nccl": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_bar": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_parbar": {
+     "ok_all_ranks": true,
+     "error": ""
+    }
+   },
+   "modes": {
+    "gpu": {
+     "kept": 30,
+     "median_ms": {
+      "nccl": 0.03481600061058998,
+      "flux_default": 0.10814399644732475,
+      "proto_triton": 0.015359999611973763,
+      "proto_triton_bar": 0.05222399905323982,
+      "proto_triton_parbar": 0.027648000046610832
+     }
+    }
+   }
+  },
+  "64": {
+   "check": {
+    "nccl": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "flux_default": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_bar": {
+     "ok_all_ranks": true,
+     "error": ""
+    },
+    "proto_triton_parbar": {
+     "ok_all_ranks": true,
+     "error": ""
+    }
+   },
+   "modes": {
+    "gpu": {
+     "kept": 30,
+     "median_ms": {
+      "nccl": 0.04864000156521797,
+      "flux_default": 0.11620799824595451,
+      "proto_triton": 0.03328000009059906,
+      "proto_triton_bar": 0.06809600070118904,
+      "proto_triton_parbar": 0.044544000178575516
+     }
+    }
+   }
+  }
+ }
+}

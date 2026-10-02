@@ -1,0 +1,75 @@
+phase   mode       M |   tp_ar  tp_vllm  sp_nccl  sp_flux  sp_rsfl  sp_disp |    auto (layout) | auto vs vLLM | auto vs sp_flux | auto vs oracle
+decode  eager      8 |   1.903    1.545    2.525    2.125    2.276    2.537 |   1.545 (tp_ar_v) |   +0.0% |  +27.3% |  +0.0% [tp_ar_vllm]
+decode  eager     16 |   1.899    1.550    2.548    2.147    2.307    2.552 |   1.550 (tp_ar_v) |   +0.0% |  +27.8% |  +0.0% [tp_ar_vllm]
+decode  eager     32 |   1.906    1.573    2.558    2.166    2.327    2.570 |   1.573 (tp_ar_v) |   +0.0% |  +27.4% |  +0.0% [tp_ar_vllm]
+decode  eager     64 |   1.882    1.508    2.512    2.203    2.287    2.535 |   1.508 (tp_ar_v) |   +0.0% |  +31.5% |  +0.0% [tp_ar_vllm]
+decode  eager    128 |   1.913    1.620    2.532    2.456    2.308    2.542 |   1.620 (tp_ar_v) |   +0.0% |  +34.0% |  +0.0% [tp_ar_vllm]
+decode  eager    256 |   2.660    2.433    2.881    3.194    2.707    2.711 |   2.433 (tp_ar_v) |   +0.0% |  +23.8% |  +0.0% [tp_ar_vllm]
+decode  eager    384 |   3.229    3.004    3.439    3.835    3.272    3.700 |   3.004 (tp_ar_v) |   +0.0% |  +21.7% |  +0.0% [tp_ar_vllm]
+decode  eager    512 |   4.612    4.602    4.781    4.310    4.254    4.163 |   4.163 (sp_disp) |   +9.6% |   +3.4% |  +0.0% [sp_dispatch]
+decode  graph      8 |   1.046    0.941    1.132      nan    1.267    1.129 |   0.941 (tp_ar_v) |   +0.0% |   +nan% |  +0.0% [tp_ar_vllm]
+decode  graph     16 |   1.075    0.985    1.159      nan    1.285    1.157 |   0.985 (tp_ar_v) |   +0.0% |   +nan% |  +0.0% [tp_ar_vllm]
+decode  graph     32 |   1.203    1.083    1.317      nan    1.394    1.317 |   1.083 (tp_ar_v) |   +0.0% |   +nan% |  +0.0% [tp_ar_vllm]
+decode  graph     64 |   1.264    1.128    1.428      nan    1.520    1.426 |   1.128 (tp_ar_v) |   +0.0% |   +nan% |  +0.0% [tp_ar_vllm]
+decode  graph    128 |   1.679    1.484    1.815      nan    1.842    1.818 |   1.484 (tp_ar_v) |   +0.0% |   +nan% |  +0.0% [tp_ar_vllm]
+decode  graph    256 |   2.615    2.323    2.835      nan    2.640    2.639 |   2.323 (tp_ar_v) |   +0.0% |   +nan% |  +0.0% [tp_ar_vllm]
+decode  graph    384 |   3.173    2.857    3.378      nan    3.202    3.640 |   2.857 (tp_ar_v) |   +0.0% |   +nan% |  +0.0% [tp_ar_vllm]
+decode  graph    512 |   4.558    4.564    4.721      nan    4.178    4.104 |   4.104 (sp_disp) |  +10.1% |   +nan% |  +0.0% [sp_dispatch]
+prefill eager   1024 |   6.454    6.413    6.633    5.798    5.908    5.785 |   5.785 (sp_disp) |   +9.8% |   +0.2% |  +0.0% [sp_dispatch]
+prefill eager   2048 |  12.105   12.095   11.886   10.449   10.737   10.448 |  10.448 (sp_disp) |  +13.6% |   +0.0% |  +0.0% [sp_dispatch]
+prefill eager   4096 |  22.811   22.709   22.009   20.535   20.014   19.054 |  19.054 (sp_disp) |  +16.1% |   +7.2% |  +0.0% [sp_dispatch]
+prefill eager   8192 |  44.845   44.878   42.937   36.984   39.862   36.938 |  36.938 (sp_disp) |  +17.7% |   +0.1% |  +0.0% [sp_dispatch]
+
+table check (eval run): predicted vs measured block difference to sp_nccl, ms
+  decode  eager      8 sp_flux      predicted   +0.807  measured   -0.383
+  decode  eager      8 sp_rsflux    predicted   +0.071  measured   -0.257
+  decode  eager      8 sp_dispatch  predicted   +0.000  measured   +0.004
+  decode  eager     16 sp_flux      predicted   +0.791  measured   -0.392
+  decode  eager     16 sp_rsflux    predicted   +0.068  measured   -0.240
+  decode  eager     16 sp_dispatch  predicted   +0.000  measured   +0.002
+  decode  eager     32 sp_flux      predicted   +0.691  measured   -0.384
+  decode  eager     32 sp_rsflux    predicted   +0.040  measured   -0.227
+  decode  eager     32 sp_dispatch  predicted   +0.000  measured   +0.016
+  decode  eager     64 sp_flux      predicted   +0.646  measured   -0.300
+  decode  eager     64 sp_rsflux    predicted   +0.044  measured   -0.220
+  decode  eager     64 sp_dispatch  predicted   +0.000  measured   +0.012
+  decode  eager    128 sp_flux      predicted   +0.542  measured   -0.073
+  decode  eager    128 sp_rsflux    predicted   -0.003  measured   -0.206
+  decode  eager    128 sp_dispatch  predicted   +0.000  measured   -0.014
+  decode  eager    256 sp_flux      predicted   +0.338  measured   +0.315
+  decode  eager    256 sp_rsflux    predicted   -0.187  measured   -0.174
+  decode  eager    256 sp_dispatch  predicted   -0.187  measured   -0.173
+  decode  eager    512 sp_flux      predicted   -0.426  measured   -0.471
+  decode  eager    512 sp_rsflux    predicted   -0.525  measured   -0.523
+  decode  eager    512 sp_dispatch  predicted   -0.600  measured   -0.616
+  decode  graph      8 sp_rsflux    predicted   +0.136  measured   +0.136
+  decode  graph      8 sp_dispatch  predicted   +0.000  measured   -0.002
+  decode  graph     16 sp_rsflux    predicted   +0.127  measured   +0.127
+  decode  graph     16 sp_dispatch  predicted   +0.000  measured   -0.003
+  decode  graph     32 sp_rsflux    predicted   +0.028  measured   +0.075
+  decode  graph     32 sp_dispatch  predicted   +0.000  measured   -0.001
+  decode  graph     64 sp_rsflux    predicted   +0.066  measured   +0.092
+  decode  graph     64 sp_dispatch  predicted   +0.000  measured   +0.003
+  decode  graph    128 sp_rsflux    predicted   -0.012  measured   +0.024
+  decode  graph    128 sp_dispatch  predicted   +0.000  measured   +0.002
+  decode  graph    256 sp_rsflux    predicted   -0.213  measured   -0.195
+  decode  graph    256 sp_dispatch  predicted   -0.213  measured   -0.198
+  decode  graph    512 sp_rsflux    predicted   -0.557  measured   -0.544
+  decode  graph    512 sp_dispatch  predicted   -0.614  measured   -0.622
+  prefill eager   1024 sp_flux      predicted   -0.849  measured   -0.843
+  prefill eager   1024 sp_rsflux    predicted   -0.728  measured   -0.734
+  prefill eager   1024 sp_dispatch  predicted   -0.860  measured   -0.852
+  prefill eager   2048 sp_flux      predicted   -1.474  measured   -1.446
+  prefill eager   2048 sp_rsflux    predicted   -1.110  measured   -1.156
+  prefill eager   2048 sp_dispatch  predicted   -1.370  measured   -1.452
+  prefill eager   4096 sp_flux      predicted   -1.143  measured   -1.459
+  prefill eager   4096 sp_rsflux    predicted   -1.874  measured   -1.979
+  prefill eager   4096 sp_dispatch  predicted   -2.780  measured   -2.957
+  prefill eager   8192 sp_flux      predicted   -5.817  measured   -5.882
+  prefill eager   8192 sp_rsflux    predicted   -3.224  measured   -3.056
+  prefill eager   8192 sp_dispatch  predicted   -5.817  measured   -5.950
+
+trace aggregates (sum of block time over M buckets; decode=graph, prefill=eager):
+  decode (graph, M<=512): auto 14.906 ms | vs vLLM default (tp_ar_vllm) +3.0% | regret vs oracle +0.00%
+  decode (eager, M<=512): auto 17.396 ms | vs vLLM default (tp_ar_vllm) +2.5% | vs always-Flux +22.5% | regret vs oracle +0.00%
+  prefill (eager, M>=1024): auto 72.224 ms | vs vLLM default (tp_ar_vllm) +16.1% | vs always-Flux +2.1% | regret vs oracle +0.00%

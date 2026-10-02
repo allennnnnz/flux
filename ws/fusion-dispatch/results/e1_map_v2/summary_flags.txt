@@ -1,0 +1,2 @@
+CONSISTENCY L-QKV M=24 gpu: B_nccl_cublas - sum(parts) = -0.0061 ms (-10.3%)
+CONSISTENCY L-QKV M=72 gpu: B_nccl_cublas - sum(parts) = -0.0082 ms (-10.3%)

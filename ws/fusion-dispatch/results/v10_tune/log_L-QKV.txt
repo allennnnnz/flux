@@ -1,0 +1,14 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/tune_upside_v2.py --layer L-QKV --Ms 8,64,256,512,1024,2048,4096,8192 --out ws/fusion-dispatch/results/v10_tune/tune_L-QKV.json
+W0930 08:37:09.229000 1122974 site-packages/torch/distributed/run.py:792] 
+W0930 08:37:09.229000 1122974 site-packages/torch/distributed/run.py:792] *****************************************
+W0930 08:37:09.229000 1122974 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0930 08:37:09.229000 1122974 site-packages/torch/distributed/run.py:792] *****************************************
+[L-QKV M=8] default 0.1665 (after 0.1960)  profiling top-k [0.172, 0.173, 0.176, 0.197, 0.2]  best/default 1.033  (64 s)
+[L-QKV M=64] default 0.1939 (after 0.1944)  profiling top-k [0.204, 0.208, 0.208, 0.21, 0.21]  best/default 1.052  (64 s)
+[L-QKV M=256] default 0.1921 (after 0.1926)  profiling top-k [0.207, 0.217, 0.217, 0.219, 0.219]  best/default 1.078  (64 s)
+[L-QKV M=512] default 0.2159 (after 0.3446)  profiling top-k [0.239, 0.245, 0.247, 0.247, 0.247]  best/default 1.107  (64 s)
+[L-QKV M=1024] default 0.3079 (after 0.3446)  profiling top-k [0.312, 0.323, 0.33, 0.373, 0.402]  best/default 1.013  (64 s)
+[L-QKV M=2048] default 0.4571 (after 0.4558)  profiling top-k [0.479, 0.487, 0.489, 0.494, 0.494]  best/default 1.048  (65 s)
+[L-QKV M=4096] default 0.6304 (after 0.6244)  profiling top-k [0.563, 0.564, 0.57, 0.599, 0.678]  best/default 0.893  (65 s)
+[L-QKV M=8192] default 0.9340 (after 0.9383)  profiling top-k [0.86, 0.933, 0.941, 0.951, 0.963]  best/default 0.921  (65 s)
+wrote ws/fusion-dispatch/results/v10_tune/tune_L-QKV.json

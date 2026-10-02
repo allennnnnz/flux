@@ -1,0 +1,362 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/ag_latency_v1.py --K 8192 --n_cols 1280 --Ms 8,64,256,512,1024,2048,4096 --modes gpu,steady --rounds 200 --warmup 30 --out_dir ws/fusion-dispatch/results/f2_ag_latency_v1
+W0930 06:34:15.618000 865808 site-packages/torch/distributed/run.py:792] 
+W0930 06:34:15.618000 865808 site-packages/torch/distributed/run.py:792] *****************************************
+W0930 06:34:15.618000 865808 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0930 06:34:15.618000 865808 site-packages/torch/distributed/run.py:792] *****************************************
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+
+[K=8192 M=8] check: {'flux_cclocal': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'flux_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'A_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}}
+[K=8192 M=8 gpu] kept 154  nccl=29.7us  flux_default=98.7us  flux_copied=96.1us  A_default=158.7us  proto_ce_1s=38.3us  proto_ce_7s=50.2us  proto_triton=14.3us  proto_triton_bar=47.1us  proto_triton_parbar=23.6us
+[K=8192 M=8 steady] kept 200  nccl=25.6us  flux_default=93.7us  flux_copied=90.6us  A_default=145.9us  proto_ce_1s=70.2us  proto_ce_7s=194.8us  proto_triton=9.5us  proto_triton_bar=39.7us  proto_triton_parbar=50.5us
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+[K=8192 M=64] check: {'flux_cclocal': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'flux_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'A_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}}
+[K=8192 M=64 gpu] kept 200  nccl=46.1us  flux_default=105.2us  flux_copied=102.5us  A_default=166.9us  proto_ce_1s=46.1us  proto_ce_7s=52.2us  proto_triton=31.2us  proto_triton_bar=63.5us  proto_triton_parbar=42.0us
+[K=8192 M=64 steady] kept 200  nccl=31.8us  flux_default=97.8us  flux_copied=94.8us  A_default=151.7us  proto_ce_1s=67.1us  proto_ce_7s=171.2us  proto_triton=25.3us  proto_triton_bar=51.0us  proto_triton_parbar=49.8us
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+
+[K=8192 M=256] check: {'flux_cclocal': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'flux_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'A_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}}
+[K=8192 M=256 gpu] kept 200  nccl=73.7us  flux_default=122.1us  flux_copied=121.1us  A_default=176.1us  proto_ce_1s=64.0us  proto_ce_7s=75.8us  proto_triton=49.2us  proto_triton_bar=80.9us  proto_triton_parbar=59.4us
+[K=8192 M=256 steady] kept 200  nccl=55.4us  flux_default=113.9us  flux_copied=110.5us  A_default=163.4us  proto_ce_1s=47.6us  proto_ce_7s=140.8us  proto_triton=28.5us  proto_triton_bar=64.8us  proto_triton_parbar=38.2us
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+[K=8192 M=512] check: {'flux_cclocal': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'flux_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'A_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}}
+[K=8192 M=512 gpu] kept 200  nccl=96.3us  flux_default=147.4us  flux_copied=145.1us  A_default=214.0us  proto_ce_1s=89.1us  proto_ce_7s=97.8us  proto_triton=70.7us  proto_triton_bar=102.4us  proto_triton_parbar=79.9us
+[K=8192 M=512 steady] kept 200  nccl=77.0us  flux_default=133.0us  flux_copied=129.8us  A_default=197.1us  proto_ce_1s=68.4us  proto_ce_7s=82.5us  proto_triton=47.9us  proto_triton_bar=79.1us  proto_triton_parbar=53.7us
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+
+[K=8192 M=1024] check: {'flux_cclocal': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'flux_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'A_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}}
+[K=8192 M=1024 gpu] kept 200  nccl=147.5us  flux_default=186.1us  flux_copied=182.5us  A_default=286.2us  proto_ce_1s=119.6us  proto_ce_7s=129.0us  proto_triton=104.4us  proto_triton_bar=137.2us  proto_triton_parbar=114.7us
+[K=8192 M=1024 steady] kept 200  nccl=135.7us  flux_default=156.8us  flux_copied=153.4us  A_default=263.0us  proto_ce_1s=111.0us  proto_ce_7s=114.8us  proto_triton=77.6us  proto_triton_bar=107.9us  proto_triton_parbar=83.5us
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+[K=8192 M=2048] check: {'flux_cclocal': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'flux_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'A_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}}
+[K=8192 M=2048 gpu] kept 200  nccl=218.1us  flux_default=245.5us  flux_copied=236.3us  A_default=423.9us  proto_ce_1s=180.1us  proto_ce_7s=191.5us  proto_triton=167.9us  proto_triton_bar=200.7us  proto_triton_parbar=178.2us
+[K=8192 M=2048 steady] kept 200  nccl=209.5us  flux_default=210.4us  flux_copied=205.4us  A_default=391.4us  proto_ce_1s=178.7us  proto_ce_7s=175.6us  proto_triton=136.9us  proto_triton_bar=168.0us  proto_triton_parbar=145.5us
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32
+
+
+
+
+
+
+
+
+[K=8192 M=4096] check: {'flux_cclocal': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'flux_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}, 'A_cclocal_fused': {'ok_all_ranks': False, 'error': '/home/rogerlee/flux/src/coll/local_copy_and_reset.cu:232 Check failed: false. unsupported for input_dtype=BF16,scale_dtype=FP32'}}
+[K=8192 M=4096 gpu] kept 200  nccl=347.1us  flux_default=357.3us  flux_copied=343.7us  A_default=537.1us  proto_ce_1s=289.6us  proto_ce_7s=298.0us  proto_triton=295.9us  proto_triton_bar=328.7us  proto_triton_parbar=305.2us
+[K=8192 M=4096 steady] kept 200  nccl=338.9us  flux_default=322.5us  flux_copied=315.4us  A_default=518.3us  proto_ce_1s=259.2us  proto_ce_7s=264.8us  proto_triton=262.8us  proto_triton_bar=294.0us  proto_triton_parbar=271.6us

@@ -1,0 +1,74 @@
+[resume] start 2026-09-30 09:58:24
+[skip] v7_ag_G-FC1_steady_300_264-16384
+[skip] v7_ag_G-FC1_steady_400_4096
+[skip] v7_ag_G-FC1_steady_550_2048
+[skip] v7_ag_G-QKV_gpu_300_16384
+[skip] v7_ag_G-QKV_steady_300_512-520-6144-8192-16384
+[skip] v7_ag_G-QKV_steady_450_4096
+[skip] v7_ag_L-GU_steady_300_6144-16384
+[skip] v7_ag_L-QKV_steady_300_4096
+[skip] v7_ag_L-QKV_steady_500_6144
+[skip] v7_ag_L-QKV_steady_900_8192
+[skip] v7_ag_L-QKV_steady_1450_16384
+[skip] v7_rs_G-FC2_gpu_300_16384
+[skip] v7_rs_G-FC2_gpu_350_8
+[V7] rs G-FC2 steady rounds=300 Ms=520,1024,4096,6144,8192,16384 exit 0 10:10:51
+[V7] rs G-FC2 steady rounds=350 Ms=1032,3072 exit 0 10:12:48
+[V7] rs G-FC2 steady rounds=950 Ms=2048 exit 0 10:15:16
+[V7] rs G-O gpu rounds=350 Ms=8 exit 0 10:15:35
+[V7] rs G-O steady rounds=300 Ms=2048 exit 0 10:16:09
+[V7] rs G-O steady rounds=500 Ms=3072 exit 0 10:17:05
+[V7] rs G-O steady rounds=700 Ms=4096 exit 0 10:18:34
+[V7] rs G-O steady rounds=1650 Ms=8192 exit 0 10:24:10
+[V7] rs G-O steady rounds=1900 Ms=6144 exit 0 10:29:05
+[V7] rs L-O gpu rounds=400 Ms=8 exit 0 10:29:24
+[V7] rs L-O steady rounds=300 Ms=4096 exit 0 10:30:00
+[V7] rs L-O steady rounds=400 Ms=6144,8192 exit 0 10:31:39
+[V7] rs L-O steady rounds=2000 Ms=16384 exit 0 10:39:01
+[V7] rs L-down gpu rounds=300 Ms=8192,16384 exit 0 10:39:34
+[V7] rs L-down gpu rounds=400 Ms=8 exit 0 10:39:53
+[V7] rs L-down steady rounds=300 Ms=1032,8192 exit 0 10:41:33
+[V7] rs L-down steady rounds=400 Ms=2048,3072,6144 exit 0 10:44:06
+[V7] rs L-down steady rounds=600 Ms=4096 exit 0 10:45:34
+[V4b] M=64 exit 0 10:46:37
+[decode graph L=80 M=64] kept 200  tp_ar=29.1046  tp_ar_vllm=22.4082  sp_nccl=44.7109  sp_rsflux=34.1248  sp_dispatch=44.9874  best=tp_ar_vllm 
+[V4b] M=256 exit 0 10:48:02
+[decode graph L=80 M=256] kept 200  tp_ar=55.7937  tp_ar_vllm=45.8240  sp_nccl=72.7404  sp_rsflux=56.4127  sp_dispatch=56.3814  best=tp_ar_vllm 
+[V4b] M=384 exit 0 10:49:41
+[decode graph L=80 M=384] kept 200  tp_ar=67.7832  tp_ar_vllm=57.7275  sp_nccl=84.0310  sp_rsflux=68.2506  sp_dispatch=72.6927  best=tp_ar_vllm 
+[V4b] M=512 exit 0 10:51:45
+[decode graph L=80 M=512] kept 200  tp_ar=94.9130  tp_ar_vllm=95.4286  sp_nccl=109.0770  sp_rsflux=88.0686  sp_dispatch=82.4387  best=sp_dispatch 
+[V4b] merged 4000 rows
+[V11] c10d exit 0 10:52:17
+[c10d] M=64 ok (graphs=6 x 320 collectives)
+[c10d] M=256 ok (graphs=6 x 320 collectives)
+[c10d] M=384 ok (graphs=6 x 320 collectives)
+[c10d] M=512 ok (graphs=6 x 320 collectives)
+[c10d] ALL OK
+[V11] pynccl exit 0 10:52:59
+[pynccl] M=64 ok (graphs=6 x 320 collectives)
+[pynccl] M=256 ok (graphs=6 x 320 collectives)
+[pynccl] M=384 ok (graphs=6 x 320 collectives)
+[pynccl] M=512 ok (graphs=6 x 320 collectives)
+[pynccl] ALL OK
+[V3b] decode graph exit 0 10:53:59
+[decode graph L=4 M=256] kept 200  tp_ar=2.6163  tp_ar_vllm=2.3214  tp_ar_vllm_big=2.3168  sp_nccl=2.8324  sp_rsflux=2.6399  sp_dispatch=2.6409  best=tp_ar_vllm_big 
+[decode graph L=4 M=384] kept 200  tp_ar=3.1688  tp_ar_vllm=2.8488  tp_ar_vllm_big=2.8467  sp_nccl=3.3756  sp_rsflux=3.1990  sp_dispatch=3.6383  best=tp_ar_vllm_big 
+[decode graph L=4 M=512] kept 200  tp_ar=4.5532  tp_ar_vllm=4.5609  tp_ar_vllm_big=4.1851  sp_nccl=4.7124  sp_rsflux=4.1667  sp_dispatch=4.0883  best=sp_dispatch 
+[V3b] prefill eager exit 0 10:54:49
+[prefill eager L=4 M=1024] kept 200  tp_ar=6.4164  tp_ar_vllm=6.3928  tp_ar_vllm_big=6.0749  sp_nccl=6.6207  sp_flux=5.7846  sp_rsflux=5.8900  sp_dispatch=5.7620  best=sp_dispatch 
+[prefill eager L=4 M=2048] kept 200  tp_ar=12.0289  tp_ar_vllm=12.0238  tp_ar_vllm_big=11.5886  sp_nccl=11.8415  sp_flux=10.4218  sp_rsflux=10.6798  sp_dispatch=10.4013  best=sp_dispatch 
+[V6ab] exit 0 10:55:09
+[M=1024] nccl/P0: p0stat 0.210 ours 0.213  nccl/P0_flush: p0stat 0.210 ours 0.212  nccl/host: p0stat 0.210 ours 0.212  nccl/gpu: p0stat 0.180 ours 0.183  flux/P0: p0stat 0.209 ours 0.226  flux/P0_flush: p0stat 0.221 ours 0.235  flux/host: p0stat 0.219 ours 0.234  flux/gpu: p0stat 0.207 ours 0.221
+[M=4096] nccl/P0: p0stat 0.498 ours 0.502  nccl/P0_flush: p0stat 0.499 ours 0.502  nccl/host: p0stat 0.499 ours 0.503  nccl/gpu: p0stat 0.472 ours 0.475  flux/P0: p0stat 0.451 ours 0.453  flux/P0_flush: p0stat 0.453 ours 0.455  flux/host: p0stat 0.453 ours 0.455  flux/gpu: p0stat 0.441 ours 0.444
+[M=16384] nccl/P0: p0stat 1.750 ours 1.758  nccl/P0_flush: p0stat 1.752 ours 1.760  nccl/host: p0stat 1.749 ours 1.757  nccl/gpu: p0stat 1.721 ours 1.732  flux/P0: p0stat 1.490 ours 1.492  flux/P0_flush: p0stat 1.492 ours 1.494  flux/host: p0stat 1.491 ours 1.493  flux/gpu: p0stat 1.476 ours 1.479
+[V9] M=64 skew=200 exit 0 10:55:28
+[single] iters=5000 M=64 K=8192 max_skew=200.0us  bad elements=0  bad (rank,iter) pairs=0  (1.8s)
+[double] iters=5000 M=64 K=8192 max_skew=200.0us  bad elements=0  bad (rank,iter) pairs=0  (1.3s)
+[V9] M=64 skew=2000 exit 0 10:56:03
+[single] iters=5000 M=64 K=8192 max_skew=2000.0us  bad elements=0  bad (rank,iter) pairs=0  (9.7s)
+[double] iters=5000 M=64 K=8192 max_skew=2000.0us  bad elements=0  bad (rank,iter) pairs=0  (9.3s)
+[V9] M=1024 skew=200 exit 0 10:56:26
+[single] iters=5000 M=1024 K=8192 max_skew=200.0us  bad elements=0  bad (rank,iter) pairs=0  (3.6s)
+[double] iters=5000 M=1024 K=8192 max_skew=200.0us  bad elements=0  bad (rank,iter) pairs=0  (3.2s)
+[resume] done 2026-09-30 10:56:26

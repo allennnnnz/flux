@@ -1,177 +1,90 @@
-# Phase 0: A100 single-node NVLink/PCIe baseline
+# Phase 0: A100 single-node NVLink / PCIe baseline
 
 Date: 2026-09-23
+Machine: `css-host-158`, 8x A100-SXM4-80GB, NVSwitch, no sudo.
 
-## Purpose
+> **Phase 0 is closed.** The consolidated record is [`docs/PHASE0_STATUS.md`](../../docs/PHASE0_STATUS.md);
+> the distilled conclusions and design rules are [`docs/PHASE0_FINDINGS.md`](../../docs/PHASE0_FINDINGS.md).
+> This folder is the raw archive. New work goes in `ws/` — see [`PROJECT.md`](../../PROJECT.md).
 
-This experiment establishes the single-node baseline before changing Flux transport or scheduling code.
+## Question
 
-The questions were:
+Is there a case for giving Flux a second, PCIe-host-staged transport channel alongside
+NVLink on this machine?
 
-- Is the current machine suitable for a single-node Flux experiment?
-- Does the 8x A100 host expose enough topology diversity to test a dual NVLink + PCIe transport idea?
-- Can the current pixi environment build and run Flux benchmarks without sudo?
-- Is there measurable benefit from intentionally moving part of GPU-GPU traffic through host pinned memory while the main path uses GPU peer copies?
+## Answer
 
-## Environment
+**No.** Do not modify Flux core scheduling on A100. Two independent lines of evidence:
 
-- GPU: 8x NVIDIA A100-SXM4-80GB
-- Driver: 615.71.09
-- CUDA user-mode stack observed by `nvidia-smi`: 13.4
-- Python environment: pixi
-- PyTorch inside pixi: 2.6.0+cu124
-- CUDA visible to PyTorch: 12.4
-- `nvidia.nvshmem`: import succeeds inside pixi
-- sudo: unavailable
+1. **Communication is not the bottleneck at the shape that matters.** Making Flux's
+   AllGather 17% faster (Ring2D → All2All) changes end-to-end AG+GEMM time by 0.9% at
+   N=49152. At smaller N (4096, 8192) it is worth about 10%, so communication *is* on the
+   critical path there — but see 2.
+2. **The second channel is ~3% of the first, and measured as a net loss.** Host staging
+   delivers 5.3 GB/s per GPU against NVLink's 217.66 GB/s per GPU. Sweeping the mix ratio
+   α over 0.01-0.12 produces a loss at *every* value, monotonically, with or without a
+   switch-aware staging ring.
 
-## Topology Findings
+A dual-channel transport becomes interesting where the two paths are within a small factor
+of each other — a machine without full NVLink, or a PCIe-only or heterogeneous accelerator.
+Building a backend abstraction against that future remains reasonable; changing the A100
+NVLink path does not.
 
-`nvidia-smi topo -m` reports all GPU-GPU pairs as `NV12`.
+## What this experiment actually produced
 
-Interpretation:
+The first pass of this work was largely wrong. It went through four correction rounds, and
+the corrections are the substance:
 
-- The 8 GPUs are connected through NVSwitch/NVLink.
-- This is not a topology where only fixed GPU pairs share a direct NVLink.
-- A second identical node is not required for Phase 0 single-node baselines.
+| Finding | Where |
+| --- | --- |
+| GPUs share PCIe switch uplinks **in pairs** (0/1, 2/3, 4/5, 6/7); confirmed by a control experiment | `B_REDO.md` B.4 |
+| PCIe is **not symmetric full-duplex**: concurrent D2H throttles H2D by 3.4x, while D2H is unaffected | `BIDIR_CORRECTION.md` X.3 |
+| Flux's own AllGather beats NCCL by **13-22%** in All2All mode — invisible in the original report, which used NCCL as the "Flux" baseline | `E_CORRECTION.md` E.1 |
+| **Ring2D**, the mode every original measurement used, is among the slowest here; All2All is worth ~10% end-to-end at small N | `E_CORRECTION.md` E.1, `FLUX_BASELINE.md` F.5 |
+| PyTorch runs cross-device copies on the **source** device's stream — placing them on the destination's stream costs 5.7x | `D_CORRECTION.md` D.0 |
+| Host staging in a ring is bounded by the **contended** H2D rate (6.46 GB/s), and already achieves 91% of it | `BIDIR_CORRECTION.md` X.4 |
 
-NUMA placement:
+## Headline numbers
 
-| Devices | NUMA node | CPU affinity |
-| --- | --- | --- |
-| GPU0-GPU3 | 0 | 0-31,64-95 |
-| GPU4-GPU7 | 1 | 32-63,96-127 |
+All corrected. See `docs/PHASE0_STATUS.md` section 2 for method and section 3 for what these replace.
 
-`nvidia-smi topo -p2p r` reports `OK` for all GPU pairs.
-
-## Bandwidth Results
-
-CUDA `bandwidthTest` was used because `nvbandwidth` was not installed.
-
-| Test | Result |
+| Quantity | Value |
 | --- | ---: |
-| 8 GPUs simultaneous pinned H2D, 32 MiB each | 162.5 GB/s aggregate |
-| 8 GPUs simultaneous pinned D2H, 32 MiB each | 172.8 GB/s aggregate |
-| 8 GPUs device-to-device | 11.23 TB/s aggregate |
-| Per-GPU H2D, local NUMA bind | 21.6-22.6 GB/s |
-| Per-GPU D2H, local NUMA bind | 23.1-23.6 GB/s |
+| NVLink all-to-all, per GPU | 217.66 GB/s |
+| Flux AllGather All2All (pull), per GPU ingress | 188.2 GB/s |
+| PCIe H2D / D2H, single GPU, unidirectional | 21.795 / 23.924 GB/s |
+| PCIe H2D / D2H, single GPU, **simultaneous** | 6.16 / 22.12 GB/s |
+| Host staging, best pair (different switches) | 22.191 GB/s |
+| Host staging, 8-GPU ring, per GPU | 5.87 GB/s |
+| AG+GEMM overlap efficiency, N=49152, bf16 | 60% |
 
-The device-to-device number is much larger than PCIe host staging bandwidth, as expected on an A100 SXM NVSwitch system.
+## Documents
 
-## Dual Path Microbenchmark
+| File | Contents |
+| --- | --- |
+| **[`../../docs/PHASE0_STATUS.md`](../../docs/PHASE0_STATUS.md)** | **Start here.** Full record: numbers, withdrawal list, decision. |
+| [`../../docs/PHASE0_FINDINGS.md`](../../docs/PHASE0_FINDINGS.md) | Distilled conclusions and design rules for later work. |
+| [`AUDIT.md`](AUDIT.md) | First audit of the original pass. |
+| [`B_REDO.md`](B_REDO.md) | PCIe topology and unidirectional bandwidth, auditable. |
+| [`BIDIR_CORRECTION.md`](BIDIR_CORRECTION.md) | Bidirectional PCIe; extends the staging section. |
+| [`D_CORRECTION.md`](D_CORRECTION.md) | Dual-path; the corrected NVLink baseline. |
+| [`E_CORRECTION.md`](E_CORRECTION.md) | Flux's own communication path, measured. |
+| [`FLUX_BASELINE.md`](FLUX_BASELINE.md) | AG+GEMM with a reproducible ECT method. |
+| [`CDE_REPORT.md`](CDE_REPORT.md) | Superseded. Sections D and E withdrawn in place. |
 
-The custom benchmark splits each source GPU payload into two parts:
-
-- main path: GPU peer copy, representing NVLink/NVSwitch traffic
-- auxiliary path: D2H into pinned CPU memory, then H2D to destination GPU, representing PCIe host staging
-
-Payload: 64 MiB per GPU, 8 GPUs, 5 timed repeats.
-
-| Host memory policy | Best alpha | Best payload GB/s | NVLink-only alpha=0 | PCIe-only alpha=1 | Notes |
-| --- | ---: | ---: | ---: | ---: | --- |
-| default allocation | 0.02 | 254.8 | 245.8 | 42.4 | about +3.6% in this run |
-| NUMA node 0 bind | 0.02 | 255.4 | 245.3 | 32.1 | host staging degraded for remote GPUs |
-| NUMA node 1 bind | 0.08 | 250.3 | 245.8 | 42.9 | small gain, not stable |
-
-Conclusion:
-
-- A small PCIe-staged fraction can sometimes improve this synthetic copy workload by roughly 2-4%.
-- The effect is narrow and NUMA-sensitive.
-- On this A100 NVSwitch machine, PCIe is much weaker than the GPU-GPU path, so this is not strong enough evidence to justify changing Flux core kernels directly.
-- The result is still useful as a proxy for future PCIe-only or heterogeneous accelerator work, especially for designing backend abstraction and fallback transport logic.
-
-## Flux Benchmark Results
-
-All runs used:
+## Reproducing
 
 ```bash
-NVSHMEM_REMOTE_TRANSPORT=none pixi run --manifest-path pixi.toml ./launch.sh ...
-```
-
-### AllGather + GEMM
-
-Command template:
-
-```bash
-NVSHMEM_REMOTE_TRANSPORT=none pixi run --manifest-path pixi.toml \
-  ./launch.sh test/python/ag_gemm/test_ag_kernel.py M 49152 12288 \
-  --dtype=float16 --warmup=2 --iters=5 --verify
-```
-
-Functional result:
-
-- All tested sizes printed `all close!` and `flux check passed`.
-- Bitwise match was observed for M=64, 4096, 8192.
-- M=512, 1024, 2048 were all-close but not bitwise identical.
-
-Timing caveat:
-
-- In this Phase 0 run, Flux AG timing lines showed `total 0.000 ms`, so those Flux timing values are invalid and should not be used.
-- A previous successful AG run on this environment showed M=4096, N=49152, K=12288, fp16: Flux about 2.889 ms vs PyTorch about 3.300 ms, roughly 1.14x.
-
-Representative PyTorch baseline from the Phase 0 AG runs:
-
-| M | PyTorch total ms | GEMM ms | Comm ms |
-| ---: | ---: | ---: | ---: |
-| 64 | 0.305 | 0.115 | 0.190 |
-| 512 | 0.500 | 0.376 | 0.120 |
-| 1024 | 1.020 | 0.816 | 0.205 |
-| 2048 | 1.670 | 1.360 | 0.310 |
-| 4096 | 3.300 | 2.750 | 0.550 |
-| 8192 | 6.460 | 5.400 | 1.060 |
-
-### GEMM + ReduceScatter
-
-Command template:
-
-```bash
-NVSHMEM_REMOTE_TRANSPORT=none pixi run --manifest-path pixi.toml \
-  ./launch.sh test/python/gemm_rs/test_gemm_rs.py M 12288 49152 \
-  --dtype=float16 --warmup=2 --iters=5
-```
-
-Functional result:
-
-- All tested sizes printed `all close!` and `flux check passed`.
-- The script reported bitwise mismatch for all tested sizes, likely due to reduction ordering. Treat this as numerically correct but not bitwise identical.
-
-Representative timings:
-
-| M | PyTorch ms | Flux ms | Flux speedup |
-| ---: | ---: | ---: | ---: |
-| 64 | 0.228 | 0.249 | 0.92x |
-| 512 | 0.514 | 0.436 | 1.18x |
-| 1024 | 1.006 | 0.783 | 1.29x |
-| 2048 | 1.667 | 1.458 | 1.14x |
-| 4096 | 3.306 | 2.807 | 1.18x |
-| 8192 | 6.276 | 5.511 | 1.14x |
-
-## Reproduction
-
-From the repository root:
-
-```bash
-pixi install
-pixi run --manifest-path pixi.toml python - <<'PY'
-import torch
-import nvidia.nvshmem
-print(torch.__version__)
-print(torch.version.cuda)
-print(torch.cuda.is_available())
-print(torch.cuda.device_count())
-PY
-
 bash experiments/2026-09-23-phase0-a100-nvlink-pcie/scripts/run_phase0_repro.sh
 ```
 
-The reproduction script reruns topology checks, CUDA bandwidth tests when `bandwidthTest` is available, the dual-path microbenchmark, and the Flux AG/RS benchmark commands used above.
+The script reproduces only the currently-valid set. It notes inline which superseded
+scripts it deliberately does not run.
 
-## Files
+Flux benchmarks must be launched through pixi:
 
-- `scripts/dual_path_bench.py`: custom dual-path NVLink + pinned-host staging microbenchmark.
-- `scripts/run_phase0_repro.sh`: commands needed to reproduce this Phase 0 measurement set.
+```bash
+pixi run --manifest-path pixi.toml ./launch.sh <script> ...
+```
 
-## Decision
-
-Do not proceed directly to Flux core dual-channel scheduling on this machine based only on Phase 0. The observed PCIe auxiliary-path gain is small, unstable, and heavily NUMA-dependent.
-
-The next useful step is to build a transport/backend abstraction and use this A100 node as a proxy for future PCIe-only or heterogeneous devices, while keeping current Flux NVLink behavior intact.
+Invoking `./launch.sh` directly fails with `torchrun: command not found`.

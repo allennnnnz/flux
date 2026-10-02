@@ -1,0 +1,102 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 09-30 08:12:04 [config.py:4136] Current vLLM config is not set.
+WARNING 09-30 08:12:04 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 09-30 08:12:04 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+vLLM custom AR present=True disabled=False fully_connected=True max_size=8388608; pynccl disabled=False
+[decode graph L=80 M=64] kept 200  tp_ar=29.1200  tp_ar_vllm=22.4184  sp_nccl=44.7672  sp_rsflux=34.1391  sp_dispatch=45.0376  best=tp_ar_vllm  dispatch counts={'ag:nccl': 160, 'rs:nccl': 160} misses={}  check={'tp_ar_vllm': 0.0858, 'sp_nccl': 0.091, 'sp_rsflux': 0.0872, 'sp_dispatch': 0.091}
+W0930 08:23:51.371000 1044582 torch/distributed/elastic/agent/server/api.py:719] Received 15 death signal, shutting down workers
+W0930 08:23:51.374000 1044582 torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1044656 closing signal SIGTERM
+W0930 08:23:51.375000 1044582 torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1044657 closing signal SIGTERM
+W0930 08:23:51.376000 1044582 torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1044658 closing signal SIGTERM
+W0930 08:23:51.376000 1044582 torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1044659 closing signal SIGTERM
+W0930 08:23:51.377000 1044582 torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1044660 closing signal SIGTERM
+W0930 08:23:51.377000 1044582 torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1044661 closing signal SIGTERM
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+W0930 08:23:51.379000 1044582 torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1044662 closing signal SIGTERM
+W0930 08:23:51.379000 1044582 torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1044663 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 260, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/elastic/metrics/api.py", line 137, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py", line 711, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 1044582 got signal: 15

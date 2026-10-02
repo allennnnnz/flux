@@ -1,0 +1,8 @@
+ag 6144x12288 (G-FC1): 8:nccl 16:nccl 24:nccl 32:nccl 64:nccl 72:nccl 128:nccl 136:nccl 256:nccl 264:nccl 512:nccl 520:nccl 1024:nccl 1032:nccl 2048:flux 3072:fluxag_fluxgemm 4096:flux 6144:flux 8192:flux 16384:flux
+ag 4608x12288 (G-QKV): 8:nccl 16:nccl 24:nccl 32:nccl 64:nccl 72:nccl 128:nccl 136:nccl 256:nccl 264:nccl 512:nccl 520:nccl 1024:nccl 1032:nccl 2048:fluxag_fluxgemm 3072:flux 4096:flux 6144:flux 8192:flux 16384:flux
+ag 7168x8192 (L-GU): 8:nccl 16:nccl 24:nccl 32:nccl 64:nccl 72:nccl 128:nccl 136:nccl 256:nccl 264:nccl 512:fluxag_fluxgemm 520:nccl 1024:fluxag_fluxgemm 1032:nccl 2048:fluxag_fluxgemm 3072:flux 4096:fluxag 6144:flux 8192:flux 16384:flux
+ag 1280x8192 (L-QKV): 8:nccl 16:nccl 24:nccl 32:nccl 64:nccl 72:nccl 128:nccl 136:nccl 256:nccl 264:nccl 512:nccl 520:nccl 1024:nccl 1032:nccl 2048:fluxag_fluxgemm 3072:flux 4096:flux 6144:flux 8192:flux 16384:flux
+rs 12288x6144 (G-FC2): 8:nccl 16:nccl 24:nccl 32:nccl 64:nccl 72:nccl 128:nccl 136:flux 256:nccl 264:flux 512:flux 520:flux 1024:flux 1032:flux 2048:flux 3072:flux 4096:flux 6144:flux 8192:flux 16384:flux
+rs 12288x1536 (G-O): 8:nccl 16:nccl 24:nccl 32:nccl 64:nccl 72:nccl 128:nccl 136:nccl 256:flux 264:flux 512:flux 520:flux 1024:flux 1032:flux 2048:flux 3072:flux 4096:flux 6144:flux 8192:flux 16384:flux
+rs 8192x1024 (L-O): 8:nccl 16:nccl 24:nccl 32:nccl 64:nccl 72:nccl 128:nccl 136:nccl 256:flux 264:nccl 512:flux 520:flux 1024:flux 1032:flux 2048:flux 3072:flux 4096:flux 6144:flux 8192:flux 16384:flux
+rs 8192x3584 (L-down): 8:nccl 16:nccl 24:nccl 32:nccl 64:nccl 72:nccl 128:nccl 136:nccl 256:flux 264:flux 512:flux 520:flux 1024:flux 1032:flux 2048:flux 3072:flux 4096:flux 6144:flux 8192:flux 16384:flux

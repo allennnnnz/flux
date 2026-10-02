@@ -1,0 +1,104 @@
+{
+ "1024": {
+  "nccl/P0": {
+   "phase0_stat_ms": 0.2104320004582405,
+   "ours_stat_ms": 0.21299199759960175
+  },
+  "nccl/P0_flush": {
+   "phase0_stat_ms": 0.2104320004582405,
+   "ours_stat_ms": 0.21248000115156174
+  },
+  "nccl/host": {
+   "phase0_stat_ms": 0.2104320004582405,
+   "ours_stat_ms": 0.21248000115156174
+  },
+  "nccl/gpu": {
+   "phase0_stat_ms": 0.17971199750900269,
+   "ours_stat_ms": 0.18329599499702454
+  },
+  "flux/P0": {
+   "phase0_stat_ms": 0.20852800458669662,
+   "ours_stat_ms": 0.2261119931936264
+  },
+  "flux/P0_flush": {
+   "phase0_stat_ms": 0.22137600183486938,
+   "ours_stat_ms": 0.23545599728822708
+  },
+  "flux/host": {
+   "phase0_stat_ms": 0.21940799802541733,
+   "ours_stat_ms": 0.23361600190401077
+  },
+  "flux/gpu": {
+   "phase0_stat_ms": 0.20708800107240677,
+   "ours_stat_ms": 0.22060800343751907
+  }
+ },
+ "4096": {
+  "nccl/P0": {
+   "phase0_stat_ms": 0.4976640045642853,
+   "ours_stat_ms": 0.5022720098495483
+  },
+  "nccl/P0_flush": {
+   "phase0_stat_ms": 0.4986880123615265,
+   "ours_stat_ms": 0.5017600059509277
+  },
+  "nccl/host": {
+   "phase0_stat_ms": 0.4986880123615265,
+   "ours_stat_ms": 0.502784013748169
+  },
+  "nccl/gpu": {
+   "phase0_stat_ms": 0.47206398844718933,
+   "ours_stat_ms": 0.47513601183891296
+  },
+  "flux/P0": {
+   "phase0_stat_ms": 0.45103999972343445,
+   "ours_stat_ms": 0.45318400859832764
+  },
+  "flux/P0_flush": {
+   "phase0_stat_ms": 0.45286400616168976,
+   "ours_stat_ms": 0.45524799823760986
+  },
+  "flux/host": {
+   "phase0_stat_ms": 0.4530400037765503,
+   "ours_stat_ms": 0.4548479914665222
+  },
+  "flux/gpu": {
+   "phase0_stat_ms": 0.4413760006427765,
+   "ours_stat_ms": 0.44392000138759613
+  }
+ },
+ "16384": {
+  "nccl/P0": {
+   "phase0_stat_ms": 1.7500159740447998,
+   "ours_stat_ms": 1.7582080364227295
+  },
+  "nccl/P0_flush": {
+   "phase0_stat_ms": 1.7515519857406616,
+   "ours_stat_ms": 1.7597440481185913
+  },
+  "nccl/host": {
+   "phase0_stat_ms": 1.7489919662475586,
+   "ours_stat_ms": 1.7571840286254883
+  },
+  "nccl/gpu": {
+   "phase0_stat_ms": 1.721343994140625,
+   "ours_stat_ms": 1.7315839529037476
+  },
+  "flux/P0": {
+   "phase0_stat_ms": 1.4903839826583862,
+   "ours_stat_ms": 1.4923200011253357
+  },
+  "flux/P0_flush": {
+   "phase0_stat_ms": 1.4920159578323364,
+   "ours_stat_ms": 1.4940959811210632
+  },
+  "flux/host": {
+   "phase0_stat_ms": 1.4911359548568726,
+   "ours_stat_ms": 1.492784023284912
+  },
+  "flux/gpu": {
+   "phase0_stat_ms": 1.475920021533966,
+   "ours_stat_ms": 1.4787039756774902
+  }
+ }
+}

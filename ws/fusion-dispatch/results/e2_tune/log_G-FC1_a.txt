@@ -1,0 +1,9 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/tune_upside_v1.py --layer G-FC1 --Ms 1024,3072,4096 --out ws/fusion-dispatch/results/e2_tune/tune_G-FC1_a.json
+W0929 23:51:29.363000 603493 site-packages/torch/distributed/run.py:792] 
+W0929 23:51:29.363000 603493 site-packages/torch/distributed/run.py:792] *****************************************
+W0929 23:51:29.363000 603493 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0929 23:51:29.363000 603493 site-packages/torch/distributed/run.py:792] *****************************************
+[G-FC1 M=1024] default 1.2727 (after 1.2558)  profiling top-k [0.961, 0.963, 0.966, 0.986, 0.99]  best/default 0.755  (65 s)
+[G-FC1 M=3072] default 2.8599 (after 2.8753)  profiling top-k [2.09, 2.09, 2.14, 2.16, 2.2]  best/default 0.731  (67 s)
+[G-FC1 M=4096] default 2.7995 (after 2.8247)  profiling top-k [2.78, 2.78, 2.83, 2.83, 2.83]  best/default 0.993  (68 s)
+wrote ws/fusion-dispatch/results/e2_tune/tune_G-FC1_a.json

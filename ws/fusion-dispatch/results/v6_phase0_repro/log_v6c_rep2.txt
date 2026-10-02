@@ -1,0 +1,43 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 experiments/2026-09-23-phase0-a100-nvlink-pcie/scripts/flux_comm_baseline.py 4096 12288 --dtype=float16 --warmup=5 --iters=30 --out=ws/fusion-dispatch/results/v6_phase0_repro/v6c_M4096_rep2.csv
+W1002 14:21:37.356000 52877 site-packages/torch/distributed/run.py:792] 
+W1002 14:21:37.356000 52877 site-packages/torch/distributed/run.py:792] *****************************************
+W1002 14:21:37.356000 52877 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1002 14:21:37.356000 52877 site-packages/torch/distributed/run.py:792] *****************************************
+[flux_all2all_push] bitwise vs nccl all_gather on all ranks: True
+[flux_all2all_pull] bitwise vs nccl all_gather on all ranks: True
+[flux_ring1d_push] bitwise vs nccl all_gather on all ranks: True
+[flux_ring1d_pull] bitwise vs nccl all_gather on all ranks: True
+[flux_ring2d_push] bitwise vs nccl all_gather on all ranks: True
+/home/rogerlee/flux/src/coll/all_gather_impls.cu:162 Check failed: false. unsupported for input_dtype=FP16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/all_gather_impls.cu:162 Check failed: false. unsupported for input_dtype=FP16,scale_dtype=FP32
+/home/rogerlee/flux/src/coll/all_gather_impls.cu:162 Check failed: false. unsupported for input_dtype=FP16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/all_gather_impls.cu:162 Check failed: false. unsupported for input_dtype=FP16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/all_gather_impls.cu:162 Check failed: false. unsupported for input_dtype=FP16,scale_dtype=FP32
+
+
+/home/rogerlee/flux/src/coll/all_gather_impls.cu:162 Check failed: false. unsupported for input_dtype=FP16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/all_gather_impls.cu:162 Check failed: false. unsupported for input_dtype=FP16,scale_dtype=FP32
+
+/home/rogerlee/flux/src/coll/all_gather_impls.cu:162 Check failed: false. unsupported for input_dtype=FP16,scale_dtype=FP32
+
+
+[flux_all2all_push_cudacore] UNSUPPORTED: /home/rogerlee/flux/src/coll/all_gather_impls.cu:162 Check failed: false. unsupported for input_dtype=FP16,scale_dtype=FP32
+[flux_ring2d_push_cudacore] bitwise vs nccl all_gather on all ranks: True
+
+M=4096 K=12288 dtype=float16 world=8 nnodes=1
+input bytes/rank=12582912 output bytes=100663296
+
+tag                             rank-max med ms   rank0 med ms  rank0 stdev   algbw GB/s
+----------------------------------------------------------------------------------------
+nccl_all_gather                        0.563712       0.546816     0.006973      178.572
+flux_all2all_push                      0.475296       0.473536     0.012182      211.791
+flux_all2all_pull                      0.468656       0.467584     0.003606      214.791
+flux_ring1d_push                       0.560176       0.560176     0.006225      179.699
+flux_ring1d_pull                       0.493984       0.493984     0.006611      203.778
+flux_ring2d_push                       0.559264       0.534304     0.143619      179.992
+flux_ring2d_push_cudacore              1.071104       0.979456     0.028068       93.981
+
+wrote ws/fusion-dispatch/results/v6_phase0_repro/v6c_M4096_rep2.csv

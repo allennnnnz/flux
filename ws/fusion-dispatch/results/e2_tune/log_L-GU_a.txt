@@ -1,0 +1,8 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/tune_upside_v1.py --layer L-GU --Ms 520,4096 --out ws/fusion-dispatch/results/e2_tune/tune_L-GU_a.json
+W0929 23:57:52.476000 605160 site-packages/torch/distributed/run.py:792] 
+W0929 23:57:52.476000 605160 site-packages/torch/distributed/run.py:792] *****************************************
+W0929 23:57:52.476000 605160 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0929 23:57:52.476000 605160 site-packages/torch/distributed/run.py:792] *****************************************
+[L-GU M=520] default 0.5293 (after 0.5300)  profiling top-k [0.525, 0.531, 0.538, 0.538, 0.549]  best/default 0.992  (65 s)
+[L-GU M=4096] default 3.0073 (after 3.0085)  profiling top-k [2.16, 2.17, 2.24, 2.24, 2.24]  best/default 0.718  (67 s)
+wrote ws/fusion-dispatch/results/e2_tune/tune_L-GU_a.json

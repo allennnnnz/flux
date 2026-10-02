@@ -1,0 +1,14 @@
+{
+ "item": "A_fused",
+ "date": "2026-09-30 06:04:45",
+ "cases": {
+  "64": {
+   "capture_ok": false,
+   "capture_error_rank0": "RuntimeError: CUDA error: capturing stream has unjoined work\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions."
+  },
+  "1024": {
+   "capture_ok": false,
+   "capture_error_rank0": "RuntimeError: captures_underway.empty() INTERNAL ASSERT FAILED at \"/pytorch/c10/cuda/CUDACachingAllocator.cpp\":3085, please report a bug to PyTorch."
+  }
+ }
+}

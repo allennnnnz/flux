@@ -1,0 +1,6 @@
+metric,per_gpu_GBps,aggregate_GBps,stdev_GBps
+h2d_own,7.186,57.491,0.010
+d2h_own,12.019,96.156,0.036
+h2d_overlap,3.563,28.504,0.010
+d2h_overlap,12.019,96.156,0.036
+overlap_fraction,0.5974,,

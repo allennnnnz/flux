@@ -1,0 +1,33 @@
+M=64
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0           267.0           212.1           112.9           132.1            32.6
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0           285.5           131.9           112.9           149.9           133.2
+c_flux_ag              20             2.0             8.0             1.0             8.0           133.1            15.6           115.1          -116.3           -16.8
+c_fluxgemm             20             2.0             0.0             1.0             0.0           132.7           124.6               -               -               -
+M=1024 exit 0
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0          1232.3          1177.9           258.0           969.2            36.3
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0          1378.1          1117.9           221.7          1136.6           241.5
+c_flux_ag              20             2.0             8.0             1.0             8.0           232.9            15.5           217.5          -200.8           -15.7
+c_fluxgemm             20             2.0             0.0             1.0             0.0          1129.2          1120.3               -               -               -
+M=3072 exit 0
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0          2774.1          2712.8           428.6          2319.4            43.9
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0          2486.3          2030.8           412.1          2052.3           436.7
+c_flux_ag              20             2.0             8.0             1.0             8.0           389.2            15.9           373.8          -361.5            22.0
+c_fluxgemm             20             2.0             0.0             1.0             0.0          1741.8          1733.7               -               -               -
+M=4096 exit 0
+longest-kernel names: {'Kernel2': 60, 'barrier_on_stream_kernel_threadgroup': 20}
+item                    n       n_kernels        n_memcpy        n_memset  n_shard_copies         span_us         gemm_us         comm_us         tail_us  gemm_start_min
+A_fused                20             3.0             8.0             2.0             8.0          2836.0          2771.5           529.1          2284.3            48.1
+D_fluxag_fluxgemm      20             4.0             8.0             2.0             8.0          3155.6          2607.6           510.7          2628.4           532.0
+c_flux_ag              20             2.0             8.0             1.0             8.0           507.2            13.0           492.5          -493.9           -14.5
+c_fluxgemm             20             2.0             0.0             1.0             0.0          2221.4          2214.2               -               -               -
+
+# sqlite exports deleted (710 MB, derived). Regenerate:
+#   nsys export --type sqlite -o G-FC1_M<M>.sqlite G-FC1_M<M>.nsys-rep
+#   python3 ../../scripts/nsys_parse_v1.py G-FC1_M<M>.sqlite --shard_bytes $((M/8*12288*2)) --device 0
+# probe runs items in blocks (not interleaved): cross-item kernel durations include clock drift.
