@@ -108,3 +108,19 @@ fusion-dispatch 結案，diag-overlap 回到最高優先。
 
 **重開條件**：vLLM 0.8.5 在本機無法與 Flux 共存；或 F0.4 顯示 Flux 無法進 CUDA graph，而目標部署必須用 graph。
 
+## D-008 · 2026-10-02 · fusion-dispatch 第三階段：先做泛用決策器，F4 延後
+
+**決策**：
+1. 先做**泛用決策器**：物理模型預測（通訊 α-β + SM 時脈修正、GEMM roofline + wave、重疊事件模型、切法加總），
+   加上不確定時的少量實測把關。計劃見 `ws/fusion-dispatch/reports/20261002_plan_general_dispatcher.md`（使用者核准）。
+2. F4（vLLM 端到端）延後，之後直接用泛用版決策器。
+3. 預測器放在 `common/cost_model/predictor/`，同時完成 `ws/cost-model` 的模型目標。
+
+**依據**：
+- 查表版不泛用（換模型 / TP / 硬體 / 時脈都要重量），且異質晶片未到手無法量；
+- 文獻調查（`reports/20261002_related_work.md`）：現有系統皆為查表 / 門檻 / 窮舉，混合式模型的推廣證據最好。
+
+**審查狀態**：不適用（組織決策）。
+
+**重開條件**：G1 / G2 顯示物理模型在既有數據上的 regret 無法降到 3% 以下，且缺的項目無法補上 → 改評估學習式或查表 + 內插。
+

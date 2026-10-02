@@ -20,10 +20,10 @@ decode 大小（M ≤ 512）四層都是不開 Flux 較快，每層查表的決�
 
 | workstream | 優先 | 狀態 | 依賴 | 負責 session | 最近更新 |
 | --- | --- | --- | --- | --- | --- |
-| `ws/fusion-dispatch` | **最高**（D-006、D-007） | 決策器完成並驗證（真 vLLM 對照：prefill 快 9.3–17.7%、80 block 成立）；F4 端到端可行性已確認，待使用者確認後開始；待 auditor。新 session 先讀其 STATUS 第 0 節 | — | boss 兼 worker | 2026-10-02 |
+| `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器（計劃已核准，G0 完成，下一步 G1）**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-02 |
 | `ws/diag-overlap` | 第二 | 未開始 | — | 未指派 | — |
 | `ws/hetero-proxy` | 第二，可與上並行 | 未開始 | — | 未指派 | — |
-| `ws/cost-model` | 第三 | 未開始 | 前兩者的數字 | 未指派 | — |
+| `ws/cost-model` | 第三 | 模型目標由 fusion-dispatch 第三階段執行（預測器在 `common/cost_model/predictor/`，D-008） | — | 未指派 | 2026-10-02 |
 
 各 workstream 的目標、步驤、成功標準寫在各自的 `STATUS.md` 第 1 節，由 boss 在建立時
 寫入，worker 不改目標、只更新進度。以下是簡述。

@@ -17,7 +17,10 @@
 - decode M ≤ 384 選 vLLM 預設（同速），M=512 快 10–14%；
 - regret ≈ 0。
 
-**下一步**：整合進 vLLM 做端到端（F4），可行性已確認。尚未開始，等使用者確認。
+**下一步（2026-10-02 使用者決定）**：先做**泛用決策器**（第三階段 G0–G6），F4（vLLM 端到端）延後，之後直接用泛用版。
+- 計劃：`reports/20261002_plan_general_dispatcher.md`（已核准，含附錄 A：數據清單、指令、坑、各階段第一步）；
+- 文獻：`reports/20261002_related_work.md`（G0 已完成）；
+- **從 G1 開始**：只用既有數據建預測器，不需要 GPU。
 
 **決策器怎麼決定**：查表，全部來自實測。
 - 離線校準：每種層形狀 × 每個 M，量每條路徑，排序存成 JSON；
@@ -37,6 +40,8 @@
 | `reports/20260930_f2_ag_latency.md` | Triton AllGather 原型比 NCCL 快 |
 | `reports/20260930_verification.md` | V1–V12 驗證：真 vLLM、80 block、獨佔重測、各種疑點 |
 | `reports/20261002_f4_feasibility.md` | 本機可做 vLLM 端到端；整合計劃 |
+| `reports/20261002_related_work.md` | 約 100 篇相關工作；缺口與定位 |
+| `reports/20261002_plan_general_dispatcher.md` | **第三階段計劃（泛用決策器）** |
 
 **環境**：
 - Flux 量測：`pixi run --manifest-path pixi.toml ./launch.sh <script>`。
@@ -47,7 +52,7 @@
 - git：工作分支 `fusion-dispatch`；push 用 SSH 網址 `git@github.com:allennnnnz/flux.git`（origin 的 HTTPS 沒有憑證）。
 
 **待使用者 / boss 決定**（細節見 PROJECT.md 第 3 節）：
-1. 是否開始 F4（vLLM 端到端）；
+1. 是否有其他型號 GPU 可做跨機器驗證（問教授）；
 2. 是否開獨立 auditor session；
 3. `CLAUDE.md` 是否加入守衛規則與三條陷阱；
 4. `PHASE0_FINDINGS.md` 2.6 是否改寫為「依 SM 時脈而定」。
@@ -124,6 +129,15 @@ D `fluxag_fluxgemm`（串行，診斷）· A\* `fused_tuned`（條件性，需 r
 計劃與成功標準見 `reports/20260930_plan_dispatcher.md`；順序 F0 → F1 → F2 / F3 → F4。
 目標框架：vLLM 0.8.5.post1，off 選項加入「TP + AllReduce」。
 改 `src/` 必須先通過關卡 G2 / G3。
+
+### 第三階段（2026-10-02，D-008）：泛用決策器
+
+查表（v1）已證明可行，並提供 oracle，但不泛用：換模型 / TP / 硬體 / 時脈都要重量，且晶片未到無法量。
+目標是「物理模型預測 + 少量實測把關」的決策器，在未見過的形狀、TP 卡數、時脈狀態、PCIe 代理上，以對 oracle 的 regret 評估。
+
+- 計劃與成功標準：`reports/20261002_plan_general_dispatcher.md`；
+- 預測器放 `common/cost_model/predictor/`，同時完成 ws/cost-model 的模型目標；
+- 成功標準：未見形狀 / TP 上，block regret ≤ 2%；校準 ≤ 10 分鐘；探測 ≤ 表點數的 15%。
 
 ---
 
@@ -229,6 +243,9 @@ E5 的 Llama 兩層結果在 `results/e5_rs_map_v1/`。**全部尚未經 auditor
 | F1 v1 的「prefill 比 vLLM 預設快 25–32%」 | `scripts/validate_block_v1.py`、`results/f1_block_v1/` | RMSNorm / SiLU×up 未融合，對 tp_ar 多算時間 | `validate_block_v2.py`、`results/f1_block_v2/`：10.4–18.3% |
 
 ## 4. 下一步（worker 維護）
+
+**00.（2026-10-02 起）第三階段：泛用決策器。** 照 `reports/20261002_plan_general_dispatcher.md` 的 G1 → G6 進行。
+G0 已完成，下一個是 G1（不需 GPU）。每階段結束：更新 §0、JOURNAL、PROJECT，commit 並用 SSH push。
 
 **0. ✅ 驗證輪完成（2026-10-02）**，見 `reports/20260930_verification.md`。下一步前需使用者確認。
 影響後續設計的結論：

@@ -133,3 +133,14 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   已改用 SSH 金鑰推送（`git push git@github.com:allennnnnz/flux.git fusion-dispatch`，金鑰認證為 allennnnnz），**沒有修改 remote 設定**。
   之後的 session 也照這個方式 push。分支：https://github.com/allennnnnz/flux/tree/fusion-dispatch
 
+## 2026-10-02（晚）· boss · 方向改為泛用決策器；計劃核准；交接
+
+- 使用者：查表只是可行性驗證，**泛用決策器更有價值**；要求查文獻、依現況設計，先擬計劃再執行。
+- 兩次網路文獻搜尋（約 100 篇，含 TensorRT-LLM / vLLM / NCCL 原始碼）→ `reports/20261002_related_work.md`（G0）。
+  - 重點一：現有系統的決策都是查表、手設門檻或窮舉，沒有人同時決定融合開關與 TP 切法，也沒有人展示推廣；
+  - 重點二：「物理模型 + 少量實測」推廣證據最好（KernelSight-LM、FlashOverlap、TileSight）；
+  - 重點三：NCCL 的時脈敏感度未見前人文獻。
+- 使用者要求解釋 cost model 的設計理由：已說明，並寫進計劃第 0 節。
+- **計劃核准**：`reports/20261002_plan_general_dispatcher.md`（G0–G6，附錄 A 為交接資訊）。
+- 使用者要開新 session 執行。新 session 從 STATUS §0 → 計劃 → 附錄 A.4 的 G1 開始。
+
