@@ -40,6 +40,10 @@ LAYERS = {
     "G-O": (12288, 12288),     # GPT-3 175B attention out
     "L-down": (8192, 28672),   # Llama-3-70B down_proj
     "L-O": (8192, 8192),       # Llama-3-70B o_proj
+    # G3 (2026-10-02): models the predictor has never seen (plan appendix A.4)
+    "Q-down": (8192, 29568),   # Qwen2.5-72B down_proj
+    "L8-O": (4096, 4096),      # Llama-3-8B o_proj
+    "L8-down": (4096, 14336),  # Llama-3-8B down_proj
 }
 ALL_ITEMS = ["A_fused", "B_nccl_cublas", "E_allreduce", "c_cublas", "c_nccl_rs", "c_nccl_ar", "c_fluxgemm"]
 GEMM_ITEMS = {"A_fused", "B_nccl_cublas", "E_allreduce", "c_cublas", "c_fluxgemm"}

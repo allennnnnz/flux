@@ -1,0 +1,11 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --node_rank=0 --nproc_per_node=4 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/calibrate_hw_v1.py --tag ag_smoke --groups ag --ag_shapes 2560x5120 --gemm_ms 16,2048 --modes gpu --rounds 5 --warmup 2 --warmup_first 5 --out_dir ws/fusion-dispatch/results/g3_smoke_tp4
+W1002 17:57:13.427000 134156 site-packages/torch/distributed/run.py:792] 
+W1002 17:57:13.427000 134156 site-packages/torch/distributed/run.py:792] *****************************************
+W1002 17:57:13.427000 134156 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1002 17:57:13.427000 134156 site-packages/torch/distributed/run.py:792] *****************************************
+[ag 2560x5120 M=16] setup + check
+[ag (2560, 5120) M=16 gpu] kept 5/5  c_cublas=0.0379  c_fluxgemm=0.0727  c_flux_ag=0.0742  A_fused=0.1270
+[ag 2560x5120 M=2048] setup + check
+[ag (2560, 5120) M=2048 gpu] kept 5/5  c_cublas=0.3154  c_fluxgemm=0.2673  c_flux_ag=0.1702  A_fused=0.3482
+wrote ws/fusion-dispatch/results/g3_smoke_tp4/raw_ag_smoke.csv  (0 s of timing)
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=ws/fusion-dispatch/results/g3_smoke_tp4/guard.log

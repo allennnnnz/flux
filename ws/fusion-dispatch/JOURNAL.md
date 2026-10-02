@@ -197,3 +197,21 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   - 探測量 > 15%（ε 掃描：5% 時 10–16%）；
   - GemmRS 參數抵換（gpu 版 η = 1.000 碰上限，RS 路徑 A MAPE 16.4%）→ G4 改用 gemm_only 家族參數。
 - **留給下個 session**：G3，照 STATUS §4 的 5 步。重點是量測前先把預測寫成檔案並 commit。
+
+## 2026-10-02（晚）· boss 兼 worker · G3 準備：4 卡 / 2 卡校準 + 預先登記預測
+
+- 新增 `scripts/launch_tp.sh`（前 TP 張卡；不改 `launch.sh`）；`run_calibration_v1.sh` 支援 `TP=<n>`。
+- 4 卡校準 3 分 4 秒、2 卡 2 分 33 秒，守衛全 CLEAN、正確性全過
+  → `common/cost_model/hw_profiles/css-host-158_tp{4,2}_{gpu,steady}.json`。
+  - 觀察：Flux AG 同步成本隨卡數近似線性（8 / 4 / 2 卡：0.053 / 0.033 / 0.014 ms），不是常數。
+- 新模型形狀加進 harness `LAYERS`：Q-GU、L8-QKV、L8-GU（AG）；Q-down、L8-O、L8-down（RS）。
+- **預先登記**：`scripts/predict_g3_v1.py` → `results/g3_predictions/predictions.csv`。
+  - 16 個 (卡數, 層) × 10 個 M × 2 模式 = 320 點；
+  - 記錄各路徑預測、選擇、要探測的點（ε = 校準 p90 規則：131 點；ε = 5% 變體：79 點）；
+  - 參數檔 sha256 記在 `predictions_meta.json`；
+  - 在量測前 commit / push。
+- 預先記下：
+  - G3 的點全都沒命中 Flux 登錄表，所以 PCIe 規則在 G3 測不到；
+  - 模型預測 4 卡 / 2 卡時 Flux 在 M = 256–512 起就勝出（8 卡要到 3072）。
+- 下一步：`tmux new -d -s g3map 'bash ws/fusion-dispatch/scripts/run_g3_map_v1.sh ws/fusion-dispatch/results/g3_map'`（約 1 小時），
+  完成後 `python3 ws/fusion-dispatch/scripts/eval_g3_v1.py`。

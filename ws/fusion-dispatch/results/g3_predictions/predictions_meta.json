@@ -1,0 +1,117 @@
+{
+ "script": "ws/fusion-dispatch/scripts/predict_g3_v1.py",
+ "date": "2026-10-02 18:04:03",
+ "git_head_before_commit": "1f7442a48fa7fd4346c2e7ac84704f1febaf6c9c",
+ "profiles_sha256": {
+  "common/cost_model/hw_profiles/css-host-158_tp2_gpu.json": "ff74e36fd509fb471bfb93150e3ef9f2fe83d35fafa21db5afba475dbf616dff",
+  "common/cost_model/hw_profiles/css-host-158_tp2_steady.json": "a5654d3401477f04d98e67134299481b1c85f14a36f6c71df72a3ac5e60237bd",
+  "common/cost_model/hw_profiles/css-host-158_tp4_gpu.json": "5b2c77b36197af93db8c0c342d0d96830bad34e5b5de50d9e7af88eafb983507",
+  "common/cost_model/hw_profiles/css-host-158_tp4_steady.json": "5c4d5bb5264ea5741533d860a615f13083a8463fa53ac3d1a0c5b8a8f7eed791",
+  "common/cost_model/hw_profiles/css-host-158_tp8_gpu.json": "11b5619f0ee3481fbcc93179814072fba86b1e39c7f2f6e96d324e970077af84",
+  "common/cost_model/hw_profiles/css-host-158_tp8_steady.json": "e209d911a5903072337ba16732b1a404f784926187cb74199bcb27a0e4fccbe7"
+ },
+ "configs": [
+  [
+   8,
+   "ag",
+   "Q-GU"
+  ],
+  [
+   8,
+   "rs",
+   "Q-down"
+  ],
+  [
+   8,
+   "ag",
+   "L8-QKV"
+  ],
+  [
+   8,
+   "ag",
+   "L8-GU"
+  ],
+  [
+   8,
+   "rs",
+   "L8-O"
+  ],
+  [
+   8,
+   "rs",
+   "L8-down"
+  ],
+  [
+   4,
+   "ag",
+   "L-QKV"
+  ],
+  [
+   4,
+   "ag",
+   "L-GU"
+  ],
+  [
+   4,
+   "rs",
+   "L-O"
+  ],
+  [
+   4,
+   "rs",
+   "L-down"
+  ],
+  [
+   4,
+   "ag",
+   "Q-GU"
+  ],
+  [
+   4,
+   "rs",
+   "Q-down"
+  ],
+  [
+   2,
+   "ag",
+   "L8-QKV"
+  ],
+  [
+   2,
+   "ag",
+   "L8-GU"
+  ],
+  [
+   2,
+   "rs",
+   "L8-O"
+  ],
+  [
+   2,
+   "rs",
+   "L8-down"
+  ]
+ ],
+ "Ms": [
+  16,
+  64,
+  136,
+  256,
+  512,
+  1024,
+  2048,
+  3072,
+  4096,
+  8192
+ ],
+ "modes": [
+  "gpu",
+  "steady"
+ ],
+ "n_points": 320,
+ "eps_rules": {
+  "hyb": "profile calibration_residual_p90",
+  "hyb5": 0.05
+ },
+ "rule": "predictions are frozen: G3 measurements are compared against this file, no parameter changes"
+}

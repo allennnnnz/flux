@@ -1,0 +1,9 @@
+[gpu] wrote common/cost_model/hw_profiles/css-host-158_tp4_gpu.json  alpha_sync=0.0330 ms  samples={'nccl': {'ag': 13, 'rs': 13, 'ar': 13}, 'flux_ag': 28, 'cublas': 25, 'flux_ag_gemm': 15, 'fused_ag': 15, 'fused_rs': 10}
+    fused_ag kappa=0.075 d_tail=0.0136  fused_rs alpha=0.0540 beta_scat=222 GB/s
+    gemm cublas: t0=16.8us bw=1.76TB/s eta=0.867 p=1.43 tile=64x64; flux_ag: t0=45.1us bw=1.25TB/s eta=0.834 p=28.02 tile=128x128; flux_rs: t0=0.0us bw=1.32TB/s eta=0.884 p=1.33 tile=128x128
+    calibration residual (in-sample, mean |rel err| by kind): {'cublas': 0.0456, 'flux_ag': 0.0066, 'flux_ag_gemm': 0.0899, 'fused_ag': 0.069, 'gemm_rs': 0.0341, 'nccl_ag': 0.0, 'nccl_ar': 0.0, 'nccl_rs': 0.0}  p90=10.7%
+[steady] wrote common/cost_model/hw_profiles/css-host-158_tp4_steady.json  alpha_sync=0.0330 ms  samples={'nccl': {'ag': 13, 'rs': 13, 'ar': 13}, 'flux_ag': 28, 'cublas': 25, 'flux_ag_gemm': 15, 'fused_ag': 15, 'fused_rs': 10}
+    fused_ag kappa=0.025 d_tail=0.0101  fused_rs alpha=0.0470 beta_scat=198 GB/s
+    gemm cublas: t0=8.9us bw=2.04TB/s eta=0.768 p=1.67 tile=64x64; flux_ag: t0=34.9us bw=1.26TB/s eta=0.783 p=29.75 tile=128x128; flux_rs: t0=0.0us bw=1.68TB/s eta=0.765 p=30.00 tile=128x128
+    calibration residual (in-sample, mean |rel err| by kind): {'cublas': 0.0497, 'flux_ag': 0.0009, 'flux_ag_gemm': 0.0761, 'fused_ag': 0.066, 'gemm_rs': 0.0282, 'nccl_ag': 0.0075, 'nccl_ar': 0.0, 'nccl_rs': 0.0011}  p90=10.7%
+guards: {'guard_ag_1536x16384.log': 'CLEAN', 'guard_ag_2560x5120.log': 'CLEAN', 'guard_ag_5120x10240.log': 'CLEAN', 'guard_comm.log': 'CLEAN', 'guard_rs_10240x1280.log': 'CLEAN', 'guard_rs_6144x2560.log': 'CLEAN'}

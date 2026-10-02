@@ -1,0 +1,252 @@
+{
+ "script": "ws/fusion-dispatch/scripts/calibrate_hw_v1.py",
+ "args": {
+  "modes": "gpu,steady",
+  "groups": "ag",
+  "tag": "ag_5120x10240",
+  "rounds": 200,
+  "rounds_steady_comm": 100,
+  "rounds_steady_gemm": 50,
+  "warmup": 30,
+  "warmup_first": 100,
+  "steady_L": 16,
+  "pad_cycles": 400000,
+  "flush_mb": 128,
+  "clock_period": 0.02,
+  "seed": 20261002,
+  "atol": 0.05,
+  "rtol": 0.05,
+  "out_dir": "ws/fusion-dispatch/results/g3_calibration_tp2",
+  "ag_shapes": "5120x10240",
+  "rs_shapes": "",
+  "gemm_ms": "",
+  "hang_dump_s": 0
+ },
+ "date": "2026-10-02 18:01:49",
+ "world": 2,
+ "torch": "2.6.0+cu124",
+ "nccl": "2.21.5",
+ "cublas_settings": {
+  "CUBLAS_WORKSPACE_CONFIG": null,
+  "deterministic": false,
+  "allow_bf16_reduced_precision_reduction": true
+ },
+ "comm_K": 6144,
+ "ag_shapes": [
+  [
+   2560,
+   5120
+  ],
+  [
+   5120,
+   10240
+  ],
+  [
+   1536,
+   16384
+  ]
+ ],
+ "rs_shapes": [
+  [
+   6144,
+   2560
+  ],
+  [
+   10240,
+   1280
+  ]
+ ],
+ "cases": [
+  {
+   "group": "ag",
+   "shape": [
+    5120,
+    10240
+   ],
+   "M": 16,
+   "check": {
+    "A_fused": true,
+    "c_fluxgemm": true,
+    "c_cublas": true,
+    "c_flux_ag": true
+   },
+   "timed": [
+    "c_cublas",
+    "c_fluxgemm",
+    "c_flux_ag",
+    "A_fused"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 200,
+     "kept": 200,
+     "modal_sm_clock_per_rank": [
+      1410,
+      1410
+     ]
+    },
+    "steady": {
+     "rounds": 50,
+     "kept": 50,
+     "modal_sm_clock_per_rank": [
+      1410,
+      1410
+     ]
+    }
+   }
+  },
+  {
+   "group": "ag",
+   "shape": [
+    5120,
+    10240
+   ],
+   "M": 128,
+   "check": {
+    "A_fused": true,
+    "c_fluxgemm": true,
+    "c_cublas": true,
+    "c_flux_ag": true
+   },
+   "timed": [
+    "c_cublas",
+    "c_fluxgemm",
+    "c_flux_ag",
+    "A_fused"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 200,
+     "kept": 200,
+     "modal_sm_clock_per_rank": [
+      1410,
+      1410
+     ]
+    },
+    "steady": {
+     "rounds": 50,
+     "kept": 50,
+     "modal_sm_clock_per_rank": [
+      1410,
+      1410
+     ]
+    }
+   }
+  },
+  {
+   "group": "ag",
+   "shape": [
+    5120,
+    10240
+   ],
+   "M": 512,
+   "check": {
+    "A_fused": true,
+    "c_fluxgemm": true,
+    "c_cublas": true,
+    "c_flux_ag": true
+   },
+   "timed": [
+    "c_cublas",
+    "c_fluxgemm",
+    "c_flux_ag",
+    "A_fused"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 200,
+     "kept": 200,
+     "modal_sm_clock_per_rank": [
+      1410,
+      1410
+     ]
+    },
+    "steady": {
+     "rounds": 50,
+     "kept": 50,
+     "modal_sm_clock_per_rank": [
+      1320,
+      1335
+     ]
+    }
+   }
+  },
+  {
+   "group": "ag",
+   "shape": [
+    5120,
+    10240
+   ],
+   "M": 2048,
+   "check": {
+    "A_fused": true,
+    "c_fluxgemm": true,
+    "c_cublas": true,
+    "c_flux_ag": true
+   },
+   "timed": [
+    "c_cublas",
+    "c_fluxgemm",
+    "c_flux_ag",
+    "A_fused"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 200,
+     "kept": 200,
+     "modal_sm_clock_per_rank": [
+      1395,
+      1410
+     ]
+    },
+    "steady": {
+     "rounds": 50,
+     "kept": 50,
+     "modal_sm_clock_per_rank": [
+      1230,
+      1275
+     ]
+    }
+   }
+  },
+  {
+   "group": "ag",
+   "shape": [
+    5120,
+    10240
+   ],
+   "M": 8192,
+   "check": {
+    "A_fused": true,
+    "c_fluxgemm": true,
+    "c_cublas": true,
+    "c_flux_ag": true
+   },
+   "timed": [
+    "c_cublas",
+    "c_fluxgemm",
+    "c_flux_ag",
+    "A_fused"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 200,
+     "kept": 200,
+     "modal_sm_clock_per_rank": [
+      1260,
+      1305
+     ]
+    },
+    "steady": {
+     "rounds": 50,
+     "kept": 50,
+     "modal_sm_clock_per_rank": [
+      1185,
+      1215
+     ]
+    }
+   }
+  }
+ ],
+ "wall_s": 26.90067148208618
+}

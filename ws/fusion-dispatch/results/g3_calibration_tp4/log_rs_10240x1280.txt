@@ -1,0 +1,17 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --node_rank=0 --nproc_per_node=4 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/calibrate_hw_v1.py --tag rs_10240x1280 --modes gpu,steady --out_dir ws/fusion-dispatch/results/g3_calibration_tp4 --groups rs --rs_shapes 10240x1280
+W1002 18:00:19.311000 150347 site-packages/torch/distributed/run.py:792] 
+W1002 18:00:19.311000 150347 site-packages/torch/distributed/run.py:792] *****************************************
+W1002 18:00:19.311000 150347 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1002 18:00:19.311000 150347 site-packages/torch/distributed/run.py:792] *****************************************
+[rs (10240, 1280) M=16 gpu] kept 150/200  c_cublas=0.0338  A_gemmrs=0.0768
+[rs (10240, 1280) M=16 steady] kept 50/50  c_cublas=0.0241  A_gemmrs=0.0586
+[rs (10240, 1280) M=128 gpu] kept 200/200  c_cublas=0.0379  A_gemmrs=0.0891
+[rs (10240, 1280) M=128 steady] kept 50/50  c_cublas=0.0281  A_gemmrs=0.0699
+[rs (10240, 1280) M=512 gpu] kept 200/200  c_cublas=0.0840  A_gemmrs=0.1403
+[rs (10240, 1280) M=512 steady] kept 50/50  c_cublas=0.0756  A_gemmrs=0.1219
+[rs (10240, 1280) M=2048 gpu] kept 200/200  c_cublas=0.2243  A_gemmrs=0.3205
+[rs (10240, 1280) M=2048 steady] kept 50/50  c_cublas=0.2386  A_gemmrs=0.3337
+[rs (10240, 1280) M=8192 gpu] kept 200/200  c_cublas=0.8817  A_gemmrs=1.1162
+[rs (10240, 1280) M=8192 steady] kept 50/50  c_cublas=0.9629  A_gemmrs=1.1857
+wrote ws/fusion-dispatch/results/g3_calibration_tp4/raw_rs_10240x1280.csv  (7 s of timing)
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=ws/fusion-dispatch/results/g3_calibration_tp4/guard_rs_10240x1280.log

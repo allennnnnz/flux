@@ -20,7 +20,7 @@ from collections import defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from predictor_data_v1 import REPO, W  # noqa: E402
+from predictor_data_v1 import REPO  # noqa: E402
 
 sys.path.insert(0, os.path.join(REPO, "common", "cost_model"))
 from predictor import FluxConfigs, fit_profile, predict_ag, predict_rs  # noqa: E402
@@ -28,6 +28,7 @@ from predictor.curves import Curve  # noqa: E402
 from predictor.overlap import fused_ag_time, fused_rs_time  # noqa: E402
 
 COMM_K = 6144
+W = 8  # set from meta_comm.json in main()
 
 
 def load_medians(cal_dir):
@@ -129,6 +130,8 @@ def main():
     ap.add_argument("cal_dir")
     ap.add_argument("--profiles_dir", default=os.path.join(REPO, "common", "cost_model", "hw_profiles"))
     a = ap.parse_args()
+    global W
+    W = json.load(open(os.path.join(a.cal_dir, "meta_comm.json")))["world"]
     med = load_medians(a.cal_dir)
     with open(os.path.join(a.cal_dir, "summary_calibration.csv"), "w", newline="") as f:
         w = csv.writer(f)

@@ -1,0 +1,33 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --node_rank=0 --nproc_per_node=4 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/calibrate_hw_v1.py --tag comm --modes gpu,steady --out_dir ws/fusion-dispatch/results/g3_calibration_tp4 --groups comm
+W1002 17:57:31.773000 134885 site-packages/torch/distributed/run.py:792] 
+W1002 17:57:31.773000 134885 site-packages/torch/distributed/run.py:792] *****************************************
+W1002 17:57:31.773000 134885 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1002 17:57:31.773000 134885 site-packages/torch/distributed/run.py:792] *****************************************
+[comm (2, 6144) M=8 gpu] kept 200/200  c_nccl_ag=0.0215  c_nccl_rs=0.0215  c_nccl_ar=0.0256  c_flux_ag=0.0613  ce_copy1=0.0106  ce_copy7=0.0186
+[comm (2, 6144) M=8 steady] kept 100/100  c_nccl_ag=0.0306  c_nccl_rs=0.0329  c_nccl_ar=0.0345  c_flux_ag=0.0580  ce_copy1=0.0110  ce_copy7=0.0320
+[comm (4, 6144) M=16 gpu] kept 200/200  c_nccl_ag=0.0215  c_nccl_rs=0.0225  c_nccl_ar=0.0297  c_flux_ag=0.0625  ce_copy1=0.0106  ce_copy7=0.0191
+[comm (4, 6144) M=16 steady] kept 100/100  c_nccl_ag=0.0322  c_nccl_rs=0.0340  c_nccl_ar=0.0359  c_flux_ag=0.0586  ce_copy1=0.0113  ce_copy7=0.0323
+[comm (8, 6144) M=32 gpu] kept 200/200  c_nccl_ag=0.0256  c_nccl_rs=0.0256  c_nccl_ar=0.0369  c_flux_ag=0.0629  ce_copy1=0.0126  ce_copy7=0.0250
+[comm (8, 6144) M=32 steady] kept 100/100  c_nccl_ag=0.0340  c_nccl_rs=0.0357  c_nccl_ar=0.0377  c_flux_ag=0.0587  ce_copy1=0.0113  ce_copy7=0.0325
+[comm (16, 6144) M=64 gpu] kept 200/200  c_nccl_ag=0.0369  c_nccl_rs=0.0379  c_nccl_ar=0.0440  c_flux_ag=0.0660  ce_copy1=0.0135  ce_copy7=0.0286
+[comm (16, 6144) M=64 steady] kept 100/100  c_nccl_ag=0.0343  c_nccl_rs=0.0357  c_nccl_ar=0.0379  c_flux_ag=0.0603  ce_copy1=0.0112  ce_copy7=0.0328
+[comm (32, 6144) M=128 gpu] kept 200/200  c_nccl_ag=0.0451  c_nccl_rs=0.0461  c_nccl_ar=0.0635  c_flux_ag=0.0712  ce_copy1=0.0155  ce_copy7=0.0332
+[comm (32, 6144) M=128 steady] kept 100/100  c_nccl_ag=0.0317  c_nccl_rs=0.0353  c_nccl_ar=0.0449  c_flux_ag=0.0629  ce_copy1=0.0096  ce_copy7=0.0279
+[comm (64, 6144) M=256 gpu] kept 200/200  c_nccl_ag=0.0696  c_nccl_rs=0.0686  c_nccl_ar=0.0788  c_flux_ag=0.0821  ce_copy1=0.0253  ce_copy7=0.0410
+[comm (64, 6144) M=256 steady] kept 100/100  c_nccl_ag=0.0599  c_nccl_rs=0.0556  c_nccl_ar=0.0599  c_flux_ag=0.0712  ce_copy1=0.0077  ce_copy7=0.0217
+[comm (128, 6144) M=512 gpu] kept 200/200  c_nccl_ag=0.0809  c_nccl_rs=0.0778  c_nccl_ar=0.1157  c_flux_ag=0.0955  ce_copy1=0.0309  ce_copy7=0.0543
+[comm (128, 6144) M=512 steady] kept 100/100  c_nccl_ag=0.0672  c_nccl_rs=0.0623  c_nccl_ar=0.0975  c_flux_ag=0.0805  ce_copy1=0.0107  ce_copy7=0.0351
+[comm (256, 6144) M=1024 gpu] kept 200/200  c_nccl_ag=0.1034  c_nccl_rs=0.1004  c_nccl_ar=0.1536  c_flux_ag=0.1180  ce_copy1=0.0370  ce_copy7=0.0718
+[comm (256, 6144) M=1024 steady] kept 100/100  c_nccl_ag=0.0947  c_nccl_rs=0.0871  c_nccl_ar=0.1374  c_flux_ag=0.0989  ce_copy1=0.0167  ce_copy7=0.0624
+[comm (512, 6144) M=2048 gpu] kept 200/200  c_nccl_ag=0.1495  c_nccl_rs=0.1454  c_nccl_ar=0.2376  c_flux_ag=0.1557  ce_copy1=0.0494  ce_copy7=0.1098
+[comm (512, 6144) M=2048 steady] kept 100/100  c_nccl_ag=0.1439  c_nccl_rs=0.1347  c_nccl_ar=0.2253  c_flux_ag=0.1349  ce_copy1=0.0284  ce_copy7=0.0918
+[comm (1024, 6144) M=4096 gpu] kept 200/200  c_nccl_ag=0.2519  c_nccl_rs=0.2355  c_nccl_ar=0.4127  c_flux_ag=0.2342  ce_copy1=0.0722  ce_copy7=0.1816
+[comm (1024, 6144) M=4096 steady] kept 100/100  c_nccl_ag=0.2454  c_nccl_rs=0.2284  c_nccl_ar=0.4007  c_flux_ag=0.2158  ce_copy1=0.0521  ce_copy7=0.1553
+[comm (2048, 6144) M=8192 gpu] kept 200/200  c_nccl_ag=0.4598  c_nccl_rs=0.4239  c_nccl_ar=0.7721  c_flux_ag=0.3883  ce_copy1=0.1168  ce_copy7=0.3196
+[comm (2048, 6144) M=8192 steady] kept 100/100  c_nccl_ag=0.4521  c_nccl_rs=0.4169  c_nccl_ar=0.7598  c_flux_ag=0.3742  ce_copy1=0.0994  ce_copy7=0.3099
+[comm (4096, 6144) M=16384 gpu] kept 200/200  c_nccl_ag=0.8387  c_nccl_rs=0.7772  c_nccl_ar=1.4469  c_flux_ag=0.6851  ce_copy1=0.2004  ce_copy7=0.5875
+[comm (4096, 6144) M=16384 steady] kept 100/100  c_nccl_ag=0.8325  c_nccl_rs=0.7708  c_nccl_ar=1.4387  c_flux_ag=0.6861  ce_copy1=0.1940  ce_copy7=0.5870
+[comm (8192, 6144) M=32768 gpu] kept 200/200  c_nccl_ag=1.6230  c_nccl_rs=1.5104  c_nccl_ar=2.8273  c_flux_ag=1.3084  ce_copy1=0.3889  ce_copy7=1.1550
+[comm (8192, 6144) M=32768 steady] kept 100/100  c_nccl_ag=1.6136  c_nccl_rs=1.5070  c_nccl_ar=2.8171  c_flux_ag=1.3087  ce_copy1=0.3832  ce_copy7=1.2100
+wrote ws/fusion-dispatch/results/g3_calibration_tp4/raw_comm.csv  (59 s of timing)
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=ws/fusion-dispatch/results/g3_calibration_tp4/guard_comm.log

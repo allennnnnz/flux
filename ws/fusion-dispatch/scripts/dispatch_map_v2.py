@@ -70,6 +70,10 @@ LAYERS = {
     "L-GU": (57344, 8192),      # Llama-3-70B gate+up
     "P0-4096": (4096, 12288),   # Phase 0 anchor shape
     "P0-8192": (8192, 12288),   # Phase 0 anchor shape
+    # G3 (2026-10-02): models the predictor has never seen (plan appendix A.4)
+    "Q-GU": (59136, 8192),      # Qwen2.5-72B gate+up (ffn 29568); its QKV / O equal Llama-3-70B's
+    "L8-QKV": (6144, 4096),     # Llama-3-8B QKV, 32 heads + 2 x 8 kv heads, head_dim 128
+    "L8-GU": (28672, 4096),     # Llama-3-8B gate+up (ffn 14336)
 }
 
 ALL_ITEMS = ["A_fused", "B_nccl_cublas", "C_fluxag_cublas", "D_fluxag_fluxgemm",

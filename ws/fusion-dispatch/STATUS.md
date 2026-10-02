@@ -20,7 +20,12 @@
   - 加少量實測把關後 ≤ 0.12%；
 - 探測量 22–23%，仍高於 G4 目標 15%。
 
-**下一步：G3**（需 GPU 約 2–3 小時）。
+**G3 進行中（2026-10-02 18:05 起）**：
+- 4 卡 / 2 卡校準完成；
+- 預測已預先登記並 push（`results/g3_predictions/`）；
+- op 地圖量測在 tmux `g3map` 中跑（`results/g3_map/run_log.txt`，可中斷續跑），完成後跑 `scripts/eval_g3_v1.py`。
+
+**G3 原計劃**（需 GPU 約 1–2 小時）。
 - 新模型（Qwen2.5-72B、Llama-3-8B）與 TP=4 / 2 的 op 地圖（M 子集）+ 一組 block 驗證；
 - 先寫 `scripts/launch_tp.sh`（不要改 `launch.sh`）；
 - TP=4 / 2 先跑 4 分鐘校準（`run_calibration_v1.sh` 加卡數參數）；

@@ -1,0 +1,8 @@
+[G2] start 2026-10-02 17:57:30  TP=4  extra args: 
+[G2] comm exit 0 17:58:38 2026-10-02 17:58:38 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G2] ag_2560x5120 exit 0 17:58:58 2026-10-02 17:58:58 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G2] ag_5120x10240 exit 0 17:59:34 2026-10-02 17:59:34 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G2] ag_1536x16384 exit 0 18:00:01 2026-10-02 18:00:01 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G2] rs_6144x2560 exit 0 18:00:17 2026-10-02 18:00:17 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G2] rs_10240x1280 exit 0 18:00:34 2026-10-02 18:00:34 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G2] done 2026-10-02 18:00:34
