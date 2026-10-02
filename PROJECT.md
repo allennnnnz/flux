@@ -12,18 +12,21 @@ Phase 0 背景：`docs/PHASE0_FINDINGS.md`（設計規則）；細節才看 `doc
 ## 1. 目前狀態一句話
 
 Phase 0 結案。A100 雙通道方案取消（DECISIONS D-001）。2026-09-29 與教授討論後新增
-`ws/fusion-dispatch`（何時不開 Flux 比開好），列為最高優先（D-006）。E0–E3 完成：
-decode 大小（M ≤ 512）四層都是不開 Flux 較快，每層查表的決策器 regret 0–2%；**待 auditor**。
-其餘三個 workstream 尚未有 worker session 進場。
+`ws/fusion-dispatch`（何時不開 Flux 比開好），列為最高優先（D-006）。查表版決策器完成並驗證；
+第三階段（泛用決策器，D-008）**G1 完成**：
+- 只用物理模型的預測器，在沒看過的模型 / 量測模式上 op 層級 regret 0.03–2.29%（關卡 ≤ 3% 通過）；
+- 融合 kernel 的重疊可由 tile 排程模擬算出，順帶解釋了 diag-overlap 的 N=4096 現象 **[推論]**。
+
+下一步 G2（約 10 分鐘 GPU 校準）。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
 
 ## 2. Workstream 總表
 
 | workstream | 優先 | 狀態 | 依賴 | 負責 session | 最近更新 |
 | --- | --- | --- | --- | --- | --- |
-| `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器（計劃已核准，G0 完成，下一步 G1）**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-02 |
+| `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器，G0、G1 完成（G1 關卡通過，`reports/20261002_g1_predictor.md`），下一步 G2**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-02 |
 | `ws/diag-overlap` | 第二 | 未開始 | — | 未指派 | — |
 | `ws/hetero-proxy` | 第二，可與上並行 | 未開始 | — | 未指派 | — |
-| `ws/cost-model` | 第三 | 模型目標由 fusion-dispatch 第三階段執行（預測器在 `common/cost_model/predictor/`，D-008） | — | 未指派 | 2026-10-02 |
+| `ws/cost-model` | 第三 | 模型目標由 fusion-dispatch 第三階段執行；預測器 v1 已建於 `common/cost_model/predictor/`（G1，D-008） | — | 未指派 | 2026-10-02 |
 
 各 workstream 的目標、步驤、成功標準寫在各自的 `STATUS.md` 第 1 節，由 boss 在建立時
 寫入，worker 不改目標、只更新進度。以下是簡述。
@@ -65,11 +68,15 @@ worker 在 JOURNAL 標「需 boss 裁決」的事項會被 boss 搬到這裡。
 | 2026-09-30 → 10-02 更新 | Phase 0 E.1「Flux AG 比 NCCL 快 13–22%」：原腳本 10/02 完全重現；與本 ws 的差異來自 SM 時脈狀態（原腳本量 NCCL 時 GPU 在 1155 MHz；NCCL 受 SM 時脈影響、Flux copy engine 不受）。**建議改寫為「依時脈狀態而定」，不撤回**。 | fusion-dispatch 驗證報告 V6 | 待裁決 |
 | 2026-10-02 | 量測一律經 `common/measure/exclusive_guard.py`（使用者要求確保獨佔）。建議寫入 `CLAUDE.md` 5.1。 | fusion-dispatch 驗證報告 V12 | 待裁決 |
 | 2026-09-30 | Flux `AGKernel.forward` 不能被 CUDA graph capture（cp_stream 未 join）；`use_cuda_core_local` / CUDA-core AG 皆不支援 bf16。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch F0.4、F2 報告 | 待裁決 |
+| 2026-10-02 | **給 ws/diag-overlap 的假說**（fusion-dispatch G1）[推論]：<br>• 現象：Phase 0 N=4096（每卡 n=512、K=12288、M=4096）幾乎不重疊。<br>• 原因：融合 GEMM 只有 128 個 tile（1.19 波），預設 config 是 stream-K，每個 block 都要等最晚到的 shard。<br>• 模型對沒看過的 P0-4096 / P0-8192 預測藏住 3% / 70%，實測 7% / 65%。<br>• 預測：換 data-parallel + RasterAlongN config 可降到 0.54–0.58 ms（目標 < 0.55）。<br>• 驗證：指定 config 量 A 與 gemm_only，並用 nsys 看 CTA 開始時間。 | fusion-dispatch G1 報告 3.5 | 待 diag-overlap 進場時處理 |
+| 2026-10-02 | Flux 登錄表 `// PCIE` 區段的 config 優先生效（emplace 第一筆），在本機 NVLink 上 GEMM 比 cuBLAS 慢 1.23–1.58×（G-FC1 M=1024、L-GU / L-QKV M=4096）。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch G1 報告第 4 節 | 待裁決 |
 | 2026-09-30 | `flux.testing.initialize_distributed()` → `init_seed()` 把 cuBLAS 設成非 production（launch 13 → 71 µs、部分形狀 +26%），任何 Flux vs torch 比較都偏向 Flux。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch E0 報告第 1 節 | 待裁決 |
 
 ## 4. 下一步（boss）
 
-0. `ws/fusion-dispatch`：安排 auditor 審 `reports/20260929_e0_anchor.md` 與 `reports/20260930_e1_e3_dispatch_map.md`；之後做 E5（GEMM+RS）與 E4（CUDA graph）。
+0. `ws/fusion-dispatch`：
+   - 第三階段 G2（校準微基準 → 只用微基準擬合 → 重跑 G1 評估），之後 G3–G6；
+   - 安排 auditor 審 E0、E1–E3 與 G1 報告。
 1. 指派第一個 worker session 到 `ws/diag-overlap`。
 2. `ws/hetero-proxy` 可同時開一個 worker，先做 1a/1b 兩項補充量測。
 3. 兩者各有第一份 report 後，安排 auditor。

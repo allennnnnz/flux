@@ -1,6 +1,8 @@
 Supersedes: （無）
 
-> 狀態：**已核准（使用者，2026-10-02）**，尚未執行。原始計劃檔：`~/.claude/plans/jazzy-gliding-blossom.md`（本檔為 repo 內權威副本）。
+> 狀態：**已核准（使用者，2026-10-02）**；執行中：G0、G1 完成（`reports/20261002_g1_predictor.md`，關卡通過），下一步 G2。
+> G1 修正：計劃第 3 節第 3 步「非 registry config 一律探測」實測太貴（42–62%），且真正的斷崖來自登錄表 PCIe 區段的 config；改為「PCIe 調校 config 才探測」，G3 重驗。
+> 原始計劃檔：`~/.claude/plans/jazzy-gliding-blossom.md`（本檔為 repo 內權威副本）。
 > 新 session：先讀本檔與 `STATUS.md` §0，再讀 `reports/20261002_related_work.md`。
 
 # 計劃：泛用決策器（Flux 開關 + 資料切法）

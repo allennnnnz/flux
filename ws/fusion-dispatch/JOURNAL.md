@@ -144,3 +144,28 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - **計劃核准**：`reports/20261002_plan_general_dispatcher.md`（G0–G6，附錄 A 為交接資訊）。
 - 使用者要開新 session 執行。新 session 從 STATUS §0 → 計劃 → 附錄 A.4 的 G1 開始。
 
+
+## 2026-10-02（晚）· boss 兼 worker · 第三階段 G1：預測器 + 推廣測試（不需 GPU）
+
+- **做了什麼**：
+  - 建 `common/cost_model/predictor/`（純 Python）：分段 α-β 通訊、roofline + tile 補齊的 GEMM、Flux config 查詢、融合 kernel 排程模擬、GemmRS 模型、JSON 參數檔；
+  - 腳本 `scripts/predictor_data_v1.py`、`eval_predictor_v1.py`、`rf_baseline_v1.py`；
+  - 結果 `results/g1_predictor/`；報告 `reports/20261002_g1_predictor.md`。
+- **結果**：
+  - 只用預測器，B（GPT-3 ↔ Llama）、D（gpu ↔ steady）軸的 op 層級 regret 為 0.03–2.29%，**G1 關卡（≤ 3%）通過**；
+  - 混合把關後 AG 0.08–0.25%，但探測 14–28%。
+- **過程中修正的東西**（都記在報告裡）：
+  1. 一開始讓 kernel 啟動時間 t_k 自由擬合，GPT-3 訓練得到 0.11 ms，但 nsys 只有 0.03–0.05 ms
+     → 改用 nsys 的 31.7 µs + bytes / 838 GB/s，另加競爭係數 κ（用穩健損失）。
+  2. Flux GEMM 擬合出的有效頻寬曾到 2.19 TB/s，超過 HBM 上限（CLAUDE.md 5.1.4）→ 加上限 2.039 TB/s。
+  3. 計劃原定「預設 config 就實測」太貴（42–62%）；真正的斷崖是登錄表 `// PCIE` 區段的 config
+     → 新增 hyb+pcie 規則。**這是看過結果才定的，要在 G3 重驗。**
+  4. 風險探測要和「最好的非 Flux-GEMM 路徑」比，否則前兩名都是有斷崖的 Flux 路徑時抓不到。
+- **意外發現**：
+  - 排程模擬解釋了為何 M ≤ 2048 不重疊；
+  - 對沒看過的 Phase 0 形狀也預測對，可能就是 diag-overlap 要找的原因 **[推論]**；
+  - 給 diag-overlap 的可驗證假說：換 data-parallel config 預測 0.54–0.58 ms。
+  - **需 boss 裁決**：是否轉給 diag-overlap（已寫進 PROJECT 第 3 節；本 ws 不改他們的檔案）。
+- **卡在哪 / 留給下個 session**：
+  - G2 要 GPU，約 10 分鐘量測：照 STATUS §4 的 G2 清單寫 `calibrate_hw_v1.py`，只用微基準擬合後重跑評估；
+  - 記得經 `exclusive_guard.py`、放 tmux。

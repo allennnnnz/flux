@@ -3,8 +3,8 @@
 **本 workstream 唯一權威。** 第 1 節由 boss 寫入，worker 不改；第 2 節起由 worker 維護。
 
 建立：2026-09-29（boss）
-最後更新：2026-10-02（boss）
-狀態：**E0 進行中**（D-006：最高優先；有證據前不改 `src/`）
+最後更新：2026-10-02（boss 兼 worker，G1 完成）
+狀態：**第三階段（泛用決策器）G1 完成，下一步 G2**（D-006 / D-008：最高優先；有證據前不改 `src/`）
 
 ---
 
@@ -12,15 +12,27 @@
 
 最後更新：2026-10-02
 
-**一句話**：決策器已完成並驗證。以真正的 vLLM 0.8.5 為對照（Llama-3-70B、TP=8、4 / 80 個 block）：
-- prefill 快 9.3–17.7%；
-- decode M ≤ 384 選 vLLM 預設（同速），M=512 快 10–14%；
-- regret ≈ 0。
+**一句話**：查表版決策器已完成並驗證（對真 vLLM 0.8.5：prefill 快 9.3–17.7%，decode M ≤ 384 同速、M=512 快 10–14%，regret ≈ 0）。
+第三階段（泛用決策器）**G0、G1 完成**：
+- 只用物理模型的預測器，在沒看過的模型（GPT-3 ↔ Llama）與另一種量測模式上，op 層級 regret 為 0.03–2.29%；
+- **G1 關卡（≤ 3%）通過**；
+- 加少量實測把關後，AG 側降到 0.08–0.25%，但探測量 14–28%，高於 G4 目標 15%。
 
-**下一步（2026-10-02 使用者決定）**：先做**泛用決策器**（第三階段 G0–G6），F4（vLLM 端到端）延後，之後直接用泛用版。
-- 計劃：`reports/20261002_plan_general_dispatcher.md`（已核准，含附錄 A：數據清單、指令、坑、各階段第一步）；
-- 文獻：`reports/20261002_related_work.md`（G0 已完成）；
-- **從 G1 開始**：只用既有數據建預測器，不需要 GPU。
+**下一步：G2**（需要 GPU，約 10 分鐘量測）。
+- 寫 `scripts/calibrate_hw_v1.py`：通訊每種原語掃約 15 個大小、GEMM 少數形狀，gpu / steady 兩種狀態；
+- 改成**只用微基準**擬合（不再用決策表的元件欄），重跑 `scripts/eval_predictor_v1.py` 的評估；
+- 一律經 `exclusive_guard.py`，放 tmux。
+
+**G1 的重點**（`reports/20261002_g1_predictor.md`）：
+1. 融合 kernel 能否「邊傳邊算」，可從 CUTLASS stream-K 的 tile 排程直接模擬出來，不必擬合重疊比例：
+   - 融合時間中位誤差 0.8–1.6%；
+   - 自己算出 M ≤ 2048 不重疊、≥ 3072 才重疊；
+   - 對沒看過的 Phase 0 形狀也對（N=4096 藏住 3% vs 實測 7%；N=8192 70% vs 65%）。
+2. 剩下的大錯誤都是 Flux 登錄表中「PCIe 區段」的 config，在本機慢 12–58%。
+   用它當風險訊號實測可抓到，但這條規則是看過結果才定的，要在 G3 重新驗證。
+3. 隨機森林在量過的形狀上準，換新形狀就退化（3.6–4.7%）；預測器維持 1.4–2.3%。
+
+計劃：`reports/20261002_plan_general_dispatcher.md`（含附錄 A）。文獻：`reports/20261002_related_work.md`。
 
 **決策器怎麼決定**：查表，全部來自實測。
 - 離線校準：每種層形狀 × 每個 M，量每條路徑，排序存成 JSON；
@@ -42,6 +54,7 @@
 | `reports/20261002_f4_feasibility.md` | 本機可做 vLLM 端到端；整合計劃 |
 | `reports/20261002_related_work.md` | 約 100 篇相關工作；缺口與定位 |
 | `reports/20261002_plan_general_dispatcher.md` | **第三階段計劃（泛用決策器）** |
+| `reports/20261002_g1_predictor.md` | **G1：預測器與推廣測試（關卡通過）；融合 kernel 排程模擬** |
 
 **環境**：
 - Flux 量測：`pixi run --manifest-path pixi.toml ./launch.sh <script>`。
@@ -51,11 +64,16 @@
 - 長時間工作放 tmux（例如 `tmux new -d -s X 'bash ...'`），斷線也不會停。
 - git：工作分支 `fusion-dispatch`；push 用 SSH 網址 `git@github.com:allennnnnz/flux.git`（origin 的 HTTPS 沒有憑證）。
 
+**預測器怎麼用**：`common/cost_model/predictor/`（純 Python，系統 python3 即可）。
+- 重跑 G1 評估：`python3 ws/fusion-dispatch/scripts/eval_predictor_v1.py`，約 45 秒，結果寫到 `results/g1_predictor/`；
+- 參數檔：`results/g1_predictor/profile_g1_all_{gpu,steady}.json`。
+
 **待使用者 / boss 決定**（細節見 PROJECT.md 第 3 節）：
 1. 是否有其他型號 GPU 可做跨機器驗證（問教授）；
 2. 是否開獨立 auditor session；
 3. `CLAUDE.md` 是否加入守衛規則與三條陷阱；
-4. `PHASE0_FINDINGS.md` 2.6 是否改寫為「依 SM 時脈而定」。
+4. `PHASE0_FINDINGS.md` 2.6 是否改寫為「依 SM 時脈而定」；
+5. （新）G1 對 diag-overlap 的假說：Phase 0 N=4096 不重疊是 stream-K 排程造成，換 data-parallel config 預測可降到 0.54–0.58 ms。是否轉給 diag-overlap。
 
 ---
 
@@ -143,7 +161,7 @@ D `fluxag_fluxgemm`（串行，診斷）· A\* `fused_tuned`（條件性，需 r
 
 ## 2. 目前成立（worker 維護）
 
-最後更新：2026-09-30。報告：`reports/20260929_e0_anchor.md`（E0）、`reports/20260930_e1_e3_dispatch_map.md`（E1–E3）。
+最後更新：2026-10-02（加第三階段 G1）。報告：`reports/20260929_e0_anchor.md`（E0）、`reports/20260930_e1_e3_dispatch_map.md`（E1–E3）。
 **尚未經 auditor 審查。**
 
 1. **decode 大小的 M 不開 Flux 較快，四層一致。**
@@ -231,6 +249,38 @@ E5 的 Llama 兩層結果在 `results/e5_rs_map_v1/`。**全部尚未經 auditor
     - 原版 vLLM 0.8.5 V1 跑通：Llama-3-70B dummy、TP=8、batch 64 × 1024 + 128，平均 3.591 s，5 次 ±0.2%；
     - 需釘選 transformers 4.51.3，並使用 Qwen2.5 tokenizer。
 
+### 第三階段 G1（2026-10-02，`reports/20261002_g1_predictor.md`，尚未經 auditor 審查）
+
+來源：`results/g1_predictor/`（`scripts/eval_predictor_v1.py`，不需 GPU，重跑結果完全相同）。
+
+29. **預測器推廣**：只用預測器（不量測）的 op 層級 regret。
+
+    | 軸 | AG 側 | RS 側 |
+    | --- | --- | --- |
+    | GPT-3 → Llama | 1.40% / 1.58%（gpu / steady） | 0.03% / 0.12% |
+    | Llama → GPT-3 | 2.29% / 1.95% | 0.13% / 0.14% |
+    | gpu ↔ steady | 1.74% / 2.04% | 0.15% / 0.11% |
+    | 沒量過的 M | 2.32% / 2.09% | 0.31% / 0.34% |
+
+    - 對照：固定門檻（M ≤ 512 不開）AG 1.99–4.80%；永遠開 5.2–10.3%。
+    - **G1 關卡（B、D ≤ 3%）通過。**
+30. **混合（預測 + 實測把關）**：AG 側 0.08–0.25%、RS 側 0–0.11%，探測 14–28% 的點。
+    - 計劃原定「Flux 用預設 config 就實測」要量 42–62%，太貴；
+    - 改成「用 PCIe 調校 config 才實測」（看過結果才定，G3 要重驗）。
+31. **融合 AG+GEMM 的時間可由 tile 排程模擬算出**（CUTLASS stream-K + Flux 列輪轉 + 每 tile 等 shard，逐行照原始碼）：
+    - 用實測元件時，中位誤差 0.8%（gpu）/ 1.6%（steady）；
+    - 自己算出 M ≤ 2048 不重疊、≥ 3072 才重疊。原因 **[程式碼 + 模型]**：
+      stream-K 工作量 ≲ 1.5 波時，每個 block 都碰到最晚的 shard；
+    - 沒看過的 Phase 0 形狀：P0-4096 M=4096 藏住 3%（實測 7%），P0-8192 70%（實測 65%），決策全對；
+    - **[推論]** diag-overlap 的「N=4096 只重疊約 2%」就是這個原因。換 data-parallel config 預測可從 0.681 降到 0.54–0.58 ms。
+32. **斷崖來源**：模型最大的錯誤（G-FC1 M=1024 45%、L-GU M=4096 16%）都是登錄表 `// PCIE` 區段的條目
+    （本機 Flux GEMM 比 cuBLAS 慢 1.23–1.58×）。「這些是為 PCIe 拓撲調的」是從區段標題推得 **[推論]**。
+33. **限制**：
+    - 融合比串行慢的點（M=136 / 264、G-QKV 2048、G-FC1 3072）模型不含；
+    - 重疊期間 GEMM 變慢比例 κ 依訓練集為 0–0.125，不穩定；
+    - 每 SM 多個 block 時低估重疊；
+    - gpu ↔ steady 的差異主要是量測方式而非時脈，NCCL 時脈修正無法從 E1 數據擬合（γ = 0）。
+
 ## 3. 撤回表（worker 維護）
 
 | 撤回主張 | 出處 | 原因 | 替代 |
@@ -245,7 +295,26 @@ E5 的 Llama 兩層結果在 `results/e5_rs_map_v1/`。**全部尚未經 auditor
 ## 4. 下一步（worker 維護）
 
 **00.（2026-10-02 起）第三階段：泛用決策器。** 照 `reports/20261002_plan_general_dispatcher.md` 的 G1 → G6 進行。
-G0 已完成，下一個是 G1（不需 GPU）。每階段結束：更新 §0、JOURNAL、PROJECT，commit 並用 SSH push。
+每階段結束：更新 §0、JOURNAL、PROJECT，commit 並用 SSH push。
+
+- ✅ G0 文獻（`reports/20261002_related_work.md`）。
+- ✅ G1 預測器（`reports/20261002_g1_predictor.md`），關卡通過。
+- **G2（下一個，需 GPU 約 10 分鐘）**：
+  - 寫 `scripts/calibrate_hw_v1.py`：
+    - 通訊：重用 `ag_latency_v1.py`，NCCL AG / RS / AR 與 Flux AG 各約 15 個大小；
+    - Flux 單筆 copy 的掃描（給 TP 外推用）；
+    - GEMM：cuBLAS、Flux gemm_only、GemmRS 在 2–3 個形狀 × 少數 M（重用 `dispatch_map_v2.run_mode`）；
+    - gpu 與 steady 兩種狀態各一次。
+  - 產生 `common/cost_model/hw_profiles/css-host-158_tp8_{light,sustained}.json`。
+  - 用 `predictor.profile.fit_profile` **只用微基準**擬合，對全部既有實測重跑 `eval_predictor_v1.py`
+    （加一個「profile 從檔案讀入」的選項）。
+  - 一律經 `exclusive_guard.py`、放 tmux。
+- G2 / G4 要處理的 G1 遺留：
+  1. 探測量降到 ≤ 15%：較小的 ε 或「預期損失」規則；
+  2. κ 的不穩定（考慮讓競爭項依形狀而定）；
+  3. 多 block 共用 SM 時重疊低估；
+  4. GemmRS 參數抵換。
+- G3：PCIe 調校 config 規則，在新模型與 TP=4 上**先預測、後量測**，不得回頭調參。
 
 **0. ✅ 驗證輪完成（2026-10-02）**，見 `reports/20260930_verification.md`。下一步前需使用者確認。
 影響後續設計的結論：

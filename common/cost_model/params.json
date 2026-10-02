@@ -286,5 +286,67 @@
     "overlap": {
       "_note": "ws/diag-overlap writes signal-arrival / CTA-start distributions and any recovered overlap numbers here."
     }
+  },
+  "flux_dispatch_g1": {
+    "_source": "ws/fusion-dispatch/reports/20261002_g1_predictor.md; results/g1_predictor/",
+    "_date": "2026-10-02",
+    "_status": "derived from existing measurements (model fit, no new GPU runs); NOT yet audited",
+    "fused_ag_kernel_start_us": {
+      "value": "31.7 + local_shard_bytes / 838 GB/s",
+      "status": "derived",
+      "source": "ws/fusion-dispatch/results/v8_nsys/parse_all.txt + results/e2_nsys/parse_G-FC1.txt (A_fused gemm_start_minus_comm_start_us, 14 points)",
+      "method": "least-squares line of GEMM-kernel start after the first copy vs local shard bytes"
+    },
+    "fused_ag_d_tail_ms": {
+      "gpu": 0.0145,
+      "steady": 0.0113,
+      "status": "derived",
+      "source": "results/final_ag_points.csv",
+      "method": "median of (Flux AG + gemm_only - fused) over shapes where one tile row spans all shards (no overlap possible): fixed cost the fused op saves"
+    },
+    "fused_ag_overlap_rule": {
+      "value": "Flux sm80 AGKernel hides communication only when the CUTLASS stream-K schedule leaves late-arriving rows to later waves; with the fallback stream-K config this needs > ~1.5 waves of work (here M >= 3072); data-parallel configs overlap earlier",
+      "status": "inferred (code + schedule simulation; matches nsys V8 and E1 D-A)",
+      "evidence": "schedule model fed with measured components: fused-time median error 0.8% (gpu) / 1.6% (steady); unseen P0-4096 M=4096 hidden 3% vs measured 7%, P0-8192 M=4096 70% vs 65%",
+      "how_to_verify": "nsys per-CTA start times, or force a data-parallel RasterAlongN config for P0-4096 (predicted fused 0.54-0.58 ms vs measured 0.681)",
+      "owner_to_verify": "ws/diag-overlap"
+    },
+    "flux_registry_pcie_section_configs": {
+      "value": "registry entries under '// PCIE' win (emplace, first entry); on this NVLink machine their GEMM is 1.23-1.58x cuBLAS at G-FC1 M=1024, L-QKV M=4096, L-GU M=4096",
+      "status": "measured (GEMM times, results/final_ag_points.csv); 'tuned for PCIe' is inferred from the section heading",
+      "source": "src/ag_gemm/tuning_config/config_ag_gemm_kernel_sm80_A100_tp8_nnodes1.cu; include/flux/op_registry.h:98-106"
+    },
+    "predictor_op_regret_pct": {
+      "_note": "op-level regret of the predictor alone (no probes), AG / RS side; test rows never used for fitting",
+      "gpt3_to_llama": {
+        "gpu": [
+          1.4,
+          0.03
+        ],
+        "steady": [
+          1.58,
+          0.12
+        ]
+      },
+      "llama_to_gpt3": {
+        "gpu": [
+          2.29,
+          0.13
+        ],
+        "steady": [
+          1.95,
+          0.14
+        ]
+      },
+      "gpu_to_steady": [
+        1.74,
+        0.15
+      ],
+      "steady_to_gpu": [
+        2.04,
+        0.11
+      ],
+      "source": "results/g1_predictor/eval_summary.csv (policy=pred)"
+    }
   }
 }
