@@ -35,6 +35,16 @@
   唯一明顯出錯在 M = 1024（+7.9%）。→ 在這台，決策器多贏的很少；它的價值要在別的硬體 / 連線上證明。
 - 比較圖：`reports/20261003_g4_strategy_compare.html`。
 
+**新節點 css-host-159（2026-10-03，唯讀盤點 `results/node159_inventory/`）**：
+- 跟本機相同：8× A100-SXM4-80GB、NVSwitch、驅動 615.71.09；GPU 閒置；`ssh rogerlee@10.2.131.159` 免密碼。
+- 兩台之間：8 條 100 GbE RoCE（每張 GPU 一條，約 12.5 GB/s，約 NVLink 單對 270 GB/s 的 1/20）。
+  **第 4 條不通**：本機 `mlx5_3`（enp95s0f1np1）沒有 IPv4，ping 10.10.4.159 失敗。
+- 本機 Flux 編譯時有開 NVSHMEM，也有跨節點 op（`AGKernelInterNode`、`GemmRSInterNode`）→ Flux 有機會跨兩台跑（未驗證）。
+- 159 的 repo 是舊的 main，沒有建好的環境；環境約 15 GB（pixi 7.0G、vLLM venv 7.7G），路徑相同，可從本機直接複製。
+- **坑**：159 的 `~/.bashrc` 把自編 NCCL 2.26.2 放進 `LD_LIBRARY_PATH`（本機 torch 用 2.21.5），非互動 ssh 也會吃到。
+- 用途：E4「跨節點」= Flux 能跑、連線又慢，正好能回答 gpu1 回答不了的核心問題。計劃待使用者核准。
+- gpu1（4× V100 PCIe）Flux 不能跑（`src/cuda/op_registry.cu:39-51` 只收 A100 / L20 / H20 / H800），只能做縮小版，優先度降低。
+
 **下一步**：
 1. **跨機器驗證（使用者提供 gpu1，優先）**：照報告第 3 節，對手規則 R1–R3 已凍結；
    成功 = 決策器重新校準後 regret ≤ 2%，且至少一個環境簡單規則 ≥ 5%。

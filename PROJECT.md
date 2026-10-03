@@ -26,7 +26,7 @@ G4 之後的事後分析（`ws/fusion-dispatch/reports/20261003_g4_flux_value.md
 - decode 輸在切法；
 - 在這台，簡單規則「decode vLLM、prefill Flux」幾乎跟決策器一樣好（省 7.5% vs 8.0%），所以決策器的價值要在別的硬體上證明。
 
-下一步：**跨機器驗證**。使用者提供 gpu1（EE325）；**2026-10-03 唯讀盤點完成：4× V100-PCIE（sm70）、無 NVLink，Flux 不能跑 → 只能做縮小版（切法 + 校準可攜性），核心問題需要 sm80+ 無 NVLink 的機器，待使用者決定**（`ws/fusion-dispatch/reports/20261003_gpu1_inventory.md`）；對手規則與成功標準已凍結。F4 / G6 待決定。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
+下一步：**跨機器驗證**。使用者提供 gpu1（EE325）；**2026-10-03 唯讀盤點完成：4× V100-PCIE（sm70）、無 NVLink，Flux 不能跑 → 只能做縮小版（切法 + 校準可攜性），核心問題需要 sm80+ 無 NVLink 的機器，待使用者決定**（`ws/fusion-dispatch/reports/20261003_gpu1_inventory.md`）；使用者另外提供 **css-host-159**（同型 8× A100，與本機以 8 條 100 GbE RoCE 相連，唯讀盤點 `ws/fusion-dispatch/results/node159_inventory/`），可做跨節點驗證（Flux 能跑、連線慢），計劃待核准；對手規則與成功標準已凍結。F4 / G6 待決定。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
 
 ## 2. Workstream 總表
 

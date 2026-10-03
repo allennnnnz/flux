@@ -302,3 +302,16 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   3. CLAUDE.md 第 2 節是 css-host-158 專屬；多機器後建議改成「各機器環境」小節。
 - **留給下個 session**：等使用者決定 gpu1 做不做縮小版（或找 sm80+ 無 NVLink 機器 / 先做 E0）。
   若做：先寫 `exclusive_guard_v2.py`，再建 venv（快取放 `/home`），腳本改 v2（fp16、Flux 可選、`gpu1_tp*_*.json`）。
+
+## 2026-10-03 · boss 兼 worker（css-host-158）· 新節點 css-host-159 唯讀盤點
+
+- 讀了 gpu1 session 的盤點（`reports/20261003_gpu1_inventory.md`），核對 `src/cuda/op_registry.cu:39-51`：
+  Flux 只接受 sm80 / 89 / 90，而且 SM 數要是 92 / 108 / 78 / 132（L20 / A100 / H20 / H800）。V100 不行。
+- 也確認 `exclusive_guard.py` 的 CPU 用量是 `ps pcpu`（生命期平均），**本機也有同樣的盲點**；名稱截斷只影響 gpu1。
+- 使用者提供新節點 css-host-159（`rogerlee@10.2.131.159`）。唯讀盤點（`results/node159_inventory/`）：
+  - 跟本機同硬體、同驅動，GPU 閒置；
+  - 兩台之間 8 條 100 GbE RoCE，第 4 條不通（本機 `mlx5_3` 沒有 IPv4）；
+  - 本機 Flux 有 NVSHMEM 與跨節點 op；159 只有舊 repo、沒有環境；
+  - 159 的 `~/.bashrc` 會把自編 NCCL 2.26.2 放進 `LD_LIBRARY_PATH`。
+- 沒有在 159 安裝或執行任何東西。
+- **留給下個 session**：使用者核准後，照 STATUS §0 做 E4（跨節點）：複製環境 → 守衛 v2（雙節點）→ 錨點 → Flux 跨節點冒煙測試。

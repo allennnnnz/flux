@@ -1,0 +1,33 @@
+2026-10-03 15:18:56
+26ee1b0 Add pixi single-node Flux environment
+main
+ls: cannot access '.pixi/envs/*': No such file or directory
+ls: cannot access 'build': No such file or directory
+pixi
+/dev/nvme0n1p2  3.5T  3.1T  219G  94% /
+-- users / procs
+USER                 %CPU     ELAPSED COMMAND
+rogerlee              212       00:01 node
+root                  6.2       00:00 sshd
+rogerlee              2.2       35:50 MainThread
+root                  0.7  1-22:26:48 nv-hostengine
+rogerlee              0.4       36:06 code-2242ebbb54
+root                  0.1  1-22:27:15 rcu_preempt
+rogerlee              0.1  1-22:26:39 tailscaled
+root                  0.1  1-22:27:07 nvswi1
+root                  0.1  1-22:27:06 nvswi3
+root                  0.1  1-22:27:06 nvswi5
+root                  0.1  1-22:27:07 nvswi2
+root                  0.1  1-22:27:06 nvswi4
+root                  0.1  1-22:26:45 containerd
+root                  0.1  1-22:27:08 nvswi0
+-- bashrc NCCL lines
+11:export NCCL_DIR=/home/rogerlee/code/develope/nccl
+12:export LD_LIBRARY_PATH=${NCCL_DIR}/build/lib:$LD_LIBRARY_PATH
+13:export PATH=$PATH:${NCCL_DIR}/build/bin
+14:export NCCL_HOME=${NCCL_DIR}/build
+libnccl.so
+libnccl.so.2
+libnccl.so.2.26.2
+libnccl_static.a
+pkgconfig

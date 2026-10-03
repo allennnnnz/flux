@@ -1,0 +1,6 @@
+NVSHMEM_HOME:UNINITIALIZED=/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/nvidia/nvshmem
+ENABLE_NVSHMEM:INTERNAL=ON
+7.0G	.pixi
+381M	build
+125M	python
+7.7G	/home/rogerlee/venvs/vllm085-flux

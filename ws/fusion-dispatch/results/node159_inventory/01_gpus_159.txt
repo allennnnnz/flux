@@ -1,0 +1,14 @@
+2026-10-03 15:18:45
+css-host-159
+6.8.0-146-generic
+ 11:18:45 up 1 day, 22:27,  2 users,  load average: 0.53, 0.61, 0.63
+index, name, memory.total [MiB], driver_version, compute_cap, clocks.max.sm [MHz], persistence_mode
+0, NVIDIA A100-SXM4-80GB, 81920 MiB, 615.71.09, 8.0, 1410 MHz, Enabled
+1, NVIDIA A100-SXM4-80GB, 81920 MiB, 615.71.09, 8.0, 1410 MHz, Enabled
+2, NVIDIA A100-SXM4-80GB, 81920 MiB, 615.71.09, 8.0, 1410 MHz, Enabled
+3, NVIDIA A100-SXM4-80GB, 81920 MiB, 615.71.09, 8.0, 1410 MHz, Enabled
+4, NVIDIA A100-SXM4-80GB, 81920 MiB, 615.71.09, 8.0, 1410 MHz, Enabled
+5, NVIDIA A100-SXM4-80GB, 81920 MiB, 615.71.09, 8.0, 1410 MHz, Enabled
+6, NVIDIA A100-SXM4-80GB, 81920 MiB, 615.71.09, 8.0, 1410 MHz, Enabled
+7, NVIDIA A100-SXM4-80GB, 81920 MiB, 615.71.09, 8.0, 1410 MHz, Enabled
+pid, process_name, used_gpu_memory [MiB]

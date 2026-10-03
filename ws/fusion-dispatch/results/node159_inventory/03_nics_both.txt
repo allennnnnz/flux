@@ -1,0 +1,72 @@
+== css-host-158
+mlx5_0    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp29s0f0np0 
+mlx5_1    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp29s0f1np1 
+mlx5_2    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp95s0f0np0 
+mlx5_3    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp95s0f1np1 
+mlx5_4    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp150s0f0np0 
+mlx5_5    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp150s0f1np1 
+mlx5_6    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp205s0f0np0 
+mlx5_7    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp205s0f1np1 
+-- ip (non-lo, up)
+eth5             UP             10.2.131.158/23 metric 100 fe80::8261:5fff:fe14:d270/64 
+enp29s0f0np0     UP             10.10.1.158/24 fe80::bace:f6ff:fe7c:6bf8/64 
+enp29s0f1np1     UP             10.10.2.158/24 fe80::bace:f6ff:fe7c:6bf9/64 
+enp95s0f0np0     UP             10.10.3.158/24 fe80::bace:f6ff:feb6:8c0/64 
+enp95s0f1np1     UP             fe80::bace:f6ff:feb6:8c1/64 
+enp150s0f0np0    UP             10.10.5.158/24 fe80::bace:f6ff:fe91:b240/64 
+enp150s0f1np1    UP             10.10.6.158/24 fe80::bace:f6ff:fe91:b241/64 
+enp205s0f0np0    UP             10.10.7.158/24 fe80::bace:f6ff:fe72:b110/64 
+enp205s0f1np1    UP             10.10.8.158/24 fe80::bace:f6ff:fe72:b111/64 
+-- tools
+/usr/sbin/ibstat
+/usr/bin/ibv_devinfo
+/usr/bin/ib_write_bw
+/usr/bin/mpirun
+-- nccl ib env
+== css-host-159
+mlx5_0    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp29s0f0np0 
+mlx5_1    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp29s0f1np1 
+mlx5_10   port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp95s0f0v0 
+mlx5_11   port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp95s0f1v0 
+mlx5_12   port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp150s0f0v0 
+mlx5_13   port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp150s0f1v0 
+mlx5_14   port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp205s0f0v0 
+mlx5_15   port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp205s0f1v0 
+mlx5_2    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp95s0f0np0 
+mlx5_3    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp95s0f1np1 
+mlx5_4    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp150s0f0np0 
+mlx5_5    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp150s0f1np1 
+mlx5_6    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp205s0f0np0 
+mlx5_7    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp205s0f1np1 
+mlx5_8    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp29s0f0v0 
+mlx5_9    port1 Ethernet   100 Gb/sec (4X EDR)    ACTIVE   netdev=enp29s0f1v0 
+-- ip (non-lo, up)
+ens13f0          UP             
+ens13f1          UP             10.2.131.159/23 metric 100 fe80::8261:5fff:fe14:d2da/64 
+enp29s0f0np0     UP             10.10.1.159/24 fe80::bace:f6ff:fe72:b298/64 
+enp29s0f1np1     UP             10.10.2.159/24 fe80::bace:f6ff:fe72:b299/64 
+enp95s0f0np0     UP             10.10.3.159/24 fe80::bace:f6ff:fe91:b21c/64 
+enp95s0f1np1     UP             10.10.4.159/24 fe80::bace:f6ff:fe91:b21d/64 
+enp150s0f0np0    UP             10.10.5.159/24 fe80::bace:f6ff:fe7c:5e10/64 
+enp150s0f1np1    UP             10.10.6.159/24 fe80::bace:f6ff:fe7c:5e11/64 
+enp205s0f0np0    UP             10.10.7.159/24 fe80::bace:f6ff:feb6:8c4/64 
+enp205s0f1np1    UP             10.10.8.159/24 fe80::bace:f6ff:feb6:8c5/64 
+br_ocp           UP             10.11.12.4/24 fe80::6573:a32e:5d5c:e1df/64 
+enp29s0f0v0      UP             
+enp29s0f1v0      UP             
+enp95s0f0v0      UP             
+enp95s0f1v0      UP             
+enp150s0f0v0     UP             
+enp150s0f1v0     UP             
+enp205s0f0v0     UP             
+enp205s0f1v0     UP             
+-- tools
+/usr/sbin/ibstat
+/usr/bin/ibv_devinfo
+/usr/bin/ib_write_bw
+/usr/bin/mpirun
+-- nccl ib env
+NCCL_DIR=/home/rogerlee/code/develope/nccl
+NCCL_HOME=/home/rogerlee/code/develope/nccl/build
+LD_LIBRARY_PATH=/home/rogerlee/code/develope/nccl/build/lib:
+PATH=/usr/local/cuda-12.4/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rogerlee/code/develope/nccl/build/bin
