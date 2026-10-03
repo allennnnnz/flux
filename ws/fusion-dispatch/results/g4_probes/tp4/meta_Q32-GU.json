@@ -1,0 +1,518 @@
+{
+ "runs": [
+  {
+   "script": "ws/fusion-dispatch/scripts/dispatch_map_v2.py",
+   "cublas_settings": {
+    "CUBLAS_WORKSPACE_CONFIG": null,
+    "deterministic": false,
+    "allow_bf16_reduced_precision_reduction": true,
+    "allow_tf32": false
+   },
+   "args": {
+    "layer": "Q32-GU",
+    "Ms": "384,768,1536,2560,6144",
+    "max_m": 6144,
+    "modes": "gpu",
+    "items": "A_fused,B_nccl_cublas,C_fluxag_cublas,D_fluxag_fluxgemm",
+    "rounds": 30,
+    "warmup": 30,
+    "steady_L": 16,
+    "pad_cycles": 400000,
+    "flush_mb": 128,
+    "clock_period": 0.02,
+    "seed": 20260929,
+    "atol": 0.05,
+    "rtol": 0.05,
+    "out_dir": "/home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp4"
+   },
+   "date": "2026-10-03 04:03:05",
+   "layer": {
+    "name": "Q32-GU",
+    "N": 55296,
+    "K": 5120,
+    "n_per_rank": 13824
+   },
+   "world": 4,
+   "dtype": "torch.bfloat16",
+   "max_m": 6144,
+   "torch": "2.6.0+cu124",
+   "nccl": "2.21.5",
+   "env": {
+    "CUDA_DEVICE_MAX_CONNECTIONS": "1",
+    "NCCL_ALGO": null,
+    "NCCL_PROTO": null,
+    "NVSHMEM_DISABLE_CUDA_VMM": "1",
+    "FLUX_TUNE_CONFIG_FILE": null
+   },
+   "cases": {
+    "384": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.00782155990600586,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.00783228874206543,
+       "error": ""
+      },
+      "C_fluxag_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.00783228874206543,
+       "error": ""
+      },
+      "D_fluxag_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.00782155990600586,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "C_fluxag_cublas",
+      "D_fluxag_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1155,
+        1410,
+        1155
+       ]
+      }
+     }
+    },
+    "768": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.007827043533325195,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.007834672927856445,
+       "error": ""
+      },
+      "C_fluxag_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.007834672927856445,
+       "error": ""
+      },
+      "D_fluxag_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.007827043533325195,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "C_fluxag_cublas",
+      "D_fluxag_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      }
+     }
+    },
+    "1536": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.01367807388305664,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.01367807388305664,
+       "error": ""
+      },
+      "C_fluxag_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.01367807388305664,
+       "error": ""
+      },
+      "D_fluxag_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.01367807388305664,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "C_fluxag_cublas",
+      "D_fluxag_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1395,
+        1410,
+        1395,
+        1410
+       ]
+      }
+     }
+    },
+    "2560": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.007824897766113281,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.007840871810913086,
+       "error": ""
+      },
+      "C_fluxag_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.007840871810913086,
+       "error": ""
+      },
+      "D_fluxag_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.007824897766113281,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "C_fluxag_cublas",
+      "D_fluxag_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1350,
+        1380,
+        1350,
+        1350
+       ]
+      }
+     }
+    },
+    "6144": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.011573314666748047,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.011573314666748047,
+       "error": ""
+      },
+      "C_fluxag_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.011573314666748047,
+       "error": ""
+      },
+      "D_fluxag_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.011573314666748047,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "C_fluxag_cublas",
+      "D_fluxag_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1275,
+        1335,
+        1305,
+        1305
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "script": "ws/fusion-dispatch/scripts/dispatch_map_v2.py",
+   "cublas_settings": {
+    "CUBLAS_WORKSPACE_CONFIG": null,
+    "deterministic": false,
+    "allow_bf16_reduced_precision_reduction": true,
+    "allow_tf32": false
+   },
+   "args": {
+    "layer": "Q32-GU",
+    "Ms": "384,768,1536,2560,6144",
+    "max_m": 6144,
+    "modes": "steady",
+    "items": "A_fused,B_nccl_cublas,C_fluxag_cublas,D_fluxag_fluxgemm",
+    "rounds": 30,
+    "warmup": 30,
+    "steady_L": 16,
+    "pad_cycles": 400000,
+    "flush_mb": 128,
+    "clock_period": 0.02,
+    "seed": 20260929,
+    "atol": 0.05,
+    "rtol": 0.05,
+    "out_dir": "/home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp4"
+   },
+   "date": "2026-10-03 04:03:17",
+   "layer": {
+    "name": "Q32-GU",
+    "N": 55296,
+    "K": 5120,
+    "n_per_rank": 13824
+   },
+   "world": 4,
+   "dtype": "torch.bfloat16",
+   "max_m": 6144,
+   "torch": "2.6.0+cu124",
+   "nccl": "2.21.5",
+   "env": {
+    "CUDA_DEVICE_MAX_CONNECTIONS": "1",
+    "NCCL_ALGO": null,
+    "NCCL_PROTO": null,
+    "NVSHMEM_DISABLE_CUDA_VMM": "1",
+    "FLUX_TUNE_CONFIG_FILE": null
+   },
+   "cases": {
+    "384": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.007825374603271484,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.007837057113647461,
+       "error": ""
+      },
+      "C_fluxag_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.007837057113647461,
+       "error": ""
+      },
+      "D_fluxag_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.007825374603271484,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "C_fluxag_cublas",
+      "D_fluxag_fluxgemm"
+     ],
+     "modes": {
+      "steady": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1365,
+        1395,
+        1365,
+        1395
+       ]
+      }
+     }
+    },
+    "768": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.010230541229248047,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.010230541229248047,
+       "error": ""
+      },
+      "C_fluxag_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.010230541229248047,
+       "error": ""
+      },
+      "D_fluxag_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.010230541229248047,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "C_fluxag_cublas",
+      "D_fluxag_fluxgemm"
+     ],
+     "modes": {
+      "steady": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1275,
+        1320,
+        1290,
+        1305
+       ]
+      }
+     }
+    },
+    "1536": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.013554573059082031,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.013554573059082031,
+       "error": ""
+      },
+      "C_fluxag_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.013554573059082031,
+       "error": ""
+      },
+      "D_fluxag_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.013554573059082031,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "C_fluxag_cublas",
+      "D_fluxag_fluxgemm"
+     ],
+     "modes": {
+      "steady": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1260,
+        1305,
+        1275,
+        1290
+       ]
+      }
+     }
+    },
+    "2560": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.013010501861572266,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.013010501861572266,
+       "error": ""
+      },
+      "C_fluxag_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.013010501861572266,
+       "error": ""
+      },
+      "D_fluxag_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.013010501861572266,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "C_fluxag_cublas",
+      "D_fluxag_fluxgemm"
+     ],
+     "modes": {
+      "steady": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1230,
+        1275,
+        1245,
+        1245
+       ]
+      }
+     }
+    },
+    "6144": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.012885093688964844,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.012885093688964844,
+       "error": ""
+      },
+      "C_fluxag_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.012885093688964844,
+       "error": ""
+      },
+      "D_fluxag_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.012885093688964844,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "C_fluxag_cublas",
+      "D_fluxag_fluxgemm"
+     ],
+     "modes": {
+      "steady": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1185,
+        1245,
+        1215,
+        1215
+       ]
+      }
+     }
+    }
+   }
+  }
+ ]
+}

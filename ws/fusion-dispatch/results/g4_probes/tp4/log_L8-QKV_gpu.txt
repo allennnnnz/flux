@@ -1,0 +1,42 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --node_rank=0 --nproc_per_node=4 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/dispatch_map_v2.py --layer L8-QKV --Ms 384,768,1536 --max_m 1536 --modes gpu --items A_fused,B_nccl_cublas,C_fluxag_cublas --rounds 30 --warmup 30 --clock_period 0.02 --out_dir /home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp4
+W1003 04:02:18.102000 622692 site-packages/torch/distributed/run.py:792] 
+W1003 04:02:18.102000 622692 site-packages/torch/distributed/run.py:792] *****************************************
+W1003 04:02:18.102000 622692 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1003 04:02:18.102000 622692 site-packages/torch/distributed/run.py:792] *****************************************
+[L8-QKV M=384] correctness: all ok
+
+[L8-QKV N=6144 K=4096 M=384 mode=gpu] kept 30/30  modal clock [None, 1155, 1155, None]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.1352    0.1260    0.1597    0.0731
+  B_nccl_cublas           0.1249    0.1178    0.1597    0.0913
+  C_fluxag_cublas         0.1347    0.1270    0.1516    0.0870
+  per-round diff                  median       p10       p90
+  A - B                           0.0113   -0.0041    0.0256
+  A - C                           0.0041   -0.0102    0.0246
+  C - B                           0.0092   -0.0113    0.0205
+[L8-QKV M=768] correctness: all ok
+
+[L8-QKV N=6144 K=4096 M=768 mode=gpu] kept 30/30  modal clock [None, 1410, None, None]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.1551    0.1413    0.1741    0.0699
+  B_nccl_cublas           0.1454    0.1362    0.1638    0.0895
+  C_fluxag_cublas         0.1592    0.1516    0.1761    0.0817
+  per-round diff                  median       p10       p90
+  A - B                           0.0092   -0.0113    0.0276
+  A - C                          -0.0061   -0.0205    0.0195
+  C - B                           0.0143    0.0061    0.0389
+[L8-QKV M=1536] correctness: all ok
+
+[L8-QKV N=6144 K=4096 M=1536 mode=gpu] kept 30/30  modal clock [None, None, None, None]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.2084    0.1915    0.2427    0.0693
+  B_nccl_cublas           0.1981    0.1935    0.2161    0.0807
+  C_fluxag_cublas         0.2191    0.2028    0.2365    0.0820
+  per-round diff                  median       p10       p90
+  A - B                           0.0102   -0.0102    0.0389
+  A - C                          -0.0097   -0.0307    0.0246
+  C - B                           0.0200   -0.0041    0.0379
+
+wrote /home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp4/raw_L8-QKV.csv
+wrote /home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp4/meta_L8-QKV.json
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp4/guard_L8-QKV_gpu.log

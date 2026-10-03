@@ -1,0 +1,318 @@
+{
+ "runs": [
+  {
+   "script": "ws/fusion-dispatch/scripts/dispatch_map_rs_v1.py",
+   "args": {
+    "layer": "L8-down",
+    "Ms": "96,200,768",
+    "max_m": 768,
+    "modes": "gpu",
+    "items": "A_fused,B_nccl_cublas",
+    "rounds": 30,
+    "warmup": 30,
+    "steady_L": 16,
+    "pad_cycles": 400000,
+    "flush_mb": 128,
+    "clock_period": 0.02,
+    "seed": 20260930,
+    "atol": 0.1,
+    "rtol": 0.05,
+    "out_dir": "/home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp4"
+   },
+   "date": "2026-10-03 04:02:44",
+   "layer": {
+    "name": "L8-down",
+    "N": 4096,
+    "K_full": 14336,
+    "k_per_rank": 3584
+   },
+   "world": 4,
+   "max_m": 768,
+   "cublas_settings": {
+    "CUBLAS_WORKSPACE_CONFIG": null,
+    "deterministic": false,
+    "allow_bf16_reduced_precision_reduction": true
+   },
+   "nccl": "2.21.5",
+   "cases": {
+    "96": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.02197408676147461,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.04058361053466797,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        null,
+        null,
+        null,
+        null
+       ]
+      }
+     }
+    },
+    "200": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.024758338928222656,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0412297248840332,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        null,
+        null,
+        null,
+        null
+       ]
+      }
+     }
+    },
+    "768": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.025094032287597656,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.039711952209472656,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        null,
+        null,
+        null,
+        null
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "script": "ws/fusion-dispatch/scripts/dispatch_map_rs_v1.py",
+   "args": {
+    "layer": "L8-down",
+    "Ms": "96,200,384,768,1536",
+    "max_m": 1536,
+    "modes": "steady",
+    "items": "A_fused,B_nccl_cublas",
+    "rounds": 30,
+    "warmup": 30,
+    "steady_L": 16,
+    "pad_cycles": 400000,
+    "flush_mb": 128,
+    "clock_period": 0.02,
+    "seed": 20260930,
+    "atol": 0.1,
+    "rtol": 0.05,
+    "out_dir": "/home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp4"
+   },
+   "date": "2026-10-03 04:02:54",
+   "layer": {
+    "name": "L8-down",
+    "N": 4096,
+    "K_full": 14336,
+    "k_per_rank": 3584
+   },
+   "world": 4,
+   "max_m": 1536,
+   "cublas_settings": {
+    "CUBLAS_WORKSPACE_CONFIG": null,
+    "deterministic": false,
+    "allow_bf16_reduced_precision_reduction": true
+   },
+   "nccl": "2.21.5",
+   "cases": {
+    "96": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.022240161895751953,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.032198429107666016,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas"
+     ],
+     "modes": {
+      "steady": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1155,
+        1320,
+        1155,
+        1290
+       ]
+      }
+     }
+    },
+    "200": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.026472091674804688,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.03651618957519531,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas"
+     ],
+     "modes": {
+      "steady": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1290
+       ]
+      }
+     }
+    },
+    "384": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.026548385620117188,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.04000377655029297,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas"
+     ],
+     "modes": {
+      "steady": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      }
+     }
+    },
+    "768": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.026810646057128906,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.03974771499633789,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas"
+     ],
+     "modes": {
+      "steady": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      }
+     }
+    },
+    "1536": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.02695941925048828,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0407562255859375,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas"
+     ],
+     "modes": {
+      "steady": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        1380,
+        1395,
+        1380,
+        1380
+       ]
+      }
+     }
+    }
+   }
+  }
+ ]
+}

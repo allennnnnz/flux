@@ -1,0 +1,193 @@
+tp,model,side,layer,M,mode,pick_pred_g3,pick_pred_g4m,pick_g4,pick_g4_probe,pick_g4_probe3,probed3,pick_thr512,probe_medians
+8,qwen2.5-32b,ag,Q32-QKV,24,gpu,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-QKV,96,gpu,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-QKV,200,gpu,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-QKV,384,gpu,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-QKV,768,gpu,B,B,B,B,B,0,A,
+8,qwen2.5-32b,ag,Q32-QKV,1536,gpu,B,B,B,B,B,0,A,
+8,qwen2.5-32b,ag,Q32-QKV,2560,gpu,B,B,B,B,B,0,A,A=0.3640 B=0.3564
+8,qwen2.5-32b,ag,Q32-QKV,6144,gpu,A,A,A,A,A,0,A,
+8,qwen2.5-32b,ag,Q32-GU,24,gpu,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-GU,96,gpu,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-GU,200,gpu,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-GU,384,gpu,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-GU,768,gpu,B,B,B,A,A,1,A,A=0.4188 B=0.4239
+8,qwen2.5-32b,ag,Q32-GU,1536,gpu,B,B,B,B,B,0,A,B=0.5376 C=0.5724
+8,qwen2.5-32b,ag,Q32-GU,2560,gpu,B,B,B,B,B,0,A,B=0.8371 C=0.8740
+8,qwen2.5-32b,ag,Q32-GU,6144,gpu,A,A,A,A,A,0,A,A=1.8411 B=1.9210
+8,qwen2.5-32b,rs,Q32-O,24,gpu,B,B,B,B,B,0,B,
+8,qwen2.5-32b,rs,Q32-O,96,gpu,A,B,B,B,B,0,B,
+8,qwen2.5-32b,rs,Q32-O,200,gpu,A,A,A,B,A,0,B,A=0.0850 B=0.0809
+8,qwen2.5-32b,rs,Q32-O,384,gpu,A,A,A,A,A,0,B,
+8,qwen2.5-32b,rs,Q32-O,768,gpu,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-O,1536,gpu,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-O,2560,gpu,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-O,6144,gpu,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-down,24,gpu,B,B,B,B,B,0,B,
+8,qwen2.5-32b,rs,Q32-down,96,gpu,B,B,B,B,B,0,B,A=0.1039 B=0.0978
+8,qwen2.5-32b,rs,Q32-down,200,gpu,B,A,B,B,B,1,B,A=0.1249 B=0.1244
+8,qwen2.5-32b,rs,Q32-down,384,gpu,A,A,B,A,A,1,B,A=0.1638 B=0.1812
+8,qwen2.5-32b,rs,Q32-down,768,gpu,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-down,1536,gpu,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-down,2560,gpu,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-down,6144,gpu,A,A,A,A,A,0,A,
+8,qwen2.5-32b,ag,Q32-QKV,24,steady,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-QKV,96,steady,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-QKV,200,steady,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-QKV,384,steady,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-QKV,768,steady,B,B,B,B,B,0,A,
+8,qwen2.5-32b,ag,Q32-QKV,1536,steady,B,B,B,B,B,0,A,
+8,qwen2.5-32b,ag,Q32-QKV,2560,steady,B,B,B,B,B,0,A,A=0.3113 B=0.2986
+8,qwen2.5-32b,ag,Q32-QKV,6144,steady,A,A,A,A,A,0,A,
+8,qwen2.5-32b,ag,Q32-GU,24,steady,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-GU,96,steady,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-GU,200,steady,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-GU,384,steady,B,B,B,B,B,0,B,
+8,qwen2.5-32b,ag,Q32-GU,768,steady,B,B,B,A,A,1,A,A=0.3449 B=0.3453
+8,qwen2.5-32b,ag,Q32-GU,1536,steady,B,B,B,B,B,0,A,B=0.5559 C=0.5823
+8,qwen2.5-32b,ag,Q32-GU,2560,steady,A,A,B,B,B,1,A,B=0.8942 C=0.9150
+8,qwen2.5-32b,ag,Q32-GU,6144,steady,A,A,A,A,A,1,A,A=1.9365 B=2.0334
+8,qwen2.5-32b,rs,Q32-O,24,steady,B,B,B,A,B,0,B,A=0.0499 B=0.0539
+8,qwen2.5-32b,rs,Q32-O,96,steady,B,B,A,A,A,1,B,A=0.0475 B=0.0623
+8,qwen2.5-32b,rs,Q32-O,200,steady,B,A,A,A,A,0,B,A=0.0567 B=0.0644
+8,qwen2.5-32b,rs,Q32-O,384,steady,A,A,A,A,A,0,B,
+8,qwen2.5-32b,rs,Q32-O,768,steady,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-O,1536,steady,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-O,2560,steady,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-O,6144,steady,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-down,24,steady,B,B,B,B,B,0,B,
+8,qwen2.5-32b,rs,Q32-down,96,steady,B,B,B,B,B,0,B,
+8,qwen2.5-32b,rs,Q32-down,200,steady,A,A,B,B,B,0,B,A=0.1130 B=0.1107
+8,qwen2.5-32b,rs,Q32-down,384,steady,A,A,B,B,B,0,B,
+8,qwen2.5-32b,rs,Q32-down,768,steady,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-down,1536,steady,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-down,2560,steady,A,A,A,A,A,0,A,
+8,qwen2.5-32b,rs,Q32-down,6144,steady,A,A,A,A,A,0,A,
+4,qwen2.5-32b,ag,Q32-QKV,24,gpu,B,B,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-QKV,96,gpu,B,B,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-QKV,200,gpu,B,B,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-QKV,384,gpu,B,B,B,B,B,0,B,B=0.1485 C=0.1541
+4,qwen2.5-32b,ag,Q32-QKV,768,gpu,B,B,B,B,B,0,A,A=0.1956 B=0.1864
+4,qwen2.5-32b,ag,Q32-QKV,1536,gpu,B,B,B,B,B,0,A,A=0.2560 B=0.2529
+4,qwen2.5-32b,ag,Q32-QKV,2560,gpu,A,A,A,A,A,0,A,
+4,qwen2.5-32b,ag,Q32-QKV,6144,gpu,A,A,A,A,A,0,A,
+4,qwen2.5-32b,ag,Q32-GU,24,gpu,B,B,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-GU,96,gpu,B,B,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-GU,200,gpu,A,A,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-GU,384,gpu,A,A,A,A,A,0,B,A=0.3533 D=0.3702
+4,qwen2.5-32b,ag,Q32-GU,768,gpu,B,B,B,B,B,0,A,B=0.4782 C=0.4971
+4,qwen2.5-32b,ag,Q32-GU,1536,gpu,B,B,B,B,B,1,A,B=0.8975 C=0.9042
+4,qwen2.5-32b,ag,Q32-GU,2560,gpu,B,B,B,B,B,1,A,B=1.4950 C=1.4961
+4,qwen2.5-32b,ag,Q32-GU,6144,gpu,A,A,C,C,C,1,A,B=3.6541 C=3.6398
+4,qwen2.5-32b,rs,Q32-O,24,gpu,B,B,B,B,B,0,B,
+4,qwen2.5-32b,rs,Q32-O,96,gpu,B,B,B,B,B,0,B,
+4,qwen2.5-32b,rs,Q32-O,200,gpu,A,A,A,A,A,0,B,A=0.0932 B=0.1065
+4,qwen2.5-32b,rs,Q32-O,384,gpu,A,A,A,A,A,0,B,
+4,qwen2.5-32b,rs,Q32-O,768,gpu,A,A,A,A,A,0,A,
+4,qwen2.5-32b,rs,Q32-O,1536,gpu,A,A,A,A,A,0,A,
+4,qwen2.5-32b,rs,Q32-O,2560,gpu,A,A,A,A,A,0,A,
+4,qwen2.5-32b,rs,Q32-O,6144,gpu,A,A,A,A,A,0,A,
+4,qwen2.5-32b,rs,Q32-down,24,gpu,B,B,B,B,B,0,B,
+4,qwen2.5-32b,rs,Q32-down,96,gpu,B,B,B,B,B,1,B,A=0.1331 B=0.1260
+4,qwen2.5-32b,rs,Q32-down,200,gpu,A,A,B,A,B,0,B,A=0.1859 B=0.1966
+4,qwen2.5-32b,rs,Q32-down,384,gpu,A,A,B,B,B,0,B,
+4,qwen2.5-32b,rs,Q32-down,768,gpu,A,A,A,A,A,0,A,
+4,qwen2.5-32b,rs,Q32-down,1536,gpu,A,A,A,A,A,0,A,A=0.5192 B=0.5811
+4,qwen2.5-32b,rs,Q32-down,2560,gpu,A,A,A,A,A,0,A,A=0.7721 B=0.8412
+4,qwen2.5-32b,rs,Q32-down,6144,gpu,A,A,A,A,A,0,A,A=1.7766 B=1.9113
+4,qwen2.5-32b,ag,Q32-QKV,24,steady,B,B,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-QKV,96,steady,B,B,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-QKV,200,steady,B,B,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-QKV,384,steady,B,B,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-QKV,768,steady,B,B,B,B,B,0,A,A=0.1772 B=0.1759
+4,qwen2.5-32b,ag,Q32-QKV,1536,steady,B,B,B,A,A,1,A,A=0.2447 B=0.2497
+4,qwen2.5-32b,ag,Q32-QKV,2560,steady,A,A,A,A,A,0,A,
+4,qwen2.5-32b,ag,Q32-QKV,6144,steady,A,A,A,A,A,0,A,
+4,qwen2.5-32b,ag,Q32-GU,24,steady,B,B,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-GU,96,steady,B,B,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-GU,200,steady,B,B,B,B,B,0,B,
+4,qwen2.5-32b,ag,Q32-GU,384,steady,B,B,A,A,A,0,B,A=0.3018 D=0.3129
+4,qwen2.5-32b,ag,Q32-GU,768,steady,B,B,B,B,B,1,A,B=0.5157 C=0.5251
+4,qwen2.5-32b,ag,Q32-GU,1536,steady,A,A,B,B,B,1,A,B=0.9750 C=0.9850
+4,qwen2.5-32b,ag,Q32-GU,2560,steady,A,A,C,C,C,1,A,B=1.6179 C=1.6131
+4,qwen2.5-32b,ag,Q32-GU,6144,steady,A,A,C,B,B,1,A,B=3.7477 C=3.7557
+4,qwen2.5-32b,rs,Q32-O,24,steady,B,B,B,B,B,0,B,
+4,qwen2.5-32b,rs,Q32-O,96,steady,B,B,B,B,B,0,B,
+4,qwen2.5-32b,rs,Q32-O,200,steady,A,A,A,A,A,1,B,A=0.0706 B=0.0918
+4,qwen2.5-32b,rs,Q32-O,384,steady,A,A,A,A,A,0,B,
+4,qwen2.5-32b,rs,Q32-O,768,steady,A,A,A,A,A,0,A,
+4,qwen2.5-32b,rs,Q32-O,1536,steady,A,A,A,A,A,0,A,
+4,qwen2.5-32b,rs,Q32-O,2560,steady,A,A,A,A,A,0,A,
+4,qwen2.5-32b,rs,Q32-O,6144,steady,A,A,A,A,A,0,A,
+4,qwen2.5-32b,rs,Q32-down,24,steady,B,B,B,B,B,0,B,
+4,qwen2.5-32b,rs,Q32-down,96,steady,A,B,B,B,B,0,B,A=0.1161 B=0.1042
+4,qwen2.5-32b,rs,Q32-down,200,steady,A,A,B,A,B,0,B,A=0.1508 B=0.1598
+4,qwen2.5-32b,rs,Q32-down,384,steady,A,A,B,B,B,0,B,
+4,qwen2.5-32b,rs,Q32-down,768,steady,A,A,A,A,A,0,A,
+4,qwen2.5-32b,rs,Q32-down,1536,steady,A,A,A,A,A,1,A,A=0.5463 B=0.6191
+4,qwen2.5-32b,rs,Q32-down,2560,steady,A,A,A,A,A,0,A,A=0.8230 B=0.9291
+4,qwen2.5-32b,rs,Q32-down,6144,steady,A,A,A,A,A,0,A,A=1.8730 B=2.0772
+4,llama3-8b,ag,L8-QKV,24,gpu,B,B,B,B,B,0,B,
+4,llama3-8b,ag,L8-QKV,96,gpu,B,B,B,B,B,0,B,
+4,llama3-8b,ag,L8-QKV,200,gpu,B,B,B,B,B,0,B,
+4,llama3-8b,ag,L8-QKV,384,gpu,B,B,B,B,B,0,B,B=0.1249 C=0.1347
+4,llama3-8b,ag,L8-QKV,768,gpu,B,B,B,B,B,0,A,A=0.1551 B=0.1454
+4,llama3-8b,ag,L8-QKV,1536,gpu,B,B,B,B,B,0,A,A=0.2084 B=0.1981
+4,llama3-8b,ag,L8-QKV,2560,gpu,A,A,A,A,A,0,A,
+4,llama3-8b,ag,L8-QKV,6144,gpu,A,A,A,A,A,0,A,
+4,llama3-8b,ag,L8-GU,24,gpu,B,B,B,B,B,0,B,
+4,llama3-8b,ag,L8-GU,96,gpu,B,B,B,B,B,0,B,A=0.1434 B=0.1311
+4,llama3-8b,ag,L8-GU,200,gpu,B,B,B,B,B,0,B,A=0.1649 B=0.1444
+4,llama3-8b,ag,L8-GU,384,gpu,B,B,B,B,B,0,B,B=0.1833 C=0.1946
+4,llama3-8b,ag,L8-GU,768,gpu,B,B,A,B,B,1,A,A=0.2970 B=0.2959
+4,llama3-8b,ag,L8-GU,1536,gpu,B,B,A,A,A,1,A,A=0.4833 D=0.5007
+4,llama3-8b,ag,L8-GU,2560,gpu,B,B,A,A,A,1,A,A=0.7357 B=0.7506
+4,llama3-8b,ag,L8-GU,6144,gpu,A,A,A,A,A,0,A,A=1.5078 C=1.6282
+4,llama3-8b,rs,L8-O,24,gpu,B,B,B,B,B,0,B,
+4,llama3-8b,rs,L8-O,96,gpu,B,B,B,B,B,0,B,
+4,llama3-8b,rs,L8-O,200,gpu,A,A,B,A,A,1,B,A=0.0778 B=0.0783
+4,llama3-8b,rs,L8-O,384,gpu,A,A,A,A,A,0,B,
+4,llama3-8b,rs,L8-O,768,gpu,A,A,A,A,A,0,A,
+4,llama3-8b,rs,L8-O,1536,gpu,A,A,A,A,A,0,A,
+4,llama3-8b,rs,L8-O,2560,gpu,A,A,A,A,A,0,A,
+4,llama3-8b,rs,L8-O,6144,gpu,A,A,A,A,A,0,A,
+4,llama3-8b,rs,L8-down,24,gpu,B,B,B,B,B,0,B,
+4,llama3-8b,rs,L8-down,96,gpu,B,B,B,B,B,0,B,A=0.0886 B=0.0840
+4,llama3-8b,rs,L8-down,200,gpu,A,A,A,B,B,1,B,A=0.1075 B=0.1070
+4,llama3-8b,rs,L8-down,384,gpu,A,A,A,A,A,0,B,
+4,llama3-8b,rs,L8-down,768,gpu,A,A,A,A,A,0,A,A=0.1551 B=0.1741
+4,llama3-8b,rs,L8-down,1536,gpu,A,A,A,A,A,0,A,
+4,llama3-8b,rs,L8-down,2560,gpu,A,A,A,A,A,0,A,
+4,llama3-8b,rs,L8-down,6144,gpu,A,A,A,A,A,0,A,
+4,llama3-8b,ag,L8-QKV,24,steady,B,B,B,B,B,0,B,
+4,llama3-8b,ag,L8-QKV,96,steady,B,B,B,B,B,0,B,
+4,llama3-8b,ag,L8-QKV,200,steady,B,B,B,B,B,0,B,
+4,llama3-8b,ag,L8-QKV,384,steady,B,B,B,B,B,0,B,
+4,llama3-8b,ag,L8-QKV,768,steady,B,B,B,B,B,0,A,A=0.1396 B=0.1353
+4,llama3-8b,ag,L8-QKV,1536,steady,B,B,B,B,B,1,A,A=0.2009 B=0.1937
+4,llama3-8b,ag,L8-QKV,2560,steady,A,A,A,A,A,0,A,
+4,llama3-8b,ag,L8-QKV,6144,steady,A,A,A,A,A,0,A,
+4,llama3-8b,ag,L8-GU,24,steady,B,B,B,B,B,0,B,
+4,llama3-8b,ag,L8-GU,96,steady,B,B,B,B,B,0,B,
+4,llama3-8b,ag,L8-GU,200,steady,B,B,B,B,B,0,B,
+4,llama3-8b,ag,L8-GU,384,steady,B,B,B,B,B,0,B,B=0.1764 C=0.1846
+4,llama3-8b,ag,L8-GU,768,steady,B,B,A,A,A,1,A,A=0.2849 B=0.2911
+4,llama3-8b,ag,L8-GU,1536,steady,B,B,A,A,A,1,A,A=0.4819 D=0.5037
+4,llama3-8b,ag,L8-GU,2560,steady,A,A,A,A,A,1,A,A=0.7708 D=0.7969
+4,llama3-8b,ag,L8-GU,6144,steady,A,A,A,A,A,0,A,A=1.6061 C=1.7229
+4,llama3-8b,rs,L8-O,24,steady,B,B,B,B,B,0,B,
+4,llama3-8b,rs,L8-O,96,steady,B,B,A,B,A,0,B,A=0.0520 B=0.0488
+4,llama3-8b,rs,L8-O,200,steady,B,A,B,A,B,0,B,A=0.0549 B=0.0624
+4,llama3-8b,rs,L8-O,384,steady,A,A,A,A,A,0,B,
+4,llama3-8b,rs,L8-O,768,steady,A,A,A,A,A,0,A,
+4,llama3-8b,rs,L8-O,1536,steady,A,A,A,A,A,0,A,
+4,llama3-8b,rs,L8-O,2560,steady,A,A,A,A,A,0,A,
+4,llama3-8b,rs,L8-O,6144,steady,A,A,A,A,A,0,A,
+4,llama3-8b,rs,L8-down,24,steady,B,B,B,B,B,0,B,
+4,llama3-8b,rs,L8-down,96,steady,A,B,B,B,B,1,B,A=0.0773 B=0.0677
+4,llama3-8b,rs,L8-down,200,steady,A,A,A,A,A,1,B,A=0.0877 B=0.0890
+4,llama3-8b,rs,L8-down,384,steady,A,A,B,A,A,1,B,A=0.1143 B=0.1171
+4,llama3-8b,rs,L8-down,768,steady,A,A,A,A,A,0,A,A=0.1402 B=0.1665
+4,llama3-8b,rs,L8-down,1536,steady,A,A,A,A,A,0,A,A=0.2424 B=0.2877
+4,llama3-8b,rs,L8-down,2560,steady,A,A,A,A,A,0,A,
+4,llama3-8b,rs,L8-down,6144,steady,A,A,A,A,A,0,A,

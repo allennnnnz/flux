@@ -1,0 +1,214 @@
+{
+ "runs": [
+  {
+   "script": "ws/fusion-dispatch/scripts/dispatch_map_rs_v1.py",
+   "args": {
+    "layer": "Q32-down",
+    "Ms": "96,200,384",
+    "max_m": 384,
+    "modes": "gpu",
+    "items": "A_fused,B_nccl_cublas",
+    "rounds": 30,
+    "warmup": 30,
+    "steady_L": 16,
+    "pad_cycles": 400000,
+    "flush_mb": 128,
+    "clock_period": 0.02,
+    "seed": 20260930,
+    "atol": 0.1,
+    "rtol": 0.05,
+    "out_dir": "/home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp8"
+   },
+   "date": "2026-10-03 04:07:07",
+   "layer": {
+    "name": "Q32-down",
+    "N": 5120,
+    "K_full": 27648,
+    "k_per_rank": 3456
+   },
+   "world": 8,
+   "max_m": 384,
+   "cublas_settings": {
+    "CUBLAS_WORKSPACE_CONFIG": null,
+    "deterministic": false,
+    "allow_bf16_reduced_precision_reduction": true
+   },
+   "nccl": "2.21.5",
+   "cases": {
+    "96": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0276641845703125,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.07001590728759766,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+       ]
+      }
+     }
+    },
+    "200": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.027033329010009766,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.06792879104614258,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+       ]
+      }
+     }
+    },
+    "384": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.027837753295898438,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.068145751953125,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "script": "ws/fusion-dispatch/scripts/dispatch_map_rs_v1.py",
+   "args": {
+    "layer": "Q32-down",
+    "Ms": "200",
+    "max_m": 200,
+    "modes": "steady",
+    "items": "A_fused,B_nccl_cublas",
+    "rounds": 30,
+    "warmup": 30,
+    "steady_L": 16,
+    "pad_cycles": 400000,
+    "flush_mb": 128,
+    "clock_period": 0.02,
+    "seed": 20260930,
+    "atol": 0.1,
+    "rtol": 0.05,
+    "out_dir": "/home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp8"
+   },
+   "date": "2026-10-03 04:07:25",
+   "layer": {
+    "name": "Q32-down",
+    "N": 5120,
+    "K_full": 27648,
+    "k_per_rank": 3456
+   },
+   "world": 8,
+   "max_m": 200,
+   "cublas_settings": {
+    "CUBLAS_WORKSPACE_CONFIG": null,
+    "deterministic": false,
+    "allow_bf16_reduced_precision_reduction": true
+   },
+   "nccl": "2.21.5",
+   "cases": {
+    "200": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.030191421508789062,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.06811332702636719,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas"
+     ],
+     "modes": {
+      "steady": {
+       "rounds": 30,
+       "kept": 30,
+       "modal_sm_clock_per_rank": [
+        null,
+        null,
+        null,
+        1155,
+        null,
+        null,
+        1410,
+        1410
+       ]
+      }
+     }
+    }
+   }
+  }
+ ]
+}

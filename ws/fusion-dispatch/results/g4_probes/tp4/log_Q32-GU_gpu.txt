@@ -1,0 +1,79 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --node_rank=0 --nproc_per_node=4 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/dispatch_map_v2.py --layer Q32-GU --Ms 384,768,1536,2560,6144 --max_m 6144 --modes gpu --items A_fused,B_nccl_cublas,C_fluxag_cublas,D_fluxag_fluxgemm --rounds 30 --warmup 30 --clock_period 0.02 --out_dir /home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp4
+W1003 04:02:59.188000 624969 site-packages/torch/distributed/run.py:792] 
+W1003 04:02:59.188000 624969 site-packages/torch/distributed/run.py:792] *****************************************
+W1003 04:02:59.188000 624969 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1003 04:02:59.188000 624969 site-packages/torch/distributed/run.py:792] *****************************************
+[Q32-GU M=384] correctness: all ok
+
+[Q32-GU N=55296 K=5120 M=384 mode=gpu] kept 30/30  modal clock [1410, 1155, 1410, 1155]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.3533    0.3461    0.3758    0.0700
+  B_nccl_cublas           0.4024    0.3973    0.4147    0.0852
+  C_fluxag_cublas         0.4127    0.3994    0.4342    0.0850
+  D_fluxag_fluxgemm       0.3702    0.3635    0.3901    0.0868
+  per-round diff                  median       p10       p90
+  A - B                          -0.0502   -0.0594   -0.0276
+  A - C                          -0.0579   -0.0768   -0.0389
+  A - D                          -0.0174   -0.0307    0.0020
+  D - C                          -0.0440   -0.0594   -0.0174
+  C - B                           0.0113   -0.0041    0.0276
+[Q32-GU M=768] correctness: all ok
+
+[Q32-GU N=55296 K=5120 M=768 mode=gpu] kept 30/30  modal clock [1410, 1410, 1410, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.5212    0.5140    0.5396    0.0681
+  B_nccl_cublas           0.4782    0.4721    0.4946    0.0842
+  C_fluxag_cublas         0.4972    0.4874    0.5212    0.0841
+  D_fluxag_fluxgemm       0.5356    0.5284    0.5468    0.0866
+  per-round diff                  median       p10       p90
+  A - B                           0.0430    0.0225    0.0584
+  A - C                           0.0251   -0.0051    0.0492
+  A - D                          -0.0174   -0.0317    0.0123
+  D - C                           0.0389    0.0164    0.0614
+  C - B                           0.0195   -0.0041    0.0471
+[Q32-GU M=1536] correctness: all ok
+
+[Q32-GU N=55296 K=5120 M=1536 mode=gpu] kept 30/30  modal clock [1395, 1410, 1395, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 0.9656    0.9462    0.9984    0.0699
+  B_nccl_cublas           0.8975    0.8929    0.9155    0.0830
+  C_fluxag_cublas         0.9042    0.8970    0.9400    0.0850
+  D_fluxag_fluxgemm       0.9789    0.9667    1.0025    0.0840
+  per-round diff                  median       p10       p90
+  A - B                           0.0660    0.0451    0.0952
+  A - C                           0.0568    0.0297    0.0942
+  A - D                          -0.0205   -0.0420    0.0348
+  D - C                           0.0712    0.0481    0.0973
+  C - B                           0.0061   -0.0031    0.0399
+[Q32-GU M=2560] correctness: all ok
+
+[Q32-GU N=55296 K=5120 M=2560 mode=gpu] kept 30/30  modal clock [1350, 1380, 1350, 1350]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 1.6266    1.6148    1.6364    0.0685
+  B_nccl_cublas           1.4950    1.4828    1.5073    0.0827
+  C_fluxag_cublas         1.4961    1.4807    1.5319    0.0842
+  D_fluxag_fluxgemm       1.6338    1.6046    1.6835    0.0837
+  per-round diff                  median       p10       p90
+  A - B                           0.1306    0.1178    0.1475
+  A - C                           0.1306    0.1004    0.1526
+  A - D                          -0.0092   -0.0440    0.0276
+  D - C                           0.1357    0.0901    0.1884
+  C - B                          -0.0026   -0.0133    0.0410
+[Q32-GU M=6144] correctness: all ok
+
+[Q32-GU N=55296 K=5120 M=6144 mode=gpu] kept 30/30  modal clock [1275, 1335, 1305, 1305]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  A_fused                 3.6915    3.6444    3.7663    0.0721
+  B_nccl_cublas           3.6541    3.5901    3.7284    0.0946
+  C_fluxag_cublas         3.6398    3.5615    3.7089    0.0893
+  D_fluxag_fluxgemm       3.9404    3.8697    4.0325    0.0857
+  per-round diff                  median       p10       p90
+  A - B                           0.0476    0.0348    0.0614
+  A - C                           0.0604    0.0154    0.0942
+  A - D                          -0.2473   -0.2908   -0.2089
+  D - C                           0.3139    0.2355    0.3871
+  C - B                          -0.0230   -0.0430    0.0399
+
+wrote /home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp4/raw_Q32-GU.csv
+wrote /home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp4/meta_Q32-GU.json
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/g4_probes/tp4/guard_Q32-GU_gpu.log
