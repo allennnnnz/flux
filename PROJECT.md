@@ -13,22 +13,21 @@ Phase 0 背景：`docs/PHASE0_FINDINGS.md`（設計規則）；細節才看 `doc
 
 Phase 0 結案。A100 雙通道方案取消（DECISIONS D-001）。2026-09-29 與教授討論後新增
 `ws/fusion-dispatch`（何時不開 Flux 比開好），列為最高優先（D-006）。查表版決策器完成並驗證；
-第三階段（泛用決策器，D-008）**G1、G2 完成**：
-- G1：物理模型預測器在沒看過的模型 / 量測模式上 op 層級 regret 0.03–2.29%（關卡 ≤ 3% 通過）；
-- 融合 kernel 的重疊可由 tile 排程模擬算出，順帶解釋了 diag-overlap 的 N=4096 現象 **[推論]**；
-- G2：**只用 4 分鐘的校準微基準**建參數檔，對全部 320 個既有實測點：AG 1.15–1.74%、RS 0.10–0.36%；加少量實測把關後 ≤ 0.12%；
-- G3：新模型與 4 卡 / 2 卡，**預測在量測前 push**。只用預測器：
-  - AG 1.76%（8 卡 0.89%、4 卡 1.77%、2 卡 2.81%），RS 0.37%；
-  - 錯誤來自 cuBLAS 斷崖；
-  - 事後分析：GEMM 改實測後 AG 0.27%。
+第三階段（泛用決策器，D-008 / D-009）**G0–G4 完成**：
+- 決策器 v2 =「模型（通訊 + 重疊）+ 實測單卡 GEMM + 少量多卡把關」；
+- 在全新情境（Qwen2.5-32B 8 / 4 卡、Llama-3-8B 4 卡）上，決策都在量測前 push：
+  - op regret 0.17%（G3 方法 1.20%、固定門檻 2.30%）；
+  - **block regret 0.02%，比 vLLM 預設省 8.0%（prefill 10.9%）**；
+- 計劃成功標準除探測量外全部達成；
+- 陷阱已寫入 `CLAUDE.md`。
 
-下一步 G4（決策器 v2 + block 驗證）。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
+下一步：F4（vLLM 端到端）/ G5（PCIe 代理）/ G6（總報告），待使用者決定先後。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
 
 ## 2. Workstream 總表
 
 | workstream | 優先 | 狀態 | 依賴 | 負責 session | 最近更新 |
 | --- | --- | --- | --- | --- | --- |
-| `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器，G0–G3 完成（`reports/20261002_g1_predictor.md`、`20261002_g2_calibration.md`、`20261002_g3_unseen.md`），下一步 G4**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-02 |
+| `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器，G0–G4 完成（`reports/20261003_g4_dispatcher.md`：op 0.17%、block 0.02%），下一步 F4 / G5 / G6**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-02 |
 | `ws/diag-overlap` | 第二 | 未開始 | — | 未指派 | — |
 | `ws/hetero-proxy` | 第二，可與上並行 | 未開始 | — | 未指派 | — |
 | `ws/cost-model` | 第三 | 模型目標由 fusion-dispatch 第三階段執行；預測器 v1 已建於 `common/cost_model/predictor/`（G1），校準參數檔在 `common/cost_model/hw_profiles/`（G2）（D-008） | — | 未指派 | 2026-10-02 |
@@ -81,8 +80,8 @@ worker 在 JOURNAL 標「需 boss 裁決」的事項會被 boss 搬到這裡。
 ## 4. 下一步（boss）
 
 0. `ws/fusion-dispatch`：
-   - 第三階段 G4（決策器 v2：模型 + 實測單卡 GEMM + 少量探測；block 驗證含 TP=4），之後 G5–G6；
-   - 安排 auditor 審 E0、E1–E3、G1、G2、G3 報告。
+   - 決定 F4（vLLM 端到端，用決策器 v2）/ G5（PCIe 代理）/ G6（總報告）的先後；
+   - 安排 auditor 審 E0、E1–E3、G1–G4 報告。
 1. 指派第一個 worker session 到 `ws/diag-overlap`。
 2. `ws/hetero-proxy` 可同時開一個 worker，先做 1a/1b 兩項補充量測。
 3. 兩者各有第一份 report 後，安排 auditor。

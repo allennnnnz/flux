@@ -1,6 +1,6 @@
 Supersedes: （無）
 
-> 狀態：**已核准（使用者，2026-10-02）**；執行中：G0–G3 完成（`reports/20261002_g1_predictor.md` 關卡通過；`20261002_g2_calibration.md` 校準 4 分鐘；`20261002_g3_unseen.md` 預先登記的新情境），下一步 G4。
+> 狀態：**已核准（使用者，2026-10-02）**；執行中：G0–G4 完成（`reports/20261002_g1_predictor.md` 關卡通過；`20261002_g2_calibration.md` 校準 4 分鐘；`20261002_g3_unseen.md` 預先登記的新情境；`20261003_g4_dispatcher.md` 決策器 v2：block regret 0.02%，成功標準除探測量外全部達成），下一步 F4 / G5 / G6。
 > G3 修正：G4 的決策器改為「模型（通訊 + 重疊）+ 實測單卡 GEMM + 少量探測」（G3 的錯誤來自 cuBLAS 斷崖），**使用者 2026-10-03 核准**（D-009）；G3 的 block 驗證移到 G4 一起做。
 > G1 修正：計劃第 3 節第 3 步「非 registry config 一律探測」實測太貴（42–62%），且真正的斷崖來自登錄表 PCIe 區段的 config；改為「PCIe 調校 config 才探測」，G3 重驗。
 > 原始計劃檔：`~/.claude/plans/jazzy-gliding-blossom.md`（本檔為 repo 內權威副本）。
@@ -278,6 +278,12 @@ python3 common/measure/exclusive_guard.py --log <dir>/guard.log -- \
 | 評估新情境前沒先寫下預測，事後就分不清是預測還是調參 | 量測前把預測寫成檔案並 push（G3：`results/g3_predictions/`）；看過結果才做的分析要標「事後」 |
 | 除錯時刪掉卡住那次的部分 log，事後少了證據 | 失敗的輸出也保留（改名，不刪） |
 | `analyze_v1.py` 在沒有 B / C / D 項目時會出錯（例如校準數據） | 校準數據用 `fit_calibration_v1.py` 自己的彙整 |
+| **以下為 G4 新增（2026-10-03）** | |
+| steady 模式量極小 kernel 是量 CPU 發 kernel 的速度，數值取決於同一輪的其他項目（同一 GEMM 探測 vs 地圖差 3 倍） | 單卡 GEMM 探測以 gpu 模式為準；eager 小 M 的決策要保守 |
+| vLLM custom all-reduce 在 eager 量比 graph 慢（複製到註冊緩衝區） | decode（graph）的切法模型會偏向序列平行；差距小時要做切法探測，或在 graph 中校準 |
+| 腳本加了「只跑部分項目」的選項後，後面依賴完整清單的步驟（如 graph 模式移除 sp_flux）會出錯 | 加子集選項時檢查所有對清單的操作；先做冒煙測試 |
+| block 用的決策表在 graph 模式下，探測差距要排除不能 capture 的路徑（AGKernel），否則會探測執行期根本不會用的路徑 | `build_table_v2.build(graph=True)` |
+| 多卡探測在「預測差距」規則下量很多點，但改善很小（op 0.17 → 0.11%） | 探測只留給差距 < 3% 或有風險訊號的點 |
 
 ### A.4 每個階段的第一步
 

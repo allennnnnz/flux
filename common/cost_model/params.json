@@ -454,5 +454,48 @@
       "status": "derived, POST-HOC (for G4 design)",
       "source": "results/g3_map/gemm_probe_diag_log.txt"
     }
+  },
+  "flux_dispatch_g4": {
+    "_source": "ws/fusion-dispatch/reports/20261003_g4_dispatcher.md; results/g4_*/",
+    "_date": "2026-10-03",
+    "_status": "measured (guard CLEAN) vs pre-registered decisions; NOT yet audited",
+    "method": "decision maker v2 (D-009): model for communication + fused-kernel overlap, measured single-GPU GEMMs, few multi-GPU probes; layout by predictor/block.py",
+    "hw_profiles_added": [
+      "common/cost_model/hw_profiles/css-host-158_tp{8,4,2}_{gpu,steady}_g4.json",
+      "common/cost_model/hw_profiles/css-host-158_tp{8,4}_{gpu,steady}_block.json"
+    ],
+    "op_regret_pct": {
+      "g4": 0.17,
+      "g4_probe": 0.11,
+      "g3_method": 1.2,
+      "fixed_threshold_M512": 2.3,
+      "always_flux": 5.6,
+      "source": "results/g4_map/eval_g4_summary.csv (192 points, Qwen2.5-32B TP8/TP4, Llama-3-8B TP4)"
+    },
+    "block_regret_pct": {
+      "auto_g4": 0.02,
+      "vllm_default": 8.71,
+      "sp_g4_always": 4.62,
+      "sp_g3_always": 5.95,
+      "saving_vs_vllm_default_pct": {
+        "all": 8.0,
+        "prefill": 10.9,
+        "decode": 0.0
+      },
+      "source": "results/g4_block_oracle/eval_g4_block_summary.csv (24 points, 4 blocks)"
+    },
+    "cost_s": {
+      "gemm_probes_op": 82,
+      "path_probes_op": 367,
+      "full_oracle_map": 1062,
+      "block_calibration": 85,
+      "block_path_probes": 215,
+      "source": "results/g4_*/run_log.txt"
+    },
+    "steady_tiny_kernel_note": {
+      "value": "steady (back-to-back) timing of kernels < ~0.03 ms is CPU-launch bound and depends on the other items in the round (same GEMM 0.034 vs 0.012 ms)",
+      "status": "measured",
+      "source": "results/g4_map/eval_g4_log.txt self-consistency"
+    }
   }
 }

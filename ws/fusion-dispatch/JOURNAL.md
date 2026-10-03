@@ -240,3 +240,26 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   - 最重要：決策器 v2 加入「實測單卡 GEMM」；
   - GemmRS 改共用 gemm_only 參數；
   - block 驗證（vLLM 環境，含 TP=4）。
+
+## 2026-10-03 · boss 兼 worker · G4：決策器 v2 + 坑的記錄
+
+- **使用者決定**：G4 改用「模型 + 實測單卡 GEMM + 少量多卡把關」，要驗證並把坑記錄起來（D-009）。
+- **坑的記錄**：
+  - `CLAUDE.md` 陷阱表新增 11 條，5.1 新增第 11 條「量測必須獨佔」；
+  - 計劃附錄 A.3 新增 20 條（G1–G4）；
+  - PROJECT 第 3 節對應項目標為已處理。
+- **op 層級**（全新測試集：Qwen2.5-32B 8 / 4 卡、Llama-3-8B 4 卡，M = 24–6144）。流程：
+  校準（多量 GemmOnly）→ 單卡 GEMM（82 秒）→ 預測並 push → 多卡探測（367 秒）→ 最終決策並 push → 標準答案（17.7 分鐘）。
+  - 決策器 v2：regret 0.17%（AG 0.04%、RS 0.41%）；加探測 0.11%；
+  - 對照：G3 方法 1.20%、固定門檻 2.30%。
+- **block 層級**。流程：vLLM all-reduce + norm 校準 → block 用的 M 量 GEMM → 表與探測 → 用 `predictor/block.py` 預測切法 → 切法探測 → 正式量測（293 秒）。
+  - 自動選切法 + G4 表：block regret 0.02%，比 vLLM 預設省 8.0%（prefill 10.9%）；decode 正確選 vLLM 預設。
+- 每一步的決策都在下一步量測前 commit / push（`49534de`、`8fc288e`、`486ef8e`、`f590a3b`、`0d6be62`、`bb42d7b`）。
+- **成功標準**：block ≤ 2%、校準 ≤ 10 分鐘、切換點誤差 ≤ 10% 達成；探測 ≤ 15% 未達成（但探測改善很小）。
+- **踩到的坑**：
+  1. steady 模式量極小 kernel 是量 CPU 發 kernel 的速度，同一 GEMM 探測與地圖差 3 倍，RS 最差的點都在這裡；
+  2. vLLM custom AR 在 eager 量比 graph 慢；
+  3. **我自己的錯誤**：`validate_block_v4.py` 的策略子集在 graph 模式仍嘗試移除 `sp_flux` → decode 切法探測第一次失敗。
+     已修，失敗紀錄改名保留（`*.failed_policyfilter_bug`），重跑後正常。
+- 報告：`reports/20261003_g4_dispatcher.md`。
+- **留給下個 session**：使用者決定 F4（vLLM 端到端）/ G5（PCIe 代理）/ G6（總報告 + auditor）的先後。

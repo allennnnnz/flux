@@ -59,6 +59,8 @@ pixi run --manifest-path pixi.toml ./launch.sh <script> [args]    # 必須在 re
 | cuBLAS 斷崖 | 特定形狀 × M 會選到慢 22–53% 的 kernel（例：n×K=14336×4096 M=136、3584×4096 M=1024），GEMM 模型預測不到。要用就實測該形狀與 M（單卡、幾秒）。 |
 | `launch.sh` 卡數 | `nproc_per_node` 來自 `nvidia-smi --list-gpus`，**不理會** `CUDA_VISIBLE_DEVICES`。少於 8 卡用 `ws/fusion-dispatch/scripts/launch_tp.sh <TP>`。 |
 | 融合 AG+GEMM 何時能重疊 | 不只看 M ≤ TILE_M。Flux 用 CUTLASS stream-K：工作量 ≲ 1.5 波時每個 block 都碰到最晚到的 shard，整個 kernel 等到資料全到才算完 → 不重疊（例：Phase 0 N=4096 M=4096）。可用 `common/cost_model/predictor/overlap.py` 模擬。 |
+| 連發量測極小 kernel | 連發 N 次取平均（steady）時，極小 kernel（< ~0.03 ms）量到的是 CPU 發 kernel 的速度；同一輪若有慢的通訊讓 CPU 先跑到前面，量到的才是 GPU 時間。同一個 GEMM 可差 3 倍（`ws/fusion-dispatch/reports/20261003_g4_dispatcher.md` 第 4 節）。要 GPU 時間就用 GPU 端先墊等待（gpu 模式）。 |
+| vLLM custom all-reduce | eager 呼叫要先把資料複製到註冊緩衝區，比 CUDA graph 內慢；在 eager 量到的時間不能直接當 graph（decode）的時間。 |
 | 時脈 / 功耗狀態 | 短 run 在 1410 MHz；持續負載有功耗上限（約 1140–1245 MHz）。NCCL（SM 搬資料）受時脈影響、Flux copy engine 不受。比較與校準都要在部署的狀態下做。 |
 
 ### Flux 內部你會用到的入口

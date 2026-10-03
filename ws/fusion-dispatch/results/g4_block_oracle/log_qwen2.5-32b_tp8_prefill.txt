@@ -1,0 +1,67 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING 10-03 04:38:15 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:15 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:15 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:15 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:15 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:15 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:15 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:15 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:15 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:15 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:15 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:15 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:16 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:16 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:16 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:16 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:16 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:16 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:16 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:16 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:16 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:16 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:16 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:16 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:16 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:16 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:16 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:16 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:16 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:16 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:16 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:16 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:16 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:16 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:16 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:16 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:16 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:16 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:16 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:16 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:16 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:16 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:16 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:16 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:16 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:38:16 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:38:16 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:38:16 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+vLLM custom AR present=True disabled=False fully_connected=True max_size=8388608; pynccl disabled=False
+[prefill eager L=4 M=1024] kept 200  tp_ar=3.8958  tp_ar_vllm=3.8897  sp_nccl=4.0223  sp_flux=3.9127  sp_rsflux=3.6250  sp_g4=3.6275  sp_g3=3.6260  best=sp_rsflux  g4 counts={'ag:nccl': 8, 'rs:flux': 8} g3 counts={'ag:nccl': 8, 'rs:flux': 8} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0189, 'sp_flux': 0.0176, 'sp_rsflux': 0.0189, 'sp_g4': 0.0189, 'sp_g3': 0.0189}
+[prefill eager L=4 M=2048] kept 200  tp_ar=6.8695  tp_ar_vllm=6.8362  sp_nccl=7.0016  sp_flux=6.2193  sp_rsflux=6.4118  sp_g4=6.2121  sp_g3=6.2781  best=sp_g4  g4 counts={'ag:flux': 8, 'rs:flux': 8} g3 counts={'ag:nccl': 4, 'rs:flux': 8, 'ag:flux': 4} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0198, 'sp_flux': 0.024, 'sp_rsflux': 0.0191, 'sp_g4': 0.024, 'sp_g3': 0.0198}
+[prefill eager L=4 M=4096] kept 199  tp_ar=13.5690  tp_ar_vllm=13.5823  sp_nccl=13.2270  sp_flux=11.3469  sp_rsflux=12.2358  sp_g4=11.3562  sp_g3=11.3592  best=sp_flux  g4 counts={'ag:flux': 8, 'rs:flux': 8} g3 counts={'ag:flux': 8, 'rs:flux': 8} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.018, 'sp_flux': 0.0206, 'sp_rsflux': 0.0168, 'sp_g4': 0.0206, 'sp_g3': 0.0206}
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_oracle/guard_qwen2.5-32b_tp8_prefill.log

@@ -1,0 +1,89 @@
+llama3-8b    tp4 decode  M=32    kept 171  sp_g3=0.884  sp_g4=0.885  sp_nccl=0.885  sp_rsflux=1.025  tp_ar_vllm=0.705  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm; probe tp_ar_vllm=0.7547 sp_g4=0.9810)
+llama3-8b    tp4 decode  M=128   kept 200  sp_g3=1.506  sp_g4=1.486  sp_nccl=1.483  sp_rsflux=1.537  tp_ar_vllm=1.220  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm)
+llama3-8b    tp4 decode  M=256   kept 200  sp_g3=2.400  sp_g4=2.400  sp_nccl=2.558  sp_rsflux=2.406  tp_ar_vllm=1.875  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm)
+llama3-8b    tp4 decode  M=384   kept 200  sp_g3=3.043  sp_g4=3.046  sp_nccl=3.110  sp_rsflux=3.047  tp_ar_vllm=2.411  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm)
+llama3-8b    tp4 decode  M=512   kept 200  sp_g3=3.841  sp_g4=3.596  sp_nccl=4.128  sp_rsflux=3.848  tp_ar_vllm=3.444  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm; probe tp_ar_vllm=3.4099 sp_g4=3.5533)
+llama3-8b    tp4 prefill M=1024  kept 200  sp_flux=3.296  sp_g3=3.543  sp_g4=3.308  sp_nccl=4.102  sp_rsflux=3.544  tp_ar_vllm=3.839  | oracle sp_flux  auto_g4 sp_g4 (model sp_g4)
+llama3-8b    tp4 prefill M=2048  kept 200  sp_flux=5.792  sp_g3=6.021  sp_g4=5.772  sp_nccl=6.705  sp_rsflux=6.024  tp_ar_vllm=6.558  | oracle sp_g4  auto_g4 sp_g4 (model sp_g4)
+llama3-8b    tp4 prefill M=4096  kept 200  sp_flux=10.519  sp_g3=10.514  sp_g4=10.515  sp_nccl=12.078  sp_rsflux=11.380  tp_ar_vllm=12.127  | oracle sp_g3  auto_g4 sp_g4 (model sp_g4)
+qwen2.5-32b  tp4 decode  M=32    kept 200  sp_g3=1.207  sp_g4=1.208  sp_nccl=1.207  sp_rsflux=1.367  tp_ar_vllm=1.030  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm; probe tp_ar_vllm=1.0854 sp_g4=1.2984)
+qwen2.5-32b  tp4 decode  M=128   kept 200  sp_g3=2.056  sp_g4=2.011  sp_nccl=2.012  sp_rsflux=2.057  tp_ar_vllm=1.744  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm)
+qwen2.5-32b  tp4 decode  M=256   kept 200  sp_g3=2.940  sp_g4=2.938  sp_nccl=3.044  sp_rsflux=2.942  tp_ar_vllm=2.364  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm)
+qwen2.5-32b  tp4 decode  M=384   kept 200  sp_g3=4.227  sp_g4=4.052  sp_nccl=4.345  sp_rsflux=4.227  tp_ar_vllm=3.651  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm; probe tp_ar_vllm=3.5947 sp_g4=4.0023)
+qwen2.5-32b  tp4 decode  M=512   kept 200  sp_g3=4.704  sp_g4=4.705  sp_nccl=5.054  sp_rsflux=4.709  tp_ar_vllm=4.387  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm; probe tp_ar_vllm=4.2767 sp_g4=4.6382)
+qwen2.5-32b  tp4 prefill M=1024  kept 200  sp_flux=5.675  sp_g3=5.682  sp_g4=5.565  sp_nccl=6.246  sp_rsflux=5.680  tp_ar_vllm=5.981  | oracle sp_g4  auto_g4 sp_g4 (model sp_g4; probe tp_ar_vllm=5.8947 sp_g4=5.5019)
+qwen2.5-32b  tp4 prefill M=2048  kept 200  sp_flux=10.324  sp_g3=10.329  sp_g4=10.294  sp_nccl=11.137  sp_rsflux=10.687  tp_ar_vllm=11.045  | oracle sp_g4  auto_g4 sp_g4 (model sp_g4)
+qwen2.5-32b  tp4 prefill M=4096  kept 200  sp_flux=20.291  sp_g3=20.338  sp_g4=20.135  sp_nccl=22.150  sp_rsflux=21.244  tp_ar_vllm=22.306  | oracle sp_g4  auto_g4 sp_g4 (model sp_g4)
+qwen2.5-32b  tp8 decode  M=32    kept 200  sp_g3=0.919  sp_g4=0.920  sp_nccl=0.921  sp_rsflux=1.031  tp_ar_vllm=0.717  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm; probe tp_ar_vllm=0.7731 sp_g4=1.0245)
+qwen2.5-32b  tp8 decode  M=128   kept 200  sp_g3=1.434  sp_g4=1.384  sp_nccl=1.382  sp_rsflux=1.449  tp_ar_vllm=1.106  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm)
+qwen2.5-32b  tp8 decode  M=256   kept 200  sp_g3=2.120  sp_g4=2.119  sp_nccl=2.107  sp_rsflux=2.124  tp_ar_vllm=1.760  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm)
+qwen2.5-32b  tp8 decode  M=384   kept 200  sp_g3=2.611  sp_g4=2.610  sp_nccl=2.744  sp_rsflux=2.609  tp_ar_vllm=2.234  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm; probe tp_ar_vllm=2.2021 sp_g4=2.6112)
+qwen2.5-32b  tp8 decode  M=512   kept 200  sp_g3=2.823  sp_g4=2.824  sp_nccl=3.015  sp_rsflux=2.820  tp_ar_vllm=2.570  | oracle tp_ar_vllm  auto_g4 tp_ar_vllm (model tp_ar_vllm; probe tp_ar_vllm=2.5257 sp_g4=2.7971)
+qwen2.5-32b  tp8 prefill M=1024  kept 200  sp_flux=3.913  sp_g3=3.626  sp_g4=3.628  sp_nccl=4.022  sp_rsflux=3.625  tp_ar_vllm=3.890  | oracle sp_rsflux  auto_g4 sp_g4 (model sp_g4)
+qwen2.5-32b  tp8 prefill M=2048  kept 200  sp_flux=6.219  sp_g3=6.278  sp_g4=6.212  sp_nccl=7.002  sp_rsflux=6.412  tp_ar_vllm=6.836  | oracle sp_g4  auto_g4 sp_g4 (model sp_g4)
+qwen2.5-32b  tp8 prefill M=4096  kept 199  sp_flux=11.347  sp_g3=11.359  sp_g4=11.356  sp_nccl=13.227  sp_rsflux=12.236  tp_ar_vllm=13.582  | oracle sp_flux  auto_g4 sp_g4 (model sp_g4)
+
+[all] 24 (config, phase, M) points
+    policy           regret  saving vs vLLM    worst  point
+    tp_ar_vllm        8.71%            0.0%    19.7%  ('qwen2.5-32b', 8, 'prefill', 4096)  (n=24)
+    sp_nccl          15.45%           -6.2%    36.4%  ('llama3-8b', 4, 'decode', 256)  (n=24)
+    sp_flux           0.80%           10.2%     7.9%  ('qwen2.5-32b', 8, 'prefill', 1024)  (n=9)
+    sp_rsflux         9.31%           -0.6%    45.5%  ('llama3-8b', 4, 'decode', 32)  (n=24)
+    sp_g3             5.95%            2.5%    29.6%  ('qwen2.5-32b', 8, 'decode', 128)  (n=24)
+    sp_g4             4.62%            3.8%    28.3%  ('qwen2.5-32b', 8, 'decode', 32)  (n=24)
+    auto_g4_model     0.02%            8.0%     0.3%  ('llama3-8b', 4, 'prefill', 1024)  (n=24)
+    auto_g4           0.02%            8.0%     0.3%  ('llama3-8b', 4, 'prefill', 1024)  (n=24)
+
+[decode (graph)] 15 (config, phase, M) points
+    policy           regret  saving vs vLLM    worst  point
+    tp_ar_vllm        0.00%            0.0%     0.0%  ('llama3-8b', 4, 'decode', 32)  (n=15)
+    sp_nccl          21.71%          -21.7%    36.4%  ('llama3-8b', 4, 'decode', 256)  (n=15)
+    sp_rsflux        19.16%          -19.2%    45.5%  ('llama3-8b', 4, 'decode', 32)  (n=15)
+    sp_g3            17.61%          -17.6%    29.6%  ('qwen2.5-32b', 8, 'decode', 128)  (n=15)
+    sp_g4            15.90%          -15.9%    28.3%  ('qwen2.5-32b', 8, 'decode', 32)  (n=15)
+    auto_g4_model     0.00%            0.0%     0.0%  ('llama3-8b', 4, 'decode', 32)  (n=15)
+    auto_g4           0.00%            0.0%     0.0%  ('llama3-8b', 4, 'decode', 32)  (n=15)
+
+[prefill (eager)] 9 (config, phase, M) points
+    policy           regret  saving vs vLLM    worst  point
+    tp_ar_vllm       12.25%            0.0%    19.7%  ('qwen2.5-32b', 8, 'prefill', 4096)  (n=9)
+    sp_nccl          12.91%           -0.6%    24.4%  ('llama3-8b', 4, 'prefill', 1024)  (n=9)
+    sp_flux           0.80%           10.2%     7.9%  ('qwen2.5-32b', 8, 'prefill', 1024)  (n=9)
+    sp_rsflux         5.30%            6.2%     8.2%  ('llama3-8b', 4, 'prefill', 4096)  (n=9)
+    sp_g3             1.21%            9.8%     7.5%  ('llama3-8b', 4, 'prefill', 1024)  (n=9)
+    sp_g4             0.03%           10.9%     0.3%  ('llama3-8b', 4, 'prefill', 1024)  (n=9)
+    auto_g4_model     0.03%           10.9%     0.3%  ('llama3-8b', 4, 'prefill', 1024)  (n=9)
+    auto_g4           0.03%           10.9%     0.3%  ('llama3-8b', 4, 'prefill', 1024)  (n=9)
+
+[llama3-8b tp4] 8 (config, phase, M) points
+    policy           regret  saving vs vLLM    worst  point
+    tp_ar_vllm       10.06%            0.0%    16.5%  ('llama3-8b', 4, 'prefill', 1024)  (n=8)
+    sp_nccl          19.88%           -8.9%    36.4%  ('llama3-8b', 4, 'decode', 256)  (n=8)
+    sp_flux           0.12%           13.0%     0.3%  ('llama3-8b', 4, 'prefill', 2048)  (n=3)
+    sp_rsflux        12.22%           -2.0%    45.5%  ('llama3-8b', 4, 'decode', 32)  (n=8)
+    sp_g3             8.60%            1.3%    28.0%  ('llama3-8b', 4, 'decode', 256)  (n=8)
+    sp_g4             6.05%            3.6%    28.0%  ('llama3-8b', 4, 'decode', 256)  (n=8)
+    auto_g4_model     0.04%            9.1%     0.3%  ('llama3-8b', 4, 'prefill', 1024)  (n=8)
+    auto_g4           0.04%            9.1%     0.3%  ('llama3-8b', 4, 'prefill', 1024)  (n=8)
+
+[qwen2.5-32b tp4] 8 (config, phase, M) points
+    policy           regret  saving vs vLLM    worst  point
+    tp_ar_vllm        6.79%            0.0%    10.8%  ('qwen2.5-32b', 4, 'prefill', 4096)  (n=8)
+    sp_nccl          12.25%           -5.1%    28.7%  ('qwen2.5-32b', 4, 'decode', 256)  (n=8)
+    sp_flux           0.82%            7.7%     2.0%  ('qwen2.5-32b', 4, 'prefill', 1024)  (n=3)
+    sp_rsflux         7.61%           -0.8%    32.8%  ('qwen2.5-32b', 4, 'decode', 32)  (n=8)
+    sp_g3             4.70%            2.0%    24.3%  ('qwen2.5-32b', 4, 'decode', 256)  (n=8)
+    sp_g4             3.54%            3.0%    24.3%  ('qwen2.5-32b', 4, 'decode', 256)  (n=8)
+    auto_g4_model     0.00%            6.4%     0.0%  ('qwen2.5-32b', 4, 'decode', 32)  (n=8)
+    auto_g4           0.00%            6.4%     0.0%  ('qwen2.5-32b', 4, 'decode', 32)  (n=8)
+
+[qwen2.5-32b tp8] 8 (config, phase, M) points
+    policy           regret  saving vs vLLM    worst  point
+    tp_ar_vllm       10.56%            0.0%    19.7%  ('qwen2.5-32b', 8, 'prefill', 4096)  (n=8)
+    sp_nccl          16.40%           -5.3%    28.4%  ('qwen2.5-32b', 8, 'decode', 32)  (n=8)
+    sp_flux           1.39%           11.6%     7.9%  ('qwen2.5-32b', 8, 'prefill', 1024)  (n=3)
+    sp_rsflux         9.24%            1.2%    43.9%  ('qwen2.5-32b', 8, 'decode', 32)  (n=8)
+    sp_g3             5.40%            4.7%    29.6%  ('qwen2.5-32b', 8, 'decode', 128)  (n=8)
+    sp_g4             5.01%            5.0%    28.3%  ('qwen2.5-32b', 8, 'decode', 32)  (n=8)
+    auto_g4_model     0.04%            9.5%     0.1%  ('qwen2.5-32b', 8, 'prefill', 4096)  (n=8)
+    auto_g4           0.04%            9.5%     0.1%  ('qwen2.5-32b', 8, 'prefill', 4096)  (n=8)

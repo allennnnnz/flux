@@ -1,0 +1,48 @@
+group,policy,block_regret,saving_vs_vllm_default,worst_rel,worst_point,n
+all,tp_ar_vllm,0.08708,0.00000,0.1970,"('qwen2.5-32b', 8, 'prefill', 4096)",24
+all,sp_nccl,0.15453,-0.06205,0.3643,"('llama3-8b', 4, 'decode', 256)",24
+all,sp_flux,0.00801,0.10199,0.0794,"('qwen2.5-32b', 8, 'prefill', 1024)",9
+all,sp_rsflux,0.09309,-0.00553,0.4549,"('llama3-8b', 4, 'decode', 32)",24
+all,sp_g3,0.05951,0.02536,0.2957,"('qwen2.5-32b', 8, 'decode', 128)",24
+all,sp_g4,0.04620,0.03760,0.2829,"('qwen2.5-32b', 8, 'decode', 32)",24
+all,auto_g4_model,0.00022,0.07990,0.0034,"('llama3-8b', 4, 'prefill', 1024)",24
+all,auto_g4,0.00022,0.07990,0.0034,"('llama3-8b', 4, 'prefill', 1024)",24
+decode (graph),tp_ar_vllm,0.00000,0.00000,0.0000,"('llama3-8b', 4, 'decode', 32)",15
+decode (graph),sp_nccl,0.21715,-0.21715,0.3643,"('llama3-8b', 4, 'decode', 256)",15
+decode (graph),sp_rsflux,0.19159,-0.19159,0.4549,"('llama3-8b', 4, 'decode', 32)",15
+decode (graph),sp_g3,0.17606,-0.17606,0.2957,"('qwen2.5-32b', 8, 'decode', 128)",15
+decode (graph),sp_g4,0.15904,-0.15904,0.2829,"('qwen2.5-32b', 8, 'decode', 32)",15
+decode (graph),auto_g4_model,0.00000,0.00000,0.0000,"('llama3-8b', 4, 'decode', 32)",15
+decode (graph),auto_g4,0.00000,0.00000,0.0000,"('llama3-8b', 4, 'decode', 32)",15
+prefill (eager),tp_ar_vllm,0.12249,0.00000,0.1970,"('qwen2.5-32b', 8, 'prefill', 4096)",9
+prefill (eager),sp_nccl,0.12906,-0.00586,0.2445,"('llama3-8b', 4, 'prefill', 1024)",9
+prefill (eager),sp_flux,0.00801,0.10199,0.0794,"('qwen2.5-32b', 8, 'prefill', 1024)",9
+prefill (eager),sp_rsflux,0.05303,0.06188,0.0823,"('llama3-8b', 4, 'prefill', 4096)",9
+prefill (eager),sp_g3,0.01211,0.09833,0.0749,"('llama3-8b', 4, 'prefill', 1024)",9
+prefill (eager),sp_g4,0.00031,0.10885,0.0034,"('llama3-8b', 4, 'prefill', 1024)",9
+prefill (eager),auto_g4_model,0.00031,0.10885,0.0034,"('llama3-8b', 4, 'prefill', 1024)",9
+prefill (eager),auto_g4,0.00031,0.10885,0.0034,"('llama3-8b', 4, 'prefill', 1024)",9
+llama3-8b tp4,tp_ar_vllm,0.10059,0.00000,0.1646,"('llama3-8b', 4, 'prefill', 1024)",8
+llama3-8b tp4,sp_nccl,0.19880,-0.08923,0.3643,"('llama3-8b', 4, 'decode', 256)",8
+llama3-8b tp4,sp_flux,0.00123,0.12950,0.0034,"('llama3-8b', 4, 'prefill', 2048)",3
+llama3-8b tp4,sp_rsflux,0.12223,-0.01967,0.4549,"('llama3-8b', 4, 'decode', 32)",8
+llama3-8b tp4,sp_g3,0.08602,0.01324,0.2799,"('llama3-8b', 4, 'decode', 256)",8
+llama3-8b tp4,sp_g4,0.06054,0.03639,0.2799,"('llama3-8b', 4, 'decode', 256)",8
+llama3-8b tp4,auto_g4_model,0.00040,0.09103,0.0034,"('llama3-8b', 4, 'prefill', 1024)",8
+llama3-8b tp4,auto_g4,0.00040,0.09103,0.0034,"('llama3-8b', 4, 'prefill', 1024)",8
+qwen2.5-32b tp4,tp_ar_vllm,0.06787,0.00000,0.1078,"('qwen2.5-32b', 4, 'prefill', 4096)",8
+qwen2.5-32b tp4,sp_nccl,0.12254,-0.05119,0.2874,"('qwen2.5-32b', 4, 'decode', 256)",8
+qwen2.5-32b tp4,sp_flux,0.00822,0.07732,0.0197,"('qwen2.5-32b', 4, 'prefill', 1024)",3
+qwen2.5-32b tp4,sp_rsflux,0.07615,-0.00775,0.3277,"('qwen2.5-32b', 4, 'decode', 32)",8
+qwen2.5-32b tp4,sp_g3,0.04704,0.01950,0.2434,"('qwen2.5-32b', 4, 'decode', 256)",8
+qwen2.5-32b tp4,sp_g4,0.03535,0.03045,0.2425,"('qwen2.5-32b', 4, 'decode', 256)",8
+qwen2.5-32b tp4,auto_g4_model,0.00000,0.06356,0.0000,"('qwen2.5-32b', 4, 'decode', 32)",8
+qwen2.5-32b tp4,auto_g4,0.00000,0.06356,0.0000,"('qwen2.5-32b', 4, 'decode', 32)",8
+qwen2.5-32b tp8,tp_ar_vllm,0.10565,0.00000,0.1970,"('qwen2.5-32b', 8, 'prefill', 4096)",8
+qwen2.5-32b tp8,sp_nccl,0.16396,-0.05274,0.2843,"('qwen2.5-32b', 8, 'decode', 32)",8
+qwen2.5-32b tp8,sp_flux,0.01392,0.11639,0.0794,"('qwen2.5-32b', 8, 'prefill', 1024)",3
+qwen2.5-32b tp8,sp_rsflux,0.09244,0.01195,0.4386,"('qwen2.5-32b', 8, 'decode', 32)",8
+qwen2.5-32b tp8,sp_g3,0.05404,0.04668,0.2957,"('qwen2.5-32b', 8, 'decode', 128)",8
+qwen2.5-32b tp8,sp_g4,0.05005,0.05028,0.2829,"('qwen2.5-32b', 8, 'decode', 32)",8
+qwen2.5-32b tp8,auto_g4_model,0.00040,0.09519,0.0008,"('qwen2.5-32b', 8, 'prefill', 4096)",8
+qwen2.5-32b tp8,auto_g4,0.00040,0.09519,0.0008,"('qwen2.5-32b', 8, 'prefill', 4096)",8

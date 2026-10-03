@@ -3,8 +3,8 @@
 **本 workstream 唯一權威。** 第 1 節由 boss 寫入，worker 不改；第 2 節起由 worker 維護。
 
 建立：2026-09-29（boss）
-最後更新：2026-10-02（boss 兼 worker，G3 完成）
-狀態：**第三階段（泛用決策器）G3 完成，下一步 G4**（D-006 / D-008：最高優先；有證據前不改 `src/`）
+最後更新：2026-10-03（boss 兼 worker，G4 完成）
+狀態：**第三階段（泛用決策器）G4 完成（op 0.17%、block 0.02%），下一步 F4 / G5 / G6**（D-006 / D-008：最高優先；有證據前不改 `src/`）
 
 ---
 
@@ -12,36 +12,28 @@
 
 最後更新：2026-10-02
 
-**一句話**：查表版決策器已完成並驗證（對真 vLLM 0.8.5：prefill 快 9.3–17.7%，decode M ≤ 384 同速、M=512 快 10–14%，regret ≈ 0）。
-第三階段（泛用決策器）**G0–G3 完成**：
-- G2：只用 4 分鐘校準微基準建參數檔，對全部 320 個既有實測點 regret AG 1.15–1.74%、RS 0.10–0.36%；
-- G3：在沒量過的模型與卡數上**先預測、後量測**（預測在量測前 push）。只用預測器：
-  - AG 1.76%（8 卡新模型 0.89%、4 卡 1.77%、2 卡 2.81%）；
-  - RS 0.37%。
-- G3 錯誤幾乎全來自 **cuBLAS 自己的斷崖**（某些形狀 × M 慢 22–53%），通訊與重疊模型都準。
-  事後分析：GEMM 改成實測（單卡、便宜）、通訊 / 重疊用模型，AG regret 1.76% → 0.27%。
+**一句話**：第三階段（泛用決策器）**G0–G4 完成**。決策器 v2 =
+- 模型（通訊 + 融合 kernel 重疊）；
+- **實測單卡 GEMM**（每個模型幾十秒）；
+- 少量多卡把關。
 
-**G4 op 層級完成（2026-10-03，預先登記，全新測試集：Qwen2.5-32B 8 卡 / 4 卡、Llama-3-8B 4 卡，M 皆為沒用過的值）**：
+在全新情境（Qwen2.5-32B 8 / 4 卡、Llama-3-8B 4 卡）上，**決策都在量測前 push**：
 
-| 方法 | regret |
-| --- | --- |
-| **模型 + 實測單卡 GEMM（g4）** | **0.17%**（AG 0.04%、RS 0.41%） |
-| 加多卡把關（g4+probe） | 0.11% |
-| G3 方法（只用模型） | 1.20% |
-| 固定門檻 | 2.30% |
+| 層級 | 決策器 v2 | 對照 |
+| --- | --- | --- |
+| op | regret **0.17%** | G3 方法 1.20%、固定門檻 2.30% |
+| block（含切法選擇） | regret **0.02%** | 比 vLLM 預設省 8.0%（prefill 10.9%；decode 正確選 vLLM 預設） |
 
-- 成本：單卡 GEMM 82 秒 = 量整張表的 7.7%；多卡把關另需 367 秒（3% 變體只探 16% 的點，效果幾乎一樣）；
-- 結果：`results/g4_map/eval_g4_log.txt`；
-- 新坑：steady 模式量極小 kernel 時量到的是 CPU 發 kernel 速度，數值取決於同一輪的其他項目（同一 GEMM 在探測與地圖中可差 3 倍）。
+- 計劃成功標準：block regret ≤ 2%、校準 ≤ 10 分鐘、切換點誤差 ≤ 10% **都達成**；
+  探測 ≤ 15% 未達成（事先規則 33–38%），但探測帶來的改善很小。
+- 報告：`reports/20261003_g4_dispatcher.md`。
 
-**下一步：G4 block 層級**（使用者 2026-10-03 核准做法，D-009）：先跑 `scripts/run_g4_block_prep_v1.sh`（vLLM all-reduce 校準 + block 用 M 的單卡 GEMM），再依 `build_g4_block_v1.py` 的步驟進行。
-原 G4 設計（`reports/20261002_g3_unseen.md` 第 0 節）：
-- 決策 = 模型（通訊 + 重疊）+ 實測單卡 GEMM + 少量多卡探測；
-- GemmRS 改用 gemm_only 家族參數；
-- 用 `scripts/build_table_v2.py` 產生 `dispatcher_v1` 格式的表；
-- 在 vLLM 環境做 block 驗證（含 TP=4），比較所有對照組。
+**下一步（待使用者決定先後）**：
+1. **F4**：接進真正的 vLLM 端到端，用 `scripts/build_table_v2.py` + `predictor/block.py` 產生表與切法；
+2. **G5**：PCIe 代理；
+3. **G6**：總報告 + auditor。
 
-**G1–G3 的重點**（`reports/20261002_g1_predictor.md`、`reports/20261002_g2_calibration.md`、`reports/20261002_g3_unseen.md`）：
+**G1–G4 的重點**（`reports/20261003_g4_dispatcher.md`、`reports/20261002_g1_predictor.md`、`reports/20261002_g2_calibration.md`、`reports/20261002_g3_unseen.md`）：
 1. 融合 kernel 能否「邊傳邊算」，可從 CUTLASS stream-K 的 tile 排程直接模擬：
    - 自己算出 M ≤ 2048 不重疊、≥ 3072 才重疊；
    - 對沒看過的 Phase 0 形狀也對 → 可能就是 diag-overlap 要找的原因 **[推論]**。
@@ -50,6 +42,7 @@
 3. 隨機森林在量過的形狀上準，換新形狀就退化。
 4. 坑：同一 process 換一組 Flux op 會隨機卡死 → 校準一組形狀一個 process。
 5. G3 證實模型的大膽預測：4 卡 / 2 卡時 Flux 在 M=136–512 就勝出（8 卡要到 1024–3072）。
+6. G4：GEMM 改實測後，AG 側幾乎完美（0.04%）。RS 側極小形狀在 steady 模式仍有誤差，原因是量測方式：連發極小 kernel 量到的是 CPU 發 kernel 的速度。
 
 計劃：`reports/20261002_plan_general_dispatcher.md`（含附錄 A）。文獻：`reports/20261002_related_work.md`。
 
@@ -76,6 +69,7 @@
 | `reports/20261002_g1_predictor.md` | **G1：預測器與推廣測試（關卡通過）；融合 kernel 排程模擬** |
 | `reports/20261002_g2_calibration.md` | **G2：4 分鐘校準 → 只用微基準的參數檔，對全部實測評估** |
 | `reports/20261002_g3_unseen.md` | **G3：新模型 / 4 卡 / 2 卡，預先登記的預測 vs 實測；cuBLAS 斷崖** |
+| `reports/20261003_g4_dispatcher.md` | **G4：決策器 v2，op 0.17% / block 0.02%（全新情境、預先登記）** |
 
 **環境**：
 - Flux 量測：`pixi run --manifest-path pixi.toml ./launch.sh <script>`。
@@ -360,6 +354,32 @@ E5 的 Llama 兩層結果在 `results/e5_rs_map_v1/`。**全部尚未經 auditor
 44. **事後分析**（G4 設計用）：單卡 GEMM 用實測、通訊 / 重疊用模型，AG regret 1.76% → 0.27%（2 卡 2.81 → 0.13%）；RS 沒改善（GemmRS 模型待修）。
 45. PCIe 調校 config 規則在 G3 沒有被測到（沒有點命中登錄表）。
 
+### 第三階段 G4（2026-10-03，`reports/20261003_g4_dispatcher.md`，尚未經 auditor 審查）
+
+46. **決策器 v2**（D-009）= 模型（通訊 + 重疊）+ 實測單卡 GEMM + 少量多卡把關。
+    - 全新測試集：Qwen2.5-32B 8 / 4 卡、Llama-3-8B 4 卡，M = 24–6144，全是沒用過的值；
+    - 每一步的決策都在下一步量測前 push。
+47. **op 層級**（192 點）：
+
+    | 方法 | regret |
+    | --- | --- |
+    | 決策器 v2 | 0.17%（AG 0.04%、RS 0.41%） |
+    | 加多卡把關 | 0.11% |
+    | G3 方法 | 1.20% |
+    | 固定門檻 | 2.30% |
+
+    - 接近切換點的路徑誤差：AG 1.9%、RS 5.8%；
+    - 單卡 GEMM 實測 82 秒 = 量整張表的 7.7%。
+48. **block 層級**（24 個情境，含切法）：
+    - 自動選切法 + G4 表：regret 0.02%，比 vLLM 預設省 8.0%（prefill 10.9%、decode 0%）；
+    - 對照：永遠 vLLM 預設 8.71%、永遠序列平行 + G4 表 4.62%；
+    - 9 個切法探測都同意 block 模型。
+49. **成功標準**：block ≤ 2%、校準 ≤ 10 分鐘、切換點誤差 ≤ 10% 達成；探測 ≤ 15% 未達成（事先規則 33–38%；3% 變體 16%）。
+50. **新坑**（已寫入 `CLAUDE.md` 與附錄 A.3）：
+    - steady 模式極小 kernel 量到的是 CPU 發 kernel 的速度；
+    - vLLM custom AR 在 eager 比 graph 慢；
+    - 策略子集選項的程式錯誤（已修）。
+
 ## 3. 撤回表（worker 維護）
 
 | 撤回主張 | 出處 | 原因 | 替代 |
@@ -380,20 +400,15 @@ E5 的 Llama 兩層結果在 `results/e5_rs_map_v1/`。**全部尚未經 auditor
 - ✅ G1 預測器（`reports/20261002_g1_predictor.md`），關卡通過。
 - ✅ G2 校準（`reports/20261002_g2_calibration.md`）：4 分鐘校準，只用微基準評估全部實測，AG 1.15–1.74%、RS 0.10–0.36%。
 - ✅ G3 新模型 / 4 卡 / 2 卡（`reports/20261002_g3_unseen.md`）：預先登記；只用預測器 AG 1.76%、RS 0.37%；錯誤來自 cuBLAS 斷崖。
-- **G4（下一個）**：
-  1. 決策器 v2 = 模型（通訊 + 重疊排程模擬）+ **實測單卡 GEMM**（cuBLAS、Flux gemm_only，每個部署形狀 × M 桶，幾秒）+ 少量多卡探測。
-     - 用 `scripts/build_table_v2.py`（已寫好、只用預測器的版本）產生 `dispatcher_v1` 格式的表；
-     - 加 GEMM 實測輸入與探測執行器。
-  2. GemmRS 改用 gemm_only 家族參數（只擬合 α、β）。G2 舊數據：RS 路徑 A MAPE 16.4% → 7.2%。
-  3. 探測規則：
-     - 差距 < ε；
-     - 風險訊號：PCIe 調校 config、GEMM 實測與模型差很多（斷崖指標）；
-     - ε 用校準集內交叉驗證決定。
-  4. 切法層級（TP+AR vs SP）：寫 `predictor/block.py`（AR 模型 + norm / residual 頻寬項），用 `results/v3_block_vllm_ar/` 驗證。
-  5. block 驗證：`validate_block_v4.py`（由 v3 改：模型維度與卡數可設定、讀 v2 表）。
-     - 至少 Llama-3-70B TP=4 與 Qwen2.5-72B TP=8；
-     - vLLM 環境；校準 / 驗證分開；守衛 + tmux。
-  6. 成功標準（計劃）：沒量過的形狀 / 卡數上 block regret ≤ 2%、校準 ≤ 10 分鐘、探測 ≤ 15%、接近切換點誤差 ≤ 10%。
+- ✅ G4 決策器 v2（`reports/20261003_g4_dispatcher.md`）：op 0.17%、block 0.02%，預先登記、全新情境。
+- **下一步（待使用者決定先後）**：
+  1. **F4（vLLM 端到端）**：
+     - 在 vLLM 0.8.5 的 linear layer / communicator 掛上 `dispatcher_v1`，表由 `build_table_v2.build(..., gemm=實測)` 產生；
+     - 切法由 `predictor/block.py` 決定（decode 多半是 vLLM 預設、prefill 序列平行）；
+     - 量端到端延遲；可行性見 `reports/20261002_f4_feasibility.md`。
+  2. **G5（PCIe 代理）**：NCCL 關 P2P、Flux 路徑不可用；先與 hetero-proxy 對齊。
+  3. **G6**：總報告 + auditor。
+  4. 探測規則改為「差距 < 3% 或風險訊號」；eager 小 M 的 RS 決策用 gpu 模式的 GEMM 實測或保守選擇。
 - 其他遺留：κ 不穩定；多 block 共用 SM 時低估重疊；steady 參數檔的 NCCL 誤差；極小形狀的串行組合誤差（G3 第 3 節）。
 
 **0. ✅ 驗證輪完成（2026-10-02）**，見 `reports/20260930_verification.md`。下一步前需使用者確認。
