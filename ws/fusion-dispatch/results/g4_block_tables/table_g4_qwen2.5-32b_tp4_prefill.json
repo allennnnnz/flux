@@ -64,7 +64,7 @@
     ]
    ],
    "verdict": [
-    "predicted",
+    "probed",
     "predicted",
     "predicted"
    ],
@@ -102,12 +102,12 @@
     ],
     [
      [
-      "fluxag",
-      1.2739
-     ],
-     [
       "nccl",
       1.2761
+     ],
+     [
+      "fluxag",
+      1.2739
      ],
      [
       "flux",
@@ -138,9 +138,9 @@
     ]
    ],
    "verdict": [
-    "predicted",
-    "predicted",
-    "predicted"
+    "probed",
+    "probed",
+    "probed"
    ],
    "source": [
     "fallback/none",
@@ -241,8 +241,8 @@
    ],
    "verdict": [
     "predicted",
-    "predicted",
-    "predicted"
+    "probed",
+    "probed"
    ],
    "source": [
     "fallback/none",
@@ -326,6 +326,8 @@
      "B"
     ]
    }
-  ]
+  ],
+  "probes_applied": 6,
+  "probes_changed_first_choice": 1
  }
 }

@@ -1,0 +1,3 @@
+2026-10-03 04:31:17 START cmd=timeout 1800 pixi run --manifest-path pixi.toml ws/fusion-dispatch/scripts/launch_tp.sh 4 ws/fusion-dispatch/scripts/dispatch_map_v2.py --layer Q32-GU --Ms 1024,2048,4096 --max_m 4096 --modes steady --items B_nccl_cublas,C_fluxag_cublas --rounds 30 --warmup 30 --clock_period 0.02 --out_dir /home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_probes/tp4
+2026-10-03 04:31:17 PREFLIGHT gpu_procs=[] other_user_cpu_hogs=[] other_users_logged_in=[]
+2026-10-03 04:31:35 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]

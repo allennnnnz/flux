@@ -28,12 +28,12 @@
     ],
     [
      [
-      "nccl",
-      0.2225
-     ],
-     [
       "fluxag",
       0.2274
+     ],
+     [
+      "nccl",
+      0.2225
      ],
      [
       "flux",
@@ -65,7 +65,7 @@
    ],
    "verdict": [
     "predicted",
-    "predicted",
+    "probed",
     "predicted"
    ],
    "source": [
@@ -138,8 +138,8 @@
     ]
    ],
    "verdict": [
-    "predicted",
-    "predicted",
+    "probed",
+    "probed",
     "predicted"
    ],
    "source": [
@@ -293,6 +293,8 @@
      "D"
     ]
    }
-  ]
+  ],
+  "probes_applied": 3,
+  "probes_changed_first_choice": 1
  }
 }

@@ -1,0 +1,29 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --node_rank=0 --nproc_per_node=4 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/dispatch_map_v2.py --layer Q32-QKV --Ms 384,512 --max_m 512 --modes gpu --items B_nccl_cublas,C_fluxag_cublas,D_fluxag_fluxgemm --rounds 30 --warmup 30 --clock_period 0.02 --out_dir /home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_probes/tp4
+W1003 04:31:46.722000 773741 site-packages/torch/distributed/run.py:792] 
+W1003 04:31:46.722000 773741 site-packages/torch/distributed/run.py:792] *****************************************
+W1003 04:31:46.722000 773741 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1003 04:31:46.722000 773741 site-packages/torch/distributed/run.py:792] *****************************************
+[Q32-QKV M=384] correctness: all ok
+
+[Q32-QKV N=7168 K=5120 M=384 mode=gpu] kept 30/30  modal clock [None, None, None, None]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  B_nccl_cublas           0.1428    0.1403    0.1567    0.0862
+  C_fluxag_cublas         0.1587    0.1423    0.1772    0.0822
+  D_fluxag_fluxgemm       0.1710    0.1567    0.1894    0.0831
+  per-round diff                  median       p10       p90
+  D - C                           0.0143   -0.0041    0.0348
+  C - B                           0.0123   -0.0020    0.0348
+[Q32-QKV M=512] correctness: all ok
+
+[Q32-QKV N=7168 K=5120 M=512 mode=gpu] kept 30/30  modal clock [1410, None, None, 1410]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  B_nccl_cublas           0.1674    0.1597    0.1751    0.0807
+  C_fluxag_cublas         0.1751    0.1659    0.1864    0.0788
+  D_fluxag_fluxgemm       0.1664    0.1577    0.1751    0.0816
+  per-round diff                  median       p10       p90
+  D - C                          -0.0092   -0.0225    0.0041
+  C - B                           0.0092   -0.0010    0.0215
+
+wrote /home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_probes/tp4/raw_Q32-QKV.csv
+wrote /home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_probes/tp4/meta_Q32-QKV.json
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_probes/tp4/guard_Q32-QKV_gpu.log

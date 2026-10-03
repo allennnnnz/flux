@@ -105,8 +105,8 @@
     "predicted",
     "predicted",
     "predicted",
-    "predicted",
-    "predicted"
+    "probed",
+    "probed"
    ],
    "source": [
     "fallback/none",
@@ -221,7 +221,7 @@
     "predicted",
     "predicted",
     "predicted",
-    "predicted",
+    "probed",
     "predicted"
    ],
    "source": [
@@ -297,8 +297,8 @@
    ],
    "verdict": [
     "predicted",
-    "predicted",
-    "predicted",
+    "probed",
+    "probed",
     "predicted",
     "predicted"
    ],
@@ -373,8 +373,8 @@
    ],
    "verdict": [
     "predicted",
-    "predicted",
-    "predicted",
+    "probed",
+    "probed",
     "predicted",
     "predicted"
    ],
@@ -473,6 +473,8 @@
      "B"
     ]
    }
-  ]
+  ],
+  "probes_applied": 7,
+  "probes_changed_first_choice": 0
  }
 }

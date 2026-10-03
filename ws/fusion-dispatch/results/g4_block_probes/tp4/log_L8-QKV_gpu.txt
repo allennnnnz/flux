@@ -1,0 +1,25 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --node_rank=0 --nproc_per_node=4 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/dispatch_map_v2.py --layer L8-QKV --Ms 384,512 --max_m 512 --modes gpu --items B_nccl_cublas,C_fluxag_cublas --rounds 30 --warmup 30 --clock_period 0.02 --out_dir /home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_probes/tp4
+W1003 04:30:39.231000 769905 site-packages/torch/distributed/run.py:792] 
+W1003 04:30:39.231000 769905 site-packages/torch/distributed/run.py:792] *****************************************
+W1003 04:30:39.231000 769905 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1003 04:30:39.231000 769905 site-packages/torch/distributed/run.py:792] *****************************************
+[L8-QKV M=384] correctness: all ok
+
+[L8-QKV N=6144 K=4096 M=384 mode=gpu] kept 30/30  modal clock [None, None, None, None]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  B_nccl_cublas           0.1213    0.1167    0.1372    0.0885
+  C_fluxag_cublas         0.1372    0.1260    0.1516    0.0903
+  per-round diff                  median       p10       p90
+  C - B                           0.0138    0.0031    0.0256
+[L8-QKV M=512] correctness: all ok
+
+[L8-QKV N=6144 K=4096 M=512 mode=gpu] kept 30/30  modal clock [1350, None, None, None]
+  item                    median       p10       p90  cpu/call  ms (rank-max)
+  B_nccl_cublas           0.1357    0.1280    0.1444    0.0859
+  C_fluxag_cublas         0.1444    0.1372    0.1669    0.0888
+  per-round diff                  median       p10       p90
+  C - B                           0.0113   -0.0020    0.0317
+
+wrote /home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_probes/tp4/raw_L8-QKV.csv
+wrote /home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_probes/tp4/meta_L8-QKV.json
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_probes/tp4/guard_L8-QKV_gpu.log

@@ -84,16 +84,16 @@
     ],
     [
      [
+      "fluxag_fluxgemm",
+      0.1614
+     ],
+     [
       "flux",
       0.1487
      ],
      [
       "nccl",
       0.1492
-     ],
-     [
-      "fluxag_fluxgemm",
-      0.1614
      ],
      [
       "fluxag",
@@ -105,8 +105,8 @@
     "predicted",
     "predicted",
     "predicted",
-    "predicted",
-    "predicted"
+    "probed",
+    "probed"
    ],
    "source": [
     "fallback/none",
@@ -182,12 +182,12 @@
     ],
     [
      [
-      "flux",
-      0.316
-     ],
-     [
       "fluxag_fluxgemm",
       0.3288
+     ],
+     [
+      "flux",
+      0.316
      ],
      [
       "nccl",
@@ -219,10 +219,10 @@
    ],
    "verdict": [
     "predicted",
-    "predicted",
-    "predicted",
-    "predicted",
-    "predicted"
+    "probed",
+    "probed",
+    "probed",
+    "probed"
    ],
    "source": [
     "fallback/none",
@@ -297,7 +297,7 @@
    ],
    "verdict": [
     "predicted",
-    "predicted",
+    "probed",
     "predicted",
     "predicted",
     "predicted"
@@ -332,12 +332,12 @@
     ],
     [
      [
-      "flux",
-      0.1256
-     ],
-     [
       "nccl",
       0.127
+     ],
+     [
+      "flux",
+      0.1256
      ]
     ],
     [
@@ -373,8 +373,8 @@
    ],
    "verdict": [
     "predicted",
-    "predicted",
-    "predicted",
+    "probed",
+    "probed",
     "predicted",
     "predicted"
    ],
@@ -495,6 +495,8 @@
      "B"
     ]
    }
-  ]
+  ],
+  "probes_applied": 9,
+  "probes_changed_first_choice": 3
  }
 }

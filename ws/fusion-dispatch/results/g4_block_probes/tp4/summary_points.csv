@@ -1,0 +1,13 @@
+layer,N,K,M,mode,modal_sm_clock,t_fused,best_off,t_best_off,delta_med(A-best),delta_p10,delta_p90,verdict,speedup_off_over_fused,A-D,D-C,C-B,t_B,t_C,t_D,c_nccl_ag,c_flux_ag,c_cublas,c_fluxgemm
+L8-GU,28672,4096,1024,steady,1365,0.3480,D_fluxag_fluxgemm,0.3624,-0.0138,-0.0195,-0.0056,fused,1.041,-0.0138,nan,nan,,,0.3624,,,,
+L8-GU,28672,4096,2048,steady,1320,0.6333,D_fluxag_fluxgemm,0.6579,-0.0258,-0.0362,-0.0157,fused,1.039,-0.0258,nan,nan,,,0.6579,,,,
+L8-O,4096,4096,128,gpu,,0.0696,B_nccl_cublas,0.0630,0.0051,-0.0020,0.0266,tie,0.904,nan,nan,nan,0.0630,,,,,,
+L8-O,4096,4096,256,gpu,,0.0794,B_nccl_cublas,0.0988,-0.0210,-0.0287,0.3779,tie,1.245,nan,nan,nan,0.0988,,,,,,
+L8-down,4096,14336,128,gpu,,0.0968,B_nccl_cublas,0.0896,0.0046,-0.0051,0.0154,tie,0.926,nan,nan,nan,0.0896,,,,,,
+L8-down,4096,14336,256,gpu,,0.1167,B_nccl_cublas,0.1413,-0.0200,-0.0348,-0.0143,fused,1.210,nan,nan,nan,0.1413,,,,,,
+Q32-O,5120,5120,128,gpu,,0.0789,B_nccl_cublas,0.0707,0.0062,-0.0041,0.0205,tie,0.896,nan,nan,nan,0.0707,,,,,,
+Q32-QKV,7168,5120,1024,steady,1410,0.1880,B_nccl_cublas,0.2046,-0.0185,-0.0237,-0.0111,fused,1.089,nan,nan,nan,0.2046,,,,,,
+Q32-down,5120,27648,128,gpu,,0.1352,B_nccl_cublas,0.1326,0.0031,-0.0062,0.0184,tie,0.981,nan,nan,nan,0.1326,,,,,,
+Q32-down,5120,27648,256,gpu,,0.1879,B_nccl_cublas,0.2033,-0.0102,-0.0348,0.0010,tie,1.082,nan,nan,nan,0.2033,,,,,,
+Q32-down,5120,27648,2048,steady,1260,0.6683,B_nccl_cublas,0.7021,-0.0329,-0.0369,-0.0264,fused,1.051,nan,nan,nan,0.7021,,,,,,
+Q32-down,5120,27648,4096,steady,1230,1.2614,B_nccl_cublas,1.4024,-0.1339,-0.1513,-0.1145,fused,1.112,nan,nan,nan,1.4024,,,,,,
