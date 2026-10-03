@@ -1,0 +1,135 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/modules/transport/ibrc/ibrc.cpp:418: non-zero status: 110 /dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/modules/transport/ibrc/ibrc.cpp:418: non-zero status: 110 ibv_modify_qp failed 
+ibv_modify_qp failed 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/modules/transport/ibrc/ibrc.cpp:418: non-zero status: 110 /dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/modules/transport/ibrc/ibrc.cpp:418: non-zero status: 110 
+
+ibv_modify_qp failed 
+ibv_modify_qp failed 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/modules/transport/ibrc/ibrc.cpp:1433: non-zero status: 7 /dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/modules/transport/ibrc/ibrc.cpp:1433: non-zero status: 7 
+
+ep_connect failed 
+ep_connect failed 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/modules/transport/ibrc/ibrc.cpp:1433: non-zero status: 7 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/modules/transport/ibrc/ibrc.cpp:1433: non-zero status: 7 
+ep_connect failed 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/modules/transport/ibrc/ibrc.cpp:1501: non-zero status: 7 ep_connect failed 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/modules/transport/ibrc/ibrc.cpp:1501: non-zero status: 7 
+transport create connect failed 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/modules/transport/ibrc/ibrc.cpp:1501: non-zero status: 7 
+transport create connect failed 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/modules/transport/ibrc/ibrc.cpp:1501: non-zero status: 7 
+transport create connect failed 
+
+transport create connect failed 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/transport/transport.cpp:400: non-zero status: 7 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/transport/transport.cpp:400: non-zero status: 7 
+connect EPS failed 
+connect EPS failed 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/transport/transport.cpp:400: non-zero status: 7 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/transport/transport.cpp:400: non-zero status: 7 
+connect EPS failed 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/init/init.cu:1008: non-zero status: 7 connect EPS failed 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/init/init.cu:1008: non-zero status: 7 
+nvshmem setup connections failed 
+
+nvshmem setup connections failed 
+
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/init/init.cu:1008: non-zero status: 7 /dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/init/init.cu:1008: non-zero status: 7 
+nvshmem setup connections failed 
+nvshmem setup connections failed 
+
+
+[rank0]:[W1003 16:23:55.436805632 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank1]:[W1003 16:23:55.452179553 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank3]:[W1003 16:23:55.454241251 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank2]:[W1003 16:23:55.468013942 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+/home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/home/rogerlee/flux/test/python/ag_gemm/test_ag_kernel.py", line 695, in <module>
+[rank1]:     perf_res_flux = perf_flux(
+[rank1]:                     ^^^^^^^^^^
+[rank1]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank1]:     return func(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/rogerlee/flux/test/python/ag_gemm/test_ag_kernel.py", line 415, in perf_flux
+[rank1]:     all_gather_gemm_kernel = flux.AGKernel(
+[rank1]:                              ^^^^^^^^^^^^^^
+[rank1]: RuntimeError: /home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+/home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+/home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/rogerlee/flux/test/python/ag_gemm/test_ag_kernel.py", line 695, in <module>
+[rank0]:     perf_res_flux = perf_flux(
+[rank0]:                     ^^^^^^^^^^
+[rank0]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank0]:     return func(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/rogerlee/flux/test/python/ag_gemm/test_ag_kernel.py", line 415, in perf_flux
+[rank0]:     all_gather_gemm_kernel = flux.AGKernel(
+[rank0]:                              ^^^^^^^^^^^^^^
+[rank0]: RuntimeError: /home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/rogerlee/flux/test/python/ag_gemm/test_ag_kernel.py", line 695, in <module>
+[rank2]:     perf_res_flux = perf_flux(
+[rank2]:                     ^^^^^^^^^^
+[rank2]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank2]:     return func(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/rogerlee/flux/test/python/ag_gemm/test_ag_kernel.py", line 415, in perf_flux
+[rank2]:     all_gather_gemm_kernel = flux.AGKernel(
+[rank2]:                              ^^^^^^^^^^^^^^
+[rank2]: RuntimeError: /home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+/home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/home/rogerlee/flux/test/python/ag_gemm/test_ag_kernel.py", line 695, in <module>
+[rank3]:     perf_res_flux = perf_flux(
+[rank3]:                     ^^^^^^^^^^
+[rank3]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank3]:     return func(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/rogerlee/flux/test/python/ag_gemm/test_ag_kernel.py", line 415, in perf_flux
+[rank3]:     all_gather_gemm_kernel = flux.AGKernel(
+[rank3]:                              ^^^^^^^^^^^^^^
+[rank3]: RuntimeError: /home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank0]:[W1003 16:23:56.516830305 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W1003 16:23:57.539000 864466 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 864599 closing signal SIGTERM
+W1003 16:23:57.539000 864466 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 864600 closing signal SIGTERM
+W1003 16:23:57.540000 864466 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 864601 closing signal SIGTERM
+E1003 16:23:57.968000 864466 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 0 (pid: 864598) of binary: /home/rogerlee/flux/.pixi/envs/default/bin/python
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+test/python/ag_gemm/test_ag_kernel.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-03_16:23:57
+  host      : css-host-158
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 864598)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_flux_smoke/ag_ppn4/guard_node0.log

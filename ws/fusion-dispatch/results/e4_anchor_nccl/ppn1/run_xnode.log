@@ -1,0 +1,2 @@
+[run_xnode] 2026-10-03 16:12:16 start: nproc_per_node=1 env=pixi ws/fusion-dispatch/scripts/xnode_nccl_anchor_v1.py --out ws/fusion-dispatch/results/e4_anchor_nccl/ppn1 --iters 30
+[run_xnode] 2026-10-03 16:12:35 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)

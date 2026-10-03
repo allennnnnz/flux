@@ -1,0 +1,20 @@
+[anchor] all_gather      world=2       1 MiB  median    0.140 ms  busbw    3.74 GB/s
+[anchor] all_gather      world=2       4 MiB  median    0.337 ms  busbw    6.22 GB/s
+[anchor] all_gather      world=2      16 MiB  median    1.234 ms  busbw    6.80 GB/s
+[anchor] all_gather      world=2      64 MiB  median    4.604 ms  busbw    7.29 GB/s
+[anchor] all_gather      world=2     256 MiB  median   17.016 ms  busbw    7.89 GB/s
+[anchor] all_gather      world=2    1024 MiB  median   69.147 ms  busbw    7.76 GB/s
+[anchor] reduce_scatter  world=2       1 MiB  median    0.137 ms  busbw    3.82 GB/s
+[anchor] reduce_scatter  world=2       4 MiB  median    0.331 ms  busbw    6.33 GB/s
+[anchor] reduce_scatter  world=2      16 MiB  median    1.271 ms  busbw    6.60 GB/s
+[anchor] reduce_scatter  world=2      64 MiB  median    4.553 ms  busbw    7.37 GB/s
+[anchor] reduce_scatter  world=2     256 MiB  median   17.544 ms  busbw    7.65 GB/s
+[anchor] reduce_scatter  world=2    1024 MiB  median   69.879 ms  busbw    7.68 GB/s
+[anchor] all_reduce      world=2       1 MiB  median    0.206 ms  busbw    5.09 GB/s
+[anchor] all_reduce      world=2       4 MiB  median    0.604 ms  busbw    6.94 GB/s
+[anchor] all_reduce      world=2      16 MiB  median    2.295 ms  busbw    7.31 GB/s
+[anchor] all_reduce      world=2      64 MiB  median    9.244 ms  busbw    7.26 GB/s
+[anchor] all_reduce      world=2     256 MiB  median   35.901 ms  busbw    7.48 GB/s
+[anchor] all_reduce      world=2    1024 MiB  median  140.963 ms  busbw    7.62 GB/s
+[anchor] host css-host-158 wrote ws/fusion-dispatch/results/e4_anchor_nccl/gdrread0_ppn1/nccl_anchor_w2.csv
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_anchor_nccl/gdrread0_ppn1/guard_node0.log

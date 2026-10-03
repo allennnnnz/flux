@@ -1,0 +1,24 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[anchor] all_gather      world=16      1 MiB  median    0.389 ms  busbw    2.53 GB/s
+[anchor] all_gather      world=16      4 MiB  median    0.376 ms  busbw   10.45 GB/s
+[anchor] all_gather      world=16     16 MiB  median    0.799 ms  busbw   19.68 GB/s
+[anchor] all_gather      world=16     64 MiB  median    2.435 ms  busbw   25.84 GB/s
+[anchor] all_gather      world=16    256 MiB  median   11.970 ms  busbw   21.02 GB/s
+[anchor] all_gather      world=16   1024 MiB  median   38.740 ms  busbw   25.98 GB/s
+[anchor] reduce_scatter  world=16      1 MiB  median    0.179 ms  busbw    5.50 GB/s
+[anchor] reduce_scatter  world=16      4 MiB  median    0.241 ms  busbw   16.34 GB/s
+[anchor] reduce_scatter  world=16     16 MiB  median    0.759 ms  busbw   20.73 GB/s
+[anchor] reduce_scatter  world=16     64 MiB  median    2.512 ms  busbw   25.05 GB/s
+[anchor] reduce_scatter  world=16    256 MiB  median   10.299 ms  busbw   24.43 GB/s
+[anchor] reduce_scatter  world=16   1024 MiB  median   38.781 ms  busbw   25.96 GB/s
+[anchor] all_reduce      world=16      1 MiB  median    0.146 ms  busbw   13.43 GB/s
+[anchor] all_reduce      world=16      4 MiB  median    0.271 ms  busbw   28.98 GB/s
+[anchor] all_reduce      world=16     16 MiB  median    0.764 ms  busbw   41.18 GB/s
+[anchor] all_reduce      world=16     64 MiB  median   20.795 ms  busbw    6.05 GB/s
+[anchor] all_reduce      world=16    256 MiB  median   20.087 ms  busbw   25.06 GB/s
+[anchor] all_reduce      world=16   1024 MiB  median   41.902 ms  busbw   48.05 GB/s
+[anchor] host css-host-158 wrote ws/fusion-dispatch/results/e4_anchor_nccl/gdrread0_ppn8/nccl_anchor_w16.csv
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_anchor_nccl/gdrread0_ppn8/guard_node0.log

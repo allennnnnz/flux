@@ -1,0 +1,2 @@
+[run_xnode] 2026-10-03 16:23:48 start: nproc_per_node=4 env=pixi test/python/ag_gemm/test_ag_kernel.py 4096 8192 8192 --dtype bfloat16 --iters 10 --warmup 5
+[run_xnode] 2026-10-03 16:23:58 done: node0 rc=1 (END rc=1 CLEAN); node1 rc=1 (END rc=1 CLEAN)

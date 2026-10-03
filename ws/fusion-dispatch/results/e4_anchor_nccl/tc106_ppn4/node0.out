@@ -1,0 +1,24 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[anchor] all_gather      world=8       1 MiB  median    0.334 ms  busbw    2.75 GB/s
+[anchor] all_gather      world=8       4 MiB  median    0.404 ms  busbw    9.07 GB/s
+[anchor] all_gather      world=8      16 MiB  median    1.128 ms  busbw   13.01 GB/s
+[anchor] all_gather      world=8      64 MiB  median    4.440 ms  busbw   13.23 GB/s
+[anchor] all_gather      world=8     256 MiB  median   16.501 ms  busbw   14.23 GB/s
+[anchor] all_gather      world=8    1024 MiB  median   64.425 ms  busbw   14.58 GB/s
+[anchor] reduce_scatter  world=8       1 MiB  median    0.137 ms  busbw    6.71 GB/s
+[anchor] reduce_scatter  world=8       4 MiB  median    0.340 ms  busbw   10.80 GB/s
+[anchor] reduce_scatter  world=8      16 MiB  median    1.076 ms  busbw   13.64 GB/s
+[anchor] reduce_scatter  world=8      64 MiB  median    4.289 ms  busbw   13.69 GB/s
+[anchor] reduce_scatter  world=8     256 MiB  median   16.372 ms  busbw   14.35 GB/s
+[anchor] reduce_scatter  world=8    1024 MiB  median   64.424 ms  busbw   14.58 GB/s
+[anchor] all_reduce      world=8       1 MiB  median    0.193 ms  busbw    9.53 GB/s
+[anchor] all_reduce      world=8       4 MiB  median    0.545 ms  busbw   13.46 GB/s
+[anchor] all_reduce      world=8      16 MiB  median    2.062 ms  busbw   14.24 GB/s
+[anchor] all_reduce      world=8      64 MiB  median    8.351 ms  busbw   14.06 GB/s
+[anchor] all_reduce      world=8     256 MiB  median   32.027 ms  busbw   14.67 GB/s
+[anchor] all_reduce      world=8    1024 MiB  median  126.936 ms  busbw   14.80 GB/s
+[anchor] host css-host-158 wrote ws/fusion-dispatch/results/e4_anchor_nccl/tc106_ppn4/nccl_anchor_w8.csv
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_anchor_nccl/tc106_ppn4/guard_node0.log

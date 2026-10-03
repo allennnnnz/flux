@@ -1,0 +1,10 @@
+collective,world,size_mib_total,rankmax_median_ms,min_ms,max_ms,busbw_GBps
+all_gather,2,16,1.2503,1.2278,1.6159,6.71
+all_gather,2,256,19.0039,18.6870,19.6291,7.06
+all_gather,2,1024,75.6403,75.0909,77.5137,7.10
+reduce_scatter,2,16,1.2140,1.1909,1.5012,6.91
+reduce_scatter,2,256,18.8590,18.6583,20.5588,7.12
+reduce_scatter,2,1024,75.5994,74.8687,77.2475,7.10
+all_reduce,2,16,2.3711,2.2948,2.6173,7.08
+all_reduce,2,256,37.5690,37.1538,38.3324,7.15
+all_reduce,2,1024,149.5736,148.6807,151.5448,7.18

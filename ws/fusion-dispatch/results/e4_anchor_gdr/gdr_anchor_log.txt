@@ -1,0 +1,10 @@
+2026-10-03 16:15:11 start
+host_to_host 98.04 Gb/s
+gpu0_to_gpu0 55.98 Gb/s
+host_to_gpu0 98.04 Gb/s
+gpu0_to_host 55.81 Gb/s
+gpu1_to_gpu1_m1 55.93 Gb/s
+gpu0_to_gpu0_m1 56.15 Gb/s
+2026-10-03 16:16:17 done
+client_pair_gpu0_m0: 37.90 Gb/s
+client_pair_gpu1_m1: 37.91 Gb/s

@@ -1,0 +1,5 @@
+[E4-anchor] start 2026-10-03 16:12:15
+[run_xnode] 2026-10-03 16:12:35 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+[run_xnode] 2026-10-03 16:12:57 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+[run_xnode] 2026-10-03 16:13:21 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+[E4-anchor] done 2026-10-03 16:13:21

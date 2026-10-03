@@ -1,0 +1,261 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+css-host-159:372714:372714 [1] NCCL INFO cudaDriverVersion 13040
+css-host-159:372714:372714 [1] NCCL INFO Bootstrap : Using enp29s0f0np0:10.10.1.159<0>
+css-host-159:372714:372714 [1] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-159:372714:372714 [1] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-159:372715:372715 [2] NCCL INFO cudaDriverVersion 13040
+css-host-159:372715:372715 [2] NCCL INFO Bootstrap : Using enp29s0f0np0:10.10.1.159<0>
+css-host-159:372715:372715 [2] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-159:372715:372715 [2] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-159:372716:372716 [3] NCCL INFO cudaDriverVersion 13040
+css-host-159:372716:372716 [3] NCCL INFO Bootstrap : Using enp29s0f0np0:10.10.1.159<0>
+css-host-159:372716:372716 [3] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-159:372716:372716 [3] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-159:372713:372713 [0] NCCL INFO cudaDriverVersion 13040
+css-host-159:372713:372713 [0] NCCL INFO Bootstrap : Using enp29s0f0np0:10.10.1.159<0>
+css-host-159:372713:372713 [0] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-159:372713:372713 [0] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-159:372714:372751 [1] NCCL INFO NET/IB : Using [0]={[0] mlx5_0:1/RoCE, [1] mlx5_1:1/RoCE} [2]mlx5_2:1/RoCE [2]={[3] mlx5_4:1/RoCE, [4] mlx5_5:1/RoCE} [3]={[5] mlx5_6:1/RoCE, [6] mlx5_7:1/RoCE} [RO]; OOB enp29s0f0np0:10.10.1.159<0>
+css-host-159:372714:372751 [1] NCCL INFO Using non-device net plugin version 0
+css-host-159:372714:372751 [1] NCCL INFO Using network IB
+css-host-159:372714:372751 [1] NCCL INFO DMA-BUF is available on GPU device 1
+css-host-159:372715:372753 [2] NCCL INFO NET/IB : Using [0]={[0] mlx5_0:1/RoCE, [1] mlx5_1:1/RoCE} [2]mlx5_2:1/RoCE [2]={[3] mlx5_4:1/RoCE, [4] mlx5_5:1/RoCE} [3]={[5] mlx5_6:1/RoCE, [6] mlx5_7:1/RoCE} [RO]; OOB enp29s0f0np0:10.10.1.159<0>
+css-host-159:372715:372753 [2] NCCL INFO Using non-device net plugin version 0
+css-host-159:372715:372753 [2] NCCL INFO Using network IB
+css-host-159:372715:372753 [2] NCCL INFO DMA-BUF is available on GPU device 2
+css-host-159:372716:372756 [3] NCCL INFO NET/IB : Using [0]={[0] mlx5_0:1/RoCE, [1] mlx5_1:1/RoCE} [2]mlx5_2:1/RoCE [2]={[3] mlx5_4:1/RoCE, [4] mlx5_5:1/RoCE} [3]={[5] mlx5_6:1/RoCE, [6] mlx5_7:1/RoCE} [RO]; OOB enp29s0f0np0:10.10.1.159<0>
+css-host-159:372716:372756 [3] NCCL INFO Using non-device net plugin version 0
+css-host-159:372716:372756 [3] NCCL INFO Using network IB
+css-host-159:372713:372757 [0] NCCL INFO NET/IB : Using [0]={[0] mlx5_0:1/RoCE, [1] mlx5_1:1/RoCE} [2]mlx5_2:1/RoCE [2]={[3] mlx5_4:1/RoCE, [4] mlx5_5:1/RoCE} [3]={[5] mlx5_6:1/RoCE, [6] mlx5_7:1/RoCE} [RO]; OOB enp29s0f0np0:10.10.1.159<0>
+css-host-159:372713:372757 [0] NCCL INFO Using non-device net plugin version 0
+css-host-159:372713:372757 [0] NCCL INFO Using network IB
+css-host-159:372716:372756 [3] NCCL INFO DMA-BUF is available on GPU device 3
+css-host-159:372713:372757 [0] NCCL INFO DMA-BUF is available on GPU device 0
+css-host-159:372716:372756 [3] NCCL INFO ncclCommInitRank comm 0x572f2c4eab90 rank 7 nranks 8 cudaDev 3 nvmlDev 5 busId 8f000 commId 0x6d24aad8e839251b - Init START
+css-host-159:372715:372753 [2] NCCL INFO ncclCommInitRank comm 0x5f00f48f2930 rank 6 nranks 8 cudaDev 2 nvmlDev 4 busId 8a000 commId 0x6d24aad8e839251b - Init START
+css-host-159:372714:372751 [1] NCCL INFO ncclCommInitRank comm 0x5ff0d1447720 rank 5 nranks 8 cudaDev 1 nvmlDev 1 busId 16000 commId 0x6d24aad8e839251b - Init START
+css-host-159:372713:372757 [0] NCCL INFO ncclCommInitRank comm 0x603d33b5a1e0 rank 4 nranks 8 cudaDev 0 nvmlDev 0 busId 10000 commId 0x6d24aad8e839251b - Init START
+css-host-159:372716:372756 [3] NCCL INFO Setting affinity for GPU 5 to ffffffff,00000000,ffffffff,00000000
+css-host-159:372716:372756 [3] NCCL INFO NVLS multicast support is not available on dev 3
+css-host-159:372714:372751 [1] NCCL INFO Setting affinity for GPU 1 to ffffffff,00000000,ffffffff
+css-host-159:372714:372751 [1] NCCL INFO NVLS multicast support is not available on dev 1
+css-host-159:372715:372753 [2] NCCL INFO Setting affinity for GPU 4 to ffffffff,00000000,ffffffff,00000000
+css-host-159:372713:372757 [0] NCCL INFO Setting affinity for GPU 0 to ffffffff,00000000,ffffffff
+css-host-159:372715:372753 [2] NCCL INFO NVLS multicast support is not available on dev 2
+css-host-159:372713:372757 [0] NCCL INFO NVLS multicast support is not available on dev 0
+css-host-159:372716:372756 [3] NCCL INFO comm 0x572f2c4eab90 rank 7 nRanks 8 nNodes 2 localRanks 4 localRank 3 MNNVL 0
+css-host-159:372715:372753 [2] NCCL INFO comm 0x5f00f48f2930 rank 6 nRanks 8 nNodes 2 localRanks 4 localRank 2 MNNVL 0
+css-host-159:372716:372756 [3] NCCL INFO Trees [0] -1/-1/-1->7->6 [1] 4/-1/-1->7->6 [2] -1/-1/-1->7->6 [3] 4/-1/-1->7->6 [4] -1/-1/-1->7->6 [5] 4/-1/-1->7->6 [6] -1/-1/-1->7->6 [7] 4/-1/-1->7->6 [8] -1/-1/-1->7->6 [9] 4/-1/-1->7->6 [10] -1/-1/-1->7->6 [11] 4/-1/-1->7->6 [12] -1/-1/-1->7->6 [13] 4/-1/-1->7->6 [14] -1/-1/-1->7->6 [15] 4/-1/-1->7->6
+css-host-159:372716:372756 [3] NCCL INFO P2P Chunksize set to 131072
+css-host-159:372714:372751 [1] NCCL INFO comm 0x5ff0d1447720 rank 5 nRanks 8 nNodes 2 localRanks 4 localRank 1 MNNVL 0
+css-host-159:372713:372757 [0] NCCL INFO comm 0x603d33b5a1e0 rank 4 nRanks 8 nNodes 2 localRanks 4 localRank 0 MNNVL 0
+css-host-159:372715:372753 [2] NCCL INFO Trees [0] 7/-1/-1->6->5 [1] 7/-1/-1->6->2 [2] 7/-1/-1->6->5 [3] 7/2/-1->6->-1 [4] 7/-1/-1->6->5 [5] 7/-1/-1->6->2 [6] 7/-1/-1->6->5 [7] 7/2/-1->6->-1 [8] 7/-1/-1->6->5 [9] 7/-1/-1->6->2 [10] 7/-1/-1->6->5 [11] 7/2/-1->6->-1 [12] 7/-1/-1->6->5 [13] 7/-1/-1->6->2 [14] 7/-1/-1->6->5 [15] 7/2/-1->6->-1
+css-host-159:372715:372753 [2] NCCL INFO P2P Chunksize set to 131072
+css-host-159:372714:372751 [1] NCCL INFO Trees [0] 6/-1/-1->5->4 [1] -1/-1/-1->5->4 [2] 6/-1/-1->5->4 [3] -1/-1/-1->5->4 [4] 6/-1/-1->5->4 [5] -1/-1/-1->5->4 [6] 6/-1/-1->5->4 [7] -1/-1/-1->5->4 [8] 6/-1/-1->5->4 [9] -1/-1/-1->5->4 [10] 6/-1/-1->5->4 [11] -1/-1/-1->5->4 [12] 6/-1/-1->5->4 [13] -1/-1/-1->5->4 [14] 6/-1/-1->5->4 [15] -1/-1/-1->5->4
+css-host-159:372714:372751 [1] NCCL INFO P2P Chunksize set to 131072
+css-host-159:372713:372757 [0] NCCL INFO Trees [0] 5/-1/-1->4->0 [1] 5/-1/-1->4->7 [2] 5/0/-1->4->-1 [3] 5/-1/-1->4->7 [4] 5/-1/-1->4->0 [5] 5/-1/-1->4->7 [6] 5/0/-1->4->-1 [7] 5/-1/-1->4->7 [8] 5/-1/-1->4->0 [9] 5/-1/-1->4->7 [10] 5/0/-1->4->-1 [11] 5/-1/-1->4->7 [12] 5/-1/-1->4->0 [13] 5/-1/-1->4->7 [14] 5/0/-1->4->-1 [15] 5/-1/-1->4->7
+css-host-159:372713:372757 [0] NCCL INFO P2P Chunksize set to 131072
+css-host-159:372715:372753 [2] NCCL INFO Channel 01/0 : 3[5] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 03/0 : 3[5] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 05/0 : 3[5] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 07/0 : 3[5] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 09/0 : 3[5] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 11/0 : 3[5] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 13/0 : 3[5] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 15/0 : 3[5] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 00/0 : 1[1] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 02/0 : 1[1] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 04/0 : 1[1] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 06/0 : 1[1] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 08/0 : 1[1] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 10/0 : 1[1] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 12/0 : 1[1] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 14/0 : 1[1] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 00/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 01/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 02/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 03/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 04/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 05/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 06/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 07/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 08/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 00/0 : 5[1] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372716:372756 [3] NCCL INFO Channel 01/0 : 7[5] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 02/0 : 5[1] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372716:372756 [3] NCCL INFO Channel 03/0 : 7[5] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 09/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 05/0 : 7[5] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 04/0 : 5[1] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372716:372756 [3] NCCL INFO Channel 07/0 : 7[5] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 10/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 09/0 : 7[5] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 06/0 : 5[1] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372716:372756 [3] NCCL INFO Channel 11/0 : 7[5] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372716:372756 [3] NCCL INFO Channel 13/0 : 7[5] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 08/0 : 5[1] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 11/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 15/0 : 7[5] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 10/0 : 5[1] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 12/0 : 5[1] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 12/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 14/0 : 5[1] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 13/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 14/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 15/0 : 4[0] -> 7[5] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 00/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 02/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 04/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 06/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 08/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 00/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 10/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 01/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 12/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 02/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 03/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 14/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 04/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 05/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 06/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 07/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 08/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 09/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 10/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 11/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 12/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 13/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 14/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 15/0 : 6[4] -> 5[1] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 01/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 03/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 05/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 07/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 09/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 11/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 13/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 15/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Connected all rings
+css-host-159:372715:372753 [2] NCCL INFO Connected all rings
+css-host-159:372715:372753 [2] NCCL INFO Channel 00/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 01/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 02/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 03/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 04/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 05/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 06/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 07/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 08/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 09/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Connected all rings
+css-host-159:372715:372753 [2] NCCL INFO Channel 10/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Connected all rings
+css-host-159:372713:372757 [0] NCCL INFO Channel 00/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 11/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 01/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 02/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 12/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 13/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 03/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 14/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 04/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 05/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 15/0 : 6[4] -> 7[5] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 06/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 01/0 : 7[5] -> 4[0] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 07/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 03/0 : 7[5] -> 4[0] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 08/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 05/0 : 7[5] -> 4[0] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 09/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 07/0 : 7[5] -> 4[0] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 10/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 09/0 : 7[5] -> 4[0] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 11/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 11/0 : 7[5] -> 4[0] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 12/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 13/0 : 7[5] -> 4[0] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 13/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 15/0 : 7[5] -> 4[0] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 14/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 15/0 : 4[0] -> 5[1] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 00/0 : 5[1] -> 6[4] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 02/0 : 5[1] -> 6[4] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 04/0 : 5[1] -> 6[4] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 06/0 : 5[1] -> 6[4] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 08/0 : 5[1] -> 6[4] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 10/0 : 5[1] -> 6[4] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 12/0 : 5[1] -> 6[4] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 14/0 : 5[1] -> 6[4] via P2P/CUMEM/read
+css-host-159:372714:372751 [1] NCCL INFO Channel 00/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 00/0 : 0[0] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 01/0 : 2[4] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 02/0 : 0[0] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 03/0 : 2[4] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 02/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 04/0 : 0[0] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 05/0 : 2[4] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 06/0 : 0[0] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 07/0 : 2[4] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 04/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Channel 08/0 : 0[0] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 09/0 : 2[4] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 10/0 : 0[0] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 11/0 : 2[4] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 12/0 : 0[0] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 06/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 13/0 : 2[4] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 14/0 : 0[0] -> 4[0] [receive] via NET/IB/0/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 15/0 : 2[4] -> 6[4] [receive] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 00/0 : 4[0] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 08/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 01/0 : 6[4] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 02/0 : 4[0] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 03/0 : 6[4] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 04/0 : 4[0] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 05/0 : 6[4] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 06/0 : 4[0] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 10/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 07/0 : 6[4] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 08/0 : 4[0] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 09/0 : 6[4] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 10/0 : 4[0] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 11/0 : 6[4] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 12/0 : 4[0] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 12/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372715:372753 [2] NCCL INFO Channel 13/0 : 6[4] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372713:372757 [0] NCCL INFO Channel 14/0 : 4[0] -> 0[0] [send] via NET/IB/0/GDRDMA
+css-host-159:372715:372753 [2] NCCL INFO Channel 15/0 : 6[4] -> 2[4] [send] via NET/IB/2/GDRDMA
+css-host-159:372714:372751 [1] NCCL INFO Channel 14/0 : 5[1] -> 4[0] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 01/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 03/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 05/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 07/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 09/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 11/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 13/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372716:372756 [3] NCCL INFO Channel 15/0 : 7[5] -> 6[4] via P2P/CUMEM/read
+css-host-159:372713:372757 [0] NCCL INFO Connected all trees
+css-host-159:372713:372757 [0] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-159:372713:372757 [0] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 2 p2p channels per peer
+css-host-159:372714:372751 [1] NCCL INFO Connected all trees
+css-host-159:372714:372751 [1] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-159:372714:372751 [1] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 2 p2p channels per peer
+css-host-159:372716:372756 [3] NCCL INFO Connected all trees
+css-host-159:372716:372756 [3] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-159:372716:372756 [3] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 2 p2p channels per peer
+css-host-159:372715:372753 [2] NCCL INFO Connected all trees
+css-host-159:372715:372753 [2] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-159:372715:372753 [2] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 2 p2p channels per peer
+css-host-159:372715:372753 [2] NCCL INFO ncclCommInitRank comm 0x5f00f48f2930 rank 6 nranks 8 cudaDev 2 nvmlDev 4 busId 8a000 commId 0x6d24aad8e839251b - Init COMPLETE
+css-host-159:372716:372756 [3] NCCL INFO ncclCommInitRank comm 0x572f2c4eab90 rank 7 nranks 8 cudaDev 3 nvmlDev 5 busId 8f000 commId 0x6d24aad8e839251b - Init COMPLETE
+css-host-159:372713:372757 [0] NCCL INFO ncclCommInitRank comm 0x603d33b5a1e0 rank 4 nranks 8 cudaDev 0 nvmlDev 0 busId 10000 commId 0x6d24aad8e839251b - Init COMPLETE
+css-host-159:372714:372751 [1] NCCL INFO ncclCommInitRank comm 0x5ff0d1447720 rank 5 nranks 8 cudaDev 1 nvmlDev 1 busId 16000 commId 0x6d24aad8e839251b - Init COMPLETE
+css-host-159:372713:372713 [0] NCCL INFO comm 0x603d33b5a1e0 rank 4 nranks 8 cudaDev 0 busId 10000 - Destroy COMPLETE
+css-host-159:372716:372716 [3] NCCL INFO comm 0x572f2c4eab90 rank 7 nranks 8 cudaDev 3 busId 8f000 - Destroy COMPLETE
+css-host-159:372714:372714 [1] NCCL INFO comm 0x5ff0d1447720 rank 5 nranks 8 cudaDev 1 busId 16000 - Destroy COMPLETE
+css-host-159:372715:372715 [2] NCCL INFO comm 0x5f00f48f2930 rank 6 nranks 8 cudaDev 2 busId 8a000 - Destroy COMPLETE
+[exclusive_guard_v2 css-host-159] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_anchor_nccl/tc104_ch16_ppn4/guard_node1.log

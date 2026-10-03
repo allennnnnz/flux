@@ -48,8 +48,16 @@
   3. RDMA 錨點（`results/e4_anchor_ib/`，兩台守衛 CLEAN）：7 條 rail 每條 98.05 Gb/s（12.3 GB/s），單獨與同時皆同；反向、雙向（193.7 Gb/s）正常。
   4. **跨節點 NCCL 卡住，已找到原因**（`results/e4_debug/README.md`）：159 有 `~/.nccl.conf`（ALGO=RING、PROTO=Simple…），
      NCCL 2.21.5 在 159 自動讀、158 沒有 → 兩邊演算法 / 協定不一致 → 卡住，甚至算錯（all_reduce 得 0.0）。
-     `NCCL_CONF_FILE` 在 2.21.5 無效；兩邊設定一致時正常。**卡在：要不要讓 159 不讀這個檔（使用者決定）**。
-  5. 159 上使用者的 `openclaw-gateway` 服務每 7 秒重啟一次、每次吃 2 核以上 → 計時量測前最好停掉（使用者決定）。
+     `NCCL_CONF_FILE` 在 2.21.5 無效。**使用者核准後改名為 `~/.nccl.conf.disabled-by-fusion-dispatch`**；`launch_xnode.sh` 發現任何 NCCL 設定檔就中止。
+  5. **159 的 `openclaw-gateway`（使用者的服務，原本每 7 秒重啟失敗一次）已依使用者指示停掉；E4 量測全部結束後要 `systemctl --user start openclaw-gateway.service` 還原。**
+  6. RoCE QoS：只有優先權 3 開 PFC（DSCP 24–31）。NCCL 預設 TC 0 會丟包、停頓約 100 ms；改用 `NCCL_IB_TC=104`（啟動腳本預設）。
+  7. 跨節點頻寬上限 = 網卡從 GPU 讀（GPUDirect RDMA read）：每張 GPU 約 7 GB/s、每組 PCIe 交換晶片約 9.5 GB/s；
+     NCCL busbw（1 GiB）：1+1 約 7、4+4 約 14.7、8+8 AG/RS 約 25.6、AR 45.9 GB/s，都可由此解釋（`results/e4_anchor_*`、params.json `flux_dispatch_e4_xnode`）。
+  8. **Flux 跨節點冒煙測試**（`results/e4_flux_smoke/`）：
+     - `AGKernelXNode` 能跑且通過正確性檢查，但 NVSHMEM 要所有 GPU 兩兩相連 → 7 條網路彼此沒有路由，只能全部擠在一條（mlx5_0）→ 對 Flux 不公平；
+     - `AGKernel` / `GemmRS` 傳 nnodes=2 會壞（直接寫對端指標）；A100 上 Flux 的多節點 RS 是 `GemmRS_multinode`（節點內融合 + NCCL send/recv），**能跑但 158 上的 rank 結果錯**；
+     - Flux 測試裡 torch 參考路徑 31 ms vs NCCL 錨點約 4–5 ms，未解釋，不可引用。
+  9. **E4 卡在**：(a) NVSHMEM 需要 rail 之間的路由（管理員）；(b) Flux 多節點 RS 結果錯（要查）；(c) 8+8 仍有停頓。待使用者決定方向。
 - gpu1（4× V100 PCIe）Flux 不能跑（`src/cuda/op_registry.cu:39-51` 只收 A100 / L20 / H20 / H800），只能做縮小版，優先度降低。
 
 **下一步**：

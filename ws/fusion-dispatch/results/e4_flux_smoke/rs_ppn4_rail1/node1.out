@@ -1,0 +1,278 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[rank6]:[W1003 12:36:55.801059668 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 6]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank7]:[W1003 12:36:55.801191006 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 7]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank4]:[W1003 12:36:55.801216587 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 4]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank5]:[W1003 12:36:55.801291316 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 5]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "/home/rogerlee/flux/test/python/gemm_rs/test_gemm_rs.py", line 530, in <module>
+[rank5]:     perf_res_flux = perf_flux(
+[rank5]:                     ^^^^^^^^^^
+[rank5]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank5]:     return func(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/home/rogerlee/flux/test/python/gemm_rs/test_gemm_rs.py", line 254, in perf_flux
+[rank5]:     torch.cuda.current_stream().synchronize()
+[rank5]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/streams.py", line 99, in synchronize
+[rank5]:     super().synchronize()
+[rank5]: RuntimeError: CUDA error: an illegal memory access was encountered
+[rank5]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank5]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank5]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[rank5]:[E1003 12:36:57.495416379 ProcessGroupNCCL.cpp:1895] [PG ID 0 PG GUID 0(default_pg) Rank 5] Process group watchdog thread terminated with exception: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception raised from c10_cuda_check_implementation at /pytorch/c10/cuda/CUDAException.cpp:43 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x732d39b6c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x64 (0x732d39b15a76 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #2: c10::cuda::c10_cuda_check_implementation(int, char const*, char const*, int, bool) + 0x118 (0x732d39fa3918 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::WorkNCCL::finishedGPUExecutionInternal() const + 0x56 (0x732ce7ff1556 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::WorkNCCL::isCompleted() + 0xa0 (0x732ce7ffe8c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: c10d::ProcessGroupNCCL::watchdogHandler() + 0x617 (0x732ce8000557 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x732ce80016ed in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #7: <unknown function> + 0x145c0 (0x732d3a32b5c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #8: <unknown function> + 0x9cb84 (0x732d3ae9cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #9: <unknown function> + 0x129ecc (0x732d3af29ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 0 PG GUID 0(default_pg) Rank 5] Process group watchdog thread terminated with exception: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception raised from c10_cuda_check_implementation at /pytorch/c10/cuda/CUDAException.cpp:43 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x732d39b6c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x64 (0x732d39b15a76 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #2: c10::cuda::c10_cuda_check_implementation(int, char const*, char const*, int, bool) + 0x118 (0x732d39fa3918 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::WorkNCCL::finishedGPUExecutionInternal() const + 0x56 (0x732ce7ff1556 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::WorkNCCL::isCompleted() + 0xa0 (0x732ce7ffe8c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: c10d::ProcessGroupNCCL::watchdogHandler() + 0x617 (0x732ce8000557 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x732ce80016ed in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #7: <unknown function> + 0x145c0 (0x732d3a32b5c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #8: <unknown function> + 0x9cb84 (0x732d3ae9cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #9: <unknown function> + 0x129ecc (0x732d3af29ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+Exception raised from ncclCommWatchdog at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:1901 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x732d39b6c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xe5c6fc (0x732ce7c5c6fc in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0x145c0 (0x732d3a32b5c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #3: <unknown function> + 0x9cb84 (0x732d3ae9cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #4: <unknown function> + 0x129ecc (0x732d3af29ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "/home/rogerlee/flux/test/python/gemm_rs/test_gemm_rs.py", line 530, in <module>
+[rank4]:     perf_res_flux = perf_flux(
+[rank4]:                     ^^^^^^^^^^
+[rank4]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank4]:     return func(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/home/rogerlee/flux/test/python/gemm_rs/test_gemm_rs.py", line 254, in perf_flux
+[rank4]:     torch.cuda.current_stream().synchronize()
+[rank4]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/streams.py", line 99, in synchronize
+[rank4]:     super().synchronize()
+[rank4]: RuntimeError: CUDA error: an illegal memory access was encountered
+[rank4]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank4]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank4]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[rank4]:[E1003 12:36:57.499684003 ProcessGroupNCCL.cpp:1895] [PG ID 0 PG GUID 0(default_pg) Rank 4] Process group watchdog thread terminated with exception: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception raised from c10_cuda_check_implementation at /pytorch/c10/cuda/CUDAException.cpp:43 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f9be1b6c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x64 (0x7f9be1b15a76 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #2: c10::cuda::c10_cuda_check_implementation(int, char const*, char const*, int, bool) + 0x118 (0x7f9be1f53918 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::WorkNCCL::finishedGPUExecutionInternal() const + 0x56 (0x7f9b8fbf1556 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::WorkNCCL::isCompleted() + 0xa0 (0x7f9b8fbfe8c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: c10d::ProcessGroupNCCL::watchdogHandler() + 0x617 (0x7f9b8fc00557 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x7f9b8fc016ed in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #7: <unknown function> + 0x145c0 (0x7f9be1fc45c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #8: <unknown function> + 0x9cb84 (0x7f9be2a9cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #9: <unknown function> + 0x129ecc (0x7f9be2b29ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 0 PG GUID 0(default_pg) Rank 4] Process group watchdog thread terminated with exception: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception raised from c10_cuda_check_implementation at /pytorch/c10/cuda/CUDAException.cpp:43 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f9be1b6c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x64 (0x7f9be1b15a76 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #2: c10::cuda::c10_cuda_check_implementation(int, char const*, char const*, int, bool) + 0x118 (0x7f9be1f53918 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::WorkNCCL::finishedGPUExecutionInternal() const + 0x56 (0x7f9b8fbf1556 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::WorkNCCL::isCompleted() + 0xa0 (0x7f9b8fbfe8c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: c10d::ProcessGroupNCCL::watchdogHandler() + 0x617 (0x7f9b8fc00557 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x7f9b8fc016ed in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #7: <unknown function> + 0x145c0 (0x7f9be1fc45c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #8: <unknown function> + 0x9cb84 (0x7f9be2a9cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #9: <unknown function> + 0x129ecc (0x7f9be2b29ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+Exception raised from ncclCommWatchdog at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:1901 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f9be1b6c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xe5c6fc (0x7f9b8f85c6fc in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0x145c0 (0x7f9be1fc45c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #3: <unknown function> + 0x9cb84 (0x7f9be2a9cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #4: <unknown function> + 0x129ecc (0x7f9be2b29ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "/home/rogerlee/flux/test/python/gemm_rs/test_gemm_rs.py", line 530, in <module>
+[rank7]:     perf_res_flux = perf_flux(
+[rank7]:                     ^^^^^^^^^^
+[rank7]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank7]:     return func(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/home/rogerlee/flux/test/python/gemm_rs/test_gemm_rs.py", line 254, in perf_flux
+[rank7]:     torch.cuda.current_stream().synchronize()
+[rank7]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/streams.py", line 99, in synchronize
+[rank7]:     super().synchronize()
+[rank7]: RuntimeError: CUDA error: an illegal memory access was encountered
+[rank7]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank7]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank7]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[rank7]:[E1003 12:36:57.526691181 ProcessGroupNCCL.cpp:1895] [PG ID 0 PG GUID 0(default_pg) Rank 7] Process group watchdog thread terminated with exception: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception raised from c10_cuda_check_implementation at /pytorch/c10/cuda/CUDAException.cpp:43 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x77a75996c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x64 (0x77a759915a76 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #2: c10::cuda::c10_cuda_check_implementation(int, char const*, char const*, int, bool) + 0x118 (0x77a759dd9918 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::WorkNCCL::finishedGPUExecutionInternal() const + 0x56 (0x77a7079f1556 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::WorkNCCL::isCompleted() + 0xa0 (0x77a7079fe8c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: c10d::ProcessGroupNCCL::watchdogHandler() + 0x617 (0x77a707a00557 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x77a707a016ed in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #7: <unknown function> + 0x145c0 (0x77a759e4a5c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #8: <unknown function> + 0x9cb84 (0x77a75a89cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #9: <unknown function> + 0x129ecc (0x77a75a929ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 0 PG GUID 0(default_pg) Rank 7] Process group watchdog thread terminated with exception: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception raised from c10_cuda_check_implementation at /pytorch/c10/cuda/CUDAException.cpp:43 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x77a75996c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x64 (0x77a759915a76 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #2: c10::cuda::c10_cuda_check_implementation(int, char const*, char const*, int, bool) + 0x118 (0x77a759dd9918 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::WorkNCCL::finishedGPUExecutionInternal() const + 0x56 (0x77a7079f1556 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::WorkNCCL::isCompleted() + 0xa0 (0x77a7079fe8c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: c10d::ProcessGroupNCCL::watchdogHandler() + 0x617 (0x77a707a00557 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x77a707a016ed in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #7: <unknown function> + 0x145c0 (0x77a759e4a5c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #8: <unknown function> + 0x9cb84 (0x77a75a89cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #9: <unknown function> + 0x129ecc (0x77a75a929ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+Exception raised from ncclCommWatchdog at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:1901 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x77a75996c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xe5c6fc (0x77a70765c6fc in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0x145c0 (0x77a759e4a5c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #3: <unknown function> + 0x9cb84 (0x77a75a89cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #4: <unknown function> + 0x129ecc (0x77a75a929ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "/home/rogerlee/flux/test/python/gemm_rs/test_gemm_rs.py", line 530, in <module>
+[rank6]:     perf_res_flux = perf_flux(
+[rank6]:                     ^^^^^^^^^^
+[rank6]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank6]:     return func(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/home/rogerlee/flux/test/python/gemm_rs/test_gemm_rs.py", line 254, in perf_flux
+[rank6]:     torch.cuda.current_stream().synchronize()
+[rank6]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/streams.py", line 99, in synchronize
+[rank6]:     super().synchronize()
+[rank6]: RuntimeError: CUDA error: an illegal memory access was encountered
+[rank6]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank6]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank6]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[rank6]:[E1003 12:36:57.569020805 ProcessGroupNCCL.cpp:1895] [PG ID 0 PG GUID 0(default_pg) Rank 6] Process group watchdog thread terminated with exception: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception raised from c10_cuda_check_implementation at /pytorch/c10/cuda/CUDAException.cpp:43 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x74fc95f6c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x64 (0x74fc95f15a76 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #2: c10::cuda::c10_cuda_check_implementation(int, char const*, char const*, int, bool) + 0x118 (0x74fc9634f918 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::WorkNCCL::finishedGPUExecutionInternal() const + 0x56 (0x74fc43ff1556 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::WorkNCCL::isCompleted() + 0xa0 (0x74fc43ffe8c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: c10d::ProcessGroupNCCL::watchdogHandler() + 0x617 (0x74fc44000557 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x74fc440016ed in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #7: <unknown function> + 0x145c0 (0x74fc963c05c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #8: <unknown function> + 0x9cb84 (0x74fc96e9cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #9: <unknown function> + 0x129ecc (0x74fc96f29ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 0 PG GUID 0(default_pg) Rank 6] Process group watchdog thread terminated with exception: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception raised from c10_cuda_check_implementation at /pytorch/c10/cuda/CUDAException.cpp:43 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x74fc95f6c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x64 (0x74fc95f15a76 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #2: c10::cuda::c10_cuda_check_implementation(int, char const*, char const*, int, bool) + 0x118 (0x74fc9634f918 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::WorkNCCL::finishedGPUExecutionInternal() const + 0x56 (0x74fc43ff1556 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::WorkNCCL::isCompleted() + 0xa0 (0x74fc43ffe8c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: c10d::ProcessGroupNCCL::watchdogHandler() + 0x617 (0x74fc44000557 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x74fc440016ed in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #7: <unknown function> + 0x145c0 (0x74fc963c05c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #8: <unknown function> + 0x9cb84 (0x74fc96e9cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #9: <unknown function> + 0x129ecc (0x74fc96f29ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+Exception raised from ncclCommWatchdog at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:1901 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x74fc95f6c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xe5c6fc (0x74fc43c5c6fc in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0x145c0 (0x74fc963c05c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #3: <unknown function> + 0x9cb84 (0x74fc96e9cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #4: <unknown function> + 0x129ecc (0x74fc96f29ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+W1003 12:36:58.700000 376952 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 377082 closing signal SIGTERM
+W1003 12:36:58.701000 376952 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 377084 closing signal SIGTERM
+W1003 12:36:58.702000 376952 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 377085 closing signal SIGTERM
+E1003 12:37:02.034000 376952 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: -6) local_rank: 1 (pid: 377083) of binary: /home/rogerlee/flux/.pixi/envs/default/bin/python
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+=======================================================
+test/python/gemm_rs/test_gemm_rs.py FAILED
+-------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+-------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-03_12:36:58
+  host      : css-host-159
+  rank      : 5 (local_rank: 1)
+  exitcode  : -6 (pid: 377083)
+  error_file: <N/A>
+  traceback : Signal 6 (SIGABRT) received by PID 377083
+=======================================================
+[exclusive_guard_v2 css-host-159] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_flux_smoke/rs_ppn4_rail1/guard_node1.log

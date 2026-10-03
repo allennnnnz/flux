@@ -1,0 +1,79 @@
+css-host-158:863313:863313 [0] NCCL INFO Bootstrap : Using enp29s0f0np0:10.10.1.158<0>
+css-host-158:863313:863313 [0] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-158:863313:863313 [0] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-158:863313:863313 [0] NCCL INFO cudaDriverVersion 13040
+NCCL version 2.21.5+cuda12.4
+css-host-158:863313:863453 [0] NCCL INFO NET/IB : Using [0]={[0] mlx5_0:1/RoCE, [1] mlx5_1:1/RoCE} [2]mlx5_2:1/RoCE [2]={[3] mlx5_4:1/RoCE, [4] mlx5_5:1/RoCE} [3]={[5] mlx5_6:1/RoCE, [6] mlx5_7:1/RoCE} [RO]; OOB enp29s0f0np0:10.10.1.158<0>
+css-host-158:863313:863453 [0] NCCL INFO Using non-device net plugin version 0
+css-host-158:863313:863453 [0] NCCL INFO Using network IB
+css-host-158:863313:863453 [0] NCCL INFO DMA-BUF is available on GPU device 0
+css-host-158:863313:863453 [0] NCCL INFO ncclCommInitRank comm 0x5766626c8690 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 10000 commId 0x2f4c2b95c0555da8 - Init START
+css-host-158:863313:863453 [0] NCCL INFO Setting affinity for GPU 0 to ffffffff,00000000,ffffffff
+css-host-158:863313:863453 [0] NCCL INFO comm 0x5766626c8690 rank 0 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+css-host-158:863313:863453 [0] NCCL INFO Channel 00/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 01/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 02/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 03/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 04/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 05/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 06/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 07/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 08/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 09/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 10/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 11/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 12/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 13/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 14/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Channel 15/16 :    0   1
+css-host-158:863313:863453 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] -1/-1/-1->0->1 [2] 1/-1/-1->0->-1 [3] -1/-1/-1->0->1 [4] 1/-1/-1->0->-1 [5] -1/-1/-1->0->1 [6] 1/-1/-1->0->-1 [7] -1/-1/-1->0->1 [8] 1/-1/-1->0->-1 [9] -1/-1/-1->0->1 [10] 1/-1/-1->0->-1 [11] -1/-1/-1->0->1 [12] 1/-1/-1->0->-1 [13] -1/-1/-1->0->1 [14] 1/-1/-1->0->-1 [15] -1/-1/-1->0->1
+css-host-158:863313:863453 [0] NCCL INFO P2P Chunksize set to 131072
+css-host-158:863313:863453 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 02/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 03/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 04/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 05/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 06/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 07/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 08/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 09/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 10/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 11/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 12/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 13/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 14/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 15/0 : 1[0] -> 0[0] [receive] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 02/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 03/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 04/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 05/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 06/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 07/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 08/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 09/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 10/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 11/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 12/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 13/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 14/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Channel 15/0 : 0[0] -> 1[0] [send] via NET/IB/0/GDRDMA
+css-host-158:863313:863453 [0] NCCL INFO Connected all rings
+css-host-158:863313:863453 [0] NCCL INFO Connected all trees
+css-host-158:863313:863453 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+css-host-158:863313:863453 [0] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 2 p2p channels per peer
+css-host-158:863313:863453 [0] NCCL INFO ncclCommInitRank comm 0x5766626c8690 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 10000 commId 0x2f4c2b95c0555da8 - Init COMPLETE
+[anchor] all_gather      world=2      16 MiB  median    1.250 ms  busbw    6.71 GB/s
+[anchor] all_gather      world=2     256 MiB  median   19.004 ms  busbw    7.06 GB/s
+[anchor] all_gather      world=2    1024 MiB  median   75.640 ms  busbw    7.10 GB/s
+[anchor] reduce_scatter  world=2      16 MiB  median    1.214 ms  busbw    6.91 GB/s
+[anchor] reduce_scatter  world=2     256 MiB  median   18.859 ms  busbw    7.12 GB/s
+[anchor] reduce_scatter  world=2    1024 MiB  median   75.599 ms  busbw    7.10 GB/s
+[anchor] all_reduce      world=2      16 MiB  median    2.371 ms  busbw    7.08 GB/s
+[anchor] all_reduce      world=2     256 MiB  median   37.569 ms  busbw    7.15 GB/s
+[anchor] all_reduce      world=2    1024 MiB  median  149.574 ms  busbw    7.18 GB/s
+[anchor] host css-host-158 wrote ws/fusion-dispatch/results/e4_anchor_nccl/tc104_ch16_ppn1/nccl_anchor_w2.csv
+css-host-158:863313:863313 [0] NCCL INFO comm 0x5766626c8690 rank 0 nranks 2 cudaDev 0 busId 10000 - Destroy COMPLETE
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_anchor_nccl/tc104_ch16_ppn1/guard_node0.log

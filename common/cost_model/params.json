@@ -497,5 +497,57 @@
       "status": "measured",
       "source": "results/g4_map/eval_g4_log.txt self-consistency"
     }
+  },
+  "flux_dispatch_e4_xnode": {
+    "date": "2026-10-03",
+    "status": "measured (anchors only; no decider result yet)",
+    "workstream": "ws/fusion-dispatch E4 (cross-node css-host-158 + css-host-159)",
+    "nodes": "2 x (8x A100-SXM4-80GB, NVSwitch); 8 x 100 GbE RoCE rails per node (subnets 10.10.<rail>.0/24, no routing between rails); rail 4 down (css-host-158 mlx5_3 has no IPv4)",
+    "roce_line_rate_GBps_per_rail": {
+      "value": 12.26,
+      "method": "ib_write_bw host memory, 1 MiB, 5 s; 98.05 Gb/s each of 7 rails, alone and all 7 at once; reverse and send/recv equal; bidirectional 193.7 Gb/s",
+      "source": "ws/fusion-dispatch/results/e4_anchor_ib/, results/e4_debug/ib_direction/"
+    },
+    "gpudirect_rdma_GBps": {
+      "nic_writes_gpu": 12.26,
+      "nic_reads_gpu_per_gpu": 7.0,
+      "nic_reads_gpu_per_pcie_switch_pair": 9.5,
+      "method": "ib_write_bw --use_cuda; GPU->NIC reads capped at ~56 Gb/s per GPU, 2 x 37.9 Gb/s for the two GPUs behind one PCIe switch",
+      "source": "ws/fusion-dispatch/results/e4_anchor_gdr/gdr_anchor_log.txt"
+    },
+    "nccl_busbw_GBps_1GiB": {
+      "1+1": {
+        "all_gather": 6.9,
+        "reduce_scatter": 7.0,
+        "all_reduce": 7.5
+      },
+      "4+4 (GPUs 0,1,4,5)": {
+        "all_gather": 14.6,
+        "reduce_scatter": 14.6,
+        "all_reduce": 14.8
+      },
+      "8+8": {
+        "all_gather": 25.5,
+        "reduce_scatter": 25.7,
+        "all_reduce": 45.9
+      },
+      "method": "NCCL 2.21.5 (torch), NCCL_IB_TC=104, 30 calls per size, rank-max median, nccl-tests busbw convention; explained by the GPU->NIC read cap (~7 GB/s per GPU / ~9.5 per switch pair)",
+      "source": "ws/fusion-dispatch/results/e4_anchor_nccl/tc104_ppn{4,8}/, tc106_ppn1/"
+    },
+    "roce_qos_note": {
+      "value": "trust DSCP, PFC only on priority 3; NCCL default TC 0 -> lossy priority -> ~100 ms stalls (max/min up to 150x); TC 106 halves 8+8 bandwidth; TC 104 keeps bandwidth with fewer stalls (8+8 all_reduce 64-256 MiB still 18-32x max/min)",
+      "source": "ws/fusion-dispatch/results/e4_anchor_nccl/"
+    },
+    "nccl_conf_note": {
+      "value": "css-host-159 ~/.nccl.conf (ALGO=RING, PROTO=Simple) made the two nodes disagree -> silent hang or wrong all_reduce result; renamed with the user's approval; NCCL_CONF_FILE has no effect in 2.21.5",
+      "source": "ws/fusion-dispatch/results/e4_debug/README.md"
+    },
+    "flux_xnode_smoke": {
+      "AGKernelXNode": "runs, passes Flux's allclose check, but NVSHMEM needs all-pairs connectivity -> only with all PEs on one rail (NVSHMEM_HCA_LIST=mlx5_0)",
+      "AGKernel_nnodes2": "fails (writes peer barrier pointers that are null across nodes)",
+      "GemmRS_nnodes2": "illegal memory access",
+      "GemmRS_multinode": "runs but node-0 ranks return wrong results (max abs err ~ value scale)",
+      "source": "ws/fusion-dispatch/results/e4_flux_smoke/"
+    }
   }
 }

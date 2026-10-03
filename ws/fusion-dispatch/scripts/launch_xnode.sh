@@ -12,7 +12,14 @@
 #     here from scratch (torch loads its bundled 2.21.5 either way; checked 2026-10-03).
 #   - css-host-159 has ~/.nccl.conf (NCCL_ALGO=RING, NCCL_PROTO=Simple, NCCL_P2P_LEVEL=NVL, NCCL_IB_HCA=mlx5_3:1; not ours,
 #     left untouched). NCCL reads it automatically on 159 only -> the two nodes pick different protocols and the first
-#     cross-node collective hangs silently (found 2026-10-03). NCCL_CONF_FILE=/dev/null disables it on both nodes.
+#     cross-node collective hangs silently, or returns a WRONG result (found 2026-10-03). NCCL_CONF_FILE does not
+#     work in 2.21.5 (the file is found via the passwd home dir) -> with the user's approval it was renamed to
+#     ~/.nccl.conf.disabled-by-fusion-dispatch, and this script aborts if any NCCL config file exists on a node.
+#   - RoCE QoS (mlnx_qos, both nodes): trust DSCP, PFC only on priority 3 (DSCP 24-31). NCCL's default TC 0 rides the
+#     lossy priority -> drops -> ~100 ms retransmission stalls (max/min up to 150x); TC 106 (with ECN) halves 8+8
+#     bandwidth; TC 104 (DSCP 26, no ECN) keeps full bandwidth with far fewer stalls (results/e4_anchor_nccl/).
+#   - cross-node bandwidth is capped by GPU->NIC PCIe reads (GPUDirect RDMA read): ~7 GB/s per GPU, ~9.5 GB/s per
+#     PCIe-switch pair; NIC->GPU writes and host memory run at line rate 12.3 GB/s (results/e4_anchor_gdr/).
 #   - every run is bounded by XNODE_TIMEOUT seconds (default 1800) so a node that never joins cannot hang the other.
 #   - GPUs: nproc_per_node 8 -> all; 4 -> 0,1,4,5 (one NIC each: mlx5_0,1,4,5); 1 -> 0. XNODE_GPUS overrides.
 ################################################################################
@@ -26,9 +33,12 @@ case "${XNODE_GPUS:-}" in
 esac
 export CUDA_VISIBLE_DEVICES=$GPUS
 export LD_LIBRARY_PATH="${FLUX}/build/lib:${FLUX}/python/flux/lib:${FLUX}/.pixi/envs/default/lib"
-export NCCL_CONF_FILE=/dev/null   # css-host-159 has ~/.nccl.conf (ALGO=RING, PROTO=Simple, IB_HCA=mlx5_3) -> ranks disagree, silent hang
+for f in "$(getent passwd "$(id -un)" | cut -d: -f6)/.nccl.conf" /etc/nccl.conf; do   # NCCL 2.21.5 reads these silently
+  if [ -e "$f" ]; then echo "[launch_xnode] ABORT: $f exists on $(hostname) -> NCCL settings would differ between nodes" >&2; exit 2; fi
+done
 export NCCL_IB_HCA="=${HCAS}"
 export NCCL_IB_GID_INDEX=3
+export NCCL_IB_TC=${NCCL_IB_TC:-104}   # DSCP 26 -> priority 3, the only PFC (lossless) priority on both nodes; no ECN bits
 export NCCL_IB_TIMEOUT=23
 export NCCL_SOCKET_IFNAME=enp29s0f0np0
 export GLOO_SOCKET_IFNAME=enp29s0f0np0
@@ -36,7 +46,8 @@ export NVSHMEM_BOOTSTRAP=UID
 export NVSHMEM_DISABLE_CUDA_VMM=1
 export NVSHMEM_REMOTE_TRANSPORT=${NVSHMEM_REMOTE_TRANSPORT:-ibrc}
 export NVSHMEM_IB_GID_INDEX=3
-export NVSHMEM_HCA_LIST="${HCAS}"
+export NVSHMEM_IB_TRAFFIC_CLASS=${NVSHMEM_IB_TRAFFIC_CLASS:-104}
+export NVSHMEM_HCA_LIST="${NVSHMEM_HCA_LIST:-$HCAS}"
 export NVSHMEM_BOOTSTRAP_UID_SOCK_IFNAME=enp29s0f0np0
 export CUDA_DEVICE_MAX_CONNECTIONS=${CUDA_DEVICE_MAX_CONNECTIONS:-1}
 export CUDA_MODULE_LOADING=LAZY

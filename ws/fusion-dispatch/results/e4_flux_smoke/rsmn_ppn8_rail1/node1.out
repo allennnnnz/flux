@@ -1,0 +1,37 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+split tp_group(16) into 2x8 subgroupssplit tp_group(16) into 2x8 subgroups
+
+[rank15]:[W1003 12:39:15.339917236 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 3 Rank 7]  using GPU 7 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank13]:[W1003 12:39:15.339917167 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 3 Rank 5]  using GPU 5 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+split tp_group(16) into 2x8 subgroups
+[rank12]:[W1003 12:39:15.341159321 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 3 Rank 4]  using GPU 4 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+split tp_group(16) into 2x8 subgroups
+[rank14]:[W1003 12:39:15.341388938 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 3 Rank 6]  using GPU 6 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+split tp_group(16) into 2x8 subgroups
+split tp_group(16) into 2x8 subgroups
+[rank8]:[W1003 12:39:15.342712929 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 3 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+split tp_group(16) into 2x8 subgroups
+[rank10]:[W1003 12:39:15.342928878 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 3 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank9]:[W1003 12:39:15.342951721 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 3 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+split tp_group(16) into 2x8 subgroups
+[rank11]:[W1003 12:39:15.345205748 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 3 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rs_smoke] rank 10 host css-host-159 out (256, 8192) max_abs_err 0.0625 ref_max 4.531 OK
+[rs_smoke] rank 13 host css-host-159 out (256, 8192) max_abs_err 0.0625 ref_max 4.594 OK[rs_smoke] rank 15 host css-host-159 out (256, 8192) max_abs_err 0.0625 ref_max 4.5 OK
+
+[rs_smoke] rank 9 host css-host-159 out (256, 8192) max_abs_err 0.0625 ref_max 4.625 OK
+[rs_smoke] rank 11 host css-host-159 out (256, 8192) max_abs_err 0.0625 ref_max 4.719 OK
+[rank10]:[W1003 12:39:16.207699631 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 10]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rs_smoke] rank 14 host css-host-159 out (256, 8192) max_abs_err 0.04688 ref_max 4.656 OK
+[rs_smoke] rank 12 host css-host-159 out (256, 8192) max_abs_err 0.04688 ref_max 4.969 OK
+[rank15]:[W1003 12:39:16.207726115 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 15]  using GPU 7 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank13]:[W1003 12:39:16.207727426 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 13]  using GPU 5 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank11]:[W1003 12:39:16.207741097 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 11]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank9]:[W1003 12:39:16.207744487 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 9]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank14]:[W1003 12:39:16.207900733 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 14]  using GPU 6 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank12]:[W1003 12:39:16.207946626 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 12]  using GPU 4 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rs_smoke] rank 8 host css-host-159 out (256, 8192) max_abs_err 0.04688 ref_max 4.375 OK
+[rank8]:[W1003 12:39:16.208057084 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 8]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[exclusive_guard_v2 css-host-159] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_flux_smoke/rsmn_ppn8_rail1/guard_node1.log

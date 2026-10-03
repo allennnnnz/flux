@@ -1,0 +1,175 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/topo/topo.cpp:469: [GPU 1] Peer GPU 8 is not accessible, exiting ... 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/init/init.cu:998: non-zero status: 3 building transport map failed 
+
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/topo/topo.cpp:469: [GPU 5] Peer GPU 8 is not accessible, exiting ... 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/init/init.cu:998: non-zero status: 3 building transport map failed 
+
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/topo/topo.cpp:469: [GPU 6] Peer GPU 8 is not accessible, exiting ... 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/init/init.cu:998: non-zero status: 3 building transport map failed 
+
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/topo/topo.cpp:469: [GPU 3] Peer GPU 8 is not accessible, exiting ... 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/init/init.cu:998: non-zero status: 3 building transport map failed 
+
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/topo/topo.cpp:469: [GPU 4] Peer GPU 8 is not accessible, exiting ... 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/init/init.cu:998: non-zero status: 3 building transport map failed 
+
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/topo/topo.cpp:469: [GPU 7] Peer GPU 8 is not accessible, exiting ... 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/init/init.cu:998: non-zero status: 3 building transport map failed 
+
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/topo/topo.cpp:469: [GPU 0] Peer GPU 8 is not accessible, exiting ... 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/init/init.cu:998: non-zero status: 3 building transport map failed 
+
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/topo/topo.cpp:469: [GPU 2] Peer GPU 8 is not accessible, exiting ... 
+/dvs/p4/build/sw/rel/gpgpu/toolkit/r12.8/main_nvshmem/src/host/init/init.cu:998: non-zero status: 3 building transport map failed 
+
+split tp_group(16) into 2x8 subgroups
+[rank1]:[W1003 16:38:30.626032478 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 2 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+split tp_group(16) into 2x8 subgroups
+[rank7]:[W1003 16:38:30.639955016 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 2 Rank 7]  using GPU 7 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+split tp_group(16) into 2x8 subgroups
+[rank6]:[W1003 16:38:30.641467339 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 2 Rank 6]  using GPU 6 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+split tp_group(16) into 2x8 subgroups
+[rank5]:[W1003 16:38:30.643986024 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 2 Rank 5]  using GPU 5 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+split tp_group(16) into 2x8 subgroups
+[rank0]:[W1003 16:38:30.646729543 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 2 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+split tp_group(16) into 2x8 subgroups
+[rank4]:[W1003 16:38:30.648452213 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 2 Rank 4]  using GPU 4 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+split tp_group(16) into 2x8 subgroups
+[rank3]:[W1003 16:38:30.650354673 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 2 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+split tp_group(16) into 2x8 subgroups
+[rank2]:[W1003 16:38:30.664756880 ProcessGroupNCCL.cpp:4561] [PG ID 2 PG GUID 2 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+/home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "/home/rogerlee/flux/ws/fusion-dispatch/scripts/xnode_flux_rs_smoke_v1.py", line 27, in <module>
+[rank7]:     op = flux.GemmRS_multinode(tp, nnodes, M, N, torch.bfloat16, transpose_weight=False, fuse_reduction=False)
+[rank7]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 117, in __init__
+[rank7]:     self.lazy_init_cpp_op(self.max_m)
+[rank7]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 124, in lazy_init_cpp_op
+[rank7]:     self.cpp_op = flux.GemmRS(
+[rank7]:                   ^^^^^^^^^^^^
+[rank7]: RuntimeError: /home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+/home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+/home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "/home/rogerlee/flux/ws/fusion-dispatch/scripts/xnode_flux_rs_smoke_v1.py", line 27, in <module>
+[rank5]:     op = flux.GemmRS_multinode(tp, nnodes, M, N, torch.bfloat16, transpose_weight=False, fuse_reduction=False)
+[rank5]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 117, in __init__
+[rank5]:     self.lazy_init_cpp_op(self.max_m)
+[rank5]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 124, in lazy_init_cpp_op
+[rank5]:     self.cpp_op = flux.GemmRS(
+[rank5]:                   ^^^^^^^^^^^^
+[rank5]: RuntimeError: /home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/home/rogerlee/flux/ws/fusion-dispatch/scripts/xnode_flux_rs_smoke_v1.py", line 27, in <module>
+[rank3]:     op = flux.GemmRS_multinode(tp, nnodes, M, N, torch.bfloat16, transpose_weight=False, fuse_reduction=False)
+[rank3]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 117, in __init__
+[rank3]:     self.lazy_init_cpp_op(self.max_m)
+[rank3]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 124, in lazy_init_cpp_op
+[rank3]:     self.cpp_op = flux.GemmRS(
+[rank3]:                   ^^^^^^^^^^^^
+[rank3]: RuntimeError: /home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+/home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+/home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+/home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/rogerlee/flux/ws/fusion-dispatch/scripts/xnode_flux_rs_smoke_v1.py", line 27, in <module>
+[rank0]:     op = flux.GemmRS_multinode(tp, nnodes, M, N, torch.bfloat16, transpose_weight=False, fuse_reduction=False)
+[rank0]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 117, in __init__
+[rank0]:     self.lazy_init_cpp_op(self.max_m)
+[rank0]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 124, in lazy_init_cpp_op
+[rank0]:     self.cpp_op = flux.GemmRS(
+[rank0]:                   ^^^^^^^^^^^^
+[rank0]: RuntimeError: /home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+/home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/home/rogerlee/flux/ws/fusion-dispatch/scripts/xnode_flux_rs_smoke_v1.py", line 27, in <module>
+[rank1]:     op = flux.GemmRS_multinode(tp, nnodes, M, N, torch.bfloat16, transpose_weight=False, fuse_reduction=False)
+[rank1]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 117, in __init__
+[rank1]:     self.lazy_init_cpp_op(self.max_m)
+[rank1]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 124, in lazy_init_cpp_op
+[rank1]:     self.cpp_op = flux.GemmRS(
+[rank1]:                   ^^^^^^^^^^^^
+[rank1]: RuntimeError: /home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+/home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "/home/rogerlee/flux/ws/fusion-dispatch/scripts/xnode_flux_rs_smoke_v1.py", line 27, in <module>
+[rank4]:     op = flux.GemmRS_multinode(tp, nnodes, M, N, torch.bfloat16, transpose_weight=False, fuse_reduction=False)
+[rank4]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 117, in __init__
+[rank4]:     self.lazy_init_cpp_op(self.max_m)
+[rank4]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 124, in lazy_init_cpp_op
+[rank4]:     self.cpp_op = flux.GemmRS(
+[rank4]:                   ^^^^^^^^^^^^
+[rank4]: RuntimeError: /home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/rogerlee/flux/ws/fusion-dispatch/scripts/xnode_flux_rs_smoke_v1.py", line 27, in <module>
+[rank2]:     op = flux.GemmRS_multinode(tp, nnodes, M, N, torch.bfloat16, transpose_weight=False, fuse_reduction=False)
+[rank2]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 117, in __init__
+[rank2]:     self.lazy_init_cpp_op(self.max_m)
+[rank2]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 124, in lazy_init_cpp_op
+[rank2]:     self.cpp_op = flux.GemmRS(
+[rank2]:                   ^^^^^^^^^^^^
+[rank2]: RuntimeError: /home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "/home/rogerlee/flux/ws/fusion-dispatch/scripts/xnode_flux_rs_smoke_v1.py", line 27, in <module>
+[rank6]:     op = flux.GemmRS_multinode(tp, nnodes, M, N, torch.bfloat16, transpose_weight=False, fuse_reduction=False)
+[rank6]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 117, in __init__
+[rank6]:     self.lazy_init_cpp_op(self.max_m)
+[rank6]:   File "/home/rogerlee/flux/python/flux/gemm_rs_sm80.py", line 124, in lazy_init_cpp_op
+[rank6]:     self.cpp_op = flux.GemmRS(
+[rank6]:                   ^^^^^^^^^^^^
+[rank6]: RuntimeError: /home/rogerlee/flux/src/ths_op/flux_shm.cc:56 Check failed: nvshmemx_init_status() >= NVSHMEM_STATUS_IS_INITIALIZED. nvshmem not initialized: status NVSHMEM_STATUS_IS_BOOTSTRAPPED
+[rank0]:[W1003 16:38:32.410129365 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W1003 16:38:33.657000 868255 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 868386 closing signal SIGTERM
+W1003 16:38:33.658000 868255 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 868387 closing signal SIGTERM
+W1003 16:38:33.658000 868255 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 868388 closing signal SIGTERM
+W1003 16:38:33.659000 868255 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 868389 closing signal SIGTERM
+W1003 16:38:33.659000 868255 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 868391 closing signal SIGTERM
+W1003 16:38:33.659000 868255 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 868392 closing signal SIGTERM
+W1003 16:38:33.660000 868255 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 868393 closing signal SIGTERM
+E1003 16:38:34.338000 868255 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 4 (pid: 868390) of binary: /home/rogerlee/flux/.pixi/envs/default/bin/python
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+ws/fusion-dispatch/scripts/xnode_flux_rs_smoke_v1.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-03_16:38:33
+  host      : css-host-158
+  rank      : 4 (local_rank: 4)
+  exitcode  : 1 (pid: 868390)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_flux_smoke/rsmn_ppn8_notransport/guard_node0.log

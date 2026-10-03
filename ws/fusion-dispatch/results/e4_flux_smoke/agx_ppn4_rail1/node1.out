@@ -1,0 +1,21 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[rank5]:[W1003 12:36:14.922617220 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 5]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank4]:[W1003 12:36:14.922798070 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 4]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank7]:[W1003 12:36:14.923128055 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 7]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank6]:[W1003 12:36:14.923173970 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 6]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+torch #4: total 31.297 ms, gemm 0.455 ms, comm 30.842 ms, gemm_only 0.000 ms
+torch #5: total 31.948 ms, gemm 0.463 ms, comm 31.486 ms, gemm_only 0.000 ms
+torch #6: total 31.929 ms, gemm 0.437 ms, comm 31.493 ms, gemm_only 0.000 ms
+torch #7: total 31.268 ms, gemm 0.455 ms, comm 30.814 ms, gemm_only 0.000 ms
+flux  #4: total 2.794 ms, gemm 0.273 ms, comm 2.522 ms, gemm_only 0.342 ms
+flux  #5: total 2.820 ms, gemm 0.271 ms, comm 2.549 ms, gemm_only 0.341 ms
+flux  #6: total 2.794 ms, gemm 0.274 ms, comm 2.520 ms, gemm_only 0.288 ms
+flux  #7: total 2.784 ms, gemm 0.273 ms, comm 2.511 ms, gemm_only 0.287 ms
+all close!
+all close!
+all close!
+all close!
+[exclusive_guard_v2 css-host-159] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_flux_smoke/agx_ppn4_rail1/guard_node1.log

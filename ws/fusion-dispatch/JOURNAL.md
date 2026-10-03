@@ -333,3 +333,17 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - **卡在哪**：159 的 `~/.nccl.conf` 怎麼處理、`openclaw-gateway` 要不要停，都需要使用者決定（是使用者 / 同帳號的人的東西）。
 - **需 boss 裁決**（CLAUDE.md）：5.1 第 11 條改指向 `exclusive_guard_v2.py`；陷阱表加「`~/.nccl.conf` 會讓多節點設定不一致，
   2.21.5 無法用環境變數關掉」與「守衛 v1 的盲點」。
+
+## 2026-10-03（續）· E4 跨節點：錨點解釋、Flux 冒煙測試
+
+- 使用者核准：159 的 `~/.nccl.conf` 改名停用、`openclaw-gateway` 量測期間停掉（**E4 結束後要還原**）。改名後跨節點 NCCL 正常、結果正確。
+- **NCCL 錨點**（1+1 / 4+4 / 8+8，`results/e4_anchor_nccl/`）：大約只有網卡極限的 1/3，且停頓嚴重（max/min 最高 150 倍）。
+  - 停頓：RoCE 只有優先權 3 不丟包，NCCL 預設 TC 0 → 丟包重傳。TC 106 讓 8+8 頻寬減半；**TC 104 最好**，設為預設。
+  - 頻寬：`ib_write_bw --use_cuda` 顯示網卡從 GPU 讀只有 56 Gb/s（寫進 GPU 是滿速）；同一交換晶片兩張 GPU 合計約 9.5 GB/s。
+    NCCL 數字與此一致（多開通道、`NCCL_NET_GDR_READ=0` 都沒幫助）。→ 這是兩台的 PCIe 特性，當作環境的一部分。
+- **Flux 冒煙測試**（`results/e4_flux_smoke/`）：
+  - `AGKernel`（單節點那個）跨節點寫對端 barrier 指標失敗 → 跨節點要用 `AGKernelXNode`：能跑、正確，但 NVSHMEM 全網狀連線只在單一 rail 成立（rail 間沒有路由）。
+  - `GemmRS` 傳 nnodes=2 → illegal memory access；A100 正確用法是 `GemmRS_multinode`（節點內融合 + NCCL）→ 能跑但 158 的 rank 結果全錯（`scripts/xnode_flux_rs_smoke_v1.py`）。
+  - Flux 自帶測試的 torch 參考 31 ms 跟錨點對不上，未解釋，不引用。
+- params.json 新增 `flux_dispatch_e4_xnode`（錨點、QoS、`.nccl.conf`、冒煙結果）。
+- **卡在哪 / 需使用者決定**：NVSHMEM 多 rail 需要管理員加 rail 間路由（以及修 rail 4 的 IP）；Flux 多節點 RS 要先查對錯；或改走 E1 / E0。
