@@ -10,7 +10,7 @@
 
 ## 0. 快速跟上（新 session 先讀這節；每次收工更新）
 
-最後更新：2026-10-02
+最後更新：2026-10-03
 
 **一句話**：第三階段（泛用決策器）**G0–G4 完成**。決策器 v2 =
 - 模型（通訊 + 融合 kernel 重疊）；
@@ -28,10 +28,21 @@
   探測 ≤ 15% 未達成（事先規則 33–38%），但探測帶來的改善很小。
 - 報告：`reports/20261003_g4_dispatcher.md`。
 
-**下一步（待使用者決定先後）**：
-1. **F4**：接進真正的 vLLM 端到端，用 `scripts/build_table_v2.py` + `predictor/block.py` 產生表與切法；
-2. **G5**：PCIe 代理；
-3. **G6**：總報告 + auditor。
+**G4 之後的分析**（2026-10-03，`reports/20261003_g4_flux_value.md`，事後分析，沒有新量測）：
+- **Flux 在 prefill 有優勢**：同一種切法下比 NCCL 快 7–20%。決策器在 prefill 的 36 個每層決定中有 31 個用 Flux。
+- **decode 輸在切法，不全是 Flux**：光從 TP + AllReduce 換成序列平行就慢 15–36%；在序列平行內，Flux 從 M ≥ 384 起才快 2–7%。
+- **簡單規則**「decode 用 vLLM 預設、prefill 用全 Flux」在這台：regret 0.57%、省 7.5%（決策器 0.02%、省 8.0%）。
+  唯一明顯出錯在 M = 1024（+7.9%）。→ 在這台，決策器多贏的很少；它的價值要在別的硬體 / 連線上證明。
+- 比較圖：`reports/20261003_g4_strategy_compare.html`。
+
+**下一步**：
+1. **跨機器驗證（使用者提供 gpu1，優先）**：照報告第 3 節，對手規則 R1–R3 已凍結；
+   成功 = 決策器重新校準後 regret ≤ 2%，且至少一個環境簡單規則 ≥ 5%。
+   - 卡在連線：從本機連跳板機被拒；改用 SSH agent forwarding，待使用者在筆電設定 `ForwardAgent yes` 後重連；
+   - 備案：在 gpu1 直接開 Claude Code session，讀本節接手；
+   - 連上後先唯讀盤點硬體（GPU 型號、NVLink / PCIe、驅動），再評估 clone + 編譯 Flux + vLLM venv 的成本。
+2. 其他可用環境（報告第 3 節）：E0 模型推演（不用 GPU）、E1 本機背景塞車、E2 本機 PCIe-only（原 G5）。
+3. **F4**（vLLM 端到端）、**G6**（總報告 + auditor）：待使用者決定先後。
 
 **G1–G4 的重點**（`reports/20261003_g4_dispatcher.md`、`reports/20261002_g1_predictor.md`、`reports/20261002_g2_calibration.md`、`reports/20261002_g3_unseen.md`）：
 1. 融合 kernel 能否「邊傳邊算」，可從 CUTLASS stream-K 的 tile 排程直接模擬：
@@ -70,6 +81,7 @@
 | `reports/20261002_g2_calibration.md` | **G2：4 分鐘校準 → 只用微基準的參數檔，對全部實測評估** |
 | `reports/20261002_g3_unseen.md` | **G3：新模型 / 4 卡 / 2 卡，預先登記的預測 vs 實測；cuBLAS 斷崖** |
 | `reports/20261003_g4_dispatcher.md` | **G4：決策器 v2，op 0.17% / block 0.02%（全新情境、預先登記）** |
+| `reports/20261003_g4_flux_value.md` | **G4 之後：Flux 優勢拆解、簡單規則 vs 決策器、跨機器驗證計劃** |
 
 **環境**：
 - Flux 量測：`pixi run --manifest-path pixi.toml ./launch.sh <script>`。
@@ -85,7 +97,7 @@
 - 評估：`python3 ws/fusion-dispatch/scripts/eval_profile_v1.py`（G2）；`eval_predictor_v1.py`（G1，用決策表元件擬合的對照）。
 
 **待使用者 / boss 決定**（細節見 PROJECT.md 第 3 節）：
-1. 是否有其他型號 GPU 可做跨機器驗證（問教授）；
+1. ~~是否有其他型號 GPU~~ → 使用者提供 gpu1（2026-10-03），連線設定中；驗證方案（報告第 3 節）待使用者核准；
 2. 是否開獨立 auditor session；
 3. `PHASE0_FINDINGS.md` 2.6 是否改寫為「依 SM 時脈而定」；
 4. G1 對 diag-overlap 的假說（Phase 0 N=4096 不重疊是 stream-K 排程造成），待 diag-overlap 進場時處理。
@@ -379,6 +391,18 @@ E5 的 Llama 兩層結果在 `results/e5_rs_map_v1/`。**全部尚未經 auditor
     - steady 模式極小 kernel 量到的是 CPU 發 kernel 的速度；
     - vLLM custom AR 在 eager 比 graph 慢；
     - 策略子集選項的程式錯誤（已修）。
+
+### G4 之後的分析（2026-10-03，`reports/20261003_g4_flux_value.md`，事後分析，尚未經 auditor 審查）
+
+51. **拆解**（`scripts/analyze_g4_flux_value_v1.py` → `results/g4_block_oracle/flux_value_log.txt`）：
+    - 切法代價（序列平行 + 全 NCCL vs vLLM 預設）：decode +15% ～ +36%、prefill −3% ～ +7%；
+    - Flux 在序列平行內（vs 全 NCCL）：prefill −7% ～ −20%；decode M = 32 +12–16%、M = 128 +2–5%、
+      M = 256 −5.9% ～ +0.8%、M ≥ 384 −2% ～ −7%；
+    - vLLM custom AllReduce vs 一般 NCCL AllReduce：decode −5% ～ −13%，prefill 無差別。
+52. 決策器在 prefill 的每層決定：31 / 36 用 Flux 路徑（29 個融合 kernel）。
+53. 簡單規則（decode 用 vLLM 預設、prefill 用全 Flux）：regret 0.57%、省 7.5%，最差 +7.9%（Qwen 8 卡 prefill M = 1024）；
+    決策器 0.02%、省 8.0%。block 層級沒量過 M = 513–1023。
+54. 跨機器驗證的對手規則 R1–R3 與成功標準已在報告第 3 節凍結（早於任何新環境量測）。
 
 ## 3. 撤回表（worker 維護）
 

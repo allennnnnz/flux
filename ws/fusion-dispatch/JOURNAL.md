@@ -263,3 +263,26 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
      已修，失敗紀錄改名保留（`*.failed_policyfilter_bug`），重跑後正常。
 - 報告：`reports/20261003_g4_dispatcher.md`。
 - **留給下個 session**：使用者決定 F4（vLLM 端到端）/ G5（PCIe 代理）/ G6（總報告 + auditor）的先後。
+
+## 2026-10-03 · boss 兼 worker · G4 之後：比較圖、Flux 優勢拆解、跨機器驗證計劃
+
+- **比較圖**：使用者要求把「全部用 Flux / 全部用 vLLM 預設 / 決策器」畫在一起。
+  - 存成 `reports/20261003_g4_strategy_compare.html`；
+  - decode 沒有真正的全 Flux（AGKernel 不能 capture），圖上用 `sp_rsflux` 並標註。
+- **使用者問「Flux 怎麼看起來沒有優勢」** → 事後分析（`scripts/analyze_g4_flux_value_v1.py`，沒有新量測）：
+  - prefill：Flux 在同一種切法下快 7–20%，決策器 31 / 36 的每層決定用 Flux；
+  - decode：輸在切法（換成序列平行就慢 15–36%），Flux 在序列平行內從 M ≥ 384 起才有幫助。
+- **使用者問「決策器有什麼用」**：
+  - 簡單規則「decode vLLM、prefill Flux」在這台 regret 0.57%、省 7.5%；決策器 0.02%、省 8.0%；
+  - 誠實結論：在這台決策器多贏的很少，價值要在別的硬體 / 連線上證明。
+- **驗證計劃**（報告第 3 節）：
+  - 對手規則 R1–R3 與成功標準已凍結；
+  - 環境：E0 模型推演、E1 本機背景塞車、E2 本機 PCIe-only、E3 gpu1。
+- **gpu1**：使用者提供（EE325 叢集，經跳板機）。
+  - 卡在哪：本機金鑰被跳板機拒絕，使用者加了公鑰仍被拒，原因未查明；
+  - 改用 SSH agent forwarding，待使用者設定筆電並重連 VSCode。
+- **更正**：對話中「Flux 在序列平行內從 M ≥ 256 起有幫助」「custom AR 快 7–12%」→ 正確是 M ≥ 384、5–13%（報告第 4 節）。
+- 報告：`reports/20261003_g4_flux_value.md`。
+- **留給下個 session**：
+  - 連上 gpu1 後先唯讀盤點硬體，回報使用者，確認後再 clone / 編譯 / 跑；
+  - 流程照報告第 3 節（校準 → 決策 push → 標準答案 → 比 regret）。

@@ -1,0 +1,46 @@
+[1] decomposition per point (block time, rank-max median ms)
+config                     M   tp_ar    vllm  sp_nccl  flux_sp  layout cost Flux in SP vs tp_ar  vs vllm
+llama3-8b tp4 decode      32   0.793   0.705    0.885    1.025        25.6%      15.9%    29.3%    45.5%
+llama3-8b tp4 decode     128   1.350   1.220    1.483    1.537        21.6%       3.6%    13.8%    25.9%
+llama3-8b tp4 decode     256   2.095   1.875    2.558    2.406        36.4%      -5.9%    14.9%    28.3%
+llama3-8b tp4 decode     384   2.631   2.411    3.110    3.047        29.0%      -2.0%    15.8%    26.4%
+llama3-8b tp4 decode     512   3.663   3.444    4.128    3.848        19.9%      -6.8%     5.0%    11.7%
+llama3-8b tp4 prefill   1024   3.832   3.839    4.102    3.296         6.9%     -19.6%   -14.0%   -14.1%
+llama3-8b tp4 prefill   2048   6.561   6.558    6.705    5.792         2.2%     -13.6%   -11.7%   -11.7%
+llama3-8b tp4 prefill   4096  12.128  12.127   12.078   10.519        -0.4%     -12.9%   -13.3%   -13.3%
+qwen2.5-32b tp8 decode    32   0.822   0.717    0.921    1.031        28.4%      12.0%    25.4%    43.9%
+qwen2.5-32b tp8 decode   128   1.248   1.106    1.382    1.449        24.9%       4.8%    16.1%    31.0%
+qwen2.5-32b tp8 decode   256   2.000   1.760    2.107    2.124        19.7%       0.8%     6.2%    20.7%
+qwen2.5-32b tp8 decode   384   2.508   2.234    2.744    2.609        22.8%      -4.9%     4.0%    16.8%
+qwen2.5-32b tp8 decode   512   2.837   2.570    3.015    2.820        17.3%      -6.5%    -0.6%     9.7%
+qwen2.5-32b tp8 prefill  1024   3.896   3.890    4.022    3.625         3.4%      -9.9%    -7.0%    -6.8%
+qwen2.5-32b tp8 prefill  2048   6.870   6.836    7.002    6.219         2.4%     -11.2%    -9.5%    -9.0%
+qwen2.5-32b tp8 prefill  4096  13.569  13.582   13.227   11.347        -2.6%     -14.2%   -16.4%   -16.5%
+qwen2.5-32b tp4 decode    32   1.118   1.030    1.207    1.367        17.3%      13.2%    22.3%    32.8%
+qwen2.5-32b tp4 decode   128   1.865   1.744    2.012    2.057        15.4%       2.2%    10.3%    18.0%
+qwen2.5-32b tp4 decode   256   2.572   2.364    3.044    2.942        28.7%      -3.3%    14.4%    24.4%
+qwen2.5-32b tp4 decode   384   3.859   3.651    4.345    4.227        19.0%      -2.7%     9.5%    15.8%
+qwen2.5-32b tp4 decode   512   4.621   4.387    5.054    4.709        15.2%      -6.8%     1.9%     7.4%
+qwen2.5-32b tp4 prefill  1024   5.961   5.981    6.246    5.675         4.4%      -9.1%    -4.8%    -5.1%
+qwen2.5-32b tp4 prefill  2048  11.040  11.045   11.137   10.324         0.8%      -7.3%    -6.5%    -6.5%
+qwen2.5-32b tp4 prefill  4096  22.268  22.306   22.150   20.291        -0.7%      -8.4%    -8.9%    -9.0%
+  decode: layout cost +15.2% .. +36.4%   Flux in SP -6.8% .. +15.9%   vLLM custom AR vs NCCL AR -12.8% .. -5.1%
+  prefill: layout cost -2.6% .. +6.9%   Flux in SP -19.6% .. -7.3%   vLLM custom AR vs NCCL AR -0.5% .. +0.3%
+  decode, Flux in SP vs sp_nccl by M: M=32: +12.0..+15.9%  M=128: +2.2..+4.8%  M=256: -5.9..+0.8%  M=384: -4.9..-2.0%  M=512: -6.8..-6.5%
+
+[2] policies (regret = sum(t - t_best) / sum(t_best); saving = 1 - sum(t) / sum(t_vllm))
+  all     tp_ar_vllm   regret   8.71%  saving vs vLLM   0.0%  worst  19.7% at qwen2.5-32b tp8 prefill M=4096
+  all     rule_phase   regret   0.57%  saving vs vLLM   7.5%  worst   7.9% at qwen2.5-32b tp8 prefill M=1024
+  all     auto_g4      regret   0.02%  saving vs vLLM   8.0%  worst   0.3% at llama3-8b tp4 prefill M=1024
+  decode  tp_ar_vllm   regret   0.00%  saving vs vLLM   0.0%  worst   0.0% at llama3-8b tp4 decode M=32
+  decode  rule_phase   regret   0.00%  saving vs vLLM   0.0%  worst   0.0% at llama3-8b tp4 decode M=32
+  decode  auto_g4      regret   0.00%  saving vs vLLM   0.0%  worst   0.0% at llama3-8b tp4 decode M=32
+  prefill tp_ar_vllm   regret  12.25%  saving vs vLLM   0.0%  worst  19.7% at qwen2.5-32b tp8 prefill M=4096
+  prefill rule_phase   regret   0.80%  saving vs vLLM  10.2%  worst   7.9% at qwen2.5-32b tp8 prefill M=1024
+  prefill auto_g4      regret   0.03%  saving vs vLLM  10.9%  worst   0.3% at llama3-8b tp4 prefill M=1024
+
+[3] sp_g4 per-layer first choice in prefill (pre-registered tables)
+  table_g4_llama3-8b_tp4_prefill.json: 11/12 Flux (10 fused)
+  table_g4_qwen2.5-32b_tp4_prefill.json: 10/12 Flux (9 fused)
+  table_g4_qwen2.5-32b_tp8_prefill.json: 10/12 Flux (10 fused)
+  total: 31/36 decisions use a Flux path (86%), 29 fused kernel

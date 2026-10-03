@@ -21,13 +21,18 @@ Phase 0 結案。A100 雙通道方案取消（DECISIONS D-001）。2026-09-29 �
 - 計劃成功標準除探測量外全部達成；
 - 陷阱已寫入 `CLAUDE.md`。
 
-下一步：F4（vLLM 端到端）/ G5（PCIe 代理）/ G6（總報告），待使用者決定先後。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
+G4 之後的事後分析（`ws/fusion-dispatch/reports/20261003_g4_flux_value.md`）：
+- prefill 的好處大多來自 Flux：同一種切法下快 7–20%；
+- decode 輸在切法；
+- 在這台，簡單規則「decode vLLM、prefill Flux」幾乎跟決策器一樣好（省 7.5% vs 8.0%），所以決策器的價值要在別的硬體上證明。
+
+下一步：**跨機器驗證**。使用者提供 gpu1（EE325），連線設定中；對手規則與成功標準已凍結。F4 / G6 待決定。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
 
 ## 2. Workstream 總表
 
 | workstream | 優先 | 狀態 | 依賴 | 負責 session | 最近更新 |
 | --- | --- | --- | --- | --- | --- |
-| `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器，G0–G4 完成（`reports/20261003_g4_dispatcher.md`：op 0.17%、block 0.02%），下一步 F4 / G5 / G6**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-02 |
+| `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器，G0–G4 完成（`reports/20261003_g4_dispatcher.md`：op 0.17%、block 0.02%），下一步：跨機器驗證（gpu1，連線設定中）**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-03 |
 | `ws/diag-overlap` | 第二 | 未開始 | — | 未指派 | — |
 | `ws/hetero-proxy` | 第二，可與上並行 | 未開始 | — | 未指派 | — |
 | `ws/cost-model` | 第三 | 模型目標由 fusion-dispatch 第三階段執行；預測器 v1 已建於 `common/cost_model/predictor/`（G1），校準參數檔在 `common/cost_model/hw_profiles/`（G2）（D-008） | — | 未指派 | 2026-10-02 |
@@ -80,7 +85,8 @@ worker 在 JOURNAL 標「需 boss 裁決」的事項會被 boss 搬到這裡。
 ## 4. 下一步（boss）
 
 0. `ws/fusion-dispatch`：
-   - 決定 F4（vLLM 端到端，用決策器 v2）/ G5（PCIe 代理）/ G6（總報告）的先後；
+   - 跨機器驗證：gpu1 連線（SSH agent forwarding，待使用者設定）→ 唯讀盤點 → 核准驗證方案（`reports/20261003_g4_flux_value.md` 第 3 節）；
+   - 決定 F4（vLLM 端到端，用決策器 v2）/ G6（總報告）的先後；
    - 安排 auditor 審 E0、E1–E3、G1–G4 報告。
 1. 指派第一個 worker session 到 `ws/diag-overlap`。
 2. `ws/hetero-proxy` 可同時開一個 worker，先做 1a/1b 兩項補充量測。
