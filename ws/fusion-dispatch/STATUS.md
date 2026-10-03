@@ -21,7 +21,21 @@
 - G3 錯誤幾乎全來自 **cuBLAS 自己的斷崖**（某些形狀 × M 慢 22–53%），通訊與重疊模型都準。
   事後分析：GEMM 改成實測（單卡、便宜）、通訊 / 重疊用模型，AG regret 1.76% → 0.27%。
 
-**下一步：G4**（使用者 2026-10-03 核准做法，D-009；`reports/20261002_g3_unseen.md` 第 0 節）：
+**G4 op 層級完成（2026-10-03，預先登記，全新測試集：Qwen2.5-32B 8 卡 / 4 卡、Llama-3-8B 4 卡，M 皆為沒用過的值）**：
+
+| 方法 | regret |
+| --- | --- |
+| **模型 + 實測單卡 GEMM（g4）** | **0.17%**（AG 0.04%、RS 0.41%） |
+| 加多卡把關（g4+probe） | 0.11% |
+| G3 方法（只用模型） | 1.20% |
+| 固定門檻 | 2.30% |
+
+- 成本：單卡 GEMM 82 秒 = 量整張表的 7.7%；多卡把關另需 367 秒（3% 變體只探 16% 的點，效果幾乎一樣）；
+- 結果：`results/g4_map/eval_g4_log.txt`；
+- 新坑：steady 模式量極小 kernel 時量到的是 CPU 發 kernel 速度，數值取決於同一輪的其他項目（同一 GEMM 在探測與地圖中可差 3 倍）。
+
+**下一步：G4 block 層級**（使用者 2026-10-03 核准做法，D-009）：先跑 `scripts/run_g4_block_prep_v1.sh`（vLLM all-reduce 校準 + block 用 M 的單卡 GEMM），再依 `build_g4_block_v1.py` 的步驟進行。
+原 G4 設計（`reports/20261002_g3_unseen.md` 第 0 節）：
 - 決策 = 模型（通訊 + 重疊）+ 實測單卡 GEMM + 少量多卡探測；
 - GemmRS 改用 gemm_only 家族參數；
 - 用 `scripts/build_table_v2.py` 產生 `dispatcher_v1` 格式的表；

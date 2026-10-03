@@ -1,0 +1,14 @@
+[G4-map] start 2026-10-03 04:07:56
+[G4-map] tp8 Q32-QKV exit 0 04:09:05 2026-10-03 04:09:05 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-map] tp8 Q32-GU exit 0 04:11:22 2026-10-03 04:11:22 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-map] tp8 Q32-O exit 0 04:12:21 2026-10-03 04:12:21 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-map] tp8 Q32-down exit 0 04:13:47 2026-10-03 04:13:47 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-map] tp4 Q32-QKV exit 0 04:14:53 2026-10-03 04:14:53 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-map] tp4 Q32-GU exit 0 04:18:20 2026-10-03 04:18:20 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-map] tp4 Q32-O exit 0 04:19:12 2026-10-03 04:19:12 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-map] tp4 Q32-down exit 0 04:21:01 2026-10-03 04:21:01 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-map] tp4 L8-QKV exit 0 04:21:57 2026-10-03 04:21:57 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-map] tp4 L8-GU exit 0 04:23:49 2026-10-03 04:23:49 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-map] tp4 L8-O exit 0 04:24:33 2026-10-03 04:24:33 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-map] tp4 L8-down exit 0 04:25:38 2026-10-03 04:25:38 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-map] done 2026-10-03 04:25:38

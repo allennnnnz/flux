@@ -1,0 +1,6 @@
+CONSISTENCY Q32-O M=24 gpu: B_nccl_cublas - sum(parts) = -0.0051 ms (-10.4%)
+CONSISTENCY Q32-O M=24 steady: B_nccl_cublas - sum(parts) = 0.0113 ms (+20.3%)
+CONSISTENCY Q32-O M=24 steady: E_allreduce - sum(parts) = 0.0129 ms (+21.6%)
+CONSISTENCY Q32-O M=96 steady: B_nccl_cublas - sum(parts) = 0.0113 ms (+20.2%)
+CONSISTENCY Q32-O M=96 steady: E_allreduce - sum(parts) = 0.0129 ms (+20.4%)
+CONSISTENCY Q32-QKV M=96 gpu: B_nccl_cublas - sum(parts) = -0.0067 ms (-10.3%)

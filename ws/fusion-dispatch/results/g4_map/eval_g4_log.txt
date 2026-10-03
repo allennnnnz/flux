@@ -1,0 +1,370 @@
+G4: 192 oracle points matched to 192 pre-registered decisions
+
+[ag all] 96 points  probed 42 (eps rule), 19 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            8.30%   40.83%    2.73%   197.4%  (8, 'Q32-QKV', 24, 'steady')   59
+    off           6.37%    1.48%    7.86%    60.9%  (4, 'Q32-QKV', 6144, 'steady')   16
+    thr512        2.86%    1.48%    2.73%    36.6%  (8, 'Q32-QKV', 768, 'steady')   17
+    pred_g3       1.55%    1.48%    1.68%    15.5%  (4, 'Q32-GU', 384, 'steady')    6
+    pred_g4m      1.55%    1.48%    1.68%    15.5%  (4, 'Q32-GU', 384, 'steady')    6
+    g4            0.04%    0.00%    0.03%     3.4%  (4, 'Q32-QKV', 1536, 'steady')    0
+    g4+probe      0.03%    0.00%    0.02%     1.7%  (8, 'Q32-GU', 768, 'gpu')     0
+    g4+probe3     0.03%    0.00%    0.02%     1.7%  (8, 'Q32-GU', 768, 'gpu')     0
+
+[ag TP=8 Qwen2.5-32B] 32 points  probed 10 (eps rule), 4 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on           13.74%   73.44%    2.83%   197.4%  (8, 'Q32-QKV', 24, 'steady')   23
+    off           4.92%    0.00%    6.38%    51.3%  (8, 'Q32-QKV', 6144, 'steady')    2
+    thr512        3.09%    0.00%    2.83%    36.6%  (8, 'Q32-QKV', 768, 'steady')    7
+    pred_g3       0.22%    0.00%    0.26%     2.4%  (8, 'Q32-GU', 2560, 'steady')    0
+    pred_g4m      0.22%    0.00%    0.26%     2.4%  (8, 'Q32-GU', 2560, 'steady')    0
+    g4            0.02%    0.00%    0.00%     0.7%  (8, 'Q32-GU', 768, 'steady')    0
+    g4+probe      0.05%    0.00%    0.00%     1.7%  (8, 'Q32-GU', 768, 'gpu')     0
+    g4+probe3     0.05%    0.00%    0.00%     1.7%  (8, 'Q32-GU', 768, 'gpu')     0
+
+[ag TP=4 Qwen2.5-32B] 32 points  probed 15 (eps rule), 8 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            6.28%   21.38%    3.91%   150.8%  (4, 'Q32-QKV', 24, 'steady')   19
+    off           5.30%    3.58%    6.05%    60.9%  (4, 'Q32-QKV', 6144, 'steady')    6
+    thr512        4.09%    3.58%    3.91%    15.5%  (4, 'Q32-GU', 384, 'steady')    9
+    pred_g3       2.55%    3.57%    2.63%    15.5%  (4, 'Q32-GU', 384, 'steady')    4
+    pred_g4m      2.55%    3.57%    2.63%    15.5%  (4, 'Q32-GU', 384, 'steady')    4
+    g4            0.06%    0.00%    0.07%     3.4%  (4, 'Q32-QKV', 1536, 'steady')    0
+    g4+probe      0.03%    0.00%    0.04%     0.2%  (4, 'Q32-GU', 1536, 'steady')    0
+    g4+probe3     0.03%    0.00%    0.04%     0.2%  (4, 'Q32-GU', 1536, 'steady')    0
+
+[ag TP=4 Llama-3-8B] 32 points  probed 17 (eps rule), 7 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            5.82%   34.82%    0.23%   164.5%  (4, 'L8-QKV', 24, 'steady')   17
+    off          10.05%    0.00%   13.25%    52.9%  (4, 'L8-QKV', 6144, 'steady')    8
+    thr512        0.28%    0.00%    0.23%     7.2%  (4, 'L8-QKV', 1536, 'gpu')    1
+    pred_g3       1.19%    0.00%    1.47%    11.4%  (4, 'L8-GU', 1536, 'steady')    2
+    pred_g4m      1.19%    0.00%    1.47%    11.4%  (4, 'L8-GU', 1536, 'steady')    2
+    g4            0.02%    0.00%    0.00%     0.5%  (4, 'L8-GU', 768, 'gpu')      0
+    g4+probe      0.00%    0.00%    0.00%     0.0%  (4, 'L8-QKV', 24, 'gpu')      0
+    g4+probe3     0.00%    0.00%    0.00%     0.0%  (4, 'L8-QKV', 24, 'gpu')      0
+
+[ag gpu] 48 points  probed 23 (eps rule), 7 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            8.68%   39.54%    2.95%   177.2%  (8, 'Q32-QKV', 24, 'gpu')    32
+    off           6.02%    1.16%    7.59%    56.6%  (4, 'Q32-QKV', 6144, 'gpu')    8
+    thr512        3.06%    1.16%    2.95%    34.3%  (8, 'Q32-QKV', 768, 'gpu')   11
+    pred_g3       0.77%    1.15%    0.78%    15.4%  (4, 'Q32-GU', 200, 'gpu')     2
+    pred_g4m      0.77%    1.15%    0.78%    15.4%  (4, 'Q32-GU', 200, 'gpu')     2
+    g4            0.01%    0.00%    0.00%     0.5%  (4, 'L8-GU', 768, 'gpu')      0
+    g4+probe      0.03%    0.00%    0.00%     1.7%  (8, 'Q32-GU', 768, 'gpu')     0
+    g4+probe3     0.03%    0.00%    0.00%     1.7%  (8, 'Q32-GU', 768, 'gpu')     0
+
+[ag steady] 48 points  probed 19 (eps rule), 12 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            7.91%   42.27%    2.52%   197.4%  (8, 'Q32-QKV', 24, 'steady')   27
+    off           6.72%    1.84%    8.13%    60.9%  (4, 'Q32-QKV', 6144, 'steady')    8
+    thr512        2.66%    1.84%    2.52%    36.6%  (8, 'Q32-QKV', 768, 'steady')    6
+    pred_g3       2.31%    1.84%    2.56%    15.5%  (4, 'Q32-GU', 384, 'steady')    4
+    pred_g4m      2.31%    1.84%    2.56%    15.5%  (4, 'Q32-GU', 384, 'steady')    4
+    g4            0.06%    0.00%    0.06%     3.4%  (4, 'Q32-QKV', 1536, 'steady')    0
+    g4+probe      0.03%    0.00%    0.03%     0.2%  (4, 'Q32-GU', 1536, 'steady')    0
+    g4+probe3     0.03%    0.00%    0.03%     0.2%  (4, 'Q32-GU', 1536, 'steady')    0
+
+[rs all] 96 points  probed 31 (eps rule), 11 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            0.96%    5.50%    0.00%    43.2%  (4, 'L8-down', 24, 'steady')   17
+    off          20.80%    7.72%   22.05%    64.5%  (8, 'Q32-down', 768, 'gpu')   66
+    thr512        1.35%    7.72%    0.00%    49.8%  (4, 'Q32-O', 384, 'gpu')     18
+    pred_g3       0.60%    3.40%    0.00%    34.5%  (4, 'L8-O', 96, 'steady')    13
+    pred_g4m      0.51%    2.92%    0.00%    34.5%  (4, 'L8-O', 96, 'steady')     9
+    g4            0.41%    2.36%    0.00%    33.0%  (4, 'L8-O', 24, 'steady')     8
+    g4+probe      0.25%    1.43%    0.00%    34.5%  (4, 'L8-O', 96, 'steady')     5
+    g4+probe3     0.32%    1.83%    0.00%    33.0%  (4, 'L8-O', 24, 'steady')     7
+
+[rs TP=8 Qwen2.5-32B] 32 points  probed 8 (eps rule), 3 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            0.87%    4.59%    0.00%    23.3%  (8, 'Q32-down', 24, 'steady')    7
+    off          28.26%    7.36%   30.97%    64.5%  (8, 'Q32-down', 768, 'gpu')   22
+    thr512        1.39%    7.36%    0.00%    33.1%  (8, 'Q32-O', 384, 'steady')    6
+    pred_g3       0.51%    2.72%    0.00%    30.1%  (8, 'Q32-O', 24, 'steady')    4
+    pred_g4m      0.48%    2.53%    0.00%    30.1%  (8, 'Q32-O', 24, 'steady')    3
+    g4            0.61%    3.21%    0.00%    30.1%  (8, 'Q32-O', 24, 'steady')    3
+    g4+probe      0.15%    0.77%    0.00%     7.1%  (8, 'Q32-down', 384, 'steady')    1
+    g4+probe3     0.34%    1.81%    0.00%    30.1%  (8, 'Q32-O', 24, 'steady')    2
+
+[rs TP=4 Qwen2.5-32B] 32 points  probed 12 (eps rule), 3 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            0.98%    6.27%    0.00%    37.3%  (4, 'Q32-O', 24, 'gpu')       6
+    off          16.31%    8.68%   15.56%    54.4%  (4, 'Q32-O', 1536, 'steady')   23
+    thr512        1.36%    8.68%    0.00%    49.8%  (4, 'Q32-O', 384, 'gpu')      7
+    pred_g3       0.60%    3.86%    0.00%    19.2%  (4, 'Q32-O', 24, 'steady')    5
+    pred_g4m      0.53%    3.41%    0.00%    19.2%  (4, 'Q32-O', 24, 'steady')    4
+    g4            0.31%    1.98%    0.00%    19.2%  (4, 'Q32-O', 24, 'steady')    3
+    g4+probe      0.16%    1.05%    0.00%    19.2%  (4, 'Q32-O', 24, 'steady')    2
+    g4+probe3     0.31%    1.98%    0.00%    19.2%  (4, 'Q32-O', 24, 'steady')    3
+
+[rs TP=4 Llama-3-8B] 32 points  probed 11 (eps rule), 5 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            1.05%    5.41%    0.00%    43.2%  (4, 'L8-down', 24, 'steady')    4
+    off          20.32%    6.73%   24.23%    36.7%  (4, 'L8-O', 2560, 'steady')   21
+    thr512        1.30%    6.73%    0.00%    34.5%  (4, 'L8-O', 96, 'steady')     5
+    pred_g3       0.68%    3.50%    0.00%    34.5%  (4, 'L8-O', 96, 'steady')     4
+    pred_g4m      0.51%    2.63%    0.00%    34.5%  (4, 'L8-O', 96, 'steady')     2
+    g4            0.38%    1.94%    0.00%    33.0%  (4, 'L8-O', 24, 'steady')     2
+    g4+probe      0.53%    2.72%    0.00%    34.5%  (4, 'L8-O', 96, 'steady')     2
+    g4+probe3     0.32%    1.63%    0.00%    33.0%  (4, 'L8-O', 24, 'steady')     2
+
+[rs gpu] 48 points  probed 14 (eps rule), 5 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            1.03%    5.55%    0.00%    40.2%  (4, 'L8-O', 24, 'gpu')        9
+    off          18.89%    5.43%   20.41%    64.5%  (8, 'Q32-down', 768, 'gpu')   29
+    thr512        1.01%    5.43%    0.00%    49.8%  (4, 'Q32-O', 384, 'gpu')      5
+    pred_g3       0.25%    1.34%    0.00%    10.0%  (4, 'Q32-down', 384, 'gpu')    2
+    pred_g4m      0.24%    1.29%    0.00%    10.0%  (4, 'Q32-down', 384, 'gpu')    1
+    g4            0.20%    1.10%    0.00%    12.3%  (8, 'Q32-down', 384, 'gpu')    1
+    g4+probe      0.03%    0.14%    0.00%     1.8%  (4, 'Q32-O', 96, 'gpu')       0
+    g4+probe3     0.06%    0.34%    0.00%     2.5%  (4, 'Q32-down', 200, 'gpu')    0
+
+[rs steady] 48 points  probed 17 (eps rule), 6 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            0.89%    5.45%    0.00%    43.2%  (4, 'L8-down', 24, 'steady')    8
+    off          22.78%   10.42%   23.70%    63.2%  (8, 'Q32-O', 2560, 'steady')   37
+    thr512        1.71%   10.42%    0.00%    45.7%  (4, 'Q32-O', 384, 'steady')   13
+    pred_g3       0.96%    5.82%    0.00%    34.5%  (4, 'L8-O', 96, 'steady')    11
+    pred_g4m      0.79%    4.83%    0.00%    34.5%  (4, 'L8-O', 96, 'steady')     8
+    g4            0.63%    3.83%    0.00%    33.0%  (4, 'L8-O', 24, 'steady')     7
+    g4+probe      0.48%    2.94%    0.00%    34.5%  (4, 'L8-O', 96, 'steady')     5
+    g4+probe3     0.59%    3.58%    0.00%    33.0%  (4, 'L8-O', 24, 'steady')     7
+
+[both all] 192 points  probed 73 (eps rule), 30 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            5.60%   25.85%    1.75%   197.4%  (8, 'Q32-QKV', 24, 'steady')   76
+    off          11.67%    4.13%   12.93%    64.5%  (8, 'Q32-down', 768, 'gpu')   82
+    thr512        2.30%    4.13%    1.75%    49.8%  (4, 'Q32-O', 384, 'gpu')     35
+    pred_g3       1.20%    2.29%    1.08%    34.5%  (4, 'L8-O', 96, 'steady')    19
+    pred_g4m      1.17%    2.09%    1.08%    34.5%  (4, 'L8-O', 96, 'steady')    15
+    g4            0.17%    1.00%    0.02%    33.0%  (4, 'L8-O', 24, 'steady')     8
+    g4+probe      0.11%    0.61%    0.01%    34.5%  (4, 'L8-O', 96, 'steady')     5
+    g4+probe3     0.14%    0.78%    0.01%    33.0%  (4, 'L8-O', 24, 'steady')     7
+
+[both TP=8 Qwen2.5-32B] 64 points  probed 18 (eps rule), 7 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            8.95%   43.47%    1.81%   197.4%  (8, 'Q32-QKV', 24, 'steady')   30
+    off          13.60%    3.20%   15.22%    64.5%  (8, 'Q32-down', 768, 'gpu')   24
+    thr512        2.46%    3.20%    1.81%    36.6%  (8, 'Q32-QKV', 768, 'steady')   13
+    pred_g3       0.33%    1.19%    0.17%    30.1%  (8, 'Q32-O', 24, 'steady')    4
+    pred_g4m      0.32%    1.10%    0.17%    30.1%  (8, 'Q32-O', 24, 'steady')    3
+    g4            0.24%    1.40%    0.00%    30.1%  (8, 'Q32-O', 24, 'steady')    3
+    g4+probe      0.09%    0.34%    0.00%     7.1%  (8, 'Q32-down', 384, 'steady')    1
+    g4+probe3     0.16%    0.79%    0.00%    30.1%  (8, 'Q32-O', 24, 'steady')    2
+
+[both TP=4 Qwen2.5-32B] 64 points  probed 27 (eps rule), 11 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            4.36%   15.03%    2.53%   150.8%  (4, 'Q32-QKV', 24, 'steady')   25
+    off           9.30%    5.72%    9.41%    60.9%  (4, 'Q32-QKV', 6144, 'steady')   29
+    thr512        3.10%    5.72%    2.53%    49.8%  (4, 'Q32-O', 384, 'gpu')     16
+    pred_g3       1.84%    3.69%    1.70%    19.2%  (4, 'Q32-O', 24, 'steady')    9
+    pred_g4m      1.82%    3.50%    1.70%    19.2%  (4, 'Q32-O', 24, 'steady')    8
+    g4            0.15%    0.83%    0.04%    19.2%  (4, 'Q32-O', 24, 'steady')    3
+    g4+probe      0.08%    0.44%    0.02%    19.2%  (4, 'Q32-O', 24, 'steady')    2
+    g4+probe3     0.13%    0.83%    0.02%    19.2%  (4, 'Q32-O', 24, 'steady')    3
+
+[both TP=4 Llama-3-8B] 64 points  probed 28 (eps rule), 12 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            4.05%   22.54%    0.15%   164.5%  (4, 'L8-QKV', 24, 'steady')   21
+    off          13.86%    2.81%   17.22%    52.9%  (4, 'L8-QKV', 6144, 'steady')   29
+    thr512        0.66%    2.81%    0.15%    34.5%  (4, 'L8-O', 96, 'steady')     6
+    pred_g3       1.00%    1.46%    0.94%    34.5%  (4, 'L8-O', 96, 'steady')     6
+    pred_g4m      0.94%    1.10%    0.94%    34.5%  (4, 'L8-O', 96, 'steady')     4
+    g4            0.15%    0.81%    0.00%    33.0%  (4, 'L8-O', 24, 'steady')     2
+    g4+probe      0.20%    1.14%    0.00%    34.5%  (4, 'L8-O', 96, 'steady')     2
+    g4+probe3     0.12%    0.68%    0.00%    33.0%  (4, 'L8-O', 24, 'steady')     2
+
+[both gpu] 96 points  probed 37 (eps rule), 12 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            5.82%   24.91%    1.88%   177.2%  (8, 'Q32-QKV', 24, 'gpu')    41
+    off          10.83%    3.00%   12.23%    64.5%  (8, 'Q32-down', 768, 'gpu')   37
+    thr512        2.29%    3.00%    1.88%    49.8%  (4, 'Q32-O', 384, 'gpu')     16
+    pred_g3       0.57%    1.23%    0.49%    15.4%  (4, 'Q32-GU', 200, 'gpu')     4
+    pred_g4m      0.57%    1.21%    0.49%    15.4%  (4, 'Q32-GU', 200, 'gpu')     3
+    g4            0.08%    0.47%    0.00%    12.3%  (8, 'Q32-down', 384, 'gpu')    1
+    g4+probe      0.03%    0.06%    0.00%     1.8%  (4, 'Q32-O', 96, 'gpu')       0
+    g4+probe3     0.04%    0.14%    0.00%     2.5%  (4, 'Q32-down', 200, 'gpu')    0
+
+[both steady] 96 points  probed 36 (eps rule), 18 (3% variant)
+    policy       regret   decode  prefill    worst  point                       >5%
+    on            5.38%   26.92%    1.63%   197.4%  (8, 'Q32-QKV', 24, 'steady')   35
+    off          12.52%    5.41%   13.61%    63.2%  (8, 'Q32-O', 2560, 'steady')   45
+    thr512        2.32%    5.41%    1.63%    45.7%  (4, 'Q32-O', 384, 'steady')   19
+    pred_g3       1.82%    3.50%    1.66%    34.5%  (4, 'L8-O', 96, 'steady')    15
+    pred_g4m      1.76%    3.08%    1.66%    34.5%  (4, 'L8-O', 96, 'steady')    12
+    g4            0.27%    1.60%    0.04%    33.0%  (4, 'L8-O', 24, 'steady')     7
+    g4+probe      0.19%    1.23%    0.02%    34.5%  (4, 'L8-O', 96, 'steady')     5
+    g4+probe3     0.23%    1.49%    0.02%    33.0%  (4, 'L8-O', 24, 'steady')     7
+
+[g4 path-time MAPE vs oracle]
+    ag A: MAPE 2.5%  median 1.5%  p90 6.7%  (n=96)
+    ag B: MAPE 4.4%  median 2.2%  p90 9.7%  (n=96)
+    ag C: MAPE 1.5%  median 1.2%  p90 3.1%  (n=96)
+    ag D: MAPE 1.8%  median 1.2%  p90 3.4%  (n=96)
+    ag near crossover (|A/best_off - 1| < 15%, 47 pts): MAPE 1.9%
+    rs A: MAPE 8.5%  median 6.7%  p90 16.3%  (n=96)
+    rs B: MAPE 5.2%  median 3.1%  p90 12.9%  (n=96)
+    rs near crossover (|A/best_off - 1| < 15%, 38 pts): MAPE 5.8%
+
+[self-consistency: GEMM probe (50 / 20 rounds) vs the same GEMM inside the oracle map (200 rounds)]
+    ag c_cublas         gpu    median dev +0.2%  max |dev| 14.3%  n=48
+    ag c_cublas         steady median dev +2.3%  max |dev| 17.5%  n=48
+    ag c_fluxgemm       gpu    median dev +0.1%  max |dev| 19.9%  n=48
+    ag c_fluxgemm       steady median dev +2.1%  max |dev| 20.9%  n=48
+    rs c_cublas         gpu    median dev +0.0%  max |dev| 6.2%  n=48
+    rs c_cublas         steady median dev +3.6%  max |dev| 187.7%  n=48
+    rs c_fluxgemm_only  gpu    median dev -0.1%  max |dev| 4.3%  n=48
+    rs c_fluxgemm_only  steady median dev +2.7%  max |dev| 70.5%  n=48
+
+[measurement cost, wall clock incl. process start-up]
+    GEMM probes 82.0s   path probes 367.0s   full oracle map (what a table needs) 1062.0s
+    g4 cost / table cost = 7.7%   g4+probe = 42.3%
+    path probes: 73 of 192 table points (38%); 3% variant 30 (16%)
+  picks tp8 Q32-GU    gpu    M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     B     B     B     B     A
+                             pred_g3      B     B     B     B     B     B     B     A
+                             g4           B     B     B     B     B     B     B     A
+                             g4+probe     B     B     B     B     A     B     B     A
+                             g4+probe3     B     B     B     B     A     B     B     A
+  picks tp8 Q32-GU    steady M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     B     A     B     B     A
+                             pred_g3      B     B     B     B     B     B     A     A
+                             g4           B     B     B     B     B     B     B     A
+                             g4+probe     B     B     B     B     A     B     B     A
+                             g4+probe3     B     B     B     B     A     B     B     A
+  picks tp8 Q32-QKV   gpu    M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     B     B     B     B     A
+                             pred_g3      B     B     B     B     B     B     B     A
+                             g4           B     B     B     B     B     B     B     A
+                             g4+probe     B     B     B     B     B     B     B     A
+                             g4+probe3     B     B     B     B     B     B     B     A
+  picks tp8 Q32-QKV   steady M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     B     B     B     B     A
+                             pred_g3      B     B     B     B     B     B     B     A
+                             g4           B     B     B     B     B     B     B     A
+                             g4+probe     B     B     B     B     B     B     B     A
+                             g4+probe3     B     B     B     B     B     B     B     A
+  picks tp4 L8-GU     gpu    M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     B     B     A     A     A
+                             pred_g3      B     B     B     B     B     B     B     A
+                             g4           B     B     B     B     A     A     A     A
+                             g4+probe     B     B     B     B     B     A     A     A
+                             g4+probe3     B     B     B     B     B     A     A     A
+  picks tp4 L8-GU     steady M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     B     A     A     A     A
+                             pred_g3      B     B     B     B     B     B     A     A
+                             g4           B     B     B     B     A     A     A     A
+                             g4+probe     B     B     B     B     A     A     A     A
+                             g4+probe3     B     B     B     B     A     A     A     A
+  picks tp4 L8-QKV    gpu    M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     B     B     B     A     A
+                             pred_g3      B     B     B     B     B     B     A     A
+                             g4           B     B     B     B     B     B     A     A
+                             g4+probe     B     B     B     B     B     B     A     A
+                             g4+probe3     B     B     B     B     B     B     A     A
+  picks tp4 L8-QKV    steady M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     B     B     B     A     A
+                             pred_g3      B     B     B     B     B     B     A     A
+                             g4           B     B     B     B     B     B     A     A
+                             g4+probe     B     B     B     B     B     B     A     A
+                             g4+probe3     B     B     B     B     B     B     A     A
+  picks tp4 Q32-GU    gpu    M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     A     B     B     B     C
+                             pred_g3      B     B     A     A     B     B     B     A
+                             g4           B     B     B     A     B     B     B     C
+                             g4+probe     B     B     B     A     B     B     B     C
+                             g4+probe3     B     B     B     A     B     B     B     C
+  picks tp4 Q32-GU    steady M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     A     B     C     C     C
+                             pred_g3      B     B     B     B     B     A     A     A
+                             g4           B     B     B     A     B     B     C     C
+                             g4+probe     B     B     B     A     B     B     C     B
+                             g4+probe3     B     B     B     A     B     B     C     B
+  picks tp4 Q32-QKV   gpu    M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     B     B     B     A     A
+                             pred_g3      B     B     B     B     B     B     A     A
+                             g4           B     B     B     B     B     B     A     A
+                             g4+probe     B     B     B     B     B     B     A     A
+                             g4+probe3     B     B     B     B     B     B     A     A
+  picks tp4 Q32-QKV   steady M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     B     B     A     A     A
+                             pred_g3      B     B     B     B     B     B     A     A
+                             g4           B     B     B     B     B     B     A     A
+                             g4+probe     B     B     B     B     B     A     A     A
+                             g4+probe3     B     B     B     B     B     A     A     A
+  picks tp8 Q32-O     gpu    M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     A     A     A     A     A     A
+                             pred_g3      B     A     A     A     A     A     A     A
+                             g4           B     B     A     A     A     A     A     A
+                             g4+probe     B     B     B     A     A     A     A     A
+                             g4+probe3     B     B     A     A     A     A     A     A
+  picks tp8 Q32-O     steady M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      A     A     A     A     A     A     A     A
+                             pred_g3      B     B     B     A     A     A     A     A
+                             g4           B     A     A     A     A     A     A     A
+                             g4+probe     A     A     A     A     A     A     A     A
+                             g4+probe3     B     A     A     A     A     A     A     A
+  picks tp8 Q32-down  gpu    M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     A     A     A     A     A
+                             pred_g3      B     B     B     A     A     A     A     A
+                             g4           B     B     B     B     A     A     A     A
+                             g4+probe     B     B     B     A     A     A     A     A
+                             g4+probe3     B     B     B     A     A     A     A     A
+  picks tp8 Q32-down  steady M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     B     A     A     A     A     A
+                             pred_g3      B     B     A     A     A     A     A     A
+                             g4           B     B     B     B     A     A     A     A
+                             g4+probe     B     B     B     B     A     A     A     A
+                             g4+probe3     B     B     B     B     A     A     A     A
+  picks tp4 L8-O      gpu    M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     A     A     A     A     A     A     A
+                             pred_g3      B     B     A     A     A     A     A     A
+                             g4           B     B     B     A     A     A     A     A
+                             g4+probe     B     B     A     A     A     A     A     A
+                             g4+probe3     B     B     A     A     A     A     A     A
+  picks tp4 L8-O      steady M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      A     A     A     A     A     A     A     A
+                             pred_g3      B     B     B     A     A     A     A     A
+                             g4           B     A     B     A     A     A     A     A
+                             g4+probe     B     B     A     A     A     A     A     A
+                             g4+probe3     B     A     B     A     A     A     A     A
+  picks tp4 L8-down   gpu    M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     A     A     A     A     A     A     A
+                             pred_g3      B     B     A     A     A     A     A     A
+                             g4           B     B     A     A     A     A     A     A
+                             g4+probe     B     B     B     A     A     A     A     A
+                             g4+probe3     B     B     B     A     A     A     A     A
+  picks tp4 L8-down   steady M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     A     A     A     A     A     A
+                             pred_g3      B     A     A     A     A     A     A     A
+                             g4           B     B     A     B     A     A     A     A
+                             g4+probe     B     B     A     A     A     A     A     A
+                             g4+probe3     B     B     A     A     A     A     A     A
+  picks tp4 Q32-O     gpu    M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     A     A     A     A     A     A     A
+                             pred_g3      B     B     A     A     A     A     A     A
+                             g4           B     B     A     A     A     A     A     A
+                             g4+probe     B     B     A     A     A     A     A     A
+                             g4+probe3     B     B     A     A     A     A     A     A
+  picks tp4 Q32-O     steady M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      A     A     A     A     A     A     A     A
+                             pred_g3      B     B     A     A     A     A     A     A
+                             g4           B     B     A     A     A     A     A     A
+                             g4+probe     B     B     A     A     A     A     A     A
+                             g4+probe3     B     B     A     A     A     A     A     A
+  picks tp4 Q32-down  gpu    M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     A     A     B     A     A     A     A
+                             pred_g3      B     B     A     A     A     A     A     A
+                             g4           B     B     B     B     A     A     A     A
+                             g4+probe     B     B     A     B     A     A     A     A
+                             g4+probe3     B     B     B     B     A     A     A     A
+  picks tp4 Q32-down  steady M:          24    96   200   384   768  1536  2560  6144
+                             oracle:      B     B     A     B     A     A     A     A
+                             pred_g3      B     A     A     A     A     A     A     A
+                             g4           B     B     B     B     A     A     A     A
+                             g4+probe     B     B     A     B     A     A     A     A
+                             g4+probe3     B     B     B     B     A     A     A     A
+
+wrote ws/fusion-dispatch/results/g4_map/eval_g4_log.txt, eval_g4_summary.csv

@@ -1,0 +1,665 @@
+{
+ "runs": [
+  {
+   "script": "ws/fusion-dispatch/scripts/dispatch_map_rs_v1.py",
+   "args": {
+    "layer": "Q32-O",
+    "Ms": "24,96,200,384,768,1536,2560,6144",
+    "max_m": 0,
+    "modes": "gpu,steady",
+    "items": "",
+    "rounds": 200,
+    "warmup": 30,
+    "steady_L": 16,
+    "pad_cycles": 400000,
+    "flush_mb": 128,
+    "clock_period": 0.02,
+    "seed": 20260930,
+    "atol": 0.1,
+    "rtol": 0.05,
+    "out_dir": "ws/fusion-dispatch/results/g4_map/tp8"
+   },
+   "date": "2026-10-03 04:11:37",
+   "layer": {
+    "name": "Q32-O",
+    "N": 5120,
+    "K_full": 5120,
+    "k_per_rank": 640
+   },
+   "world": 8,
+   "max_m": 6144,
+   "cublas_settings": {
+    "CUBLAS_WORKSPACE_CONFIG": null,
+    "deterministic": false,
+    "allow_bf16_reduced_precision_reduction": true
+   },
+   "nccl": "2.21.5",
+   "cases": {
+    "24": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.01167440414428711,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.02211475372314453,
+       "error": ""
+      },
+      "E_allreduce": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.02738165855407715,
+       "error": ""
+      },
+      "c_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0039000511169433594,
+       "error": ""
+      },
+      "c_nccl_rs": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_nccl_ar": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0039000511169433594,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "E_allreduce",
+      "c_cublas",
+      "c_nccl_rs",
+      "c_nccl_ar",
+      "c_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 200,
+       "kept": 150,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      },
+      "steady": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      }
+     }
+    },
+    "96": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.012701988220214844,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.03011012077331543,
+       "error": ""
+      },
+      "E_allreduce": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.029478073120117188,
+       "error": ""
+      },
+      "c_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0039048194885253906,
+       "error": ""
+      },
+      "c_nccl_rs": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_nccl_ar": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0039048194885253906,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "E_allreduce",
+      "c_cublas",
+      "c_nccl_rs",
+      "c_nccl_ar",
+      "c_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      },
+      "steady": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      }
+     }
+    },
+    "200": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.012683868408203125,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.030935287475585938,
+       "error": ""
+      },
+      "E_allreduce": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.027151107788085938,
+       "error": ""
+      },
+      "c_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0039054155349731445,
+       "error": ""
+      },
+      "c_nccl_rs": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_nccl_ar": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0039054155349731445,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "E_allreduce",
+      "c_cublas",
+      "c_nccl_rs",
+      "c_nccl_ar",
+      "c_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      },
+      "steady": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      }
+     }
+    },
+    "384": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.01263427734375,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.029967308044433594,
+       "error": ""
+      },
+      "E_allreduce": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.03306245803833008,
+       "error": ""
+      },
+      "c_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.003905177116394043,
+       "error": ""
+      },
+      "c_nccl_rs": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_nccl_ar": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.003905177116394043,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "E_allreduce",
+      "c_cublas",
+      "c_nccl_rs",
+      "c_nccl_ar",
+      "c_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      },
+      "steady": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      }
+     }
+    },
+    "768": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.01278543472290039,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0338747501373291,
+       "error": ""
+      },
+      "E_allreduce": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.036641597747802734,
+       "error": ""
+      },
+      "c_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0039055347442626953,
+       "error": ""
+      },
+      "c_nccl_rs": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_nccl_ar": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0039055347442626953,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "E_allreduce",
+      "c_cublas",
+      "c_nccl_rs",
+      "c_nccl_ar",
+      "c_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      },
+      "steady": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      }
+     }
+    },
+    "1536": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0147857666015625,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.032418012619018555,
+       "error": ""
+      },
+      "E_allreduce": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.03397321701049805,
+       "error": ""
+      },
+      "c_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.003906607627868652,
+       "error": ""
+      },
+      "c_nccl_rs": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_nccl_ar": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.003906607627868652,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "E_allreduce",
+      "c_cublas",
+      "c_nccl_rs",
+      "c_nccl_ar",
+      "c_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      },
+      "steady": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      }
+     }
+    },
+    "2560": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.013790130615234375,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.036383628845214844,
+       "error": ""
+      },
+      "E_allreduce": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.037026405334472656,
+       "error": ""
+      },
+      "c_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0039052963256835938,
+       "error": ""
+      },
+      "c_nccl_rs": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_nccl_ar": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0039052963256835938,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "E_allreduce",
+      "c_cublas",
+      "c_nccl_rs",
+      "c_nccl_ar",
+      "c_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      },
+      "steady": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      }
+     }
+    },
+    "6144": {
+     "check": {
+      "A_fused": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.01519775390625,
+       "error": ""
+      },
+      "B_nccl_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.039581298828125,
+       "error": ""
+      },
+      "E_allreduce": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.03848004341125488,
+       "error": ""
+      },
+      "c_cublas": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.003905653953552246,
+       "error": ""
+      },
+      "c_nccl_rs": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_nccl_ar": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.0,
+       "error": ""
+      },
+      "c_fluxgemm": {
+       "ok_all_ranks": true,
+       "max_abs_err": 0.003905653953552246,
+       "error": ""
+      }
+     },
+     "timed_items": [
+      "A_fused",
+      "B_nccl_cublas",
+      "E_allreduce",
+      "c_cublas",
+      "c_nccl_rs",
+      "c_nccl_ar",
+      "c_fluxgemm"
+     ],
+     "modes": {
+      "gpu": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      },
+      "steady": {
+       "rounds": 200,
+       "kept": 200,
+       "modal_sm_clock_per_rank": [
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410,
+        1410
+       ]
+      }
+     }
+    }
+   }
+  }
+ ]
+}
