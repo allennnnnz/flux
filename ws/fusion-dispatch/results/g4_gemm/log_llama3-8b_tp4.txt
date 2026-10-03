@@ -1,0 +1,71 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --node_rank=0 --nproc_per_node=4 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/probe_gemm_v1.py --model llama3-8b --Ms 24,96,200,384,768,1536,2560,6144 --out_dir ws/fusion-dispatch/results/g4_gemm
+W1003 03:59:57.755000 617485 site-packages/torch/distributed/run.py:792] 
+W1003 03:59:57.755000 617485 site-packages/torch/distributed/run.py:792] *****************************************
+W1003 03:59:57.755000 617485 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1003 03:59:57.755000 617485 site-packages/torch/distributed/run.py:792] *****************************************
+[llama3-8b_tp4 qkv M=24 gpu] kept 50/50  c_cublas=0.02662  c_fluxgemm=0.06656
+[llama3-8b_tp4 qkv M=24 steady] kept 20/20  c_cublas=0.01875  c_fluxgemm=0.06045
+[llama3-8b_tp4 qkv M=96 gpu] kept 50/50  c_cublas=0.02765  c_fluxgemm=0.05837
+[llama3-8b_tp4 qkv M=96 steady] kept 20/20  c_cublas=0.02080  c_fluxgemm=0.05018
+[llama3-8b_tp4 qkv M=200 gpu] kept 50/50  c_cublas=0.03379  c_fluxgemm=0.05325
+[llama3-8b_tp4 qkv M=200 steady] kept 20/20  c_cublas=0.02557  c_fluxgemm=0.04608
+[llama3-8b_tp4 qkv M=384 gpu] kept 50/50  c_cublas=0.03891  c_fluxgemm=0.05325
+[llama3-8b_tp4 qkv M=384 steady] kept 20/20  c_cublas=0.03258  c_fluxgemm=0.04586
+[llama3-8b_tp4 qkv M=768 gpu] kept 50/50  c_cublas=0.06042  c_fluxgemm=0.06656
+[llama3-8b_tp4 qkv M=768 steady] kept 20/20  c_cublas=0.05766  c_fluxgemm=0.06035
+[llama3-8b_tp4 qkv M=1536 gpu] kept 50/50  c_cublas=0.09626  c_fluxgemm=0.10547
+[llama3-8b_tp4 qkv M=1536 steady] kept 20/20  c_cublas=0.09459  c_fluxgemm=0.10275
+[llama3-8b_tp4 qkv M=2560 gpu] kept 50/50  c_cublas=0.21094  c_fluxgemm=0.15462
+[llama3-8b_tp4 qkv M=2560 steady] kept 20/20  c_cublas=0.20934  c_fluxgemm=0.15053
+[llama3-8b_tp4 qkv M=6144 gpu] kept 50/50  c_cublas=0.31334  c_fluxgemm=0.32922
+[llama3-8b_tp4 qkv M=6144 steady] kept 20/20  c_cublas=0.33693  c_fluxgemm=0.35072
+[llama3-8b_tp4 gate_up M=24 gpu] kept 50/50  c_cublas=0.06758  c_fluxgemm=0.07782
+[llama3-8b_tp4 gate_up M=24 steady] kept 20/20  c_cublas=0.05258  c_fluxgemm=0.06880
+[llama3-8b_tp4 gate_up M=96 gpu] kept 50/50  c_cublas=0.09114  c_fluxgemm=0.07885
+[llama3-8b_tp4 gate_up M=96 steady] kept 20/20  c_cublas=0.07718  c_fluxgemm=0.06938
+[llama3-8b_tp4 gate_up M=200 gpu] kept 50/50  c_cublas=0.09933  c_fluxgemm=0.09626
+[llama3-8b_tp4 gate_up M=200 steady] kept 20/20  c_cublas=0.09312  c_fluxgemm=0.08768
+[llama3-8b_tp4 gate_up M=384 gpu] kept 50/50  c_cublas=0.11059  c_fluxgemm=0.14541
+[llama3-8b_tp4 gate_up M=384 steady] kept 20/20  c_cublas=0.11206  c_fluxgemm=0.13859
+[llama3-8b_tp4 gate_up M=768 gpu] kept 50/50  c_cublas=0.21402  c_fluxgemm=0.20582
+[llama3-8b_tp4 gate_up M=768 steady] kept 20/20  c_cublas=0.22442  c_fluxgemm=0.21469
+[llama3-8b_tp4 gate_up M=1536 gpu] kept 50/50  c_cublas=0.41574  c_fluxgemm=0.37990
+[llama3-8b_tp4 gate_up M=1536 steady] kept 20/20  c_cublas=0.44157  c_fluxgemm=0.40090
+[llama3-8b_tp4 gate_up M=2560 gpu] kept 50/50  c_cublas=0.62157  c_fluxgemm=0.61952
+[llama3-8b_tp4 gate_up M=2560 steady] kept 20/20  c_cublas=0.67894  c_fluxgemm=0.66749
+[llama3-8b_tp4 gate_up M=6144 gpu] kept 50/50  c_cublas=1.39366  c_fluxgemm=1.49299
+[llama3-8b_tp4 gate_up M=6144 steady] kept 20/20  c_cublas=1.49478  c_fluxgemm=1.59597
+[llama3-8b_tp4 o M=24 gpu] kept 50/50  c_cublas=0.01690  c_fluxgemm_only=0.02560
+[llama3-8b_tp4 o M=24 steady] kept 20/20  c_cublas=0.01258  c_fluxgemm_only=0.02115
+[llama3-8b_tp4 o M=96 gpu] kept 50/50  c_cublas=0.01946  c_fluxgemm_only=0.02560
+[llama3-8b_tp4 o M=96 steady] kept 20/20  c_cublas=0.01853  c_fluxgemm_only=0.02147
+[llama3-8b_tp4 o M=200 gpu] kept 50/50  c_cublas=0.02355  c_fluxgemm_only=0.03174
+[llama3-8b_tp4 o M=200 steady] kept 20/20  c_cublas=0.02038  c_fluxgemm_only=0.02842
+[llama3-8b_tp4 o M=384 gpu] kept 50/50  c_cublas=0.02458  c_fluxgemm_only=0.02970
+[llama3-8b_tp4 o M=384 steady] kept 20/20  c_cublas=0.02160  c_fluxgemm_only=0.02944
+[llama3-8b_tp4 o M=768 gpu] kept 50/50  c_cublas=0.03789  c_fluxgemm_only=0.04301
+[llama3-8b_tp4 o M=768 steady] kept 20/20  c_cublas=0.03341  c_fluxgemm_only=0.04387
+[llama3-8b_tp4 o M=1536 gpu] kept 50/50  c_cublas=0.06758  c_fluxgemm_only=0.07475
+[llama3-8b_tp4 o M=1536 steady] kept 20/20  c_cublas=0.06390  c_fluxgemm_only=0.07530
+[llama3-8b_tp4 o M=2560 gpu] kept 50/50  c_cublas=0.09830  c_fluxgemm_only=0.10445
+[llama3-8b_tp4 o M=2560 steady] kept 20/20  c_cublas=0.09952  c_fluxgemm_only=0.11005
+[llama3-8b_tp4 o M=6144 gpu] kept 50/50  c_cublas=0.21914  c_fluxgemm_only=0.24371
+[llama3-8b_tp4 o M=6144 steady] kept 20/20  c_cublas=0.23555  c_fluxgemm_only=0.26528
+[llama3-8b_tp4 down M=24 gpu] kept 50/50  c_cublas=0.03686  c_fluxgemm_only=0.04608
+[llama3-8b_tp4 down M=24 steady] kept 20/20  c_cublas=0.02528  c_fluxgemm_only=0.03821
+[llama3-8b_tp4 down M=96 gpu] kept 50/50  c_cublas=0.04403  c_fluxgemm_only=0.04813
+[llama3-8b_tp4 down M=96 steady] kept 20/20  c_cublas=0.03494  c_fluxgemm_only=0.04064
+[llama3-8b_tp4 down M=200 gpu] kept 50/50  c_cublas=0.05837  c_fluxgemm_only=0.06554
+[llama3-8b_tp4 down M=200 steady] kept 20/20  c_cublas=0.05146  c_fluxgemm_only=0.05658
+[llama3-8b_tp4 down M=384 gpu] kept 50/50  c_cublas=0.05939  c_fluxgemm_only=0.07168
+[llama3-8b_tp4 down M=384 steady] kept 20/20  c_cublas=0.05168  c_fluxgemm_only=0.07837
+[llama3-8b_tp4 down M=768 gpu] kept 50/50  c_cublas=0.09728  c_fluxgemm_only=0.11571
+[llama3-8b_tp4 down M=768 steady] kept 20/20  c_cublas=0.09901  c_fluxgemm_only=0.12054
+[llama3-8b_tp4 down M=1536 gpu] kept 50/50  c_cublas=0.18944  c_fluxgemm_only=0.20992
+[llama3-8b_tp4 down M=1536 steady] kept 20/20  c_cublas=0.19610  c_fluxgemm_only=0.23187
+[llama3-8b_tp4 down M=2560 gpu] kept 50/50  c_cublas=0.28262  c_fluxgemm_only=0.31334
+[llama3-8b_tp4 down M=2560 steady] kept 20/20  c_cublas=0.30474  c_fluxgemm_only=0.34832
+[llama3-8b_tp4 down M=6144 gpu] kept 50/50  c_cublas=0.72806  c_fluxgemm_only=0.75264
+[llama3-8b_tp4 down M=6144 steady] kept 20/20  c_cublas=0.80934  c_fluxgemm_only=0.81898
+wrote gemm_llama3-8b_tp4.csv (11 s after init)
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=ws/fusion-dispatch/results/g4_gemm/guard_llama3-8b_tp4.log

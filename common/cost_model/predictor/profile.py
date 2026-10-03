@@ -90,13 +90,29 @@ def fit_fused_rs(samples, W):
     return fam, {"alpha_rs": a, "beta_scat": b, "fit_msle": v}
 
 
+def fit_rs_scatter(samples, W):
+    """GemmRS with the GEMM time GIVEN per sample: samples [(M, N, t_gemm, t_A)] -> alpha_rs, beta_scat
+    (2 parameters; G4 / D-009: fewer parameters generalise better than the joint fit, G2 report)."""
+    def loss(x):
+        a, b = math.exp(x[0]), math.exp(x[1])
+        return msle([fused_rs_time(M, N, W, g, a, b) for M, N, g, _ in samples], [s[3] for s in samples])
+    x, v = nelder_mead(loss, [math.log(0.03), math.log(3e8)], step=0.5, iters=3000)
+    return {"alpha_rs": math.exp(x[0]), "beta_scat": math.exp(x[1]), "fit_msle": v, "n": len(samples)}
+
+
 def fit_profile(W, nccl_points, flux_ag_points, flux_alpha_sync, cublas_samples, flux_ag_samples,
-                fused_ag_samples, fused_rs_samples, meta=None):
+                fused_ag_samples, fused_rs_samples, meta=None, fused_rs_meas_samples=None):
+    """fused_rs_meas_samples (optional, G4): [(M, N, k, cfg, t_gemm_only_measured, t_A)] adds
+    fused_rs["meas"] (GEMM = measured flux.GemmOnly) and fused_rs["shared"] (GEMM = flux_ag family)."""
     comm = CommModel.fit(nccl_points, flux_ag_points, flux_alpha_sync, W)
     cub, _ = GemmFamily.fit(cublas_samples, "cublas")
     fag, _ = GemmFamily.fit(flux_ag_samples, "flux_ag", tile_from_sample=True)
     fused_ag = fit_fused_ag(fused_ag_samples, W)
     frs, fused_rs = fit_fused_rs(fused_rs_samples, W)
+    if fused_rs_meas_samples:
+        fused_rs["meas"] = fit_rs_scatter([(M, N, g, a) for M, N, k, cfg, g, a in fused_rs_meas_samples], W)
+        fused_rs["shared"] = fit_rs_scatter([(M, N, fag.time(M, N, k, cfg["tile"]), a)
+                                             for M, N, k, cfg, g, a in fused_rs_meas_samples], W)
     meta = dict(meta or {})
     meta.setdefault("date", time.strftime("%Y-%m-%d"))
     return HardwareProfile(W, comm, {"cublas": cub, "flux_ag": fag, "flux_rs": frs}, fused_ag,

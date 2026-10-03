@@ -1,0 +1,17 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/calibrate_hw_v1.py --tag rs_6144x2560 --modes gpu,steady --out_dir ws/fusion-dispatch/results/g4_calibration_tp8 --groups rs --rs_shapes 6144x2560 --rs_gemm_only
+W1003 03:51:50.752000 582886 site-packages/torch/distributed/run.py:792] 
+W1003 03:51:50.752000 582886 site-packages/torch/distributed/run.py:792] *****************************************
+W1003 03:51:50.752000 582886 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1003 03:51:50.752000 582886 site-packages/torch/distributed/run.py:792] *****************************************
+[rs (6144, 2560) M=16 gpu] kept 200/200  c_cublas=0.0379  A_gemmrs=0.0850  c_fluxgemm_only=0.0512
+[rs (6144, 2560) M=16 steady] kept 50/50  c_cublas=0.0255  A_gemmrs=0.0659  c_fluxgemm_only=0.0381
+[rs (6144, 2560) M=128 gpu] kept 200/200  c_cublas=0.0420  A_gemmrs=0.1060  c_fluxgemm_only=0.0512
+[rs (6144, 2560) M=128 steady] kept 50/50  c_cublas=0.0307  A_gemmrs=0.0791  c_fluxgemm_only=0.0413
+[rs (6144, 2560) M=512 gpu] kept 200/200  c_cublas=0.0748  A_gemmrs=0.1454  c_fluxgemm_only=0.0891
+[rs (6144, 2560) M=512 steady] kept 50/50  c_cublas=0.0735  A_gemmrs=0.1274  c_fluxgemm_only=0.0879
+[rs (6144, 2560) M=2048 gpu] kept 200/200  c_cublas=0.2724  A_gemmrs=0.3482  c_fluxgemm_only=0.2949
+[rs (6144, 2560) M=2048 steady] kept 50/50  c_cublas=0.2953  A_gemmrs=0.3500  c_fluxgemm_only=0.3119
+[rs (6144, 2560) M=8192 gpu] kept 200/200  c_cublas=1.0394  A_gemmrs=1.1556  c_fluxgemm_only=1.0772
+[rs (6144, 2560) M=8192 steady] kept 50/50  c_cublas=1.1336  A_gemmrs=1.2234  c_fluxgemm_only=1.1720
+wrote ws/fusion-dispatch/results/g4_calibration_tp8/raw_rs_6144x2560.csv  (11 s of timing)
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=ws/fusion-dispatch/results/g4_calibration_tp8/guard_rs_6144x2560.log

@@ -72,7 +72,7 @@ def fit_mode(med, mode, cfgs, meta_extra):
             flux_pts.append((b, fa))
         if c1:
             copy1.append((b / W, c1))
-    cub, fag, fused_ag, fused_rs = [], [], [], []
+    cub, fag, fused_ag, fused_rs, fused_rs_meas = [], [], [], [], []
     for n, K in ag_shapes:
         for M in sorted({k[3] for k in keys if k[0] == "ag" and (k[1], k[2]) == (n, K)}):
             cfg = cfgs.get("ag", M, n, K)
@@ -89,10 +89,13 @@ def fit_mode(med, mode, cfgs, meta_extra):
         for M in sorted({kk[3] for kk in keys if kk[0] == "rs" and (kk[1], kk[2]) == (N, k)}):
             cfg = cfgs.get("rs", M, N, k)
             c, a = get("rs", N, k, M, "c_cublas"), get("rs", N, k, M, "A_gemmrs")
+            go = get("rs", N, k, M, "c_fluxgemm_only")  # G4 calibrations only (--rs_gemm_only)
             if c:
                 cub.append((M, N, k, None, c))
             if a:
                 fused_rs.append((M, N, k, cfg, a))
+            if a and go:
+                fused_rs_meas.append((M, N, k, cfg, go, a))
     alpha = alpha_sync_gpu(med)
     meta = {"host": "css-host-158", "tp": W, "mode": mode,
             "method": "G2: fitted ONLY from calibration microbenchmarks (calibrate_hw_v1.py); no decision-table point",
@@ -100,9 +103,11 @@ def fit_mode(med, mode, cfgs, meta_extra):
             "alpha_sync_method": "gpu mode: median_{M<=64}(c_flux_ag - W/(W-1) * ce_copy7) (steady copies pipeline)",
             "single_copy_curve": Curve.fit(copy1).to_dict() if copy1 else None,
             "n_samples": {"nccl": {p: len(v) for p, v in nccl.items()}, "flux_ag": len(flux_pts), "cublas": len(cub),
-                          "flux_ag_gemm": len(fag), "fused_ag": len(fused_ag), "fused_rs": len(fused_rs)}}
+                          "flux_ag_gemm": len(fag), "fused_ag": len(fused_ag), "fused_rs": len(fused_rs),
+                          "fused_rs_meas": len(fused_rs_meas)}}
     meta.update(meta_extra)
-    prof = fit_profile(W, nccl, flux_pts, alpha, cub, fag, fused_ag, fused_rs, meta=meta)
+    prof = fit_profile(W, nccl, flux_pts, alpha, cub, fag, fused_ag, fused_rs, meta=meta,
+                       fused_rs_meas_samples=fused_rs_meas or None)
     # in-sample residuals on the calibration set: used for the probe threshold eps (G2 eval)
     res = []
     for M, n, K, _, t in cub:
@@ -120,6 +125,18 @@ def fit_mode(med, mode, cfgs, meta_extra):
         for b, t in pts:
             res.append((f"nccl_{prim}", abs(prof.comm.nccl(prim, b) / t - 1)))
     prof.meta["calibration_residual_p90"] = sorted(r for _, r in res)[int(0.9 * len(res))]
+    # G4: the same with MEASURED GEMMs (only communication and overlap modelled) -> probe threshold
+    res_m = []
+    for M, n, K, cfg, fa, g, a in fused_ag:
+        c = next((t for M2, n2, K2, _, t in cub if (M2, n2, K2) == (M, n, K)), None)
+        arms, _, _ = predict_ag(prof, cfgs, M, n, K, meas={"cublas": c, "fluxgemm": g})
+        res_m.append(abs(arms["A"] / a - 1))
+    for M, N, k, cfg, go, a in fused_rs_meas:
+        arms, _, _ = predict_rs(prof, cfgs, M, N, k, meas={"fluxgemm_only": go})
+        res_m.append(abs(arms["A"] / a - 1))
+    if res_m:
+        prof.meta["calibration_residual_meas_p90"] = sorted(res_m)[int(0.9 * len(res_m))]
+        prof.meta["calibration_residual_meas_mean"] = statistics.mean(res_m)
     prof.meta["calibration_residual_by_kind"] = {
         kind: round(statistics.mean(r for k_, r in res if k_ == kind), 4) for kind in sorted({k_ for k_, _ in res})}
     return prof
@@ -129,6 +146,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("cal_dir")
     ap.add_argument("--profiles_dir", default=os.path.join(REPO, "common", "cost_model", "hw_profiles"))
+    ap.add_argument("--suffix", default="", help="profile file suffix, e.g. _g4 (keeps earlier profiles unchanged)")
     a = ap.parse_args()
     global W
     W = json.load(open(os.path.join(a.cal_dir, "meta_comm.json")))["world"]
@@ -147,7 +165,7 @@ def main():
     rel = os.path.relpath(a.cal_dir, REPO)
     for mode in ("gpu", "steady"):
         prof = fit_mode(med, mode, cfgs, {"source": f"{rel}/raw_*.csv", "guard": guards})
-        out = os.path.join(a.profiles_dir, f"css-host-158_tp{W}_{mode}.json")
+        out = os.path.join(a.profiles_dir, f"css-host-158_tp{W}_{mode}{a.suffix}.json")
         prof.save(out)
         g = prof.gemm
         print(f"[{mode}] wrote {os.path.relpath(out, REPO)}  alpha_sync={prof.meta['alpha_sync_ms']:.4f} ms  "
@@ -157,7 +175,9 @@ def main():
         print("    gemm " + "; ".join(f"{k}: t0={v.t0 * 1e3:.1f}us bw={v.bw / 1e12:.2f}TB/s eta={v.eta:.3f} p={v.p:.2f} "
                                     f"tile={v.tm}x{v.tn}" for k, v in g.items()))
         print(f"    calibration residual (in-sample, mean |rel err| by kind): {prof.meta['calibration_residual_by_kind']}"
-              f"  p90={prof.meta['calibration_residual_p90'] * 100:.1f}%")
+              f"  p90={prof.meta['calibration_residual_p90'] * 100:.1f}%"
+              + (f"  | with measured GEMMs: fused p90 {prof.meta['calibration_residual_meas_p90'] * 100:.1f}%"
+                 if "calibration_residual_meas_p90" in prof.meta else ""))
     print(f"guards: {guards}")
 
 

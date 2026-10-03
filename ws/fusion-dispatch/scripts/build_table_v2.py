@@ -22,7 +22,7 @@ from predictor import FLUX_GEMM_ARMS, FluxConfigs, HardwareProfile, predict_ag, 
 
 # hidden, q heads, kv heads, head_dim, ffn
 MODELS = {"llama3-70b": (8192, 64, 8, 128, 28672), "qwen2.5-72b": (8192, 64, 8, 128, 29568),
-          "llama3-8b": (4096, 32, 8, 128, 14336)}
+          "llama3-8b": (4096, 32, 8, 128, 14336), "qwen2.5-32b": (5120, 40, 8, 128, 27648)}
 PATH = {"A": "flux", "B": "nccl", "C": "fluxag", "D": "fluxag_fluxgemm"}
 DEFAULT_MS = [8, 16, 24, 32, 64, 72, 128, 136, 256, 264, 384, 512, 520, 1024, 1032, 2048, 3072, 4096, 6144, 8192, 16384]
 

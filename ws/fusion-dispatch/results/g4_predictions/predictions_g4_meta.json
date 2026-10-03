@@ -1,0 +1,55 @@
+{
+ "script": "ws/fusion-dispatch/scripts/predict_g4_v1.py predict",
+ "date": "2026-10-03 04:00:36",
+ "git_head_before_commit": "d54f01cf3054f2f098b20490fe641e7de95e97d5",
+ "profiles_sha256": {
+  "common/cost_model/hw_profiles/css-host-158_tp8_gpu.json": "11b5619f0ee3481fbcc93179814072fba86b1e39c7f2f6e96d324e970077af84",
+  "common/cost_model/hw_profiles/css-host-158_tp8_gpu_g4.json": "74736a984efa0160d1d96bf305aac30f5c3373feb73f7a0e4b704918ba428eb2",
+  "common/cost_model/hw_profiles/css-host-158_tp8_steady.json": "e209d911a5903072337ba16732b1a404f784926187cb74199bcb27a0e4fccbe7",
+  "common/cost_model/hw_profiles/css-host-158_tp8_steady_g4.json": "3ed850a7f90087fbd99c7a60f6a1eb2ed02da5a64189ad4b237f27dddf7bea34",
+  "common/cost_model/hw_profiles/css-host-158_tp4_gpu.json": "5b2c77b36197af93db8c0c342d0d96830bad34e5b5de50d9e7af88eafb983507",
+  "common/cost_model/hw_profiles/css-host-158_tp4_gpu_g4.json": "fca9c91d9107f023df0d4157d0f24c50125e8842e43083bae212d55c87299097",
+  "common/cost_model/hw_profiles/css-host-158_tp4_steady.json": "5c4d5bb5264ea5741533d860a615f13083a8463fa53ac3d1a0c5b8a8f7eed791",
+  "common/cost_model/hw_profiles/css-host-158_tp4_steady_g4.json": "ac8bba6e2401c81f7debc572080b19fcec6a08d80d153fcb482fa77b6e723fd5"
+ },
+ "gemm_probe_sha256": {
+  "ws/fusion-dispatch/results/g4_gemm/gemm_qwen2.5-32b_tp8.csv": "1245af3da50a45057dd72cb0928cb8e3a69320e2eaad9fd781260bfe543e9b7f",
+  "ws/fusion-dispatch/results/g4_gemm/gemm_qwen2.5-32b_tp4.csv": "f142d734f724d6d589e4ba10fb25def61ae75324598d8ece674ad609ed1235d4",
+  "ws/fusion-dispatch/results/g4_gemm/gemm_llama3-8b_tp4.csv": "1228cbc352c36ae6abf52d86081d57593cb1cc30bf8a488e298e09fae4004c85"
+ },
+ "configs": [
+  [
+   8,
+   "qwen2.5-32b"
+  ],
+  [
+   4,
+   "qwen2.5-32b"
+  ],
+  [
+   4,
+   "llama3-8b"
+  ]
+ ],
+ "Ms": [
+  24,
+  96,
+  200,
+  384,
+  768,
+  1536,
+  2560,
+  6144
+ ],
+ "modes": [
+  "gpu",
+  "steady"
+ ],
+ "n_points": 192,
+ "n_probes": 73,
+ "rule": "frozen before the oracle maps are measured; no parameter changes afterwards",
+ "variants": {
+  "g4+probe": "probe when margin < eps (declared rule) or PCIe risk",
+  "g4+probe3": "probe only when margin < 3% (subset of the same probes), registered before any probe or oracle run"
+ }
+}

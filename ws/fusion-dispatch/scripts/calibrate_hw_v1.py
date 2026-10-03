@@ -17,7 +17,8 @@
 #   ag     AG+GEMM shapes (n, K) = (2560, 5120), (5120, 10240), (1536, 16384); M = 16 ... 8192:
 #          c_cublas, c_fluxgemm (AGKernel.gemm_only), c_flux_ag, A_fused (AGKernel.forward)
 #   rs     GEMM+RS shapes (N, k) = (6144, 2560), (10240, 1280); M = 16 ... 8192:
-#          c_cublas (M x N x k), A_gemmrs (flux.GemmRS.forward)
+#          c_cublas (M x N x k), A_gemmrs (flux.GemmRS.forward),
+#          c_fluxgemm_only (flux.GemmOnly; only with --rs_gemm_only, G4 / D-009)
 # Protocol: dispatch_map_v2.run_mode (interleaved, L2 flush, gpu / steady, rank-max, clock filter).
 # ONE SHAPE GROUP PER PROCESS (--groups comm | ag --ag_shapes nxK | rs --rs_shapes Nxk): creating a
 # second set of Flux ops after deleting the first in the same process deadlocked intermittently in
@@ -131,15 +132,18 @@ class AGCase:
 
 
 class RSCase:
-    def __init__(self, op, weights, M, N, k):
+    def __init__(self, op, weights, M, N, k, gemm_only=None):
         self.M, self.layer = M, _W(weights)
         self.x = torch.randn((M, k), dtype=torch.float32, device="cuda").to(DT)
         self.part = torch.empty((M, N), dtype=DT, device="cuda")
+        self.part2 = torch.empty((M, N), dtype=DT, device="cuda")
         self.res = {}
 
         def a(w):
             self.res["A"] = op.forward(self.x, w)
         self.fns = {"c_cublas": lambda w: torch.mm(self.x, w.t(), out=self.part), "A_gemmrs": a}
+        if gemm_only is not None:  # G4 (--rs_gemm_only): flux.GemmOnly, the GEMM part GemmRS is modelled from
+            self.fns["c_fluxgemm_only"] = lambda w: gemm_only.forward(self.x, w, output_buf=self.part2)
 
     def check(self, w):
         full = torch.mm(self.x.float(), w.float().t())
@@ -242,11 +246,18 @@ def main():
         for N, k in rs_shapes:
             max_m = max(GEMM_MS)
             op = flux.GemmRS(TP, 1, max_m, N, DT, DT, transpose_weight=False)
+            go = flux.GemmOnly(DT, DT, DT, transpose_weight=False) if ARGS.rs_gemm_only else None
             weights = [(torch.randn((N, k), dtype=torch.float32, device="cuda") * 0.01).to(DT) for _ in range(L)]
             for M in gemm_ms:
-                case = RSCase(op, weights, M, N, k)
+                case = RSCase(op, weights, M, N, k, go)
                 chk = case.check(weights[0])
-                good = ["c_cublas"] + (["A_gemmrs"] if chk["A_gemmrs"] else [])
+                if go is not None:
+                    case.fns["c_fluxgemm_only"](weights[0])
+                    torch.cuda.synchronize()
+                    ref = torch.mm(case.x.float(), weights[0].float().t())
+                    chk["c_fluxgemm_only"] = _all_ok(torch.allclose(case.part2.float(), ref, atol=ARGS.atol, rtol=ARGS.rtol))
+                good = ["c_cublas"] + (["A_gemmrs"] if chk["A_gemmrs"] else []) + \
+                    (["c_fluxgemm_only"] if chk.get("c_fluxgemm_only") else [])
                 mc = {"group": "rs", "shape": [N, k], "M": M, "check": chk, "timed": good}
                 time_case(case, "rs", (N, k), M, good, modes, rng, wr, mc)
                 meta["cases"].append(mc)
@@ -282,6 +293,8 @@ def parse_args():
     p.add_argument("--rs_shapes", default="", help="one N x k, e.g. 6144x2560")
     p.add_argument("--gemm_ms", default="", help="debug: comma list (default: GEMM_MS)")
     p.add_argument("--hang_dump_s", type=int, default=0, help="debug: dump Python stacks and exit after N s")
+    p.add_argument("--rs_gemm_only", action="store_true",
+                   help="G4: also time flux.GemmOnly in the rs group (GemmRS is then modelled from it)")
     return p.parse_args()
 
 

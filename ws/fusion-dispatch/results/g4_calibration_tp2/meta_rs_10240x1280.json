@@ -1,0 +1,238 @@
+{
+ "script": "ws/fusion-dispatch/scripts/calibrate_hw_v1.py",
+ "args": {
+  "modes": "gpu,steady",
+  "groups": "rs",
+  "tag": "rs_10240x1280",
+  "rounds": 200,
+  "rounds_steady_comm": 100,
+  "rounds_steady_gemm": 50,
+  "warmup": 30,
+  "warmup_first": 100,
+  "steady_L": 16,
+  "pad_cycles": 400000,
+  "flush_mb": 128,
+  "clock_period": 0.02,
+  "seed": 20261002,
+  "atol": 0.05,
+  "rtol": 0.05,
+  "out_dir": "ws/fusion-dispatch/results/g4_calibration_tp2",
+  "ag_shapes": "",
+  "rs_shapes": "10240x1280",
+  "gemm_ms": "",
+  "hang_dump_s": 0,
+  "rs_gemm_only": true
+ },
+ "date": "2026-10-03 03:58:20",
+ "world": 2,
+ "torch": "2.6.0+cu124",
+ "nccl": "2.21.5",
+ "cublas_settings": {
+  "CUBLAS_WORKSPACE_CONFIG": null,
+  "deterministic": false,
+  "allow_bf16_reduced_precision_reduction": true
+ },
+ "comm_K": 6144,
+ "ag_shapes": [
+  [
+   2560,
+   5120
+  ],
+  [
+   5120,
+   10240
+  ],
+  [
+   1536,
+   16384
+  ]
+ ],
+ "rs_shapes": [
+  [
+   6144,
+   2560
+  ],
+  [
+   10240,
+   1280
+  ]
+ ],
+ "cases": [
+  {
+   "group": "rs",
+   "shape": [
+    10240,
+    1280
+   ],
+   "M": 16,
+   "check": {
+    "A_gemmrs": true,
+    "c_fluxgemm_only": true
+   },
+   "timed": [
+    "c_cublas",
+    "A_gemmrs",
+    "c_fluxgemm_only"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 200,
+     "kept": 200,
+     "modal_sm_clock_per_rank": [
+      1380,
+      1410
+     ]
+    },
+    "steady": {
+     "rounds": 50,
+     "kept": 50,
+     "modal_sm_clock_per_rank": [
+      1410,
+      1410
+     ]
+    }
+   }
+  },
+  {
+   "group": "rs",
+   "shape": [
+    10240,
+    1280
+   ],
+   "M": 128,
+   "check": {
+    "A_gemmrs": true,
+    "c_fluxgemm_only": true
+   },
+   "timed": [
+    "c_cublas",
+    "A_gemmrs",
+    "c_fluxgemm_only"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 200,
+     "kept": 200,
+     "modal_sm_clock_per_rank": [
+      1410,
+      1410
+     ]
+    },
+    "steady": {
+     "rounds": 50,
+     "kept": 50,
+     "modal_sm_clock_per_rank": [
+      1410,
+      1410
+     ]
+    }
+   }
+  },
+  {
+   "group": "rs",
+   "shape": [
+    10240,
+    1280
+   ],
+   "M": 512,
+   "check": {
+    "A_gemmrs": true,
+    "c_fluxgemm_only": true
+   },
+   "timed": [
+    "c_cublas",
+    "A_gemmrs",
+    "c_fluxgemm_only"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 200,
+     "kept": 200,
+     "modal_sm_clock_per_rank": [
+      1410,
+      1410
+     ]
+    },
+    "steady": {
+     "rounds": 50,
+     "kept": 50,
+     "modal_sm_clock_per_rank": [
+      1380,
+      1410
+     ]
+    }
+   }
+  },
+  {
+   "group": "rs",
+   "shape": [
+    10240,
+    1280
+   ],
+   "M": 2048,
+   "check": {
+    "A_gemmrs": true,
+    "c_fluxgemm_only": true
+   },
+   "timed": [
+    "c_cublas",
+    "A_gemmrs",
+    "c_fluxgemm_only"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 200,
+     "kept": 200,
+     "modal_sm_clock_per_rank": [
+      1410,
+      1410
+     ]
+    },
+    "steady": {
+     "rounds": 50,
+     "kept": 50,
+     "modal_sm_clock_per_rank": [
+      1290,
+      1335
+     ]
+    }
+   }
+  },
+  {
+   "group": "rs",
+   "shape": [
+    10240,
+    1280
+   ],
+   "M": 8192,
+   "check": {
+    "A_gemmrs": true,
+    "c_fluxgemm_only": true
+   },
+   "timed": [
+    "c_cublas",
+    "A_gemmrs",
+    "c_fluxgemm_only"
+   ],
+   "modes": {
+    "gpu": {
+     "rounds": 200,
+     "kept": 200,
+     "modal_sm_clock_per_rank": [
+      1365,
+      1380
+     ]
+    },
+    "steady": {
+     "rounds": 50,
+     "kept": 50,
+     "modal_sm_clock_per_rank": [
+      1245,
+      1290
+     ]
+    }
+   }
+  }
+ ],
+ "wall_s": 9.292434453964233
+}

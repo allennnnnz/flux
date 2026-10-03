@@ -1,0 +1,22 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --node_rank=0 --nproc_per_node=4 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/calibrate_hw_v1.py --tag ag_5120x10240 --modes gpu,steady --out_dir ws/fusion-dispatch/results/g4_calibration_tp4 --groups ag --ag_shapes 5120x10240 --rs_gemm_only
+W1003 03:54:12.773000 594829 site-packages/torch/distributed/run.py:792] 
+W1003 03:54:12.773000 594829 site-packages/torch/distributed/run.py:792] *****************************************
+W1003 03:54:12.773000 594829 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1003 03:54:12.773000 594829 site-packages/torch/distributed/run.py:792] *****************************************
+[ag 5120x10240 M=16] setup + check
+[ag (5120, 10240) M=16 gpu] kept 174/200  c_cublas=0.0850  c_fluxgemm=0.1167  c_flux_ag=0.0657  A_fused=0.1700
+[ag (5120, 10240) M=16 steady] kept 50/50  c_cublas=0.0686  c_fluxgemm=0.1059  c_flux_ag=0.0594  A_fused=0.1534
+[ag 5120x10240 M=128] setup + check
+[ag (5120, 10240) M=128 gpu] kept 200/200  c_cublas=0.1075  c_fluxgemm=0.1188  c_flux_ag=0.0822  A_fused=0.1874
+[ag (5120, 10240) M=128 steady] kept 50/50  c_cublas=0.0927  c_fluxgemm=0.1080  c_flux_ag=0.0690  A_fused=0.1672
+[ag 5120x10240 M=512] setup + check
+[ag (5120, 10240) M=512 gpu] kept 200/200  c_cublas=0.2540  c_fluxgemm=0.2806  c_flux_ag=0.1116  A_fused=0.4076
+[ag (5120, 10240) M=512 steady] kept 50/50  c_cublas=0.2629  c_fluxgemm=0.2775  c_flux_ag=0.1015  A_fused=0.3962
+[ag 5120x10240 M=2048] setup + check
+[ag (5120, 10240) M=2048 gpu] kept 200/200  c_cublas=0.7547  c_fluxgemm=0.8131  c_flux_ag=0.2185  A_fused=0.9267
+[ag (5120, 10240) M=2048 steady] kept 50/50  c_cublas=0.8528  c_fluxgemm=0.8997  c_flux_ag=0.2021  A_fused=0.9960
+[ag 5120x10240 M=8192] setup + check
+[ag (5120, 10240) M=8192 gpu] kept 200/200  c_cublas=3.2891  c_fluxgemm=3.4836  c_flux_ag=0.6339  A_fused=3.6178
+[ag (5120, 10240) M=8192 steady] kept 50/50  c_cublas=3.4259  c_fluxgemm=3.6214  c_flux_ag=0.6098  A_fused=3.7896
+wrote ws/fusion-dispatch/results/g4_calibration_tp4/raw_ag_5120x10240.csv  (28 s of timing)
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=ws/fusion-dispatch/results/g4_calibration_tp4/guard_ag_5120x10240.log

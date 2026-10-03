@@ -44,6 +44,9 @@ LAYERS = {
     "Q-down": (8192, 29568),   # Qwen2.5-72B down_proj
     "L8-O": (4096, 4096),      # Llama-3-8B o_proj
     "L8-down": (4096, 14336),  # Llama-3-8B down_proj
+    # G4 (2026-10-03): fresh test model, never used before (D-009)
+    "Q32-O": (5120, 5120),     # Qwen2.5-32B o_proj
+    "Q32-down": (5120, 27648), # Qwen2.5-32B down_proj
 }
 ALL_ITEMS = ["A_fused", "B_nccl_cublas", "E_allreduce", "c_cublas", "c_nccl_rs", "c_nccl_ar", "c_fluxgemm"]
 GEMM_ITEMS = {"A_fused", "B_nccl_cublas", "E_allreduce", "c_cublas", "c_fluxgemm"}

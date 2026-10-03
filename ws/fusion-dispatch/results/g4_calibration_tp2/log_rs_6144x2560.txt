@@ -1,0 +1,17 @@
+CUDA_VISIBLE_DEVICES=0,1 torchrun --node_rank=0 --nproc_per_node=2 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/calibrate_hw_v1.py --tag rs_6144x2560 --modes gpu,steady --out_dir ws/fusion-dispatch/results/g4_calibration_tp2 --groups rs --rs_shapes 6144x2560 --rs_gemm_only
+W1003 03:58:01.316000 610386 site-packages/torch/distributed/run.py:792] 
+W1003 03:58:01.316000 610386 site-packages/torch/distributed/run.py:792] *****************************************
+W1003 03:58:01.316000 610386 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1003 03:58:01.316000 610386 site-packages/torch/distributed/run.py:792] *****************************************
+[rs (6144, 2560) M=16 gpu] kept 200/200  c_cublas=0.0369  A_gemmrs=0.0737  c_fluxgemm_only=0.0471
+[rs (6144, 2560) M=16 steady] kept 50/50  c_cublas=0.0255  A_gemmrs=0.0620  c_fluxgemm_only=0.0378
+[rs (6144, 2560) M=128 gpu] kept 200/200  c_cublas=0.0430  A_gemmrs=0.0870  c_fluxgemm_only=0.0502
+[rs (6144, 2560) M=128 steady] kept 50/50  c_cublas=0.0305  A_gemmrs=0.0687  c_fluxgemm_only=0.0410
+[rs (6144, 2560) M=512 gpu] kept 200/200  c_cublas=0.0737  A_gemmrs=0.1290  c_fluxgemm_only=0.0891
+[rs (6144, 2560) M=512 steady] kept 50/50  c_cublas=0.0731  A_gemmrs=0.1189  c_fluxgemm_only=0.0891
+[rs (6144, 2560) M=2048 gpu] kept 200/200  c_cublas=0.2703  A_gemmrs=0.3400  c_fluxgemm_only=0.2918
+[rs (6144, 2560) M=2048 steady] kept 50/50  c_cublas=0.2961  A_gemmrs=0.3631  c_fluxgemm_only=0.3116
+[rs (6144, 2560) M=8192 gpu] kept 200/200  c_cublas=1.0414  A_gemmrs=1.2334  c_fluxgemm_only=1.0803
+[rs (6144, 2560) M=8192 steady] kept 50/50  c_cublas=1.1361  A_gemmrs=1.3131  c_fluxgemm_only=1.1748
+wrote ws/fusion-dispatch/results/g4_calibration_tp2/raw_rs_6144x2560.csv  (10 s of timing)
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=ws/fusion-dispatch/results/g4_calibration_tp2/guard_rs_6144x2560.log
