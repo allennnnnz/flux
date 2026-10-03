@@ -1,3 +1,4 @@
+# WITHDRAWN 2026-10-03: owner by truncated user name and lifetime-average CPU% (blind to bursts of long-lived processes; ws/fusion-dispatch/reports/20261003_gpu1_inventory.md section 4). Replaced by common/measure/exclusive_guard_v2.py.
 """Exclusive-machine guard for measurements (CLAUDE.md 5.1: numbers are only valid if nothing
 else shares the GPUs / CPUs while they are taken).
 

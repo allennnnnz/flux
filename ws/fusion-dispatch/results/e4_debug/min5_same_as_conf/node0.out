@@ -1,0 +1,10 @@
+[dbg rank 0 css-host-158 15:56:45] start
+[dbg rank 0 css-host-158 15:56:46] init_process_group done
+[dbg rank 0 css-host-158 15:56:46] device 0
+[dbg rank 0 css-host-158 15:56:46] tensor
+NCCL version 2.21.5+cuda12.4
+[dbg rank 0 css-host-158 15:56:46] all_reduce launched
+[dbg rank 0 css-host-158 15:56:46] all_reduce done value 2.0
+[dbg rank 0 css-host-158 15:56:46] barrier done
+[dbg rank 0 css-host-158 15:56:46] end
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_debug/min5_same_as_conf/guard_node0.log

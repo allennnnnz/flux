@@ -1,0 +1,89 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[dbg rank 1 css-host-158 15:49:21] start
+[dbg rank 0 css-host-158 15:49:21] start
+[dbg rank 1 css-host-158 15:49:21] init_process_group done
+[dbg rank 0 css-host-158 15:49:21] init_process_group done
+[dbg rank 0 css-host-158 15:49:21] device 0
+[dbg rank 1 css-host-158 15:49:21] device 1
+[dbg rank 0 css-host-158 15:49:21] tensor
+[dbg rank 1 css-host-158 15:49:21] tensor
+css-host-158:853765:853765 [0] NCCL INFO NCCL_SOCKET_IFNAME set to enp29s0f0np0
+css-host-158:853765:853765 [0] NCCL INFO Bootstrap : Using enp29s0f0np0:10.10.1.158<0>
+css-host-158:853765:853765 [0] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-158:853765:853765 [0] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-158:853765:853765 [0] NCCL INFO cudaDriverVersion 13040
+NCCL version 2.21.5+cuda12.4
+css-host-158:853766:853766 [1] NCCL INFO cudaDriverVersion 13040
+css-host-158:853766:853766 [1] NCCL INFO NCCL_SOCKET_IFNAME set to enp29s0f0np0
+css-host-158:853766:853766 [1] NCCL INFO Bootstrap : Using enp29s0f0np0:10.10.1.158<0>
+css-host-158:853766:853766 [1] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-158:853766:853766 [1] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-158:853765:853787 [0] NCCL INFO NCCL_IB_HCA set to =mlx5_0,mlx5_1,mlx5_2,mlx5_4,mlx5_5,mlx5_6,mlx5_7
+css-host-158:853766:853788 [1] NCCL INFO NCCL_IB_HCA set to =mlx5_0,mlx5_1,mlx5_2,mlx5_4,mlx5_5,mlx5_6,mlx5_7
+css-host-158:853765:853787 [0] NCCL INFO NET/IB : Using [0]={[0] mlx5_0:1/RoCE, [1] mlx5_1:1/RoCE} [2]mlx5_2:1/RoCE [2]={[3] mlx5_4:1/RoCE, [4] mlx5_5:1/RoCE} [3]={[5] mlx5_6:1/RoCE, [6] mlx5_7:1/RoCE} [RO]; OOB enp29s0f0np0:10.10.1.158<0>
+css-host-158:853765:853787 [0] NCCL INFO Using non-device net plugin version 0
+css-host-158:853765:853787 [0] NCCL INFO Using network IB
+css-host-158:853766:853788 [1] NCCL INFO NET/IB : Using [0]={[0] mlx5_0:1/RoCE, [1] mlx5_1:1/RoCE} [2]mlx5_2:1/RoCE [2]={[3] mlx5_4:1/RoCE, [4] mlx5_5:1/RoCE} [3]={[5] mlx5_6:1/RoCE, [6] mlx5_7:1/RoCE} [RO]; OOB enp29s0f0np0:10.10.1.158<0>
+css-host-158:853766:853788 [1] NCCL INFO Using non-device net plugin version 0
+css-host-158:853766:853788 [1] NCCL INFO Using network IB
+css-host-158:853765:853787 [0] NCCL INFO DMA-BUF is available on GPU device 0
+css-host-158:853766:853788 [1] NCCL INFO DMA-BUF is available on GPU device 1
+css-host-158:853766:853788 [1] NCCL INFO ncclCommInitRank comm 0x576501260210 rank 1 nranks 2 cudaDev 1 nvmlDev 1 busId 16000 commId 0x18e2d4a9c03e5fde - Init START
+css-host-158:853765:853787 [0] NCCL INFO ncclCommInitRank comm 0x5886e9a9c9a0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 10000 commId 0x18e2d4a9c03e5fde - Init START
+css-host-158:853765:853787 [0] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 0 'mlx5_0+mlx5_1'
+css-host-158:853766:853788 [1] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 0 'mlx5_0+mlx5_1'
+css-host-158:853765:853787 [0] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 1 'mlx5_2'
+css-host-158:853766:853788 [1] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 1 'mlx5_2'
+css-host-158:853765:853787 [0] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 2 'mlx5_4+mlx5_5'
+css-host-158:853766:853788 [1] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 2 'mlx5_4+mlx5_5'
+css-host-158:853765:853787 [0] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 3 'mlx5_6+mlx5_7'
+css-host-158:853766:853788 [1] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 3 'mlx5_6+mlx5_7'
+css-host-158:853765:853787 [0] NCCL INFO NCCL_P2P_LEVEL set by environment to LOC
+css-host-158:853766:853788 [1] NCCL INFO NCCL_P2P_LEVEL set by environment to LOC
+css-host-158:853765:853787 [0] NCCL INFO GPU Direct RDMA Enabled for GPU 10000 / HCA 0 (distance 4 <= 4), read 0
+css-host-158:853766:853788 [1] NCCL INFO GPU Direct RDMA Enabled for GPU 10000 / HCA 0 (distance 4 <= 4), read 0
+css-host-158:853765:853787 [0] NCCL INFO GPU Direct RDMA Enabled for GPU 16000 / HCA 0 (distance 4 <= 4), read 0
+css-host-158:853766:853788 [1] NCCL INFO GPU Direct RDMA Enabled for GPU 16000 / HCA 0 (distance 4 <= 4), read 0
+css-host-158:853766:853788 [1] NCCL INFO Setting affinity for GPU 1 to ffffffff,00000000,ffffffff
+css-host-158:853765:853787 [0] NCCL INFO Setting affinity for GPU 0 to ffffffff,00000000,ffffffff
+css-host-158:853766:853788 [1] NCCL INFO comm 0x576501260210 rank 1 nRanks 2 nNodes 1 localRanks 2 localRank 1 MNNVL 0
+css-host-158:853765:853787 [0] NCCL INFO comm 0x5886e9a9c9a0 rank 0 nRanks 2 nNodes 1 localRanks 2 localRank 0 MNNVL 0
+css-host-158:853766:853788 [1] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] -1/-1/-1->1->0
+css-host-158:853766:853788 [1] NCCL INFO P2P Chunksize set to 131072
+css-host-158:853765:853787 [0] NCCL INFO Channel 00/02 :    0   1
+css-host-158:853765:853787 [0] NCCL INFO Channel 01/02 :    0   1
+css-host-158:853765:853787 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1
+css-host-158:853765:853787 [0] NCCL INFO P2P Chunksize set to 131072
+css-host-158:853765:853787 [0] NCCL INFO Channel 00 : 0[0] -> 1[1] via SHM/direct/direct
+css-host-158:853765:853787 [0] NCCL INFO Channel 01 : 0[0] -> 1[1] via SHM/direct/direct
+css-host-158:853766:853788 [1] NCCL INFO Channel 00 : 1[1] -> 0[0] via SHM/direct/direct
+css-host-158:853766:853788 [1] NCCL INFO Channel 01 : 1[1] -> 0[0] via SHM/direct/direct
+css-host-158:853765:853787 [0] NCCL INFO Connected all rings
+css-host-158:853765:853787 [0] NCCL INFO Connected all trees
+css-host-158:853766:853788 [1] NCCL INFO Connected all rings
+css-host-158:853766:853788 [1] NCCL INFO Connected all trees
+css-host-158:853766:853788 [1] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+css-host-158:853766:853788 [1] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+css-host-158:853765:853787 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+css-host-158:853765:853787 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+css-host-158:853766:853803 [1] NCCL INFO New proxy send connection 0 from local rank 1, transport 2
+css-host-158:853766:853788 [1] NCCL INFO Connected to proxy localRank 1 -> connection 0x7c7acc004f60
+css-host-158:853765:853804 [0] NCCL INFO New proxy send connection 0 from local rank 0, transport 2
+css-host-158:853765:853787 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x74e284004f70
+css-host-158:853766:853803 [1] NCCL INFO Allocated shareable buffer 0x7c7afde00000 size 4194304 ipcDesc 0x7c7acc008eb8
+css-host-158:853765:853804 [0] NCCL INFO Allocated shareable buffer 0x74e27de00000 size 4194304 ipcDesc 0x74e284008ec8
+css-host-158:853765:853787 [0] NCCL INFO ncclCommInitRank comm 0x5886e9a9c9a0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 10000 commId 0x18e2d4a9c03e5fde - Init COMPLETE
+css-host-158:853766:853788 [1] NCCL INFO ncclCommInitRank comm 0x576501260210 rank 1 nranks 2 cudaDev 1 nvmlDev 1 busId 16000 commId 0x18e2d4a9c03e5fde - Init COMPLETE
+[dbg rank 0 css-host-158 15:49:22] all_reduce launched
+[dbg rank 1 css-host-158 15:49:22] all_reduce launched
+[dbg rank 0 css-host-158 15:49:22] all_reduce done value 2.0
+[dbg rank 1 css-host-158 15:49:22] all_reduce done value 2.0
+[dbg rank 0 css-host-158 15:49:22] barrier done
+[dbg rank 1 css-host-158 15:49:22] barrier done
+css-host-158:853765:853765 [0] NCCL INFO comm 0x5886e9a9c9a0 rank 0 nranks 2 cudaDev 0 busId 10000 - Destroy COMPLETE
+[dbg rank 0 css-host-158 15:49:22] end
+css-host-158:853766:853766 [1] NCCL INFO comm 0x576501260210 rank 1 nranks 2 cudaDev 1 busId 16000 - Destroy COMPLETE
+[dbg rank 1 css-host-158 15:49:22] end

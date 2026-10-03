@@ -1,0 +1,17 @@
+2026-10-03 15:30:47 single-rail runs
+2026-10-03 15:31:45 all rails concurrently
+2026-10-03 15:31:53 done
+client_concurrent_mlx5_0 BW_average_Gbps=98.05
+client_concurrent_mlx5_1 BW_average_Gbps=98.04
+client_concurrent_mlx5_2 BW_average_Gbps=98.05
+client_concurrent_mlx5_4 BW_average_Gbps=98.05
+client_concurrent_mlx5_5 BW_average_Gbps=98.04
+client_concurrent_mlx5_6 BW_average_Gbps=98.04
+client_concurrent_mlx5_7 BW_average_Gbps=98.04
+client_single_mlx5_0 BW_average_Gbps=98.05
+client_single_mlx5_1 BW_average_Gbps=98.05
+client_single_mlx5_2 BW_average_Gbps=98.05
+client_single_mlx5_4 BW_average_Gbps=98.05
+client_single_mlx5_5 BW_average_Gbps=98.05
+client_single_mlx5_6 BW_average_Gbps=98.05
+client_single_mlx5_7 BW_average_Gbps=98.05

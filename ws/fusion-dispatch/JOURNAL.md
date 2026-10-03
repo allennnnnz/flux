@@ -315,3 +315,21 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   - 159 的 `~/.bashrc` 會把自編 NCCL 2.26.2 放進 `LD_LIBRARY_PATH`。
 - 沒有在 159 安裝或執行任何東西。
 - **留給下個 session**：使用者核准後，照 STATUS §0 做 E4（跨節點）：複製環境 → 守衛 v2（雙節點）→ 錨點 → Flux 跨節點冒煙測試。
+
+## 2026-10-03 · boss 兼 worker（css-host-158）· E4 跨節點：環境、守衛 v2、錨點、NCCL 卡住的原因
+
+- **使用者核准 E4**，開始做準備。
+- **環境**：159 的舊 repo 是今天剛 clone 的 main（我們分支的祖先、沒有獨有內容），用本機完整副本覆蓋；
+  pixi 環境 + vLLM venv 一起複製（共 18.6 GB，48 秒）。159 上 torch / vLLM 都載入自己附的 NCCL 2.21.5。
+- **守衛 v2**（`common/measure/exclusive_guard_v2.py`）：修 gpu1 發現的兩個 bug（名稱截斷、生命期平均 CPU），
+  另外監看 root 程序、log 一律 UTC（159 時區是紐約）。自我測試：忙迴圈 100.6% 被即時抓到。v1 加 WITHDRAWN。
+- **啟動腳本**：`scripts/run_xnode.sh`（在 158 跑，兩台各自包守衛）+ `scripts/launch_xnode.sh`（每台的環境）。
+- **RDMA 錨點**（`results/e4_anchor_ib/`）：7 條 rail 各 98.05 Gb/s，7 條同時也一樣；兩台守衛 CLEAN。
+- **跨節點 NCCL 一律卡住** → 一路排除（`results/e4_debug/README.md`）：網路、MTU、GDR、網卡合併、單節點、Flux 環境變數都不是。
+  **原因**：159 的 `~/.nccl.conf`（不是我們的；ALGO=RING、PROTO=Simple、P2P_LEVEL=NVL、IB_HCA=mlx5_3:1）只在 159 生效，
+  兩台演算法 / 協定不一致 → 卡住；只一致一半時 all_reduce「完成」但結果錯（0.0，應為 2.0）。
+  NCCL 2.21.5 用 passwd 的家目錄找這個檔，`NCCL_CONF_FILE` 無效，改 `HOME` 也沒用。
+- **其他**：159 上使用者的 `openclaw-gateway`（systemd 使用者服務）每 7 秒重啟一次、每次吃 2 核以上。
+- **卡在哪**：159 的 `~/.nccl.conf` 怎麼處理、`openclaw-gateway` 要不要停，都需要使用者決定（是使用者 / 同帳號的人的東西）。
+- **需 boss 裁決**（CLAUDE.md）：5.1 第 11 條改指向 `exclusive_guard_v2.py`；陷阱表加「`~/.nccl.conf` 會讓多節點設定不一致，
+  2.21.5 無法用環境變數關掉」與「守衛 v1 的盲點」。

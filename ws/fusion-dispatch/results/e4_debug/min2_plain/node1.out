@@ -1,0 +1,40 @@
+[dbg rank 1 css-host-159 11:47:56] start
+[dbg rank 1 css-host-159 11:47:56] init_process_group done
+[dbg rank 1 css-host-159 11:47:56] device 0
+[dbg rank 1 css-host-159 11:47:56] tensor
+[dbg rank 1 css-host-159 11:47:56] all_reduce launched
+Timeout (0:00:40)!
+Thread 0x00007d6464d0e600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/__init__.py", line 985 in synchronize
+  File "/home/rogerlee/flux/ws/fusion-dispatch/scripts/xnode_debug_min_v1.py", line 17 in <module>
+W1003 11:48:53.912000 358156 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py:719] Received 15 death signal, shutting down workers
+W1003 11:48:53.913000 358156 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 358284 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 260, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/metrics/api.py", line 137, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py", line 711, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 358156 got signal: 15

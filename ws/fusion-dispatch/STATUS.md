@@ -42,7 +42,14 @@
 - 本機 Flux 編譯時有開 NVSHMEM，也有跨節點 op（`AGKernelInterNode`、`GemmRSInterNode`）→ Flux 有機會跨兩台跑（未驗證）。
 - 159 的 repo 是舊的 main，沒有建好的環境；環境約 15 GB（pixi 7.0G、vLLM venv 7.7G），路徑相同，可從本機直接複製。
 - **坑**：159 的 `~/.bashrc` 把自編 NCCL 2.26.2 放進 `LD_LIBRARY_PATH`（本機 torch 用 2.21.5），非互動 ssh 也會吃到。
-- 用途：E4「跨節點」= Flux 能跑、連線又慢，正好能回答 gpu1 回答不了的核心問題。計劃待使用者核准。
+- 用途：E4「跨節點」= Flux 能跑、連線又慢，正好能回答 gpu1 回答不了的核心問題。**使用者已核准（2026-10-03），進行中**：
+  1. 環境已複製到 159（repo + pixi 10.5 GB、vLLM venv 8.1 GB，48 秒）；159 上 torch 用自己的 NCCL 2.21.5。
+  2. `common/measure/exclusive_guard_v2.py`：uid 判斷、每秒取樣 CPU、也看 root；log 用 UTC；v1 加 WITHDRAWN。
+  3. RDMA 錨點（`results/e4_anchor_ib/`，兩台守衛 CLEAN）：7 條 rail 每條 98.05 Gb/s（12.3 GB/s），單獨與同時皆同；反向、雙向（193.7 Gb/s）正常。
+  4. **跨節點 NCCL 卡住，已找到原因**（`results/e4_debug/README.md`）：159 有 `~/.nccl.conf`（ALGO=RING、PROTO=Simple…），
+     NCCL 2.21.5 在 159 自動讀、158 沒有 → 兩邊演算法 / 協定不一致 → 卡住，甚至算錯（all_reduce 得 0.0）。
+     `NCCL_CONF_FILE` 在 2.21.5 無效；兩邊設定一致時正常。**卡在：要不要讓 159 不讀這個檔（使用者決定）**。
+  5. 159 上使用者的 `openclaw-gateway` 服務每 7 秒重啟一次、每次吃 2 核以上 → 計時量測前最好停掉（使用者決定）。
 - gpu1（4× V100 PCIe）Flux 不能跑（`src/cuda/op_registry.cu:39-51` 只收 A100 / L20 / H20 / H800），只能做縮小版，優先度降低。
 
 **下一步**：

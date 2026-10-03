@@ -1,0 +1,768 @@
+css-host-159:356564:356564 [0] NCCL INFO cudaDriverVersion 13040
+css-host-159:356564:356564 [0] NCCL INFO NCCL_SOCKET_IFNAME set to enp29s0f0np0
+css-host-159:356564:356564 [0] NCCL INFO Bootstrap : Using enp29s0f0np0:10.10.1.159<0>
+css-host-159:356564:356564 [0] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-159:356564:356564 [0] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-159:356564:356703 [0] NCCL INFO NET/Socket : Using [0]enp29s0f0np0:10.10.1.159<0>
+css-host-159:356564:356703 [0] NCCL INFO Using non-device net plugin version 0
+css-host-159:356564:356703 [0] NCCL INFO Using network Socket
+css-host-159:356564:356703 [0] NCCL INFO ncclCommInitRank comm 0x62d278cb99d0 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 10000 commId 0xe2ad66d5a0703914 - Init START
+css-host-159:356564:356703 [0] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'enp29s0f0np0'
+css-host-159:356564:356703 [0] NCCL INFO NCCL_P2P_LEVEL set by environment to NVL
+css-host-159:356564:356703 [0] NCCL INFO Setting affinity for GPU 0 to ffffffff,00000000,ffffffff
+css-host-159:356564:356703 [0] NCCL INFO comm 0x62d278cb99d0 rank 1 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+css-host-159:356564:356703 [0] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] 0/-1/-1->1->-1
+css-host-159:356564:356703 [0] NCCL INFO P2P Chunksize set to 131072
+css-host-159:356564:356704 [0] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2
+css-host-159:356564:356703 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x7403fc004f60
+css-host-159:356564:356703 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+css-host-159:356564:356704 [0] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2
+css-host-159:356564:356703 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x7403fc004fd8
+css-host-159:356564:356703 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+css-host-159:356564:356704 [0] NCCL INFO New proxy send connection 2 from local rank 0, transport 2
+css-host-159:356564:356703 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x7403fc005050
+css-host-159:356564:356703 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+css-host-159:356564:356704 [0] NCCL INFO New proxy send connection 3 from local rank 0, transport 2
+css-host-159:356564:356703 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x7403fc0050c8
+css-host-159:356564:356703 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+css-host-159:356564:356703 [0] NCCL INFO Connected all rings
+css-host-159:356564:356703 [0] NCCL INFO Connected all trees
+css-host-159:356564:356703 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+css-host-159:356564:356703 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+css-host-159:356564:356704 [0] NCCL INFO New proxy send connection 4 from local rank 0, transport 2
+css-host-159:356564:356703 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x7403fc005140
+css-host-159:356564:356703 [0] NCCL INFO ncclCommInitRank comm 0x62d278cb99d0 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 10000 commId 0xe2ad66d5a0703914 - Init COMPLETE
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+[rank1]:[E1003 11:45:29.446996367 ProcessGroupNCCL.cpp:552] [Rank 1] Collective WorkNCCL(SeqNum=6, OpType=ALLREDUCE, NumelIn=1, NumelOut=1, Timeout(ms)=600000) raised the following async exception: NCCL error: remote process exited or there was a network error, NCCL version 2.21.5
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2363 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x74095b56c1b6 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x220 (0x7409095f61c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x7b (0x7409095fe64b in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::watchdogHandler() + 0x650 (0x740909600590 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x7409096016ed in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0x145c0 (0x74095b9b45c0 in /home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #6: <unknown function> + 0x9cb84 (0x74095c49cb84 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #7: <unknown function> + 0x129ecc (0x74095c529ecc in /lib/x86_64-linux-gnu/libc.so.6)
+
+[rank1]:[E1003 11:45:29.453362878 ProcessGroupNCCL.cpp:2168] [PG ID 0 PG GUID 0(default_pg) Rank 1]  failure detected by watchdog at work sequence id: 6 PG status: last enqueued work: 6, last completed work: 5
+[rank1]:[E1003 11:45:29.453390181 ProcessGroupNCCL.cpp:667] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+
+css-host-159:356564:356706 [0] misc/socket.cc:50 NCCL WARN socketProgress: Connection closed by remote peer 10.10.1.158<38464>
+css-host-159:356564:356706 [0] NCCL INFO misc/socket.cc:752 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net_socket.cc:474 -> 6
+css-host-159:356564:356706 [0] NCCL INFO transport/net.cc:1302 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:698 -> 6
+css-host-159:356564:356706 [0] NCCL INFO proxy.cc:878 -> 6 [Progress Thread]
+W1003 11:45:29.457000 356432 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py:719] Received 15 death signal, shutting down workers
+W1003 11:45:29.458000 356432 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 356564 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 260, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/metrics/api.py", line 137, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py", line 711, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 356432 got signal: 15
+[exclusive_guard_v2 css-host-159] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 14) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_anchor_nccl/w2_C_socket/guard_node1.log

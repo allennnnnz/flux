@@ -1,0 +1,33 @@
+ WARNING: BW peak won't be measured in this run.
+
+************************************
+* Waiting for client to connect... *
+************************************
+---------------------------------------------------------------------------------------
+                    RDMA_Write BW Test
+ Dual-port       : OFF		Device         : mlx5_4
+ Number of qps   : 2		Transport type : IB
+ Connection type : RC		Using SRQ      : OFF
+ PCIe relax order: ON		Lock-free      : OFF
+ ibv_wr* API     : ON		Using Enhanced Reorder      : OFF
+ CQ Moderation   : 1
+ CQE Poll Batch  : Dynamic
+ Mtu             : 4096[B]
+ Link type       : Ethernet
+ GID index       : 3
+ Max inline data : 0[B]
+ rdma_cm QPs	 : OFF
+ Data ex. method : Ethernet
+---------------------------------------------------------------------------------------
+ local address: LID 0000 QPN 0x00a8 PSN 0xe83e60 RKey 0x1fffbd VAddr 0x0075c36fbff000
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:10:05:159
+ local address: LID 0000 QPN 0x00a9 PSN 0x3438ca RKey 0x1fffbd VAddr 0x0075c36fcff000
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:10:05:159
+ remote address: LID 0000 QPN 0x00a8 PSN 0xdf9b6 RKey 0x203dbc VAddr 0x0079601acfb000
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:10:05:158
+ remote address: LID 0000 QPN 0x00a9 PSN 0xdc4068 RKey 0x203dbc VAddr 0x0079601adfb000
+ GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:10:05:158
+---------------------------------------------------------------------------------------
+ #bytes     #iterations    BW peak[Gb/sec]    BW average[Gb/sec]   MsgRate[Mpps]
+ 1048576    35065            0.00               98.05  		     0.011688
+---------------------------------------------------------------------------------------

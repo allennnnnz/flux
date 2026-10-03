@@ -1,0 +1,12 @@
+2026-10-03 15:51:59Z [css-host-159] START guard=v2 uid=1001045 cmd=timeout --signal=TERM --kill-after=30 90 /home/rogerlee/flux/.pixi/envs/default/bin/python -m torch.distributed.run --nnodes=2 --node_rank=1 --nproc_per_node=1 --master_addr=10.10.1.158 --master_port=29531 ws/fusion-dispatch/scripts/xnode_debug_min_v1.py
+2026-10-03 15:52:00Z [css-host-159] PREFLIGHT gpu_procs=[] foreign_cpu=[] foreign_root=[] self_cpu=[] other_users_logged_in=[]
+2026-10-03 15:52:05Z [css-host-159] SELF_CPU (warning) [(360235, 'rogerlee', 'node', 190.2)]
+2026-10-03 15:52:11Z [css-host-159] SELF_CPU (warning) [(360272, 'rogerlee', 'node', 225.5)]
+2026-10-03 15:52:26Z [css-host-159] SELF_CPU (warning) [(360325, 'rogerlee', 'node', 196.0)]
+2026-10-03 15:52:33Z [css-host-159] SELF_CPU (warning) [(360349, 'rogerlee', 'node', 232.4)]
+2026-10-03 15:52:40Z [css-host-159] SELF_CPU (warning) [(360376, 'rogerlee', 'node', 227.9)]
+2026-10-03 15:52:55Z [css-host-159] SELF_CPU (warning) [(360427, 'rogerlee', 'node', 202.3)]
+2026-10-03 15:53:02Z [css-host-159] SELF_CPU (warning) [(360452, 'rogerlee', 'node', 229.9)]
+2026-10-03 15:53:09Z [css-host-159] SELF_CPU (warning) [(360477, 'rogerlee', 'node', 207.7)]
+2026-10-03 15:53:24Z [css-host-159] SELF_CPU (warning) [(360529, 'rogerlee', 'node', 223.5)]
+2026-10-03 15:53:30Z [css-host-159] END rc=124 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 foreign_root_samples=0 self_cpu_warnings=9 window=None..None users_logged_in_at_end=[]

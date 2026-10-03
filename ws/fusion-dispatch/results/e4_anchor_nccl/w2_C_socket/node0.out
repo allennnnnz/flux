@@ -1,0 +1,68 @@
+css-host-158:852099:852099 [0] NCCL INFO NCCL_SOCKET_IFNAME set to enp29s0f0np0
+css-host-158:852099:852099 [0] NCCL INFO Bootstrap : Using enp29s0f0np0:10.10.1.158<0>
+css-host-158:852099:852099 [0] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-158:852099:852099 [0] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-158:852099:852099 [0] NCCL INFO cudaDriverVersion 13040
+NCCL version 2.21.5+cuda12.4
+css-host-158:852099:852240 [0] NCCL INFO NET/Socket : Using [0]enp29s0f0np0:10.10.1.158<0>
+css-host-158:852099:852240 [0] NCCL INFO Using non-device net plugin version 0
+css-host-158:852099:852240 [0] NCCL INFO Using network Socket
+css-host-158:852099:852240 [0] NCCL INFO ncclCommInitRank comm 0x5e72ce94cf70 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 10000 commId 0xe2ad66d5a0703914 - Init START
+css-host-158:852099:852240 [0] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'enp29s0f0np0'
+css-host-158:852099:852240 [0] NCCL INFO Setting affinity for GPU 0 to ffffffff,00000000,ffffffff
+css-host-158:852099:852240 [0] NCCL INFO comm 0x5e72ce94cf70 rank 0 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+css-host-158:852099:852240 [0] NCCL INFO Channel 00/02 :    0   1
+css-host-158:852099:852240 [0] NCCL INFO Channel 01/02 :    0   1
+css-host-158:852099:852240 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] -1/-1/-1->0->1
+css-host-158:852099:852240 [0] NCCL INFO P2P Chunksize set to 131072
+css-host-158:852099:852248 [0] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2
+css-host-158:852099:852240 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x716300004f70
+css-host-158:852099:852240 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+css-host-158:852099:852248 [0] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2
+css-host-158:852099:852240 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x716300004fe8
+css-host-158:852099:852240 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+css-host-158:852099:852248 [0] NCCL INFO New proxy send connection 2 from local rank 0, transport 2
+css-host-158:852099:852240 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x716300005060
+css-host-158:852099:852240 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+css-host-158:852099:852248 [0] NCCL INFO New proxy send connection 3 from local rank 0, transport 2
+css-host-158:852099:852240 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x7163000050d8
+css-host-158:852099:852240 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+css-host-158:852099:852240 [0] NCCL INFO Connected all rings
+css-host-158:852099:852240 [0] NCCL INFO Connected all trees
+css-host-158:852099:852240 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+css-host-158:852099:852240 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+css-host-158:852099:852248 [0] NCCL INFO New proxy send connection 4 from local rank 0, transport 2
+css-host-158:852099:852240 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x716300005150
+css-host-158:852099:852240 [0] NCCL INFO ncclCommInitRank comm 0x5e72ce94cf70 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 10000 commId 0xe2ad66d5a0703914 - Init COMPLETE
+W1003 15:45:29.145000 851968 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py:719] Received 15 death signal, shutting down workers
+W1003 15:45:29.146000 851968 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 852099 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 260, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/metrics/api.py", line 137, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py", line 711, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 851968 got signal: 15
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4_anchor_nccl/w2_C_socket/guard_node0.log
