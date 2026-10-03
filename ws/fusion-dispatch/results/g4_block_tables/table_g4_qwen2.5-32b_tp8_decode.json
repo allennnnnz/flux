@@ -1,0 +1,445 @@
+{
+ "ag": {
+  "896x5120": {
+   "layer": "qkv",
+   "M": [
+    32,
+    128,
+    256,
+    384,
+    512
+   ],
+   "rank": [
+    [
+     [
+      "nccl",
+      0.0585
+     ],
+     [
+      "fluxag",
+      0.1265
+     ],
+     [
+      "flux",
+      0.1642
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.1787
+     ]
+    ],
+    [
+     [
+      "nccl",
+      0.0696
+     ],
+     [
+      "fluxag",
+      0.1316
+     ],
+     [
+      "flux",
+      0.1571
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.1715
+     ]
+    ],
+    [
+     [
+      "nccl",
+      0.0896
+     ],
+     [
+      "fluxag",
+      0.1472
+     ],
+     [
+      "flux",
+      0.1654
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.1799
+     ]
+    ],
+    [
+     [
+      "nccl",
+      0.1052
+     ],
+     [
+      "fluxag",
+      0.1597
+     ],
+     [
+      "flux",
+      0.1697
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.1842
+     ]
+    ],
+    [
+     [
+      "nccl",
+      0.1174
+     ],
+     [
+      "fluxag",
+      0.1714
+     ],
+     [
+      "flux",
+      0.1754
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.1898
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  },
+  "6912x5120": {
+   "layer": "gate_up",
+   "M": [
+    32,
+    128,
+    256,
+    384,
+    512
+   ],
+   "rank": [
+    [
+     [
+      "nccl",
+      0.0954
+     ],
+     [
+      "fluxag",
+      0.1633
+     ],
+     [
+      "flux",
+      0.1714
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.1859
+     ]
+    ],
+    [
+     [
+      "nccl",
+      0.1239
+     ],
+     [
+      "flux",
+      0.1786
+     ],
+     [
+      "fluxag",
+      0.1859
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.1931
+     ]
+    ],
+    [
+     [
+      "nccl",
+      0.1715
+     ],
+     [
+      "flux",
+      0.1992
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.2137
+     ],
+     [
+      "fluxag",
+      0.2291
+     ]
+    ],
+    [
+     [
+      "nccl",
+      0.2045
+     ],
+     [
+      "fluxag",
+      0.259
+     ],
+     [
+      "flux",
+      0.266
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.2805
+     ]
+    ],
+    [
+     [
+      "nccl",
+      0.2127
+     ],
+     [
+      "fluxag",
+      0.2666
+     ],
+     [
+      "flux",
+      0.2726
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.2871
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  }
+ },
+ "rs": {
+  "5120x640": {
+   "layer": "o",
+   "M": [
+    32,
+    128,
+    256,
+    384,
+    512
+   ],
+   "rank": [
+    [
+     [
+      "nccl",
+      0.0481
+     ],
+     [
+      "flux",
+      0.0689
+     ]
+    ],
+    [
+     [
+      "nccl",
+      0.0631
+     ],
+     [
+      "flux",
+      0.0696
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.0712
+     ],
+     [
+      "nccl",
+      0.0836
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.0827
+     ],
+     [
+      "nccl",
+      0.1019
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.0832
+     ],
+     [
+      "nccl",
+      0.1096
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  },
+  "5120x3456": {
+   "layer": "down",
+   "M": [
+    32,
+    128,
+    256,
+    384,
+    512
+   ],
+   "rank": [
+    [
+     [
+      "nccl",
+      0.0737
+     ],
+     [
+      "flux",
+      0.0986
+     ]
+    ],
+    [
+     [
+      "nccl",
+      0.0959
+     ],
+     [
+      "flux",
+      0.102
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.121
+     ],
+     [
+      "nccl",
+      0.1256
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.1593
+     ],
+     [
+      "nccl",
+      0.1608
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.1503
+     ],
+     [
+      "nccl",
+      0.1761
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  }
+ },
+ "meta": {
+  "model": "qwen2.5-32b",
+  "world": 8,
+  "phase": "decode",
+  "mode": "gpu",
+  "graph": true,
+  "method": "g4",
+  "eps": 0.13543217179612443,
+  "probes_pending": [
+   {
+    "kind": "rs",
+    "key": "5120x640",
+    "layer": "o",
+    "M": 128,
+    "margin": 0.1017,
+    "candidates": [
+     "B",
+     "A"
+    ]
+   },
+   {
+    "kind": "rs",
+    "key": "5120x3456",
+    "layer": "down",
+    "M": 128,
+    "margin": 0.0632,
+    "candidates": [
+     "B",
+     "A"
+    ]
+   },
+   {
+    "kind": "rs",
+    "key": "5120x3456",
+    "layer": "down",
+    "M": 256,
+    "margin": 0.0381,
+    "candidates": [
+     "A",
+     "B"
+    ]
+   },
+   {
+    "kind": "rs",
+    "key": "5120x3456",
+    "layer": "down",
+    "M": 384,
+    "margin": 0.009,
+    "candidates": [
+     "A",
+     "B"
+    ]
+   }
+  ]
+ }
+}

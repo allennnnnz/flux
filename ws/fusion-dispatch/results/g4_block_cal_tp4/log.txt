@@ -1,0 +1,63 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING 10-03 04:27:42 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:27:42 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:27:42 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:27:42 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:27:42 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:27:42 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:27:42 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:27:42 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:27:42 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:27:42 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:27:42 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:27:42 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:27:42 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:27:42 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:27:42 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:27:42 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:27:42 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:27:42 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:27:42 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:27:42 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:27:42 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-03 04:27:42 [config.py:4136] Current vLLM config is not set.
+WARNING 10-03 04:27:42 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-03 04:27:42 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+[block-cal tp4 M=8 gpu] vllm_ar=0.02458  rmsnorm=0.01126  add=0.00717
+[block-cal tp4 M=8 steady] vllm_ar=0.03034  rmsnorm=0.04474  add=0.00832
+[block-cal tp4 M=16 gpu] vllm_ar=0.02970  rmsnorm=0.01126  add=0.00819
+[block-cal tp4 M=16 steady] vllm_ar=0.03030  rmsnorm=0.04470  add=0.00838
+[block-cal tp4 M=32 gpu] vllm_ar=0.04096  rmsnorm=0.01229  add=0.00819
+[block-cal tp4 M=32 steady] vllm_ar=0.03069  rmsnorm=0.04477  add=0.00835
+[block-cal tp4 M=64 gpu] vllm_ar=0.04403  rmsnorm=0.01229  add=0.00922
+[block-cal tp4 M=64 steady] vllm_ar=0.03184  rmsnorm=0.04592  add=0.00838
+[block-cal tp4 M=128 gpu] vllm_ar=0.05427  rmsnorm=0.01434  add=0.01024
+[block-cal tp4 M=128 steady] vllm_ar=0.03894  rmsnorm=0.04470  add=0.00838
+[block-cal tp4 M=256 gpu] vllm_ar=0.06656  rmsnorm=0.01741  add=0.01331
+[block-cal tp4 M=256 steady] vllm_ar=0.04960  rmsnorm=0.04208  add=0.00845
+[block-cal tp4 M=512 gpu] vllm_ar=0.09370  rmsnorm=0.02253  add=0.01946
+[block-cal tp4 M=512 steady] vllm_ar=0.07475  rmsnorm=0.01504  add=0.00874
+[block-cal tp4 M=1024 gpu] vllm_ar=0.17613  rmsnorm=0.03072  add=0.03072
+[block-cal tp4 M=1024 steady] vllm_ar=0.15898  rmsnorm=0.02838  add=0.02598
+[block-cal tp4 M=2048 gpu] vllm_ar=0.26624  rmsnorm=0.05325  add=0.05222
+[block-cal tp4 M=2048 steady] vllm_ar=0.24726  rmsnorm=0.05194  add=0.04826
+[block-cal tp4 M=4096 gpu] vllm_ar=0.46131  rmsnorm=0.09318  add=0.09318
+[block-cal tp4 M=4096 steady] vllm_ar=0.43354  rmsnorm=0.09565  add=0.09037
+[block-cal tp4 M=8192 gpu] vllm_ar=0.83558  rmsnorm=0.17306  add=0.18125
+[block-cal tp4 M=8192 steady] vllm_ar=0.81850  rmsnorm=0.17939  add=0.17488
+[block-cal tp4 M=16384 gpu] vllm_ar=1.56365  rmsnorm=0.33997  add=0.34918
+[rank3]:[W1003 04:28:13.929617530 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank2]:[W1003 04:28:13.929675095 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank1]:[W1003 04:28:13.929772326 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[block-cal tp4 M=16384 steady] vllm_ar=1.54736  rmsnorm=0.34746  add=0.34374
+[rank0]:[W1003 04:28:13.940181184 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[exclusive_guard] CLEAN (foreign GPU samples 0, CPU 0) log=ws/fusion-dispatch/results/g4_block_cal_tp4/guard.log

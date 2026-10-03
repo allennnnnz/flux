@@ -1,0 +1,7 @@
+[G4-block-prep] start 2026-10-03 04:26:49
+[G4-block-prep] block-cal tp8 exit 0 04:27:32 2026-10-03 04:27:32 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-block-prep] block-cal tp4 exit 0 04:28:15 2026-10-03 04:28:15 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-block-prep] gemm tp8 qwen2.5-32b exit 0 04:28:46 2026-10-03 04:28:46 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-block-prep] gemm tp4 qwen2.5-32b exit 0 04:29:10 2026-10-03 04:29:10 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-block-prep] gemm tp4 llama3-8b exit 0 04:29:29 2026-10-03 04:29:29 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-block-prep] done 2026-10-03 04:29:29

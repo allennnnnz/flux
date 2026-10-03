@@ -1,0 +1,298 @@
+{
+ "ag": {
+  "896x5120": {
+   "layer": "qkv",
+   "M": [
+    1024,
+    2048,
+    4096
+   ],
+   "rank": [
+    [
+     [
+      "nccl",
+      0.1534
+     ],
+     [
+      "flux",
+      0.1828
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.1962
+     ],
+     [
+      "fluxag",
+      0.2042
+     ]
+    ],
+    [
+     [
+      "nccl",
+      0.2507
+     ],
+     [
+      "flux",
+      0.2559
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.2679
+     ],
+     [
+      "fluxag",
+      0.2792
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.3383
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.4385
+     ],
+     [
+      "nccl",
+      0.4473
+     ],
+     [
+      "fluxag",
+      0.4833
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  },
+  "6912x5120": {
+   "layer": "gate_up",
+   "M": [
+    1024,
+    2048,
+    4096
+   ],
+   "rank": [
+    [
+     [
+      "nccl",
+      0.3732
+     ],
+     [
+      "fluxag",
+      0.424
+     ],
+     [
+      "flux",
+      0.443
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.4557
+     ]
+    ],
+    [
+     [
+      "nccl",
+      0.7175
+     ],
+     [
+      "flux",
+      0.7288
+     ],
+     [
+      "fluxag",
+      0.746
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.8042
+     ]
+    ],
+    [
+     [
+      "flux",
+      1.3426
+     ],
+     [
+      "nccl",
+      1.373
+     ],
+     [
+      "fluxag",
+      1.409
+     ],
+     [
+      "fluxag_fluxgemm",
+      1.5186
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  }
+ },
+ "rs": {
+  "5120x640": {
+   "layer": "o",
+   "M": [
+    1024,
+    2048,
+    4096
+   ],
+   "rank": [
+    [
+     [
+      "flux",
+      0.0926
+     ],
+     [
+      "nccl",
+      0.135
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.1423
+     ],
+     [
+      "nccl",
+      0.2073
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.249
+     ],
+     [
+      "nccl",
+      0.3546
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  },
+  "5120x3456": {
+   "layer": "down",
+   "M": [
+    1024,
+    2048,
+    4096
+   ],
+   "rank": [
+    [
+     [
+      "flux",
+      0.2133
+     ],
+     [
+      "nccl",
+      0.2755
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.3795
+     ],
+     [
+      "nccl",
+      0.4339
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.7079
+     ],
+     [
+      "nccl",
+      0.8165
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  }
+ },
+ "meta": {
+  "model": "qwen2.5-32b",
+  "world": 8,
+  "phase": "prefill",
+  "mode": "steady",
+  "graph": false,
+  "method": "g4",
+  "eps": 0.10143487172823906,
+  "probes_pending": [
+   {
+    "kind": "ag",
+    "key": "896x5120",
+    "layer": "qkv",
+    "M": 2048,
+    "margin": 0.0208,
+    "candidates": [
+     "B",
+     "A"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "6912x5120",
+    "layer": "gate_up",
+    "M": 2048,
+    "margin": 0.0157,
+    "candidates": [
+     "B",
+     "A"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "6912x5120",
+    "layer": "gate_up",
+    "M": 4096,
+    "margin": 0.0226,
+    "candidates": [
+     "A",
+     "B"
+    ]
+   }
+  ]
+ }
+}

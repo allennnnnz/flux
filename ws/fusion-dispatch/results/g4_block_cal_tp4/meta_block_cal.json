@@ -1,0 +1,24 @@
+{
+ "script": "ws/fusion-dispatch/scripts/calibrate_block_v1.py",
+ "args": {
+  "modes": "gpu,steady",
+  "rounds": 200,
+  "rounds_steady": 100,
+  "warmup": 30,
+  "warmup_first": 100,
+  "steady_L": 16,
+  "pad_cycles": 400000,
+  "flush_mb": 128,
+  "clock_period": 0.02,
+  "seed": 20261003,
+  "out_dir": "ws/fusion-dispatch/results/g4_block_cal_tp4"
+ },
+ "world": 4,
+ "date": "2026-10-03 04:28:13",
+ "wall_s": 18.109567165374756,
+ "custom_ar": {
+  "present": true,
+  "disabled": false,
+  "max_size": 8388608
+ }
+}

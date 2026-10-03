@@ -1,0 +1,263 @@
+{
+ "ag": {
+  "1792x5120": {
+   "layer": "qkv",
+   "M": [
+    1024,
+    2048,
+    4096
+   ],
+   "rank": [
+    [
+     [
+      "nccl",
+      0.1761
+     ],
+     [
+      "fluxag",
+      0.1904
+     ],
+     [
+      "flux",
+      0.2015
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.2116
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.2769
+     ],
+     [
+      "fluxag",
+      0.2936
+     ],
+     [
+      "nccl",
+      0.297
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.3128
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.4372
+     ],
+     [
+      "fluxag",
+      0.5294
+     ],
+     [
+      "nccl",
+      0.5393
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.5442
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  },
+  "13824x5120": {
+   "layer": "gate_up",
+   "M": [
+    1024,
+    2048,
+    4096
+   ],
+   "rank": [
+    [
+     [
+      "nccl",
+      0.7137
+     ],
+     [
+      "flux",
+      0.7179
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.728
+     ],
+     [
+      "fluxag",
+      0.728
+     ]
+    ],
+    [
+     [
+      "flux",
+      1.286
+     ],
+     [
+      "fluxag_fluxgemm",
+      1.3455
+     ],
+     [
+      "fluxag",
+      1.3553
+     ],
+     [
+      "nccl",
+      1.3587
+     ]
+    ],
+    [
+     [
+      "flux",
+      2.4557
+     ],
+     [
+      "fluxag_fluxgemm",
+      2.6095
+     ],
+     [
+      "fluxag",
+      2.6431
+     ],
+     [
+      "nccl",
+      2.653
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  }
+ },
+ "rs": {
+  "5120x1280": {
+   "layer": "o",
+   "M": [
+    1024,
+    2048,
+    4096
+   ],
+   "rank": [
+    [
+     [
+      "flux",
+      0.1197
+     ],
+     [
+      "nccl",
+      0.1466
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.1925
+     ],
+     [
+      "nccl",
+      0.2433
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.3379
+     ],
+     [
+      "nccl",
+      0.4353
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  },
+  "5120x6912": {
+   "layer": "down",
+   "M": [
+    1024,
+    2048,
+    4096
+   ],
+   "rank": [
+    [
+     [
+      "flux",
+      0.3554
+     ],
+     [
+      "nccl",
+      0.3981
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.6639
+     ],
+     [
+      "nccl",
+      0.7399
+     ]
+    ],
+    [
+     [
+      "flux",
+      1.2807
+     ],
+     [
+      "nccl",
+      1.424
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  }
+ },
+ "meta": {
+  "model": "qwen2.5-32b",
+  "world": 4,
+  "phase": "prefill",
+  "mode": "steady",
+  "graph": false,
+  "method": "g3",
+  "eps": null
+ }
+}

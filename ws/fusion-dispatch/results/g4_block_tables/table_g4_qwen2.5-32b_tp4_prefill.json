@@ -1,0 +1,331 @@
+{
+ "ag": {
+  "1792x5120": {
+   "layer": "qkv",
+   "M": [
+    1024,
+    2048,
+    4096
+   ],
+   "rank": [
+    [
+     [
+      "flux",
+      0.1862
+     ],
+     [
+      "nccl",
+      0.1928
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.1963
+     ],
+     [
+      "fluxag",
+      0.2077
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.2595
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.2963
+     ],
+     [
+      "fluxag",
+      0.3424
+     ],
+     [
+      "nccl",
+      0.3447
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.4162
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.5258
+     ],
+     [
+      "fluxag",
+      0.6053
+     ],
+     [
+      "nccl",
+      0.6148
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  },
+  "13824x5120": {
+   "layer": "gate_up",
+   "M": [
+    1024,
+    2048,
+    4096
+   ],
+   "rank": [
+    [
+     [
+      "nccl",
+      0.6591
+     ],
+     [
+      "fluxag",
+      0.6741
+     ],
+     [
+      "flux",
+      0.7199
+     ],
+     [
+      "fluxag_fluxgemm",
+      0.73
+     ]
+    ],
+    [
+     [
+      "fluxag",
+      1.2739
+     ],
+     [
+      "nccl",
+      1.2761
+     ],
+     [
+      "flux",
+      1.3194
+     ],
+     [
+      "fluxag_fluxgemm",
+      1.3809
+     ]
+    ],
+    [
+     [
+      "fluxag",
+      2.5029
+     ],
+     [
+      "nccl",
+      2.5125
+     ],
+     [
+      "flux",
+      2.5602
+     ],
+     [
+      "fluxag_fluxgemm",
+      2.7181
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  }
+ },
+ "rs": {
+  "5120x1280": {
+   "layer": "o",
+   "M": [
+    1024,
+    2048,
+    4096
+   ],
+   "rank": [
+    [
+     [
+      "flux",
+      0.1111
+     ],
+     [
+      "nccl",
+      0.1542
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.187
+     ],
+     [
+      "nccl",
+      0.2391
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.3383
+     ],
+     [
+      "nccl",
+      0.4377
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  },
+  "5120x6912": {
+   "layer": "down",
+   "M": [
+    1024,
+    2048,
+    4096
+   ],
+   "rank": [
+    [
+     [
+      "flux",
+      0.3706
+     ],
+     [
+      "nccl",
+      0.4409
+     ]
+    ],
+    [
+     [
+      "flux",
+      0.6879
+     ],
+     [
+      "nccl",
+      0.6929
+     ]
+    ],
+    [
+     [
+      "flux",
+      1.311
+     ],
+     [
+      "nccl",
+      1.3633
+     ]
+    ]
+   ],
+   "verdict": [
+    "predicted",
+    "predicted",
+    "predicted"
+   ],
+   "source": [
+    "fallback/none",
+    "fallback/none",
+    "fallback/none"
+   ]
+  }
+ },
+ "meta": {
+  "model": "qwen2.5-32b",
+  "world": 4,
+  "phase": "prefill",
+  "mode": "steady",
+  "graph": false,
+  "method": "g4",
+  "eps": 0.07546442698646483,
+  "probes_pending": [
+   {
+    "kind": "ag",
+    "key": "1792x5120",
+    "layer": "qkv",
+    "M": 1024,
+    "margin": 0.0352,
+    "candidates": [
+     "A",
+     "B"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "13824x5120",
+    "layer": "gate_up",
+    "M": 1024,
+    "margin": 0.0227,
+    "candidates": [
+     "B",
+     "C"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "13824x5120",
+    "layer": "gate_up",
+    "M": 2048,
+    "margin": 0.0018,
+    "candidates": [
+     "C",
+     "B"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "13824x5120",
+    "layer": "gate_up",
+    "M": 4096,
+    "margin": 0.0038,
+    "candidates": [
+     "C",
+     "B"
+    ]
+   },
+   {
+    "kind": "rs",
+    "key": "5120x6912",
+    "layer": "down",
+    "M": 2048,
+    "margin": 0.0072,
+    "candidates": [
+     "A",
+     "B"
+    ]
+   },
+   {
+    "kind": "rs",
+    "key": "5120x6912",
+    "layer": "down",
+    "M": 4096,
+    "margin": 0.0399,
+    "candidates": [
+     "A",
+     "B"
+    ]
+   }
+  ]
+ }
+}
