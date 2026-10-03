@@ -286,3 +286,19 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - **留給下個 session**：
   - 連上 gpu1 後先唯讀盤點硬體，回報使用者，確認後再 clone / 編譯 / 跑；
   - 流程照報告第 3 節（校準 → 決策 push → 標準答案 → 比 regret）。
+
+## 2026-10-03 · gpu1 session · 跨機器驗證：gpu1 唯讀盤點
+
+- 在 gpu1 直接開 Claude Code session（備案路線）；clone 已存在，切到 `fusion-dispatch`。只做唯讀盤點，沒有編譯、沒有 GPU 量測。
+- 原始輸出：`results/gpu1_inventory/`；報告：`reports/20261003_gpu1_inventory.md`。
+- **硬體**：4× Tesla V100-PCIE-32GB（sm70，80 SM），驅動 580.142；無 NVLink；PCIe Gen3 x16；
+  P2P 只在 GPU0↔1、GPU2↔3，跨 CPU 經 host + QPI；2× Xeon E5-2678 v3，125 GiB；`/` 只剩 9.2 GB，`/home` 是 NAS。
+- **Flux 不能跑**：`src/cuda/op_registry.cu:39-51` 只接受 sm80/89/90 與 A100/H20/H800/L20 的 SM 數；kernel 也用 sm80 指令。
+  依凍結規則，R1 / R3 在這台退回 R2 → 無法回答「決策器是否比簡單規則好」，只能做縮小版（切法 + 校準可攜性，fp16）。
+- **共用**：7 個其他使用者在線；GPU 盤點時閒置；Slurm 有但 gpu1 DOWN、無 GRES，沒有排程保護。
+- **新的坑**（**需 boss 裁決**：是否寫進 `CLAUDE.md` 陷阱表 / 5.1 第 11 條）：
+  1. `exclusive_guard.py` 用使用者名稱比對，`ps` 把 > 8 字的名稱截成 `allenzh+` → 自己的程序被當成別人，預檢 ABORT、執行必 CONTAMINATED；
+  2. `exclusive_guard.py` 的 CPU% 是生命期平均：user_D 的程序瞬間 151.7%、守衛看到 0.2%；
+  3. CLAUDE.md 第 2 節是 css-host-158 專屬；多機器後建議改成「各機器環境」小節。
+- **留給下個 session**：等使用者決定 gpu1 做不做縮小版（或找 sm80+ 無 NVLink 機器 / 先做 E0）。
+  若做：先寫 `exclusive_guard_v2.py`，再建 venv（快取放 `/home`），腳本改 v2（fp16、Flux 可選、`gpu1_tp*_*.json`）。

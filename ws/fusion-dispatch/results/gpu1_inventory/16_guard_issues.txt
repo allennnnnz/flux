@@ -1,0 +1,11 @@
+== ps user column truncation 2026-10-03T16:44:47+08:00
+ME(pwd)=allenzhuang0117 len=15
+allenzh+  364649
+== user_D pid 2245467 lifetime pcpu vs instantaneous
+2245467 user_D    0.2  2-08:39:24 MainThread
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+2245467 user_D    20   0 2023884 347748  30060 S   0.0   0.3   6:57.62 MainThr+
+== ps with wide user field
+ 160152       1 allenzhuang0117                   0.1
+ 175427 3965714 allenzhuang0117                   0.0
+ 176078 3965563 allenzhuang0117                   0.0

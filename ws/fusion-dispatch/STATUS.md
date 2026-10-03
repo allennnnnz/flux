@@ -3,7 +3,7 @@
 **本 workstream 唯一權威。** 第 1 節由 boss 寫入，worker 不改；第 2 節起由 worker 維護。
 
 建立：2026-09-29（boss）
-最後更新：2026-10-03（boss 兼 worker，G4 完成）
+最後更新：2026-10-03（gpu1 唯讀盤點完成）
 狀態：**第三階段（泛用決策器）G4 完成（op 0.17%、block 0.02%），下一步 F4 / G5 / G6**（D-006 / D-008：最高優先；有證據前不改 `src/`）
 
 ---
@@ -38,9 +38,13 @@
 **下一步**：
 1. **跨機器驗證（使用者提供 gpu1，優先）**：照報告第 3 節，對手規則 R1–R3 已凍結；
    成功 = 決策器重新校準後 regret ≤ 2%，且至少一個環境簡單規則 ≥ 5%。
-   - 卡在連線：從本機連跳板機被拒；改用 SSH agent forwarding，待使用者在筆電設定 `ForwardAgent yes` 後重連；
-   - 備案：在 gpu1 直接開 Claude Code session，讀本節接手；
-   - 連上後先唯讀盤點硬體（GPU 型號、NVLink / PCIe、驅動），再評估 clone + 編譯 Flux + vLLM venv 的成本。
+   - **2026-10-03 gpu1 唯讀盤點完成**（在 gpu1 直接開 session；`reports/20261003_gpu1_inventory.md`，原始輸出 `results/gpu1_inventory/`）：
+     - gpu1 = **4× V100-PCIE-32GB（sm70）**，無 NVLink，PCIe Gen3 x16，P2P 只在 GPU0↔1、GPU2↔3（跨 CPU 經 host + QPI）；
+     - **Flux 不能跑**（`src/cuda/op_registry.cu:39-51` 只接受 sm80/89/90 與特定 SM 數）；V100 無 bf16 → 要改 fp16；
+     - 依凍結規則，R1 / R3 在 gpu1 退回 R2 → **這台無法回答核心問題**，只能做「縮小版」（切法決策 + 模型校準可攜性，等於 E2 真機版）；
+     - 共用機器（7 個其他使用者在線，GPU 盤點時閒置，Slurm 不管 gpu1）；
+     - **`exclusive_guard.py` 在這台會誤判**：`ps` 截斷使用者名稱（自己被當別人）、CPU% 用生命期平均（抓不到突發）→ 建環境前先做 v2；
+     - **待使用者決定**：做縮小版、找 sm80+ 且無 NVLink 的機器、或先做 E0。尚未編譯、尚未跑任何 GPU 量測。
 2. 其他可用環境（報告第 3 節）：E0 模型推演（不用 GPU）、E1 本機背景塞車、E2 本機 PCIe-only（原 G5）。
 3. **F4**（vLLM 端到端）、**G6**（總報告 + auditor）：待使用者決定先後。
 

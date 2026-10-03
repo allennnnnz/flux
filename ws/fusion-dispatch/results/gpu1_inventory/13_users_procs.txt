@@ -1,0 +1,91 @@
+== who
+user_E      pts/1        2026-08-29 15:33 (tmux(1073393).%5)
+user_E      pts/4        2026-08-03 11:50 (tmux(1073393).%0)
+user_H     pts/5        2026-08-03 11:50 (tmux(1073393).%0)
+user_E      pts/6        2026-08-03 11:52 (tmux(1073393).%1)
+user_G      pts/2        2026-09-15 12:54 (tmux(3280382).%0)
+user_E      pts/7        2026-09-01 07:17 (tmux(1073393).%12)
+user_E      pts/9        2026-09-08 12:46 (tmux(1073393).%15)
+user_E      pts/10       2026-08-03 17:07 (tmux(1073393).%3)
+user_E      pts/3        2026-08-31 16:43 (tmux(1073393).%11)
+user_E      pts/8        2026-09-16 21:52 (tmux(1073393).%17)
+user_E      pts/12       2026-09-30 11:51 (tmux(1073393).%19)
+user_F     pts/16       2026-09-16 15:11 (tmux(674624).%0)
+user_F     pts/17       2026-09-16 15:15 (tmux(674624).%1)
+user_A pts/21       2026-09-23 17:11 (tmux(3114010).%1)
+user_E      pts/22       2026-09-21 19:09 (tmux(1073393).%18)
+user_F     pts/19       2026-10-02 16:22 (tmux(674624).%7)
+user_B pts/15       2026-10-01 20:52 (tmux(3717047).%0)
+user_A pts/18       2026-09-24 09:57 (tmux(3114010).%2)
+user_E      pts/20       2026-10-01 20:23 (tmux(1073393).%20)
+user_D   pts/23       2026-09-28 11:56 (192.168.20.3)
+user_B pts/27       2026-10-01 20:52 (tmux(3717047).%1)
+== w
+ 16:42:33 up 62 days,  1:44, 28 users,  load average: 4.27, 3.46, 2.41
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT
+user_B          192.168.20.20    16:29   26:53m  0.00s  0.02s sshd: user_B [priv]
+user_C            192.168.20.20    15:41   26:53m  0.00s  0.03s sshd: user_C [priv]
+user_C            192.168.20.20    15:25   26:53m  0.00s  0.04s sshd: user_C [priv]
+user_C            192.168.20.20    15:25   26:53m  0.00s  0.03s sshd: user_C [priv]
+allenzhu          192.168.20.20    11:43   26:53m  0.00s  0.03s sshd: allenzhuang0117 [priv]
+user_D            192.168.20.3     五09   26:53m  0.00s  0.02s sshd: user_D [priv]
+user_D            192.168.20.3     五09   26:53m  0.00s  0.02s sshd: user_D [priv]
+user_D            192.168.20.3     一11   26:53m  0.00s  0.03s sshd: user_D [priv]
+gdm      tty1     -                02 八 26 22:23m  2:36m  0.02s /usr/libexec/gsd-printer
+== users with processes
+    667 root
+    111 user_D
+     53 allenzhuang0117
+     43 user_E
+     42 gdm
+     40 user_B
+     36 user_C
+     33 user_F
+     23 user_G
+     19 70
+      9 user_A
+      2 nobody
+      2 kernoops
+      2 avahi
+      1 user_H
+      1 systemd-timesync
+      1 systemd-resolve
+      1 systemd-oom
+      1 systemd-network
+      1 syslog
+      1 rtkit
+      1 _rpc
+      1 polkitd
+      1 munge
+      1 messagebus
+      1 gnome-remote-desktop
+      1 cups-browsed
+      1 colord
+      1 472
+== top cpu
+    PID USER     %CPU %MEM     ELAPSED COMMAND
+   3072 root     45.5  0.1 62-01:44:00 cadvisor
+ 351117 allenzh+ 10.8  0.4       03:39 MainThread
+ 353299 allenzh+  8.4  0.2       02:59 claude
+2429491 user_A  5.1  0.6  2-06:59:28 opencode
+   1993 root      4.0  0.0 62-01:44:05 containerd
+   1451 root      3.7  0.0 62-01:44:15 nv_queue
+ 351726 allenzh+  3.7  0.3       03:33 MainThread
+   4494 nobody    3.7  0.5 62-01:43:54 prometheus
+   1468 root      3.1  0.0 62-01:44:12 nv_queue
+ 236161 user_C    3.0  0.6    01:01:24 MainThread
+ 112267 user_B  2.9  0.4    02:04:15 MainThread
+  94435 user_B  2.4  0.3    02:12:42 MainThread
+   6827 70        2.3  0.0 62-01:42:29 postgres
+   1454 root      2.3  0.0 62-01:44:14 nv_queue
+   1459 root      1.9  0.0 62-01:44:13 nv_queue
+   4999 root      1.8  0.0 62-01:43:54 python
+ 875190 user_D    1.6  0.3  1-07:29:02 MainThread
+4038491 user_E       1.6  0.2  9-07:20:24 nvim
+4118144 user_E       1.5  1.6  9-06:04:09 codex
+== uptime
+ 16:42:34 up 62 days,  1:44, 28 users,  load average: 4.27, 3.46, 2.41
+== loadavg
+4.27 3.46 2.41 3/6111 359820
+== /home
+[redacted: directory listing of other users removed before publishing]

@@ -1,0 +1,136 @@
+== dry preflight using exclusive_guard functions (no command executed) 2026-10-03T16:43:36+08:00
+gpu_procs []
+other_user_cpu_hogs(>20% lifetime) [(362182, 'allenzh+', 60.0)]
+other_users_logged_in ['user_A', 'user_G', 'user_D', 'user_E', 'user_F', 'user_H', 'user_B']
+== top sample 1 16:43:36
+top - 16:43:39 up 62 days,  1:45, 28 users,  load average: 4.00, 3.46, 2.48
+Tasks: 1100 total,   3 running, 1086 sleeping,   0 stopped,  11 zombie
+%Cpu(s):  3.9 us,  2.5 sy,  0.0 ni, 93.3 id,  0.2 wa,  0.0 hi,  0.2 si,  0.0 st 
+MiB Mem : 128773.0 total,  61239.5 free,  22121.9 used,  46879.7 buff/cache     
+MiB Swap:   2048.0 total,    341.6 free,   1706.4 used. 106651.1 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+2245467 user_D    20   0 1855872 197940  30060 R 151.7   0.2   5:57.19 MainThread
+   3072 root      20   0 1488288 210504  11404 S  35.6   0.2     4w+0d cadvisor
+   1993 root      20   0 5459092  90600  62268 S  22.4   0.1     60,23 containerd
+ 875190 user_D    20   0   21.7g 511840  55360 S   8.8   0.4  31:18.94 MainThread
+ 351117 allenzh+  20   0   21.4g 634940 104080 S   5.9   0.5   0:24.52 MainThread
+   1459 root      20   0       0      0      0 S   4.9   0.0     29,20 nv_queue
+ 314029 root      20   0       0      0      0 I   4.9   0.0   0:02.36 kworker/u97:8-nfsiod
+2429491 user_A  20   0   76.3g 843916  27916 S   4.4   0.6 170:31.34 opencode
+ 358548 root      20   0       0      0      0 I   3.4   0.0   0:00.18 kworker/u97:19-nfsiod
+   1451 root      20   0       0      0      0 S   2.9   0.0     56,15 nv_queue
+   4999 root      20   0  941648  82104   4452 S   2.9   0.1     27,43 python
+ 314028 root      20   0       0      0      0 I   2.9   0.0   0:03.01 kworker/u97:5-nfsiod
+ 358547 root      20   0       0      0      0 I   2.9   0.0   0:00.16 kworker/u97:18-nfsiod
+ 236161 user_C    20   0   21.5g 806604 102504 D   2.4   0.6   1:53.81 MainThread
+ 350367 root      20   0       0      0      0 I   2.4   0.0   0:01.36 kworker/u97:0-nfsiod
+== top sample 2 16:43:47
+top - 16:43:49 up 62 days,  1:45, 28 users,  load average: 4.08, 3.50, 2.50
+Tasks: 1102 total,   3 running, 1088 sleeping,   0 stopped,  11 zombie
+%Cpu(s):  4.1 us,  2.6 sy,  0.0 ni, 92.9 id,  0.1 wa,  0.0 hi,  0.3 si,  0.0 st 
+MiB Mem : 128773.0 total,  61061.9 free,  22165.5 used,  47013.5 buff/cache     
+MiB Swap:   2048.0 total,    341.6 free,   1706.4 used. 106607.5 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+ 362578 user_D    20   0  261.4g  56492  23600 S 153.9   0.0   0:03.14 vsce-sign
+2245467 user_D    20   0 1855960 197932  30060 S  64.7   0.2   6:03.46 MainThread
+   1993 root      20   0 5459092  91640  62268 S  17.6   0.1     60,23 containerd
+   3072 root      20   0 1488288 204984  11404 S   5.4   0.2     4w+0d cadvisor
+2429491 user_A  20   0   76.3g 861528  27916 S   5.4   0.7 170:35.09 opencode
+ 358547 root      20   0       0      0      0 I   4.9   0.0   0:00.30 kworker/u97:18-xprtiod
+ 314029 root      20   0       0      0      0 I   4.4   0.0   0:02.51 kworker/u97:8-writeback
+ 333169 root      20   0       0      0      0 R   4.4   0.0   0:01.60 kworker/u97:2+xprtiod
+ 351117 allenzh+  20   0   21.4g 634968 104080 S   4.4   0.5   0:24.74 MainThread
+ 350370 root      20   0       0      0      0 I   3.9   0.0   0:00.46 kworker/u97:11-rpciod
+   6827 70        20   0  317320  39304  37336 R   3.4   0.0     35,27 postgres
+   1451 root      20   0       0      0      0 S   2.9   0.0     56,15 nv_queue
+   1468 root      20   0       0      0      0 S   2.9   0.0     46,37 nv_queue
+ 875190 user_D    20   0   21.7g 511840  55360 S   2.9   0.4  31:19.23 MainThread
+   4471 nobody    20   0 1241624  25080   6404 S   2.5   0.0     14,56 postgres_export
+== top sample 3 16:43:57
+top - 16:44:00 up 62 days,  1:45, 28 users,  load average: 4.14, 3.53, 2.53
+Tasks: 1098 total,   2 running, 1085 sleeping,   0 stopped,  11 zombie
+%Cpu(s):  3.1 us,  1.6 sy,  0.0 ni, 93.3 id,  1.9 wa,  0.0 hi,  0.1 si,  0.0 st 
+MiB Mem : 128773.0 total,  60660.0 free,  22101.1 used,  47479.9 buff/cache     
+MiB Swap:   2048.0 total,    341.6 free,   1706.4 used. 106671.9 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+2245467 user_D    20   0 1886168 199552  30060 R  92.2   0.2   6:16.88 MainThread
+   1993 root      20   0 5459092  90624  62268 S  18.1   0.1     60,23 containerd
+   3072 root      20   0 1488288 206704  11404 S  16.2   0.2     4w+0d cadvisor
+   6827 70        20   0  317052  39120  37336 S   8.8   0.0     35,27 postgres
+ 351117 allenzh+  20   0   21.4g 635012 104080 S   5.4   0.5   0:24.99 MainThread
+ 314028 root      20   0       0      0      0 I   4.4   0.0   0:03.19 kworker/u97:5-xprtiod
+ 350369 root      20   0       0      0      0 I   3.9   0.0   0:01.30 kworker/u97:10-nfsiod
+ 357803 root      20   0       0      0      0 I   3.9   0.0   0:00.19 kworker/u97:17-nfsiod
+   1451 root      20   0       0      0      0 S   3.4   0.0     56,15 nv_queue
+2429491 user_A  20   0   76.3g 826964  27916 S   3.4   0.6 170:35.57 opencode
+   1468 root      20   0       0      0      0 S   2.9   0.0     46,37 nv_queue
+ 350371 root      20   0       0      0      0 I   2.9   0.0   0:01.38 kworker/u97:12-rpciod
+ 353299 allenzh+  20   0 5648396 314040 123660 S   2.5   0.2   0:19.53 claude
+   4471 nobody    20   0 1241624  24524   6404 S   2.0   0.0     14,56 postgres_export
+   4999 root      20   0  941648  82104   4452 S   2.0   0.1     27,43 python
+== top sample 4 16:44:08
+top - 16:44:10 up 62 days,  1:46, 28 users,  load average: 3.81, 3.49, 2.53
+Tasks: 1100 total,   3 running, 1086 sleeping,   0 stopped,  11 zombie
+%Cpu(s):  4.5 us,  1.8 sy,  0.0 ni, 93.4 id,  0.3 wa,  0.0 hi,  0.1 si,  0.0 st 
+MiB Mem : 128773.0 total,  60606.7 free,  22070.6 used,  47563.7 buff/cache     
+MiB Swap:   2048.0 total,    341.6 free,   1706.4 used. 106702.4 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+2245467 user_D    20   0 1886168 199780  30060 R 114.1   0.2   6:26.98 MainThread
+   3072 root      20   0 1488288 175760  11404 S  70.7   0.1     4w+0d cadvisor
+   6827 70        20   0  317052  39120  37336 S   7.3   0.0     35,27 postgres
+ 351117 allenzh+  20   0   21.4g 635152 104080 S   6.3   0.5   0:25.26 MainThread
+2429491 user_A  20   0   76.3g 827056  27916 S   4.4   0.6 170:36.09 opencode
+   1468 root      20   0       0      0      0 S   3.4   0.0     46,37 nv_queue
+ 875190 user_D    20   0   21.7g 511840  55360 S   3.4   0.4  31:19.59 MainThread
+   4471 nobody    20   0 1241624  22460   6404 S   2.9   0.0     14,56 postgres_export
+ 350371 root      20   0       0      0      0 I   2.9   0.0   0:01.64 kworker/u97:12-nfsiod
+   1451 root      20   0       0      0      0 S   2.4   0.0     56,15 nv_queue
+   2117 root      20   0 7083988 111836  20252 S   2.4   0.1     18,12 dockerd
+   4999 root      20   0  941648  82104   4452 S   2.4   0.1     27,43 python
+ 236161 user_C    20   0   21.5g 806604 102504 S   2.4   0.6   1:54.49 MainThread
+ 350367 root      20   0       0      0      0 I   2.4   0.0   0:01.55 kworker/u97:0-xprtiod
+ 350368 root      20   0       0      0      0 I   2.4   0.0   0:00.59 kworker/u97:9-nfsiod
+== top sample 5 16:44:18
+top - 16:44:20 up 62 days,  1:46, 28 users,  load average: 3.61, 3.46, 2.53
+Tasks: 1100 total,   3 running, 1086 sleeping,   0 stopped,  11 zombie
+%Cpu(s):  4.7 us,  1.4 sy,  0.0 ni, 93.6 id,  0.3 wa,  0.0 hi,  0.1 si,  0.0 st 
+MiB Mem : 128773.0 total,  60428.9 free,  22093.7 used,  47718.3 buff/cache     
+MiB Swap:   2048.0 total,    341.6 free,   1706.4 used. 106679.3 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+   3072 root      20   0 1488288 220868  11404 S 133.7   0.2     4w+0d cadvisor
+2245467 user_D    20   0 1891032 207340  30060 R  84.4   0.2   6:36.92 MainThread
+   6827 70        20   0  317052  39120  37336 S   6.8   0.0     35,27 postgres
+ 873804 user_D    20   0  143228  19400  11168 S   4.9   0.0   1:06.14 code-07f806f999
+2429491 user_A  20   0   76.3g 827040  27916 S   4.9   0.6 170:36.60 opencode
+ 351117 allenzh+  20   0   21.4g 635168 104080 S   4.4   0.5   0:25.48 MainThread
+ 276476 root      20   0       0      0      0 I   3.4   0.0   0:04.16 kworker/u97:3-nfsiod
+ 350369 root      20   0       0      0      0 I   3.4   0.0   0:01.70 kworker/u97:10-xprtiod
+   1468 root      20   0       0      0      0 S   2.9   0.0     46,37 nv_queue
+   4471 nobody    20   0 1241624  22448   6404 S   2.9   0.0     14,56 postgres_export
+ 357803 root      20   0       0      0      0 I   2.4   0.0   0:00.62 kworker/u97:17-xprtiod
+ 358550 root      20   0       0      0      0 I   2.4   0.0   0:00.23 kworker/u97:21-rpciod
+   1451 root      20   0       0      0      0 S   2.0   0.0     56,15 nv_queue
+ 236161 user_C    20   0   21.5g 806604 102504 S   2.0   0.6   1:54.71 MainThread
+ 363692 allenzh+  20   0   15216   6224   3792 R   2.0   0.0   0:00.11 top
+== top sample 6 16:44:28
+top - 16:44:31 up 62 days,  1:46, 28 users,  load average: 3.51, 3.44, 2.54
+Tasks: 1096 total,   1 running, 1084 sleeping,   0 stopped,  11 zombie
+%Cpu(s):  5.9 us,  1.7 sy,  0.0 ni, 92.0 id,  0.3 wa,  0.0 hi,  0.1 si,  0.0 st 
+MiB Mem : 128773.0 total,  60352.5 free,  22025.4 used,  47863.1 buff/cache     
+MiB Swap:   2048.0 total,    341.6 free,   1706.4 used. 106747.5 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+   3072 root      20   0 1488288 215396  11404 S 178.5   0.2     4w+0d cadvisor
+2245467 user_D    20   0 1891032 222088  30060 S 107.3   0.2   6:46.64 MainThread
+2429491 user_A  20   0   76.3g 827400  27916 S  10.7   0.6 170:37.17 opencode
+   6827 70        20   0  317052  39120  37336 S   6.3   0.0     35,27 postgres
+ 351117 allenzh+  20   0   21.4g 635188 104080 S   4.4   0.5   0:25.69 MainThread
+   1451 root      20   0       0      0      0 S   3.9   0.0     56,15 nv_queue
+ 357803 root      20   0       0      0      0 I   3.9   0.0   0:00.89 kworker/u97:17-rpciod
+   4487 472       20   0 1708000  78752  30716 S   2.9   0.1 225:12.50 grafana
+ 236161 user_C    20   0   21.5g 806604 102504 S   2.9   0.6   1:54.94 MainThread
+ 333169 root      20   0       0      0      0 I   2.9   0.0   0:01.98 kworker/u97:2-nfsiod
+   1468 root      20   0       0      0      0 S   2.4   0.0     46,37 nv_queue
+   4471 nobody    20   0 1241624  22092   6404 S   2.4   0.0     14,56 postgres_export
+ 350369 root      20   0       0      0      0 I   2.4   0.0   0:02.00 kworker/u97:10-nfsiod
+ 362045 root      20   0       0      0      0 I   2.4   0.0   0:00.48 kworker/u97:22-rpciod
+ 364016 allenzh+  20   0   15216   6220   3792 R   2.4   0.0   0:00.11 top

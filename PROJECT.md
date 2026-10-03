@@ -2,7 +2,7 @@
 
 **boss session 專屬。** worker 只讀。
 
-最後更新：2026-10-02（boss）
+最後更新：2026-10-03（gpu1 盤點）
 
 閱讀順序：`CLAUDE.md` → 本檔 → `ws/<你的 workstream>/STATUS.md` → 該 JOURNAL 最近條目。
 Phase 0 背景：`docs/PHASE0_FINDINGS.md`（設計規則）；細節才看 `docs/PHASE0_STATUS.md`。
@@ -26,13 +26,13 @@ G4 之後的事後分析（`ws/fusion-dispatch/reports/20261003_g4_flux_value.md
 - decode 輸在切法；
 - 在這台，簡單規則「decode vLLM、prefill Flux」幾乎跟決策器一樣好（省 7.5% vs 8.0%），所以決策器的價值要在別的硬體上證明。
 
-下一步：**跨機器驗證**。使用者提供 gpu1（EE325），連線設定中；對手規則與成功標準已凍結。F4 / G6 待決定。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
+下一步：**跨機器驗證**。使用者提供 gpu1（EE325）；**2026-10-03 唯讀盤點完成：4× V100-PCIE（sm70）、無 NVLink，Flux 不能跑 → 只能做縮小版（切法 + 校準可攜性），核心問題需要 sm80+ 無 NVLink 的機器，待使用者決定**（`ws/fusion-dispatch/reports/20261003_gpu1_inventory.md`）；對手規則與成功標準已凍結。F4 / G6 待決定。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
 
 ## 2. Workstream 總表
 
 | workstream | 優先 | 狀態 | 依賴 | 負責 session | 最近更新 |
 | --- | --- | --- | --- | --- | --- |
-| `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器，G0–G4 完成（`reports/20261003_g4_dispatcher.md`：op 0.17%、block 0.02%），下一步：跨機器驗證（gpu1，連線設定中）**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-03 |
+| `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器，G0–G4 完成（`reports/20261003_g4_dispatcher.md`：op 0.17%、block 0.02%），下一步：跨機器驗證（gpu1 盤點完成：V100 PCIe，Flux 不能跑，待決定範圍）**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-03 |
 | `ws/diag-overlap` | 第二 | 未開始 | — | 未指派 | — |
 | `ws/hetero-proxy` | 第二，可與上並行 | 未開始 | — | 未指派 | — |
 | `ws/cost-model` | 第三 | 模型目標由 fusion-dispatch 第三階段執行；預測器 v1 已建於 `common/cost_model/predictor/`（G1），校準參數檔在 `common/cost_model/hw_profiles/`（G2）（D-008） | — | 未指派 | 2026-10-02 |
@@ -85,7 +85,8 @@ worker 在 JOURNAL 標「需 boss 裁決」的事項會被 boss 搬到這裡。
 ## 4. 下一步（boss）
 
 0. `ws/fusion-dispatch`：
-   - 跨機器驗證：gpu1 連線（SSH agent forwarding，待使用者設定）→ 唯讀盤點 → 核准驗證方案（`reports/20261003_g4_flux_value.md` 第 3 節）；
+   - 跨機器驗證：gpu1 唯讀盤點完成（2026-10-03，V100 PCIe sm70，Flux 不能跑）→ **決定**：gpu1 做縮小版 / 找 sm80+ 無 NVLink 機器 / 先做 E0；
+     `exclusive_guard.py` 在 gpu1 有兩個誤判 bug（使用者名稱截斷、CPU% 生命期平均），量測前要先修（v2）；
    - 決定 F4（vLLM 端到端，用決策器 v2）/ G6（總報告）的先後；
    - 安排 auditor 審 E0、E1–E3、G1–G4 報告。
 1. 指派第一個 worker session 到 `ws/diag-overlap`。

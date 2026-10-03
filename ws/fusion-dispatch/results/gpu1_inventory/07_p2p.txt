@@ -1,0 +1,80 @@
+== p2p r
+ 	[4mGPU0	GPU1	GPU2	GPU3	[0m
+ GPU0	X	OK	TNS	TNS	
+ GPU1	OK	X	TNS	TNS	
+ GPU2	TNS	TNS	X	OK	
+ GPU3	TNS	TNS	OK	X	
+
+Legend:
+
+  X    = Self
+  OK   = Status Ok
+  CNS  = Chipset not supported
+  GNS  = GPU not supported
+  TNS  = Topology not supported
+  NS   = Not supported
+  U    = Unknown
+== p2p w
+ 	[4mGPU0	GPU1	GPU2	GPU3	[0m
+ GPU0	X	OK	TNS	TNS	
+ GPU1	OK	X	TNS	TNS	
+ GPU2	TNS	TNS	X	OK	
+ GPU3	TNS	TNS	OK	X	
+
+Legend:
+
+  X    = Self
+  OK   = Status Ok
+  CNS  = Chipset not supported
+  GNS  = GPU not supported
+  TNS  = Topology not supported
+  NS   = Not supported
+  U    = Unknown
+== p2p n
+ 	[4mGPU0	GPU1	GPU2	GPU3	[0m
+ GPU0	X	NS	NS	NS	
+ GPU1	NS	X	NS	NS	
+ GPU2	NS	NS	X	NS	
+ GPU3	NS	NS	NS	X	
+
+Legend:
+
+  X    = Self
+  OK   = Status Ok
+  CNS  = Chipset not supported
+  GNS  = GPU not supported
+  TNS  = Topology not supported
+  NS   = Not supported
+  U    = Unknown
+== p2p a
+ 	[4mGPU0	GPU1	GPU2	GPU3	[0m
+ GPU0	X	NS	NS	NS	
+ GPU1	NS	X	NS	NS	
+ GPU2	NS	NS	X	NS	
+ GPU3	NS	NS	NS	X	
+
+Legend:
+
+  X    = Self
+  OK   = Status Ok
+  CNS  = Chipset not supported
+  GNS  = GPU not supported
+  TNS  = Topology not supported
+  NS   = Not supported
+  U    = Unknown
+== p2p p
+ 	[4mGPU0	GPU1	GPU2	GPU3	[0m
+ GPU0	X	OK	NS	NS	
+ GPU1	OK	X	NS	NS	
+ GPU2	NS	NS	X	OK	
+ GPU3	NS	NS	OK	X	
+
+Legend:
+
+  X    = Self
+  OK   = Status Ok
+  CNS  = Chipset not supported
+  GNS  = GPU not supported
+  TNS  = Topology not supported
+  NS   = Not supported
+  U    = Unknown

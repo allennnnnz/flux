@@ -1,0 +1,26 @@
+NodeName=gpu1 Arch=x86_64 CoresPerSocket=12 
+   Gres=(null)
+   OS=Linux 6.8.0-111-generic #111-Ubuntu SMP PREEMPT_DYNAMIC Sat Apr 11 23:16:02 UTC 2026 
+   State=DOWN ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Reason=Node unexpectedly rebooted [slurm@2025-07-08T12:02:11]
+NodeName=gpu2 Arch=x86_64 CoresPerSocket=12 
+   Gres=(null)
+   OS=Linux 6.8.0-90-generic #91-Ubuntu SMP PREEMPT_DYNAMIC Tue Nov 18 14:14:30 UTC 2025 
+   State=DOWN+DRAIN+INVALID_REG ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Reason=Low RealMemory (reported:128769 < 100.00% of configured:128772) [slurm@2025-10-27T11:56:11]
+NodeName=gpu3 Arch=x86_64 CoresPerSocket=12 
+   Gres=(null)
+   OS=Linux 6.8.0-111-generic #111-Ubuntu SMP PREEMPT_DYNAMIC Sat Apr 11 23:16:02 UTC 2026 
+   State=DOWN ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Reason=Node unexpectedly rebooted [slurm@2025-05-26T23:20:30]
+NodeName=gpu4 Arch=x86_64 CoresPerSocket=12 
+   Gres=(null)
+   OS=Linux 6.8.0-85-generic #85-Ubuntu SMP PREEMPT_DYNAMIC Thu Sep 18 15:26:59 UTC 2025 
+   State=DOWN ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Reason=Undraining [root@2025-05-19T02:08:39]
+NodeName=gpu5 Arch=x86_64 CoresPerSocket=12 
+   Gres=(null)
+   OS=Linux 6.8.0-84-generic #84-Ubuntu SMP PREEMPT_DYNAMIC Fri Sep  5 22:36:38 UTC 2025 
+   State=DOWN ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Reason=Undraining : Not responding [slurm@2025-07-06T06:10:23]
+ugrep: warning: /etc/slurm/gres.conf: No such file or directory

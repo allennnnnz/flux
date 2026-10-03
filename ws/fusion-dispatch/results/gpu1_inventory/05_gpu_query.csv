@@ -1,0 +1,5 @@
+index, name, pci.bus_id, memory.total [MiB], memory.used [MiB], utilization.gpu [%], compute_cap, driver_version, clocks.max.sm [MHz], clocks.current.sm [MHz], power.limit [W], persistence_mode, compute_mode
+0, Tesla V100-PCIE-32GB, 00000000:02:00.0, 32768 MiB, 5 MiB, 0 %, 7.0, 580.142, 1380 MHz, 135 MHz, 250.00 W, Disabled, Default
+1, Tesla V100-PCIE-32GB, 00000000:03:00.0, 32768 MiB, 5 MiB, 0 %, 7.0, 580.142, 1380 MHz, 135 MHz, 250.00 W, Disabled, Default
+2, Tesla V100-PCIE-32GB, 00000000:82:00.0, 32768 MiB, 5 MiB, 0 %, 7.0, 580.142, 1380 MHz, 135 MHz, 250.00 W, Disabled, Default
+3, Tesla V100-PCIE-32GB, 00000000:83:00.0, 32768 MiB, 5 MiB, 0 %, 7.0, 580.142, 1380 MHz, 135 MHz, 250.00 W, Disabled, Default

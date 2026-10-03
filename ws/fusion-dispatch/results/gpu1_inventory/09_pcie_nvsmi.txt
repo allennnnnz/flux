@@ -1,0 +1,36 @@
+            PCIe Generation
+                Max                                    : 3
+                Current                                : 3
+                Device Current                         : 3
+                Device Max                             : 3
+                Host Max                               : 3
+            Link Width
+                Max                                    : 16x
+                Current                                : 16x
+            PCIe Generation
+                Max                                    : 3
+                Current                                : 3
+                Device Current                         : 3
+                Device Max                             : 3
+                Host Max                               : 3
+            Link Width
+                Max                                    : 16x
+                Current                                : 16x
+            PCIe Generation
+                Max                                    : 3
+                Current                                : 3
+                Device Current                         : 3
+                Device Max                             : 3
+                Host Max                               : 3
+            Link Width
+                Max                                    : 16x
+                Current                                : 16x
+            PCIe Generation
+                Max                                    : 3
+                Current                                : 3
+                Device Current                         : 3
+                Device Max                             : 3
+                Host Max                               : 3
+            Link Width
+                Max                                    : 16x
+                Current                                : 16x

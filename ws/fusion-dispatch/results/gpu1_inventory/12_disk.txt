@@ -1,0 +1,24 @@
+Filesystem          Size  Used Avail Use% Mounted on
+nas:/volume1/homes   48T   39T  8.5T  83% /home
+/dev/nvme0n1p4      467G  435G  9.2G  98% /
+nas:/volume1/homes   48T   39T  8.5T  83% /home
+
+637M	/home/allenzhuang0117/flux
+Filesystem             Size  Used Avail Use% Mounted on
+tmpfs                   13G  5.1M   13G   1% /run
+/dev/nvme0n1p4         467G  435G  9.2G  98% /
+tmpfs                   63G  4.0K   63G   1% /dev/shm
+tmpfs                  5.0M  8.0K  5.0M   1% /run/lock
+efivarfs               512K  461K   47K  91% /sys/firmware/efi/efivars
+/dev/nvme0n1p1         511M  6.2M  505M   2% /boot/efi
+nas:/volume1/homes      48T   39T  8.5T  83% /home
+nas:/volume1/data_tmp   48T   39T  8.5T  83% /mnt
+tmpfs                   13G  108K   13G   1% /run/user/125
+tmpfs                   13G  140K   13G   1% /run/user/1000056
+tmpfs                   13G  100K   13G   1% /run/user/1000063
+tmpfs                   13G   92K   13G   1% /run/user/1000064
+tmpfs                   63G     0   63G   0% /run/qemu
+tmpfs                   13G   92K   13G   1% /run/user/30038
+tmpfs                   13G  104K   13G   1% /run/user/30037
+tmpfs                   13G   92K   13G   1% /run/user/1000001
+tmpfs                   13G  104K   13G   1% /run/user/30032
