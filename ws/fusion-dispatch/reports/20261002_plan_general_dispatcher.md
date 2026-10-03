@@ -1,7 +1,7 @@
 Supersedes: （無）
 
 > 狀態：**已核准（使用者，2026-10-02）**；執行中：G0–G3 完成（`reports/20261002_g1_predictor.md` 關卡通過；`20261002_g2_calibration.md` 校準 4 分鐘；`20261002_g3_unseen.md` 預先登記的新情境），下一步 G4。
-> G3 修正：G4 的決策器改為「模型（通訊 + 重疊）+ 實測單卡 GEMM + 少量探測」（G3 的錯誤來自 cuBLAS 斷崖）；G3 的 block 驗證移到 G4 一起做。
+> G3 修正：G4 的決策器改為「模型（通訊 + 重疊）+ 實測單卡 GEMM + 少量探測」（G3 的錯誤來自 cuBLAS 斷崖），**使用者 2026-10-03 核准**（D-009）；G3 的 block 驗證移到 G4 一起做。
 > G1 修正：計劃第 3 節第 3 步「非 registry config 一律探測」實測太貴（42–62%），且真正的斷崖來自登錄表 PCIe 區段的 config；改為「PCIe 調校 config 才探測」，G3 重驗。
 > 原始計劃檔：`~/.claude/plans/jazzy-gliding-blossom.md`（本檔為 repo 內權威副本）。
 > 新 session：先讀本檔與 `STATUS.md` §0，再讀 `reports/20261002_related_work.md`。
@@ -263,6 +263,21 @@ python3 common/measure/exclusive_guard.py --log <dir>/guard.log -- \
 | 持續負載下有功耗上限（約 1140–1245 MHz），短 run 則在 1410 MHz | 記錄時脈並分開處理；**決策表 / 校準必須在部署的時脈狀態下做** |
 | 長 graph 中 c10d NCCL 會超線性變慢 | graph 中的 SP 路徑考慮改用 vLLM 的 pynccl |
 | vLLM 0.8.5 V1 一定會載入 tokenizer；transformers 5.x 不相容 | 使用 `setup_vllm_venv.sh` |
+| **以下為 G1–G3 新增（2026-10-02 / 03）** | |
+| 同一 process 先建立再銷毀一組 Flux op、再建第二組，會隨機卡死 | 一組形狀一個 process（`run_calibration_v1.sh`、`run_g3_map_v1.sh`），或建好就不銷毀 |
+| `launch.sh` 不理會 `CUDA_VISIBLE_DEVICES` | 少於 8 卡用 `scripts/launch_tp.sh <TP>` |
+| Flux 登錄表 `// PCIE` 區段的 config 優先生效，在 NVLink 上反而慢 | 預測器把它當風險訊號（`flux_config.py` 的 `tuned_for`） |
+| cuBLAS 在特定形狀 × M 慢 22–53%（斷崖），任何 GEMM 模型都預測不到 | G4 起 GEMM 改用實測（單卡、每形狀幾秒） |
+| 自由參數會吸收模型沒有的效應：kernel 啟動時間被擬合到 0.11 ms 來吸收競爭（nsys 只有 0.03–0.05）；GemmRS 6 參數擬合讓 η 衝到上限 1.0 | 能直接量的常數就固定（nsys）；參數加物理上限（η ≤ 1、頻寬 ≤ 2.039 TB/s）；優先少參數（GemmRS 共用 gemm_only 參數後，推廣誤差 16% → 7%） |
+| 斷崖點會把擬合拉偏（例：重疊期間變慢比例被 G-FC1 M=3072 拉到 0.3） | 用穩健損失（中位數 \|log 誤差\|） |
+| steady 模式同 stream 連發的 peer copy 會跨呼叫重疊，逐筆 copy 時間不是單次時間（算出的同步成本會變負） | 需要單次時間的量一律用 gpu 模式 |
+| Flux AG 同步成本不是常數，隨卡數變化（8 / 4 / 2 卡：0.053 / 0.033 / 0.014 ms） | 每種卡數各校準一次；要外推卡數需加這一項 |
+| 極小形狀時「NCCL 再 cuBLAS 依序執行」≠ 兩者單獨相加（±5–16 µs） | 模型用相加；這些點總時間只有 0.04–0.06 ms，regret 比例會放大 |
+| 只在「預測差距小」時探測，抓不到「有信心但錯」的斷崖 | 探測規則要加風險訊號（PCIe config、GEMM 實測與模型差很多） |
+| 校準形狀若與評估層相同，會變成用答案擬合 | 校準形狀刻意避開評估層與登錄表條目（`calibrate_hw_v1.py`） |
+| 評估新情境前沒先寫下預測，事後就分不清是預測還是調參 | 量測前把預測寫成檔案並 push（G3：`results/g3_predictions/`）；看過結果才做的分析要標「事後」 |
+| 除錯時刪掉卡住那次的部分 log，事後少了證據 | 失敗的輸出也保留（改名，不刪） |
+| `analyze_v1.py` 在沒有 B / C / D 項目時會出錯（例如校準數據） | 校準數據用 `fit_calibration_v1.py` 自己的彙整 |
 
 ### A.4 每個階段的第一步
 

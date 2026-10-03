@@ -71,12 +71,12 @@ worker 在 JOURNAL 標「需 boss 裁決」的事項會被 boss 搬到這裡。
 | 2026-09-29 | Phase 0 的 N=4096（每卡 n=512, K=12288, bf16, RCR, 無 bias）在 A100 tp8 tuning registry 中**無條目**，跑的是 fallback hparams；N=8192、N=49152 在 M=4096 有條目。diag-overlap 的「~2% overlap」需考慮 config 因素。驗證：對該形狀做 `profiling()`，比較最佳 hparams 與 fallback 的 GEMM-only。 | fusion-dispatch 設計 3.1 | 待 diag-overlap 進場時處理 |
 | 2026-09-29 | fusion-dispatch 的 A\* arm 需在 pybind `forward` 暴露 `hparams` 並 rebuild；diag-overlap 也要 instrument `src/ag_gemm/`。 | fusion-dispatch 設計 5.3 | 2026-09-30：E2 估計 decode 區調校收益 ≤ 6%，不值得；只有少數斷崖 M 有 9–17%。建議暫不改，等部署 M 桶確定 |
 | 2026-09-30 → 10-02 更新 | Phase 0 E.1「Flux AG 比 NCCL 快 13–22%」：原腳本 10/02 完全重現；與本 ws 的差異來自 SM 時脈狀態（原腳本量 NCCL 時 GPU 在 1155 MHz；NCCL 受 SM 時脈影響、Flux copy engine 不受）。**建議改寫為「依時脈狀態而定」，不撤回**。 | fusion-dispatch 驗證報告 V6 | 待裁決 |
-| 2026-10-02 | 量測一律經 `common/measure/exclusive_guard.py`（使用者要求確保獨佔）。建議寫入 `CLAUDE.md` 5.1。 | fusion-dispatch 驗證報告 V12 | 待裁決 |
-| 2026-09-30 | Flux `AGKernel.forward` 不能被 CUDA graph capture（cp_stream 未 join）；`use_cuda_core_local` / CUDA-core AG 皆不支援 bf16。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch F0.4、F2 報告 | 待裁決 |
+| 2026-10-02 | 量測一律經 `common/measure/exclusive_guard.py`（使用者要求確保獨佔）。建議寫入 `CLAUDE.md` 5.1。 | fusion-dispatch 驗證報告 V12 | **已處理 2026-10-03**：寫入 `CLAUDE.md` 5.1 第 11 條（D-009） |
+| 2026-09-30 | Flux `AGKernel.forward` 不能被 CUDA graph capture（cp_stream 未 join）；`use_cuda_core_local` / CUDA-core AG 皆不支援 bf16。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch F0.4、F2 報告 | **已處理 2026-10-03**：寫入陷阱表（D-009） |
 | 2026-10-02 | **給 ws/diag-overlap 的假說**（fusion-dispatch G1）[推論]：<br>• 現象：Phase 0 N=4096（每卡 n=512、K=12288、M=4096）幾乎不重疊。<br>• 原因：融合 GEMM 只有 128 個 tile（1.19 波），預設 config 是 stream-K，每個 block 都要等最晚到的 shard。<br>• 模型對沒看過的 P0-4096 / P0-8192 預測藏住 3% / 70%，實測 7% / 65%。<br>• 預測：換 data-parallel + RasterAlongN config 可降到 0.54–0.58 ms（目標 < 0.55）。<br>• 驗證：指定 config 量 A 與 gemm_only，並用 nsys 看 CTA 開始時間。 | fusion-dispatch G1 報告 3.5 | 待 diag-overlap 進場時處理 |
-| 2026-10-02 | Flux 登錄表 `// PCIE` 區段的 config 優先生效（emplace 第一筆），在本機 NVLink 上 GEMM 比 cuBLAS 慢 1.23–1.58×（G-FC1 M=1024、L-GU / L-QKV M=4096）。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch G1 報告第 4 節 | 待裁決 |
-| 2026-10-02 | 同一 process 內先建立再銷毀一組 Flux op（AGKernel / AllGatherOp）、再建第二組，會隨機卡死（所有 rank 卡在 synchronize，GPU 空轉）；一組一個 process 即正常。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch G2 報告第 3 節 | 待裁決 |
-| 2026-09-30 | `flux.testing.initialize_distributed()` → `init_seed()` 把 cuBLAS 設成非 production（launch 13 → 71 µs、部分形狀 +26%），任何 Flux vs torch 比較都偏向 Flux。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch E0 報告第 1 節 | 待裁決 |
+| 2026-10-02 | Flux 登錄表 `// PCIE` 區段的 config 優先生效（emplace 第一筆），在本機 NVLink 上 GEMM 比 cuBLAS 慢 1.23–1.58×（G-FC1 M=1024、L-GU / L-QKV M=4096）。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch G1 報告第 4 節 | **已處理 2026-10-03**：寫入陷阱表（D-009） |
+| 2026-10-02 | 同一 process 內先建立再銷毀一組 Flux op（AGKernel / AllGatherOp）、再建第二組，會隨機卡死（所有 rank 卡在 synchronize，GPU 空轉）；一組一個 process 即正常。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch G2 報告第 3 節 | **已處理 2026-10-03**：寫入陷阱表（D-009） |
+| 2026-09-30 | `flux.testing.initialize_distributed()` → `init_seed()` 把 cuBLAS 設成非 production（launch 13 → 71 µs、部分形狀 +26%），任何 Flux vs torch 比較都偏向 Flux。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch E0 報告第 1 節 | **已處理 2026-10-03**：寫入陷阱表（D-009） |
 
 ## 4. 下一步（boss）
 

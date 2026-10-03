@@ -21,7 +21,7 @@
 - G3 錯誤幾乎全來自 **cuBLAS 自己的斷崖**（某些形狀 × M 慢 22–53%），通訊與重疊模型都準。
   事後分析：GEMM 改成實測（單卡、便宜）、通訊 / 重疊用模型，AG regret 1.76% → 0.27%。
 
-**下一步：G4**（`reports/20261002_g3_unseen.md` 第 0 節）：
+**下一步：G4**（使用者 2026-10-03 核准做法，D-009；`reports/20261002_g3_unseen.md` 第 0 節）：
 - 決策 = 模型（通訊 + 重疊）+ 實測單卡 GEMM + 少量多卡探測；
 - GemmRS 改用 gemm_only 家族參數；
 - 用 `scripts/build_table_v2.py` 產生 `dispatcher_v1` 格式的表；
@@ -79,9 +79,12 @@
 **待使用者 / boss 決定**（細節見 PROJECT.md 第 3 節）：
 1. 是否有其他型號 GPU 可做跨機器驗證（問教授）；
 2. 是否開獨立 auditor session；
-3. `CLAUDE.md` 是否加入守衛規則與三條陷阱；
-4. `PHASE0_FINDINGS.md` 2.6 是否改寫為「依 SM 時脈而定」；
-5. （新）G1 對 diag-overlap 的假說：Phase 0 N=4096 不重疊是 stream-K 排程造成，換 data-parallel config 預測可降到 0.54–0.58 ms。是否轉給 diag-overlap。
+3. `PHASE0_FINDINGS.md` 2.6 是否改寫為「依 SM 時脈而定」；
+4. G1 對 diag-overlap 的假說（Phase 0 N=4096 不重疊是 stream-K 排程造成），待 diag-overlap 進場時處理。
+
+**已決定（2026-10-03，D-009）**：
+- G4 改用「模型 + 實測單卡 GEMM + 少量多卡把關」，要用新數據驗證；
+- 陷阱已寫入 `CLAUDE.md` 陷阱表與 5.1 第 11 條，本 ws 的建模坑在計劃附錄 A.3。
 
 ---
 

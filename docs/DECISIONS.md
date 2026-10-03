@@ -124,3 +124,18 @@ fusion-dispatch 結案，diag-overlap 回到最高優先。
 
 **重開條件**：G1 / G2 顯示物理模型在既有數據上的 regret 無法降到 3% 以下，且缺的項目無法補上 → 改評估學習式或查表 + 內插。
 
+## D-009 · 2026-10-03 · fusion-dispatch G4：決策器改為「模型 + 實測單卡 GEMM + 少量多卡把關」；陷阱寫入 CLAUDE.md
+
+**決策**（使用者）：
+1. G4 的決策器改為「模型（通訊 α-β + 融合 kernel 排程模擬）+ 實測單卡 GEMM（cuBLAS、Flux gemm_only）+ 少量多卡探測」，
+   取代 D-008 的「純物理模型 + 少量探測」。要用新數據驗證（op 層級預先登記 + block 層級）。
+2. 把 G1–G3 與之前待裁決的陷阱寫進 `CLAUDE.md` 陷阱表；5.1 加入「量測必須獨佔」（`exclusive_guard.py`）。
+
+**依據**：
+- G3（`ws/fusion-dispatch/reports/20261002_g3_unseen.md`）：預先登記的預測只用模型時 AG regret 1.76%，錯誤來自 cuBLAS 斷崖；通訊與重疊模型準確；
+- 事後分析：GEMM 改實測後 AG regret 0.27%。GEMM 是單卡、不涉及通訊的量測，每個形狀幾秒，遠少於查表版的多卡全路徑量測。
+
+**審查狀態**：G1–G3 技術結論待 auditor（D-004）。
+
+**重開條件**：G4 的新數據上 block regret 無法 ≤ 2%，或 GEMM 實測成本接近查表版。
+

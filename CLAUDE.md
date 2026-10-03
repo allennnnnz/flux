@@ -52,6 +52,14 @@ pixi run --manifest-path pixi.toml ./launch.sh <script> [args]    # 必須在 re
 | `use_cuda_core_ag=True` | fp16 不能跑：`ag_a2a_mode` 只對 INT8+FP32 scale 實例化（`all_gather_impls.cu:127`）。 |
 | GEMM_RS 通訊 | sm80 單節點**無法隔離**：scatter 在 GEMM epilogue 內經 `output_scatter_ptrs` 直寫對端；`forward_reduce_scatter` 只做 local reduce，`forward_barrier` 是 no-op。不要找 API，要量就得 instrument kernel。 |
 | Flux AG 模式 | 這台機器上 **All2All + `use_read=True`** 最快；Ring2D 走 `copy_ring_push_2d_pcie`，為 PCIe 拓撲設計，在 NVSwitch 上是最慢的之一。Phase 0 原始量測全用 Ring2D。 |
+| `flux.testing.initialize_distributed()` | 內部 `init_seed()` 把 cuBLAS 設成非 production（`CUBLAS_WORKSPACE_CONFIG=:16:8`、deterministic、關 reduced precision）：`torch.mm` launch 13 → 71 µs，部分形狀 +26%，任何 Flux vs torch 比較都偏向 Flux。初始化後立刻還原（`ws/fusion-dispatch/scripts/dispatch_map_v2.py` 結尾）。 |
+| AGKernel 與 CUDA graph | `AGKernel.forward` **不能** capture（`cp_stream` 的 copy 沒 join 回主 stream）；GemmRS、AllGatherOp + mm、NCCL 路徑可以。bf16 / fp16 也不支援 `use_cuda_core_local` / CUDA-core AG。 |
+| Flux 登錄表 config | `(m, n, k)` 完全相符才用調好的 config，否則用第一個註冊的預設 config。同一 key 第一筆生效（emplace），A100 tp8 檔案中 `// PCIE` 區段排在前面，這些 config 在本機 NVLink 上 GEMM 比 cuBLAS 慢 1.23–1.58×（AG：n×K=6144×12288 M=1024、7168×8192 / 1280×8192 M=4096）。 |
+| 同一 process 換一組 Flux op | 先建立再銷毀一組 AGKernel / AllGatherOp、再建第二組，會**隨機卡死**（所有 rank 停在 `torch.cuda.synchronize`，GPU 100% 空轉）。一組形狀一個 process，或建好就不銷毀（`ws/fusion-dispatch/results/g2_smoke/debug_hang2/`）。 |
+| cuBLAS 斷崖 | 特定形狀 × M 會選到慢 22–53% 的 kernel（例：n×K=14336×4096 M=136、3584×4096 M=1024），GEMM 模型預測不到。要用就實測該形狀與 M（單卡、幾秒）。 |
+| `launch.sh` 卡數 | `nproc_per_node` 來自 `nvidia-smi --list-gpus`，**不理會** `CUDA_VISIBLE_DEVICES`。少於 8 卡用 `ws/fusion-dispatch/scripts/launch_tp.sh <TP>`。 |
+| 融合 AG+GEMM 何時能重疊 | 不只看 M ≤ TILE_M。Flux 用 CUTLASS stream-K：工作量 ≲ 1.5 波時每個 block 都碰到最晚到的 shard，整個 kernel 等到資料全到才算完 → 不重疊（例：Phase 0 N=4096 M=4096）。可用 `common/cost_model/predictor/overlap.py` 模擬。 |
+| 時脈 / 功耗狀態 | 短 run 在 1410 MHz；持續負載有功耗上限（約 1140–1245 MHz）。NCCL（SM 搬資料）受時脈影響、Flux copy engine 不受。比較與校準都要在部署的狀態下做。 |
 
 ### Flux 內部你會用到的入口
 
@@ -141,6 +149,9 @@ workstream 的 `reports/YYYYMMDD_audit_<主題>.md`。**每個要進 DECISIONS.m
 9. **Nsight Systems 驗證時間軸**：任何關於「並行」「重疊」「串行」的主張，都要有
    profile 佐證，而不是從總時間推。
 10. **可能時用外部工具交叉驗證**（nvbandwidth、NCCL 參考值），並報告偏差。
+11. **量測必須獨佔**：每個 GPU 量測都包在 `common/measure/exclusive_guard.py` 內（啟動前確認
+    沒有其他 GPU 程序或其他使用者佔 CPU，執行中每秒監控，結束標記 CLEAN / CONTAMINATED），
+    報告數字時附上守衛結果。長時間工作放 tmux。
 
 ### 5.2 報告與文件
 
