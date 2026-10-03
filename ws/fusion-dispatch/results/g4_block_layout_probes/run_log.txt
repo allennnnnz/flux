@@ -1,0 +1,11 @@
+[G4-block-layout] start 2026-10-03 04:34:26
+[G4-block-layout] qwen2.5-32b_tp8_decode M=[32, 384, 512] exit 1 22s 2026-10-03 04:34:48 END rc=1 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-block-layout] qwen2.5-32b_tp4_decode M=[32, 384, 512] exit 1 14s 2026-10-03 04:35:01 END rc=1 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-block-layout] qwen2.5-32b_tp4_prefill M=[1024] exit 0 14s 2026-10-03 04:35:16 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-block-layout] llama3-8b_tp4_decode M=[32, 512] exit 1 14s 2026-10-03 04:35:29 END rc=1 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-block-layout] done 2026-10-03 04:35:29  total 64s
+[G4-block-layout] start 2026-10-03 04:35:57
+[G4-block-layout] qwen2.5-32b_tp8_decode M=[32, 384, 512] exit 0 25s 2026-10-03 04:36:22 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-block-layout] qwen2.5-32b_tp4_decode M=[32, 384, 512] exit 0 17s 2026-10-03 04:36:38 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-block-layout] llama3-8b_tp4_decode M=[32, 512] exit 0 15s 2026-10-03 04:36:54 END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 window=None..None users_logged_in_at_end=[]
+[G4-block-layout] done 2026-10-03 04:36:54  total 57s

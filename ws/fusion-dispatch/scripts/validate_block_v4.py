@@ -170,7 +170,7 @@ def main():
         policies = [p for p in policies if p in keep]
     if CA_BIG is not None:
         policies.insert(2, "tp_ar_vllm_big")
-    if ARGS.mode == "graph":
+    if ARGS.mode == "graph" and "sp_flux" in policies:
         policies.remove("sp_flux")  # AGKernel not capturable (F0.4)
     FLUSH = torch.empty(128 * 1024 * 1024 // 4, device="cuda")
     ALIGN = torch.zeros(1, device="cuda")

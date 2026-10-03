@@ -18,6 +18,7 @@ T = os.path.join(WS, "results", "g4_block_tables")
 CONFIGS = [(8, "qwen2.5-32b"), (4, "qwen2.5-32b"), (4, "llama3-8b")]
 PHASES = {"decode": ("graph", [32, 128, 256, 384, 512]), "prefill": ("eager", [1024, 2048, 4096])}
 step = sys.argv[1]
+only_phase = sys.argv[2] if len(sys.argv) > 2 else None  # rerun one phase (e.g. after a failure)
 out = os.path.join(WS, "results", "g4_block_layout_probes" if step == "layout" else "g4_block_oracle")
 os.makedirs(out, exist_ok=True)
 flag = set()
@@ -30,6 +31,8 @@ log.write(f"[G4-block-{step}] start {time.strftime('%F %T')}\n")
 t_all = time.time()
 for tp, model in CONFIGS:
     for phase, (mode, Ms) in PHASES.items():
+        if only_phase and phase != only_phase:
+            continue
         ms = [m for m in Ms if step == "oracle" or (tp, model, phase, m) in flag]
         if not ms:
             continue

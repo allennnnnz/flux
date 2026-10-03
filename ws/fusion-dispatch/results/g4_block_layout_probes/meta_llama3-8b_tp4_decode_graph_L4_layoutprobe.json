@@ -1,0 +1,221 @@
+{
+ "args": {
+  "phase": "decode",
+  "mode": "graph",
+  "Ms": "32,512",
+  "model": "llama3-8b",
+  "table_g4": "/home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_tables/table_g4_llama3-8b_tp4_decode.json",
+  "table_g3": "/home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_tables/table_g3_llama3-8b_tp4_decode.json",
+  "policies": "tp_ar_vllm,sp_g4",
+  "tag": "layoutprobe",
+  "L": 4,
+  "ctx": 1024,
+  "rounds": 30,
+  "warmup": 10,
+  "pad_cycles": 400000,
+  "rel_tol": 0.05,
+  "seed": 20261003,
+  "car_big_mib": 0,
+  "out_dir": "/home/rogerlee/flux/ws/fusion-dispatch/results/g4_block_layout_probes"
+ },
+ "model": [
+  4096,
+  32,
+  8,
+  128,
+  14336
+ ],
+ "world": 4,
+ "table_g4_digest": "172bad71354f40b41e6827730121b17b70b22c191529eac1adbf5beda7c12a21",
+ "table_g3_digest": "ce0952192e3727ebb54d2f1484a0810fc5d2d01cd63e70859e7ee4e60fc73ea1",
+ "table_meta": {
+  "model": "llama3-8b",
+  "world": 4,
+  "phase": "decode",
+  "mode": "gpu",
+  "graph": true,
+  "method": "g4",
+  "eps": 0.10941210713689609,
+  "probes_pending": [
+   {
+    "kind": "ag",
+    "key": "1536x4096",
+    "layer": "qkv",
+    "M": 384,
+    "margin": 0.1041,
+    "candidates": [
+     "B",
+     "C"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "1536x4096",
+    "layer": "qkv",
+    "M": 512,
+    "margin": 0.1059,
+    "candidates": [
+     "B",
+     "C"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "7168x4096",
+    "layer": "gate_up",
+    "M": 384,
+    "margin": 0.0635,
+    "candidates": [
+     "B",
+     "C"
+    ]
+   },
+   {
+    "kind": "rs",
+    "key": "4096x1024",
+    "layer": "o",
+    "M": 128,
+    "margin": 0.1008,
+    "candidates": [
+     "B",
+     "A"
+    ]
+   },
+   {
+    "kind": "rs",
+    "key": "4096x1024",
+    "layer": "o",
+    "M": 256,
+    "margin": 0.0795,
+    "candidates": [
+     "A",
+     "B"
+    ]
+   },
+   {
+    "kind": "rs",
+    "key": "4096x3584",
+    "layer": "down",
+    "M": 128,
+    "margin": 0.044,
+    "candidates": [
+     "B",
+     "A"
+    ]
+   },
+   {
+    "kind": "rs",
+    "key": "4096x3584",
+    "layer": "down",
+    "M": 256,
+    "margin": 0.0655,
+    "candidates": [
+     "A",
+     "B"
+    ]
+   }
+  ],
+  "probes_applied": 7,
+  "probes_changed_first_choice": 0
+ },
+ "date": "2026-10-03 04:36:49",
+ "cases": {
+  "32": {
+   "check": {
+    "tp_ar_vllm": {
+     "max_abs_err": 0.265625,
+     "rel_err": 0.012354651162790697,
+     "ok_all_ranks": true
+    },
+    "sp_g4": {
+     "max_abs_err": 0.25,
+     "rel_err": 0.011627906976744186,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {},
+    "sp_flux": {},
+    "sp_rsflux": {},
+    "sp_g4": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    },
+    "sp_g3": {}
+   },
+   "misses": {},
+   "kept": 30,
+   "median_ms": {
+    "tp_ar": 0.8586239814758301,
+    "tp_ar_vllm": 0.7546879947185516,
+    "sp_g4": 0.9809920191764832
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     0.0942080020904541,
+     0.12031999230384827,
+     0.14438396692276
+    ],
+    "tp_ar_vllm": [
+     0.14438396692276,
+     0.2309119999408722,
+     0.26419204473495483
+    ],
+    "sp_g4": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "512": {
+   "check": {
+    "tp_ar_vllm": {
+     "max_abs_err": 0.3125,
+     "rel_err": 0.01366120218579235,
+     "ok_all_ranks": true
+    },
+    "sp_g4": {
+     "max_abs_err": 0.3125,
+     "rel_err": 0.01366120218579235,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {},
+    "sp_flux": {},
+    "sp_rsflux": {},
+    "sp_g4": {
+     "ag:nccl": 4,
+     "rs:flux": 8,
+     "ag:fluxag_fluxgemm": 4
+    },
+    "sp_g3": {}
+   },
+   "misses": {},
+   "kept": 30,
+   "median_ms": {
+    "tp_ar": 3.610624074935913,
+    "tp_ar_vllm": 3.4099199771881104,
+    "sp_g4": 3.553279995918274
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     -0.1310720443725586,
+     -0.04761612415313721,
+     0.04607987403869629
+    ],
+    "tp_ar_vllm": [
+     0.028671979904174805,
+     0.17203199863433838,
+     0.2928638458251953
+    ],
+    "sp_g4": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  }
+ }
+}

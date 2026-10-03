@@ -1,0 +1,25 @@
+tp,model,phase,M,choice_model,choice_final,note
+8,qwen2.5-32b,decode,32,tp_ar_vllm,tp_ar_vllm,probe tp_ar_vllm=0.7731 sp_g4=1.0245
+8,qwen2.5-32b,decode,128,tp_ar_vllm,tp_ar_vllm,
+8,qwen2.5-32b,decode,256,tp_ar_vllm,tp_ar_vllm,
+8,qwen2.5-32b,decode,384,tp_ar_vllm,tp_ar_vllm,probe tp_ar_vllm=2.2021 sp_g4=2.6112
+8,qwen2.5-32b,decode,512,tp_ar_vllm,tp_ar_vllm,probe tp_ar_vllm=2.5257 sp_g4=2.7971
+8,qwen2.5-32b,prefill,1024,sp_g4,sp_g4,
+8,qwen2.5-32b,prefill,2048,sp_g4,sp_g4,
+8,qwen2.5-32b,prefill,4096,sp_g4,sp_g4,
+4,qwen2.5-32b,decode,32,tp_ar_vllm,tp_ar_vllm,probe tp_ar_vllm=1.0854 sp_g4=1.2984
+4,qwen2.5-32b,decode,128,tp_ar_vllm,tp_ar_vllm,
+4,qwen2.5-32b,decode,256,tp_ar_vllm,tp_ar_vllm,
+4,qwen2.5-32b,decode,384,tp_ar_vllm,tp_ar_vllm,probe tp_ar_vllm=3.5947 sp_g4=4.0023
+4,qwen2.5-32b,decode,512,tp_ar_vllm,tp_ar_vllm,probe tp_ar_vllm=4.2767 sp_g4=4.6382
+4,qwen2.5-32b,prefill,1024,sp_g4,sp_g4,probe tp_ar_vllm=5.8947 sp_g4=5.5019
+4,qwen2.5-32b,prefill,2048,sp_g4,sp_g4,
+4,qwen2.5-32b,prefill,4096,sp_g4,sp_g4,
+4,llama3-8b,decode,32,tp_ar_vllm,tp_ar_vllm,probe tp_ar_vllm=0.7547 sp_g4=0.9810
+4,llama3-8b,decode,128,tp_ar_vllm,tp_ar_vllm,
+4,llama3-8b,decode,256,tp_ar_vllm,tp_ar_vllm,
+4,llama3-8b,decode,384,tp_ar_vllm,tp_ar_vllm,
+4,llama3-8b,decode,512,tp_ar_vllm,tp_ar_vllm,probe tp_ar_vllm=3.4099 sp_g4=3.5533
+4,llama3-8b,prefill,1024,sp_g4,sp_g4,
+4,llama3-8b,prefill,2048,sp_g4,sp_g4,
+4,llama3-8b,prefill,4096,sp_g4,sp_g4,
