@@ -103,3 +103,15 @@ policy      regret   saving vs vLLM   worst point   (regret = sum(t - t_best) / 
   R1p         2.31%         -0.9%       5.8% at prefill M=2048
   R2          1.35%          0.0%       2.4% at prefill M=4096
   R3          2.31%         -0.9%       5.8% at prefill M=2048
+[E4a] 2026-10-05 14:05:42 git: committed dd41dda fusion-dispatch E4a: oracle + evaluation (tp4x2n qwen2.5-32b tp4)
+[E4a] 2026-10-05 14:05:43 git: pushed dd41dda
+[E4a] 2026-10-05 14:05:43 == predict tp4x2n llama3-8b tp4
+wrote ws/fusion-dispatch/results/e4a_layout/predictions_tp4x2n_llama3-8b_tp4.csv
+  decode  M=32    TP+AR 0.4906 ms  SP 0.5013 ms  -> decider tp_ar_vllm   (R1p tp_ar_vllm)
+  decode  M=128   TP+AR 1.1127 ms  SP 0.7924 ms  -> decider sp_nccl   (R1p tp_ar_vllm)
+  decode  M=256   TP+AR 1.4258 ms  SP 0.9877 ms  -> decider sp_nccl   (R1p tp_ar_vllm)
+  decode  M=384   TP+AR 1.4512 ms  SP 1.2031 ms  -> decider sp_nccl   (R1p tp_ar_vllm)
+  decode  M=512   TP+AR 1.7042 ms  SP 1.5625 ms  -> decider sp_nccl   (R1p tp_ar_vllm)
+  prefill M=1024  TP+AR 2.5431 ms  SP 2.6283 ms  -> decider tp_ar_vllm   (R1p sp_nccl)
+  prefill M=2048  TP+AR 4.9338 ms  SP 5.0812 ms  -> decider tp_ar_vllm   (R1p sp_nccl)
+  prefill M=4096  TP+AR 9.7832 ms  SP 10.0766 ms  -> decider tp_ar_vllm   (R1p sp_nccl)
