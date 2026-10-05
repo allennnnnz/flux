@@ -153,3 +153,7 @@ policy      regret   saving vs vLLM   worst point   (regret = sum(t - t_best) / 
   R3          5.57%         -5.6%      10.8% at prefill M=2048
 [E4a] 2026-10-05 14:07:18 git: committed 8cb5817 fusion-dispatch E4a: oracle + evaluation (tp4x2n llama3-8b tp4)
 [E4a] 2026-10-05 14:07:20 git: pushed 8cb5817
+[E4a] 2026-10-05 14:07:20 git: committed bf451e0 fusion-dispatch E4a: unattended run finished (auto JOURNAL entry; conclusions to be written)
+[E4a] 2026-10-05 14:07:22 git: pushed bf451e0
+[E4a] 2026-10-05 14:07:22 done
+[E4a] pipeline exited rc=0
