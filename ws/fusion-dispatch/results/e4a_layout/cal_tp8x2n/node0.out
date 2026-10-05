@@ -1,0 +1,67 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING 10-05 13:46:43 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 13:46:43 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 13:46:43 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 13:46:43 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 13:46:43 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 13:46:43 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 13:46:43 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 13:46:43 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 13:46:43 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 13:46:44 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 13:46:44 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 13:46:44 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 13:46:44 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 13:46:44 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 13:46:44 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 13:46:44 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 13:46:44 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 13:46:44 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 13:46:44 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 13:46:44 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 13:46:44 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 13:46:44 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 13:46:44 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 13:46:44 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 13:46:44 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 10-05 13:46:44 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 10-05 13:46:44 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 10-05 13:46:44 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+[xnode-cal tp8 M=8 gpu] vllm_ar=0.10445  nccl_ag=0.05427  nccl_rs=0.05427  rmsnorm=0.01229  add=0.00819
+[xnode-cal tp8 M=8 steady] vllm_ar=0.08682  nccl_ag=0.04118  nccl_rs=0.04118  rmsnorm=0.03107  add=0.00323
+[xnode-cal tp8 M=16 gpu] vllm_ar=0.13312  nccl_ag=0.07373  nccl_rs=0.07475  rmsnorm=0.01229  add=0.00819
+[xnode-cal tp8 M=16 steady] vllm_ar=0.11322  nccl_ag=0.04739  nccl_rs=0.04643  rmsnorm=0.02416  add=0.00333
+[xnode-cal tp8 M=32 gpu] vllm_ar=0.19866  nccl_ag=0.10138  nccl_rs=0.10240  rmsnorm=0.01229  add=0.00922
+[xnode-cal tp8 M=32 steady] vllm_ar=0.18525  nccl_ag=0.07024  nccl_rs=0.06925  rmsnorm=0.00723  add=0.00352
+[xnode-cal tp8 M=64 gpu] vllm_ar=0.17306  nccl_ag=0.16384  nccl_rs=0.16486  rmsnorm=0.01331  add=0.00922
+[xnode-cal tp8 M=64 steady] vllm_ar=0.13318  nccl_ag=0.10976  nccl_rs=0.10893  rmsnorm=0.00774  add=0.00384
+[xnode-cal tp8 M=128 gpu] vllm_ar=0.26829  nccl_ag=0.16794  nccl_rs=0.16794  rmsnorm=0.01434  add=0.01126
+[xnode-cal tp8 M=128 steady] vllm_ar=0.21597  nccl_ag=0.12627  nccl_rs=0.12637  rmsnorm=0.00877  add=0.00442
+[xnode-cal tp8 M=256 gpu] vllm_ar=0.61440  nccl_ag=0.35328  nccl_rs=0.35226  rmsnorm=0.01741  add=0.01434
+[xnode-cal tp8 M=256 steady] vllm_ar=0.46189  nccl_ag=0.25693  nccl_rs=0.25882  rmsnorm=0.01024  add=0.00570
+[xnode-cal tp8 M=512 gpu] vllm_ar=1.27437  nccl_ag=0.61952  nccl_rs=0.61901  rmsnorm=0.02253  add=0.02048
+[xnode-cal tp8 M=512 steady] vllm_ar=1.05370  nccl_ag=0.52534  nccl_rs=0.52262  rmsnorm=0.01402  add=0.00826
+[xnode-cal tp8 M=1024 gpu] vllm_ar=2.84365  nccl_ag=1.47610  nccl_rs=1.47507  rmsnorm=0.03072  add=0.03072
+[xnode-cal tp8 M=1024 steady] vllm_ar=2.34045  nccl_ag=1.31690  nccl_rs=1.31146  rmsnorm=0.01997  add=0.02547
+[xnode-cal tp8 M=2048 gpu] vllm_ar=7.31546  nccl_ag=3.74067  nccl_rs=3.75194  rmsnorm=0.05325  add=0.05222
+[xnode-cal tp8 M=2048 steady] vllm_ar=6.94608  nccl_ag=3.61366  nccl_rs=3.65126  rmsnorm=0.04819  add=0.04781
+[xnode-cal tp8 M=4096 gpu] vllm_ar=19.68435  nccl_ag=9.94611  nccl_rs=9.72954  rmsnorm=0.09318  add=0.09421
+[xnode-cal tp8 M=4096 steady] vllm_ar=18.45520  nccl_ag=9.20362  nccl_rs=9.13741  rmsnorm=0.09395  add=0.09011
+[xnode-cal tp8 M=8192 gpu] vllm_ar=38.36211  nccl_ag=19.35821  nccl_rs=19.53792  rmsnorm=0.17306  add=0.18125
+[xnode-cal tp8 M=8192 steady] vllm_ar=36.31088  nccl_ag=18.26938  nccl_rs=18.38496  rmsnorm=0.17782  add=0.17453
+[xnode-cal tp8 M=16384 gpu] vllm_ar=78.63347  nccl_ag=40.18381  nccl_rs=39.71789  rmsnorm=0.33997  add=0.34918
+[rank3]:[W1005 13:57:57.063005775 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank2]:[W1005 13:57:57.063011799 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank1]:[W1005 13:57:57.063176932 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[xnode-cal tp8 M=16384 steady] vllm_ar=77.14150  nccl_ag=38.00566  nccl_rs=37.82675  rmsnorm=0.34678  add=0.34355
+[rank0]:[W1005 13:57:57.080857284 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 1) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4a_layout/cal_tp8x2n/guard_node0.log

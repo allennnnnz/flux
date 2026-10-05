@@ -1,0 +1,2 @@
+[run_xnode] 2026-10-05 13:46:32 start: nproc_per_node=4 env=vllm ws/fusion-dispatch/scripts/calibrate_xnode_v1.py --out_dir ws/fusion-dispatch/results/e4a_layout/cal_tp8x2n
+[run_xnode] 2026-10-05 13:57:59 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)

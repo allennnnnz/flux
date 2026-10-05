@@ -1,0 +1,9 @@
+model,tp,phase,M,t_tp_pred_ms,t_sp_pred_ms,delta_ms,decider,R1,R1p,R2,R3
+qwen2.5-32b,8,decode,32,0.5242,0.5564,-0.0322,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,8,decode,128,0.7004,0.8781,-0.1777,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,8,decode,256,1.2828,1.4342,-0.1513,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,8,decode,384,1.9112,2.0071,-0.0959,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,8,decode,512,2.4816,2.4641,0.0175,sp_nccl,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,8,prefill,1024,4.5047,4.8229,-0.3183,tp_ar_vllm,tp_ar_vllm,sp_nccl,tp_ar_vllm,sp_nccl
+qwen2.5-32b,8,prefill,2048,12.0328,12.5263,-0.4935,tp_ar_vllm,tp_ar_vllm,sp_nccl,tp_ar_vllm,sp_nccl
+qwen2.5-32b,8,prefill,4096,31.6342,31.4474,0.1868,sp_nccl,tp_ar_vllm,sp_nccl,tp_ar_vllm,sp_nccl

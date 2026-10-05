@@ -1,1 +1,17 @@
 [E4a] 2026-10-05 13:46:29 start (pid 1031034)
+[E4a] 2026-10-05 13:46:29 git: committed 90ccc43 fusion-dispatch E4a: setup (cross-node calibration, layout predictor, unattended pipeline, smoke tests)
+[E4a] 2026-10-05 13:46:31 git: pushed 90ccc43
+[E4a] 2026-10-05 13:46:31 == calibrate tp8x2n (TP=8, 4 GPUs per node)
+[run_xnode] 2026-10-05 13:57:59 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+wrote common/cost_model/hw_profiles/xnode158-159_tp8x2n_gpu_block.json  (W=8, 12 AR points)
+wrote common/cost_model/hw_profiles/xnode158-159_tp8x2n_steady_block.json  (W=8, 12 AR points)
+[E4a] 2026-10-05 13:57:59 == predict tp8x2n qwen2.5-32b tp8
+wrote ws/fusion-dispatch/results/e4a_layout/predictions_tp8x2n_qwen2.5-32b_tp8.csv
+  decode  M=32    TP+AR 0.5242 ms  SP 0.5564 ms  -> decider tp_ar_vllm   (R1p tp_ar_vllm)
+  decode  M=128   TP+AR 0.7004 ms  SP 0.8781 ms  -> decider tp_ar_vllm   (R1p tp_ar_vllm)
+  decode  M=256   TP+AR 1.2828 ms  SP 1.4342 ms  -> decider tp_ar_vllm   (R1p tp_ar_vllm)
+  decode  M=384   TP+AR 1.9112 ms  SP 2.0071 ms  -> decider tp_ar_vllm   (R1p tp_ar_vllm)
+  decode  M=512   TP+AR 2.4816 ms  SP 2.4641 ms  -> decider sp_nccl   (R1p tp_ar_vllm)
+  prefill M=1024  TP+AR 4.5047 ms  SP 4.8229 ms  -> decider tp_ar_vllm   (R1p sp_nccl)
+  prefill M=2048  TP+AR 12.0328 ms  SP 12.5263 ms  -> decider tp_ar_vllm   (R1p sp_nccl)
+  prefill M=4096  TP+AR 31.6342 ms  SP 31.4474 ms  -> decider sp_nccl   (R1p sp_nccl)
