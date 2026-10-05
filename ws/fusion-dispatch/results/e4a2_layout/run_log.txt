@@ -7,3 +7,4 @@
 [E4a2] 2026-10-05 16:27:29 gemm tp4 llama3-8b exit 0 END rc=0 CLEAN
 [E4a2] 2026-10-05 16:27:29 == 2. cross-node calibration at exact sizes
 [run_xnode] 2026-10-05 16:29:29 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+[E4a2] 2026-10-05 17:09:52 start (pid 1186138)
