@@ -1,0 +1,49 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING 10-05 13:59:59 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 13:59:59 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 13:59:59 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 13:59:59 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 13:59:59 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 13:59:59 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 13:59:59 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 13:59:59 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 13:59:59 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 13:59:59 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 13:59:59 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 13:59:59 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 13:59:59 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 10-05 13:59:59 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+[xnode-cal tp4 M=8 gpu] vllm_ar=0.09165  nccl_ag=0.04608  nccl_rs=0.04608  rmsnorm=0.01229  add=0.00819
+[xnode-cal tp4 M=8 steady] vllm_ar=0.08032  nccl_ag=0.03635  nccl_rs=0.03613  rmsnorm=0.04125  add=0.00640
+[xnode-cal tp4 M=16 gpu] vllm_ar=0.12595  nccl_ag=0.06963  nccl_rs=0.07066  rmsnorm=0.01229  add=0.00819
+[xnode-cal tp4 M=16 steady] vllm_ar=0.11059  nccl_ag=0.04848  nccl_rs=0.04819  rmsnorm=0.02864  add=0.00333
+[xnode-cal tp4 M=32 gpu] vllm_ar=0.19763  nccl_ag=0.09318  nccl_rs=0.09370  rmsnorm=0.01229  add=0.00922
+[xnode-cal tp4 M=32 steady] vllm_ar=0.19130  nccl_ag=0.06698  nccl_rs=0.06608  rmsnorm=0.00723  add=0.00346
+[xnode-cal tp4 M=64 gpu] vllm_ar=0.38502  nccl_ag=0.13978  nccl_rs=0.14029  rmsnorm=0.01331  add=0.00922
+[xnode-cal tp4 M=64 steady] vllm_ar=0.29776  nccl_ag=0.10294  nccl_rs=0.10090  rmsnorm=0.00762  add=0.00378
+[xnode-cal tp4 M=128 gpu] vllm_ar=0.74957  nccl_ag=0.15872  nccl_rs=0.15565  rmsnorm=0.01434  add=0.01126
+[xnode-cal tp4 M=128 steady] vllm_ar=0.34550  nccl_ag=0.14717  nccl_rs=0.14474  rmsnorm=0.00864  add=0.00442
+[xnode-cal tp4 M=256 gpu] vllm_ar=0.40448  nccl_ag=0.23245  nccl_rs=0.22835  rmsnorm=0.01638  add=0.01331
+[xnode-cal tp4 M=256 steady] vllm_ar=0.39184  nccl_ag=0.22070  nccl_rs=0.22051  rmsnorm=0.01018  add=0.00570
+[xnode-cal tp4 M=512 gpu] vllm_ar=0.72806  nccl_ag=0.39117  nccl_rs=0.38810  rmsnorm=0.02253  add=0.02048
+[xnode-cal tp4 M=512 steady] vllm_ar=0.70285  nccl_ag=0.38147  nccl_rs=0.37616  rmsnorm=0.01382  add=0.00826
+[xnode-cal tp4 M=1024 gpu] vllm_ar=1.39571  nccl_ag=0.73626  nccl_rs=0.73114  rmsnorm=0.03072  add=0.03072
+[xnode-cal tp4 M=1024 steady] vllm_ar=1.33722  nccl_ag=0.70518  nccl_rs=0.71344  rmsnorm=0.01990  add=0.02541
+[xnode-cal tp4 M=2048 gpu] vllm_ar=3.50464  nccl_ag=1.53293  nccl_rs=1.52934  rmsnorm=0.05325  add=0.05222
+[xnode-cal tp4 M=2048 steady] vllm_ar=2.93190  nccl_ag=1.54304  nccl_rs=1.57347  rmsnorm=0.04845  add=0.04768
+[xnode-cal tp4 M=4096 gpu] vllm_ar=5.48710  nccl_ag=2.86208  nccl_rs=2.88307  rmsnorm=0.09318  add=0.09421
+[xnode-cal tp4 M=4096 steady] vllm_ar=5.54352  nccl_ag=2.95094  nccl_rs=2.91616  rmsnorm=0.09398  add=0.09005
+[xnode-cal tp4 M=8192 gpu] vllm_ar=10.91482  nccl_ag=5.64480  nccl_rs=5.60230  rmsnorm=0.17306  add=0.18125
+[xnode-cal tp4 M=8192 steady] vllm_ar=11.00586  nccl_ag=5.77856  nccl_rs=5.83706  rmsnorm=0.17754  add=0.17459
+[xnode-cal tp4 M=16384 gpu] vllm_ar=21.52602  nccl_ag=11.03872  nccl_rs=11.12883  rmsnorm=0.33894  add=0.34918
+[rank1]:[W1005 14:03:47.672686915 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[xnode-cal tp4 M=16384 steady] vllm_ar=21.61565  nccl_ag=11.34067  nccl_rs=11.32691  rmsnorm=0.34538  add=0.34323
+[rank0]:[W1005 14:03:47.690941193 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4a_layout/cal_tp4x2n/guard_node0.log

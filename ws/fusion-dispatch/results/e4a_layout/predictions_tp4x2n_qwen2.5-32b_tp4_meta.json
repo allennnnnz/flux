@@ -1,0 +1,15 @@
+{
+ "script": "ws/fusion-dispatch/scripts/e4a_layout_v1.py predict",
+ "tag": "tp4x2n",
+ "model": "qwen2.5-32b",
+ "tp": 4,
+ "git_head_before_commit": "ef445697b18dbae35c5fe961a9af953c1459d0d7",
+ "profiles_sha256": {
+  "common/cost_model/hw_profiles/xnode158-159_tp4x2n_gpu_block.json": "0ae3372e9aa91bee9db3e68d0f8de5db699132b014962ce62c04957e2ee92cba",
+  "common/cost_model/hw_profiles/xnode158-159_tp4x2n_steady_block.json": "5a1bf17ea214c99f12b8e70b9b863b3a225bd9a3ad82459e478795b2ea8c5de8"
+ },
+ "gemm_sha256": {
+  "ws/fusion-dispatch/results/g4_block_gemm/gemm_qwen2.5-32b_tp4.csv": "e8270ae23d63911b581e9fc612f7205814874b5f7a55f70adef17fbbc99140cf"
+ },
+ "rule": "frozen before the oracle run; nothing refitted afterwards"
+}

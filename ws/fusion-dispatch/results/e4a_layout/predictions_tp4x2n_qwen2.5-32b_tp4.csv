@@ -1,0 +1,9 @@
+model,tp,phase,M,t_tp_pred_ms,t_sp_pred_ms,delta_ms,decider,R1,R1p,R2,R3
+qwen2.5-32b,4,decode,32,0.6218,0.6154,0.0064,sp_nccl,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,decode,128,1.3540,0.9273,0.4267,sp_nccl,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,decode,256,1.5342,1.1911,0.3431,sp_nccl,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,decode,384,1.8135,1.6452,0.1683,sp_nccl,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,decode,512,1.9860,1.9507,0.0353,sp_nccl,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,prefill,1024,3.4702,3.5627,-0.0924,tp_ar_vllm,tp_ar_vllm,sp_nccl,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,prefill,2048,7.0302,7.2254,-0.1952,tp_ar_vllm,tp_ar_vllm,sp_nccl,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,prefill,4096,13.7659,14.1099,-0.3440,tp_ar_vllm,tp_ar_vllm,sp_nccl,tp_ar_vllm,sp_nccl

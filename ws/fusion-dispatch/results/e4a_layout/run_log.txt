@@ -51,3 +51,19 @@ policy      regret   saving vs vLLM   worst point   (regret = sum(t - t_best) / 
   R1p         0.71%          3.1%       1.2% at prefill M=4096
   R2          3.94%          0.0%      23.6% at prefill M=1024
   R3          0.71%          3.1%       1.2% at prefill M=4096
+[E4a] 2026-10-05 13:59:47 git: committed ef44569 fusion-dispatch E4a: oracle + evaluation (tp8x2n qwen2.5-32b tp8)
+[E4a] 2026-10-05 13:59:49 git: pushed ef44569
+[E4a] 2026-10-05 13:59:49 == calibrate tp4x2n (TP=4, 2 GPUs per node)
+[run_xnode] 2026-10-05 14:03:49 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+wrote common/cost_model/hw_profiles/xnode158-159_tp4x2n_gpu_block.json  (W=4, 12 AR points)
+wrote common/cost_model/hw_profiles/xnode158-159_tp4x2n_steady_block.json  (W=4, 12 AR points)
+[E4a] 2026-10-05 14:03:49 == predict tp4x2n qwen2.5-32b tp4
+wrote ws/fusion-dispatch/results/e4a_layout/predictions_tp4x2n_qwen2.5-32b_tp4.csv
+  decode  M=32    TP+AR 0.6218 ms  SP 0.6154 ms  -> decider sp_nccl   (R1p tp_ar_vllm)
+  decode  M=128   TP+AR 1.3540 ms  SP 0.9273 ms  -> decider sp_nccl   (R1p tp_ar_vllm)
+  decode  M=256   TP+AR 1.5342 ms  SP 1.1911 ms  -> decider sp_nccl   (R1p tp_ar_vllm)
+  decode  M=384   TP+AR 1.8135 ms  SP 1.6452 ms  -> decider sp_nccl   (R1p tp_ar_vllm)
+  decode  M=512   TP+AR 1.9860 ms  SP 1.9507 ms  -> decider sp_nccl   (R1p tp_ar_vllm)
+  prefill M=1024  TP+AR 3.4702 ms  SP 3.5627 ms  -> decider tp_ar_vllm   (R1p sp_nccl)
+  prefill M=2048  TP+AR 7.0302 ms  SP 7.2254 ms  -> decider tp_ar_vllm   (R1p sp_nccl)
+  prefill M=4096  TP+AR 13.7659 ms  SP 14.1099 ms  -> decider tp_ar_vllm   (R1p sp_nccl)
