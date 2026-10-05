@@ -73,3 +73,36 @@ wrote ws/fusion-dispatch/results/e4a2_layout/predictions_tp4x2n2_llama3-8b_tp4_o
   prefill M=1024  TP+AR 2.5000  SP 2.5546  delta  -0.0546 -> tp_ar_vllm probe=1  (R1p sp_nccl)
   prefill M=2048  TP+AR 5.0004  SP 5.8107  delta  -0.8103 -> tp_ar_vllm probe=0  (R1p sp_nccl)
   prefill M=4096  TP+AR 9.7513  SP 10.0235  delta  -0.2723 -> tp_ar_vllm probe=1  (R1p sp_nccl)
+[E4a2] 2026-10-05 17:16:21 git: committed d252251 fusion-dispatch E4a2: pre-registered model decisions and probe lists (before probes and oracle)
+[E4a2] 2026-10-05 17:16:23 git: pushed d252251
+[E4a2] 2026-10-05 17:16:23 == 4. layout probes (30 rounds) and final decisions
+[E4a2] 2026-10-05 17:16:23 probe qwen2.5-32b tp8 prefill (768,1536,3072)
+[run_xnode] 2026-10-05 17:16:46 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+wrote ws/fusion-dispatch/results/e4a2_layout/decisions_tp8x2n2_qwen2.5-32b_tp8_new.csv
+  decode  M=64    model sp_nccl    final sp_nccl    
+  decode  M=192   model tp_ar_vllm final tp_ar_vllm 
+  decode  M=320   model tp_ar_vllm final tp_ar_vllm 
+  decode  M=448   model tp_ar_vllm final tp_ar_vllm 
+  prefill M=768   model sp_nccl    final sp_nccl    probe tp_ar_vllm=10.9768 sp_nccl=10.0992
+  prefill M=1536  model sp_nccl    final sp_nccl    probe tp_ar_vllm=18.2216 sp_nccl=18.0337
+  prefill M=3072  model sp_nccl    final sp_nccl    probe tp_ar_vllm=36.1661 sp_nccl=35.5686
+[E4a2] 2026-10-05 17:16:46 probe qwen2.5-32b tp4 prefill (768,3072)
+[run_xnode] 2026-10-05 17:17:05 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+wrote ws/fusion-dispatch/results/e4a2_layout/decisions_tp4x2n2_qwen2.5-32b_tp4_new.csv
+  decode  M=64    model sp_nccl    final sp_nccl    
+  decode  M=192   model sp_nccl    final sp_nccl    
+  decode  M=320   model tp_ar_vllm final tp_ar_vllm 
+  decode  M=448   model tp_ar_vllm final tp_ar_vllm 
+  prefill M=768   model tp_ar_vllm final tp_ar_vllm probe tp_ar_vllm=10.2502 sp_nccl=10.9148
+  prefill M=1536  model tp_ar_vllm final tp_ar_vllm 
+  prefill M=3072  model tp_ar_vllm final tp_ar_vllm probe tp_ar_vllm=41.5565 sp_nccl=42.2625
+[E4a2] 2026-10-05 17:17:05 probe llama3-8b tp4 prefill (1536)
+[run_xnode] 2026-10-05 17:17:20 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+wrote ws/fusion-dispatch/results/e4a2_layout/decisions_tp4x2n2_llama3-8b_tp4_new.csv
+  decode  M=64    model sp_nccl    final sp_nccl    
+  decode  M=192   model sp_nccl    final sp_nccl    
+  decode  M=320   model tp_ar_vllm final tp_ar_vllm 
+  decode  M=448   model tp_ar_vllm final tp_ar_vllm 
+  prefill M=768   model tp_ar_vllm final tp_ar_vllm 
+  prefill M=1536  model tp_ar_vllm final tp_ar_vllm probe tp_ar_vllm=13.8860 sp_nccl=14.7471
+  prefill M=3072  model tp_ar_vllm final tp_ar_vllm 

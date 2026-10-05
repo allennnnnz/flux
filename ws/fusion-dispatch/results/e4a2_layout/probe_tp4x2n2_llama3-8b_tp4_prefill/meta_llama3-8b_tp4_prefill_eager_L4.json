@@ -1,0 +1,128 @@
+{
+ "args": {
+  "phase": "prefill",
+  "mode": "eager",
+  "Ms": "1536",
+  "model": "llama3-8b",
+  "table_g4": "ws/fusion-dispatch/results/g4_block_tables/table_g4_llama3-8b_tp4_prefill.json",
+  "table_g3": "ws/fusion-dispatch/results/g4_block_tables/table_g3_llama3-8b_tp4_prefill.json",
+  "policies": "tp_ar_vllm,sp_nccl",
+  "tag": "",
+  "L": 4,
+  "ctx": 1024,
+  "rounds": 30,
+  "warmup": 5,
+  "pad_cycles": 400000,
+  "rel_tol": 0.05,
+  "seed": 20260930,
+  "car_big_mib": 0,
+  "out_dir": "ws/fusion-dispatch/results/e4a2_layout/probe_tp4x2n2_llama3-8b_tp4_prefill"
+ },
+ "model": [
+  4096,
+  32,
+  8,
+  128,
+  14336
+ ],
+ "world": 4,
+ "table_g4_digest": "77f73b2028a4527b4af8e921f35b1330c1495ab90ee085bc0c8a573a87892765",
+ "table_g3_digest": "f969b86936c7a0cd2753f0d6884d89bd6f6fbcea21e613d6cfb22d2c8589d45b",
+ "table_meta": {
+  "model": "llama3-8b",
+  "world": 4,
+  "phase": "prefill",
+  "mode": "steady",
+  "graph": false,
+  "method": "g4",
+  "eps": 0.07546442698646483,
+  "probes_pending": [
+   {
+    "kind": "ag",
+    "key": "1536x4096",
+    "layer": "qkv",
+    "M": 2048,
+    "margin": 0.0219,
+    "candidates": [
+     "B",
+     "C"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "7168x4096",
+    "layer": "gate_up",
+    "M": 1024,
+    "margin": 0.029,
+    "candidates": [
+     "A",
+     "D"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "7168x4096",
+    "layer": "gate_up",
+    "M": 2048,
+    "margin": 0.0158,
+    "candidates": [
+     "A",
+     "D"
+    ]
+   }
+  ],
+  "probes_applied": 3,
+  "probes_changed_first_choice": 1
+ },
+ "date": "2026-10-05 17:17:16",
+ "cases": {
+  "1536": {
+   "check": {
+    "tp_ar_vllm": {
+     "max_abs_err": 0.0,
+     "rel_err": 0.0,
+     "ok_all_ranks": true
+    },
+    "sp_nccl": {
+     "max_abs_err": 0.375,
+     "rel_err": 0.014492753623188406,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    },
+    "sp_flux": {},
+    "sp_rsflux": {},
+    "sp_g4": {},
+    "sp_g3": {}
+   },
+   "misses": {},
+   "kept": 30,
+   "median_ms": {
+    "tp_ar": 14.001664161682129,
+    "tp_ar_vllm": 13.88595199584961,
+    "sp_nccl": 14.747136116027832
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "tp_ar_vllm": [
+     -38.866942405700684,
+     0.03276824951171875,
+     7.60422420501709
+    ],
+    "sp_nccl": [
+     -1.6476154327392578,
+     -0.6353917121887207,
+     6.46348762512207
+    ]
+   }
+  }
+ }
+}
