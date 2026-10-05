@@ -1,0 +1,30 @@
+E4a tp4x2n llama3-8b TP=4 (two nodes): pre-registered decisions vs measured oracle
+phase        M     vLLM       SP        best     decider  pred dT  meas dT  kept
+decode      32    1.744    1.802  tp_ar_vllm  tp_ar_vllm   -0.011   -0.058  185
+decode     128    5.105    4.577     sp_nccl     sp_nccl    0.320    0.528  200
+decode     256    9.653    4.472     sp_nccl     sp_nccl    0.438    5.181  200
+decode     384    5.190    5.751  tp_ar_vllm     sp_nccl    0.248   -0.561  200
+decode     512    6.961    7.509  tp_ar_vllm     sp_nccl    0.142   -0.548  200
+prefill   1024    9.839   10.503  tp_ar_vllm  tp_ar_vllm   -0.085   -0.665  200
+prefill   2048   20.488   22.701  tp_ar_vllm  tp_ar_vllm   -0.147   -2.213  200
+prefill   4096   39.049   40.032  tp_ar_vllm  tp_ar_vllm   -0.293   -0.984  200
+
+policy      regret   saving vs vLLM   worst point   (regret = sum(t - t_best) / sum(t_best))
+[all] 8 points
+  decider     1.20%          4.7%      10.8% at decode M=384
+  R1          6.18%          0.0%     115.9% at decode M=256
+  R1p        10.37%         -3.9%     115.9% at decode M=256
+  R2          6.18%          0.0%     115.9% at decode M=256
+  R3          5.45%          0.7%      10.8% at decode M=384
+[decode] 5 points
+  decider     4.83%         16.1%      10.8% at decode M=384
+  R1         24.88%          0.0%     115.9% at decode M=256
+  R1p        24.88%          0.0%     115.9% at decode M=256
+  R2         24.88%          0.0%     115.9% at decode M=256
+  R3          5.09%         15.9%      10.8% at decode M=384
+[prefill] 3 points
+  decider     0.00%          0.0%       0.0% at prefill M=1024
+  R1          0.00%          0.0%       0.0% at prefill M=1024
+  R1p         5.57%         -5.6%      10.8% at prefill M=2048
+  R2          0.00%          0.0%       0.0% at prefill M=1024
+  R3          5.57%         -5.6%      10.8% at prefill M=2048

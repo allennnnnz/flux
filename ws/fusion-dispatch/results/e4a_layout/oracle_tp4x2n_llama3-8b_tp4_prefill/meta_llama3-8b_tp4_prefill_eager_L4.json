@@ -1,0 +1,224 @@
+{
+ "args": {
+  "phase": "prefill",
+  "mode": "eager",
+  "Ms": "1024,2048,4096",
+  "model": "llama3-8b",
+  "table_g4": "ws/fusion-dispatch/results/g4_block_tables/table_g4_llama3-8b_tp4_prefill.json",
+  "table_g3": "ws/fusion-dispatch/results/g4_block_tables/table_g3_llama3-8b_tp4_prefill.json",
+  "policies": "tp_ar_vllm,sp_nccl",
+  "tag": "",
+  "L": 4,
+  "ctx": 1024,
+  "rounds": 200,
+  "warmup": 10,
+  "pad_cycles": 400000,
+  "rel_tol": 0.05,
+  "seed": 20260930,
+  "car_big_mib": 0,
+  "out_dir": "ws/fusion-dispatch/results/e4a_layout/oracle_tp4x2n_llama3-8b_tp4_prefill"
+ },
+ "model": [
+  4096,
+  32,
+  8,
+  128,
+  14336
+ ],
+ "world": 4,
+ "table_g4_digest": "77f73b2028a4527b4af8e921f35b1330c1495ab90ee085bc0c8a573a87892765",
+ "table_g3_digest": "f969b86936c7a0cd2753f0d6884d89bd6f6fbcea21e613d6cfb22d2c8589d45b",
+ "table_meta": {
+  "model": "llama3-8b",
+  "world": 4,
+  "phase": "prefill",
+  "mode": "steady",
+  "graph": false,
+  "method": "g4",
+  "eps": 0.07546442698646483,
+  "probes_pending": [
+   {
+    "kind": "ag",
+    "key": "1536x4096",
+    "layer": "qkv",
+    "M": 2048,
+    "margin": 0.0219,
+    "candidates": [
+     "B",
+     "C"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "7168x4096",
+    "layer": "gate_up",
+    "M": 1024,
+    "margin": 0.029,
+    "candidates": [
+     "A",
+     "D"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "7168x4096",
+    "layer": "gate_up",
+    "M": 2048,
+    "margin": 0.0158,
+    "candidates": [
+     "A",
+     "D"
+    ]
+   }
+  ],
+  "probes_applied": 3,
+  "probes_changed_first_choice": 1
+ },
+ "date": "2026-10-05 14:06:28",
+ "cases": {
+  "1024": {
+   "check": {
+    "tp_ar_vllm": {
+     "max_abs_err": 0.0,
+     "rel_err": 0.0,
+     "ok_all_ranks": true
+    },
+    "sp_nccl": {
+     "max_abs_err": 0.390625,
+     "rel_err": 0.014952153110047847,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    },
+    "sp_flux": {},
+    "sp_rsflux": {},
+    "sp_g4": {},
+    "sp_g3": {}
+   },
+   "misses": {},
+   "kept": 200,
+   "median_ms": {
+    "tp_ar": 9.900032043457031,
+    "tp_ar_vllm": 9.838591575622559,
+    "sp_nccl": 10.503168106079102
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "tp_ar_vllm": [
+     -0.3747835159301758,
+     -0.004095554351806641,
+     0.3778553009033203
+    ],
+    "sp_nccl": [
+     -0.9789438247680664,
+     -0.5969915390014648,
+     -0.25804805755615234
+    ]
+   }
+  },
+  "2048": {
+   "check": {
+    "tp_ar_vllm": {
+     "max_abs_err": 0.0,
+     "rel_err": 0.0,
+     "ok_all_ranks": true
+    },
+    "sp_nccl": {
+     "max_abs_err": 0.375,
+     "rel_err": 0.013043478260869565,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    },
+    "sp_flux": {},
+    "sp_rsflux": {},
+    "sp_g4": {},
+    "sp_g3": {}
+   },
+   "misses": {},
+   "kept": 200,
+   "median_ms": {
+    "tp_ar": 20.42521572113037,
+    "tp_ar_vllm": 20.487680435180664,
+    "sp_nccl": 22.700544357299805
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "tp_ar_vllm": [
+     -2.1422080993652344,
+     -0.047616004943847656,
+     1.454080581665039
+    ],
+    "sp_nccl": [
+     -3.281919479370117,
+     -1.9701766967773438,
+     -0.5150718688964844
+    ]
+   }
+  },
+  "4096": {
+   "check": {
+    "tp_ar_vllm": {
+     "max_abs_err": 0.0,
+     "rel_err": 0.0,
+     "ok_all_ranks": true
+    },
+    "sp_nccl": {
+     "max_abs_err": 0.375,
+     "rel_err": 0.014354066985645933,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    },
+    "sp_flux": {},
+    "sp_rsflux": {},
+    "sp_g4": {},
+    "sp_g3": {}
+   },
+   "misses": {},
+   "kept": 200,
+   "median_ms": {
+    "tp_ar": 38.88435173034668,
+    "tp_ar_vllm": 39.04870414733887,
+    "sp_nccl": 40.03225517272949
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "tp_ar_vllm": [
+     -2.6368026733398438,
+     -0.04044914245605469,
+     2.1975059509277344
+    ],
+    "sp_nccl": [
+     -3.731456756591797,
+     -1.0332164764404297,
+     1.04345703125
+    ]
+   }
+  }
+ }
+}
