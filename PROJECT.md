@@ -26,7 +26,7 @@ G4 之後的事後分析（`ws/fusion-dispatch/reports/20261003_g4_flux_value.md
 - decode 輸在切法；
 - 在這台，簡單規則「decode vLLM、prefill Flux」幾乎跟決策器一樣好（省 7.5% vs 8.0%），所以決策器的價值要在別的硬體上證明。
 
-下一步：**跨機器驗證**。使用者提供 gpu1（EE325）；**2026-10-03 唯讀盤點完成：4× V100-PCIE（sm70）、無 NVLink，Flux 不能跑 → 只能做縮小版（切法 + 校準可攜性），核心問題需要 sm80+ 無 NVLink 的機器，待使用者決定**（`ws/fusion-dispatch/reports/20261003_gpu1_inventory.md`）；使用者另外提供 **css-host-159**（同型 8× A100，與本機以 8 條 100 GbE RoCE 相連，唯讀盤點 `ws/fusion-dispatch/results/node159_inventory/`），可做跨節點驗證（Flux 能跑、連線慢），**已核准、進行中**：環境已複製、守衛 v2、RDMA 錨點 12.3 GB/s/rail；159 的 `~/.nccl.conf` 已停用、NCCL 跨節點正常（頻寬受 GPU→網卡讀取限制，約 7 GB/s/GPU）；Flux 跨節點：AG 能跑但 NVSHMEM 只能用單一 rail（缺 rail 間路由），多節點 RS 結果錯 → 方向待使用者決定；對手規則與成功標準已凍結。F4 / G6 待決定。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
+下一步：**跨機器驗證**。使用者提供 gpu1（EE325）；**2026-10-03 唯讀盤點完成：4× V100-PCIE（sm70）、無 NVLink，Flux 不能跑 → 只能做縮小版（切法 + 校準可攜性），核心問題需要 sm80+ 無 NVLink 的機器，待使用者決定**（`ws/fusion-dispatch/reports/20261003_gpu1_inventory.md`）；使用者另外提供 **css-host-159**（同型 8× A100，與本機以 8 條 100 GbE RoCE 相連，唯讀盤點 `ws/fusion-dispatch/results/node159_inventory/`），可做跨節點驗證（Flux 能跑、連線慢），**已核准、進行中**：環境已複製、守衛 v2、RDMA 錨點 12.3 GB/s/rail；159 的 `~/.nccl.conf` 已停用、NCCL 跨節點正常（頻寬受 GPU→網卡讀取限制，約 7 GB/s/GPU）；Flux 跨節點：AG 能跑但 NVSHMEM 只能用單一 rail（缺 rail 間路由），多節點 RS 結果錯 → 方向待使用者決定；**10-05 啟動 E4a（tmux `e4a`，無人值守）：跨節點的切法實驗，看簡單規則會不會失效**；對手規則與成功標準已凍結。F4 / G6 待決定。**待 auditor**。其餘三個 workstream 尚未有 worker session 進場。
 
 ## 2. Workstream 總表
 

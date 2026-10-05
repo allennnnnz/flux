@@ -161,7 +161,11 @@ def main():
     }
     # all dispatchers share backends (one Flux op per shape): build once, then alias
     base = Ds["sp_g4"]
-    base.prepare(shapes_ag, shapes_rs)
+    # E4 (2026-10-05): NCCL-only policy subsets (cross-node, where Flux ops cannot be built) skip the
+    # Flux backends; G4 behaviour (any Flux policy present) is unchanged.
+    _flux_pols = {"sp_flux", "sp_rsflux", "sp_g4", "sp_g3"}
+    if not ARGS.policies or _flux_pols & set(ARGS.policies.split(",")):
+        base.prepare(shapes_ag, shapes_rs)
     for D in Ds.values():
         D._agk, D._agop, D._rs, D._gbuf = base._agk, base._agop, base._rs, base._gbuf
     policies = ["tp_ar", "tp_ar_vllm", "sp_nccl", "sp_flux", "sp_rsflux", "sp_g4", "sp_g3"]

@@ -347,3 +347,16 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   - Flux 自帶測試的 torch 參考 31 ms 跟錨點對不上，未解釋，不引用。
 - params.json 新增 `flux_dispatch_e4_xnode`（錨點、QoS、`.nccl.conf`、冒煙結果）。
 - **卡在哪 / 需使用者決定**：NVSHMEM 多 rail 需要管理員加 rail 間路由（以及修 rail 4 的 IP）；Flux 多節點 RS 要先查對錯；或改走 E1 / E0。
+
+## 2026-10-05 · boss 兼 worker · 報告準備、決策器價值的拆解、E4a 啟動
+
+- **給教授的簡報**（Slides artifact，14 張含講稿）：https://claude.ai/artifact/Tvgvi2KCKYweKgeXMfK49M
+- **拆解決策器的價值**：prefill 9 點「全部用 Flux」vs「逐層查表」只差 0.77%，**幾乎全部來自 1 個點**（Qwen TP8 M=1024，+7.9%）。
+  → 在這台機器上，決策器比簡單規則多出的價值**尚未被證明**；切法決策壓倒一切，而切法很好選。
+- 使用者問「能不能移植 Flux 到 V100」：不建議（`op_registry.cu` 擋 sm70、mainloop 用 `cp.async`、無 bf16、違反 D-006，而且量到的是自己寫的 kernel）。改用兩台 A100 跨節點當慢連線環境。
+- **我先前的推論被冒煙測試推翻**：以為 TP+AllReduce 和序列平行+NCCL 搬的位元組一樣多、沒有 Flux 就不會翻；實測 prefill M=1024 跨節點序列平行快 22%（10 輪）。
+- **E4a 啟動**（tmux `e4a`，無人值守，因為使用者要關電腦）：`scripts/run_e4a_v1.sh`。
+  - 新腳本：`calibrate_xnode_v1.py`（多量 NCCL AG / RS）、`e4a_layout_v1.py`（fit / predict / eval）；`validate_block_v4.py` 在純 NCCL 策略時跳過 Flux 初始化（G4 行為不變）。
+  - 坑：`flux.testing.initialize_distributed()` 與 decode 的 graph 路徑會啟動 NVSHMEM → 跨節點必須 `NVSHMEM_HCA_LIST=mlx5_0`（NCCL 不受影響，仍用 7 條）。
+  - 坑：流程裡 log 一直在寫，`git pull --rebase` 要加 `--autostash`。
+- **留給下個 session**：讀 `results/e4a_layout/eval_*.txt` 與自動 JOURNAL 條目寫結論；若簡單規則在跨節點失效，接著做帶 Flux 的版本（需先解 NVSHMEM 多 rail 與 `GemmRS_multinode` 結果錯）。

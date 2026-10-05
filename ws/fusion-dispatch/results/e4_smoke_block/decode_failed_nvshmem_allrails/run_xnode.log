@@ -1,0 +1,2 @@
+[run_xnode] 2026-10-05 13:34:18 start: nproc_per_node=4 env=vllm ws/fusion-dispatch/scripts/validate_block_v4.py --model qwen2.5-32b --phase decode --mode graph --Ms 128 --table_g4 ws/fusion-dispatch/results/g4_block_tables/table_g4_qwen2.5-32b_tp8_decode.json --table_g3 ws/fusion-dispatch/results/g4_block_tables/table_g3_qwen2.5-32b_tp8_decode.json --policies tp_ar_vllm,sp_nccl --rounds 10 --warmup 3 --out_dir ws/fusion-dispatch/results/e4_smoke_block/decode
+[run_xnode] 2026-10-05 13:41:01 done: node0 rc=124 (END rc=124 CLEAN); node1 rc=124 (END rc=124 CLEAN)

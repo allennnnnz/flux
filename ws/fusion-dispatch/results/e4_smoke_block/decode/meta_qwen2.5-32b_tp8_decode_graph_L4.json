@@ -1,0 +1,139 @@
+{
+ "args": {
+  "phase": "decode",
+  "mode": "graph",
+  "Ms": "128",
+  "model": "qwen2.5-32b",
+  "table_g4": "ws/fusion-dispatch/results/g4_block_tables/table_g4_qwen2.5-32b_tp8_decode.json",
+  "table_g3": "ws/fusion-dispatch/results/g4_block_tables/table_g3_qwen2.5-32b_tp8_decode.json",
+  "policies": "tp_ar_vllm,sp_nccl",
+  "tag": "",
+  "L": 4,
+  "ctx": 1024,
+  "rounds": 10,
+  "warmup": 3,
+  "pad_cycles": 400000,
+  "rel_tol": 0.05,
+  "seed": 20260930,
+  "car_big_mib": 0,
+  "out_dir": "ws/fusion-dispatch/results/e4_smoke_block/decode"
+ },
+ "model": [
+  5120,
+  40,
+  8,
+  128,
+  27648
+ ],
+ "world": 8,
+ "table_g4_digest": "96b7af106f77a546071b8ba475ad42176dbcfbbc20ff22a1e258a62f5f7dd1be",
+ "table_g3_digest": "893a6345be70e3dc0f406db3f2b368ee65180a973443ca22dbc6b5a0bbf4313d",
+ "table_meta": {
+  "model": "qwen2.5-32b",
+  "world": 8,
+  "phase": "decode",
+  "mode": "gpu",
+  "graph": true,
+  "method": "g4",
+  "eps": 0.13543217179612443,
+  "probes_pending": [
+   {
+    "kind": "rs",
+    "key": "5120x640",
+    "layer": "o",
+    "M": 128,
+    "margin": 0.1017,
+    "candidates": [
+     "B",
+     "A"
+    ]
+   },
+   {
+    "kind": "rs",
+    "key": "5120x3456",
+    "layer": "down",
+    "M": 128,
+    "margin": 0.0632,
+    "candidates": [
+     "B",
+     "A"
+    ]
+   },
+   {
+    "kind": "rs",
+    "key": "5120x3456",
+    "layer": "down",
+    "M": 256,
+    "margin": 0.0381,
+    "candidates": [
+     "A",
+     "B"
+    ]
+   },
+   {
+    "kind": "rs",
+    "key": "5120x3456",
+    "layer": "down",
+    "M": 384,
+    "margin": 0.009,
+    "candidates": [
+     "A",
+     "B"
+    ]
+   }
+  ],
+  "probes_applied": 4,
+  "probes_changed_first_choice": 0
+ },
+ "date": "2026-10-05 13:41:33",
+ "cases": {
+  "128": {
+   "check": {
+    "tp_ar_vllm": {
+     "max_abs_err": 0.0,
+     "rel_err": 0.0,
+     "ok_all_ranks": true
+    },
+    "sp_nccl": {
+     "max_abs_err": 0.5625,
+     "rel_err": 0.014423076923076924,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    },
+    "sp_flux": {},
+    "sp_rsflux": {},
+    "sp_g4": {},
+    "sp_g3": {}
+   },
+   "misses": {},
+   "kept": 10,
+   "median_ms": {
+    "tp_ar": 2.4673279523849487,
+    "tp_ar_vllm": 2.4663039445877075,
+    "sp_nccl": 2.818560004234314
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "tp_ar_vllm": [
+     -0.029695987701416016,
+     0.010239958763122559,
+     0.1976320743560791
+    ],
+    "sp_nccl": [
+     -0.3768320083618164,
+     -0.35788798332214355,
+     -0.09830403327941895
+    ]
+   }
+  }
+ }
+}
