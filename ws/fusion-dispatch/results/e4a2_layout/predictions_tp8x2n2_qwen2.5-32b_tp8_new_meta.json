@@ -1,0 +1,16 @@
+{
+ "script": "ws/fusion-dispatch/scripts/e4a_layout_v2.py predict",
+ "tag": "tp8x2n2",
+ "set": "new",
+ "eps": 0.03,
+ "git_head_before_commit": "16f9ebae133f5b5bfe70a1e1d12546fbda9400d2",
+ "profiles_sha256": {
+  "common/cost_model/hw_profiles/xnode158-159_tp8x2n2_gpu_block.json": "14c5c1d5fa3af31a38f0a92134694ed8b1babbd30a486122fcf6598e622125ae",
+  "common/cost_model/hw_profiles/xnode158-159_tp8x2n2_steady_block.json": "2e6e79f809dc6865148fdd65dbea68aca82c0cf3ddf92cfc316133eacbad0647"
+ },
+ "gemm_sha256": {
+  "ws/fusion-dispatch/results/g4_block_gemm/gemm_qwen2.5-32b_tp8.csv": "f5205a17ae39c14bbac5b5a3ad8535c344708429ebf0af41ef00ef178a7da5e7",
+  "ws/fusion-dispatch/results/e4a2_layout/gemm/gemm_qwen2.5-32b_tp8.csv": "aeb6c63c73bc1debdb461b920a7ab3e8ca8382a49824ea84d4084b272b1a9266"
+ },
+ "rule": "frozen before the probe and oracle runs; nothing refitted afterwards"
+}

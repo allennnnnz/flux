@@ -1,0 +1,161 @@
+{
+ "script": "ws/fusion-dispatch/scripts/probe_gemm_v1.py",
+ "args": {
+  "model": "qwen2.5-32b",
+  "Ms": "64,192,320,448,768,1536,3072",
+  "modes": "gpu,steady",
+  "rounds": 50,
+  "rounds_steady": 20,
+  "warmup": 10,
+  "warmup_first": 100,
+  "steady_L": 16,
+  "pad_cycles": 400000,
+  "flush_mb": 128,
+  "clock_period": 0.02,
+  "seed": 20261003,
+  "out_dir": "ws/fusion-dispatch/results/e4a2_layout/gemm"
+ },
+ "world": 8,
+ "date": "2026-10-05 17:10:21",
+ "layers": {
+  "ag": {
+   "qkv": [
+    896,
+    5120
+   ],
+   "gate_up": [
+    6912,
+    5120
+   ]
+  },
+  "rs": {
+   "o": [
+    5120,
+    640
+   ],
+   "down": [
+    5120,
+    3456
+   ]
+  }
+ },
+ "checks": {
+  "qkv@64": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "qkv@192": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "qkv@320": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "qkv@448": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "qkv@768": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "qkv@1536": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "qkv@3072": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "gate_up@64": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "gate_up@192": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "gate_up@320": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "gate_up@448": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "gate_up@768": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "gate_up@1536": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "gate_up@3072": {
+   "c_cublas": true,
+   "c_fluxgemm": true
+  },
+  "o@64": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "o@192": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "o@320": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "o@448": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "o@768": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "o@1536": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "o@3072": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "down@64": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "down@192": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "down@320": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "down@448": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "down@768": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "down@1536": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  },
+  "down@3072": {
+   "c_cublas": true,
+   "c_fluxgemm_only": true
+  }
+ },
+ "wall_s_after_init": 12.166857242584229,
+ "cublas_settings": {
+  "CUBLAS_WORKSPACE_CONFIG": null,
+  "deterministic": false
+ }
+}

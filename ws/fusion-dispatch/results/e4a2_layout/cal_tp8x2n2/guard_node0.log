@@ -1,0 +1,3 @@
+2026-10-05 17:11:06Z [css-host-158] START guard=v2 uid=1001045 cmd=timeout --signal=TERM --kill-after=30 3600 /home/rogerlee/venvs/vllm085-flux/bin/python -m torch.distributed.run --nnodes=2 --node_rank=0 --nproc_per_node=4 --master_addr=10.10.1.158 --master_port=29531 ws/fusion-dispatch/scripts/calibrate_xnode_v2.py --cases 5120:32,64,128,192,256,320,384,448,512,768,1024,1536,2048,3072,4096 --out_dir ws/fusion-dispatch/results/e4a2_layout/cal_tp8x2n2
+2026-10-05 17:11:07Z [css-host-158] PREFLIGHT gpu_procs=[] foreign_cpu=[] foreign_root=[] self_cpu=[] other_users_logged_in=[]
+2026-10-05 17:13:04Z [css-host-158] END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 foreign_root_samples=0 self_cpu_warnings=0 window=None..None users_logged_in_at_end=[]

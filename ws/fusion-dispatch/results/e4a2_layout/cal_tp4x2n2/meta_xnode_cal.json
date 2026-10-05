@@ -1,0 +1,26 @@
+{
+ "script": "ws/fusion-dispatch/scripts/calibrate_xnode_v2.py",
+ "hosts": "css-host-158",
+ "args": {
+  "modes": "gpu,steady",
+  "rounds": 200,
+  "rounds_steady": 100,
+  "warmup": 30,
+  "warmup_first": 100,
+  "steady_L": 16,
+  "pad_cycles": 400000,
+  "flush_mb": 128,
+  "clock_period": 0.02,
+  "seed": 20261003,
+  "out_dir": "ws/fusion-dispatch/results/e4a2_layout/cal_tp4x2n2",
+  "cases": "5120:32,64,128,192,256,320,384,448,512,768,1024,1536,2048,3072,4096;4096:32,64,128,192,256,320,384,448,512,768,1024,1536,2048,3072,4096"
+ },
+ "world": 4,
+ "date": "2026-10-05 17:16:19",
+ "wall_s": 183.70574116706848,
+ "custom_ar": {
+  "present": true,
+  "disabled": true,
+  "max_size": null
+ }
+}

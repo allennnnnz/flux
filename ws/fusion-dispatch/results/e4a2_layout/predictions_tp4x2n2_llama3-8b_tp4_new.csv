@@ -1,0 +1,8 @@
+model,tp,phase,M,t_tp_pred_ms,t_sp_pred_ms,delta_ms,decider_model,probe,R1,R1p,R2,R3
+llama3-8b,4,decode,64,0.7065,0.6691,0.0374,sp_nccl,0,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+llama3-8b,4,decode,192,1.7324,0.8357,0.8967,sp_nccl,0,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+llama3-8b,4,decode,320,0.9960,1.0950,-0.0991,tp_ar_vllm,0,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+llama3-8b,4,decode,448,1.3501,1.4465,-0.0964,tp_ar_vllm,0,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+llama3-8b,4,prefill,768,1.8532,1.9340,-0.0808,tp_ar_vllm,0,tp_ar_vllm,sp_nccl,tp_ar_vllm,sp_nccl
+llama3-8b,4,prefill,1536,3.5678,3.6300,-0.0622,tp_ar_vllm,1,tp_ar_vllm,sp_nccl,tp_ar_vllm,sp_nccl
+llama3-8b,4,prefill,3072,7.5635,7.8414,-0.2779,tp_ar_vllm,0,tp_ar_vllm,sp_nccl,tp_ar_vllm,sp_nccl
