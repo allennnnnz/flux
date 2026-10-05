@@ -1,0 +1,33 @@
+E4a2 tp4x2n2 qwen2.5-32b TP=4 set=old (SANITY ONLY: E4a points, answers seen before the model change)
+phase        M     vLLM       SP        best       model       final  pred dT  meas dT probe
+decode      32    2.270    2.288  tp_ar_vllm     sp_nccl     sp_nccl    0.054   -0.017 0
+decode     128    6.535    3.845     sp_nccl     sp_nccl     sp_nccl    0.659    2.690 0
+decode     256    4.799    5.335  tp_ar_vllm  tp_ar_vllm     sp_nccl   -0.099   -0.536 0
+decode     384    6.917    7.494  tp_ar_vllm  tp_ar_vllm     sp_nccl   -0.092   -0.578 0
+decode     512    8.470    9.073  tp_ar_vllm  tp_ar_vllm     sp_nccl   -0.082   -0.603 0
+prefill   1024   13.326   13.908  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.059   -0.582 1
+prefill   2048   27.977   29.585  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.585   -1.609 0
+prefill   4096   54.951   53.673     sp_nccl     sp_nccl  tp_ar_vllm    0.217    1.278 1
+
+policy           regret   saving vs vLLM   worst point   right
+[all] 8 points
+  decider_model     0.01%          3.2%      0.8% at decode M=32      7/8
+  decider_e4a_v1    2.48%          0.8%     11.2% at decode M=256     3/8
+  R1                3.27%          0.0%     70.0% at decode M=128     6/8
+  R1p               4.02%         -0.7%     70.0% at decode M=128     5/8
+  R2                3.27%          0.0%     70.0% at decode M=128     6/8
+  R3                3.24%          0.0%     11.2% at decode M=256     2/8
+[decode] 5 points
+  decider_model     0.07%          9.2%      0.8% at decode M=32      4/5
+  decider_e4a_v1    6.59%          3.3%     11.2% at decode M=256     1/5
+  R1               10.23%          0.0%     70.0% at decode M=128     4/5
+  R1p              10.23%          0.0%     70.0% at decode M=128     4/5
+  R2               10.23%          0.0%     70.0% at decode M=128     4/5
+  R3                6.59%          3.3%     11.2% at decode M=256     1/5
+[prefill] 3 points
+  decider_model     0.00%          1.3%      0.0% at prefill M=1024    3/3
+  decider_e4a_v1    1.35%          0.0%      2.4% at prefill M=4096    2/3
+  R1                1.35%          0.0%      2.4% at prefill M=4096    2/3
+  R1p               2.31%         -0.9%      5.8% at prefill M=2048    1/3
+  R2                1.35%          0.0%      2.4% at prefill M=4096    2/3
+  R3                2.31%         -0.9%      5.8% at prefill M=2048    1/3

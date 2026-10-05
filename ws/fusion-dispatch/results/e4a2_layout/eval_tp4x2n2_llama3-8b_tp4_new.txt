@@ -1,0 +1,32 @@
+E4a2 tp4x2n2 llama3-8b TP=4 set=new (FRESH points, pre-registered)
+phase        M     vLLM       SP        best       model       final  pred dT  meas dT probe
+decode      64    2.747    2.580     sp_nccl     sp_nccl     sp_nccl    0.037    0.166 0
+decode     192    7.262    3.763     sp_nccl     sp_nccl     sp_nccl    0.897    3.499 0
+decode     320    4.553    5.116  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.099   -0.564 0
+decode     448    6.321    6.922  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.096   -0.601 0
+prefill    768    7.282    7.954  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.081   -0.673 0
+prefill   1536   13.961   14.761  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.062   -0.800 1
+prefill   3072   31.086   31.422  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.278   -0.336 0
+
+policy           regret   saving vs vLLM   worst point   right
+[all] 7 points
+  decider           0.00%          5.0%      0.0% at decode M=64      7/7
+  decider_model     0.00%          5.0%      0.0% at decode M=64      7/7
+  R1                5.27%          0.0%     93.0% at decode M=192     5/7
+  R1p               7.87%         -2.5%     93.0% at decode M=192     2/7
+  R2                5.27%          0.0%     93.0% at decode M=192     5/7
+  R3                4.28%          0.9%     12.4% at decode M=320     2/7
+[decode] 4 points
+  decider           0.00%         17.6%      0.0% at decode M=64      4/4
+  decider_model     0.00%         17.6%      0.0% at decode M=64      4/4
+  R1               21.29%          0.0%     93.0% at decode M=192     2/4
+  R1p              21.29%          0.0%     93.0% at decode M=192     2/4
+  R2               21.29%          0.0%     93.0% at decode M=192     2/4
+  R3                6.77%         12.0%     12.4% at decode M=320     2/4
+[prefill] 3 points
+  decider           0.00%          0.0%      0.0% at prefill M=768     3/3
+  decider_model     0.00%          0.0%      0.0% at prefill M=768     3/3
+  R1                0.00%          0.0%      0.0% at prefill M=768     3/3
+  R1p               3.46%         -3.5%      9.2% at prefill M=768     0/3
+  R2                0.00%          0.0%      0.0% at prefill M=768     3/3
+  R3                3.46%         -3.5%      9.2% at prefill M=768     0/3

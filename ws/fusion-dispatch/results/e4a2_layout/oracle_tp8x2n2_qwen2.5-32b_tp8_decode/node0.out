@@ -1,0 +1,44 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING 10-05 17:17:35 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 17:17:35 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 17:17:35 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 17:17:35 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 17:17:35 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 17:17:35 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 17:17:35 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 17:17:35 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 17:17:35 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 17:17:35 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 17:17:35 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 17:17:35 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 17:17:35 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 17:17:35 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 17:17:35 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 17:17:35 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 17:17:35 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 17:17:35 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 17:17:35 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 17:17:35 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 17:17:35 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 17:17:35 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 17:17:35 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 17:17:35 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 17:17:35 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 10-05 17:17:35 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 10-05 17:17:35 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 10-05 17:17:35 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+vLLM custom AR present=True disabled=True fully_connected=None max_size=None; pynccl disabled=False
+[decode graph L=4 M=64] kept 176  tp_ar=3.0075  tp_ar_vllm=2.9599  sp_nccl=3.2307  best=tp_ar_vllm  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.016}
+[decode graph L=4 M=192] kept 200  tp_ar=3.1939  tp_ar_vllm=3.1908  sp_nccl=3.4657  best=tp_ar_vllm  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0164}
+[decode graph L=4 M=320] kept 200  tp_ar=4.7713  tp_ar_vllm=4.7657  sp_nccl=4.9219  best=tp_ar_vllm  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0152}
+[decode graph L=4 M=448] kept 200  tp_ar=6.3770  tp_ar_vllm=6.3831  sp_nccl=7.2668  best=tp_ar  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0154}
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4a2_layout/oracle_tp8x2n2_qwen2.5-32b_tp8_decode/guard_node0.log

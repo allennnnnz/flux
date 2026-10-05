@@ -1,0 +1,30 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING 10-05 17:18:59 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 17:18:59 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 17:18:59 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 17:18:59 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 17:18:59 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 17:18:59 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 17:18:59 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 17:18:59 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 17:18:59 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 17:18:59 [config.py:4136] Current vLLM config is not set.
+WARNING 10-05 17:18:59 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 10-05 17:18:59 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 10-05 17:19:00 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 10-05 17:19:00 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+vLLM custom AR present=True disabled=True fully_connected=None max_size=None; pynccl disabled=False
+[rank0]:[W1005 17:19:01.275551604 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[decode graph L=4 M=64] kept 172  tp_ar=3.2471  tp_ar_vllm=3.6736  sp_nccl=3.4038  best=tp_ar  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.014}
+[decode graph L=4 M=192] kept 200  tp_ar=8.2258  tp_ar_vllm=9.3681  sp_nccl=4.6172  best=sp_nccl  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0149}
+[decode graph L=4 M=320] kept 200  tp_ar=6.0396  tp_ar_vllm=6.0580  sp_nccl=6.6007  best=tp_ar  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0132}
+[rank1]:[W1005 17:19:14.172312728 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[decode graph L=4 M=448] kept 200  tp_ar=7.7251  tp_ar_vllm=7.7384  sp_nccl=8.2775  best=tp_ar  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0141}
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4a2_layout/oracle_tp4x2n2_qwen2.5-32b_tp4_decode/guard_node0.log
