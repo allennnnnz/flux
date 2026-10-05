@@ -19,9 +19,12 @@ ABS_OUT=$(cd "$OUT" && pwd)
 rsync -a -e "ssh $SSHO" --exclude .pixi --exclude build --exclude 'python/flux/lib' --exclude '__pycache__' \
   ${REPO}/ws ${REPO}/common ${REPO}/launch.sh ${REMOTE}:${REPO}/ || { echo "rsync failed" >&2; exit 2; }
 ssh $SSHO ${REMOTE} "mkdir -p ${ABS_OUT}"
+# Arguments go to node 1 through a remote shell: quote each one (E4a2, 2026-10-05: an unquoted "--cases a;b"
+# was split at ';' on css-host-159, node 1 exited, node 0 waited until the timeout).
+ARGQ=$(printf '%q ' "$@")
 echo "[run_xnode] $(date '+%F %T') start: nproc_per_node=${NPROC} env=${ENVK} $*" | tee -a "${ABS_OUT}/run_xnode.log"
 ssh $SSHO ${REMOTE} "env ${XNODE_ENV:-} XNODE_GPUS='${XNODE_GPUS:-}' XNODE_TIMEOUT='${XNODE_TIMEOUT:-1800}' MASTER_PORT='${MASTER_PORT:-29531}' NVSHMEM_REMOTE_TRANSPORT='${NVSHMEM_REMOTE_TRANSPORT:-ibrc}' \
-  bash ${REPO}/ws/fusion-dispatch/scripts/launch_xnode.sh 1 ${NPROC} ${ENVK} ${ABS_OUT}/guard_node1.log $*" \
+  bash ${REPO}/ws/fusion-dispatch/scripts/launch_xnode.sh 1 ${NPROC} ${ENVK} ${ABS_OUT}/guard_node1.log ${ARGQ}" \
   > "${ABS_OUT}/node1.out" 2>&1 &
 RPID=$!
 env ${XNODE_ENV:-} bash ${REPO}/ws/fusion-dispatch/scripts/launch_xnode.sh 0 ${NPROC} ${ENVK} ${ABS_OUT}/guard_node0.log "$@" \

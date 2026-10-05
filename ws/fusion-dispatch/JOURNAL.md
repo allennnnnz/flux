@@ -487,3 +487,10 @@ policy      regret   saving vs vLLM   worst point   (regret = sum(t - t_best) / 
   4. **新的測試點** decode 64 / 192 / 320 / 448、prefill 768 / 1536 / 3072；E4a 的 24 點只當健全性檢查。
 - 流程 `scripts/run_e4a2_v1.sh`（tmux `e4a2`）：補量單卡 cuBLAS → 跨節點校準 → 模型決定 commit → 把關 → 最終決定 commit → 標準答案 → 評估。
 - **留給下個 session**：讀 `results/e4a2_layout/eval_*_new.txt` 寫結論。
+
+## 2026-10-05（續）· E4a2 第一次嘗試失敗（我的 bug），修正後重跑
+
+- `run_xnode.sh` 把 node 1 的參數經 ssh 傳過去時沒有加引號；`--cases "5120:...;4096:..."` 在 159 被分號切開，node 1 啟動失敗，node 0 空等 38 分鐘。
+  E4a 沒踩到，因為當時的參數沒有 shell 特殊字元。
+- 若放著不管，TP4 擬合會失敗，流程會連 TP8 的把關與標準答案一起跳過 → 手動停掉。尚未預先登記任何預測（只有 setup commit），重跑不影響登記。
+- 修正：`printf '%q '` 逐一引用參數，經 ssh 驗證分號完整保留。部分輸出移到 `results/e4a2_layout/attempt1_failed/`（含 README），第二次全部重量。
