@@ -360,3 +360,105 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   - 坑：`flux.testing.initialize_distributed()` 與 decode 的 graph 路徑會啟動 NVSHMEM → 跨節點必須 `NVSHMEM_HCA_LIST=mlx5_0`（NCCL 不受影響，仍用 7 條）。
   - 坑：流程裡 log 一直在寫，`git pull --rebase` 要加 `--autostash`。
 - **留給下個 session**：讀 `results/e4a_layout/eval_*.txt` 與自動 JOURNAL 條目寫結論；若簡單規則在跨節點失效，接著做帶 Flux 的版本（需先解 NVSHMEM 多 rail 與 `GemmRS_multinode` 結果錯）。
+
+## 2026-10-05 · E4a 自動流程完成（run_e4a_v1.sh 自動追加；結論待人工撰寫）
+
+- `ws/fusion-dispatch/results/e4a_layout/eval_tp4x2n_llama3-8b_tp4_summary.csv`
+- `ws/fusion-dispatch/results/e4a_layout/eval_tp4x2n_qwen2.5-32b_tp4_summary.csv`
+- `ws/fusion-dispatch/results/e4a_layout/eval_tp8x2n_qwen2.5-32b_tp8_summary.csv`
+
+```
+E4a tp4x2n llama3-8b TP=4 (two nodes): pre-registered decisions vs measured oracle
+phase        M     vLLM       SP        best     decider  pred dT  meas dT  kept
+decode      32    1.744    1.802  tp_ar_vllm  tp_ar_vllm   -0.011   -0.058  185
+decode     128    5.105    4.577     sp_nccl     sp_nccl    0.320    0.528  200
+decode     256    9.653    4.472     sp_nccl     sp_nccl    0.438    5.181  200
+decode     384    5.190    5.751  tp_ar_vllm     sp_nccl    0.248   -0.561  200
+decode     512    6.961    7.509  tp_ar_vllm     sp_nccl    0.142   -0.548  200
+prefill   1024    9.839   10.503  tp_ar_vllm  tp_ar_vllm   -0.085   -0.665  200
+prefill   2048   20.488   22.701  tp_ar_vllm  tp_ar_vllm   -0.147   -2.213  200
+prefill   4096   39.049   40.032  tp_ar_vllm  tp_ar_vllm   -0.293   -0.984  200
+
+policy      regret   saving vs vLLM   worst point   (regret = sum(t - t_best) / sum(t_best))
+[all] 8 points
+  decider     1.20%          4.7%      10.8% at decode M=384
+  R1          6.18%          0.0%     115.9% at decode M=256
+  R1p        10.37%         -3.9%     115.9% at decode M=256
+  R2          6.18%          0.0%     115.9% at decode M=256
+  R3          5.45%          0.7%      10.8% at decode M=384
+[decode] 5 points
+  decider     4.83%         16.1%      10.8% at decode M=384
+  R1         24.88%          0.0%     115.9% at decode M=256
+  R1p        24.88%          0.0%     115.9% at decode M=256
+  R2         24.88%          0.0%     115.9% at decode M=256
+  R3          5.09%         15.9%      10.8% at decode M=384
+[prefill] 3 points
+  decider     0.00%          0.0%       0.0% at prefill M=1024
+  R1          0.00%          0.0%       0.0% at prefill M=1024
+  R1p         5.57%         -5.6%      10.8% at prefill M=2048
+  R2          0.00%          0.0%       0.0% at prefill M=1024
+  R3          5.57%         -5.6%      10.8% at prefill M=2048
+
+E4a tp4x2n qwen2.5-32b TP=4 (two nodes): pre-registered decisions vs measured oracle
+phase        M     vLLM       SP        best     decider  pred dT  meas dT  kept
+decode      32    2.270    2.288  tp_ar_vllm     sp_nccl    0.006   -0.017  181
+decode     128    6.535    3.845     sp_nccl     sp_nccl    0.427    2.690  200
+decode     256    4.799    5.335  tp_ar_vllm     sp_nccl    0.343   -0.536  200
+decode     384    6.917    7.494  tp_ar_vllm     sp_nccl    0.168   -0.578  200
+decode     512    8.470    9.073  tp_ar_vllm     sp_nccl    0.035   -0.603  200
+prefill   1024   13.326   13.908  tp_ar_vllm  tp_ar_vllm   -0.092   -0.582  200
+prefill   2048   27.977   29.585  tp_ar_vllm  tp_ar_vllm   -0.195   -1.609  200
+prefill   4096   54.951   53.673     sp_nccl  tp_ar_vllm   -0.344    1.278  200
+
+policy      regret   saving vs vLLM   worst point   (regret = sum(t - t_best) / sum(t_best))
+[all] 8 points
+  decider     2.48%          0.8%      11.2% at decode M=256
+  R1          3.27%          0.0%      70.0% at decode M=128
+  R1p         4.02%         -0.7%      70.0% at decode M=128
+  R2          3.27%          0.0%      70.0% at decode M=128
+  R3          3.24%          0.0%      11.2% at decode M=256
+[decode] 5 points
+  decider     6.59%          3.3%      11.2% at decode M=256
+  R1         10.23%          0.0%      70.0% at decode M=128
+  R1p        10.23%          0.0%      70.0% at decode M=128
+  R2         10.23%          0.0%      70.0% at decode M=128
+  R3          6.59%          3.3%      11.2% at decode M=256
+[prefill] 3 points
+  decider     1.35%          0.0%       2.4% at prefill M=4096
+  R1          1.35%          0.0%       2.4% at prefill M=4096
+  R1p         2.31%         -0.9%       5.8% at prefill M=2048
+  R2          1.35%          0.0%       2.4% at prefill M=4096
+  R3          2.31%         -0.9%       5.8% at prefill M=2048
+
+E4a tp8x2n qwen2.5-32b TP=8 (two nodes): pre-registered decisions vs measured oracle
+phase        M     vLLM       SP        best     decider  pred dT  meas dT  kept
+decode      32    1.886    2.164  tp_ar_vllm  tp_ar_vllm   -0.032   -0.278  200
+decode     128    2.324    2.648  tp_ar_vllm  tp_ar_vllm   -0.178   -0.324  200
+decode     256    4.009    4.232  tp_ar_vllm  tp_ar_vllm   -0.151   -0.223  200
+decode     384    5.588    6.449  tp_ar_vllm  tp_ar_vllm   -0.096   -0.861  200
+decode     512    6.989    7.759  tp_ar_vllm     sp_nccl    0.018   -0.770  200
+prefill   1024   15.293   12.375     sp_nccl  tp_ar_vllm   -0.318    2.919  200
+prefill   2048   23.711   23.219     sp_nccl  tp_ar_vllm   -0.493    0.492  200
+prefill   4096   50.994   51.613  tp_ar_vllm     sp_nccl    0.187   -0.619  200
+
+policy      regret   saving vs vLLM   worst point   (regret = sum(t - t_best) / sum(t_best))
+[all] 8 points
+  decider     4.47%         -1.3%      23.6% at prefill M=1024
+  R1          3.18%          0.0%      23.6% at prefill M=1024
+  R1p         0.58%          2.5%       1.2% at prefill M=4096
+  R2          3.18%          0.0%      23.6% at prefill M=1024
+  R3          2.86%          0.3%      15.4% at decode M=384
+[decode] 5 points
+  decider     3.70%         -3.7%      11.0% at decode M=512
+  R1          0.00%          0.0%       0.0% at decode M=32
+  R1p         0.00%          0.0%       0.0% at decode M=32
+  R2          0.00%          0.0%       0.0% at decode M=32
+  R3         11.81%        -11.8%      15.4% at decode M=384
+[prefill] 3 points
+  decider     4.65%         -0.7%      23.6% at prefill M=1024
+  R1          3.94%          0.0%      23.6% at prefill M=1024
+  R1p         0.71%          3.1%       1.2% at prefill M=4096
+  R2          3.94%          0.0%      23.6% at prefill M=1024
+  R3          0.71%          3.1%       1.2% at prefill M=4096
+
+```
