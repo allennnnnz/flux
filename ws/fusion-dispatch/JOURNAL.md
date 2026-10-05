@@ -475,3 +475,15 @@ policy      regret   saving vs vLLM   worst point   (regret = sum(t - t_best) / 
 - **我自己的錯**：冒煙測試前，我以為「兩種切法位元組一樣多，沒有 Flux 就不會翻」；實測完全不是如此。
 - 報告：`reports/20261005_e4a_slow_link_layout.md`。
 - **留給下個 session**：修模型 → 用新的 M 點預先登記並重測（舊 24 點不能再當測試集）；之後才做帶 Flux 的版本。159 的 openclaw-gateway 仍停著。
+
+## 2026-10-05（續）· E4a2 設計並啟動（修正後的決策器，新的測試點）
+
+- 使用者要求「根據本次數據調整，再做一次」。
+- **修正**（皆對應 E4a 定位到的失敗，看到新數據前定案並隨 setup commit 登記）：
+  1. `predictor/curves.py` 加 `monotone=False`（預設不變，單機參數檔不受影響）；v2 擬合也不合併相近大小（`rel_merge=0`）。
+     自我測試直接重現了失敗機制：`[0.385, 0.750, 0.404, 0.728]` 被單調化成 `[0.385, 0.577, 0.577, 0.728]`。
+  2. `calibrate_xnode_v2.py --cases`：直接量 block 會用到的 (H, M)。這是單一集合通訊的元件量測，不是 block 量測（性質同 G4 的單卡 GEMM 實測）。
+  3. `e4a_layout_v2.py`：開啟 G4 把關，EPS = 3%。
+  4. **新的測試點** decode 64 / 192 / 320 / 448、prefill 768 / 1536 / 3072；E4a 的 24 點只當健全性檢查。
+- 流程 `scripts/run_e4a2_v1.sh`（tmux `e4a2`）：補量單卡 cuBLAS → 跨節點校準 → 模型決定 commit → 把關 → 最終決定 commit → 標準答案 → 評估。
+- **留給下個 session**：讀 `results/e4a2_layout/eval_*_new.txt` 寫結論。

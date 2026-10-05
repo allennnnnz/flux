@@ -28,10 +28,13 @@ class Curve:
         return ts[i] + f * (ts[i + 1] - ts[i])
 
     @classmethod
-    def fit(cls, points, rel_merge=0.10):
+    def fit(cls, points, rel_merge=0.10, monotone=True):
         """points: iterable of (bytes, ms). Points whose sizes are within rel_merge of a group's
         first size are merged (geometric-mean size, median time); then pool-adjacent-violators
-        makes the curve non-decreasing (a larger message never takes less time)."""
+        makes the curve non-decreasing (a larger message never takes less time).
+        monotone=False (E4a2, 2026-10-05) skips that step: across css-host-158 + 159 NCCL all-reduce is
+        NOT monotone in size (TP4 2+2: 1.5 MiB 0.750 ms, 3 MiB 0.404 ms; ws/fusion-dispatch/reports/
+        20261005_e4a_slow_link_layout.md section 3), and pooling smeared that cliff onto its neighbours."""
         pts = sorted((float(x), float(t)) for x, t in points if x > 0 and t is not None)
         assert pts, "no points to fit"
         groups = [[pts[0]]]
@@ -49,7 +52,8 @@ class Curve:
             xs.append(prod)
             ts.append(statistics.median(p[1] for p in g))
             ws.append(len(g))
-        ts = _pav(ts, ws)
+        if monotone:
+            ts = _pav(ts, ws)
         return cls(xs, ts)
 
     def to_dict(self):
