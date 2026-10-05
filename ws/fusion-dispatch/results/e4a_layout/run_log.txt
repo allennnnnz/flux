@@ -67,3 +67,39 @@ wrote ws/fusion-dispatch/results/e4a_layout/predictions_tp4x2n_qwen2.5-32b_tp4.c
   prefill M=1024  TP+AR 3.4702 ms  SP 3.5627 ms  -> decider tp_ar_vllm   (R1p sp_nccl)
   prefill M=2048  TP+AR 7.0302 ms  SP 7.2254 ms  -> decider tp_ar_vllm   (R1p sp_nccl)
   prefill M=4096  TP+AR 13.7659 ms  SP 14.1099 ms  -> decider tp_ar_vllm   (R1p sp_nccl)
+[E4a] 2026-10-05 14:03:49 git: committed 74e1ee1 fusion-dispatch E4a: pre-registered layout decisions (tp4x2n qwen2.5-32b tp4, before the oracle run)
+[E4a] 2026-10-05 14:03:51 git: pushed 74e1ee1
+[E4a] 2026-10-05 14:03:51 oracle qwen2.5-32b tp4 decode (32,128,256,384,512)
+[run_xnode] 2026-10-05 14:04:25 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+[E4a] 2026-10-05 14:04:25 oracle qwen2.5-32b tp4 prefill (1024,2048,4096)
+[run_xnode] 2026-10-05 14:05:41 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+E4a tp4x2n qwen2.5-32b TP=4 (two nodes): pre-registered decisions vs measured oracle
+phase        M     vLLM       SP        best     decider  pred dT  meas dT  kept
+decode      32    2.270    2.288  tp_ar_vllm     sp_nccl    0.006   -0.017  181
+decode     128    6.535    3.845     sp_nccl     sp_nccl    0.427    2.690  200
+decode     256    4.799    5.335  tp_ar_vllm     sp_nccl    0.343   -0.536  200
+decode     384    6.917    7.494  tp_ar_vllm     sp_nccl    0.168   -0.578  200
+decode     512    8.470    9.073  tp_ar_vllm     sp_nccl    0.035   -0.603  200
+prefill   1024   13.326   13.908  tp_ar_vllm  tp_ar_vllm   -0.092   -0.582  200
+prefill   2048   27.977   29.585  tp_ar_vllm  tp_ar_vllm   -0.195   -1.609  200
+prefill   4096   54.951   53.673     sp_nccl  tp_ar_vllm   -0.344    1.278  200
+
+policy      regret   saving vs vLLM   worst point   (regret = sum(t - t_best) / sum(t_best))
+[all] 8 points
+  decider     2.48%          0.8%      11.2% at decode M=256
+  R1          3.27%          0.0%      70.0% at decode M=128
+  R1p         4.02%         -0.7%      70.0% at decode M=128
+  R2          3.27%          0.0%      70.0% at decode M=128
+  R3          3.24%          0.0%      11.2% at decode M=256
+[decode] 5 points
+  decider     6.59%          3.3%      11.2% at decode M=256
+  R1         10.23%          0.0%      70.0% at decode M=128
+  R1p        10.23%          0.0%      70.0% at decode M=128
+  R2         10.23%          0.0%      70.0% at decode M=128
+  R3          6.59%          3.3%      11.2% at decode M=256
+[prefill] 3 points
+  decider     1.35%          0.0%       2.4% at prefill M=4096
+  R1          1.35%          0.0%       2.4% at prefill M=4096
+  R1p         2.31%         -0.9%       5.8% at prefill M=2048
+  R2          1.35%          0.0%       2.4% at prefill M=4096
+  R3          2.31%         -0.9%       5.8% at prefill M=2048

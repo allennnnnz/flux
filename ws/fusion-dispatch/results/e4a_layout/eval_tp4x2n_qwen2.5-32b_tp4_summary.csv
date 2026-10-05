@@ -1,0 +1,16 @@
+group,policy,regret,saving_vs_vllm,worst_rel,worst_point,n
+all,decider,0.02483,0.00764,0.1117,decode 256,8
+all,R1,0.03272,0.00000,0.6996,decode 128,8
+all,R1p,0.04024,-0.00728,0.6996,decode 128,8
+all,R2,0.03272,0.00000,0.6996,decode 128,8
+all,R3,0.03236,0.00035,0.1117,decode 256,8
+decode,decider,0.06592,0.03299,0.1117,decode 256,5
+decode,R1,0.10228,0.00000,0.6996,decode 128,5
+decode,R1p,0.10228,0.00000,0.6996,decode 128,5
+decode,R2,0.10228,0.00000,0.6996,decode 128,5
+decode,R3,0.06592,0.03299,0.1117,decode 256,5
+prefill,decider,0.01346,0.00000,0.0238,prefill 4096,3
+prefill,R1,0.01346,0.00000,0.0238,prefill 4096,3
+prefill,R1p,0.02306,-0.00948,0.0575,prefill 2048,3
+prefill,R2,0.01346,0.00000,0.0238,prefill 4096,3
+prefill,R3,0.02306,-0.00948,0.0575,prefill 2048,3
