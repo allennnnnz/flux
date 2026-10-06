@@ -1,0 +1,1 @@
+[run_xnode] 2026-10-06 03:28:50 start: nproc_per_node=4 env=pixi ws/fusion-dispatch/scripts/xnode_flux_rs_smoke_v2.py 4096 8192 8192

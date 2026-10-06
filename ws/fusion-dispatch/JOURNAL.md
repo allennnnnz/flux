@@ -711,3 +711,9 @@ policy           regret   saving vs vLLM   worst point   right
 - TP8（4+4）仍是模型最弱處：prefill 量級低估、decode M=64 方向猜錯（9.2%）。
 - 報告：`reports/20261005_e4a2_corrected_decider.md`。
 - **留給下個 session**：帶 Flux 的跨節點版本（先解 NVSHMEM 多 rail、`GemmRS_multinode` 結果錯）；auditor 審 E4a / E4a2；openclaw 還原。
+
+## 2026-10-06 · boss 兼 worker · GemmRS_multinode 假說測試未跑成；主線轉到 hetero-proxy
+
+- 假說：`GemmRS_multinode` 連續兩次呼叫節點內 GemmRS 之間沒有同步（sm80 的 forward_barrier 是空操作），跑得快的 rank 把第二次的資料寫進還在複製第一次結果的 rank → 只有保留第一次結果的節點 0 算錯（與症狀吻合）。
+- 測試腳本 `scripts/xnode_flux_rs_smoke_v2.py`；159 被同帳號的 `sglang::server` 佔用（8 卡各約 74 GB），守衛在 preflight 中止 → **假說未驗證**（`results/e4_flux_smoke/rsmn_v2_barrier_ppn4/README.md`）。
+- 教授指派新方向（PCIe 通道 + 異質晶片），主線轉到 `ws/hetero-proxy`；本 ws 的跨節點 Flux 工作暫停。
