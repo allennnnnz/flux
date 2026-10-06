@@ -3,8 +3,32 @@
 **本 workstream 唯一權威。** 第 1 節由 boss 寫入，worker 不改；第 2 節起由 worker 維護。
 
 建立：2026-09-23（boss）
-最後更新：2026-09-23（boss，建立）
-狀態：**未開始**
+最後更新：2026-10-06（boss 兼 worker，教授新方向 + 文獻 / 開源調查）
+狀態：**調查完成，實作未開始**
+
+---
+
+## 0. 快速跟上（新 session 先讀這節；每次收工更新）
+
+最後更新：2026-10-06
+
+**教授新方向（2026-10-06）**：讓 PCIe 也能用 Flux 的邏輯做通訊 / 計算重疊，配合 NVLink 相連的運算環境；
+節點外多一顆只有 PCIe 的不同廠牌晶片也要能協同運作、用 PCIe 溝通。這正是本 workstream 第 1 節的目標，故由本 ws 承接。
+
+**調查結論**（`reports/20261006_survey_pcie_overlap_hetero.md`）：
+1. Flux 的重疊只靠 GEMM tile 在 GPU 記憶體裡等旗標（`include/flux/cuda/system_barrier.hpp:38-86`），跟傳輸方式無關 → 任何能寫旗標的傳輸都能驅動重疊。
+2. NVIDIA GPU 之間走 PCIe 的 Flux 重疊已存在（Ring1D / Ring2D、PCIe 版 GEMM+RS；A100 PCIe op 1.20–3.25×），不是新貢獻。
+3. 在 NVLink 節點內把 PCIe 當額外頻寬：上限低（FlexLink 在 8×H800 只 +26%、只有集合通訊），與 D-001 一致 → 不作主線。
+4. **沒人做過**：PCIe 掛的不同廠牌晶片以 tile 級重疊加入 NVLink 域；沒有論文量過同機 NVIDIA ↔ 他廠晶片 PCIe P2P；沒有開源專案跨廠牌共用 tile 旗標。
+5. 可借用：copy engine 搬資料（ConCCL：SM 21% vs DMA 72% 理想加速）、主機中轉 + 主機記憶體旗標（ThunderEP、LLMQ）、
+   tile 計數觸發傳輸（FlashOverlap，已在昇騰上跑過）、主機代理執行緒（MSCCL++ PortChannel）、跨廠牌傳輸（FlagCX，12 家 CCL）。
+
+**建議路線**（報告第 4 節）：1a / 1b 量測 → 技術探針（能否從 Flux 外部寫 AG-GEMM 的旗標）→ 等級 0（算子級中轉）→
+等級 1（chunk 級中轉 + 旗標驅動 GEMM tile）→ NPU 型代理 → 工作切分 → 晶片到手後等級 2。
+
+**待使用者 / 教授確認**：「PCIe 加入通訊通道」是指連外部晶片的通道（建議主線），還是 NVLink 之外的額外頻寬；晶片的型號與軟體堆疊。
+
+**環境注意**：css-host-159 目前被同帳號的 `sglang::server` 佔用；本 ws 的等級 0 / 1 只需要 css-host-158 單機（以一張關閉 peer access 的 A100 代理晶片）。
 
 ---
 
@@ -79,6 +103,13 @@ Phase 3 的起點：為「PCIe-only 晶片 + A100 NVLink 域」的異質計算�
 
 ## 4. 下一步（worker 維護）
 
+**2026-10-06 更新**（依調查報告第 4 節；原 1a / 1b 仍是第一步）：
+0. 與教授確認方向解讀（見第 0 節「待確認」）。
+1. 1a、1b（如下）。
+2. 技術探針：從 Flux 外部（H2D stream 上的 `cuStreamWriteValue32` / 主機執行緒）寫入 AG-GEMM kernel 等待的旗標，確認等級 1 對 Flux 的改動量。
+3. 等級 0 → 等級 1 → NPU 型代理 → 工作切分（先用成本模型估，避開跨裝置頻寬的「死區」，arXiv 2602.09721）。
+
+原有：
 1. 1a：改 `bidirectional_bandwidth_v2.py` 為 per-device 方向，複製到本 ws 的 `scripts/`
    （保留原檔不動），跑三組配置各 20 repeats。
 2. 1b：`dual_path_v3.py` 加 overhead-only 模式，同樣複製到本 ws。

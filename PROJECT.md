@@ -34,7 +34,7 @@ G4 之後的事後分析（`ws/fusion-dispatch/reports/20261003_g4_flux_value.md
 | --- | --- | --- | --- | --- | --- |
 | `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器，G0–G4 完成（`reports/20261003_g4_dispatcher.md`：op 0.17%、block 0.02%），下一步：跨機器驗證（gpu1 盤點完成：V100 PCIe，Flux 不能跑，待決定範圍）**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-03 |
 | `ws/diag-overlap` | 第二 | 未開始 | — | 未指派 | — |
-| `ws/hetero-proxy` | 第二，可與上並行 | 未開始 | — | 未指派 | — |
+| `ws/hetero-proxy` | **最高（2026-10-06 教授指派）** | 教授新方向：PCIe 通道上的 Flux 式重疊 + NVLink 域與 PCIe 異質晶片協同；**文獻 / 開源調查完成**（`reports/20261006_survey_pcie_overlap_hetero.md`），實作未開始；新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-06 |
 | `ws/cost-model` | 第三 | 模型目標由 fusion-dispatch 第三階段執行；預測器 v1 已建於 `common/cost_model/predictor/`（G1），校準參數檔在 `common/cost_model/hw_profiles/`（G2）（D-008） | — | 未指派 | 2026-10-02 |
 
 各 workstream 的目標、步驤、成功標準寫在各自的 `STATUS.md` 第 1 節，由 boss 在建立時
@@ -90,7 +90,7 @@ worker 在 JOURNAL 標「需 boss 裁決」的事項會被 boss 搬到這裡。
    - 決定 F4（vLLM 端到端，用決策器 v2）/ G6（總報告）的先後；
    - 安排 auditor 審 E0、E1–E3、G1–G4 報告。
 1. 指派第一個 worker session 到 `ws/diag-overlap`。
-2. `ws/hetero-proxy` 可同時開一個 worker，先做 1a/1b 兩項補充量測。
+2. `ws/hetero-proxy`（**2026-10-06 起為主線**，教授指派）：先與教授確認方向解讀，再做 1a / 1b 與「從 Flux 外部寫旗標」的技術探針。
 3. 兩者各有第一份 report 後，安排 auditor。
 4. 第一批 auditor 通過的結論寫進 `DECISIONS.md`，並更新 `params.json`。
 
