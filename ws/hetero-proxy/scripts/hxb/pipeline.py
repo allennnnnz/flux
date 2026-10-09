@@ -9,7 +9,9 @@ Every pass is pre-enqueued behind a host gate counter, and the gate opens only a
 has received every command), so the timed window excludes host enqueue time and command transport (reported
 separately as enqueue_s and submit_s; in steady state they overlap the previous pass). Timed window = dst start event (after the gate) -> dst end event (after the consumer);
 cross-check: host time from opening the gate to seeing the pass_done counter that the dst stream writes.
-A static device (caps.max_queues == 1) gets its copy_in / op / copy_out interleaved per chunk on its only queue.
+Submission order per chunk i: send(i + lookahead), op(i), recv(i). lookahead=0 suits separate copy_in / copy_out
+queues; when they share a queue (a half-duplex device, or a static one with a single queue) lookahead >= 1 lets
+copy_in(i+1) run while op(i) computes instead of queueing behind copy_out(i).
 """
 import time
 
@@ -32,7 +34,7 @@ class Weights:
 
 class StagePipeline:
     def __init__(self, bridge, queues, weights, src, dst, M, n_chunks, slots=4, op="lowrank_gelu", seed=1,
-                 timing=False):
+                 timing=False, lookahead=0):
         be = bridge.be
         self.br, self.be, self.w = bridge, be, weights
         self.src, self.dst, self.M, self.n, self.op = src, dst, M, n_chunks, op
@@ -55,6 +57,7 @@ class StagePipeline:
         self.gate, self.done = be.signal("gate"), be.signal("pass_done")
         self.cs_src = torch.cuda.Stream(src)
         self.cs_dst = self.cs_src if dst == src else torch.cuda.Stream(dst)
+        self.lookahead = lookahead  # sends submitted this many chunks ahead of op / recv (shared copy queue)
         self.p = 0
         self.last = None
         self._warmup()
@@ -75,6 +78,9 @@ class StagePipeline:
             e.record()
         torch.cuda.synchronize(self.src)
         torch.cuda.synchronize(self.dst)
+        args = {"x": self.dA, "u": self.w.dU, "v": self.w.dV, "y": self.dB}
+        self.be.prepare(self.op, dict(args, rows=(0, cr)))
+        self.be.prepare(self.op, dict(args, rows=(0, self.M)))
 
     def enqueue(self):
         """Enqueue one pass behind the gate; returns the pass record (call run() to open the gate)."""
@@ -107,10 +113,20 @@ class StagePipeline:
                 rec["dst_end"] = torch.cuda.Event(enable_timing=True)
                 rec["dst_end"].record()
             cm.write64(self.cs_dst, self.done.addr, p + 1)
-        for i in range(n):
+        sent = {}
+
+        def send(i):
             j = p * n + i
             rows = (i * cr, (i + 1) * cr)
-            sig, v = self.ob.send(self.A, rows[0], rows[1], ev[i], self.dA, rows, self.q_in, tag=f"in{j}")
+            sent[i] = self.ob.send(self.A, rows[0], rows[1], ev[i], self.dA, rows, self.q_in, tag=f"in{j}")
+        for i in range(min(self.lookahead, n)):
+            send(i)
+        for i in range(n):
+            if i + self.lookahead < n:
+                send(i + self.lookahead)
+            j = p * n + i
+            rows = (i * cr, (i + 1) * cr)
+            sig, v = sent[i]
             self.be.launch(self.q_op, self.op, {"x": self.dA, "u": self.w.dU, "v": self.w.dV, "y": self.dB,
                                                 "rows": rows}, wait=[(sig, v)], done=(self.computed, j + 1),
                            tag=f"op{j}")
@@ -139,8 +155,9 @@ class StagePipeline:
         return rec
 
     def reference(self):
-        """fp32 reference of the whole pass, computed on the dst GPU."""
-        A = (self.X.float() @ self.w.W1.float().to(self.X.device)).to(torch.bfloat16)
+        """fp32 reference of the whole pass. Intermediates hop GPU -> CPU -> GPU: a direct cross-GPU .to() would
+        enable peer access and use NVLink, polluting the "nothing over NVLink" check (I4 dry run 2026-10-09)."""
+        A = (self.X.float() @ self.w.W1.float()).to(torch.bfloat16)
         Bf = torch.nn.functional.gelu(A.float() @ self.w.U.to(A.device)) @ self.w.V.to(A.device)
-        B = Bf.to(torch.bfloat16).to(self.Z.device)
+        B = Bf.to(torch.bfloat16).cpu().to(self.Z.device)
         return (B.float() @ self.w.W3.float()).to(torch.bfloat16)

@@ -163,6 +163,11 @@ class Backend(abc.ABC):
     @abc.abstractmethod
     def sync(self, timeout=60.0): ...
 
+    def prepare(self, op, args):
+        """Run whatever one-time work `op` needs (kernel loading, compilation) before any queue waits on a counter.
+        A GPU-like device must not load modules while one of its streams is parked (context-wide sync -> deadlock,
+        Bridge rule 3). Default: nothing to do."""
+
     def flush(self, timeout=60.0):
         """Return once every submitted command has reached the device (submission, not execution). Backends whose
         submission is synchronous need not override it."""

@@ -27,7 +27,6 @@ _wait64 = _fn("cuStreamWaitValue64_v2", [_V, _U64, _U64, _UI])
 _memcpy = _fn("cuMemcpyAsync", [_U64, _U64, _SZ, _V])
 WAIT_GEQ = 0x0          # CU_STREAM_WAIT_VALUE_GEQ: (int64)(*addr - v) >= 0
 HOST_REGISTER_FLAGS = 3  # cudaHostRegisterPortable | cudaHostRegisterMapped
-_ALREADY_REGISTERED = 712
 
 
 def _check(r, what):
@@ -58,14 +57,25 @@ def memcpy(stream, dst, src, nbytes):
     _check(_memcpy(dst, src, nbytes, _s(stream)), "cuMemcpyAsync")
 
 
+_registered = set()
+
+
 def register(addr, nbytes):
-    """Pin + map host memory for every device (portable). Idempotent."""
+    """Pin + map host memory for every device (portable). Idempotent: returns True only for the call that registered.
+    Never call cudaHostRegister twice on one range: the runtime returns 712 and keeps it as the sticky last error,
+    so the NEXT unrelated torch CUDA call raises it ("part or all of the requested memory range is already mapped",
+    I4 dry run 2026-10-09: backend and Bridge both registered the signal table)."""
+    if addr in _registered:
+        return False
     r = torch.cuda.cudart().cudaHostRegister(addr, nbytes, HOST_REGISTER_FLAGS)
     code = int(getattr(r, "value", r))
-    if code not in (0, _ALREADY_REGISTERED):
+    if code != 0:
         raise RuntimeError(f"cudaHostRegister failed: {r}")
-    return code == 0
+    _registered.add(addr)
+    return True
 
 
 def unregister(addr):
-    torch.cuda.cudart().cudaHostUnregister(addr)
+    if addr in _registered:
+        torch.cuda.cudart().cudaHostUnregister(addr)
+        _registered.discard(addr)

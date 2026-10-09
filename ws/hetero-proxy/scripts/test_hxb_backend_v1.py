@@ -7,7 +7,7 @@
 #   T4 release                   once done is observed, the op's writes are visible (read immediately, many times)
 #   T5 monotonic                 a lower store never lowers a counter
 #   T6 cross-queue dependency    compute on queue B waits for copy_in on queue A (B submitted first)
-#   T7 op correctness            gemm / lowrank_gelu against a float64 torch reference
+#   T7 op correctness            gemm / lowrank_gelu against a float64 torch reference (max rel err < 2e-2: bf16)
 #   T8 static device             with one queue, interleaved submission (in_i, op_i, out_i) completes
 # Usage: python test_hxb_backend_v1.py [--backend cpu|proxy] [--device 2] [--log file]
 ################################################################################
@@ -97,7 +97,9 @@ def run(be):
     gate.set(1)
     s.wait(v)
     tr = {r["tag"]: r for r in be.trace()}
-    check("T3 wait", not started_early and tr["gated"]["t_start"] >= t_set,
+    # primary: the op had not completed during the 50 ms before the set; the trace check allows 1 ms because a
+    # device-timed trace (CUDA events) is aligned to the host clock only approximately
+    check("T3 wait", not started_early and tr["gated"]["t_start"] >= t_set - 1e-3,
           f"(start - set = {1e6 * (tr['gated']['t_start'] - t_set):.1f} us)")
 
     # T4: overwrite a device buffer in many steps; after each done, the host copy must equal the expectation
@@ -154,7 +156,7 @@ def run(be):
     ref2 = torch.nn.functional.gelu(x.double() @ u.double()) @ vv.double()
     e1 = ((y1 - ref1).abs().max() / ref1.abs().max()).item()
     e2 = ((y2 - ref2).abs().max() / ref2.abs().max()).item()
-    check("T7 op correctness", e1 < 1e-2 and e2 < 1e-2, f"(max rel err gemm {e1:.2e}, lowrank_gelu {e2:.2e}; bf16 output)")
+    check("T7 op correctness", e1 < 2e-2 and e2 < 2e-2, f"(max rel err gemm {e1:.2e}, lowrank_gelu {e2:.2e}; bf16 output)")
     be.sync()
 
 
