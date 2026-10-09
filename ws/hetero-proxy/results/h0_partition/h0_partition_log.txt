@@ -1,0 +1,35 @@
+H0 inputs: Qwen2.5-32B (H=5120, 64 layers), 8x A100 TP8 domain, PCIe 22.2 GB/s one-way, 6.46 GB/s H2D under
+           bidirectional load, ALPHA=20 us per transfer (assumption), chip speed s = x one A100
+
+[TP] chip as an extra TP member: PCIe time per layer vs the domain's whole layer time
+  M=32    PCIe    1.3 MB/layer ->  0.139 ..  0.283 ms   domain layer  0.179 ms   PCIe/layer =  0.8x ..  1.6x  (any chip speed)
+  M=256   PCIe   10.5 MB/layer ->  0.552 ..  1.703 ms   domain layer  0.440 ms   PCIe/layer =  1.3x ..  3.9x  (any chip speed)
+  M=1024  PCIe   41.9 MB/layer ->  1.969 ..  6.573 ms   domain layer  0.907 ms   PCIe/layer =  2.2x ..  7.2x  (any chip speed)
+  M=4096  PCIe  167.8 MB/layer ->  7.637 .. 26.051 ms   domain layer  2.839 ms   PCIe/layer =  2.7x ..  9.2x  (any chip speed)
+  -> the chip's path alone is longer than the domain's layer: TP membership slows every layer, whatever s is.
+
+[PP] chip as a pipeline stage (balanced k layers); throughput gain = s/8; PCIe per pass vs stage time
+  s=0.033 M=32    chip layers   0.3  stage    11.42 ms  boundary  0.070 ms ( 0.61% of stage)  throughput + 0.4%  single-pass latency x2.00
+  s=0.033 M=4096  chip layers   0.3  stage   180.95 ms  boundary  3.819 ms ( 2.11% of stage)  throughput + 0.4%  single-pass latency x2.01
+  s=0.125 M=32    chip layers   1.0  stage    11.29 ms  boundary  0.070 ms ( 0.62% of stage)  throughput + 1.6%  single-pass latency x1.98
+  s=0.125 M=4096  chip layers   1.0  stage   178.90 ms  boundary  3.819 ms ( 2.13% of stage)  throughput + 1.6%  single-pass latency x1.99
+  s=0.250 M=32    chip layers   1.9  stage    11.12 ms  boundary  0.070 ms ( 0.63% of stage)  throughput + 3.1%  single-pass latency x1.95
+  s=0.250 M=4096  chip layers   1.9  stage   176.19 ms  boundary  3.819 ms ( 2.17% of stage)  throughput + 3.1%  single-pass latency x1.96
+  s=0.500 M=32    chip layers   3.8  stage    10.79 ms  boundary  0.070 ms ( 0.64% of stage)  throughput + 6.2%  single-pass latency x1.89
+  s=0.500 M=4096  chip layers   3.8  stage   171.01 ms  boundary  3.819 ms ( 2.23% of stage)  throughput + 6.2%  single-pass latency x1.90
+  s=1.000 M=32    chip layers   7.1  stage    10.19 ms  boundary  0.070 ms ( 0.68% of stage)  throughput +12.5%  single-pass latency x1.78
+  s=1.000 M=4096  chip layers   7.1  stage   161.51 ms  boundary  3.819 ms ( 2.36% of stage)  throughput +12.5%  single-pass latency x1.80
+  -> PCIe is a small fraction of a stage; gain is capped by the chip's compute (s/8: +12.5% for an A100-class chip,
+     +3.1% at s=1/4, +0.4% for a CPU); the price is longer single-pass (decode) latency unless requests are pipelined.
+
+[ATT] chip runs decode attention (q, k, v in; output back) per layer
+  M=32    PCIe  0.79 MB/layer ->  0.075 ms  vs domain layer  0.179 ms ( 42.1%)
+  M=256   PCIe  6.29 MB/layer ->  0.323 ms  vs domain layer  0.440 ms ( 73.5%)
+  -> a large share of every layer; only workable with cross-layer / two-batch pipelining (Lamina); the gain is mainly
+     KV-cache capacity, not compute.
+
+[DRAFT] speculative-decoding draft on the chip: PCIe carries token ids / logits only -> link is not the issue, and
+        there is no large transfer to overlap; the gain comes from running the draft in parallel with the target.
+
+Conclusion [推論]: first real role = pipeline stage (PCIe-feasible, gain s/8). Flux-style chunk overlap applies to the
+stage-boundary transfers (next stage's first GEMM starts on arriving row chunks). TP membership is excluded.

@@ -30,3 +30,11 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - **粗估改變了順序** [推論]：晶片若當 TP=4 成員，每層 PCIe 收送量（M=4096：125.8 MB，5.67–19.48 ms）不少於 GPU 算一層（5.03 ms）→ 重疊也救不了；
   當 pipeline 段只在邊界搬 84 MB。→ 工作切分（H0）移到最前面，Flux 式重疊做在選定角色的通訊上。
 - 計劃 H0–H5 寫入 STATUS §0。等教授確認方向解讀與晶片型號後開始；H0 不用 GPU，可先做。
+
+## 2026-10-09 · boss 兼 worker · 開始實作；H0 完成
+
+- 使用者核准「開始所有實作」，並採用「先用 CPU 當第一個非 NVIDIA 加速器、做出介面式系統」的方向（Python 原型）。
+- 環境：Triton 3.2（原子操作有 acquire / scope）、**無 cuda-python**（不能 `cuStreamWriteValue32`）→ GPU 旗標改以 copy engine 搬 4 bytes 寫入；
+  `launch.sh` 的 `CUDA_DEVICE_MAX_CONNECTIONS=1` 會讓搬運 stream 排在等旗標的 GEMM 後面 → 原型不經 `launch.sh`。
+  **設計規則：GPU 旗標絕不能用 kernel 寫**（等旗標的 tile 佔住 SM 時，寫旗標的 kernel 排不上去 → 死結）。
+- **H0**（`reports/20261009_h0_work_partition.md`，推論）：TP 成員排除；pipeline 段可行、上限 +s/8；示範設計成雙向 chunk 串流。
