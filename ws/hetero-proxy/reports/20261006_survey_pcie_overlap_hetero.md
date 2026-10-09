@@ -138,3 +138,23 @@ FlexLink 在 H800 上集合通訊只 +26%），且 A100 之間的 P2P 會走 NVL
 - 教授的「PCIe 加入通訊通道」是指 (a) 連到外部晶片的通道（本報告建議的主線），還是 (b) 節點內 NVLink 之外的額外頻寬？若是 (b)，需先說明上限。
 - 那顆國產晶片的型號 / 軟體堆疊（是否有 Triton 後端、廠牌 CCL、dma-buf 匯出 / 匯入能力）決定步驟 7 與工作切分。
 - 未驗證項目：Hybe 的拓撲、FastDecode 與 Cephalo 的發表處、FlagCX 的頻寬宣稱、HetCCL（2605.31000）程式碼連結。
+
+## 附錄 A：FlexLink 細節（2026-10-09 讀全文，arxiv.org/html/2510.15882 **[已抽查]**）
+
+- **定位**：NCCL API 相容的直接替代品；目前只支援 AllReduce、AllGather（AllToAll 列為未來工作）。程式碼未公開（文中說約 500 行 Python + 3,500 行 C++/CUDA）。
+- **PCIe 路徑 = 經主機中轉**：NVLink 相連的 GPU 之間做 P2P 會自動走 NVLink，所以要刻意用 PCIe 只能 GPU → pinned 主機記憶體 → GPU。
+  - 雙緩衝 pipeline：拆成 producer D2H、H2D consumer 兩段，各一塊 pinned buffer，一個 chunk 上傳時另一個在下載；chunk 4 MB（PCIe 與 RDMA 都是）。
+  - 用 copy engine（`cudaMemcpyAsync`），不用 SM。
+  - 同步：`cuStreamWaitValue32` / `cuStreamWriteValue32`，GPU 直接輪詢記憶體旗標；**單調遞增計數器**——第 i 輪 producer 等 `semEmpty == i`、寫資料、把對方 `semFull` 設為 `i+1`，不必重設旗標，也不會讀到舊值。
+- **網卡路徑**：節點內 RDMA loopback，以 NVSHMEM 的 CPU 發起 API 實作；作者自承「次佳，需要再優化」。
+- **三路同時跑、資料切塊分配**：兩階段負載平衡。初始化約 10 秒反覆量測、調到三路同時完成；執行時看最近約 10 次呼叫，最慢與最快差距超過門檻就移一小塊給最快的。
+  結果 PCIe 約 10–14%、網卡 4–10%、其餘 NVLink。環狀演算法如何按路徑拆分，文中未詳述。
+- **測試平台與效益**：8×H800（NVLink 被限到 400 GB/s）、PCIe 5.0 x16、ConnectX-6。AllReduce 2 卡 256 MB +26%（PCIe 12% + RDMA 9%）；
+  AllGather 4 卡 +27%、8 卡 +24%；**8 卡 AllReduce 只有 +2%**（環狀 2(N−1)=14 步，慢路徑的延遲被放大）。
+- **限制（作者自述）**：協調用的 kernel 會佔 SM；網卡與主機流量共用同一條 PCIe 上行（H800 上合計被限在一個 PCIe 介面 128 GB/s）；PCIe 被其他工作佔用時效益下降；
+  不跟計算重疊（只做頻寬加總）。
+- **對本 ws 的意義**：
+  - PCIe 路徑的設計（主機中轉雙緩衝 + copy engine + GPU 輪詢旗標 + 單調計數器）可直接作為等級 1 的傳輸層；Phase 0 的 staging 量測用的是同一類機制（`cuStreamWrite/WaitValue32` 雙緩衝，16 MiB 最佳）。
+  - 它沒有 Flux 式的「chunk 到就開算」，那是本 ws 要補的部分。
+  - 在本機 A100 上把 PCIe 當額外頻寬，效益會比 H800 更小 **[推論]**：H800 是 PCIe 5.0 配限速 NVLink；本機 PCIe 4.0 中轉最佳 22.2 GB/s、NVLink 單對約 270 GB/s，若三路同時完成，PCIe 最多分到約 8%。
+    如何驗證：在本機實作 PCIe 中轉路徑與 NVLink 並行跑 AllGather，量合計頻寬。
