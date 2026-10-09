@@ -1,0 +1,141 @@
+# start 2026-10-09 07:38:45 CUDA_MODULE_LOADING=EAGER
+[A] copy_in  dma_threads=1                       n=1      6.036 ms    6.95 GB/s
+[A] copy_out dma_threads=1                       n=1      4.522 ms    9.28 GB/s
+[A] copy_in  dma_threads=1 | with copy_out       n=1      5.833 ms    7.19 GB/s
+[A] copy_out dma_threads=1 | with copy_in        n=1      3.032 ms   13.83 GB/s
+[A] copy_in  dma_threads=1                       n=2      3.724 ms    5.63 GB/s
+[A] copy_out dma_threads=1                       n=2      3.363 ms    6.24 GB/s
+[A] copy_in  dma_threads=1                       n=4      1.606 ms    6.53 GB/s
+[A] copy_out dma_threads=1                       n=4      1.444 ms    7.26 GB/s
+[A] copy_in  dma_threads=1                       n=8      0.854 ms    6.14 GB/s
+[A] copy_out dma_threads=1                       n=8      0.791 ms    6.63 GB/s
+[A] copy_in  dma_threads=1 | with copy_out       n=8      1.083 ms    4.84 GB/s
+[A] copy_out dma_threads=1 | with copy_in        n=8      0.805 ms    6.51 GB/s
+[A] copy_in  dma_threads=1                       n=16     0.556 ms    4.72 GB/s
+[A] copy_out dma_threads=1                       n=16     0.524 ms    5.01 GB/s
+[A] copy_in  dma_threads=1                       n=32     0.280 ms    4.68 GB/s
+[A] copy_out dma_threads=1                       n=32     0.278 ms    4.71 GB/s
+[A] copy_in  dma_threads=2                       n=1      3.424 ms   12.25 GB/s
+[A] copy_out dma_threads=2                       n=1      3.400 ms   12.34 GB/s
+[A] copy_in  dma_threads=2 | with copy_out       n=1      7.141 ms    5.87 GB/s
+[A] copy_out dma_threads=2 | with copy_in        n=1      7.203 ms    5.82 GB/s
+[A] copy_in  dma_threads=2                       n=2      1.522 ms   13.78 GB/s
+[A] copy_out dma_threads=2                       n=2      1.504 ms   13.95 GB/s
+[A] copy_in  dma_threads=2                       n=4      1.002 ms   10.46 GB/s
+[A] copy_out dma_threads=2                       n=4      0.959 ms   10.93 GB/s
+[A] copy_in  dma_threads=2                       n=8      0.623 ms    8.41 GB/s
+[A] copy_out dma_threads=2                       n=8      0.584 ms    8.98 GB/s
+[A] copy_in  dma_threads=2 | with copy_out       n=8      1.135 ms    4.62 GB/s
+[A] copy_out dma_threads=2 | with copy_in        n=8      1.121 ms    4.68 GB/s
+[A] copy_in  dma_threads=2                       n=16     0.351 ms    7.47 GB/s
+[A] copy_out dma_threads=2                       n=16     0.331 ms    7.93 GB/s
+[A] copy_in  dma_threads=2                       n=32     0.195 ms    6.74 GB/s
+[A] copy_out dma_threads=2                       n=32     0.184 ms    7.10 GB/s
+[A] copy_in  dma_threads=4                       n=1      1.657 ms   25.31 GB/s
+[A] copy_out dma_threads=4                       n=1      1.600 ms   26.21 GB/s
+[A] copy_in  dma_threads=4 | with copy_out       n=1      3.675 ms   11.41 GB/s
+[A] copy_out dma_threads=4 | with copy_in        n=1      3.686 ms   11.38 GB/s
+[A] copy_in  dma_threads=4                       n=2      0.867 ms   24.19 GB/s
+[A] copy_out dma_threads=4                       n=2      0.801 ms   26.20 GB/s
+[A] copy_in  dma_threads=4                       n=4      0.597 ms   17.57 GB/s
+[A] copy_out dma_threads=4                       n=4      0.585 ms   17.91 GB/s
+[A] copy_in  dma_threads=4                       n=8      0.360 ms   14.54 GB/s
+[A] copy_out dma_threads=4                       n=8      0.355 ms   14.78 GB/s
+[A] copy_in  dma_threads=4 | with copy_out       n=8      0.538 ms    9.75 GB/s
+[A] copy_out dma_threads=4 | with copy_in        n=8      0.550 ms    9.54 GB/s
+[A] copy_in  dma_threads=4                       n=16     0.261 ms   10.05 GB/s
+[A] copy_out dma_threads=4                       n=16     0.278 ms    9.42 GB/s
+[A] copy_in  dma_threads=4                       n=32     0.248 ms    5.29 GB/s
+[A] copy_out dma_threads=4                       n=32     0.230 ms    5.71 GB/s
+[A] copy_in  dma_threads=8                       n=1      1.078 ms   38.93 GB/s
+[A] copy_out dma_threads=8                       n=1      0.968 ms   43.33 GB/s
+[A] copy_in  dma_threads=8 | with copy_out       n=1      2.034 ms   20.62 GB/s
+[A] copy_out dma_threads=8 | with copy_in        n=1      2.052 ms   20.44 GB/s
+[A] copy_in  dma_threads=8                       n=2      0.583 ms   35.98 GB/s
+[A] copy_out dma_threads=8                       n=2      0.563 ms   37.23 GB/s
+[A] copy_in  dma_threads=8                       n=4      0.338 ms   31.05 GB/s
+[A] copy_out dma_threads=8                       n=4      0.325 ms   32.26 GB/s
+[A] copy_in  dma_threads=8                       n=8      0.284 ms   18.48 GB/s
+[A] copy_out dma_threads=8                       n=8      0.283 ms   18.49 GB/s
+[A] copy_in  dma_threads=8 | with copy_out       n=8      0.566 ms    9.27 GB/s
+[A] copy_out dma_threads=8 | with copy_in        n=8      0.675 ms    7.76 GB/s
+[A] copy_in  dma_threads=8                       n=16     0.228 ms   11.48 GB/s
+[A] copy_out dma_threads=8                       n=16     0.233 ms   11.24 GB/s
+[A] copy_in  dma_threads=8                       n=32     0.231 ms    5.69 GB/s
+[A] copy_out dma_threads=8                       n=32     0.235 ms    5.57 GB/s
+[B] lowrank_gelu R=64 alone                      n=1      6.466 ms  0.830 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=2      2.984 ms  0.900 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=4      1.846 ms  0.727 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=8      1.029 ms  0.652 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=16     0.574 ms  0.585 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=32     0.400 ms  0.420 TFLOPS
+[C] lowrank_gelu R=64 | copies both ways         n=1      8.854 ms  copies covered compute: False
+[C] copy_in  | with compute R=64 + copy_out      n=1      5.626 ms    7.46 GB/s
+[C] copy_out | with compute R=64 + copy_in       n=1      5.396 ms    7.77 GB/s
+[C] lowrank_gelu R=64 | copies both ways         n=8      1.836 ms  copies covered compute: False
+[C] copy_in  | with compute R=64 + copy_out      n=8      0.344 ms   15.24 GB/s
+[C] copy_out | with compute R=64 + copy_in       n=8      0.347 ms   15.11 GB/s
+[B] lowrank_gelu R=256 alone                     n=1     22.219 ms  0.966 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=2     12.111 ms  0.887 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=4      6.683 ms  0.803 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=8      3.768 ms  0.712 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=16     2.371 ms  0.566 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=32     1.406 ms  0.477 TFLOPS
+[C] lowrank_gelu R=256 | copies both ways        n=1     22.854 ms  copies covered compute: False
+[C] copy_in  | with compute R=256 + copy_out     n=1      5.276 ms    7.95 GB/s
+[C] copy_out | with compute R=256 + copy_in      n=1      5.116 ms    8.20 GB/s
+[C] lowrank_gelu R=256 | copies both ways        n=8      3.877 ms  copies covered compute: False
+[C] copy_in  | with compute R=256 + copy_out     n=8      0.367 ms   14.29 GB/s
+[C] copy_out | with compute R=256 + copy_in      n=8      0.364 ms   14.39 GB/s
+[E] tiny op duration                             n=1      0.067 ms
+[E] gap between back-to-back ops (same queue)    n=1      0.002 ms
+[E] host signal -> waiting op starts             n=1      0.015 ms
+[D] D2H GPU0 alone                               n=1      1.744 ms   24.06 GB/s
+[D] H2D GPU0 alone                               n=1      1.933 ms   21.70 GB/s
+[D] H2D GPU2 alone                               n=1      1.917 ms   21.88 GB/s
+[D] D2H GPU0 | with H2D GPU0 (same GPU)          n=1      1.900 ms   22.07 GB/s
+[D] H2D GPU0 | with D2H GPU0 (same GPU)          n=1      2.201 ms   19.06 GB/s
+[D] D2H GPU0 | with H2D GPU2                     n=1      1.756 ms   23.89 GB/s
+[D] H2D GPU2 | with D2H GPU0                     n=1      1.955 ms   21.45 GB/s
+[D] D2H GPU0 alone                               n=2      0.875 ms   23.96 GB/s
+[D] H2D GPU0 alone                               n=2      0.971 ms   21.61 GB/s
+[D] H2D GPU2 alone                               n=2      0.963 ms   21.79 GB/s
+[D] D2H GPU0 | with H2D GPU0 (same GPU)          n=2      0.958 ms   21.89 GB/s
+[D] H2D GPU0 | with D2H GPU0 (same GPU)          n=2      1.122 ms   18.69 GB/s
+[D] D2H GPU0 | with H2D GPU2                     n=2      0.887 ms   23.65 GB/s
+[D] H2D GPU2 | with D2H GPU0                     n=2      0.984 ms   21.32 GB/s
+[D] D2H GPU0 alone                               n=4      0.441 ms   23.79 GB/s
+[D] H2D GPU0 alone                               n=4      0.491 ms   21.34 GB/s
+[D] H2D GPU2 alone                               n=4      0.487 ms   21.53 GB/s
+[D] D2H GPU0 | with H2D GPU0 (same GPU)          n=4      0.484 ms   21.66 GB/s
+[D] H2D GPU0 | with D2H GPU0 (same GPU)          n=4      0.491 ms   21.38 GB/s
+[D] D2H GPU0 | with H2D GPU2                     n=4      0.443 ms   23.67 GB/s
+[D] H2D GPU2 | with D2H GPU0                     n=4      0.493 ms   21.27 GB/s
+[D] D2H GPU0 alone                               n=8      0.223 ms   23.48 GB/s
+[D] H2D GPU0 alone                               n=8      0.250 ms   20.97 GB/s
+[D] H2D GPU2 alone                               n=8      0.250 ms   20.98 GB/s
+[D] D2H GPU0 | with H2D GPU0 (same GPU)          n=8      0.246 ms   21.33 GB/s
+[D] H2D GPU0 | with D2H GPU0 (same GPU)          n=8      0.251 ms   20.90 GB/s
+[D] D2H GPU0 | with H2D GPU2                     n=8      0.223 ms   23.47 GB/s
+[D] H2D GPU2 | with D2H GPU0                     n=8      0.250 ms   20.94 GB/s
+[D] D2H GPU0 alone                               n=16     0.115 ms   22.80 GB/s
+[D] H2D GPU0 alone                               n=16     0.129 ms   20.30 GB/s
+[D] H2D GPU2 alone                               n=16     0.128 ms   20.50 GB/s
+[D] D2H GPU0 | with H2D GPU0 (same GPU)          n=16     0.129 ms   20.29 GB/s
+[D] H2D GPU0 | with D2H GPU0 (same GPU)          n=16     0.131 ms   20.04 GB/s
+[D] D2H GPU0 | with H2D GPU2                     n=16     0.115 ms   22.80 GB/s
+[D] H2D GPU2 | with D2H GPU0                     n=16     0.128 ms   20.48 GB/s
+[D] D2H GPU0 alone                               n=32     0.061 ms   21.57 GB/s
+[D] H2D GPU0 alone                               n=32     0.070 ms   18.68 GB/s
+[D] H2D GPU2 alone                               n=32     0.069 ms   19.13 GB/s
+[D] D2H GPU0 | with H2D GPU0 (same GPU)          n=32     0.071 ms   18.55 GB/s
+[D] H2D GPU0 | with D2H GPU0 (same GPU)          n=32     0.071 ms   18.45 GB/s
+[D] D2H GPU0 | with H2D GPU2                     n=32     0.061 ms   21.55 GB/s
+[D] H2D GPU2 | with D2H GPU0                     n=32     0.069 ms   19.07 GB/s
+[D] D2H GPU0 | with H2D GPU2 + device DMA both   n=1      1.890 ms   22.20 GB/s
+[D] H2D GPU2 | with D2H GPU0 + device DMA both   n=1      2.081 ms   20.15 GB/s
+[D] D2H GPU0 | with H2D GPU2 + device DMA both   n=8      0.230 ms   22.82 GB/s
+[D] H2D GPU2 | with D2H GPU0 + device DMA both   n=8      0.258 ms   20.31 GB/s
+[D] device copy_in during the above (M rows)     n=1      1.835 ms   22.85 GB/s
+[D] device copy_out during the above (M rows)    n=1      3.407 ms   12.31 GB/s
+# end 2026-10-09 07:39:02

@@ -1,0 +1,20 @@
+# start 2026-10-09 08:01:05 rounds=3 CUDA_MODULE_LOADING=EAGER CUDA_DEVICE_MAX_CONNECTIONS=None
+[pred] cpu64       n=1   T_opt  17.257 ms  T_pes  17.257 ms  stages p=0.923 d=1.617 h=1.873 e=4.112 c_opt=7.740 c_pes=9.374 g=0.910
+[pred] cpu64       n=2   T_opt  10.631 ms  T_pes  11.882 ms  stages p=0.463 d=0.840 h=0.942 e=2.005 c_opt=2.963 c_pes=3.588 g=0.455
+[pred] cpu64       n=4   T_opt   8.576 ms  T_pes  17.425 ms  stages p=0.310 d=0.432 h=0.471 e=0.968 c_opt=1.542 c_pes=3.754 g=0.227
+[pred] cpu64       n=8   T_opt   7.913 ms  T_pes  17.580 ms  stages p=0.159 d=0.213 h=0.238 e=0.451 c_opt=0.842 c_pes=2.051 g=0.114
+[pred] cpu64       n=16  T_opt   9.175 ms  T_pes  21.477 ms  stages p=0.087 d=0.108 h=0.123 e=0.224 c_opt=0.536 c_pes=1.305 g=0.057
+[pred] cpu64       n=32  T_opt  12.718 ms  T_pes  30.470 ms  stages p=0.059 d=0.057 h=0.066 e=0.133 c_opt=0.387 c_pes=0.941 g=0.028
+[check] cpu64 n=1 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=2 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=4 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=8 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=16 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=32 max rel err vs fp32 reference 4.26e-03 OK
+[meas] cpu64       n=1   gpu  38.556 ms (host  38.604) x1.00 vs level 0 | pred  17.257.. 17.257 | dev op sum  28.70 in  2.13 out  2.21 | d2h  1.75 h2d  1.97 | enqueue  0.48 | kept 3/3
+[meas] cpu64       n=2   gpu  31.804 ms (host  31.857) x1.21 vs level 0 | pred  10.631.. 11.882 | dev op sum  26.71 in  2.24 out  2.39 | d2h  1.81 h2d  2.02 | enqueue  0.67 | kept 3/3
+[meas] cpu64       n=4   gpu  20.376 ms (host  20.426) x1.89 vs level 0 | pred   8.576.. 17.425 | dev op sum  17.43 in  2.36 out  3.13 | d2h  1.86 h2d  2.10 | enqueue  1.08 | kept 3/3
+[meas] cpu64       n=8   gpu  16.925 ms (host  16.997) x2.28 vs level 0 | pred   7.913.. 17.580 | dev op sum  15.31 in  2.61 out  4.08 | d2h  1.91 h2d  2.22 | enqueue  1.89 | kept 3/3
+[meas] cpu64       n=16  gpu  19.209 ms (host  19.265) x2.01 vs level 0 | pred   9.175.. 21.477 | dev op sum  17.99 in  3.16 out  4.45 | d2h  2.06 h2d  2.44 | enqueue  3.56 | kept 3/3
+[meas] cpu64       n=32  gpu  33.080 ms (host  33.153) x1.17 vs level 0 | pred  12.718.. 30.470 | dev op sum  32.06 in  2.63 out  3.65 | d2h  2.14 h2d  3.65 | enqueue  6.86 | kept 3/3
+# end 2026-10-09 08:01:16

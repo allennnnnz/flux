@@ -1,0 +1,140 @@
+section,case,n_chunks,ms,bytes,GBps,extra
+A,copy_in  dma_threads=1,1,5.3124,41943040,7.90,
+A,copy_out dma_threads=1,1,3.6608,41943040,11.46,
+A,copy_in  dma_threads=1 | with copy_out,1,7.3700,41943040,5.69,
+A,copy_out dma_threads=1 | with copy_in,1,7.3739,41943040,5.69,
+A,copy_in  dma_threads=1,2,1.8199,20971520,11.52,
+A,copy_out dma_threads=1,2,1.7370,20971520,12.07,
+A,copy_in  dma_threads=1,4,0.8326,10485760,12.59,
+A,copy_out dma_threads=1,4,0.8066,10485760,13.00,
+A,copy_in  dma_threads=1,8,0.4046,5242880,12.96,
+A,copy_out dma_threads=1,8,0.3923,5242880,13.36,
+A,copy_in  dma_threads=1 | with copy_out,8,0.9553,5242880,5.49,
+A,copy_out dma_threads=1 | with copy_in,8,0.9735,5242880,5.39,
+A,copy_in  dma_threads=1,16,0.2330,2621440,11.25,
+A,copy_out dma_threads=1,16,0.2081,2621440,12.60,
+A,copy_in  dma_threads=1,32,0.1121,1310720,11.69,
+A,copy_out dma_threads=1,32,0.1013,1310720,12.94,
+A,copy_in  dma_threads=2,1,2.9453,41943040,14.24,
+A,copy_out dma_threads=2,1,3.0239,41943040,13.87,
+A,copy_in  dma_threads=2 | with copy_out,1,6.6597,41943040,6.30,
+A,copy_out dma_threads=2 | with copy_in,1,6.6683,41943040,6.29,
+A,copy_in  dma_threads=2,2,0.9013,20971520,23.27,
+A,copy_out dma_threads=2,2,0.8507,20971520,24.65,
+A,copy_in  dma_threads=2,4,0.4260,10485760,24.61,
+A,copy_out dma_threads=2,4,0.4042,10485760,25.94,
+A,copy_in  dma_threads=2,8,0.2097,5242880,25.00,
+A,copy_out dma_threads=2,8,0.2003,5242880,26.18,
+A,copy_in  dma_threads=2 | with copy_out,8,0.2649,5242880,19.79,
+A,copy_out dma_threads=2 | with copy_in,8,0.2617,5242880,20.03,
+A,copy_in  dma_threads=2,16,0.1348,2621440,19.44,
+A,copy_out dma_threads=2,16,0.1074,2621440,24.41,
+A,copy_in  dma_threads=2,32,0.0573,1310720,22.89,
+A,copy_out dma_threads=2,32,0.0426,1310720,30.76,
+A,copy_in  dma_threads=4,1,1.5882,41943040,26.41,
+A,copy_out dma_threads=4,1,1.5619,41943040,26.85,
+A,copy_in  dma_threads=4 | with copy_out,1,3.5996,41943040,11.65,
+A,copy_out dma_threads=4 | with copy_in,1,3.5985,41943040,11.66,
+A,copy_in  dma_threads=4,2,0.4919,20971520,42.63,
+A,copy_out dma_threads=4,2,0.4467,20971520,46.94,
+A,copy_in  dma_threads=4,4,0.2257,10485760,46.46,
+A,copy_out dma_threads=4,4,0.2025,10485760,51.78,
+A,copy_in  dma_threads=4,8,0.1105,5242880,47.44,
+A,copy_out dma_threads=4,8,0.0995,5242880,52.68,
+A,copy_in  dma_threads=4 | with copy_out,8,0.1106,5242880,47.41,
+A,copy_out dma_threads=4 | with copy_in,8,0.1397,5242880,37.54,
+A,copy_in  dma_threads=4,16,0.0717,2621440,36.57,
+A,copy_out dma_threads=4,16,0.0358,2621440,73.17,
+A,copy_in  dma_threads=4,32,0.0244,1310720,53.73,
+A,copy_out dma_threads=4,32,0.0144,1310720,90.92,
+A,copy_in  dma_threads=8,1,1.0277,41943040,40.81,
+A,copy_out dma_threads=8,1,1.0108,41943040,41.50,
+A,copy_in  dma_threads=8 | with copy_out,1,2.0430,41943040,20.53,
+A,copy_out dma_threads=8 | with copy_in,1,2.0446,41943040,20.51,
+A,copy_in  dma_threads=8,2,0.2949,20971520,71.12,
+A,copy_out dma_threads=8,2,0.2647,20971520,79.23,
+A,copy_in  dma_threads=8,4,0.1473,10485760,71.17,
+A,copy_out dma_threads=8,4,0.1644,10485760,63.79,
+A,copy_in  dma_threads=8,8,0.0576,5242880,90.96,
+A,copy_out dma_threads=8,8,0.0381,5242880,137.63,
+A,copy_in  dma_threads=8 | with copy_out,8,0.0577,5242880,90.81,
+A,copy_out dma_threads=8 | with copy_in,8,0.0643,5242880,81.56,
+A,copy_in  dma_threads=8,16,0.0532,2621440,49.29,
+A,copy_out dma_threads=8,16,0.0270,2621440,97.10,
+A,copy_in  dma_threads=8,32,0.0302,1310720,43.45,
+A,copy_out dma_threads=8,32,0.0249,1310720,52.71,
+B,lowrank_gelu R=64 alone,1,5.0867,0,0.00,1.055 TFLOPS
+B,lowrank_gelu R=64 alone,2,2.4479,0,0.00,1.097 TFLOPS
+B,lowrank_gelu R=64 alone,4,1.6406,0,0.00,0.818 TFLOPS
+B,lowrank_gelu R=64 alone,8,0.6645,0,0.00,1.010 TFLOPS
+B,lowrank_gelu R=64 alone,16,0.4027,0,0.00,0.833 TFLOPS
+B,lowrank_gelu R=64 alone,32,0.2872,0,0.00,0.584 TFLOPS
+C,lowrank_gelu R=64 | copies both ways,1,8.0745,0,0.00,copies until 6.8 ms after the last op
+C,copy_in  | with compute R=64 + copy_out,1,4.7292,41943040,8.87,
+C,copy_out | with compute R=64 + copy_in,1,4.7065,41943040,8.91,
+C,lowrank_gelu R=64 | copies both ways,8,1.9404,0,0.00,copies until 1.1 ms after the last op
+C,copy_in  | with compute R=64 + copy_out,8,0.2857,5242880,18.35,
+C,copy_out | with compute R=64 + copy_in,8,0.2848,5242880,18.41,
+B,lowrank_gelu R=256 alone,1,13.0472,0,0.00,1.646 TFLOPS
+B,lowrank_gelu R=256 alone,2,5.2512,0,0.00,2.045 TFLOPS
+B,lowrank_gelu R=256 alone,4,2.8324,0,0.00,1.895 TFLOPS
+B,lowrank_gelu R=256 alone,8,1.3004,0,0.00,2.064 TFLOPS
+B,lowrank_gelu R=256 alone,16,0.7134,0,0.00,1.881 TFLOPS
+B,lowrank_gelu R=256 alone,32,0.5149,0,0.00,1.303 TFLOPS
+C,lowrank_gelu R=256 | copies both ways,1,14.7879,0,0.00,copies until 6.7 ms after the last op
+C,copy_in  | with compute R=256 + copy_out,1,4.0121,41943040,10.45,
+C,copy_out | with compute R=256 + copy_in,1,3.9932,41943040,10.50,
+C,lowrank_gelu R=256 | copies both ways,8,4.6279,0,0.00,copies until 2.2 ms after the last op
+C,copy_in  | with compute R=256 + copy_out,8,0.2982,5242880,17.58,
+C,copy_out | with compute R=256 + copy_in,8,0.3035,5242880,17.27,
+E,tiny op duration,1,0.0447,0,0.00,
+E,gap between back-to-back ops (same queue),1,0.0020,0,0.00,
+E,host signal -> waiting op starts,1,0.0142,0,0.00,
+D,D2H GPU0 alone,1,1.7421,41943040,24.08,copies in window 30/30
+D,H2D GPU0 alone,1,1.9253,41943040,21.79,copies in window 30/30
+D,H2D GPU2 alone,1,1.9185,41943040,21.86,copies in window 30/30
+D,D2H GPU0 | with H2D GPU0 (same GPU),1,1.9025,41943040,22.05,copies in window 30/30
+D,H2D GPU0 | with D2H GPU0 (same GPU),1,6.8631,41943040,6.11,copies in window 8/30
+D,D2H GPU0 | with H2D GPU2,1,1.7714,41943040,23.68,copies in window 30/30
+D,H2D GPU2 | with D2H GPU0,1,1.9719,41943040,21.27,copies in window 26/30
+D,D2H GPU0 alone,2,0.8700,20971520,24.10,copies in window 30/30
+D,H2D GPU0 alone,2,0.9688,20971520,21.65,copies in window 30/30
+D,H2D GPU2 alone,2,0.9642,20971520,21.75,copies in window 30/30
+D,D2H GPU0 | with H2D GPU0 (same GPU),2,0.9530,20971520,22.01,copies in window 30/30
+D,H2D GPU0 | with D2H GPU0 (same GPU),2,3.4859,20971520,6.02,copies in window 8/30
+D,D2H GPU0 | with H2D GPU2,2,0.8959,20971520,23.41,copies in window 30/30
+D,H2D GPU2 | with D2H GPU0,2,0.9931,20971520,21.12,copies in window 27/30
+D,D2H GPU0 alone,4,0.4383,10485760,23.92,copies in window 30/30
+D,H2D GPU0 alone,4,0.4882,10485760,21.48,copies in window 30/30
+D,H2D GPU2 alone,4,0.4851,10485760,21.62,copies in window 30/30
+D,D2H GPU0 | with H2D GPU0 (same GPU),4,0.4774,10485760,21.96,copies in window 30/30
+D,H2D GPU0 | with D2H GPU0 (same GPU),4,1.6742,10485760,6.26,copies in window 8/30
+D,D2H GPU0 | with H2D GPU2,4,0.4483,10485760,23.39,copies in window 30/30
+D,H2D GPU2 | with D2H GPU0,4,0.4980,10485760,21.06,copies in window 26/30
+D,D2H GPU0 alone,8,0.2203,5242880,23.80,copies in window 30/30
+D,H2D GPU0 alone,8,0.2486,5242880,21.09,copies in window 30/30
+D,H2D GPU2 alone,8,0.2478,5242880,21.16,copies in window 30/30
+D,D2H GPU0 | with H2D GPU0 (same GPU),8,0.2419,5242880,21.67,copies in window 30/30
+D,H2D GPU0 | with D2H GPU0 (same GPU),8,0.7798,5242880,6.72,copies in window 9/30
+D,D2H GPU0 | with H2D GPU2,8,0.2219,5242880,23.63,copies in window 30/30
+D,H2D GPU2 | with D2H GPU0,8,0.2497,5242880,20.99,copies in window 26/30
+D,D2H GPU0 alone,16,0.1118,2621440,23.45,copies in window 48/48
+D,H2D GPU0 alone,16,0.1270,2621440,20.63,copies in window 48/48
+D,H2D GPU2 alone,16,0.1279,2621440,20.50,copies in window 48/48
+D,D2H GPU0 | with H2D GPU0 (same GPU),16,0.1251,2621440,20.95,copies in window 48/48
+D,H2D GPU0 | with D2H GPU0 (same GPU),16,0.3580,2621440,7.32,copies in window 16/48
+D,D2H GPU0 | with H2D GPU2,16,0.1132,2621440,23.16,copies in window 48/48
+D,H2D GPU2 | with D2H GPU0,16,0.1282,2621440,20.45,copies in window 42/48
+D,D2H GPU0 alone,32,0.0584,1310720,22.43,copies in window 96/96
+D,H2D GPU0 alone,32,0.0684,1310720,19.15,copies in window 96/96
+D,H2D GPU2 alone,32,0.0685,1310720,19.14,copies in window 96/96
+D,D2H GPU0 | with H2D GPU0 (same GPU),32,0.0679,1310720,19.31,copies in window 96/96
+D,H2D GPU0 | with D2H GPU0 (same GPU),32,0.1576,1310720,8.32,copies in window 40/96
+D,D2H GPU0 | with H2D GPU2,32,0.0593,1310720,22.09,copies in window 96/96
+D,H2D GPU2 | with D2H GPU0,32,0.0686,1310720,19.11,copies in window 83/96
+D,D2H GPU0 | with H2D GPU2 + device DMA both,1,1.8932,41943040,22.15,copies in window 30/30
+D,H2D GPU2 | with D2H GPU0 + device DMA both,1,2.0906,41943040,20.06,copies in window 27/30
+D,D2H GPU0 | with H2D GPU2 + device DMA both,8,0.2339,5242880,22.41,copies in window 30/30
+D,H2D GPU2 | with D2H GPU0 + device DMA both,8,0.2629,5242880,19.94,copies in window 27/30
+D,device copy_in during the above,1,3.5292,41943040,11.88,
+D,device copy_out during the above,1,3.5391,41943040,11.85,

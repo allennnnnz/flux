@@ -1,0 +1,141 @@
+# start 2026-10-09 07:47:22 CUDA_MODULE_LOADING=EAGER backend {}
+[A] copy_in  dma_threads=1                       n=1      5.312 ms    7.90 GB/s
+[A] copy_out dma_threads=1                       n=1      3.661 ms   11.46 GB/s
+[A] copy_in  dma_threads=1 | with copy_out       n=1      7.370 ms    5.69 GB/s
+[A] copy_out dma_threads=1 | with copy_in        n=1      7.374 ms    5.69 GB/s
+[A] copy_in  dma_threads=1                       n=2      1.820 ms   11.52 GB/s
+[A] copy_out dma_threads=1                       n=2      1.737 ms   12.07 GB/s
+[A] copy_in  dma_threads=1                       n=4      0.833 ms   12.59 GB/s
+[A] copy_out dma_threads=1                       n=4      0.807 ms   13.00 GB/s
+[A] copy_in  dma_threads=1                       n=8      0.405 ms   12.96 GB/s
+[A] copy_out dma_threads=1                       n=8      0.392 ms   13.36 GB/s
+[A] copy_in  dma_threads=1 | with copy_out       n=8      0.955 ms    5.49 GB/s
+[A] copy_out dma_threads=1 | with copy_in        n=8      0.973 ms    5.39 GB/s
+[A] copy_in  dma_threads=1                       n=16     0.233 ms   11.25 GB/s
+[A] copy_out dma_threads=1                       n=16     0.208 ms   12.60 GB/s
+[A] copy_in  dma_threads=1                       n=32     0.112 ms   11.69 GB/s
+[A] copy_out dma_threads=1                       n=32     0.101 ms   12.94 GB/s
+[A] copy_in  dma_threads=2                       n=1      2.945 ms   14.24 GB/s
+[A] copy_out dma_threads=2                       n=1      3.024 ms   13.87 GB/s
+[A] copy_in  dma_threads=2 | with copy_out       n=1      6.660 ms    6.30 GB/s
+[A] copy_out dma_threads=2 | with copy_in        n=1      6.668 ms    6.29 GB/s
+[A] copy_in  dma_threads=2                       n=2      0.901 ms   23.27 GB/s
+[A] copy_out dma_threads=2                       n=2      0.851 ms   24.65 GB/s
+[A] copy_in  dma_threads=2                       n=4      0.426 ms   24.61 GB/s
+[A] copy_out dma_threads=2                       n=4      0.404 ms   25.94 GB/s
+[A] copy_in  dma_threads=2                       n=8      0.210 ms   25.00 GB/s
+[A] copy_out dma_threads=2                       n=8      0.200 ms   26.18 GB/s
+[A] copy_in  dma_threads=2 | with copy_out       n=8      0.265 ms   19.79 GB/s
+[A] copy_out dma_threads=2 | with copy_in        n=8      0.262 ms   20.03 GB/s
+[A] copy_in  dma_threads=2                       n=16     0.135 ms   19.44 GB/s
+[A] copy_out dma_threads=2                       n=16     0.107 ms   24.41 GB/s
+[A] copy_in  dma_threads=2                       n=32     0.057 ms   22.89 GB/s
+[A] copy_out dma_threads=2                       n=32     0.043 ms   30.76 GB/s
+[A] copy_in  dma_threads=4                       n=1      1.588 ms   26.41 GB/s
+[A] copy_out dma_threads=4                       n=1      1.562 ms   26.85 GB/s
+[A] copy_in  dma_threads=4 | with copy_out       n=1      3.600 ms   11.65 GB/s
+[A] copy_out dma_threads=4 | with copy_in        n=1      3.598 ms   11.66 GB/s
+[A] copy_in  dma_threads=4                       n=2      0.492 ms   42.63 GB/s
+[A] copy_out dma_threads=4                       n=2      0.447 ms   46.94 GB/s
+[A] copy_in  dma_threads=4                       n=4      0.226 ms   46.46 GB/s
+[A] copy_out dma_threads=4                       n=4      0.203 ms   51.78 GB/s
+[A] copy_in  dma_threads=4                       n=8      0.111 ms   47.44 GB/s
+[A] copy_out dma_threads=4                       n=8      0.100 ms   52.68 GB/s
+[A] copy_in  dma_threads=4 | with copy_out       n=8      0.111 ms   47.41 GB/s
+[A] copy_out dma_threads=4 | with copy_in        n=8      0.140 ms   37.54 GB/s
+[A] copy_in  dma_threads=4                       n=16     0.072 ms   36.57 GB/s
+[A] copy_out dma_threads=4                       n=16     0.036 ms   73.17 GB/s
+[A] copy_in  dma_threads=4                       n=32     0.024 ms   53.73 GB/s
+[A] copy_out dma_threads=4                       n=32     0.014 ms   90.92 GB/s
+[A] copy_in  dma_threads=8                       n=1      1.028 ms   40.81 GB/s
+[A] copy_out dma_threads=8                       n=1      1.011 ms   41.50 GB/s
+[A] copy_in  dma_threads=8 | with copy_out       n=1      2.043 ms   20.53 GB/s
+[A] copy_out dma_threads=8 | with copy_in        n=1      2.045 ms   20.51 GB/s
+[A] copy_in  dma_threads=8                       n=2      0.295 ms   71.12 GB/s
+[A] copy_out dma_threads=8                       n=2      0.265 ms   79.23 GB/s
+[A] copy_in  dma_threads=8                       n=4      0.147 ms   71.17 GB/s
+[A] copy_out dma_threads=8                       n=4      0.164 ms   63.79 GB/s
+[A] copy_in  dma_threads=8                       n=8      0.058 ms   90.96 GB/s
+[A] copy_out dma_threads=8                       n=8      0.038 ms  137.63 GB/s
+[A] copy_in  dma_threads=8 | with copy_out       n=8      0.058 ms   90.81 GB/s
+[A] copy_out dma_threads=8 | with copy_in        n=8      0.064 ms   81.56 GB/s
+[A] copy_in  dma_threads=8                       n=16     0.053 ms   49.29 GB/s
+[A] copy_out dma_threads=8                       n=16     0.027 ms   97.10 GB/s
+[A] copy_in  dma_threads=8                       n=32     0.030 ms   43.45 GB/s
+[A] copy_out dma_threads=8                       n=32     0.025 ms   52.71 GB/s
+[B] lowrank_gelu R=64 alone                      n=1      5.087 ms  1.055 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=2      2.448 ms  1.097 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=4      1.641 ms  0.818 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=8      0.664 ms  1.010 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=16     0.403 ms  0.833 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=32     0.287 ms  0.584 TFLOPS
+[C] lowrank_gelu R=64 | copies both ways         n=1      8.075 ms  copies until 6.8 ms after the last op
+[C] copy_in  | with compute R=64 + copy_out      n=1      4.729 ms    8.87 GB/s
+[C] copy_out | with compute R=64 + copy_in       n=1      4.706 ms    8.91 GB/s
+[C] lowrank_gelu R=64 | copies both ways         n=8      1.940 ms  copies until 1.1 ms after the last op
+[C] copy_in  | with compute R=64 + copy_out      n=8      0.286 ms   18.35 GB/s
+[C] copy_out | with compute R=64 + copy_in       n=8      0.285 ms   18.41 GB/s
+[B] lowrank_gelu R=256 alone                     n=1     13.047 ms  1.646 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=2      5.251 ms  2.045 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=4      2.832 ms  1.895 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=8      1.300 ms  2.064 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=16     0.713 ms  1.881 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=32     0.515 ms  1.303 TFLOPS
+[C] lowrank_gelu R=256 | copies both ways        n=1     14.788 ms  copies until 6.7 ms after the last op
+[C] copy_in  | with compute R=256 + copy_out     n=1      4.012 ms   10.45 GB/s
+[C] copy_out | with compute R=256 + copy_in      n=1      3.993 ms   10.50 GB/s
+[C] lowrank_gelu R=256 | copies both ways        n=8      4.628 ms  copies until 2.2 ms after the last op
+[C] copy_in  | with compute R=256 + copy_out     n=8      0.298 ms   17.58 GB/s
+[C] copy_out | with compute R=256 + copy_in      n=8      0.303 ms   17.27 GB/s
+[E] tiny op duration                             n=1      0.045 ms
+[E] gap between back-to-back ops (same queue)    n=1      0.002 ms
+[E] host signal -> waiting op starts             n=1      0.014 ms
+[D] D2H GPU0 alone                               n=1      1.742 ms   24.08 GB/s  copies in window 30/30
+[D] H2D GPU0 alone                               n=1      1.925 ms   21.79 GB/s  copies in window 30/30
+[D] H2D GPU2 alone                               n=1      1.918 ms   21.86 GB/s  copies in window 30/30
+[D] D2H GPU0 | with H2D GPU0 (same GPU)          n=1      1.903 ms   22.05 GB/s  copies in window 30/30
+[D] H2D GPU0 | with D2H GPU0 (same GPU)          n=1      6.863 ms    6.11 GB/s  copies in window 8/30
+[D] D2H GPU0 | with H2D GPU2                     n=1      1.771 ms   23.68 GB/s  copies in window 30/30
+[D] H2D GPU2 | with D2H GPU0                     n=1      1.972 ms   21.27 GB/s  copies in window 26/30
+[D] D2H GPU0 alone                               n=2      0.870 ms   24.10 GB/s  copies in window 30/30
+[D] H2D GPU0 alone                               n=2      0.969 ms   21.65 GB/s  copies in window 30/30
+[D] H2D GPU2 alone                               n=2      0.964 ms   21.75 GB/s  copies in window 30/30
+[D] D2H GPU0 | with H2D GPU0 (same GPU)          n=2      0.953 ms   22.01 GB/s  copies in window 30/30
+[D] H2D GPU0 | with D2H GPU0 (same GPU)          n=2      3.486 ms    6.02 GB/s  copies in window 8/30
+[D] D2H GPU0 | with H2D GPU2                     n=2      0.896 ms   23.41 GB/s  copies in window 30/30
+[D] H2D GPU2 | with D2H GPU0                     n=2      0.993 ms   21.12 GB/s  copies in window 27/30
+[D] D2H GPU0 alone                               n=4      0.438 ms   23.92 GB/s  copies in window 30/30
+[D] H2D GPU0 alone                               n=4      0.488 ms   21.48 GB/s  copies in window 30/30
+[D] H2D GPU2 alone                               n=4      0.485 ms   21.62 GB/s  copies in window 30/30
+[D] D2H GPU0 | with H2D GPU0 (same GPU)          n=4      0.477 ms   21.96 GB/s  copies in window 30/30
+[D] H2D GPU0 | with D2H GPU0 (same GPU)          n=4      1.674 ms    6.26 GB/s  copies in window 8/30
+[D] D2H GPU0 | with H2D GPU2                     n=4      0.448 ms   23.39 GB/s  copies in window 30/30
+[D] H2D GPU2 | with D2H GPU0                     n=4      0.498 ms   21.06 GB/s  copies in window 26/30
+[D] D2H GPU0 alone                               n=8      0.220 ms   23.80 GB/s  copies in window 30/30
+[D] H2D GPU0 alone                               n=8      0.249 ms   21.09 GB/s  copies in window 30/30
+[D] H2D GPU2 alone                               n=8      0.248 ms   21.16 GB/s  copies in window 30/30
+[D] D2H GPU0 | with H2D GPU0 (same GPU)          n=8      0.242 ms   21.67 GB/s  copies in window 30/30
+[D] H2D GPU0 | with D2H GPU0 (same GPU)          n=8      0.780 ms    6.72 GB/s  copies in window 9/30
+[D] D2H GPU0 | with H2D GPU2                     n=8      0.222 ms   23.63 GB/s  copies in window 30/30
+[D] H2D GPU2 | with D2H GPU0                     n=8      0.250 ms   20.99 GB/s  copies in window 26/30
+[D] D2H GPU0 alone                               n=16     0.112 ms   23.45 GB/s  copies in window 48/48
+[D] H2D GPU0 alone                               n=16     0.127 ms   20.63 GB/s  copies in window 48/48
+[D] H2D GPU2 alone                               n=16     0.128 ms   20.50 GB/s  copies in window 48/48
+[D] D2H GPU0 | with H2D GPU0 (same GPU)          n=16     0.125 ms   20.95 GB/s  copies in window 48/48
+[D] H2D GPU0 | with D2H GPU0 (same GPU)          n=16     0.358 ms    7.32 GB/s  copies in window 16/48
+[D] D2H GPU0 | with H2D GPU2                     n=16     0.113 ms   23.16 GB/s  copies in window 48/48
+[D] H2D GPU2 | with D2H GPU0                     n=16     0.128 ms   20.45 GB/s  copies in window 42/48
+[D] D2H GPU0 alone                               n=32     0.058 ms   22.43 GB/s  copies in window 96/96
+[D] H2D GPU0 alone                               n=32     0.068 ms   19.15 GB/s  copies in window 96/96
+[D] H2D GPU2 alone                               n=32     0.068 ms   19.14 GB/s  copies in window 96/96
+[D] D2H GPU0 | with H2D GPU0 (same GPU)          n=32     0.068 ms   19.31 GB/s  copies in window 96/96
+[D] H2D GPU0 | with D2H GPU0 (same GPU)          n=32     0.158 ms    8.32 GB/s  copies in window 40/96
+[D] D2H GPU0 | with H2D GPU2                     n=32     0.059 ms   22.09 GB/s  copies in window 96/96
+[D] H2D GPU2 | with D2H GPU0                     n=32     0.069 ms   19.11 GB/s  copies in window 83/96
+[D] D2H GPU0 | with H2D GPU2 + device DMA both   n=1      1.893 ms   22.15 GB/s  copies in window 30/30
+[D] H2D GPU2 | with D2H GPU0 + device DMA both   n=1      2.091 ms   20.06 GB/s  copies in window 27/30
+[D] D2H GPU0 | with H2D GPU2 + device DMA both   n=8      0.234 ms   22.41 GB/s  copies in window 30/30
+[D] H2D GPU2 | with D2H GPU0 + device DMA both   n=8      0.263 ms   19.94 GB/s  copies in window 27/30
+[D] device copy_in during the above              n=1      3.529 ms   11.88 GB/s
+[D] device copy_out during the above             n=1      3.539 ms   11.85 GB/s
+# end 2026-10-09 07:47:41

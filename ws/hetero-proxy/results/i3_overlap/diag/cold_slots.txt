@@ -1,0 +1,5 @@
+slots   1 (     5 MiB rotating)  copy_in 5 MiB median 0.267 ms -> 19.6 GB/s
+slots   4 (    20 MiB rotating)  copy_in 5 MiB median 0.250 ms -> 21.0 GB/s
+slots  24 (   120 MiB rotating)  copy_in 5 MiB median 0.309 ms -> 17.0 GB/s
+slots  96 (   480 MiB rotating)  copy_in 5 MiB median 0.255 ms -> 20.6 GB/s
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/i3_overlap/diag/cold_slots_guard.log

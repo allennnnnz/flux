@@ -1,0 +1,44 @@
+# start 2026-10-09 07:50:15 rounds=3 CUDA_MODULE_LOADING=EAGER CUDA_DEVICE_MAX_CONNECTIONS=None
+[pred] emu4        n=1   T_opt  12.643 ms  T_pes  12.643 ms  stages p=0.923 d=1.771 h=1.972 e=3.150 c_opt=4.000 c_pes=4.000 g=0.909
+[pred] emu4        n=2   T_opt   7.745 ms  T_pes   7.745 ms  stages p=0.463 d=0.896 h=0.993 e=0.939 c_opt=2.000 c_pes=2.000 g=0.455
+[pred] emu4        n=4   T_opt   5.912 ms  T_pes   5.912 ms  stages p=0.310 d=0.448 h=0.498 e=0.428 c_opt=1.000 c_pes=1.000 g=0.227
+[pred] emu4        n=8   T_opt   4.954 ms  T_pes   4.954 ms  stages p=0.159 d=0.222 h=0.250 e=0.210 c_opt=0.500 c_pes=0.500 g=0.114
+[pred] emu4        n=16  T_opt   4.493 ms  T_pes   4.493 ms  stages p=0.087 d=0.113 h=0.128 e=0.107 c_opt=0.250 c_pes=0.250 g=0.057
+[pred] emu4        n=32  T_opt   4.253 ms  T_pes   4.253 ms  stages p=0.058 d=0.059 h=0.069 e=0.039 c_opt=0.125 c_pes=0.125 g=0.028
+[meas] emu4        n=1   gpu  13.759 ms (host  13.827) x1.00 vs level 0 | pred  12.643.. 12.643 | dev op sum   4.02 in  2.09 out  2.19 | d2h  1.75 h2d  1.96 | enqueue  0.47 | kept 3/3
+[meas] emu4        n=2   gpu   9.111 ms (host   9.143) x1.51 vs level 0 | pred   7.745..  7.745 | dev op sum   4.04 in  2.18 out  2.24 | d2h  1.81 h2d  2.00 | enqueue  0.61 | kept 3/3
+[meas] emu4        n=4   gpu   6.844 ms (host   6.884) x2.01 vs level 0 | pred   5.912..  5.912 | dev op sum   4.08 in  2.77 out  2.45 | d2h  1.86 h2d  2.05 | enqueue  1.00 | kept 3/3
+[meas] emu4        n=8   gpu   5.642 ms (host   5.708) x2.44 vs level 0 | pred   4.954..  4.954 | dev op sum   4.14 in  3.61 out  3.77 | d2h  1.92 h2d  2.16 | enqueue  1.81 | kept 3/3
+[meas] emu4        n=16  gpu   6.241 ms (host   6.279) x2.20 vs level 0 | pred   4.493..  4.493 | dev op sum   4.35 in  5.14 out  4.99 | d2h  1.96 h2d  2.31 | enqueue  3.39 | kept 3/3
+[meas] emu4        n=32  gpu   7.970 ms (host   8.038) x1.73 vs level 0 | pred   4.253..  4.253 | dev op sum   4.63 in  7.03 out  7.03 | d2h  2.16 h2d  2.69 | enqueue  6.54 | kept 3/3
+[pred] emu4_same   n=1   T_opt  12.649 ms  T_pes  12.649 ms  stages p=0.923 d=1.903 h=6.863 e=3.150 c_opt=4.000 c_pes=4.000 g=0.909
+[pred] emu4_same   n=2   T_opt  11.781 ms  T_pes  11.781 ms  stages p=0.463 d=0.953 h=3.486 e=0.939 c_opt=2.000 c_pes=2.000 g=0.455
+[pred] emu4_same   n=4   T_opt   9.140 ms  T_pes   9.140 ms  stages p=0.310 d=0.477 h=1.674 e=0.428 c_opt=1.000 c_pes=1.000 g=0.227
+[pred] emu4_same   n=8   T_opt   7.463 ms  T_pes   7.463 ms  stages p=0.159 d=0.242 h=0.780 e=0.210 c_opt=0.500 c_pes=0.500 g=0.114
+[pred] emu4_same   n=16  T_opt   6.354 ms  T_pes   6.354 ms  stages p=0.087 d=0.125 h=0.358 e=0.107 c_opt=0.250 c_pes=0.250 g=0.057
+[pred] emu4_same   n=32  T_opt   5.363 ms  T_pes   5.363 ms  stages p=0.059 d=0.068 h=0.158 e=0.039 c_opt=0.125 c_pes=0.125 g=0.028
+[meas] emu4_same   n=1   gpu  13.594 ms (host  13.652) x1.00 vs level 0 | pred  12.649.. 12.649 | dev op sum   4.02 in  2.10 out  2.16 | d2h  1.74 h2d  1.96 | enqueue  0.99 | kept 3/3
+[meas] emu4_same   n=2   gpu   8.966 ms (host   9.035) x1.52 vs level 0 | pred  11.781.. 11.781 | dev op sum   4.04 in  2.17 out  2.21 | d2h  1.81 h2d  1.99 | enqueue  0.68 | kept 3/3
+[meas] emu4_same   n=4   gpu   6.784 ms (host   6.814) x2.00 vs level 0 | pred   9.140..  9.140 | dev op sum   4.08 in  2.78 out  2.48 | d2h  1.85 h2d  2.07 | enqueue  1.01 | kept 3/3
+[meas] emu4_same   n=8   gpu   5.637 ms (host   5.707) x2.41 vs level 0 | pred   7.463..  7.463 | dev op sum   4.15 in  3.77 out  3.45 | d2h  1.95 h2d  2.54 | enqueue  1.82 | kept 3/3
+[meas] emu4_same   n=16  gpu   6.064 ms (host   6.147) x2.24 vs level 0 | pred   6.354..  6.354 | dev op sum   4.30 in  4.99 out  4.90 | d2h  1.94 h2d  2.48 | enqueue  3.33 | kept 3/3
+[meas] emu4_same   n=32  gpu   7.899 ms (host   7.932) x1.72 vs level 0 | pred   5.363..  5.363 | dev op sum   4.68 in  7.07 out  7.01 | d2h  1.86 h2d  2.63 | enqueue 11.93 | kept 3/3
+[pred] cpu64       n=1   T_opt  13.730 ms  T_pes  13.730 ms  stages p=0.923 d=1.771 h=1.972 e=3.150 c_opt=5.087 c_pes=8.075 g=0.910
+[pred] cpu64       n=2   T_opt   8.641 ms  T_pes  11.517 ms  stages p=0.463 d=0.896 h=0.993 e=0.939 c_opt=2.448 c_pes=3.886 g=0.455
+[pred] cpu64       n=4   T_opt   8.475 ms  T_pes  21.075 ms  stages p=0.310 d=0.448 h=0.498 e=0.428 c_opt=1.641 c_pes=4.791 g=0.227
+[pred] cpu64       n=8   T_opt   6.270 ms  T_pes  16.478 ms  stages p=0.159 d=0.222 h=0.250 e=0.210 c_opt=0.664 c_pes=1.940 g=0.114
+[pred] cpu64       n=16  T_opt   6.926 ms  T_pes  19.298 ms  stages p=0.087 d=0.113 h=0.128 e=0.107 c_opt=0.403 c_pes=1.176 g=0.047
+[pred] cpu64       n=32  T_opt   9.440 ms  T_pes  27.086 ms  stages p=0.059 d=0.059 h=0.069 e=0.039 c_opt=0.287 c_pes=0.839 g=0.023
+[check] cpu64 n=1 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=2 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=4 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=8 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=16 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=32 max rel err vs fp32 reference 4.26e-03 OK
+[meas] cpu64       n=1   gpu  33.641 ms (host  33.742) x1.00 vs level 0 | pred  13.730.. 13.730 | dev op sum  22.13 in  2.38 out  2.37 | d2h  1.76 h2d  1.99 | enqueue  1.31 | kept 3/3
+[meas] cpu64       n=2   gpu  22.813 ms (host  22.890) x1.47 vs level 0 | pred   8.641.. 11.517 | dev op sum  17.48 in  2.51 out  2.73 | d2h  1.80 h2d  2.05 | enqueue  1.10 | kept 3/3
+[meas] cpu64       n=4   gpu  27.336 ms (host  27.398) x1.23 vs level 0 | pred   8.475.. 21.075 | dev op sum  24.12 in  2.65 out  3.26 | d2h  1.85 h2d  2.22 | enqueue  1.77 | kept 3/3
+[meas] cpu64       n=8   gpu  20.828 ms (host  20.924) x1.62 vs level 0 | pred   6.270.. 16.478 | dev op sum  19.14 in  2.48 out  4.54 | d2h  1.88 h2d  2.39 | enqueue  2.82 | kept 3/3
+[meas] cpu64       n=16  gpu  19.098 ms (host  19.169) x1.76 vs level 0 | pred   6.926.. 19.298 | dev op sum  17.97 in  3.71 out  5.41 | d2h  1.99 h2d  2.86 | enqueue  5.11 | kept 3/3
+[meas] cpu64       n=32  gpu  25.687 ms (host  25.716) x1.31 vs level 0 | pred   9.440.. 27.086 | dev op sum  24.67 in  4.45 out  4.40 | d2h  2.15 h2d  4.32 | enqueue  9.71 | kept 3/3
+# end 2026-10-09 07:50:34

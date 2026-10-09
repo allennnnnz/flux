@@ -1,0 +1,6 @@
+R=64 src0->dst0 n=1   gpu   21.80 ms host   21.85 ms enqueue   0.45 ms prod  0.92 relerr 4.3e-03
+R=64 src0->dst0 n=8   gpu   21.96 ms host   22.00 ms enqueue   3.56 ms prod  1.12 relerr 4.3e-03
+R=64 src0->dst0 n=16  gpu   29.26 ms host   29.29 ms enqueue   3.55 ms prod  1.23 relerr 4.3e-03
+R=64 src0->dst2 n=1   gpu   24.64 ms host   24.70 ms enqueue   0.41 ms prod  0.92 relerr 4.3e-03
+R=64 src0->dst2 n=8   gpu   22.06 ms host   22.12 ms enqueue   1.27 ms prod  1.29 relerr 4.3e-03
+R=64 src0->dst2 n=16  gpu   32.29 ms host   32.31 ms enqueue   2.64 ms prod  1.44 relerr 4.3e-03

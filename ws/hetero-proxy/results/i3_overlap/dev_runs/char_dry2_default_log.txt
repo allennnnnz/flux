@@ -1,0 +1,29 @@
+# start 2026-10-09 07:46:21 CUDA_MODULE_LOADING=EAGER backend {}
+[B] lowrank_gelu R=64 alone                      n=1      8.254 ms  0.650 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=2      4.442 ms  0.604 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=4      2.602 ms  0.516 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=8      1.755 ms  0.382 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=16     0.977 ms  0.343 TFLOPS
+[B] lowrank_gelu R=64 alone                      n=32     0.617 ms  0.272 TFLOPS
+[C] lowrank_gelu R=64 | copies both ways         n=1      9.304 ms  copies until 6.0 ms after the last op
+[C] copy_in  | with compute R=64 + copy_out      n=1      3.893 ms   10.77 GB/s
+[C] copy_out | with compute R=64 + copy_in       n=1      3.837 ms   10.93 GB/s
+[C] lowrank_gelu R=64 | copies both ways         n=8      2.202 ms  copies until 0.8 ms after the last op
+[C] copy_in  | with compute R=64 + copy_out      n=8      0.299 ms   17.53 GB/s
+[C] copy_out | with compute R=64 + copy_in       n=8      0.302 ms   17.35 GB/s
+[B] lowrank_gelu R=256 alone                     n=1     21.992 ms  0.976 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=2     11.788 ms  0.911 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=4      6.854 ms  0.783 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=8      3.775 ms  0.711 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=16     1.958 ms  0.685 TFLOPS
+[B] lowrank_gelu R=256 alone                     n=32     1.345 ms  0.499 TFLOPS
+[C] lowrank_gelu R=256 | copies both ways        n=1     21.875 ms  copies until 5.7 ms after the last op
+[C] copy_in  | with compute R=256 + copy_out     n=1      4.000 ms   10.48 GB/s
+[C] copy_out | with compute R=256 + copy_in      n=1      4.016 ms   10.45 GB/s
+[C] lowrank_gelu R=256 | copies both ways        n=8      4.584 ms  copies until 1.8 ms after the last op
+[C] copy_in  | with compute R=256 + copy_out     n=8      0.285 ms   18.39 GB/s
+[C] copy_out | with compute R=256 + copy_in      n=8      0.287 ms   18.28 GB/s
+[E] tiny op duration                             n=1      0.067 ms
+[E] gap between back-to-back ops (same queue)    n=1      0.003 ms
+[E] host signal -> waiting op starts             n=1      0.013 ms
+# end 2026-10-09 07:46:24

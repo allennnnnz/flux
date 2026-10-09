@@ -1,0 +1,27 @@
+# start 2026-10-09 08:03:28 rounds=5 CUDA_MODULE_LOADING=EAGER CUDA_DEVICE_MAX_CONNECTIONS=None
+[pred] emu0        n=1   T_opt   9.517 ms  T_pes   9.517 ms  stages p=0.923 d=1.617 h=1.873 e=4.112 c_opt=0.000 c_pes=0.000 g=0.910
+[pred] emu0        n=2   T_opt   6.710 ms  T_pes   6.710 ms  stages p=0.463 d=0.840 h=0.942 e=2.005 c_opt=0.000 c_pes=0.000 g=0.455
+[pred] emu0        n=4   T_opt   5.311 ms  T_pes   5.311 ms  stages p=0.310 d=0.432 h=0.471 e=0.968 c_opt=0.000 c_pes=0.000 g=0.227
+[pred] emu0        n=8   T_opt   4.335 ms  T_pes   4.335 ms  stages p=0.159 d=0.213 h=0.238 e=0.451 c_opt=0.000 c_pes=0.000 g=0.114
+[pred] emu0        n=16  T_opt   3.960 ms  T_pes   3.960 ms  stages p=0.087 d=0.108 h=0.123 e=0.224 c_opt=0.000 c_pes=0.000 g=0.057
+[pred] emu0        n=32  T_opt   4.479 ms  T_pes   4.479 ms  stages p=0.059 d=0.057 h=0.066 e=0.133 c_opt=0.000 c_pes=0.000 g=0.028
+[meas] emu0        n=1   gpu   9.844 ms (host   9.896) x1.00 vs level 0 | pred   9.517..  9.517 | dev op sum   0.03 in  2.15 out  2.18 | d2h  1.75 h2d  1.96 | enqueue  0.53 | kept 5/5
+[meas] emu0        n=2   gpu   7.323 ms (host   7.374) x1.34 vs level 0 | pred   6.710..  6.710 | dev op sum   0.10 in  2.25 out  3.24 | d2h  1.80 h2d  2.05 | enqueue  0.77 | kept 5/5
+[meas] emu0        n=4   gpu   6.395 ms (host   6.423) x1.54 vs level 0 | pred   5.311..  5.311 | dev op sum   0.13 in  3.57 out  4.05 | d2h  1.84 h2d  2.07 | enqueue  1.19 | kept 5/5
+[meas] emu0        n=8   gpu   6.071 ms (host   6.133) x1.62 vs level 0 | pred   4.335..  4.335 | dev op sum   0.23 in  4.56 out  4.68 | d2h  1.87 h2d  2.17 | enqueue  1.99 | kept 5/5
+[meas] emu0        n=16  gpu   6.649 ms (host   6.694) x1.48 vs level 0 | pred   3.960..  3.960 | dev op sum   0.41 in  5.57 out  5.65 | d2h  1.94 h2d  2.39 | enqueue  3.63 | kept 5/5
+[meas] emu0        n=32  gpu   8.645 ms (host   8.687) x1.14 vs level 0 | pred   4.479..  4.479 | dev op sum   0.86 in  7.65 out  7.70 | d2h  2.04 h2d  2.79 | enqueue  7.05 | kept 5/5
+[pred] cpu64       n=1   T_opt  17.256 ms  T_pes  17.256 ms  stages p=0.922 d=1.617 h=1.873 e=4.112 c_opt=7.740 c_pes=9.374 g=0.910
+[pred] cpu64       n=2   T_opt  10.631 ms  T_pes  11.882 ms  stages p=0.463 d=0.840 h=0.942 e=2.005 c_opt=2.963 c_pes=3.588 g=0.455
+[pred] cpu64       n=4   T_opt   8.576 ms  T_pes  17.425 ms  stages p=0.310 d=0.432 h=0.471 e=0.968 c_opt=1.542 c_pes=3.754 g=0.227
+[pred] cpu64       n=8   T_opt   7.913 ms  T_pes  17.580 ms  stages p=0.159 d=0.213 h=0.238 e=0.451 c_opt=0.842 c_pes=2.051 g=0.114
+[pred] cpu64       n=16  T_opt   9.165 ms  T_pes  21.468 ms  stages p=0.087 d=0.108 h=0.123 e=0.224 c_opt=0.536 c_pes=1.305 g=0.047
+[pred] cpu64       n=32  T_opt  12.713 ms  T_pes  30.464 ms  stages p=0.059 d=0.057 h=0.066 e=0.133 c_opt=0.387 c_pes=0.941 g=0.023
+[check] cpu64 n=1 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=2 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=4 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=8 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=16 max rel err vs fp32 reference 4.26e-03 OK
+[check] cpu64 n=32 max rel err vs fp32 reference 4.26e-03 OK
+[meas] cpu64       n=1   gpu  24.104 ms (host  24.135) x1.00 vs level 0 | pred  17.256.. 17.256 | dev op sum  13.35 in  2.67 out  2.48 | d2h  1.76 h2d  2.05 | enqueue  0.53 | kept 1/5
+[meas] cpu64       n=2   gpu  18.532 ms (host  18.608) x1.30 vs level 0 | pred  10.631.. 11.882 | dev op sum  12.80 in  2.86 out  2.67 | d2h  1.80 h2d  2.20 | enqueue  0.86 | kept 1/5
