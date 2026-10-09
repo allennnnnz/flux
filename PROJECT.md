@@ -90,7 +90,7 @@ worker 在 JOURNAL 標「需 boss 裁決」的事項會被 boss 搬到這裡。
    - 決定 F4（vLLM 端到端，用決策器 v2）/ G6（總報告）的先後；
    - 安排 auditor 審 E0、E1–E3、G1–G4 報告。
 1. 指派第一個 worker session 到 `ws/diag-overlap`。
-2. `ws/hetero-proxy`（**2026-10-06 起為主線**，教授指派）：先與教授確認方向解讀，再做 1a / 1b 與「從 Flux 外部寫旗標」的技術探針。
+2. `ws/hetero-proxy`（**2026-10-06 起為主線**，教授指派）：計劃 H0–H5（STATUS §0）。先做 H0 工作切分分析（粗估顯示晶片當 TP 成員會被 PCIe 拖慢），再 H1 三個前提（代理隔離、旗標探針、1a / 1b）。待教授確認方向解讀與晶片型號。
 3. 兩者各有第一份 report 後，安排 auditor。
 4. 第一批 auditor 通過的結論寫進 `DECISIONS.md`，並更新 `params.json`。
 
