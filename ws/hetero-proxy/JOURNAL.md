@@ -79,3 +79,19 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   → **decode 受 Python 發指令速度限制**（G4 用 CUDA graph 約 11.5 ms）。prefill 也比 G4 的最佳策略慢約 45%（eager、未融合）。
 - **待與使用者討論**：(1) decode 要加 CUDA graph 才接近實際服務；(2) B 若 CPU 只做「最後的正規化」，prefill 只需最後一個位置 → 每次只傳幾 KB，
   幾乎不經過切塊重疊；建議改成「中間某層的輸入正規化」（全部 token 經 PCIe、回來後經 NVLink 廣播給 8 卡、該層 QKV 逐塊等旗標）。
+
+## 2026-10-14 · boss 兼 worker · E2E 步驟 2：B（CPU 經 PCIe）
+
+- 使用者決定：decode 一律 CUDA graph；B 兩種位置都做（Bfinal / Bmid）。
+- `qwen_tp_v2.py`：CUDA-graph decode（固定 KV 視窗 + 位置遮罩的 SDPA）；B 的交棒走 hxb（rank 0 的 GPU0 ↔ NUMA1 CPU 裝置），回來後 NCCL 廣播給 8 卡；
+  hxb Outbound / Inbound 拆成 post_device / post_gpu，整段 run 的裝置指令先送，指令傳送不在關鍵路徑上；CPU 後端加 `rmsnorm`（HF 順序）。
+- 卡過的坑：(1) graph capture 前沒進 inference_mode → 靜態張量不能原地改；(2) 例外發生時 finally 裡的 barrier 讓其他 rank 永遠等，例外訊息被吞掉
+  → 例外先印、出錯不做集體收尾；(3) NCCL 進過 CUDA graph 後 `destroy_process_group` 卡住 → 結果寫完直接 `os._exit`。
+- 正確性：v2 四種設定 4 題 × 64 字彼此完全一致；graph 版 A 對 HF 在英文題第 5 字分歧（HF top-2 差 0.625 = 5 個 bf16 ulp，近平手）。
+- **run1**（v2，guard CLEAN）：prefill Bfinal +0.1–0.8%；Bmid1 +5 / +16 / +14%（遠超預測 2–6%）；Bmid8 在 8×1024 藏掉 82%；
+  decode Bfinal +1.5–2.5%，**Bmid 反而比 A 快 4%** → 兩個疑點，run1 存檔附 README，不作結論。
+- 疑點 1 查明：CPU rmsnorm 一次配置整塊暫存 → 8192 行 60 ms（1.4 GB/s，`results/e2e/diag/`）→ 改分塊 15.5 ms → 改 C / OpenMP 約 10 ms（64 行 0.54 → 0.16 ms）。
+  C 版與 GPU 版有 0.043% 元素差 1 個 bf16 ulp（fp32 加總順序）；check v3：Bmid 在英文題第 48 字與 A 分歧，該處 HF top-2 logit **完全相同**（20.75 / 20.75）。
+  事前登記的 S4（全部與 A 一致）因此不過，照實記錄。
+- 疑點 2：v3 加 AsplitF / AsplitM 對照（同樣拆兩個 graph、不經 CPU），B 減對應 Asplit = 純交棒代價。run2 已在跑（tmux e2e_b3）。
+- 待查：本推論程式 decode 偏慢（A b32 每字 43 ms，G4 最佳約 11.5 ms）→ 百分比低估交棒代價，報告要附絕對毫秒；之後用 nsys 看時間花在哪。
