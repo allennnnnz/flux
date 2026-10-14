@@ -12,7 +12,8 @@ def lib():
     global _lib
     if _lib is None:
         if not os.path.exists(_LIB) or os.path.getmtime(_LIB) < os.path.getmtime(_SRC):
-            subprocess.run(["gcc", "-O2", "-shared", "-fPIC", "-pthread", "-o", _LIB, _SRC], check=True)
+            subprocess.run(["gcc", "-O3", "-march=native", "-fopenmp", "-shared", "-fPIC", "-pthread", "-o", _LIB, _SRC],
+                           check=True)
         L = ctypes.CDLL(_LIB)
         L.hxb_dma_start.argtypes = [ctypes.c_int, ctypes.POINTER(ctypes.c_int)]
         L.hxb_dma_copy.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_size_t]
@@ -21,5 +22,8 @@ def lib():
         L.hxb_wait_geq.argtypes = [ctypes.c_void_p, ctypes.c_int64, ctypes.c_void_p, ctypes.c_double]
         L.hxb_store_max.argtypes = [ctypes.c_void_p, ctypes.c_int64]
         L.hxb_store_max.restype = None
+        L.hxb_rmsnorm_bf16.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_long, ctypes.c_long,
+                                       ctypes.c_float, ctypes.c_int]
+        L.hxb_rmsnorm_bf16.restype = None
         _lib = L
     return _lib

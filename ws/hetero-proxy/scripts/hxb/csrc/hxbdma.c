@@ -110,3 +110,28 @@ int hxb_wait_geq(volatile int64_t *addr, int64_t v, volatile int64_t *abort_flag
 void hxb_store_max(volatile int64_t *addr, int64_t v) {
     if (__atomic_load_n(addr, __ATOMIC_ACQUIRE) < v) __atomic_store_n(addr, v, __ATOMIC_RELEASE);
 }
+
+// ---- compute kernels of the CPU "device" (OpenMP over rows) ----------------------------------------------------
+#include <math.h>
+
+static inline float bf2f(uint16_t b) { uint32_t u = (uint32_t)b << 16; float f; memcpy(&f, &u, 4); return f; }
+static inline uint16_t f2bf(float f) {  // round to nearest even, as torch's float -> bfloat16 cast
+    uint32_t u; memcpy(&u, &f, 4);
+    if ((u & 0x7fffffffu) > 0x7f800000u) return (uint16_t)((u >> 16) | 0x40);
+    u += 0x7fffu + ((u >> 16) & 1u);
+    return (uint16_t)(u >> 16);
+}
+
+// y = w * bf16(x * 1/sqrt(mean(x^2) + eps)), x / w / y bf16 (HF Qwen2RMSNorm order). Replaces 7 torch ops per block:
+// 64 rows took 0.54 ms and 8192 rows 15.5 ms (5.4 GB/s) that way (diag_cpu_rmsnorm_v1, 2026-10-14).
+void hxb_rmsnorm_bf16(const uint16_t *x, const uint16_t *w, uint16_t *y, long rows, long H, float eps, int nt) {
+    #pragma omp parallel for num_threads(nt) schedule(static)
+    for (long r = 0; r < rows; r++) {
+        const uint16_t *xr = x + r * H;
+        uint16_t *yr = y + r * H;
+        float acc = 0.f;
+        for (long i = 0; i < H; i++) { float v = bf2f(xr[i]); acc += v * v; }
+        float inv = 1.0f / sqrtf(acc / (float)H + eps);
+        for (long i = 0; i < H; i++) yr[i] = f2bf(bf2f(f2bf(bf2f(xr[i]) * inv)) * bf2f(w[i]));
+    }
+}

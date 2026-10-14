@@ -187,13 +187,31 @@ class _Device:
                 x, y = self.bufs[a["x"]], self.bufs[a["y"]]
                 y[r0:r1].copy_(x[r0:r1].float() * a["a"] + a["b"])
             elif op == "rmsnorm":
-                # HF Qwen2RMSNorm order: fp32 normalisation, cast to the input dtype, then multiply by the weight
+                # HF Qwen2RMSNorm order: fp32 normalisation, cast to the input dtype, then multiply by the weight.
+                # Blocked (512 rows) with preallocated scratch: one-shot full-size temporaries made 8192 rows cost
+                # 60 ms (1.4 GB/s, page faults; diag_cpu_rmsnorm_v1, 2026-10-14).
                 x, w, y = self.bufs[a["x"]], self.bufs[a["w"]], self.bufs[a["y"]]
-                xf = self._scr(q, "xf", (r1 - r0, x.shape[-1]), torch.float32)
-                xf.copy_(x[r0:r1])
-                var = xf.pow(2).mean(-1, keepdim=True)
-                xf.mul_(torch.rsqrt(var.add_(a["eps"])))
-                torch.mul(w, xf.to(x.dtype), out=y[r0:r1])
+                Hd = x.shape[-1]
+                if x.dtype == torch.bfloat16 and w.dtype == torch.bfloat16 and y.dtype == torch.bfloat16:
+                    rb = Hd * 2
+                    self.lib.hxb_rmsnorm_bf16(x.data_ptr() + r0 * rb, w.data_ptr(), y.data_ptr() + r0 * rb, r1 - r0, Hd,
+                                              float(a["eps"]), len(self.cfg["compute_cores"]))
+                    return
+                blk = 512
+                xf = self._scr(q, "xf", (blk, Hd), torch.float32)
+                sq = self._scr(q, "sq", (blk, Hd), torch.float32)
+                xb = self._scr(q, "xb", (blk, Hd), x.dtype)
+                var = self._scr(q, "var", (blk, 1), torch.float32)
+                for b0 in range(r0, r1, blk):
+                    n = min(blk, r1 - b0)
+                    f, t, c, v_ = xf[:n], sq[:n], xb[:n], var[:n]
+                    f.copy_(x[b0:b0 + n])
+                    torch.mul(f, f, out=t)
+                    torch.mean(t, -1, keepdim=True, out=v_)
+                    v_.add_(a["eps"]).rsqrt_()
+                    f.mul_(v_)
+                    c.copy_(f)
+                    torch.mul(w, c, out=y[b0:b0 + n])
             else:
                 raise ValueError(f"unknown op {op}")
         else:

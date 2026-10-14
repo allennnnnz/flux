@@ -1,0 +1,1 @@
+[bitexact] 9094 / 20971520 bf16 elements differ (0.0434%), max |diff| 0.5, max rel 0.0139

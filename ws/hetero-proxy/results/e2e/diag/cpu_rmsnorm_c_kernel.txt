@@ -1,0 +1,5 @@
+[cpu-rmsnorm] rows     64 (   0.6 MiB bf16):     0.16 ms  ->   4.14 GB/s of input
+[cpu-rmsnorm] rows   1024 (  10.0 MiB bf16):     1.55 ms  ->   6.77 GB/s of input
+[cpu-rmsnorm] rows   2048 (  20.0 MiB bf16):     3.06 ms  ->   6.85 GB/s of input
+[cpu-rmsnorm] rows   8192 (  80.0 MiB bf16):    10.21 ms  ->   8.22 GB/s of input
+[cpu-rmsnorm] rows  16384 ( 160.0 MiB bf16):    12.95 ms  ->  12.96 GB/s of input
