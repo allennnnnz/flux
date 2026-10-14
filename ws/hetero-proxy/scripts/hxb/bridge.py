@@ -102,16 +102,31 @@ class _Channel:
 
 
 class Outbound(_Channel):
+    """send() = post_device() + post_gpu() for the same chunk index j. The halves can also be called separately:
+    a caller may post the device side of many future chunks ahead (no command latency on the critical path) and
+    the GPU side when the data is produced. Both halves count j independently, in the same order."""
+
     def __init__(self, bridge, device, chunk_rows, cols, dtype, slots, timing):
         super().__init__(bridge, device, chunk_rows, cols, dtype, slots, timing, "ob")
         self.staged, self.consumed = self.be.signal("ob.staged"), self.be.signal("ob.consumed")
+        self.jd = self.jg = 0
 
-    def send(self, src, r0, r1, ready, dst, dst_rows, q, tag=""):
-        """Send src[r0:r1] (GPU tensor, contiguous rows) once `ready` (CUDA event) has fired, into dst[dst_rows].
-        Returns (signal, value): reached when the rows are in device memory."""
+    def post_device(self, dst, dst_rows, n, q, tag=""):
+        """Device half of the next chunk: copy_in of n rows from its slot into dst[dst_rows] once staged.
+        Returns (signal, value) reached when the rows are in device memory."""
         self._q(q)
-        S, j = len(self.slots), self.j
-        self.j += 1
+        j = self.jd
+        self.jd += 1
+        slot = self.slots[j % len(self.slots)]
+        self.be.copy_in(q, dst, dst_rows, slot, (0, n), wait=[(self.staged, j + 1)], done=(self.consumed, j + 1),
+                        tag=tag or f"in{j}")
+        return self.consumed, j + 1
+
+    def post_gpu(self, src, r0, r1, ready):
+        """GPU half of the next chunk: D2H src[r0:r1] into its slot after `ready` and once the slot is free."""
+        S, j = len(self.slots), self.jg
+        self.jg += 1
+        self.j = self.jg
         slot, n = self.slots[j % S], r1 - r0
         assert src.is_contiguous() and src.device.index == self.device and n <= slot.shape[0]
         with torch.cuda.device(self.device):
@@ -125,26 +140,43 @@ class Outbound(_Channel):
             if self.timing:
                 self.events.append((j, e0, self._ev()))
             cm.write64(s, self.staged.addr, j + 1)
-        self.be.copy_in(q, dst, dst_rows, slot, (0, n), wait=[(self.staged, j + 1)], done=(self.consumed, j + 1),
-                        tag=tag or f"in{j}")
-        return self.consumed, j + 1
+
+    def send(self, src, r0, r1, ready, dst, dst_rows, q, tag=""):
+        """Send src[r0:r1] (GPU tensor, contiguous rows) once `ready` (CUDA event) has fired, into dst[dst_rows].
+        Returns (signal, value): reached when the rows are in device memory."""
+        assert self.jd == self.jg, "send() needs both halves in step; use post_device / post_gpu separately"
+        out = self.post_device(dst, dst_rows, r1 - r0, q, tag)
+        self.post_gpu(src, r0, r1, ready)
+        return out
 
 
 class Inbound(_Channel):
+    """recv() = post_device() + post_gpu(); the halves can be called separately as for Outbound."""
+
     def __init__(self, bridge, device, chunk_rows, cols, dtype, slots, timing):
         super().__init__(bridge, device, chunk_rows, cols, dtype, slots, timing, "ib")
         self.staged, self.free = self.be.signal("ib.staged"), self.be.signal("ib.free")
+        self.jd = self.jg = 0
 
-    def recv(self, src, src_rows, q, wait, dst, r0, r1, flag=None, tag=""):
-        """Bring device src[src_rows] into dst[r0:r1] (GPU tensor) after every (signal, v) in `wait`;
-        then, if flag = (gpu_address, value), store the int32 value there (stream memory op)."""
+    def post_device(self, src, src_rows, n, q, wait, tag=""):
+        """Device half: copy_out of device src[src_rows] (n rows) into the next slot after `wait` and once the slot
+        is free. Returns (signal, value) reached when the rows are in the slot."""
         self._q(q)
-        S, j = len(self.slots), self.j
-        self.j += 1
-        slot, n = self.slots[j % S], r1 - r0
-        assert dst.is_contiguous() and dst.device.index == self.device and n <= slot.shape[0]
+        S, j = len(self.slots), self.jd
+        self.jd += 1
+        slot = self.slots[j % S]
         w = list(wait) + ([(self.free, j - S + 1)] if j >= S else [])
         self.be.copy_out(q, slot, (0, n), src, src_rows, wait=w, done=(self.staged, j + 1), tag=tag or f"out{j}")
+        return self.staged, j + 1
+
+    def post_gpu(self, dst, r0, r1, flag=None):
+        """GPU half: H2D the next slot into dst[r0:r1] once staged; then free the slot and, if flag = (gpu_address,
+        value), store the int32 value there (stream memory op). Returns (signal, value) of the slot release."""
+        S, j = len(self.slots), self.jg
+        self.jg += 1
+        self.j = self.jg
+        slot, n = self.slots[j % S], r1 - r0
+        assert dst.is_contiguous() and dst.device.index == self.device and n <= slot.shape[0]
         with torch.cuda.device(self.device):
             s = self.stream
             cm.wait_geq(s, self.staged.addr, j + 1)
@@ -156,3 +188,10 @@ class Inbound(_Channel):
             if flag is not None:
                 cm.write32(s, flag[0], flag[1])
         return self.free, j + 1
+
+    def recv(self, src, src_rows, q, wait, dst, r0, r1, flag=None, tag=""):
+        """Bring device src[src_rows] into dst[r0:r1] (GPU tensor) after every (signal, v) in `wait`;
+        then, if flag = (gpu_address, value), store the int32 value there (stream memory op)."""
+        assert self.jd == self.jg, "recv() needs both halves in step; use post_device / post_gpu separately"
+        self.post_device(src, src_rows, r1 - r0, q, wait, tag)
+        return self.post_gpu(dst, r0, r1, flag)

@@ -23,6 +23,7 @@ Ops (launch(q, op, args)); row ranges are (r0, r1) of the first dimension:
   gemm          args x, w, y, rows:       y[rows] = x[rows] @ w            (w float32 on the device)
   lowrank_gelu  args x, u, v, y, rows:    y[rows] = gelu(x[rows] @ u) @ v  (u, v float32)
   axpb          args x, y, rows, a, b:    y[rows] = a * x[rows] + b
+  rmsnorm       args x, w, y, rows, eps:  y[rows] = w * rmsnorm_fp32(x[rows]).to(x.dtype)   (HF Qwen2 order)
   sleep         args seconds
 """
 import ctypes
@@ -185,6 +186,14 @@ class _Device:
             elif op == "axpb":
                 x, y = self.bufs[a["x"]], self.bufs[a["y"]]
                 y[r0:r1].copy_(x[r0:r1].float() * a["a"] + a["b"])
+            elif op == "rmsnorm":
+                # HF Qwen2RMSNorm order: fp32 normalisation, cast to the input dtype, then multiply by the weight
+                x, w, y = self.bufs[a["x"]], self.bufs[a["w"]], self.bufs[a["y"]]
+                xf = self._scr(q, "xf", (r1 - r0, x.shape[-1]), torch.float32)
+                xf.copy_(x[r0:r1])
+                var = xf.pow(2).mean(-1, keepdim=True)
+                xf.mul_(torch.rsqrt(var.add_(a["eps"])))
+                torch.mul(w, xf.to(x.dtype), out=y[r0:r1])
             else:
                 raise ValueError(f"unknown op {op}")
         else:
@@ -304,7 +313,7 @@ class CpuBackend(Backend):
         self._caps = Caps(
             name=self._name, level=1, scheduling=scheduling, max_queues=1 if scheduling == "static" else 8,
             dma_engines=1 if dma_threads else 0, memory="device_local",
-            dtypes=(torch.float32, torch.bfloat16, torch.float16), ops=("gemm", "lowrank_gelu", "axpb", "sleep"),
+            dtypes=(torch.float32, torch.bfloat16, torch.float16), ops=("gemm", "lowrank_gelu", "axpb", "rmsnorm", "sleep"),
             peak_tflops=emulate_tflops or len(compute) * 2.6e9 * 32 / 1e12,  # cores x 2.6 GHz x 32 fp32 flop/cycle
             link_gbps=link_gbps or 0.0)
         self._table = SignalTable()

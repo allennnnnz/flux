@@ -1,0 +1,66 @@
+[
+ {
+  "name": "en_explain",
+  "config": "A",
+  "position": 5,
+  "hf_top2": [
+   315,
+   279
+  ],
+  "hf_top2_logits": [
+   29.625,
+   29.0
+  ],
+  "gap": 0.625,
+  "config_token": 279,
+  "config_chose_runner_up": true
+ },
+ {
+  "name": "en_explain",
+  "config": "Bfinal",
+  "position": 5,
+  "hf_top2": [
+   315,
+   279
+  ],
+  "hf_top2_logits": [
+   29.625,
+   29.0
+  ],
+  "gap": 0.625,
+  "config_token": 279,
+  "config_chose_runner_up": true
+ },
+ {
+  "name": "en_explain",
+  "config": "Bmid8",
+  "position": 5,
+  "hf_top2": [
+   315,
+   279
+  ],
+  "hf_top2_logits": [
+   29.625,
+   29.0
+  ],
+  "gap": 0.625,
+  "config_token": 279,
+  "config_chose_runner_up": true
+ },
+ {
+  "name": "en_explain",
+  "config": "Bmid1",
+  "position": 5,
+  "hf_top2": [
+   315,
+   279
+  ],
+  "hf_top2_logits": [
+   29.625,
+   29.0
+  ],
+  "gap": 0.625,
+  "config_token": 279,
+  "config_chose_runner_up": true
+ }
+]

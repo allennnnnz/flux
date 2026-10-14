@@ -44,6 +44,11 @@
   FlexLink 8×H800 AllReduce 只 +2%）。使用者知悉、仍要做：沒加速本身也是結論（NVLink 很強的機器上 PCIe 適合接外部晶片，不適合分擔 GPU 間通訊）。
   先量純頻寬，再接模型。
 - 步驟：(1) 權重 + 推論程式 + 與 HF 輸出一致 + 量 A；(2) B；(3) C；(4) ShareGPT。每步預測先登記、守衛、交錯、多輪中位數。
+- **步驟 1 完成（10-14）**：推論程式與 HF 逐字一致（4×64）；CPU 一層 prefill 4096 字 2.05 s、decode B=32 109 ms（推論得證）；A（eager）prefill 87 / 532 / 1056 ms，
+  decode 每字約 48 ms 且不隨批次變（受 Python 發指令限制）。
+- **追加決定（10-14 使用者）**：(1) decode 的 A、B、C 都用 CUDA graph（同一用法）；(2) B 兩種位置都做——**B-final**（CPU 做最後的 RMSNorm，
+  只需各序列最後一個位置，每次傳幾 KB）與 **B-mid**（CPU 做第 33 層的輸入 RMSNorm，全部 token 經 PCIe 切塊往返，回到 GPU0 後經 NVLink 廣播給 8 卡）。
+  推論：B-mid prefill 慢約 3–6%、decode 影響小；B-final 接近 A。
 
 **實作進度（I1–I4 完成；細節與數字見第 2 節）**：
 - [x] H0 工作切分（`reports/20261009_h0_work_partition.md`，推論）：TP 成員排除；pipeline 段可行，吞吐量上限 +s/8。
