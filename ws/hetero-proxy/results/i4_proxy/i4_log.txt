@@ -1,0 +1,41 @@
+# start 2026-10-09 08:13:33 rounds=200 src=0 proxy=2 dst=4
+[meas] pemu4_sep     n=1   gpu  12.637 ms (host  12.700) x1.00 | dev in  1.90 op  3.28 out  1.73 | d2h  1.75 h2d  2.20 | enqueue  0.85
+[meas] pemu4_sep     n=2   gpu   8.098 ms (host   8.161) x1.56 | dev in  1.93 op  3.29 out  1.75 | d2h  1.77 h2d  2.21 | enqueue  1.26
+[meas] pemu4_sep     n=4   gpu   5.959 ms (host   6.029) x2.12 | dev in  2.65 op  3.30 out  1.86 | d2h  1.79 h2d  2.22 | enqueue  2.06
+[meas] pemu4_sep     n=8   gpu   4.890 ms (host   4.957) x2.58 | dev in  2.71 op  3.34 out  1.92 | d2h  1.84 h2d  2.26 | enqueue  3.60
+[meas] pemu4_sep     n=16  gpu   4.545 ms (host   4.602) x2.78 | dev in  2.93 op  3.39 out  2.00 | d2h  1.96 h2d  2.32 | enqueue  6.67
+[meas] pemu4_sep     n=32  gpu   4.751 ms (host   4.817) x2.66 | dev in  3.16 op  3.49 out  2.19 | d2h  2.17 h2d  2.44 | enqueue 12.95
+[meas] pemu4_shared  n=1   gpu  12.626 ms (host  12.688) x1.00 | dev in  1.90 op  3.28 out  1.73 | d2h  1.75 h2d  2.20 | enqueue  0.90
+[meas] pemu4_shared  n=2   gpu   8.095 ms (host   8.154) x1.56 | dev in  1.95 op  3.29 out  1.75 | d2h  1.77 h2d  2.21 | enqueue  1.33
+[meas] pemu4_shared  n=4   gpu   6.204 ms (host   6.264) x2.03 | dev in  1.99 op  3.30 out  1.78 | d2h  1.78 h2d  2.22 | enqueue  2.17
+[meas] pemu4_shared  n=8   gpu   5.309 ms (host   5.368) x2.38 | dev in  2.01 op  3.33 out  1.83 | d2h  1.82 h2d  2.25 | enqueue  3.83
+[meas] pemu4_shared  n=16  gpu   5.293 ms (host   5.353) x2.39 | dev in  2.10 op  3.38 out  1.91 | d2h  1.88 h2d  2.32 | enqueue  7.10
+[meas] pemu4_shared  n=32  gpu   5.967 ms (host   6.028) x2.12 | dev in  2.26 op  3.48 out  2.07 | d2h  2.01 h2d  2.44 | enqueue 13.82
+[check] preal_sep n=1 max rel err vs fp32 reference 4.52e-03 OK
+[check] preal_sep n=2 max rel err vs fp32 reference 4.52e-03 OK
+[check] preal_sep n=4 max rel err vs fp32 reference 5.09e-03 OK
+[check] preal_sep n=8 max rel err vs fp32 reference 5.09e-03 OK
+[check] preal_sep n=16 max rel err vs fp32 reference 4.81e-03 OK
+[check] preal_sep n=32 max rel err vs fp32 reference 5.66e-03 OK
+[meas] preal_sep     n=1   gpu   9.603 ms (host   9.656) x1.00 | dev in  1.92 op  0.22 out  1.74 | d2h  1.75 h2d  2.21 | enqueue  0.79
+[meas] preal_sep     n=2   gpu   6.600 ms (host   6.658) x1.46 | dev in  2.66 op  0.25 out  1.84 | d2h  1.77 h2d  2.23 | enqueue  1.22
+[meas] preal_sep     n=4   gpu   5.266 ms (host   5.320) x1.82 | dev in  3.03 op  0.33 out  1.92 | d2h  1.80 h2d  2.25 | enqueue  2.06
+[meas] preal_sep     n=8   gpu   4.541 ms (host   4.595) x2.11 | dev in  3.24 op  0.44 out  2.00 | d2h  1.84 h2d  2.29 | enqueue  3.73
+[meas] preal_sep     n=16  gpu   4.438 ms (host   4.489) x2.16 | dev in  3.39 op  0.71 out  2.10 | d2h  1.93 h2d  2.34 | enqueue  7.04
+[meas] preal_sep     n=32  gpu   4.185 ms (host   4.240) x2.29 | dev in  2.67 op  1.29 out  2.25 | d2h  2.02 h2d  2.45 | enqueue 13.72
+[check] preal_shared n=1 max rel err vs fp32 reference 4.52e-03 OK
+[check] preal_shared n=2 max rel err vs fp32 reference 4.52e-03 OK
+[check] preal_shared n=4 max rel err vs fp32 reference 5.09e-03 OK
+[check] preal_shared n=8 max rel err vs fp32 reference 5.09e-03 OK
+[check] preal_shared n=16 max rel err vs fp32 reference 4.81e-03 OK
+[check] preal_shared n=32 max rel err vs fp32 reference 5.66e-03 OK
+[meas] preal_shared  n=1   gpu   9.606 ms (host   9.665) x1.00 | dev in  1.91 op  0.22 out  1.75 | d2h  1.75 h2d  2.20 | enqueue  0.88
+[meas] preal_shared  n=2   gpu   6.940 ms (host   6.997) x1.38 | dev in  1.97 op  0.25 out  1.77 | d2h  1.77 h2d  2.24 | enqueue  1.37
+[meas] preal_shared  n=4   gpu   5.680 ms (host   5.736) x1.69 | dev in  2.00 op  0.34 out  1.80 | d2h  1.79 h2d  2.23 | enqueue  2.32
+[meas] preal_shared  n=8   gpu   5.121 ms (host   5.184) x1.88 | dev in  2.05 op  0.45 out  1.86 | d2h  1.85 h2d  2.27 | enqueue  4.15
+[meas] preal_shared  n=16  gpu   5.365 ms (host   5.423) x1.79 | dev in  2.19 op  0.71 out  1.96 | d2h  1.95 h2d  2.31 | enqueue  7.90
+[meas] preal_shared  n=32  gpu   6.285 ms (host   6.341) x1.53 | dev in  2.36 op  1.18 out  2.21 | d2h  2.14 h2d  2.44 | enqueue 15.29
+[nvlink] GPU0: Tx+Rx delta over the run 0 KiB OK (< 1 MiB)
+[nvlink] GPU2: Tx+Rx delta over the run 0 KiB OK (< 1 MiB)
+[nvlink] GPU4: Tx+Rx delta over the run 0 KiB OK (< 1 MiB)
+# end 2026-10-09 08:14:49
