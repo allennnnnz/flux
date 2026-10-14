@@ -1,0 +1,52 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[rank3]:[W1014 09:31:29.029190598 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank2]:[W1014 09:31:29.621602298 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank5]:[W1014 09:31:29.756324149 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank1]:[W1014 09:31:29.813217121 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank4]:[W1014 09:31:29.813670270 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank6]:[W1014 09:31:29.925292589 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank7]:[W1014 09:31:29.926616565 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank0]:[W1014 09:31:31.368745647 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[load] 8.3 s, world 8, configs ['A', 'Bfinal', 'Bmid8', 'Bmid1'], hop rows 16384, mem 18.9 GiB
+[rank2]:[W1014 09:31:34.629723324 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank1]:[W1014 09:31:35.027381722 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank0]:[W1014 09:31:35.194592094 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank4]:[W1014 09:31:35.244907997 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank5]:[W1014 09:31:35.244990145 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank3]:[W1014 09:31:35.245380548 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank6]:[W1014 09:31:35.245415611 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W1014 09:31:35.455456965 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[bench] A       prefill_1x1024   median    87.191 ms  (p25 87.049, p75 87.443)
+[bench] A       prefill_8x1024   median   535.113 ms  (p25 534.513, p75 536.324)
+[bench] A       prefill_4x4096   median  1062.010 ms  (p25 1060.689, p75 1063.601)
+[bench] A       decode_b1        median    22.055 ms  (p25 22.051, p75 22.059)
+[bench] A       decode_b8        median    29.085 ms  (p25 29.082, p75 29.088)
+[bench] A       decode_b32       median    42.936 ms  (p25 42.925, p75 42.954)
+[bench] A       decode_b64       median    61.262 ms  (p25 61.233, p75 61.292)
+[bench] Bfinal  prefill_1x1024   median    87.856 ms  (p25 87.541, p75 88.189)  vs A  +0.76%
+[bench] Bfinal  prefill_8x1024   median   536.441 ms  (p25 535.694, p75 537.553)  vs A  +0.25%
+[bench] Bfinal  prefill_4x4096   median  1063.365 ms  (p25 1061.971, p75 1064.322)  vs A  +0.13%
+[bench] Bfinal  decode_b1        median    22.391 ms  (p25 22.363, p75 22.415)  vs A  +1.52%
+[bench] Bfinal  decode_b8        median    29.812 ms  (p25 29.783, p75 29.847)  vs A  +2.50%
+[bench] Bfinal  decode_b32       median    43.743 ms  (p25 43.717, p75 43.776)  vs A  +1.88%
+[bench] Bfinal  decode_b64       median    62.583 ms  (p25 62.557, p75 62.615)  vs A  +2.16%
+[bench] Bmid8   prefill_1x1024   median    94.333 ms  (p25 94.072, p75 94.868)  vs A  +8.19%
+[bench] Bmid8   prefill_8x1024   median   550.616 ms  (p25 550.104, p75 551.849)  vs A  +2.90%
+[bench] Bmid8   prefill_4x4096   median  1172.621 ms  (p25 1171.022, p75 1176.741)  vs A +10.42%
+[bench] Bmid8   decode_b1        median    21.124 ms  (p25 21.091, p75 21.176)  vs A  -4.22%
+[bench] Bmid8   decode_b8        median    28.612 ms  (p25 28.594, p75 28.635)  vs A  -1.63%
+[bench] Bmid8   decode_b32       median    42.881 ms  (p25 42.851, p75 42.925)  vs A  -0.13%
+[bench] Bmid8   decode_b64       median    61.147 ms  (p25 61.102, p75 61.225)  vs A  -0.19%
+[bench] Bmid1   prefill_1x1024   median    91.624 ms  (p25 91.434, p75 92.056)  vs A  +5.09%
+[bench] Bmid1   prefill_8x1024   median   622.157 ms  (p25 619.765, p75 624.057)  vs A +16.27%
+[bench] Bmid1   prefill_4x4096   median  1212.710 ms  (p25 1210.720, p75 1217.882)  vs A +14.19%
+[bench] Bmid1   decode_b1        median    21.068 ms  (p25 21.057, p75 21.095)  vs A  -4.47%
+[bench] Bmid1   decode_b8        median    28.675 ms  (p25 28.655, p75 28.689)  vs A  -1.41%
+[bench] Bmid1   decode_b32       median    42.886 ms  (p25 42.832, p75 42.937)  vs A  -0.12%
+[bench] Bmid1   decode_b64       median    61.217 ms  (p25 61.197, p75 61.296)  vs A  -0.07%
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/e2e/bench_v2/guard.log
