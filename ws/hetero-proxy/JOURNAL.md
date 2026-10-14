@@ -66,3 +66,16 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - 機器上沒有 vLLM、沒有 Qwen 權重；ShareGPT 資料集在 HF 快取。
 - I4 正式量測結果（10-09 跑完）今天才 commit（70e6143）；STATUS / JOURNAL / PROJECT 在 10-09 收工時漏更新，今天補上。
 - **留給下個 session**：E2E 步驟 1（下載權重、推論程式、與 HF 一致、實測 CPU 一層、量 A）。
+
+## 2026-10-14 · boss 兼 worker · E2E 步驟 1：真實模型 + 基準 A
+
+- 下載 Qwen2.5-32B-Instruct（62 GB，HF 快取）；側邊 venv `~/.venvs/hetero-proxy-hf`（system-site-packages 沿用 pixi 的 torch；
+  加裝 transformers 4.49 / safetensors / accelerate），不動共用 pixi 環境。
+- `scripts/e2e/qwen_tp_v1.py`：精簡 TP8 推論（NCCL）。與 HF 單卡參考（`hf_reference_v1.py`，手寫 argmax，避開 generation_config 的
+  repetition_penalty）比對：4 個提示各 64 字**全部一致**，第一步 top-20 logit 差 ≤ 0.375（`results/e2e/check/`）。
+- CPU 算一層真實模型層（`cpu_layer_time_v1.py`，NUMA1 26 核，guard CLEAN）：prefill 4096 字 2054 ms、decode B=32 109 ms、B=1 13 ms
+  → 確認「整層給 CPU 比 8 卡跑完整模型還慢」（推論得到驗證，decode B=32 比估計更慢）。
+- 基準 A（eager，guard CLEAN，20 輪）：prefill 1×1024 86.6 ms、8×1024 532 ms、4×4096 1056 ms；decode 每字 47.7–48.6 ms 且不隨批次變
+  → **decode 受 Python 發指令速度限制**（G4 用 CUDA graph 約 11.5 ms）。prefill 也比 G4 的最佳策略慢約 45%（eager、未融合）。
+- **待與使用者討論**：(1) decode 要加 CUDA graph 才接近實際服務；(2) B 若 CPU 只做「最後的正規化」，prefill 只需最後一個位置 → 每次只傳幾 KB，
+  幾乎不經過切塊重疊；建議改成「中間某層的輸入正規化」（全部 token 經 PCIe、回來後經 NVLink 廣播給 8 卡、該層 QKV 逐塊等旗標）。
