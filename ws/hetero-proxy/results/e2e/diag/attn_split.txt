@@ -1,0 +1,3 @@
+B=1: max|old-fp32ref| 0.000469  max|split-fp32ref| 0.000732  graph time old 36.2 us  split 9.0 us
+B=32: max|old-fp32ref| 0.000976  max|split-fp32ref| 0.00102  graph time old 58.2 us  split 14.3 us
+B=64: max|old-fp32ref| 0.000975  max|split-fp32ref| 0.00104  graph time old 73.9 us  split 21.4 us

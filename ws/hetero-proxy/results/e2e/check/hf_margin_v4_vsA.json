@@ -1,0 +1,66 @@
+[
+ {
+  "name": "zh_explain",
+  "config": "Bmid8",
+  "position": 41,
+  "hf_top2": [
+   99558,
+   65278
+  ],
+  "hf_top2_logits": [
+   24.375,
+   24.25
+  ],
+  "gap": 0.125,
+  "config_token": 99558,
+  "config_chose_runner_up": false
+ },
+ {
+  "name": "zh_explain",
+  "config": "Bmid1",
+  "position": 41,
+  "hf_top2": [
+   99558,
+   65278
+  ],
+  "hf_top2_logits": [
+   24.375,
+   24.25
+  ],
+  "gap": 0.125,
+  "config_token": 99558,
+  "config_chose_runner_up": false
+ },
+ {
+  "name": "math",
+  "config": "Bmid8",
+  "position": 30,
+  "hf_top2": [
+   5692,
+   576
+  ],
+  "hf_top2_logits": [
+   32.0,
+   32.0
+  ],
+  "gap": 0.0,
+  "config_token": 576,
+  "config_chose_runner_up": true
+ },
+ {
+  "name": "math",
+  "config": "Bmid1",
+  "position": 30,
+  "hf_top2": [
+   5692,
+   576
+  ],
+  "hf_top2_logits": [
+   32.0,
+   32.0
+  ],
+  "gap": 0.0,
+  "config_token": 576,
+  "config_chose_runner_up": true
+ }
+]
