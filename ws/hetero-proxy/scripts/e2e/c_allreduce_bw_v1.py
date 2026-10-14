@@ -29,7 +29,7 @@ sys.path.insert(0, os.path.dirname(HERE))
 from hxb import cudamem as cm  # noqa: E402
 
 W = 8
-HDR = 4096  # counters: deposited[0..7] at int64 slots 8..15, reduced at slot 16, sizes ring at 64..64+1023
+HDR = 4096  # counters: deposited[0..7] at int64 slots 8..15, reduced at slot 16, sizes ring at 64..64+255
 
 
 def reducer_main(path, total, slot_bytes, cpus, threads):
@@ -46,7 +46,7 @@ def reducer_main(path, total, slot_bytes, cpus, threads):
             if all(ctr[8 + r] >= k for r in range(W)):
                 break
             time.sleep(2e-6)
-        nbytes = int(ctr[64 + (k % 1024)])
+        nbytes = int(ctr[64 + (k % 256)])
         n = nbytes // 2
         acc = None
         for r in range(W):
@@ -91,7 +91,7 @@ class HostAllReduce:
         self.k += 1
         k, nb = self.k, (t.numel() - s) * 2
         if self.rank == 0:
-            self.ctr[64 + (k % 1024)] = nb
+            self.ctr[64 + (k % 256)] = nb
         st = self.stream
         st.wait_event(ready)
         cm.memcpy(st, self.base + HDR + self.rank * self.slot, t.data_ptr() + 2 * s, nb)
