@@ -121,3 +121,8 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   （第一次 nsys 用 os._exit 結束，CUPTI 沒寫出 kernel 紀錄 → 改正常收尾重錄。）
 - 結論方向：C 慢的主因依序是 (1) PCIe 流量讓 NVLink all-reduce 本身變慢、(2) 8 卡同時用 PCIe 每卡只剩約 10 GB/s（同時收送 2.5）、(3) 原 torch 主機加總慢。
   → 「與 NCCL 同時傳」的排程方向受 (1) 限制；可能的方向是讓 PCIe 只在 NVLink 閒置時（GEMM 計算期間）傳。待與使用者討論。
+
+## 2026-10-14 · boss 兼 worker · 給教授的進度投影片
+
+- 13 頁（概念、介面原型量測、真實模型 A / B / C 結果與原因、結論、下一步），中文講稿：https://claude.ai/artifact/2Y8G4VW3TX2z5t9rdfHuht
+- 數字全部取自已提交的 results（i3_overlap、i4_proxy、e2e/bench_v5、e2e/c_bw、e2e/c_diag、e2e/cpu_layer）；報告人姓名留佔位。
