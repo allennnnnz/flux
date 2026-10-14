@@ -1,0 +1,34 @@
+[
+ {
+  "name": "code",
+  "config": "Bmid8",
+  "position": 18,
+  "hf_top2": [
+   1447,
+   13
+  ],
+  "hf_top2_logits": [
+   35.25,
+   35.25
+  ],
+  "gap": 0.0,
+  "config_token": 1447,
+  "config_chose_runner_up": false
+ },
+ {
+  "name": "code",
+  "config": "Bmid1",
+  "position": 18,
+  "hf_top2": [
+   1447,
+   13
+  ],
+  "hf_top2_logits": [
+   35.25,
+   35.25
+  ],
+  "gap": 0.0,
+  "config_token": 1447,
+  "config_chose_runner_up": false
+ }
+]

@@ -30,12 +30,14 @@
 #   check  greedy-generate the HF reference prompts with every configuration; tokens vs HF and vs each other
 #   bench  fixed batches, configurations interleaved round by round: prefill (CUDA events, rank 0) and decode per
 #          token (graph replays + hops, CUDA events on rank 0's compute stream)
-# PRE-REGISTERED for v3 run2 (written before it; run1 = v2 numbers in results/e2e/bench_v2/run1) [推論]:
-#   S1 decode: Bfinal - AsplitF and Bmid* - AsplitM are both > 0 (the hop costs time) and below 1 ms per token.
-#   S2 decode: A vs AsplitF / AsplitM differ by more than the run-to-run spread (the split effect seen in run1).
-#   S3 prefill Bmid1 - A at 8x1024 drops from 87 ms (run1) to <= 30 ms with the C rmsnorm (8.7-10 ms for 8192 rows)
-#      + D2H 3.5 + H2D 3.8 + device DMA ~8 + broadcast; Bmid8 - A at 8x1024 <= 15 ms.
-#   S4 tokens of every configuration identical to A on the 4 HF prompts (check mode).
+# Check v5 (results/e2e/check/check_v5.json): A vs HF 64/64 on 3 prompts, 5/64 on en_explain (HF top-2 gap 0.625);
+# Bmid* vs A diverge only on `code` at token 18, where HF's top-2 logits are equal (35.25 / 35.25).
+# PRE-REGISTERED for the v5 bench (written before it; v3 run2 in results/e2e/bench_v3/) [推論]:
+#   T1 decode hop cost (Bfinal - AsplitF, Bmid* - AsplitM) is 0.2 .. 1.1 ms per step at every batch size: the hop does
+#      not depend on the engine's speed (v3 run2: 0.32 .. 1.04 ms).
+#   T2 so its share grows with the faster base step: Bfinal vs AsplitF +2 .. +7% per token.
+#   T3 prefill: Bfinal within +1% of A; Bmid8 - A <= 20 ms and Bmid1 - A 20 .. 35 ms at 8x1024 (v3: 14.5 / 26.9 ms).
+#   T4 the graph-split effect shrinks with ~5x fewer kernels per graph: |AsplitM / A - 1| < 3% at every batch size.
 # Usage:
 #   env -u CUDA_DEVICE_MAX_CONNECTIONS CUDA_MODULE_LOADING=EAGER pixi run --manifest-path pixi.toml \
 #       ~/.venvs/hetero-proxy-hf/bin/python -m torch.distributed.run --nproc_per_node 8 \
