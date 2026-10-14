@@ -1,0 +1,23 @@
+graph launches on GPU0: 76; analysing the last 2 x 16 (the timed round)
+case1: kernels/step 3853, GPU span 43828.1 us, kernel busy 40374.4 us (92%), gap between steps 78.8 us
+    29.0%   1026 launches/step  elementwise_kernel
+    14.8%   1444 launches/step  vectorized_elementwise_kernel
+    11.8%    128 launches/step  ncclDevKernel_AllReduce_Sum_bf16_RING_LL
+    11.4%    112 launches/step  ampere_bf16_s16816gemm_bf16_64_2...
+     6.4%     64 launches/step  gemv2T_kernel_val
+     5.5%     80 launches/step  kernel
+     5.1%    194 launches/step  reduce_kernel
+     3.6%     64 launches/step  Kernel2
+     2.9%    256 launches/step  index_elementwise_kernel
+     2.7%    226 launches/step  unrolled_elementwise_kernel
+case2: kernels/step 3917, GPU span 43750.8 us, kernel busy 40286.0 us (92%), gap between steps 76.6 us
+    32.0%   1155 launches/step  elementwise_kernel
+    14.9%   1348 launches/step  vectorized_elementwise_kernel
+    11.9%    128 launches/step  ampere_bf16_s16816gemm_bf16_64_2...
+    10.4%    128 launches/step  ncclDevKernel_AllReduce_Sum_bf16_RING_LL
+     7.3%     64 launches/step  gemv2T_kernel_val
+     5.5%     64 launches/step  kernel
+     5.4%    194 launches/step  reduce_kernel
+     2.8%    256 launches/step  index_elementwise_kernel
+     2.3%      1 launches/step  ampere_bf16_s16816gemm_bf16_25_4...
+     2.0%    194 launches/step  unrolled_elementwise_kernel

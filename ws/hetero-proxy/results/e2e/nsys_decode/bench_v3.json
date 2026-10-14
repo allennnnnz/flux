@@ -1,0 +1,37 @@
+{
+ "raw_ms": {
+  "A|decode_b1": [
+   22.694963455200195
+  ],
+  "A|decode_b32": [
+   43.8005256652832
+  ]
+ },
+ "summary": {
+  "A|decode_b1": {
+   "median_ms": 22.694963455200195,
+   "p25": 22.694963455200195,
+   "p75": 22.694963455200195,
+   "rounds": 1
+  },
+  "A|decode_b32": {
+   "median_ms": 43.8005256652832,
+   "p25": 43.8005256652832,
+   "p75": 43.8005256652832,
+   "rounds": 1
+  }
+ },
+ "args": {
+  "mode": "bench",
+  "out": "ws/hetero-proxy/results/e2e/nsys_decode",
+  "reference": null,
+  "configs": "A",
+  "max_batch": 64,
+  "max_len": 4352,
+  "prefill": "",
+  "decode": "1,32",
+  "decode_prompt": 512,
+  "decode_steps": 16,
+  "rounds": 1
+ }
+}
