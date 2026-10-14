@@ -3,14 +3,14 @@
 **本 workstream 唯一權威。** 第 1 節由 boss 寫入，worker 不改；第 2 節起由 worker 維護。
 
 建立：2026-09-23（boss）
-最後更新：2026-10-09（boss 兼 worker，後續計劃 H0–H5）
-狀態：**調查完成，實作未開始**
+最後更新：2026-10-14（boss 兼 worker：I1–I4 完成；E2E 計劃定案）
+狀態：**介面原型與 I3 / I4 量測完成；下一步：真實模型端到端（A / B / C）**
 
 ---
 
 ## 0. 快速跟上（新 session 先讀這節；每次收工更新）
 
-最後更新：2026-10-06
+最後更新：2026-10-14
 
 **教授新方向（2026-10-06）**：讓 PCIe 也能用 Flux 的邏輯做通訊 / 計算重疊，配合 NVLink 相連的運算環境；
 節點外多一顆只有 PCIe 的不同廠牌晶片也要能協同運作、用 PCIe 溝通。這正是本 workstream 第 1 節的目標，故由本 ws 承接。
@@ -26,11 +26,35 @@
 **建議路線**（報告第 4 節）：1a / 1b 量測 → 技術探針（能否從 Flux 外部寫 AG-GEMM 的旗標）→ 等級 0（算子級中轉）→
 等級 1（chunk 級中轉 + 旗標驅動 GEMM tile）→ NPU 型代理 → 工作切分 → 晶片到手後等級 2。
 
-**實作進度（2026-10-09 使用者核准「開始所有實作」；第一個加速器後端 = CPU，Python 原型）**：
-- [x] **H0 工作切分**（`reports/20261009_h0_work_partition.md`）：TP 成員排除（PCIe 每層 0.8–9.2× 域的整層時間，與晶片快慢無關）；
-  **pipeline 段可行**，吞吐量上限 +s/8，邊界傳輸佔段時間 0.6–2.4%；平衡時單次延遲約 2×。→ 示範做成「GPU 段 → 晶片段 → GPU 段」雙向 chunk 串流。
-- [ ] I1 介面規格　[ ] I2 Bridge + CPU 後端　[ ] I3 chunk 重疊　[ ] I4 A100 代理後端　[ ] I5 NPU 型模擬
+**最新（2026-10-14）—— 一段話跟上**：做出了「任何加速器都能接進 NVIDIA 環境」的介面原型 hxb（`scripts/hxb/`）：
+雙方在**主機記憶體**交換資料（中轉 slot），用主機記憶體裡的**單調計數器**通知彼此；GPU 端用 copy engine 搬、用 stream memory op 等 / 寫計數器
+（ctypes 直接呼叫 libcuda，全部事先排進 stream，不需主機執行緒）；接收端 GPU 用每塊一個旗標的 Triton GEMM（Flux 的 tile 等旗標）。
+兩個不同的後端都接上且正確：CPU（獨立程序扮晶片）與 A100 代理（GPU2，NVLink 計數器增量 0）。
+交棒切塊重疊實測：level 0 → level 1 快 **2.3–2.8×**（模擬計算 / 真實計算）。使用者要求下一步用**真實模型端到端**驗證（見下）。
 
+**E2E 計劃（2026-10-14 與使用者討論定案）**：Qwen2.5-32B-Instruct 真實權重（下載約 65 GB），自寫精簡推論程式（vLLM 未安裝，也不支援異質分段），
+先固定批次（prefill / decode / 吞吐量），再 ShareGPT（快取裡已有）。三組比較：
+- **A**：8 卡 NVLink、預設 NCCL（基準）。
+- **B**：8 卡 + CPU 經 PCIe 參與每次前向（CPU 做最後的 RMSNorm；資料 GPU → PCIe → CPU → PCIe → GPU，hxb 切塊重疊）→ 證明「PCIe 能與 NVLink 環境協同」，
+  生成文字必須與 A 完全一致；量通道代價（預期 B 比 A 慢約 0.5–2%，推論）。
+  不把整層給 CPU：CPU fp32 0.7–2 TFLOPS（I2 v2 B）vs A100 236 TFLOPS → CPU 算 1 層（prefill 4096 字約 2 s、decode 約 10–20 ms）就比 8 卡跑完整模型
+  （約 0.18 s / 11.5 ms，fusion-dispatch G4）慢 [推論；下載權重後實測一層驗證]。
+- **C**：8 卡 NVLink + PCIe 同時傳（FlexLink 式：TP all-reduce 的一部分經主機中轉走 PCIe）→ 檢驗 PCIe 通道能否加速。
+  **預期在本機最多約 +0.5%**（推論：8 卡同時收送時 PCIe 每卡約 6 GB/s〔Phase 0 5.87〕對 NVLink 約 200 GB/s，通訊約佔 prefill 兩成；decode 受延遲限制不受益；
+  FlexLink 8×H800 AllReduce 只 +2%）。使用者知悉、仍要做：沒加速本身也是結論（NVLink 很強的機器上 PCIe 適合接外部晶片，不適合分擔 GPU 間通訊）。
+  先量純頻寬，再接模型。
+- 步驟：(1) 權重 + 推論程式 + 與 HF 輸出一致 + 量 A；(2) B；(3) C；(4) ShareGPT。每步預測先登記、守衛、交錯、多輪中位數。
+
+**實作進度（I1–I4 完成；細節與數字見第 2 節）**：
+- [x] H0 工作切分（`reports/20261009_h0_work_partition.md`，推論）：TP 成員排除；pipeline 段可行，吞吐量上限 +s/8。
+- [x] I1 介面規格（`reports/20261009_i1_backend_interface.md`）：6 個基本動作 + 語意規則 + Bridge 四條硬規則。
+- [x] I2 CPU 後端 + Bridge + 特性量測 v2（`results/i2_characterize_v2/`，CLEAN）。
+- [x] I3 交棒切塊重疊（`results/i3_overlap/`，CLEAN，200 輪）——分析報告未寫。
+- [x] I4 A100 代理後端（`results/i4_proxy/`，CLEAN，200 輪）——分析報告未寫。
+- [ ] I5 NPU 型模擬：腳本 `scripts/i5_npu_sim_v1.py` 已寫、未跑（E2E 優先）。
+- [ ] I3 / I4 報告；auditor 審查（進 DECISIONS 前必需）。
+
+**以下為 2026-10-09 的原計劃 H0–H5（保留供追溯；已由上面的實作與 E2E 計劃取代）**：
 **後續計劃（2026-10-09 提案，H0–H5；原則：最便宜的步驟先排除最大的風險，每步產出下一步的基準，預測先登記再量）**：
 - **H0 工作切分（不用 GPU）**：晶片當 TP 成員 / pipeline 段 / attention-KV 卸載 / draft 模型，各自的 PCIe 流量與預期效益。
   **為什麼先做 [推論，粗估]**：Qwen2.5-32B TP=4 若晶片是 TP 成員，每層要經 PCIe 收 31.5 MB（M=1024）/ 125.8 MB（M=4096），
@@ -44,9 +68,10 @@
 - **H4 NPU 型代理**：固定順序 + 軟體 pipeline（國產晶片多半是 NPU 型，A100 代理太樂觀）。
 - **H5 晶片到手**：等級 2 直連可行性；FlagCX 接廠牌 runtime。
 
-**待使用者 / 教授確認**：「PCIe 加入通訊通道」是指連外部晶片的通道（建議主線），還是 NVLink 之外的額外頻寬；晶片的型號與軟體堆疊。
+**待使用者 / 教授確認**：晶片的型號與軟體堆疊。（「通道」的兩種解讀已由 E2E 計劃的 B〔接外部晶片〕與 C〔額外頻寬〕同時涵蓋，2026-10-14。）
 
-**環境注意**：css-host-159 目前被同帳號的 `sglang::server` 佔用；本 ws 的等級 0 / 1 只需要 css-host-158 單機（以一張關閉 peer access 的 A100 代理晶片）。
+**環境注意**：css-host-159 曾被同帳號的 `sglang::server` 佔用（10-06），其 openclaw-gateway 仍停著，待使用者決定何時還原；本 ws 全部只用 css-host-158。
+執行 hxb：`env -u CUDA_DEVICE_MAX_CONNECTIONS CUDA_MODULE_LOADING=EAGER pixi run --manifest-path pixi.toml python ...`（不經 `launch.sh`）。
 
 ---
 
@@ -111,26 +136,39 @@ Phase 3 的起點：為「PCIe-only 晶片 + A100 NVLink 域」的異質計算�
 
 ## 2. 目前成立（worker 維護）
 
-（尚無。）
+全部 2026-10-09 量測、css-host-158、exclusive_guard_v2 CLEAN；**尚未經 auditor 審查**。
+
+1. **介面可接不同後端**：CPU 後端語意測試 9/9（`scripts/test_hxb_backend_v1.py`：依序、釋放語意、單調、跨佇列依賴、運算正確、靜態裝置），
+   A100 代理 7/7（T8 為 CPU 專屬）。測試抓到並修正：DMA worker 缺 sfence（NT store 未排序）、測試自身用 `value()+1` 推目標值的競爭。
+2. **特性量測 v2 與錨點一致**（`results/i2_characterize_v2/`，D 段只計兩方向同時在飛的窗口）：D2H 24.07、H2D 21.7–21.9、同卡雙向 H2D 5.95–7.3 GB/s
+   （錨點 6.46）、GPU0 送 + GPU2 收 23.7 / 21.3 GB/s。CPU 裝置 DMA（4 執行緒、GPU 剛寫入的資料）兩方向合計 20–23 GB/s；
+   DMA 持續運作時 CPU 計算慢 2.1–2.8×（C 段）。F 段：GPU 流量不會拖慢裝置 DMA（n ≥ 8 背景流量覆蓋完整；n ≤ 4 未覆蓋窗口，不採計）。
+3. **I3 交棒切塊重疊**（`results/i3_overlap/rounds.csv`，全部 200 輪中位數，`scripts/i3_overlap_v1.py` @ 3431a0b）：
+   emu4（裝置計算 4 ms）13.83 → 5.88 ms（n=8，×2.35，可省等待的 81%）；emu0 10.08 → 6.33（×1.59）；cpu64 真實計算最多 ×1.3、n 大反而變慢。
+   事前登記：P1（emu 在 15% 內）emu4 n ≤ 8 過（+2–14%）、n ≥ 16 不過；emu0 只有 n ≤ 2 過。P2（cpu 落在樂觀–悲觀區間）大多不過或邊界。
+   P3 前半過（emu4 ≥ 2×）、後半不過（同卡收送沒有比較慢：瓶頸在裝置端、兩方向實際同時傳的時間短）。P4 過（最佳 n 為模型所選或相鄰）。
+   模型漏掉的：每塊固定開銷（n=32 時主機 enqueue 13–15 ms，> pass 時間）；link-bound 時裝置 DMA 在 pipeline 內慢約 33%，原因未隔離
+   （「冷 slot」假說已否定，`results/i3_overlap/diag/`）。時脈過濾：GPU0 有 2/3 輪次在 1155 MHz，故以全部輪次中位數為準。
+4. **I4 A100 代理**（`results/i4_proxy/`，@ f210b89）：pemu4_sep 12.64 → 4.54 ms（n=16，×2.78，可省的 86%）；preal_sep 9.60 → 4.19（n=32，×2.29）。
+   P1 過：NVLink Tx+Rx 增量 GPU0 / 2 / 4 皆 **0 KiB**。P2 **不過**：分開佇列比共用佇列快（預測相反）。P3 過（rel err ≤ 5.7e-3）。
+   P4 過但有附註：代理的模擬計算校準偏差，設定 4 ms 實為約 3.3 ms，與 CPU emu4 的比較不完全對等。
 
 ## 3. 撤回表（worker 維護）
 
 | 撤回主張 | 出處 | 原因 | 替代 |
 | --- | --- | --- | --- |
-| （無） | | | |
+| 無 cuda-python → GPU 旗標改以 copy engine 搬 4 bytes 寫入 | JOURNAL 2026-10-09「開始實作」 | ctypes 直接呼叫 libcuda `cuStreamWriteValue/WaitValue*_v2` 可用（2026-10-09 探針，`scripts/hxb/cudamem.py`） | 旗標與計數器一律用 stream memory op |
+| I2 v1 A 段裝置 DMA 44–52 GB/s | `results/i2_characterize/`（v1） | 每次拷貝同一塊快取熱的緩衝區；pipeline 內是 GPU 剛寫入的冷資料，約一半 | `scripts/i2_characterize_v2.py` A 段（v1 腳本已加 WITHDRAWN） |
+| I2 run1 C 段「計算與拷貝競爭 1.6–3.6×」 | `results/i2_characterize/run1_ht_sibling_layout/` | 控制執行緒放在計算核心的 HT 兄弟核，混入自旋干擾 | v2 C 段 2.1–2.8×（專屬控制核心） |
 
 ## 4. 下一步（worker 維護）
 
-**2026-10-06 更新**（依調查報告第 4 節；原 1a / 1b 仍是第一步）：
-0. 與教授確認方向解讀（見第 0 節「待確認」）。
-1. 1a、1b（如下）。
-2. 技術探針：從 Flux 外部（H2D stream 上的 `cuStreamWriteValue32` / 主機執行緒）寫入 AG-GEMM kernel 等待的旗標，確認等級 1 對 Flux 的改動量。
-3. 等級 0 → 等級 1 → NPU 型代理 → 工作切分（先用成本模型估，避開跨裝置頻寬的「死區」，arXiv 2602.09721）。
-
-原有：
-1. 1a：改 `bidirectional_bandwidth_v2.py` 為 per-device 方向，複製到本 ws 的 `scripts/`
-   （保留原檔不動），跑三組配置各 20 repeats。
-2. 1b：`dual_path_v3.py` 加 overhead-only 模式，同樣複製到本 ws。
+**2026-10-14**（取代 10-06 的清單；1a / 1b 已由 I2 特性量測 D 段涵蓋：同卡雙向 H2D 5.95–7.3 GB/s、GPU0 送 + GPU2 收無競爭）：
+1. E2E 步驟 1：下載 Qwen2.5-32B-Instruct；精簡 TP8 推論程式（NCCL）；輸出與 HF 一致；實測 CPU 算一層的時間（驗證第 0 節的推論）；量 A。
+2. E2E 步驟 2：B（CPU 做 final RMSNorm，經 hxb）；文字與 A 一致；A / B 交錯量測。
+3. E2E 步驟 3：C 先量純頻寬（NVLink-only vs NVLink + PCIe 中轉分流），再接模型。
+4. E2E 步驟 4：ShareGPT。
+5. 寫 I3 / I4 分析報告；I5 視需要再跑；安排 auditor。
 
 ## 5. 產出到 common 的數字
 

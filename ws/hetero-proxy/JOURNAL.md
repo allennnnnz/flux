@@ -38,3 +38,31 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   `launch.sh` 的 `CUDA_DEVICE_MAX_CONNECTIONS=1` 會讓搬運 stream 排在等旗標的 GEMM 後面 → 原型不經 `launch.sh`。
   **設計規則：GPU 旗標絕不能用 kernel 寫**（等旗標的 tile 佔住 SM 時，寫旗標的 kernel 排不上去 → 死結）。
 - **H0**（`reports/20261009_h0_work_partition.md`，推論）：TP 成員排除；pipeline 段可行、上限 +s/8；示範設計成雙向 chunk 串流。
+
+## 2026-10-09 · boss 兼 worker · I1–I4 實作與量測
+
+- **做了什麼**：介面規格 I1；套件 `scripts/hxb/`（api、cudamem〔ctypes 呼叫 libcuda stream memory ops〕、cpu_backend〔獨立裝置程序 + C 寫的 DMA 引擎〕、
+  bridge、gpu_consumer〔Triton 每塊旗標 GEMM〕、pipeline、proxy_backend〔A100 代理〕）；驗收測試 CPU 9/9、代理 7/7；
+  I2 特性量測 v1 → v2；I3（6 組 × 6 種 n × 200 輪）與 I4（4 組 × 6 種 n × 200 輪）正式量測，全部 guard CLEAN；結果見 STATUS 第 2 節。
+- **踩過的坑（每條都寫進程式註解或規格）**：
+  - 模組延遲載入會同步整個 context，與停在 WaitValue 的 stream 死結 → `CUDA_MODULE_LOADING=EAGER` + 暖機 + Triton `do_not_specialize`。
+  - DMA worker 的 non-temporal store 要在 worker 自己的執行緒 sfence；測試用 `value()+1` 推目標值是競爭（規格第 4.3 條補上）。
+  - 我自己重犯 Phase 0 的錯：試跑的雙向量測沒限定「兩方向同時在飛的窗口」，量到 20 GB/s；修正後 6.0–6.6，與錨點一致。
+  - 特性量測 v1 A 段用快取熱的緩衝區，高估裝置 DMA 約 2 倍 → v2（GPU 剛寫入的資料）。
+  - 控制執行緒放在計算核心的 HT 兄弟核，計算慢 3–4 倍 → 專屬控制核心；暫存區依形狀重配，每次 20 ms page fault → 只增不減的暫存區。
+  - 重複 cudaHostRegister 留下黏著錯誤 712；驗證用的 reference 跨卡 `.to()` 走了 NVLink → 改經 CPU。
+- **事前登記**：I3 / I4 腳本在正式量測前 commit；I4 的 3 輪試跑發生在 commit 之前，已顯示 P2 可能不過，預測未改（`results/i4_proxy/dev_runs/README.md`）。
+  開發用試跑的 log 歸檔在 `results/i3_overlap/dev_runs/`、`results/i4_proxy/dev_runs/`，標明不是量測。
+- **卡在哪**：模型在 n ≥ 16 與 link-bound 情況失準（每塊固定開銷、裝置 DMA 在 pipeline 內慢 33% 未隔離）。
+- **留給下個 session**：I3 / I4 分析報告未寫；I5 腳本已寫未跑。
+
+## 2026-10-14 · boss 兼 worker · 與使用者討論 → 真實模型端到端計劃
+
+- 向使用者用白話說明設計（主機記憶體中轉 + 單調計數器、依序單線道保證順序、只在 pipeline 交接點走 PCIe、大小兩層重疊）。
+  使用者指出兩點：GPU 在晶片計算時是否閒置（→ 需要多批輪流的「大重疊」，原型未做）、應以真實模型與 NCCL 基準比端到端時間。
+- **定案**（STATUS §0 E2E 計劃）：Qwen2.5-32B-Instruct 真實權重；A = 8 卡 NCCL；B = 8 卡 + CPU（PCIe，CPU 做 final RMSNorm）；
+  C = 8 卡 NVLink + PCIe 同時傳；先固定批次再 ShareGPT。替身只用 CPU（使用者決定）。
+- **事先告知使用者的預期（推論）**：B 比 A 慢約 0.5–2%（CPU 太慢，只能證明協同與量通道代價，無法加速）；C 在本機最多約 +0.5%，可能量不出差別。使用者知悉，三組都做。
+- 機器上沒有 vLLM、沒有 Qwen 權重；ShareGPT 資料集在 HF 快取。
+- I4 正式量測結果（10-09 跑完）今天才 commit（70e6143）；STATUS / JOURNAL / PROJECT 在 10-09 收工時漏更新，今天補上。
+- **留給下個 session**：E2E 步驟 1（下載權重、推論程式、與 HF 一致、實測 CPU 一層、量 A）。
