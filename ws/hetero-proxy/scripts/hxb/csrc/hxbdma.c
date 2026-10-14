@@ -135,3 +135,14 @@ void hxb_rmsnorm_bf16(const uint16_t *x, const uint16_t *w, uint16_t *y, long ro
         for (long i = 0; i < H; i++) yr[i] = f2bf(bf2f(f2bf(bf2f(xr[i]) * inv)) * bf2f(w[i]));
     }
 }
+
+// out[i] = bf16(sum_k fp32(in_k[i])) over k = 0..n_in-1 (host-side all-reduce of the C configuration).
+// Summation order: k = 0, 1, ..., n_in-1, in fp32 (NCCL's ring order differs; results may differ by an ulp).
+void hxb_sum_bf16(const uint16_t *const *in, int n_in, uint16_t *out, long n, int nt) {
+    #pragma omp parallel for num_threads(nt) schedule(static)
+    for (long i = 0; i < n; i++) {
+        float acc = 0.f;
+        for (int k = 0; k < n_in; k++) acc += bf2f(in[k][i]);
+        out[i] = f2bf(acc);
+    }
+}

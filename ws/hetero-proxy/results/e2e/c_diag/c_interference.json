@@ -1,0 +1,50 @@
+{
+ "10|none": {
+  "nccl_ms_rank_max": 0.2534400001168251,
+  "host_enqueue_ms_max": 0.0037965073715895414
+ },
+ "10|d2h": {
+  "nccl_ms_rank_max": 2.2661120891571045,
+  "host_enqueue_ms_max": 0.03681948874145746
+ },
+ "10|h2d": {
+  "nccl_ms_rank_max": 2.3889920711517334,
+  "host_enqueue_ms_max": 0.03106548683717847
+ },
+ "10|both": {
+  "nccl_ms_rank_max": 4.316160202026367,
+  "host_enqueue_ms_max": 0.05216800491325557
+ },
+ "10|both_presync": {
+  "nccl_ms_rank_max": 0.2949119955301285,
+  "host_enqueue_ms_max": 0.05240549216978252
+ },
+ "10|d2d": {
+  "nccl_ms_rank_max": 0.1879040002822876,
+  "host_enqueue_ms_max": 0.037773483199998736
+ },
+ "80|none": {
+  "nccl_ms_rank_max": 0.7854079902172089,
+  "host_enqueue_ms_max": 0.0021745217964053154
+ },
+ "80|d2h": {
+  "nccl_ms_rank_max": 2.007040023803711,
+  "host_enqueue_ms_max": 0.03100148751400411
+ },
+ "80|h2d": {
+  "nccl_ms_rank_max": 2.362368106842041,
+  "host_enqueue_ms_max": 0.030648487154394388
+ },
+ "80|both": {
+  "nccl_ms_rank_max": 4.22707200050354,
+  "host_enqueue_ms_max": 0.05216701538302004
+ },
+ "80|both_presync": {
+  "nccl_ms_rank_max": 1.3987840414047241,
+  "host_enqueue_ms_max": 0.053180992836132646
+ },
+ "80|d2d": {
+  "nccl_ms_rank_max": 0.7864319980144501,
+  "host_enqueue_ms_max": 0.038358994061127305
+ }
+}

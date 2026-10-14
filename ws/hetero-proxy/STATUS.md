@@ -61,6 +61,9 @@
   decode 訊息太小，PCIe 固定延遲已超過 NCCL 全程。事前登記的預測成立。使用者（10-14）不接受就此結論：要有足夠數據說明為何效果不佳，並嘗試讓 NVLink 與 PCIe 並存的排程（認為善加排程應能加速）。
   **已確認的 C 計劃**：(1) 拆開計時找原因（8 卡同時 D2H / H2D 的每卡頻寬、CPU 加總、同步、對 NCCL 的干擾）；(2) 試三種改良：主機端 C 加總 + 切塊流水線、
   GPU 自己加總（主機只轉送）、收送分時段避開同卡雙向掉速；(3) 純頻寬真的贏過 NVLink-only 才接進模型量端到端。事先告知的上限：all-reduce −5–10%、prefill 端到端約 −1–2%（推論）。
+- **C 診斷結果（10-14，`results/e2e/c_diag/`）**：PCIe 流量讓同一張 GPU 的 NCCL all-reduce 慢 1.7–5×（nsys 證實是干擾而非排隊）；8 卡同時使用時 PCIe 每卡約 10 GB/s、
+  同時收送時 H2D 2.3–2.9 GB/s；C 版主機加總 19 GB/s。→「與 NCCL 同時傳」受干擾限制；下一步排程方向待與使用者確認。
+- **推論程式 v5（10-14）**：decode b1 / b32 / b64 = 14.8 / 16.4 / 18.1 ms（v3：22.1 / 43.0 / 61.2）；B v5 交棒代價 decode 0.23–0.77 ms / 步、prefill Bmid8 +3.6%。
 - **順序（10-14 使用者）**：先加快推論程式（nsys：decode 每步約 3850 個 kernel，逐元素小 kernel 佔 GPU 時間約一半，`results/e2e/nsys_decode/analysis.txt`
   → v4 用 Triton 融合 kernel）→ C 的分析與改良 → ShareGPT。
 

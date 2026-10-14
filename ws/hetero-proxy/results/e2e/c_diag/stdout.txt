@@ -1,0 +1,41 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[diag] a_d2h_all8|1                 rank-max    0.102 ms  ->  10.24 GB/s per GPU
+[diag] b_h2d_all8|1                 rank-max    0.108 ms  ->   9.67 GB/s per GPU
+[diag] a_d2h_all8|4                 rank-max    0.424 ms  ->   9.89 GB/s per GPU
+[diag] b_h2d_all8|4                 rank-max    0.420 ms  ->   9.99 GB/s per GPU
+[diag] a_d2h_all8|16                rank-max    1.712 ms  ->   9.80 GB/s per GPU
+[diag] b_h2d_all8|16                rank-max    1.657 ms  ->  10.12 GB/s per GPU
+[diag] c_bidir_d2h|1                rank-max    0.127 ms  ->   8.29 GB/s per GPU
+[diag] c_bidir_h2d_in_window|1      rank-max    0.367 ms  ->   2.85 GB/s per GPU
+[diag] c_bidir_d2h|4                rank-max    0.500 ms  ->   8.38 GB/s per GPU
+[diag] c_bidir_h2d_in_window|4      rank-max    1.711 ms  ->   2.45 GB/s per GPU
+[diag] c_bidir_d2h|16               rank-max    1.983 ms  ->   8.46 GB/s per GPU
+[diag] c_bidir_h2d_in_window|16     rank-max    7.206 ms  ->   2.33 GB/s per GPU
+[diag] e_sync_roundtrip_64B         rank-max    0.051 ms
+[diag] f_nccl_alone|10              rank-max    0.153 ms
+[diag] f_nccl_with_pcie_bg|10       rank-max    4.596 ms
+[diag] f_nccl_alone|40              rank-max    0.404 ms
+[diag] f_nccl_with_pcie_bg|40       rank-max    4.537 ms
+[diag] f_nccl_alone|80              rank-max    0.751 ms
+[diag] f_nccl_with_pcie_bg|80       rank-max    4.577 ms
+[diag] d_reduce torch16    0.1 MiB x 8 slots:    0.552 ms ->   1.52 GB/s of input
+[diag] d_reduce torch16    0.4 MiB x 8 slots:    0.480 ms ->   6.99 GB/s of input
+[diag] d_reduce torch16    1.0 MiB x 8 slots:    0.982 ms ->   8.54 GB/s of input
+[diag] d_reduce torch16    4.0 MiB x 8 slots:    2.990 ms ->  11.22 GB/s of input
+[diag] d_reduce torch16   16.0 MiB x 8 slots:   43.131 ms ->   3.11 GB/s of input
+[diag] d_reduce c16        0.1 MiB x 8 slots:    0.131 ms ->   6.39 GB/s of input
+[diag] d_reduce c16        0.4 MiB x 8 slots:    0.364 ms ->   9.21 GB/s of input
+[diag] d_reduce c16        1.0 MiB x 8 slots:    0.901 ms ->   9.31 GB/s of input
+[diag] d_reduce c16        4.0 MiB x 8 slots:    3.354 ms ->  10.01 GB/s of input
+[diag] d_reduce c16       16.0 MiB x 8 slots:   11.634 ms ->  11.54 GB/s of input
+[diag] d_reduce c32        0.1 MiB x 8 slots:    0.099 ms ->   8.47 GB/s of input
+[diag] d_reduce c32        0.4 MiB x 8 slots:    0.366 ms ->   9.17 GB/s of input
+[diag] d_reduce c32        1.0 MiB x 8 slots:    0.498 ms ->  16.83 GB/s of input
+[diag] d_reduce c32        4.0 MiB x 8 slots:    2.000 ms ->  16.77 GB/s of input
+[diag] d_reduce c32       16.0 MiB x 8 slots:    6.923 ms ->  19.39 GB/s of input
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 3 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/e2e/c_diag/guard.log

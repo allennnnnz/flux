@@ -25,5 +25,8 @@ def lib():
         L.hxb_rmsnorm_bf16.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_long, ctypes.c_long,
                                        ctypes.c_float, ctypes.c_int]
         L.hxb_rmsnorm_bf16.restype = None
+        L.hxb_sum_bf16.argtypes = [ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_void_p, ctypes.c_long,
+                                   ctypes.c_int]
+        L.hxb_sum_bf16.restype = None
         _lib = L
     return _lib

@@ -104,3 +104,20 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - C 頻寬（`c_allreduce_bw_v1.py`，guard CLEAN）：所有 f > 0 都比 NCCL-only 慢；首次執行因 sizes 環形索引越界（1024 vs 512 格）失敗，修正後重跑。
   主機路徑本身未優化（torch 加總、輪詢），但理想上限也只有 all-reduce −5.6%、prefill 端到端約 −1.3%（推論）。
 - **留給下個 session**：等使用者決定 C 的去留；ShareGPT（步驟 4）；用 nsys 查本推論程式 decode 的 graph 啟動開銷。
+
+## 2026-10-14 · boss 兼 worker · 推論程式加速（v4 / v5）、B 的 v5 量測、C 的診斷
+
+- 使用者：C 不就此結論，要數據說明原因並試並存排程（計劃經確認）；先加快推論程式再 ShareGPT。
+- **推論程式**：nsys（`results/e2e/nsys_decode/`）decode 每步 3850 個 kernel、逐元素小 kernel 佔一半 → v4 Triton 融合（add+RMSNorm、RoPE+KV、
+  decode attention、silu*up；除 attention 外與 torch 路徑逐位元相同）→ 709 kernel/步；nsys v4 顯示 attention 佔 23% → v5 split-K attention（graph 內 4×）。
+  A decode b1 / b32 / b64：v3 22.1 / 43.0 / 61.2 → v5 14.8 / 16.4 / 18.1 ms；prefill 8×1024 535 → 398 ms。剩下最大的是 NCCL（約 25%，A 定義為預設 NCCL，不動）。
+  與 HF 的分歧都在近平手處（gap 0–0.625，`check/hf_margin_v4/v5*`）；v5 的 B 對 A 只在 HF top-2 完全相同處翻轉。
+- **B v5**（`results/e2e/bench_v5/`，guard CLEAN 0 警告）：交棒純代價 decode 0.23–0.77 ms / 步（Bfinal +1.9–3.8%）；prefill Bmid8 +3.6%、Bmid1 +6.1–8.6%、Bfinal 約 0。
+  事前登記：T1 過、T2 / T3 邊界不過各一、**T4 不過（拆 graph 的效果變大：AsplitM 比 A 快 5.5–10%）**，原因未查（推論：單一大 graph 有額外開銷；驗證：nsys 比對 A 與 AsplitM）。
+- **C 診斷**（`results/e2e/c_diag/`，guard CLEAN）：8 卡同時 D2H / H2D 每卡約 10 GB/s（單卡 24 / 22）；同時收送時 H2D 只剩 2.3–2.9；
+  主機加總 8 份：torch 16 MiB 43 ms → C 32 執行緒 6.9 ms（19 GB/s 輸入）；同步來回 0.05 ms；
+  **NCCL 與 PCIe 拷貝同時跑時 NCCL 變慢 2–5×**。對照：GPU 內部拷貝當背景不受影響；主機排指令只要 0.05 ms；
+  nsys（`c_diag/nsys/analysis.txt`）：NCCL kernel 與 PCIe 拷貝在時間上確實重疊，重疊者中位數 1.36 ms、不重疊 0.82 ms → 是干擾，不是被排在後面。
+  （第一次 nsys 用 os._exit 結束，CUPTI 沒寫出 kernel 紀錄 → 改正常收尾重錄。）
+- 結論方向：C 慢的主因依序是 (1) PCIe 流量讓 NVLink all-reduce 本身變慢、(2) 8 卡同時用 PCIe 每卡只剩約 10 GB/s（同時收送 2.5）、(3) 原 torch 主機加總慢。
+  → 「與 NCCL 同時傳」的排程方向受 (1) 限制；可能的方向是讓 PCIe 只在 NVLink 閒置時（GEMM 計算期間）傳。待與使用者討論。
