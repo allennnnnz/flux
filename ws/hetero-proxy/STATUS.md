@@ -50,6 +50,16 @@
   只需各序列最後一個位置，每次傳幾 KB）與 **B-mid**（CPU 做第 33 層的輸入 RMSNorm，全部 token 經 PCIe 切塊往返，回到 GPU0 後經 NVLink 廣播給 8 卡）。
   推論：B-mid prefill 慢約 3–6%、decode 影響小；B-final 接近 A。
 
+**E2E 結果（2026-10-14，guard 全部 CLEAN，尚未審查）**：
+- **B：PCIe 確實能與 NVLink 環境協同**（`results/e2e/bench_v3/`，v3 @ 77717fc，20 輪）：每個字都經過 GPU → PCIe → CPU → PCIe → NVLink 廣播，
+  生成文字與 A 一致（Bfinal 4/4 題全同；Bmid 3/4 全同、第 4 題在 HF top-2 logit 完全平手處翻轉，`check/hf_margin_v3_vsA.json`）。
+  代價：decode 每步 0.3–1.0 ms（B 減同樣拆 graph 的 Asplit 對照）；prefill Bfinal +0.1–0.7%、Bmid8 +2.5–4.1%、Bmid1 +4.4–5.3%；
+  切 8 塊藏掉交棒時間的 22–46%。CPU 不增加算力 → 不可能加速（預期之內）。
+  拆 graph 本身讓 decode 快 0.1–6.5%（AsplitM vs A）：本推論程式的 decode 有可觀的 graph 啟動開銷（A b1 每字 22 ms，b32 43 ms；G4 最佳約 11.5 ms）。
+- **C：本機上 PCIe 通道無法加速 GPU 間通訊**（`results/e2e/c_bw/`）：all-reduce 分任何比例 f > 0 走主機中轉 PCIe，在 0.6–160 MiB 全部比只走 NCCL 慢（+63% 以上）。
+  上限推算：NCCL 160 MiB algbw 約 102 GB/s，PCIe 每卡同時收送約 6 GB/s → 最多分擔 all-reduce 的 5.6%；all-reduce 約佔 prefill 23% → 端到端最多約 1.3%（推論，主機加總不計時間）；
+  decode 訊息太小，PCIe 固定延遲已超過 NCCL 全程。事前登記的預測成立。是否把 C 接進模型、或先優化主機路徑，待使用者決定。
+
 **實作進度（I1–I4 完成；細節與數字見第 2 節）**：
 - [x] H0 工作切分（`reports/20261009_h0_work_partition.md`，推論）：TP 成員排除；pipeline 段可行，吞吐量上限 +s/8。
 - [x] I1 介面規格（`reports/20261009_i1_backend_interface.md`）：6 個基本動作 + 語意規則 + Bridge 四條硬規則。

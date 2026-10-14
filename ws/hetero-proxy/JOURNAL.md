@@ -95,3 +95,12 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   事前登記的 S4（全部與 A 一致）因此不過，照實記錄。
 - 疑點 2：v3 加 AsplitF / AsplitM 對照（同樣拆兩個 graph、不經 CPU），B 減對應 Asplit = 純交棒代價。run2 已在跑（tmux e2e_b3）。
 - 待查：本推論程式 decode 偏慢（A b32 每字 43 ms，G4 最佳約 11.5 ms）→ 百分比低估交棒代價，報告要附絕對毫秒；之後用 nsys 看時間花在哪。
+
+## 2026-10-14 · boss 兼 worker · E2E run2 與 C 頻寬量測
+
+- run2（v3，guard CLEAN，1898 s）：AsplitM 比 A 快 2.3–6.5% → run1「Bmid 比 A 快」是拆 graph 的效果（S2 成立）。
+  交棒純代價（B − 對應 Asplit）：decode 0.32–1.04 ms / 步；prefill Bmid1 8×1024 +26.9 ms（run1 87 ms，C 版 rmsnorm 之後）、Bmid8 +14.5 ms。
+  S1 幾乎成立（Bmid1 b64 1.04 ms > 1 ms 不過）、S3 成立、S4 不過（平手翻轉）。guard 一筆 SELF_CPU 警告（自己的範圍外程序 52.8%，一次）。
+- C 頻寬（`c_allreduce_bw_v1.py`，guard CLEAN）：所有 f > 0 都比 NCCL-only 慢；首次執行因 sizes 環形索引越界（1024 vs 512 格）失敗，修正後重跑。
+  主機路徑本身未優化（torch 加總、輪詢），但理想上限也只有 all-reduce −5.6%、prefill 端到端約 −1.3%（推論）。
+- **留給下個 session**：等使用者決定 C 的去留；ShareGPT（步驟 4）；用 nsys 查本推論程式 decode 的 graph 啟動開銷。
