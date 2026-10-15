@@ -126,3 +126,13 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 
 - 13 頁（概念、介面原型量測、真實模型 A / B / C 結果與原因、結論、下一步），中文講稿：https://claude.ai/artifact/2Y8G4VW3TX2z5t9rdfHuht
 - 數字全部取自已提交的 results（i3_overlap、i4_proxy、e2e/bench_v5、e2e/c_bw、e2e/c_diag、e2e/cpu_layer）；報告人姓名留佔位。
+
+## 2026-10-15 · boss 兼 worker · 異質角色初步測試 P1
+
+- 使用者：目前只跑通沒有加速；要查主流做法並「先初步測試有用再延伸」。調查（P/D 分離、attention 分離、MoE 專家外放、自動分配；
+  Lamina、MegaScale-Infer、KTransformers、Fiddler、HybriMoE、HexGen-2、HMA-Serve、A100+GroqRack）共同原則：依特性分工、兩邊同時忙、只傳小資料並重疊、排程器分配。
+- P1 四項測試（`scripts/hetero_roles/`，`results/hetero_roles/p1/`，guard CLEAN；C / OpenMP kernel 加在 hxb/csrc/hxbdma.c）：
+  T1 attention 外放 ≤ 0.5%（無用）；T2 MoE 專家在裝置上算比搬權重快 5.3–7.3×（有用）；T3 KV 存主機續聊推估 ~15×（有用，待端到端）；T4 CPU 做 decode +1.8%（無用）。
+- 自我修正：10-14 回覆說 HTX301 適合 attention 外放，T1 顯示 attention 吃頻寬，低頻寬裝置不適合。
+- 量測錯誤兩則（已修，見 STATUS）：專家權重留在 L3 造成讀取速度超過 DRAM 錨點；頻寬 kernel 被加法延遲限制。
+- **留給下個 session**：與使用者確認延伸方向（建議 MoE 專家外放的端到端原型；KV 存放的端到端量測可順便做）。

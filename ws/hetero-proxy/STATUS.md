@@ -50,6 +50,14 @@
   只需各序列最後一個位置，每次傳幾 KB）與 **B-mid**（CPU 做第 33 層的輸入 RMSNorm，全部 token 經 PCIe 切塊往返，回到 GPU0 後經 NVLink 廣播給 8 卡）。
   推論：B-mid prefill 慢約 3–6%、decode 影響小；B-final 接近 A。
 
+**異質角色初步測試 P1（2026-10-15，`results/hetero_roles/p1/analysis.txt`，guard CLEAN）**——使用者要求「先初步測試調查到的方法，有用再延伸」：
+- 背景：目前只確認「跑通」、沒有加速；根本原因是 B 把晶片串在每個字的必經路線上（GPU 等晶片），晶片再快也不會加速；主流做法都是讓晶片與 GPU **同時做不同工作**。
+- T1 attention 外放（Lamina 式）：CPU 讀 KV 10–77 GB/s（頻寬上限 172 GB/s），一張 A100 0.84–1.77 TB/s → 在 8 卡旁只能分擔 0.1–0.5%（即使用滿頻寬 1.2%）→ **對低頻寬裝置無用**（修正 10-14 回覆中「HTX301 適合 attention」的說法：attention 吃頻寬，Lamina 用的是 4 TB/s 的 H20）。
+- T2 MoE 專家外放（Fiddler / KTransformers 式）：權重不在 GPU 時，專家直接在裝置上算比搬到 GPU 再算快 **5.3–7.3×**（每專家 1–4 個 token，decode 常見）、16 token 時 1.8–2.0×；64 token 起搬到 GPU 較快 → **有用**，適用「模型放不進 GPU」的情境。
+- T3 KV cache 存放於大記憶體裝置（推估，未做端到端）：續聊時從主機搬回 8k 前綴的 KV 約 27 ms vs 重算 prefill 約 398 ms（~15×）→ 有用（用記憶體，不用算力）。
+- T4 晶片做 decode（P/D）：CPU 替身只多約 1.8% decode 能力 → 此替身下無用；實際效益取決於晶片頻寬。
+- 量測過程抓到兩個基準錯誤並修正：專家權重重複使用而留在 L3（讀出「221 GB/s」超過 DRAM 錨點）→ 改輪流使用 ≥1.5 GB 的專家池；頻寬 kernel 受加法延遲限制（82→172 GB/s）。
+
 **E2E 結果（2026-10-14，guard 全部 CLEAN，尚未審查）**：
 - **B：PCIe 確實能與 NVLink 環境協同**（`results/e2e/bench_v3/`，v3 @ 77717fc，20 輪）：每個字都經過 GPU → PCIe → CPU → PCIe → NVLink 廣播，
   生成文字與 A 一致（Bfinal 4/4 題全同；Bmid 3/4 全同、第 4 題在 HF top-2 logit 完全平手處翻轉，`check/hf_margin_v3_vsA.json`）。

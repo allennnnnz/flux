@@ -113,6 +113,7 @@ void hxb_store_max(volatile int64_t *addr, int64_t v) {
 
 // ---- compute kernels of the CPU "device" (OpenMP over rows) ----------------------------------------------------
 #include <math.h>
+#include <omp.h>
 
 static inline float bf2f(uint16_t b) { uint32_t u = (uint32_t)b << 16; float f; memcpy(&f, &u, 4); return f; }
 static inline uint16_t f2bf(float f) {  // round to nearest even, as torch's float -> bfloat16 cast
@@ -144,5 +145,114 @@ void hxb_sum_bf16(const uint16_t *const *in, int n_in, uint16_t *out, long n, in
         float acc = 0.f;
         for (int k = 0; k < n_in; k++) acc += bf2f(in[k][i]);
         out[i] = f2bf(acc);
+    }
+}
+
+// ---- role-test kernels (2026-10-15, ws/hetero-proxy hetero_roles P1): what the CPU "device" can do per byte -------
+// Peak read bandwidth: sum of a float array (the anchor for memory-bound roles).
+// (v1 of this kernel accumulated into one double per thread: latency-bound, ~82-99 GB/s, below what the expert
+// kernel then read (132 GB/s) -> rewritten with vector float accumulators, 2026-10-15)
+double hxb_read_sum(const float *a, long n, int nt) {
+    double s = 0.0;
+    #pragma omp parallel num_threads(nt) reduction(+:s)
+    {
+        int t = omp_get_thread_num(), T = omp_get_num_threads();
+        long lo = n * t / T, hi = n * (t + 1) / T;
+        float acc[16] = {0};
+        long i = lo;
+        for (; i + 16 <= hi; i += 16) {
+            #pragma omp simd
+            for (int k = 0; k < 16; k++) acc[k] += a[i + k];
+        }
+        for (; i < hi; i++) acc[0] += a[i];
+        for (int k = 0; k < 16; k++) s += acc[k];
+    }
+    return s;
+}
+
+// Decode attention, GQA: q [B, NKV, G, D] fp32, K / V [B, NKV, L, D] bf16 (row stride L*D per (b,h)),
+// lens[b] keys valid, out [B, NKV, G, D] fp32. One (b, h) per iteration; fp32 softmax. G <= 16, D <= 256.
+void hxb_attn_decode(const float *q, const uint16_t *K, const uint16_t *V, const int *lens, float *out,
+                     int B, int NKV, int G, int D, long L, float scale, int nt, float *scratch /* nt*G*L */) {
+    #pragma omp parallel for num_threads(nt) schedule(dynamic, 1)
+    for (long bh = 0; bh < (long)B * NKV; bh++) {
+        int tid = omp_get_thread_num();
+        float *s = scratch + (long)tid * G * L;
+        int b = (int)(bh / NKV);
+        long n = lens[b];
+        const uint16_t *k = K + bh * L * D, *v = V + bh * L * D;
+        const float *qq = q + bh * G * D;
+        float mx[16];
+        for (int g = 0; g < G; g++) mx[g] = -1e30f;
+        for (long t = 0; t < n; t++) {
+            float kr[256];
+            #pragma omp simd
+            for (int d = 0; d < D; d++) kr[d] = bf2f(k[t * D + d]);
+            for (int g = 0; g < G; g++) {
+                float acc = 0.f;
+                #pragma omp simd reduction(+:acc)
+                for (int d = 0; d < D; d++) acc += qq[g * D + d] * kr[d];
+                acc *= scale;
+                s[g * L + t] = acc;
+                if (acc > mx[g]) mx[g] = acc;
+            }
+        }
+        float sum[16];
+        for (int g = 0; g < G; g++) {
+            float z = 0.f;
+            for (long t = 0; t < n; t++) { float e = expf(s[g * L + t] - mx[g]); s[g * L + t] = e; z += e; }
+            sum[g] = z;
+        }
+        float o[16 * 256];
+        for (int i = 0; i < G * D; i++) o[i] = 0.f;
+        for (long t = 0; t < n; t++) {
+            float vr[256];
+            #pragma omp simd
+            for (int d = 0; d < D; d++) vr[d] = bf2f(v[t * D + d]);
+            for (int g = 0; g < G; g++) {
+                float p = s[g * L + t];
+                #pragma omp simd
+                for (int d = 0; d < D; d++) o[g * D + d] += p * vr[d];
+            }
+        }
+        for (int g = 0; g < G; g++)
+            for (int d = 0; d < D; d++) out[bh * G * D + g * D + d] = o[g * D + d] / sum[g];
+    }
+}
+
+// One MoE expert (SwiGLU) for n tokens: out[n, H] = Wd . (silu(Wg . x) * (Wu . x)), x [n, H] fp32,
+// Wg / Wu [I, H] bf16, Wd [H, I] bf16, act scratch [n, I] fp32. Small n: weight-bandwidth bound. n <= 64.
+void hxb_moe_expert(const float *x, const uint16_t *Wg, const uint16_t *Wu, const uint16_t *Wd, float *out,
+                    float *act, int n, long H, long I, int nt) {
+    #pragma omp parallel for num_threads(nt) schedule(static)
+    for (long i = 0; i < I; i++) {
+        const uint16_t *g = Wg + i * H, *u = Wu + i * H;
+        float ga[64], ua[64];
+        for (int t = 0; t < n; t++) { ga[t] = 0.f; ua[t] = 0.f; }
+        for (long h0 = 0; h0 < H; h0 += 256) {
+            long h1 = h0 + 256 < H ? h0 + 256 : H;
+            float gr[256], ur[256];
+            #pragma omp simd
+            for (long h = h0; h < h1; h++) { gr[h - h0] = bf2f(g[h]); ur[h - h0] = bf2f(u[h]); }
+            for (int t = 0; t < n; t++) {
+                float a = 0.f, c = 0.f;
+                const float *xt = x + (long)t * H;
+                #pragma omp simd reduction(+:a, c)
+                for (long h = h0; h < h1; h++) { a += gr[h - h0] * xt[h]; c += ur[h - h0] * xt[h]; }
+                ga[t] += a; ua[t] += c;
+            }
+        }
+        for (int t = 0; t < n; t++) act[(long)t * I + i] = ga[t] / (1.f + expf(-ga[t])) * ua[t];
+    }
+    #pragma omp parallel for num_threads(nt) schedule(static)
+    for (long h = 0; h < H; h++) {
+        const uint16_t *w = Wd + h * I;
+        for (int t = 0; t < n; t++) {
+            float a = 0.f;
+            const float *at = act + (long)t * I;
+            #pragma omp simd reduction(+:a)
+            for (long i = 0; i < I; i++) a += bf2f(w[i]) * at[i];
+            out[(long)t * H + h] = a;
+        }
     }
 }

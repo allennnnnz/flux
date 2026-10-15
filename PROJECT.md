@@ -34,7 +34,7 @@ G4 之後的事後分析（`ws/fusion-dispatch/reports/20261003_g4_flux_value.md
 | --- | --- | --- | --- | --- | --- |
 | `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器，G0–G4 完成（`reports/20261003_g4_dispatcher.md`：op 0.17%、block 0.02%），下一步：跨機器驗證（gpu1 盤點完成：V100 PCIe，Flux 不能跑，待決定範圍）**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-03 |
 | `ws/diag-overlap` | 第二 | 未開始 | — | 未指派 | — |
-| `ws/hetero-proxy` | **最高（2026-10-06 教授指派）** | PCIe 通道上的 Flux 式重疊 + NVLink 域與 PCIe 異質晶片協同；**介面原型 hxb 完成**（CPU / A100 代理兩個後端），交棒切塊重疊實測快 2.3–2.8×、代理 NVLink 增量 0；下一步：真實模型端到端 A（8 卡 NCCL）/ B（+CPU 經 PCIe）/ C（NVLink + PCIe 同時傳）；新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-14 |
+| `ws/hetero-proxy` | **最高（2026-10-06 教授指派）** | PCIe 異質協同：介面原型 hxb 完成；真實模型上 PCIe 晶片能與 NVLink 協同（每字代價 0.3–0.8 ms），但尚未加速（晶片被串在路線上）；C（PCIe 額外通道）因干擾 NVLink 無效益；**2026-10-15 初步測試主流角色：MoE 專家外放有用（比搬權重快 5–7×）、attention 外放對低頻寬裝置無用**；新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-15 |
 | `ws/cost-model` | 第三 | 模型目標由 fusion-dispatch 第三階段執行；預測器 v1 已建於 `common/cost_model/predictor/`（G1），校準參數檔在 `common/cost_model/hw_profiles/`（G2）（D-008） | — | 未指派 | 2026-10-02 |
 
 各 workstream 的目標、步驤、成功標準寫在各自的 `STATUS.md` 第 1 節，由 boss 在建立時

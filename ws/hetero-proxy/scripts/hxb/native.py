@@ -28,5 +28,12 @@ def lib():
         L.hxb_sum_bf16.argtypes = [ctypes.POINTER(ctypes.c_void_p), ctypes.c_int, ctypes.c_void_p, ctypes.c_long,
                                    ctypes.c_int]
         L.hxb_sum_bf16.restype = None
+        L.hxb_read_sum.argtypes = [ctypes.c_void_p, ctypes.c_long, ctypes.c_int]
+        L.hxb_read_sum.restype = ctypes.c_double
+        L.hxb_attn_decode.argtypes = [ctypes.c_void_p] * 5 + [ctypes.c_int] * 4 + [ctypes.c_long, ctypes.c_float,
+                                                                                  ctypes.c_int, ctypes.c_void_p]
+        L.hxb_attn_decode.restype = None
+        L.hxb_moe_expert.argtypes = [ctypes.c_void_p] * 6 + [ctypes.c_int, ctypes.c_long, ctypes.c_long, ctypes.c_int]
+        L.hxb_moe_expert.restype = None
         _lib = L
     return _lib

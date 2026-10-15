@@ -1,0 +1,32 @@
+T1 attention offload (Lamina-style), Qwen2.5-32B layer shapes, KV read rate
+  L4096_B16    device   43.5 GB/s  one A100  1495.4 GB/s  -> device share next to 8 GPUs 0.36%  (throughput gain bound ~0.36%)
+  L32768_B1    device   10.2 GB/s  one A100  1403.3 GB/s  -> device share next to 8 GPUs 0.09%  (throughput gain bound ~0.09%)
+  L32768_B16   device   76.5 GB/s  one A100  1769.3 GB/s  -> device share next to 8 GPUs 0.54%  (throughput gain bound ~0.54%)
+  even at the device's full read bandwidth (172 GB/s): share 1.20%
+
+T2 MoE expert offload (Fiddler / KTransformers-style): one expert call, weights NOT on the GPU
+  qwen3-30b-a3b     n=1   compute on device   0.076 ms | swap to GPU + compute   0.516 ms -> device faster x 6.8
+  qwen3-30b-a3b     n=4   compute on device   0.098 ms | swap to GPU + compute   0.530 ms -> device faster x 5.4
+  qwen3-30b-a3b     n=16  compute on device   0.292 ms | swap to GPU + compute   0.530 ms -> device faster x 1.8
+  qwen3-30b-a3b     n=64  compute on device   1.025 ms | swap to GPU + compute   0.519 ms -> swap   faster x 2.0
+    decode batch B -> tokens per expert n = B x 8 / 128: B=16 -> 1.0, B=64 -> 4.0, B=256 -> 16.0
+  deepseek-v2-lite  n=1   compute on device   0.137 ms | swap to GPU + compute   1.000 ms -> device faster x 7.3
+  deepseek-v2-lite  n=4   compute on device   0.187 ms | swap to GPU + compute   1.000 ms -> device faster x 5.3
+  deepseek-v2-lite  n=16  compute on device   0.506 ms | swap to GPU + compute   1.013 ms -> device faster x 2.0
+  deepseek-v2-lite  n=64  compute on device   1.767 ms | swap to GPU + compute   1.004 ms -> swap   faster x 1.8
+    decode batch B -> tokens per expert n = B x 6 / 64: B=16 -> 1.5, B=64 -> 6.0, B=256 -> 24.0
+  mixtral-8x7b      n=1   compute on device   2.539 ms | swap to GPU + compute  18.229 ms -> device faster x 7.2
+  mixtral-8x7b      n=4   compute on device   3.447 ms | swap to GPU + compute  18.234 ms -> device faster x 5.3
+  mixtral-8x7b      n=16  compute on device   9.117 ms | swap to GPU + compute  18.243 ms -> device faster x 2.0
+  mixtral-8x7b      n=64  compute on device  53.763 ms | swap to GPU + compute  18.241 ms -> swap   faster x 2.9
+    decode batch B -> tokens per expert n = B x 2 / 8: B=16 -> 4.0, B=64 -> 16.0, B=256 -> 64.0
+  (activations crossing PCIe per call: n x hidden x 2 bytes each way, KB-scale; hop latency ~0.05-0.3 ms measured in E2E B, not included above)
+
+T3 KV-cache tier (estimate): Qwen2.5-32B TP8, KV per GPU per token = 64 layers x 1 KV head x 128 x 2 x 2 B = 32 KiB
+  prefix   2048 tokens: restore    67.1 MB per GPU at 10 GB/s =    6.7 ms
+  prefix   8192 tokens: restore   268.4 MB per GPU at 10 GB/s =   26.8 ms  vs recompute ~398 ms (8 x 1024 measured) -> ~x15
+  prefix  32768 tokens: restore  1073.7 MB per GPU at 10 GB/s =  107.4 ms
+
+T4 P/D with the device doing decode: one Qwen2.5-32B layer on the CPU device, decode B=1 13 ms, B=32 109 ms
+  (results/e2e/cpu_layer) -> 64 layers ~0.8 s / token at B=1 vs the 8-GPU domain 14.8 ms (bench_v5):
+  the device adds ~1.8% decode capacity at B=1 and less at larger batches

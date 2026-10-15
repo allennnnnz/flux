@@ -1,0 +1,20 @@
+[T1-GPU] decode attention L=4096   B=1  :   0.0200 ms per layer, KV read   838.1 GB/s
+[T1-GPU] decode attention L=4096   B=16 :   0.1795 ms per layer, KV read  1495.4 GB/s
+[T1-GPU] decode attention L=32768  B=1  :   0.0956 ms per layer, KV read  1403.3 GB/s
+[T1-GPU] decode attention L=32768  B=16 :   1.2137 ms per layer, KV read  1769.3 GB/s
+[T2-GPU] expert qwen3-30b-a3b     weights    9.4 MB H2D:    0.492 ms ( 19.2 GB/s)
+[T2-GPU] expert qwen3-30b-a3b     n=1   resident compute:   0.0249 ms
+[T2-GPU] expert qwen3-30b-a3b     n=4   resident compute:   0.0385 ms
+[T2-GPU] expert qwen3-30b-a3b     n=16  resident compute:   0.0390 ms
+[T2-GPU] expert qwen3-30b-a3b     n=64  resident compute:   0.0276 ms
+[T2-GPU] expert deepseek-v2-lite  weights   17.3 MB H2D:    0.972 ms ( 17.8 GB/s)
+[T2-GPU] expert deepseek-v2-lite  n=1   resident compute:   0.0285 ms
+[T2-GPU] expert deepseek-v2-lite  n=4   resident compute:   0.0281 ms
+[T2-GPU] expert deepseek-v2-lite  n=16  resident compute:   0.0414 ms
+[T2-GPU] expert deepseek-v2-lite  n=64  resident compute:   0.0326 ms
+[T2-GPU] expert mixtral-8x7b      weights  352.3 MB H2D:   17.986 ms ( 19.6 GB/s)
+[T2-GPU] expert mixtral-8x7b      n=1   resident compute:   0.2436 ms
+[T2-GPU] expert mixtral-8x7b      n=4   resident compute:   0.2484 ms
+[T2-GPU] expert mixtral-8x7b      n=16  resident compute:   0.2567 ms
+[T2-GPU] expert mixtral-8x7b      n=64  resident compute:   0.2550 ms
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/hetero_roles/p1/guard_gpu.log

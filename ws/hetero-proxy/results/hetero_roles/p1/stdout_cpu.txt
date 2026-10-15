@@ -1,0 +1,21 @@
+[R ] read bandwidth, 26 threads:   172.5 GB/s
+[R ] read bandwidth, 32 threads:   175.6 GB/s
+[T1] attention kernel vs torch fp32: max |diff| 3.87e-07
+[T1] decode attention L=4096   B=1  :     0.98 ms per layer, KV read   17.0 GB/s
+[T1] decode attention L=4096   B=16 :     6.16 ms per layer, KV read   43.5 GB/s
+[T1] decode attention L=32768  B=1  :    13.12 ms per layer, KV read   10.2 GB/s
+[T1] decode attention L=32768  B=16 :    28.07 ms per layer, KV read   76.5 GB/s
+[T2] expert kernel vs torch fp32: max rel diff 4.01e-07
+[T2] expert qwen3-30b-a3b     (   9.4 MB, pool 159) n=1  :    0.076 ms  (weights read at  123.4 GB/s)
+[T2] expert qwen3-30b-a3b     (   9.4 MB, pool 159) n=4  :    0.098 ms  (weights read at   96.2 GB/s)
+[T2] expert qwen3-30b-a3b     (   9.4 MB, pool 159) n=16 :    0.292 ms  (weights read at   32.3 GB/s)
+[T2] expert qwen3-30b-a3b     (   9.4 MB, pool 159) n=64 :    1.025 ms  (weights read at    9.2 GB/s)
+[T2] expert deepseek-v2-lite  (  17.3 MB, pool  87) n=1  :    0.137 ms  (weights read at  126.1 GB/s)
+[T2] expert deepseek-v2-lite  (  17.3 MB, pool  87) n=4  :    0.187 ms  (weights read at   92.5 GB/s)
+[T2] expert deepseek-v2-lite  (  17.3 MB, pool  87) n=16 :    0.506 ms  (weights read at   34.2 GB/s)
+[T2] expert deepseek-v2-lite  (  17.3 MB, pool  87) n=64 :    1.767 ms  (weights read at    9.8 GB/s)
+[T2] expert mixtral-8x7b      ( 352.3 MB, pool   5) n=1  :    2.539 ms  (weights read at  138.8 GB/s)
+[T2] expert mixtral-8x7b      ( 352.3 MB, pool   5) n=4  :    3.447 ms  (weights read at  102.2 GB/s)
+[T2] expert mixtral-8x7b      ( 352.3 MB, pool   5) n=16 :    9.117 ms  (weights read at   38.6 GB/s)
+[T2] expert mixtral-8x7b      ( 352.3 MB, pool   5) n=64 :   53.763 ms  (weights read at    6.6 GB/s)
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/hetero_roles/p1/guard_cpu.log
