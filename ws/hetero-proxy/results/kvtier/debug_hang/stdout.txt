@@ -1,0 +1,469 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[load] 9.5 s, world 8, GPU mem 11.9 GiB, host tier 3.91 GiB per rank, NUMA pages per rank [(0, {'N0': 1024001}), (0, {'N0': 1024001}), (0, {'N0': 1024001}), (0, {'N0': 1024001}), (1, {'N1': 1024001}), (1, {'N1': 1024001}), (1, {'N1': 1024001}), (1, {'N1': 1024001})]
+[rank0]:[W1016 08:09:43.065876256 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank2]:[W1016 08:09:43.406046103 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W1016 08:09:43.760730724 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank6]:[W1016 08:09:44.380333281 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank3]:[W1016 08:09:44.381183314 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank1]:[W1016 08:09:44.727769834 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank5]:[W1016 08:09:46.408525594 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank4]:[W1016 08:09:49.197385356 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[capture] 21 graphs in 21 s, GPU mem 12.0 GiB
+[trace] 1792138202.233 ideal None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138202.265 ideal_eager None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138202.316 recompute None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138202.394 serial None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138202.418 layer None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138202.440 split 0.0625 P1024 gate=[0, 0, 0, 0]
+[trace] 1792138202.483 split 0.125 P1024 gate=[0, 0, 0, 0]
+[trace] 1792138202.525 split 0.25 P1024 gate=[0, 0, 0, 0]
+[trace] 1792138202.577 ideal None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138202.598 ideal_eager None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138202.648 recompute None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138202.780 serial None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138202.808 layer None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138202.830 split 0.0625 P2048 gate=[0, 0, 0, 0]
+[trace] 1792138202.874 split 0.125 P2048 gate=[0, 0, 0, 0]
+[trace] 1792138202.926 split 0.25 P2048 gate=[0, 0, 0, 0]
+[trace] 1792138202.987 ideal None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138203.009 ideal_eager None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138203.058 recompute None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138203.290 serial None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138203.325 layer None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138203.349 split 0.0625 P4096 gate=[0, 0, 0, 0]
+[trace] 1792138203.402 split 0.125 P4096 gate=[0, 0, 0, 0]
+[trace] 1792138203.465 split 0.25 P4096 gate=[0, 0, 0, 0]
+[trace] 1792138203.553 ideal None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138203.575 ideal_eager None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138203.624 recompute None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138204.069 serial None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138204.117 layer None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138204.147 split 0.0625 P8192 gate=[0, 0, 0, 0]
+[trace] 1792138204.211 split 0.125 P8192 gate=[0, 0, 0, 0]
+[trace] 1792138204.301 split 0.25 P8192 gate=[0, 0, 0, 0]
+[trace] 1792138204.438 ideal None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138204.461 ideal_eager None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138204.510 recompute None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138205.418 serial None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138205.492 layer None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138205.546 split 0.0625 P16384 gate=[0, 0, 0, 0]
+[trace] 1792138205.639 split 0.125 P16384 gate=[0, 0, 0, 0]
+[trace] 1792138205.778 split 0.25 P16384 gate=[0, 0, 0, 0]
+[trace] 1792138206.017 ideal None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138206.042 ideal_eager None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138206.092 recompute None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138208.027 serial None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138208.149 layer None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138208.250 split 0.0625 P32000 gate=[0, 0, 0, 0]
+[trace] 1792138208.388 split 0.125 P32000 gate=[0, 0, 0, 0]
+[trace] 1792138208.630 split 0.25 P32000 gate=[0, 0, 0, 0]
+[trace] 1792138209.078 load None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138209.081 save None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138209.085 load None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138209.092 save None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138209.098 load None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138209.112 save None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138209.125 load None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138209.149 save None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138209.174 load None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138209.223 save None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138209.271 load None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138209.364 save None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138209.459 ideal None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138209.493 ideal_eager None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138209.544 recompute None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138209.622 serial None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138209.646 layer None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138209.667 split 0.0625 P1024 gate=[0, 0, 0, 0]
+[trace] 1792138209.710 split 0.125 P1024 gate=[0, 0, 0, 0]
+[trace] 1792138209.753 split 0.25 P1024 gate=[0, 0, 0, 0]
+[trace] 1792138209.804 ideal None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138209.825 ideal_eager None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138209.874 recompute None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138210.007 serial None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138210.034 layer None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138210.057 split 0.0625 P2048 gate=[0, 0, 0, 0]
+[trace] 1792138210.101 split 0.125 P2048 gate=[0, 0, 0, 0]
+[trace] 1792138210.153 split 0.25 P2048 gate=[0, 0, 0, 0]
+[trace] 1792138210.214 ideal None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138210.235 ideal_eager None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138210.288 recompute None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138210.521 serial None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138210.555 layer None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138210.579 split 0.0625 P4096 gate=[0, 0, 0, 0]
+[trace] 1792138210.632 split 0.125 P4096 gate=[0, 0, 0, 0]
+[trace] 1792138210.695 split 0.25 P4096 gate=[0, 0, 0, 0]
+[trace] 1792138210.783 ideal None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138210.805 ideal_eager None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138210.854 recompute None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138211.300 serial None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138211.347 layer None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138211.377 split 0.0625 P8192 gate=[0, 0, 0, 0]
+[trace] 1792138211.441 split 0.125 P8192 gate=[0, 0, 0, 0]
+[trace] 1792138211.530 split 0.25 P8192 gate=[0, 0, 0, 0]
+[trace] 1792138211.667 ideal None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138211.690 ideal_eager None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138211.740 recompute None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138212.648 serial None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138212.722 layer None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138212.776 split 0.0625 P16384 gate=[0, 0, 0, 0]
+[trace] 1792138212.869 split 0.125 P16384 gate=[0, 0, 0, 0]
+[trace] 1792138213.007 split 0.25 P16384 gate=[0, 0, 0, 0]
+[trace] 1792138213.247 ideal None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138213.272 ideal_eager None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138213.321 recompute None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138215.260 serial None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138215.382 layer None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138215.482 split 0.0625 P32000 gate=[0, 0, 0, 0]
+[trace] 1792138215.620 split 0.125 P32000 gate=[0, 0, 0, 0]
+[trace] 1792138215.862 split 0.25 P32000 gate=[0, 0, 0, 0]
+[trace] 1792138216.310 load None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138216.314 save None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138216.317 load None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138216.324 save None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138216.331 load None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138216.344 save None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138216.357 load None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138216.381 save None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138216.406 load None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138216.455 save None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138216.504 load None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138216.596 save None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138216.691 recompute None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138217.151 save None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138217.232 split 0.25 P4096 gate=[0, 0, 0, 0]
+[trace] 1792138217.335 ideal_eager None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138217.384 recompute None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138217.462 split 0.0625 P1024 gate=[0, 0, 0, 0]
+[trace] 1792138217.505 recompute None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138217.737 serial None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138217.859 split 0.25 P32000 gate=[0, 0, 0, 0]
+[trace] 1792138218.306 split 0.125 P4096 gate=[0, 0, 0, 0]
+[trace] 1792138218.369 save None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138218.411 ideal_eager None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138218.468 serial None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138218.502 recompute None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138218.635 serial None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138218.659 serial None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138218.686 split 0.0625 P8192 gate=[0, 0, 0, 0]
+[trace] 1792138218.750 split 0.0625 P16384 gate=[0, 0, 0, 0]
+[trace] 1792138218.843 split 0.25 P2048 gate=[0, 0, 0, 0]
+[trace] 1792138218.904 serial None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138218.978 load None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138218.990 save None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138219.003 ideal None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138219.029 split 0.0625 P32000 gate=[0, 0, 0, 0]
+[trace] 1792138219.166 recompute None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138220.076 split 0.0625 P4096 gate=[0, 0, 0, 0]
+[trace] 1792138220.130 layer None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138220.153 load None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138220.160 load None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138220.245 ideal_eager None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138220.309 split 0.25 P16384 gate=[0, 0, 0, 0]
+[trace] 1792138220.548 ideal None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138220.570 recompute None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138222.513 layer None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138222.537 layer None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138222.638 split 0.125 P2048 gate=[0, 0, 0, 0]
+[trace] 1792138222.690 ideal_eager None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138222.739 save None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138222.742 ideal None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138222.763 split 0.125 P16384 gate=[0, 0, 0, 0]
+[trace] 1792138222.901 serial None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138222.949 split 0.125 P32000 gate=[0, 0, 0, 0]
+[trace] 1792138223.191 ideal_eager None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138223.241 load None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138223.285 split 0.125 P1024 gate=[0, 0, 0, 0]
+[trace] 1792138223.334 split 0.0625 P2048 gate=[0, 0, 0, 0]
+[trace] 1792138223.377 ideal None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138223.398 ideal_eager None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138223.448 split 0.125 P8192 gate=[0, 0, 0, 0]
+[trace] 1792138223.538 layer None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138223.566 save None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138223.587 split 0.25 P8192 gate=[0, 0, 0, 0]
+[trace] 1792138223.727 split 0.25 P1024 gate=[0, 0, 0, 0]
+[trace] 1792138223.778 ideal None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138223.799 layer None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138223.821 load None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138223.825 save None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138223.831 load None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138223.855 layer None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138223.912 ideal None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138223.933 ideal_eager None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138223.983 load None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138223.990 layer None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138224.014 split 0.0625 P4096 gate=[0, 0, 0, 0]
+[trace] 1792138224.066 split 0.25 P1024 gate=[0, 0, 0, 0]
+[trace] 1792138224.117 serial None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138224.239 layer None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138224.261 split 0.25 P32000 gate=[0, 0, 0, 0]
+[trace] 1792138224.709 ideal None P32000 gate=[0, 0, 0, 0]
+[trace] 1792138224.734 recompute None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138224.867 split 0.125 P2048 gate=[0, 0, 0, 0]
+[trace] 1792138224.918 split 0.0625 P2048 gate=[0, 0, 0, 0]
+[trace] 1792138224.963 split 0.125 P4096 gate=[0, 0, 0, 0]
+Timeout (0:01:00)!
+Thread 0x0000787720260600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/streams.py", line 224 in synchronize
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 309 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x000072f6fc70d600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/streams.py", line 224 in synchronize
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 309 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x00007b8284f3f600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/streams.py", line 224 in synchronize
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 309 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x000072da279df600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/streams.py", line 224 in synchronize
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 309 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+[trace] 1792138225.025 serial None P1024 gate=[0, 0, 0, 0]
+Timeout (0:01:00)!
+Thread 0x00007471667c7600 (most recent call first):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/hxb/cudamem.py", line 57 in memcpy
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 163 in issue_all
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 181 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x00007e8e40e35600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/streams.py", line 224 in synchronize
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 309 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x000075221a464600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/streams.py", line 224 in synchronize
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 309 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x000078a2bb86a600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/streams.py", line 224 in synchronize
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 309 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+[trace] 1792138225.049 ideal None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138225.070 ideal_eager None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138225.119 split 0.0625 P8192 gate=[0, 0, 0, 0]
+[trace] 1792138225.183 save None P8192 gate=[0, 0, 0, 0]
+[trace] 1792138225.205 save None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138225.211 ideal_eager None P2048 gate=[0, 0, 0, 0]
+[trace] 1792138225.261 ideal_eager None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138225.311 load None P4096 gate=[0, 0, 0, 0]
+[trace] 1792138225.324 ideal None P1024 gate=[0, 0, 0, 0]
+[trace] 1792138225.345 layer None P16384 gate=[0, 0, 0, 0]
+[trace] 1792138225.399 ideal_eager None P32000 gate=[0, 0, 0, 0]
+Timeout (0:01:00)!
+Thread 0x0000787720260600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x000072f6fc70d600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File Timeout (0:01:00)!
+"/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py"Thread 0x, line 00007b8284f3f600407 (most recent call first):
+ in <module>
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x000072da279df600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x00007471667c7600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x00007e8e40e35600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x000075221a464600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x000078a2bb86a600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x0000787720260600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x000072f6fc70d600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x00007b8284f3f600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x000072da279df600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x00007471667c7600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x00007e8e40e35600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x000075221a464600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>
+Timeout (0:01:00)!
+Thread 0x000078a2bb86a600 (most recent call first):
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 2806 in all_reduce
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 81 in wrapper
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 208 in _layer_ext
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v2.py", line 223 in extend
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116 in decorate_context
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 176 in run_path
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 307 in one
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 326 in mode_bench
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 391 in main
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v4.py", line 407 in <module>

@@ -1,0 +1,14 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[load] 9.6 s, world 8, GPU mem 11.9 GiB, host tier 3.91 GiB per rank, NUMA pages per rank [(0, {'N0': 1024001}), (0, {'N0': 1024001}), (0, {'N0': 1024001}), (0, {'N0': 1024001}), (1, {'N1': 1024001}), (1, {'N1': 1024001}), (1, {'N1': 1024001}), (1, {'N1': 1024001})]
+[rank5]:[W1016 07:31:38.068470756 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W1016 07:31:38.068771671 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank3]:[W1016 07:31:38.069296087 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank4]:[W1016 07:31:39.432473387 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank2]:[W1016 07:31:41.458853611 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank6]:[W1016 07:31:43.000818677 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank0]:[W1016 07:31:46.803466055 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank1]:[W1016 07:31:47.677602026 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[capture] 21 graphs in 21 s, GPU mem 12.0 GiB

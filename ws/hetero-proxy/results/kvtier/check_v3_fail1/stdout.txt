@@ -1,0 +1,260 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[load] 7.5 s, world 8, GPU mem 11.2 GiB, host tier 0.26 GiB per rank, NUMA pages per rank [(0, {'N0': 67153}), (0, {'N0': 67159}), (0, {'N0': 67159}), (0, {'N0': 67153}), (1, {'N1': 67153}), (1, {'N1': 67153}), (1, {'N1': 67153}), (1, {'N1': 67153})]
+[rank4]:[W1016 07:26:51.255725145 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank3]:[W1016 07:26:51.255886936 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W1016 07:26:51.256878869 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank0]:[W1016 07:26:51.258023585 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+    mode_check(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+    finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+    return m.replay(T, P, True, True, new)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+    buf.copy_(ids)
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+    mode_check(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+    finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+    return m.replay(T, P, True, True, new)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+    buf.copy_(ids)
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+    mode_check(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+    finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+    return m.replay(T, P, True, True, new)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+    buf.copy_(ids)
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+    mode_check(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+    finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+    return m.replay(T, P, True, True, new)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+    buf.copy_(ids)
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 394, in <module>
+[rank5]:     main()
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+[rank5]:     mode_check(m, tier, rank, args)
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+[rank5]:     finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+[rank5]:                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+[rank5]:     return m.replay(T, P, True, True, new)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+[rank5]:     buf.copy_(ids)
+[rank5]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 394, in <module>
+[rank2]:     main()
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+[rank2]:     mode_check(m, tier, rank, args)
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+[rank2]:     finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+[rank2]:                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+[rank2]:     return m.replay(T, P, True, True, new)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+[rank2]:     buf.copy_(ids)
+[rank2]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 394, in <module>
+[rank4]:     main()
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+[rank4]:     mode_check(m, tier, rank, args)
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+[rank4]:     finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+[rank4]:                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+[rank4]:     return m.replay(T, P, True, True, new)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+[rank4]:     buf.copy_(ids)
+[rank4]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 394, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+[rank0]:     mode_check(m, tier, rank, args)
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+[rank0]:     finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+[rank0]:                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+[rank0]:     return m.replay(T, P, True, True, new)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+[rank0]:     buf.copy_(ids)
+[rank0]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+    mode_check(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+    finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+    return m.replay(T, P, True, True, new)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+    buf.copy_(ids)
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+    mode_check(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+    finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+    return m.replay(T, P, True, True, new)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+    buf.copy_(ids)
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+    mode_check(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+    finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+    return m.replay(T, P, True, True, new)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+    buf.copy_(ids)
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 394, in <module>
+[rank7]:     main()
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+[rank7]:     mode_check(m, tier, rank, args)
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+[rank7]:     finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+[rank7]:                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+[rank7]:     return m.replay(T, P, True, True, new)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+[rank7]:     buf.copy_(ids)
+[rank7]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 394, in <module>
+[rank1]:     main()
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+[rank1]:     mode_check(m, tier, rank, args)
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+[rank1]:     finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+[rank1]:                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+[rank1]:     return m.replay(T, P, True, True, new)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+[rank1]:     buf.copy_(ids)
+[rank1]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 394, in <module>
+[rank6]:     main()
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+[rank6]:     mode_check(m, tier, rank, args)
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+[rank6]:     finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+[rank6]:                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+[rank6]:     return m.replay(T, P, True, True, new)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+[rank6]:     buf.copy_(ids)
+[rank6]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+    mode_check(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+    finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+    return m.replay(T, P, True, True, new)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+    buf.copy_(ids)
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 394, in <module>
+[rank3]:     main()
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 376, in main
+[rank3]:     mode_check(m, tier, rank, args)
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 225, in mode_check
+[rank3]:     finish("resident", run_path(m, tier, "ideal", hist, new, 0))
+[rank3]:                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 165, in run_path
+[rank3]:     return m.replay(T, P, True, True, new)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 134, in replay
+[rank3]:     buf.copy_(ids)
+[rank3]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank0]:[W1016 07:26:52.708863296 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W1016 07:26:54.131000 370061 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 370193 closing signal SIGTERM
+W1016 07:26:54.132000 370061 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 370194 closing signal SIGTERM
+W1016 07:26:54.132000 370061 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 370195 closing signal SIGTERM
+W1016 07:26:54.133000 370061 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 370196 closing signal SIGTERM
+W1016 07:26:54.133000 370061 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 370197 closing signal SIGTERM
+W1016 07:26:54.133000 370061 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 370198 closing signal SIGTERM
+W1016 07:26:54.134000 370061 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 370199 closing signal SIGTERM
+E1016 07:26:55.377000 370061 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 7 (pid: 370200) of binary: /home/rogerlee/.venvs/hetero-proxy-hf/bin/python
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+ws/hetero-proxy/scripts/kvtier/kvtier_v3.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-16_07:26:54
+  host      : css-host-158
+  rank      : 7 (local_rank: 7)
+  exitcode  : 1 (pid: 370200)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/kvtier/check_v3/guard.log

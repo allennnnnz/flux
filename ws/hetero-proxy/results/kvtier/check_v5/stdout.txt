@@ -1,0 +1,17 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[load] 7.1 s, world 8, GPU mem 11.9 GiB, host tier 0.26 GiB per rank, NUMA pages per rank [(0, {'N0': 67155}), (0, {'N0': 67153}), (0, {'N0': 67153}), (0, {'N0': 67153}), (1, {'N0': 1, 'N1': 67153}), (1, {'N0': 1, 'N1': 67153}), (1, {'N1': 67153}), (1, {'N1': 67153})]
+[rank2]:[W1016 08:14:37.886531204 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank0]:[W1016 08:14:37.887088654 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank3]:[W1016 08:14:38.233696627 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank1]:[W1016 08:14:38.234303961 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W1016 08:14:38.235570214 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[check] hist2k (P 1639, T 21): resident_eager: HF 19/64 bit=1 tok=1  resident: HF 19/64 bit=1 tok=1  serial: HF 19/64 bit=1 tok=1  layer: HF 19/64 bit=1 tok=1  split0.25: HF 19/64 bit=0 tok=1  recompute: HF 26/64 bit=0 tok=0
+[check] hist4k (P 3590, T 31): resident_eager: HF 26/64 bit=1 tok=1  resident: HF 26/64 bit=1 tok=1  serial: HF 26/64 bit=1 tok=1  layer: HF 26/64 bit=1 tok=1  split0.25: HF 64/64 bit=0 tok=0  recompute: HF 26/64 bit=0 tok=1
+[rank4]:[W1016 08:14:54.877902946 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank6]:[W1016 08:14:54.882665556 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank5]:[W1016 08:14:55.776688227 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[check] hist8k (P 8354, T 40): resident_eager: HF 8/64 bit=1 tok=1  resident: HF 8/64 bit=1 tok=1  serial: HF 8/64 bit=1 tok=1  layer: HF 8/64 bit=1 tok=1  split0.25: HF 8/64 bit=0 tok=0  recompute: HF 64/64 bit=0 tok=0
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/kvtier/check_v5/guard.log

@@ -1,6 +1,6 @@
 ################################################################################
-# hetero-proxy KV tier (2026-10-16): analysis of kvtier_v1.py --mode bench.
-# Inputs: <dir>/bench_kvtier_v1.json (rank-max ms per case and round, rank-0 wall windows) and <dir>/clocks.csv
+# hetero-proxy KV tier (2026-10-16): analysis of kvtier_v2.py --mode bench.
+# Inputs: <dir>/bench_kvtier_v2.json (rank-max ms per case and round, rank-0 wall windows) and <dir>/clocks.csv
 # (nvidia-smi -lms 200: timestamp, gpu, SM MHz, W, C; css-host-158 local time = UTC).
 # Clock filter (CLAUDE.md 5.1.6): a round's clock = the lowest SM clock of any GPU among the samples inside its
 # window (or the last one before it); rounds below 0.95 x the modal clock are dropped. Reports both all rounds and
@@ -15,7 +15,8 @@ import statistics
 import sys
 
 d = sys.argv[1]
-b = json.load(open(os.path.join(d, "bench_kvtier_v1.json")))
+f = [n for n in ("bench_kvtier_v3.json", "bench_kvtier_v2.json") if os.path.exists(os.path.join(d, n))][0]
+b = json.load(open(os.path.join(d, f)))
 out = []
 
 
@@ -82,7 +83,7 @@ for c, k in ch:
     say(f"  {k:<22} all {med_all[k]:9.2f}  kept {med[k]:9.2f}  ({100 * c:.1f}%)")
 
 say("")
-say("pre-registered predictions (kvtier_v1.py header) vs kept-round medians:")
+say("pre-registered predictions (kvtier_v2.py header) vs kept-round medians:")
 lo = min(NB(P) / med[f"load|P{P}"] / 1e6 for P in Ps if P >= 4096)
 hi = max(NB(P) / med[f"load|P{P}"] / 1e6 for P in Ps if P >= 4096)
 say(f"  K1 load 9-12.5 GB/s/GPU (P >= 4096): {lo:.1f}-{hi:.1f} -> {'holds' if lo >= 9 and hi <= 12.5 else 'FAILS'}")

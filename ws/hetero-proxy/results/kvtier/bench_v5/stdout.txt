@@ -1,0 +1,41 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[load] 8.9 s, world 8, GPU mem 11.9 GiB, host tier 3.91 GiB per rank, NUMA pages per rank [(0, {'N0': 1024001}), (0, {'N0': 1024001}), (0, {'N0': 1024001}), (0, {'N0': 1024001}), (1, {'N1': 1024001}), (1, {'N1': 1024001}), (1, {'N1': 1024001}), (1, {'N1': 1024001})]
+[rank5]:[W1016 08:16:56.691056344 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W1016 08:16:57.034275347 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank6]:[W1016 08:16:57.034338209 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank3]:[W1016 08:16:57.034388604 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank2]:[W1016 08:16:58.037529368 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank4]:[W1016 08:16:58.373400724 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank1]:[W1016 08:17:02.537977951 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank0]:[W1016 08:17:15.861130539 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[capture] 21 graphs in 22 s, GPU mem 12.0 GiB
+[progress] round 10/200, 73 s
+[progress] round 20/200, 145 s
+[progress] round 30/200, 218 s
+[progress] round 40/200, 291 s
+[progress] round 50/200, 364 s
+[progress] round 60/200, 436 s
+[progress] round 70/200, 509 s
+[progress] round 80/200, 582 s
+[progress] round 90/200, 655 s
+[progress] round 100/200, 728 s
+[progress] round 110/200, 800 s
+[progress] round 120/200, 873 s
+[progress] round 130/200, 946 s
+[progress] round 140/200, 1019 s
+[progress] round 150/200, 1091 s
+[progress] round 160/200, 1164 s
+[progress] round 170/200, 1237 s
+[progress] round 180/200, 1310 s
+[progress] round 190/200, 1383 s
+[progress] round 200/200, 1456 s
+[bench] P=1024    ideal    20.14 (x  3.9)  ideal_eager    49.53 (x  1.6)  recompute    77.68  serial    24.02 (x  3.2)  layer    21.64 (x  3.6)  split0.0625    42.46 (x  1.8)  split0.125    42.47 (x  1.8)  split0.25    50.81 (x  1.5)  load    3.95 ms =   8.5 GB/s/GPU  save    3.38 ms =   9.9 GB/s/GPU
+[bench] P=2048    ideal    20.57 (x  6.4)  ideal_eager    49.67 (x  2.7)  recompute   132.52  serial    27.47 (x  4.8)  layer    22.47 (x  5.9)  split0.0625    43.49 (x  3.0)  split0.125    51.69 (x  2.6)  split0.25    60.71 (x  2.2)  load    7.23 ms =   9.3 GB/s/GPU  save    6.44 ms =  10.4 GB/s/GPU
+[bench] P=4096    ideal    20.79 (x 11.3)  ideal_eager    49.67 (x  4.7)  recompute   234.04  serial    34.41 (x  6.8)  layer    23.54 (x  9.9)  split0.0625    53.17 (x  4.4)  split0.125    61.81 (x  3.8)  split0.25    87.85 (x  2.7)  load   13.99 ms =   9.6 GB/s/GPU  save   12.53 ms =  10.7 GB/s/GPU
+[bench] P=8192    ideal    21.39 (x 21.1)  ideal_eager    49.62 (x  9.1)  recompute   450.35  serial    47.32 (x  9.5)  layer    28.37 (x 15.9)  split0.0625    64.16 (x  7.0)  split0.125    89.18 (x  5.0)  split0.25   136.79 (x  3.3)  load   26.42 ms =  10.2 GB/s/GPU  save   24.72 ms =  10.9 GB/s/GPU
+[bench] P=16384   ideal    22.42 (x 41.0)  ideal_eager    49.57 (x 18.6)  recompute   920.47  serial    73.68 (x 12.5)  layer    53.46 (x 17.2)  split0.0625    92.77 (x  9.9)  split0.125   138.53 (x  6.6)  split0.25   241.17 (x  3.8)  load   51.74 ms =  10.4 GB/s/GPU  save   49.14 ms =  10.9 GB/s/GPU
+[bench] P=32000   ideal    24.27 (x 80.7)  ideal_eager    49.76 (x 39.4)  recompute  1958.52  serial   121.87 (x 16.1)  layer   100.87 (x 19.4)  split0.0625   137.74 (x 14.2)  split0.125   243.57 (x  8.0)  split0.25   452.18 (x  4.3)  load   98.33 ms =  10.7 GB/s/GPU  save   95.36 ms =  11.0 GB/s/GPU
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 1) log=ws/hetero-proxy/results/kvtier/bench_v5/guard.log

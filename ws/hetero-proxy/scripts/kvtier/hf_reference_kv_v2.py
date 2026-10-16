@@ -1,3 +1,5 @@
+# WITHDRAWN 2026-10-16: still found only the ~2k history (split gpt answers break the role-alternation check). Replaced by
+# ws/hetero-proxy/scripts/kvtier/hf_reference_kv_v3.py.
 ################################################################################
 # hetero-proxy KV tier v2 (2026-10-16): HuggingFace reference for the KV-tier correctness check - real multi-turn
 # conversations from ShareGPT (ShareGPT_V3_unfiltered_cleaned_split.json, already in the HF cache).

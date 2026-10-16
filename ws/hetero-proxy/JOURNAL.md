@@ -136,3 +136,20 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - 自我修正：10-14 回覆說 HTX301 適合 attention 外放，T1 顯示 attention 吃頻寬，低頻寬裝置不適合。
 - 量測錯誤兩則（已修，見 STATUS）：專家權重留在 L3 造成讀取速度超過 DRAM 錨點；頻寬 kernel 被加法延遲限制。
 - **留給下個 session**：與使用者確認延伸方向（建議 MoE 專家外放的端到端原型；KV 存放的端到端量測可順便做）。
+
+## 2026-10-16 · boss 兼 worker · KV 外存 K0 / K1（CPU 當 KV 存放層，單一請求）
+
+- 使用者決定：晶片短期拿不到，先在本機 CPU 上做出加速；選 KV 外存。釐清與 LMCache / SGLang HiCache 的異同後同意「計劃好就開始做」。
+  計劃 K0–K3 寫進 STATUS §0（借鑑逐層重疊、寫入時機、Cake；自己的部分是裝置主動送、干擾排程、介面不綁 NVIDIA）。
+- 正確性參考：`kvtier/hf_reference_kv_v3.py`（v1 / v2 撤回：ShareGPT 檔案把對話切成約 2k token 一段，長 AI 回答本身也被切開；v3 接回連續段、合併同角色訊息）。
+  3 段真實對話，歷史 1639 / 3590 / 8354 token。
+- 程式演進（每版都留著，撤回者加 banner）：
+  v1 check 抓到 decode graph 暖身蓋掉 KV 位置 0 → v2 修（同一 bug 影響 E2E v3–v5 check → `e2e/qwen_tp_v6.py` 重驗）；
+  v2 smoke：eager 的新一輪 128 token 約 50 ms 都是 Python 發 kernel 的開銷 → v3 全部計時路徑錄 CUDA graph，graph 內用 hxb stream memory op 計數器逐層等搬運（先探針確認可錄進 graph）；
+  v3 bench 錄 graph 時 OOM（NCCL 用過的 tensor 在錄製中不重用，32k 重算累積 42 GB）→ v4 all-reduce 用固定緩衝區；
+  v4 bench 兩次卡死（8 rank 都在 eager all-reduce、NCCL 工作佇列記為滿、GPU 閒置；gdb + faulthandler 定位）→ v5 給 graph 獨立 communicator，同設定 3 輪除錯跑完。
+- **K1 結果**（`results/kvtier/bench_v5/analysis.txt`，200 輪，guard CLEAN）：搬回 + 邊搬邊算比重算快 3.6×（1k）/ 9.9×（4k）/ 15.9×（8k）/ 17.2×（16k）/ 19.4×（32k）；
+  8k 以下只比 KV 沒被擠掉多 1.5–7 ms；16k 以上由 PCIe 決定（每卡約 10 GB/s，GPU4–7 比 0–3 慢約 15%）；Cake 在這台機器全面變慢。事前預測 G3 / G4 / G6 成立，G1 / G2 / G5 / G7 不成立（原因見 STATUS）。
+- 卡過的坑：`pkill -f <腳本名>` 又把自己的 shell 殺掉（第二次）——停程序一律用 PID。
+- E2E v6 重驗（`results/e2e/check_v6/`）：修正後 en_explain A vs HF 由 5/64 變 50/64（原本的「平手」解釋是錯的，是 KV 位置 0 被蓋掉）；Bfinal 4/4 與 A 相同；Bmid 在兩個近似平手處（差 0.000 / 0.375）與 A 不同。已寫入撤回表。
+- **留給下個 session**：K2（系統層級：ShareGPT 多人多輪 + GPU KV 容量受限，量被擠掉的比例、平均首字時間、吞吐量、搬運對他人 decode 的干擾）；K3（裝置主動送）。

@@ -45,6 +45,27 @@
 - **K2**（K1 之後）：工作負載層級——ShareGPT 多人多輪、GPU 的 KV 容量受限：量「重算佔 GPU 時間的比例」（= 加速上限）與實際首字時間 / 吞吐量；
   事先定的判斷：重算佔比 < 10% → 改走 MoE 專家外放路線。GPU 本身約可放 200 萬 token 的 KV（每卡 32 KiB / token），要嘛模擬很多使用者，要嘛限制 KV 容量（論文常用，需寫明）。
 - **K3**：裝置主動送（模擬真晶片：KV 在裝置記憶體、經 hxb 中繼區 + 計數器送進 GPU），與 K1 的差距 = 真晶片路徑的代價。
+- **K1 結果（2026-10-16，`results/kvtier/bench_v5/analysis.txt`，`kvtier_v5.py`，200 輪交錯、rank-max 中位數、逐案例時脈過濾，guard CLEAN〔1 筆 SELF_CPU 警告〕，尚未審查）**——
+  單一請求、新一輪 128 token、所有計時路徑都是 CUDA graph：
+
+  | 歷史 P | 重算（基準） | 理想（KV 還在 GPU） | **搬回、邊搬邊算** | 先搬完再算 | 純搬運（每卡） | 加速（保守：重算換算到 1410 MHz） |
+  | --- | --- | --- | --- | --- | --- | --- |
+  | 1024 | 77.7 ms | 20.1 | **21.6** | 24.0 | 3.95 ms（8.5 GB/s） | 3.6×（3.6×） |
+  | 4096 | 234.0 | 20.8 | **23.5** | 34.4 | 14.0（9.6） | 9.9×（9.7×） |
+  | 8192 | 450.4 | 21.4 | **28.4** | 47.3 | 26.4（10.2） | 15.9×（15.2×） |
+  | 16384 | 920.5 | 22.4 | **53.5** | 73.7 | 51.7（10.4） | 17.2×（16.1×） |
+  | 32000 | 1958.5 | 24.3 | **100.9** | 121.9 | 98.3（10.7） | 19.4×（17.8×） |
+
+  - 邊搬邊算 = max(純搬運, 理想) + 1.5–2.7 ms：8k 以下搬運完全藏在計算底下（只比 KV 沒被擠掉多 1.5–7 ms）；16k 以上由 PCIe 決定。
+  - 搬運頻寬與錨點一致（c_diag 8 卡同時 H2D 10.1–12.2 GB/s）：GPU0–3 每卡 11.3–12.4 GB/s、GPU4–7 9.3–10.7（主機記憶體已放在各自 NUMA 節點，差異仍在 → 推論是 GPU4–7 這側的 PCIe 拓撲，非 NUMA；如何驗證：nvbandwidth 逐卡 H2D）。存出 9.9–11.0。
+  - **Cake 在這台機器上全面變慢**（+36% ~ +126%）：搬一個 token 的 KV 比重算它快約 15 倍，讓 GPU 分擔只是多跑一趟、並與 PCIe 互相干擾。適用於搬運比重算慢的情況（較慢的鏈路、多人同時搬）。
+  - 正確性（`results/kvtier/check_v5`）：3 段真實 ShareGPT 對話（歷史 1639 / 3590 / 8354），搬回路徑與 KV 留在 GPU 的路徑 logits 與 64 個生成字**逐位元相同**；graph 與 eager 逐位元相同；與 HF 不同處都在 HF top-2 差 0 或 0.125 的位置。
+  - 事前預測：G3（邊搬邊算 ≤ max+3 ms）、G4（加速倍數下限）、G6（Cake 不會更快）成立；G1（理想 8–20 ms，實測 20.1–24.3）、G2（P=1024 重算錄 graph 後應快 15–45 ms，實測 0.5 ms——1152 token 的重算本來就受 GPU 限制）、
+    G5（差 1.6–3.3 ms，正是 G3 量到的邊搬邊算額外開銷）、G7（P=1024 搬運 8.5 GB/s < 9，小拷貝的固定開銷）不成立。
+  - 引擎開銷的教訓：eager 的新一輪 128 token 要 49.5 ms（graph 20.1 ms），v1 / v2 的 smoke 數字量到的是 Python 發 kernel 的速度。
+  - **這是單一請求的結果，不是系統層級的加速**：整體能快多少取決於多少請求會被擠掉、搬運會不會拖慢別人的 decode → K2。
+- **過程中修掉的問題**（細節見 JOURNAL 10-16）：ShareGPT 檔案把對話切成約 2k 一段（HF 參考 v1 / v2 撤回 → v3 接回）；decode graph 暖身蓋掉 KV 位置 0（kvtier v1 撤回；影響 E2E v3–v5 check，見撤回表）；
+  eager 開銷主導（v2 bench 由 v3 取代）；錄 graph 時 all-reduce 輸出不能重用 → OOM（v3 撤回）；graph 與 eager 的 NCCL all-reduce 共用同一個 communicator 交錯幾百次後卡死（v4 撤回 → v5 給 graph 獨立 communicator，同設定 3 輪除錯跑完）。
 
 **E2E 計劃（2026-10-14 與使用者討論定案）**：Qwen2.5-32B-Instruct 真實權重（下載約 65 GB），自寫精簡推論程式（vLLM 未安裝，也不支援異質分段），
 先固定批次（prefill / decode / 吞吐量），再 ShareGPT（快取裡已有）。三組比較：
@@ -204,6 +225,9 @@ Phase 3 的起點：為「PCIe-only 晶片 + A100 NVLink 域」的異質計算�
 | 無 cuda-python → GPU 旗標改以 copy engine 搬 4 bytes 寫入 | JOURNAL 2026-10-09「開始實作」 | ctypes 直接呼叫 libcuda `cuStreamWriteValue/WaitValue*_v2` 可用（2026-10-09 探針，`scripts/hxb/cudamem.py`） | 旗標與計數器一律用 stream memory op |
 | I2 v1 A 段裝置 DMA 44–52 GB/s | `results/i2_characterize/`（v1） | 每次拷貝同一塊快取熱的緩衝區；pipeline 內是 GPU 剛寫入的冷資料，約一半 | `scripts/i2_characterize_v2.py` A 段（v1 腳本已加 WITHDRAWN） |
 | I2 run1 C 段「計算與拷貝競爭 1.6–3.6×」 | `results/i2_characterize/run1_ht_sibling_layout/` | 控制執行緒放在計算核心的 HT 兄弟核，混入自旋干擾 | v2 C 段 2.1–2.8×（專屬控制核心） |
+| E2E v3–v5 正確性檢查的細節：「en_explain 只同 HF 5/64、因 HF top-2 差 0.625」與「Bmid 只在 code 第 18 字與 A 不同」 | `results/e2e/check/check_v3.json`–`check_v5.json`、§0 E2E 結果 | `Engine._capture` 錄 decode graph 前暖身 3 次、`pos` 緩衝區為 0 → 蓋掉 KV 第 0 個位置；check 模式每題每種設定第一次 decode 都會碰到（2026-10-16 由 KV 外存檢查 `results/kvtier/check_v1` 發現）。bench 計時不受影響（graph 在計時前建好）。en_explain 第 5 字的分歧是這個 bug 造成的，不是平手 | `scripts/e2e/qwen_tp_v6.py` 重驗（`results/e2e/check_v6/`，guard CLEAN）：A vs HF en_explain **50/64**、其餘 3 題 64/64；**Bfinal 與 A 4/4 題逐字相同**；Bmid 2/4 相同，另 2 題在近似平手處分歧（code 第 18 字 HF top-2 差 0.000；en_explain 第 50 字差 0.375，此處 Bmid 與 HF 相同、A 選了次高）（`hf_margin_v6_vsA.json`、`hf_margin_v6_vsHF.json`）。結論「B 的結果與 A 一致到數值誤差」不變 |
+| P1 T3「8k 前綴搬回約 27 ms vs 重算約 398 ms（~15×）」 | §0 P1、`results/hetero_roles/p1/analysis.txt` | 推估，重算用的是 8×1024 批次（非單一 8k 序列），也沒算新一輪本身的時間 | K 系列實測（`results/kvtier/bench_v3/analysis.txt`） |
+| kvtier v1 / v2 的首字時間（smoke 3 輪：理想 50–57 ms、Cake 比邊搬邊算慢） | `results/kvtier/bench_smoke/` | 逐個發 kernel 的 Python 開銷（約 45 ms）主導 128 token 的新一輪，重算也背同樣開銷 → 量到的是引擎開銷而非記憶體分層；事前預測 K3（理想 10–30 ms）因此不成立 | `scripts/kvtier/kvtier_v3.py`（全部計時路徑錄成 CUDA graph，hxb 計數器在 graph 內逐層把關） |
 
 ## 4. 下一步（worker 維護）
 

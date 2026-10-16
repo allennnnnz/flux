@@ -1,0 +1,9 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[load] 7.4 s, world 8, GPU mem 11.2 GiB, host tier 0.26 GiB per rank, NUMA pages per rank [(0, {'N0': 67153}), (0, {'N0': 67159}), (0, {'N0': 67159}), (0, {'N0': 67159}), (1, {'N1': 67153}), (1, {'N0': 6, 'N1': 67153}), (1, {'N0': 6, 'N1': 67153}), (1, {'N1': 67153})]
+[check] hist2k (P 1639, T 21): resident: HF 17/64 bit=1 d=0.000  serial: HF 19/64 bit=1 d=0.000  layer: HF 19/64 bit=1 d=0.000  split0.25: HF 19/64 bit=0 d=0.375  recompute: HF 26/64 bit=0 d=0.250
+[check] hist4k (P 3590, T 31): resident: HF 10/64 bit=1 d=0.000  serial: HF 26/64 bit=1 d=0.000  layer: HF 26/64 bit=1 d=0.000  split0.25: HF 64/64 bit=0 d=0.250  recompute: HF 26/64 bit=0 d=0.250
+[check] hist8k (P 8354, T 40): resident: HF 60/64 bit=1 d=0.000  serial: HF 8/64 bit=1 d=0.000  layer: HF 8/64 bit=1 d=0.000  split0.25: HF 8/64 bit=0 d=0.359  recompute: HF 64/64 bit=0 d=0.406
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/kvtier/check/guard.log

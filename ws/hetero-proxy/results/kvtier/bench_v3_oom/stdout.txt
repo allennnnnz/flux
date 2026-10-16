@@ -1,0 +1,403 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[load] 9.3 s, world 8, GPU mem 11.2 GiB, host tier 3.91 GiB per rank, NUMA pages per rank [(0, {'N0': 1024001}), (0, {'N0': 1024001}), (0, {'N0': 1024001}), (0, {'N0': 1024001}), (1, {'N1': 1024001}), (1, {'N1': 1024001}), (1, {'N1': 1024001}), (1, {'N1': 1024001})]
+[rank3]:[W1016 07:28:54.952542429 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W1016 07:28:55.296882364 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank2]:[W1016 07:28:55.297352591 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank5]:[W1016 07:28:55.297553811 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank4]:[W1016 07:28:57.141311333 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank6]:[W1016 07:28:59.516770047 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank0]:[W1016 07:28:59.519326982 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+    mode_bench(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+    capture_for(m, P, T, xs)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+    m.graph(P + T, 0, False, True)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+    out = self._fwd(ids, pos0, b, gated, head)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+    x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 93, in _layer_g
+    return add_rmsnorm(x, nw, c.eps, r=d)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/e2e/fused_kernels.py", line 41, in add_rmsnorm
+    x_out = torch.empty_like(x) if x_out is None else x_out
+            ^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 7 has a total capacity of 79.28 GiB of which 97.06 MiB is free. Including non-PyTorch memory, this process has 79.17 GiB memory in use. Of the allocated memory 61.04 GiB is allocated by PyTorch, with 47.05 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 395, in <module>
+[rank7]:     main()
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+[rank7]:     mode_bench(m, tier, rank, args)
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+[rank7]:     capture_for(m, P, T, xs)
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+[rank7]:     m.graph(P + T, 0, False, True)
+[rank7]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank7]:     return func(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+[rank7]:     out = self._fwd(ids, pos0, b, gated, head)
+[rank7]:           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+[rank7]:     x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 93, in _layer_g
+[rank7]:     return add_rmsnorm(x, nw, c.eps, r=d)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/e2e/fused_kernels.py", line 41, in add_rmsnorm
+[rank7]:     x_out = torch.empty_like(x) if x_out is None else x_out
+[rank7]:             ^^^^^^^^^^^^^^^^^^^
+[rank7]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 7 has a total capacity of 79.28 GiB of which 97.06 MiB is free. Including non-PyTorch memory, this process has 79.17 GiB memory in use. Of the allocated memory 61.04 GiB is allocated by PyTorch, with 47.05 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+    mode_bench(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+    capture_for(m, P, T, xs)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+    m.graph(P + T, 0, False, True)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+    out = self._fwd(ids, pos0, b, gated, head)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+    x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 90, in _layer_g
+    d = F.linear(silu_mul(F.linear(h2, w["wgu"])), w["wd"])
+                          ^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 424.00 MiB. GPU 5 has a total capacity of 79.28 GiB of which 379.06 MiB is free. Including non-PyTorch memory, this process has 78.89 GiB memory in use. Of the allocated memory 60.63 GiB is allocated by PyTorch, with 47.25 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 395, in <module>
+[rank5]:     main()
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+[rank5]:     mode_bench(m, tier, rank, args)
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+[rank5]:     capture_for(m, P, T, xs)
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+[rank5]:     m.graph(P + T, 0, False, True)
+[rank5]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank5]:     return func(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+[rank5]:     out = self._fwd(ids, pos0, b, gated, head)
+[rank5]:           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+[rank5]:     x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 90, in _layer_g
+[rank5]:     d = F.linear(silu_mul(F.linear(h2, w["wgu"])), w["wd"])
+[rank5]:                           ^^^^^^^^^^^^^^^^^^^^^^
+[rank5]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 424.00 MiB. GPU 5 has a total capacity of 79.28 GiB of which 379.06 MiB is free. Including non-PyTorch memory, this process has 78.89 GiB memory in use. Of the allocated memory 60.63 GiB is allocated by PyTorch, with 47.25 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+    mode_bench(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+    capture_for(m, P, T, xs)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+    m.graph(P + T, 0, False, True)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+    out = self._fwd(ids, pos0, b, gated, head)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+    x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 93, in _layer_g
+    return add_rmsnorm(x, nw, c.eps, r=d)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/e2e/fused_kernels.py", line 41, in add_rmsnorm
+    x_out = torch.empty_like(x) if x_out is None else x_out
+            ^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 79.28 GiB of which 97.06 MiB is free. Including non-PyTorch memory, this process has 79.17 GiB memory in use. Of the allocated memory 61.04 GiB is allocated by PyTorch, with 47.05 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 395, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+[rank0]:     mode_bench(m, tier, rank, args)
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+[rank0]:     capture_for(m, P, T, xs)
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+[rank0]:     m.graph(P + T, 0, False, True)
+[rank0]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank0]:     return func(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+[rank0]:     out = self._fwd(ids, pos0, b, gated, head)
+[rank0]:           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+[rank0]:     x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 93, in _layer_g
+[rank0]:     return add_rmsnorm(x, nw, c.eps, r=d)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/e2e/fused_kernels.py", line 41, in add_rmsnorm
+[rank0]:     x_out = torch.empty_like(x) if x_out is None else x_out
+[rank0]:             ^^^^^^^^^^^^^^^^^^^
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 79.28 GiB of which 97.06 MiB is free. Including non-PyTorch memory, this process has 79.17 GiB memory in use. Of the allocated memory 61.04 GiB is allocated by PyTorch, with 47.05 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+    mode_bench(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+    capture_for(m, P, T, xs)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+    m.graph(P + T, 0, False, True)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+    out = self._fwd(ids, pos0, b, gated, head)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+    x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 90, in _layer_g
+    d = F.linear(silu_mul(F.linear(h2, w["wgu"])), w["wd"])
+                          ^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 424.00 MiB. GPU 2 has a total capacity of 79.28 GiB of which 379.06 MiB is free. Including non-PyTorch memory, this process has 78.89 GiB memory in use. Of the allocated memory 60.63 GiB is allocated by PyTorch, with 47.25 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 395, in <module>
+[rank2]:     main()
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+[rank2]:     mode_bench(m, tier, rank, args)
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+[rank2]:     capture_for(m, P, T, xs)
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+[rank2]:     m.graph(P + T, 0, False, True)
+[rank2]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank2]:     return func(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+[rank2]:     out = self._fwd(ids, pos0, b, gated, head)
+[rank2]:           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+[rank2]:     x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 90, in _layer_g
+[rank2]:     d = F.linear(silu_mul(F.linear(h2, w["wgu"])), w["wd"])
+[rank2]:                           ^^^^^^^^^^^^^^^^^^^^^^
+[rank2]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 424.00 MiB. GPU 2 has a total capacity of 79.28 GiB of which 379.06 MiB is free. Including non-PyTorch memory, this process has 78.89 GiB memory in use. Of the allocated memory 60.63 GiB is allocated by PyTorch, with 47.25 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+    mode_bench(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+    capture_for(m, P, T, xs)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+    m.graph(P + T, 0, False, True)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+    out = self._fwd(ids, pos0, b, gated, head)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+    x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 90, in _layer_g
+    d = F.linear(silu_mul(F.linear(h2, w["wgu"])), w["wd"])
+                          ^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 424.00 MiB. GPU 1 has a total capacity of 79.28 GiB of which 379.06 MiB is free. Including non-PyTorch memory, this process has 78.89 GiB memory in use. Of the allocated memory 60.63 GiB is allocated by PyTorch, with 47.25 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 395, in <module>
+[rank1]:     main()
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+[rank1]:     mode_bench(m, tier, rank, args)
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+[rank1]:     capture_for(m, P, T, xs)
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+[rank1]:     m.graph(P + T, 0, False, True)
+[rank1]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank1]:     return func(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+[rank1]:     out = self._fwd(ids, pos0, b, gated, head)
+[rank1]:           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+[rank1]:     x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 90, in _layer_g
+[rank1]:     d = F.linear(silu_mul(F.linear(h2, w["wgu"])), w["wd"])
+[rank1]:                           ^^^^^^^^^^^^^^^^^^^^^^
+[rank1]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 424.00 MiB. GPU 1 has a total capacity of 79.28 GiB of which 379.06 MiB is free. Including non-PyTorch memory, this process has 78.89 GiB memory in use. Of the allocated memory 60.63 GiB is allocated by PyTorch, with 47.25 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+    mode_bench(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+    capture_for(m, P, T, xs)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+    m.graph(P + T, 0, False, True)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+    out = self._fwd(ids, pos0, b, gated, head)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+    x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 90, in _layer_g
+    d = F.linear(silu_mul(F.linear(h2, w["wgu"])), w["wd"])
+                          ^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 424.00 MiB. GPU 6 has a total capacity of 79.28 GiB of which 379.06 MiB is free. Including non-PyTorch memory, this process has 78.89 GiB memory in use. Of the allocated memory 60.63 GiB is allocated by PyTorch, with 47.25 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+    mode_bench(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+    capture_for(m, P, T, xs)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+    m.graph(P + T, 0, False, True)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+    out = self._fwd(ids, pos0, b, gated, head)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+    x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 90, in _layer_g
+    d = F.linear(silu_mul(F.linear(h2, w["wgu"])), w["wd"])
+                          ^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 424.00 MiB. GPU 4 has a total capacity of 79.28 GiB of which 379.06 MiB is free. Including non-PyTorch memory, this process has 78.89 GiB memory in use. Of the allocated memory 60.63 GiB is allocated by PyTorch, with 47.25 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 395, in <module>
+[rank6]:     main()
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+[rank6]:     mode_bench(m, tier, rank, args)
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+[rank6]:     capture_for(m, P, T, xs)
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+[rank6]:     m.graph(P + T, 0, False, True)
+[rank6]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank6]:     return func(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+[rank6]:     out = self._fwd(ids, pos0, b, gated, head)
+[rank6]:           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+[rank6]:     x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 90, in _layer_g
+[rank6]:     d = F.linear(silu_mul(F.linear(h2, w["wgu"])), w["wd"])
+[rank6]:                           ^^^^^^^^^^^^^^^^^^^^^^
+[rank6]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 424.00 MiB. GPU 6 has a total capacity of 79.28 GiB of which 379.06 MiB is free. Including non-PyTorch memory, this process has 78.89 GiB memory in use. Of the allocated memory 60.63 GiB is allocated by PyTorch, with 47.25 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 395, in <module>
+[rank4]:     main()
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+[rank4]:     mode_bench(m, tier, rank, args)
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+[rank4]:     capture_for(m, P, T, xs)
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+[rank4]:     m.graph(P + T, 0, False, True)
+[rank4]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank4]:     return func(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+[rank4]:     out = self._fwd(ids, pos0, b, gated, head)
+[rank4]:           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+[rank4]:     x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 90, in _layer_g
+[rank4]:     d = F.linear(silu_mul(F.linear(h2, w["wgu"])), w["wd"])
+[rank4]:                           ^^^^^^^^^^^^^^^^^^^^^^
+[rank4]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 424.00 MiB. GPU 4 has a total capacity of 79.28 GiB of which 379.06 MiB is free. Including non-PyTorch memory, this process has 78.89 GiB memory in use. Of the allocated memory 60.63 GiB is allocated by PyTorch, with 47.25 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+    mode_bench(m, tier, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+    capture_for(m, P, T, xs)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+    m.graph(P + T, 0, False, True)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+    out = self._fwd(ids, pos0, b, gated, head)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+    x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 90, in _layer_g
+    d = F.linear(silu_mul(F.linear(h2, w["wgu"])), w["wd"])
+                          ^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 424.00 MiB. GPU 3 has a total capacity of 79.28 GiB of which 379.06 MiB is free. Including non-PyTorch memory, this process has 78.89 GiB memory in use. Of the allocated memory 60.63 GiB is allocated by PyTorch, with 47.25 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 395, in <module>
+[rank3]:     main()
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 379, in main
+[rank3]:     mode_bench(m, tier, rank, args)
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 265, in mode_bench
+[rank3]:     capture_for(m, P, T, xs)
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 192, in capture_for
+[rank3]:     m.graph(P + T, 0, False, True)
+[rank3]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank3]:     return func(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 127, in graph
+[rank3]:     out = self._fwd(ids, pos0, b, gated, head)
+[rank3]:           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 100, in _fwd
+[rank3]:     x, h = self._layer_g(i, x, h, b, pos0, T, gated)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/kvtier_v3.py", line 90, in _layer_g
+[rank3]:     d = F.linear(silu_mul(F.linear(h2, w["wgu"])), w["wd"])
+[rank3]:                           ^^^^^^^^^^^^^^^^^^^^^^
+[rank3]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 424.00 MiB. GPU 3 has a total capacity of 79.28 GiB of which 379.06 MiB is free. Including non-PyTorch memory, this process has 78.89 GiB memory in use. Of the allocated memory 60.63 GiB is allocated by PyTorch, with 47.25 GiB allocated in private pools (e.g., CUDA Graphs), and 11.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]:[W1016 07:29:16.684273341 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W1016 07:29:18.789000 371656 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 371787 closing signal SIGTERM
+W1016 07:29:18.790000 371656 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 371788 closing signal SIGTERM
+W1016 07:29:18.791000 371656 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 371789 closing signal SIGTERM
+W1016 07:29:18.791000 371656 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 371790 closing signal SIGTERM
+W1016 07:29:18.792000 371656 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 371791 closing signal SIGTERM
+W1016 07:29:18.792000 371656 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 371792 closing signal SIGTERM
+W1016 07:29:18.793000 371656 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 371793 closing signal SIGTERM
+E1016 07:29:22.703000 371656 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 7 (pid: 371794) of binary: /home/rogerlee/.venvs/hetero-proxy-hf/bin/python
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+ws/hetero-proxy/scripts/kvtier/kvtier_v3.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-16_07:29:18
+  host      : css-host-158
+  rank      : 7 (local_rank: 7)
+  exitcode  : 1 (pid: 371794)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/kvtier/bench_v3/guard.log

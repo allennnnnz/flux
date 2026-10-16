@@ -1,3 +1,5 @@
+# WITHDRAWN 2026-10-16: decode-graph capture warm-up overwrote KV position 0 in the check (results/kvtier/check_v1). Replaced by
+# ws/hetero-proxy/scripts/kvtier/kvtier_v2.py.
 ################################################################################
 # hetero-proxy KV tier v1 (2026-10-16): the CPU as a KV-cache tier for multi-turn conversations, on the real
 # Qwen2.5-32B-Instruct TP8 engine (e2e/qwen_tp_v5.py). Question: when a conversation's KV no longer fits in GPU
