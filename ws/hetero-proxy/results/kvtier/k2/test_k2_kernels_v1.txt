@@ -1,0 +1,4 @@
+[1] identity slots bit-identical (q, cache, attention): True
+[2] permuted slots match the original on the gathered cache, other slots untouched: True
+[3] prefill rows = single-row calls (q and cache): True
+ALL PASS

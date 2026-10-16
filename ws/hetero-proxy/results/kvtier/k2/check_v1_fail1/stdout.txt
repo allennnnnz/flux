@@ -1,0 +1,240 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[rank7]:[W1016 09:11:46.752564580 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank5]:[W1016 09:11:46.752956661 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank0]:[W1016 09:11:46.753179634 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank1]:[W1016 09:11:46.753362534 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank4]:[W1016 09:11:46.753774089 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank3]:[W1016 09:11:46.754144357 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank2]:[W1016 09:11:46.754352563 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank6]:[W1016 09:11:46.755030904 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[load] 8 s; slots 8, host regions 0.1 GiB per rank
+[rank0]:[W1016 09:11:52.390028628 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank1]:[W1016 09:11:53.061934063 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank3]:[W1016 09:11:56.166013313 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank6]:[W1016 09:11:56.166313623 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank5]:[W1016 09:11:56.167217821 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W1016 09:12:05.130218865 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank2]:[W1016 09:12:07.818782118 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[capture] 110 graphs in 56 s, GPU mem 11.8 GiB
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+    check(m, host, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+    check(m, host, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+    m.run_new(ids, s)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+    m.run_new(ids, s)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+    check(m, host, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+    check(m, host, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+    self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+    self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+    m.run_new(ids, s)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+    m.run_new(ids, s)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+    self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+    super().replay()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+    super().replay()
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+    self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+    check(m, host, rank, args)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+    super().replay()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+    super().replay()
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+    m.run_new(ids, s)
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+    self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+    super().replay()
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+    check(m, host, rank, args)
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+    m.run_new(ids, s)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+    self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+    check(m, host, rank, args)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+    super().replay()
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+    m.run_new(ids, s)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+    self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+    super().replay()
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+    check(m, host, rank, args)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+    m.run_new(ids, s)
+  File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+    self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+    super().replay()
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 383, in <module>
+[rank3]:     main()
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+[rank3]:     check(m, host, rank, args)
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+[rank3]:     m.run_new(ids, s)
+[rank3]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+[rank3]:     self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+[rank3]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+[rank3]:     super().replay()
+[rank3]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 383, in <module>
+[rank6]:     main()
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+[rank6]:     check(m, host, rank, args)
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+[rank6]:     m.run_new(ids, s)
+[rank6]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+[rank6]:     self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+[rank6]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+[rank6]:     super().replay()
+[rank6]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 383, in <module>
+[rank4]:     main()
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+[rank4]:     check(m, host, rank, args)
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+[rank4]:     m.run_new(ids, s)
+[rank4]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+[rank4]:     self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+[rank4]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+[rank4]:     super().replay()
+[rank4]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 383, in <module>
+[rank7]:     main()
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+[rank7]:     check(m, host, rank, args)
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+[rank7]:     m.run_new(ids, s)
+[rank7]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+[rank7]:     self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+[rank7]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+[rank7]:     super().replay()
+[rank7]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 383, in <module>
+[rank5]:     main()
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+[rank5]:     check(m, host, rank, args)
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+[rank5]:     m.run_new(ids, s)
+[rank5]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+[rank5]:     self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+[rank5]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+[rank5]:     super().replay()
+[rank5]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 383, in <module>
+[rank1]:     main()
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+[rank1]:     check(m, host, rank, args)
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+[rank1]:     m.run_new(ids, s)
+[rank1]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+[rank1]:     self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+[rank1]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+[rank1]:     super().replay()
+[rank1]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 383, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+[rank0]:     check(m, host, rank, args)
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+[rank0]:     m.run_new(ids, s)
+[rank0]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+[rank0]:     self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+[rank0]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+[rank0]:     super().replay()
+[rank0]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 383, in <module>
+[rank2]:     main()
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 365, in main
+[rank2]:     check(m, host, rank, args)
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py", line 271, in check
+[rank2]:     m.run_new(ids, s)
+[rank2]:   File "/home/rogerlee/flux/ws/hetero-proxy/scripts/kvtier/k2_engine_v1.py", line 209, in run_new
+[rank2]:     self.gs[("new", bucket(len(ids), T_BUCKETS))].replay()
+[rank2]:   File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+[rank2]:     super().replay()
+[rank2]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+[rank0]:[W1016 09:12:45.273353144 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W1016 09:13:00.984000 397834 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 397966 closing signal SIGTERM
+W1016 09:13:00.985000 397834 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 397967 closing signal SIGTERM
+W1016 09:13:00.986000 397834 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 397968 closing signal SIGTERM
+W1016 09:13:00.986000 397834 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 397969 closing signal SIGTERM
+W1016 09:13:00.986000 397834 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 397970 closing signal SIGTERM
+W1016 09:13:00.987000 397834 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 397971 closing signal SIGTERM
+W1016 09:13:00.987000 397834 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 397972 closing signal SIGTERM
+E1016 09:13:02.067000 397834 .pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 7 (pid: 397973) of binary: /home/rogerlee/.venvs/hetero-proxy-hf/bin/python
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+ws/hetero-proxy/scripts/kvtier/k2_serve_v1.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-16_09:13:00
+  host      : css-host-158
+  rank      : 7 (local_rank: 7)
+  exitcode  : 1 (pid: 397973)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/kvtier/k2/check_v1/guard.log
