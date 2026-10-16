@@ -20,3 +20,9 @@ Setting OMP_NUM_THREADS environment variable for each process to be 1 in default
 [rank3]:[W1016 10:56:38.242267139 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
 [rank7]:[W1016 10:56:41.961025208 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
 [capture] 111 graphs in 57 s, GPU mem 37.7 GiB
+[serve] ideal: 3325 turns after warm-up, generated 825963 tokens in 600 s = 1377 tok/s
+[serve] TTFT all: median 31.3 ms, p90 57.2, p99 110.6
+[serve]   hit       n=2592  median     31.3 ms  p90     55.2
+[serve]   new       n=733   median     31.4 ms  p90     64.6
+[serve] decode step GPU ms median 16.58; iteration wall median 16.68 ms
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 2) log=ws/hetero-proxy/results/kvtier/k2/loadH/guard_ideal_r1.log

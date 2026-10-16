@@ -1,0 +1,46 @@
+=== ideal: 2 run(s)
+  serve_ideal_r1.json: seats 192 slots 32 think 30.0 s, 3325 turns, 1377 tok/s, TTFT median 31.3 ms
+  serve_ideal_r2.json: seats 192 slots 32 think 30.0 s, 3325 turns, 1376 tok/s, TTFT median 31.0 ms
+  TTFT all  n=6650  median     31.1  p90     57.9  p99    108.5 ms
+  TTFT hit       n=5184  median     31.1  p90     56.7  p99    105.6 ms   (tokens already in context: median 705)
+  TTFT new       n=1466  median     31.4  p90     66.7  p99    125.9 ms   (tokens already in context: median 53)
+  time per output token (iteration wall): median 16.69  p90 32.79  p99 44.26 ms
+  GPU time shares: decode 87.6%, hit 9.4%, restore 0.0%, recompute 0.0%, new 3.0%  (busy 1166 s of 1200 s)
+=== tier: 2 run(s)
+  serve_tier_r1.json: seats 192 slots 32 think 30.0 s, 3307 turns, 1371 tok/s, TTFT median 35.2 ms
+  serve_tier_r2.json: seats 192 slots 32 think 30.0 s, 3310 turns, 1370 tok/s, TTFT median 35.2 ms
+  TTFT all  n=6617  median     35.2  p90    474.2  p99   1409.6 ms
+  TTFT hit       n=195   median     30.4  p90     56.2  p99    103.8 ms   (tokens already in context: median 637)
+  TTFT restore   n=4960  median     35.3  p90    491.5  p99   1409.6 ms   (tokens already in context: median 711)
+  TTFT new       n=1462  median     35.6  p90    492.1  p99   1497.2 ms   (tokens already in context: median 53)
+  time per output token (iteration wall): median 16.72  p90 33.78  p99 45.66 ms
+  GPU time shares: decode 87.0%, hit 0.3%, restore 9.7%, recompute 0.0%, new 3.0%  (busy 1156 s of 1200 s)
+  decode step GPU ms, decode-only iterations, with vs without a KV save in flight:
+    B=16: quiet 15.91 (n=199) / with saves 15.65 (n=29) -> -1.6%
+    B=17: quiet 16.40 (n=317) / with saves 16.09 (n=55) -> -1.9%
+    B=18: quiet 16.41 (n=736) / with saves 16.09 (n=100) -> -1.9%
+    B=19: quiet 16.45 (n=1098) / with saves 16.12 (n=146) -> -2.0%
+    B=20: quiet 16.48 (n=1584) / with saves 16.16 (n=180) -> -1.9%
+    B=21: quiet 16.50 (n=1896) / with saves 16.16 (n=224) -> -2.1%
+    B=22: quiet 16.53 (n=2374) / with saves 16.19 (n=290) -> -2.0%
+    B=23: quiet 16.55 (n=2911) / with saves 16.21 (n=349) -> -2.0%
+    B=24: quiet 16.58 (n=3104) / with saves 16.22 (n=369) -> -2.2%
+    B=25: quiet 16.55 (n=3373) / with saves 16.19 (n=414) -> -2.2%
+    B=26: quiet 16.58 (n=3368) / with saves 16.21 (n=401) -> -2.3%
+    B=27: quiet 16.60 (n=3524) / with saves 16.23 (n=404) -> -2.2%
+    B=28: quiet 16.63 (n=3597) / with saves 16.24 (n=427) -> -2.4%
+    B=29: quiet 16.65 (n=3676) / with saves 16.29 (n=398) -> -2.2%
+    B=30: quiet 16.67 (n=2987) / with saves 16.27 (n=354) -> -2.4%
+    B=31: quiet 16.70 (n=2917) / with saves 16.35 (n=288) -> -2.1%
+=== recompute: 2 run(s)
+  serve_recompute_r1.json: seats 192 slots 32 think 30.0 s, 3068 turns, 1274 tok/s, TTFT median 1227.0 ms
+  serve_recompute_r2.json: seats 192 slots 32 think 30.0 s, 3074 turns, 1276 tok/s, TTFT median 1250.4 ms
+  TTFT all  n=6142  median   1239.2  p90   3167.5  p99   4455.7 ms
+  TTFT hit       n=28    median     30.4  p90    127.9  p99    271.8 ms   (tokens already in context: median 607)
+  TTFT recompute n=4781  median   1264.7  p90   3196.6  p99   4455.7 ms   (tokens already in context: median 744)
+  TTFT new       n=1333  median   1205.2  p90   3085.5  p99   4476.7 ms   (tokens already in context: median 53)
+  time per output token (iteration wall): median 16.79  p90 45.63  p99 129.24 ms
+  GPU time shares: decode 69.2%, hit 0.0%, restore 0.0%, recompute 28.0%, new 2.7%  (busy 1172 s of 1200 s)
+
+tier vs recompute: TTFT median x35.23, p90 x6.68, p99 x3.16; throughput +7.5%; time per token -0.4%
+recompute share of GPU time in the recompute policy: 28.0% (pre-registered rule: < 10% -> switch to the MoE route)

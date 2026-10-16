@@ -1,0 +1,32 @@
+serve_ideal_r1.json (slots 96, max batch 32)
+  queue wait  median      9.6  p90     16.6  p99     50.8 ms
+  prefill GPU median     18.5  p90     27.8  p99     90.6 ms
+  running batch: median 12, p90 17, max 23; iterations at batch >= 32: 0.0%
+  iterations without a prefill: 95.0%
+serve_ideal_r2.json (slots 96, max batch 32)
+  queue wait  median      9.2  p90     16.6  p99     52.4 ms
+  prefill GPU median     18.6  p90     27.9  p99     90.5 ms
+  running batch: median 12, p90 17, max 23; iterations at batch >= 32: 0.0%
+  iterations without a prefill: 95.0%
+serve_recompute_r1.json (slots 24, max batch 32)
+  queue wait  median     10.7  p90     46.5  p99    165.2 ms
+  prefill GPU median     38.7  p90     91.0  p99    113.0 ms
+  running batch: median 13, p90 19, max 24; iterations at batch >= 32: 0.0%
+  iterations without a prefill: 94.6%
+serve_recompute_r2.json (slots 24, max batch 32)
+  queue wait  median     10.3  p90     41.4  p99    149.8 ms
+  prefill GPU median     38.7  p90     90.9  p99    112.9 ms
+  running batch: median 13, p90 19, max 24; iterations at batch >= 32: 0.0%
+  iterations without a prefill: 94.6%
+serve_tier_r1.json (slots 24, max batch 32)
+  queue wait  median      9.4  p90     16.7  p99     51.2 ms
+  prefill GPU median     20.1  p90     29.4  p99     90.6 ms
+  running batch: median 12, p90 17, max 24; iterations at batch >= 32: 0.0%
+  iterations without a prefill: 95.0%
+  decode GPU ms with a save issued vs without, same batch (14 batch sizes): median -1.6%, range -1.8% .. -1.2%
+serve_tier_r2.json (slots 24, max batch 32)
+  queue wait  median      9.7  p90     16.9  p99     56.4 ms
+  prefill GPU median     20.2  p90     29.5  p99     90.6 ms
+  running batch: median 12, p90 17, max 24; iterations at batch >= 32: 0.0%
+  iterations without a prefill: 95.0%
+  decode GPU ms with a save issued vs without, same batch (12 batch sizes): median -1.5%, range -1.8% .. -1.3%
