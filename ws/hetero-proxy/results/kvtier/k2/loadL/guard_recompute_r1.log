@@ -1,0 +1,4 @@
+2026-10-16 09:58:10Z [css-host-158] START guard=v2 uid=1001045 cmd=ws/hetero-proxy/scripts/kvtier/run_k2_v1.sh ws/hetero-proxy/results/kvtier/k2/loadL --mode run --policy recompute --tag r1 --warmup 180 --duration 600 --seats 96 --slots 24
+2026-10-16 09:58:11Z [css-host-158] PREFLIGHT gpu_procs=[] foreign_cpu=[] foreign_root=[] self_cpu=[] other_users_logged_in=[]
+2026-10-16 10:07:19Z [css-host-158] SELF_CPU (warning) [(360428, 'rogerlee', 'MainThread', 65.1)]
+2026-10-16 10:12:34Z [css-host-158] END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 foreign_root_samples=0 self_cpu_warnings=1 window=None..None users_logged_in_at_end=[]

@@ -1,0 +1,2 @@
+2026-10-16 10:56:06Z [css-host-158] START guard=v2 uid=1001045 cmd=ws/hetero-proxy/scripts/kvtier/run_k2_v1.sh ws/hetero-proxy/results/kvtier/k2/loadH --mode run --policy ideal --tag r1 --warmup 180 --duration 600 --seats 192 --slots 32 --max_b 48
+2026-10-16 10:56:07Z [css-host-158] PREFLIGHT gpu_procs=[] foreign_cpu=[] foreign_root=[] self_cpu=[] other_users_logged_in=[]
