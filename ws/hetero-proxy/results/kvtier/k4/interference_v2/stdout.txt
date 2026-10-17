@@ -1,0 +1,27 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[rank4]:[W1017 06:48:20.833593679 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank5]:[W1017 06:48:20.833593999 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank3]:[W1017 06:48:21.179983188 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank0]:[W1017 06:48:21.180106693 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank6]:[W1017 06:48:21.813500747 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank1]:[W1017 06:48:22.137259918 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W1017 06:48:23.127759086 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank2]:[W1017 06:48:24.084506760 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[setup] 27 s, host NUMA pages {'N0': 98305}
+[progress] round 25/200, 20 s
+[progress] round 50/200, 40 s
+[progress] round 75/200, 60 s
+[progress] round 100/200, 80 s
+[progress] round 125/200, 100 s
+[progress] round 150/200, 120 s
+[progress] round 175/200, 140 s
+[progress] round 200/200, 160 s
+[interf] dec8     none   15.510 ms | h2d   23.016 ms (+48.4%, kept 200/200, bg 10.6-12.4 GB/s)
+[interf] dec16    none   15.697 ms | h2d   23.279 ms (+48.3%, kept 200/200, bg 10.6-12.4 GB/s)
+[interf] dec32    none   16.820 ms | h2d   24.476 ms (+45.5%, kept 200/200, bg 10.6-12.4 GB/s)
+[interf] new2048  none  111.335 ms | h2d  118.790 ms ( +6.7%, kept 200/200, bg 10.6-12.4 GB/s)
+[interf] ext128   none   28.782 ms | h2d   31.772 ms (+10.4%, kept 141/200, bg 10.6-12.4 GB/s)
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 1) log=ws/hetero-proxy/results/kvtier/k4/interference_v2/guard.log

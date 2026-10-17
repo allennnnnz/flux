@@ -1,0 +1,11 @@
+2026-10-17 07:12:38Z [css-host-158] START guard=v2 uid=1001045 cmd=env -u CUDA_DEVICE_MAX_CONNECTIONS CUDA_MODULE_LOADING=EAGER /usr/local/bin/nsys profile -t cuda,nvtx -o ws/hetero-proxy/results/kvtier/k4/diag_v1_nsys/diag --force-overwrite true pixi run --manifest-path pixi.toml /home/rogerlee/.venvs/hetero-proxy-hf/bin/python -m torch.distributed.run --nproc_per_node 8 ws/hetero-proxy/scripts/kvtier/k4_diag_v1.py --out ws/hetero-proxy/results/kvtier/k4/diag_v1_nsys --rounds 3
+2026-10-17 07:12:40Z [css-host-158] PREFLIGHT gpu_procs=[] foreign_cpu=[] foreign_root=[] self_cpu=[] other_users_logged_in=[]
+2026-10-17 07:12:44Z [css-host-158] SELF_CPU (warning) [(507934, 'rogerlee', 'nsys', 53.0)]
+2026-10-17 07:13:08Z [css-host-158] SELF_CPU (warning) [(507934, 'rogerlee', 'nsys', 100.8)]
+2026-10-17 07:13:09Z [css-host-158] SELF_CPU (warning) [(507934, 'rogerlee', 'nsys', 99.6)]
+2026-10-17 07:13:11Z [css-host-158] SELF_CPU (warning) [(507934, 'rogerlee', 'nsys', 100.6)]
+2026-10-17 07:13:12Z [css-host-158] SELF_CPU (warning) [(507934, 'rogerlee', 'nsys', 98.9)]
+2026-10-17 07:13:13Z [css-host-158] SELF_CPU (warning) [(507934, 'rogerlee', 'nsys', 100.7)]
+2026-10-17 07:13:14Z [css-host-158] SELF_CPU (warning) [(507934, 'rogerlee', 'nsys', 99.8)]
+2026-10-17 07:13:15Z [css-host-158] SELF_CPU (warning) [(507934, 'rogerlee', 'nsys', 99.8)]
+2026-10-17 07:13:16Z [css-host-158] SELF_CPU (warning) [(507934, 'rogerlee', 'nsys', 82.6)]

@@ -1,0 +1,31 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[rank2]:[W1017 07:12:51.825788002 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank0]:[W1017 07:12:52.108781953 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank1]:[W1017 07:12:52.555851712 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank4]:[W1017 07:12:52.584121522 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank3]:[W1017 07:12:52.595320420 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank7]:[W1017 07:12:52.596148389 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank5]:[W1017 07:12:52.629125388 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank6]:[W1017 07:12:52.652519618 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[diag] gemm|none        3.611 ms
+[diag] gemm|h2d         3.829 ms   background   35.37 ms, workload ended with/after it in 0/24 (rank, round)
+[diag] gemm|d2h         4.316 ms   background   33.78 ms, workload ended with/after it in 0/24 (rank, round)
+[diag] ar|none          8.087 ms
+[diag] ar|h2d           8.143 ms   background   35.36 ms, workload ended with/after it in 0/24 (rank, round)
+[diag] ar|d2h          18.143 ms   background   33.80 ms, workload ended with/after it in 0/24 (rank, round)
+[diag] mix|none        20.343 ms
+[diag] mix|h2d         20.206 ms   background   35.59 ms, workload ended with/after it in 0/24 (rank, round)
+[diag] mix|d2h         30.555 ms   background   33.98 ms, workload ended with/after it in 4/24 (rank, round)
+[diag] ar_big|none      2.153 ms
+[diag] ar_big|h2d       6.496 ms   background   35.33 ms, workload ended with/after it in 0/24 (rank, round)
+[diag] ar_big|d2h       2.515 ms   background   33.66 ms, workload ended with/after it in 0/24 (rank, round)
+Collecting data...
+Generating '/tmp/nsys-rogerlee/nsys-report-546f.qdstrm'
+Press Ctrl-C to stop symbol files downloading
+Symbol file download process is aborted by the user
+[1/1] [0%                          ] diag.nsys-rep[1/1] [0%                          ] diag.nsys-rep[1/1] [1%                          ] diag.nsys-rep[1/1] [2%                          ] diag.nsys-rep[1/1] [5%                          ] diag.nsys-rep[1/1] [6%                          ] diag.nsys-rep[1/1] [7%                          ] diag.nsys-rep[1/1] [8%                          ] diag.nsys-rep[1/1] [9%                          ] diag.nsys-rep[1/1] [10%                         ] diag.nsys-rep[1/1] [11%                         ] diag.nsys-rep[1/1] [12%                         ] diag.nsys-rep[1/1] [13%                         ] diag.nsys-rep[1/1] [14%                         ] diag.nsys-rep[1/1] [=15%                        ] diag.nsys-rep[1/1] [=16%                        ] diag.nsys-rep[1/1] [=17%                        ] diag.nsys-rep[1/1] [==18%                       ] diag.nsys-rep[1/1] [==19%                       ] diag.nsys-rep[1/1] [==20%                       ] diag.nsys-rep[1/1] [==========47%               ] diag.nsys-rep[1/1] [==========48%               ] diag.nsys-rep[1/1] [=======================93%  ] diag.nsys-rep[1/1] [=======================96%  ] diag.nsys-rep[1/1] [========================98% ] diag.nsys-rep[1/1] [========================100%] diag.nsys-rep[1/1] [========================100%] diag.nsys-rep
+Generated:
+	/home/rogerlee/flux/ws/hetero-proxy/results/kvtier/k4/diag_v1_nsys/diag.nsys-rep

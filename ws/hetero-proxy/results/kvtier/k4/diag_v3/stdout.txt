@@ -1,0 +1,14 @@
+[diag3] none|h2d  mix   17.016 ms (  +0.0%)
+[diag3] ticks|h2d mix   12.998 ms ( -23.6%)
+[diag3] free|h2d  mix   15.558 ms (  -8.6%)   copies  402.7 MB in  36.62 ms = 11.00 GB/s per GPU
+[diag3] free|d2h  mix   27.626 ms ( +62.4%)   copies  402.7 MB in  34.15 ms = 11.79 GB/s per GPU
+[diag3] free512|h2d mix   16.868 ms (  -0.9%)   copies  402.7 MB in  38.63 ms = 10.42 GB/s per GPU
+[diag3] free512|d2h mix   23.337 ms ( +37.2%)   copies  402.7 MB in  35.08 ms = 11.48 GB/s per GPU
+[diag3] gemm128|h2d mix   13.130 ms ( -22.8%)   copies   16.8 MB in  13.80 ms =  1.22 GB/s per GPU
+[diag3] gemm128|d2h mix   14.647 ms ( -13.9%)   copies   16.8 MB in  15.30 ms =  1.10 GB/s per GPU
+[diag3] gemm512|h2d mix   13.903 ms ( -18.3%)   copies   67.1 MB in  14.60 ms =  4.60 GB/s per GPU
+[diag3] gemm512|d2h mix   13.802 ms ( -18.9%)   copies   67.1 MB in  14.50 ms =  4.63 GB/s per GPU
+[diag3] gemm1024|h2d mix   15.717 ms (  -7.6%)   copies  134.2 MB in  16.46 ms =  8.16 GB/s per GPU
+[diag3] gemm1024|d2h mix   18.743 ms ( +10.2%)   copies  134.2 MB in  19.44 ms =  6.90 GB/s per GPU
+[diag3] ar512|h2d mix   14.637 ms ( -14.0%)   copies   67.1 MB in  15.39 ms =  4.36 GB/s per GPU
+[diag3] ar512|d2h mix   14.964 ms ( -12.1%)   copies   67.1 MB in  15.70 ms =  4.28 GB/s per GPU

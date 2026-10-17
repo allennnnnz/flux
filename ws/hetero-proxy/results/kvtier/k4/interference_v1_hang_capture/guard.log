@@ -1,0 +1,3 @@
+2026-10-17 06:07:21Z [css-host-158] START guard=v2 uid=1001045 cmd=env -u CUDA_DEVICE_MAX_CONNECTIONS CUDA_MODULE_LOADING=EAGER HXB_STACK_DUMP_S=600 pixi run --manifest-path pixi.toml /home/rogerlee/.venvs/hetero-proxy-hf/bin/python -m torch.distributed.run --nproc_per_node 8 ws/hetero-proxy/scripts/kvtier/k4_interference_v1.py --out ws/hetero-proxy/results/kvtier/k4/interference_v1 --rounds 200
+2026-10-17 06:07:22Z [css-host-158] PREFLIGHT gpu_procs=[] foreign_cpu=[] foreign_root=[] self_cpu=[] other_users_logged_in=[]
+2026-10-17 06:46:23Z [css-host-158] SELF_CPU (warning) [(490903, 'rogerlee', 'claude', 76.3)]

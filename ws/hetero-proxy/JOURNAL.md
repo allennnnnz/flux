@@ -166,3 +166,13 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   外存的尾端是排隊等格子（正在生成的對話佔滿 GPU），不是搬運。
 - 待查：背景存 KV 時他人 decode 反而快 1.5–2.8%（兩種負載同方向）。
 - **留給下個 session**：與使用者確認下一步（K3 裝置主動送 / 干擾待查實驗 / 整理報告 / auditor 審查）。
+
+## 2026-10-17 · boss 兼 worker · K4 方向一：避開 NVLink 的搬運排程
+
+- 使用者選方向一（理由：Flux 指出 TP 的 all-reduce 在必經路線上）。計劃 K4.1–K4.4 見 STATUS §0。
+- K4.1 第一次在錄 graph 時卡死（暖身走 graph 專用 communicator，同一 communicator 混用逐個發與錄進 graph）→ `k2_engine_v2.py`：暖身改走預設 communicator。
+- K4.1 v2：背景搬回 decode +48%、存出約 +145%（graph、打亂、兩次一致）。D2H 時運算總在搬運結束時才結束，先懷疑佇列共用，`CUDA_DEVICE_MAX_CONNECTIONS=32` 重跑無變化。
+- 逐個發 kernel 的分解實驗（diag v1–v3）：發現小 all-reduce 受害最深，但 v2 / v3 的基準在不同次執行間漂移 50%、出現不可能的結果 → 撤回，教訓：小 NCCL 迴圈不能用逐個發的方式量。
+- nsys 兩次寫不出報告（第一次是 `os._exit` 害的，第二次在 8 卡 torchrun 下卡住）→ 改以直接實驗檢驗假設。
+- `k4_place_v1.py`（graph、打亂）：搬運只在最大的矩陣乘法開始時放行一小塊（0.5 MB）→ decode 只慢 2.8–3.7%；放在 all-reduce 開始時 5.3–11.9%；全速 45–145%；塊放大到 1 MB 優勢消失。
+- **留給下個 session**：K4.2 / K4.3 接進服務迴圈（背景搬回、Flux 式放行；每層多個放行點提高速度）+ 長對話使用者（文件問答）；查 K2「存 KV 沒拖慢」與 K4.1 的矛盾。

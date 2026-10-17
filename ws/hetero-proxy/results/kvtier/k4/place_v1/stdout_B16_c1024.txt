@@ -1,0 +1,8 @@
+[place] B=16 none|-    step   15.757 ms (  +0.0%)
+[place] B=16 ticks|-   step   15.980 ms (  +1.4%)
+[place] B=16 free|h2d  step   23.283 ms ( +47.8%)   copies  402.7 MB in  35.35 ms (11.39 GB/s per GPU)
+[place] B=16 free|d2h  step   38.598 ms (+145.0%)   copies  402.7 MB in  33.56 ms (12.00 GB/s per GPU)
+[place] B=16 gu|h2d    step   17.506 ms ( +11.1%)   copies   67.1 MB in  16.73 ms ( 4.01 GB/s per GPU)
+[place] B=16 gu|d2h    step   17.844 ms ( +13.2%)   copies   67.1 MB in  17.06 ms ( 3.93 GB/s per GPU)
+[place] B=16 ar|h2d    step   16.751 ms (  +6.3%)   copies   67.1 MB in  15.97 ms ( 4.20 GB/s per GPU)
+[place] B=16 ar|d2h    step   17.882 ms ( +13.5%)   copies   67.1 MB in  17.07 ms ( 3.93 GB/s per GPU)

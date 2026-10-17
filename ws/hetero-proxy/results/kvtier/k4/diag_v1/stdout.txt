@@ -1,0 +1,12 @@
+[diag] gemm|none        3.529 ms
+[diag] gemm|h2d         3.749 ms   background   35.19 ms, workload ended with/after it in 0/240 (rank, round)
+[diag] gemm|d2h         4.274 ms   background   33.75 ms, workload ended with/after it in 0/240 (rank, round)
+[diag] ar|none          4.049 ms
+[diag] ar|h2d           5.042 ms   background   35.33 ms, workload ended with/after it in 0/240 (rank, round)
+[diag] ar|d2h          15.006 ms   background   33.81 ms, workload ended with/after it in 0/240 (rank, round)
+[diag] mix|none        11.434 ms
+[diag] mix|h2d         13.578 ms   background   35.51 ms, workload ended with/after it in 0/240 (rank, round)
+[diag] mix|d2h         24.399 ms   background   33.83 ms, workload ended with/after it in 0/240 (rank, round)
+[diag] ar_big|none      2.135 ms
+[diag] ar_big|h2d       2.179 ms   background   35.25 ms, workload ended with/after it in 0/240 (rank, round)
+[diag] ar_big|d2h       2.460 ms   background   33.76 ms, workload ended with/after it in 0/240 (rank, round)

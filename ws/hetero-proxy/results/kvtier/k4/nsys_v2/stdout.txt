@@ -1,0 +1,23 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[rank2]:[W1017 06:55:37.774180370 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank1]:[W1017 06:55:37.781791961 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank0]:[W1017 06:55:46.253445783 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank5]:[W1017 06:55:48.787140274 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank6]:[W1017 06:55:49.224840558 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W1017 06:55:49.226794228 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank4]:[W1017 06:55:51.463059629 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank3]:[W1017 06:55:52.710122429 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[setup] 32 s, host NUMA pages {'N0': 98305}
+[interf] dec8     none   15.333 ms | h2d   21.901 ms (+42.8%, kept 4/4, bg 10.5-12.3 GB/s)
+[interf] dec16    none   15.630 ms | h2d   22.068 ms (+41.2%, kept 4/4, bg 10.5-12.3 GB/s)
+[interf] dec32    none   16.748 ms | h2d   23.335 ms (+39.3%, kept 4/4, bg 10.5-12.2 GB/s)
+[interf] new2048  none  111.698 ms | h2d  118.756 ms ( +6.3%, kept 4/4, bg 10.6-12.4 GB/s)
+[interf] ext128   none   29.271 ms
+Collecting data...
+Generating '/tmp/nsys-rogerlee/nsys-report-ea1f.qdstrm'
+Press Ctrl-C to stop symbol files downloading
+[1/1] [0%                          ] k4.nsys-rep[1/1] [0%                          ] k4.nsys-rep[1/1] [1%                          ] k4.nsys-rep[1/1] [2%                          ] k4.nsys-rep[1/1] [5%                          ] k4.nsys-rep[1/1] [6%                          ] k4.nsys-rep[1/1] [7%                          ] k4.nsys-rep[1/1] [8%                          ] k4.nsys-rep[1/1] [9%                          ] k4.nsys-rep[1/1] [10%                         ] k4.nsys-rep[1/1] [11%                         ] k4.nsys-rep[1/1] [12%                         ] k4.nsys-rep[1/1] [13%                         ] k4.nsys-rep[1/1] [14%                         ] k4.nsys-rep[1/1] [=15%                        ] k4.nsys-rep[1/1] [=16%                        ] k4.nsys-rep[1/1] [=17%                        ] k4.nsys-rep[1/1] [==18%                       ] k4.nsys-rep[1/1] [==19%                       ] k4.nsys-rep[1/1] [==20%                       ] k4.nsys-rep[1/1] [===================81%      ] k4.nsys-rep[1/1] [===================82%      ] k4.nsys-rep/dvs/p4/build/sw/devtools/Agora/Rel/CUDA13.4/QuadD/Common/AgentAPI/Src/SessionImpl.cpp(21): rpc Signal(.Agent.SignalRequest) returns (.Agent.EmptyMessage);
+ is canceled because the timeout period is expired (30 sec).
