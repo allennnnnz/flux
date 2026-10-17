@@ -1,0 +1,6 @@
+GPU0: 11824 kernels, 4825 NCCL all-reduce kernels, 4608 background 4 MiB copies (kind 1 = H2D, 2 = D2H)
+  all-reduce kernel duration, overlapping no copy : n= 1675  median   56.7 us (kernels < 200 us)
+  all-reduce kernel duration, overlapping H2D copy: n= 1584  median   55.6 us (kernels < 200 us)
+  all-reduce kernel duration, overlapping D2H copy: n= 1566  median   74.4 us (kernels < 200 us)
+  gap between consecutive all-reduce kernels, no copy       : n= 1705  median    2.5 us
+  gap between consecutive all-reduce kernels, copy in flight: n= 3027  median   23.9 us

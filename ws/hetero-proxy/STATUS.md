@@ -117,7 +117,9 @@
     同樣的搬運量（每步 64 塊 × 0.5 MB），**在最大的矩陣乘法開始時放行：+2.8–3.7%**（含計數器本身 1.2–1.4%）；**在 all-reduce 開始時放行：+5.3–11.9%**；
     全速搬：+45–145%。**塊放大到 1 MB（超過矩陣乘法的時間窗）優勢消失**（+10–13%，與 all-reduce 放行相當）→ 傷害來自搬運壓在 all-reduce 上。
     換算每搬 1 MB 對他人的拖慢：錯開比全速好約 3.5×（H2D）到 6.6×（D2H）；代價是搬運速度 2 GB/s（全速 11.4）。預測 R1、R3 成立；R2 只在 D2H 成立。
-  - 機制（推論，未證實）：decode 的 all-reduce 是 128 個約 20 µs 的小 kernel，對延遲敏感；同時有 PCIe 流量時被拖慢。如何驗證：nsys 單卡逐 kernel 時間（8 卡 torchrun 下 nsys 兩次寫不出報告，需改方法）。
+  - 機制（`results/kvtier/k4/diag_v1_nsys/gaps.txt`，GPU0 的 CUPTI kernel 時間，逐個發 kernel + nsys，只作佐證）：有背景搬運時，**相鄰兩個 all-reduce kernel 之間的空檔 2.5 → 23.9 µs（約 10×）**；
+    kernel 本身 H2D 時不變（56.7 → 55.6 µs）、D2H 時 +31%。→ 主要是 GPU 啟動下一個 kernel 被延遲；decode 一步有上千個小 kernel，所以受害最深，prefill 的 kernel 少而大幾乎不受影響。
+    推論：啟動 kernel 要經 PCIe 讀指令／參數，被大量搬運塞住（D2H 更嚴重：讀取請求排在大量寫入之後）。Flux 式放行有效，是因為搬運只發生在一個長 kernel 執行期間。
   - 待解的矛盾：K2 的背景存 KV（每輪約 8 MB）沒有拖慢 decode（−2%），與這裡的 +145% 不一致；推論是量太小、只壓到少數幾層。
   - 撤回：逐個發 kernel 的分解實驗 `k4_diag_v2` / `v3` 的結論（基準在 11.4 / 12.9 / 17.0 ms 間漂移，只加計數器反而快 24%），已加 WITHDRAWN；`k4_diag_v1` 只當定性參考。
 - **過程中修掉的問題**（細節見 JOURNAL 10-16）：ShareGPT 檔案把對話切成約 2k 一段（HF 參考 v1 / v2 撤回 → v3 接回）；decode graph 暖身蓋掉 KV 位置 0（kvtier v1 撤回；影響 E2E v3–v5 check，見撤回表）；
