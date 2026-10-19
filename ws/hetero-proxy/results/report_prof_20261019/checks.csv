@@ -1,0 +1,20 @@
+stage,item,path,compared_with,result,first_diff_vs_hf,hf_top2_gap_there
+K1,hist2k（歷史 1639 字）,先搬完再算,KV 一直留在 GPU,逐位元相同,19,0.0
+K1,hist2k（歷史 1639 字）,邊搬邊算,KV 一直留在 GPU,逐位元相同,19,0.0
+K1,hist2k（歷史 1639 字）,重算,KV 一直留在 GPU,在平手處分歧,26,0.125
+K1,hist4k（歷史 3590 字）,先搬完再算,KV 一直留在 GPU,逐位元相同,26,0.0
+K1,hist4k（歷史 3590 字）,邊搬邊算,KV 一直留在 GPU,逐位元相同,26,0.0
+K1,hist4k（歷史 3590 字）,重算,KV 一直留在 GPU,64 字相同、logits 有最後一位差異,26,0.0
+K1,hist8k（歷史 8354 字）,先搬完再算,KV 一直留在 GPU,逐位元相同,8,0.125
+K1,hist8k（歷史 8354 字）,邊搬邊算,KV 一直留在 GPU,逐位元相同,8,0.125
+K1,hist8k（歷史 8354 字）,重算,KV 一直留在 GPU,在平手處分歧,64,
+K2,hist2k（歷史 1639 字）,搬回 + 接續（服務用的程式）,KV 留在 GPU 接續,逐位元相同,19,0.0
+K2,hist4k（歷史 3590 字）,搬回 + 接續（服務用的程式）,KV 留在 GPU 接續,逐位元相同,64,
+E2E 重驗,en_explain,Bfinal（經 CPU）,A（8 卡 NCCL）,64 字相同,50,
+E2E 重驗,en_explain,Bmid8（經 CPU）,A（8 卡 NCCL）,第 50 字分歧,53,0.375
+E2E 重驗,zh_explain,Bfinal（經 CPU）,A（8 卡 NCCL）,64 字相同,64,
+E2E 重驗,zh_explain,Bmid8（經 CPU）,A（8 卡 NCCL）,64 字相同,64,
+E2E 重驗,code,Bfinal（經 CPU）,A（8 卡 NCCL）,64 字相同,64,
+E2E 重驗,code,Bmid8（經 CPU）,A（8 卡 NCCL）,第 18 字分歧,18,0.0
+E2E 重驗,math,Bfinal（經 CPU）,A（8 卡 NCCL）,64 字相同,64,
+E2E 重驗,math,Bmid8（經 CPU）,A（8 卡 NCCL）,64 字相同,64,

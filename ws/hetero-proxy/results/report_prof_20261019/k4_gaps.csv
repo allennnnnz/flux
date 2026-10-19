@@ -1,0 +1,6 @@
+metric,condition,samples,median_us
+all-reduce kernel 本身,no copy,1675,56.7
+all-reduce kernel 本身,H2D copy,1584,55.6
+all-reduce kernel 本身,D2H copy,1566,74.4
+相鄰 kernel 之間的空檔,no copy,1705,2.5
+相鄰 kernel 之間的空檔,copy in flight,3027,23.9

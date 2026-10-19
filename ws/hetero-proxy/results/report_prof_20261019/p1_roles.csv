@@ -1,0 +1,8 @@
+role,role_zh,metric_zh,value,unit,verdict
+T1,CPU 幫忙算 attention,CPU 能分擔的比例（最好的情況）,0.54,%,無用
+T1,CPU 幫忙算 attention,即使用滿 CPU 讀取頻寬,1.2,%,無用
+T2,MoE 專家在 CPU 上算,Qwen3-30B-A3B，每專家 1 個 token：比搬權重快,6.8,×,有用（模型放不進 GPU 時）
+T2,MoE 專家在 CPU 上算,Qwen3-30B-A3B，每專家 4 個 token：比搬權重快,5.4,×,有用（模型放不進 GPU 時）
+T2,MoE 專家在 CPU 上算,Mixtral-8x7B，每專家 1 個 token：比搬權重快,7.2,×,有用（模型放不進 GPU 時）
+T4,CPU 幫忙做 decode,多出的 decode 能力,1.8,%,無用
+KV,CPU 當 KV 外存,歷史 8192 字：搬回比重算快（K1 實測）,15.87,×,有用 → 選為主線

@@ -1,0 +1,17 @@
+load,load_zh,policy,policy_zh,kind,kind_zh,turns,ttft_median_ms,ttft_p90_ms,context_tokens_median
+L,輕負載,ideal,理想（記憶體無限）,hit,命中（KV 還在）,2612,29.2,43.1,686
+L,輕負載,ideal,理想（記憶體無限）,new,新對話,756,30.7,64.4,52
+L,輕負載,tier,CPU 外存,hit,命中（KV 還在）,484,29.9,41.0,648
+L,輕負載,tier,CPU 外存,restore,從 CPU 搬回,2124,31.2,44.7,692
+L,輕負載,tier,CPU 外存,new,新對話,754,30.6,63.9,52
+L,輕負載,recompute,重算,hit,命中（KV 還在）,449,30.2,59.6,648
+L,輕負載,recompute,重算,recompute,重算,2115,78.8,128.4,738
+L,輕負載,recompute,重算,new,新對話,756,31.7,87.8,52
+H,重負載,ideal,理想（記憶體無限）,hit,命中（KV 還在）,5184,31.1,56.7,705
+H,重負載,ideal,理想（記憶體無限）,new,新對話,1466,31.4,66.7,53
+H,重負載,tier,CPU 外存,hit,命中（KV 還在）,195,30.4,56.2,637
+H,重負載,tier,CPU 外存,restore,從 CPU 搬回,4960,35.3,491.5,711
+H,重負載,tier,CPU 外存,new,新對話,1462,35.6,492.1,53
+H,重負載,recompute,重算,hit,命中（KV 還在）,28,30.4,127.9,607
+H,重負載,recompute,重算,recompute,重算,4781,1264.7,3196.6,744
+H,重負載,recompute,重算,new,新對話,1333,1205.2,3085.5,53
