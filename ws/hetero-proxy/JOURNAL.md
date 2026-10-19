@@ -176,3 +176,10 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - nsys 兩次寫不出報告（第一次是 `os._exit` 害的，第二次在 8 卡 torchrun 下卡住）→ 改以直接實驗檢驗假設。
 - `k4_place_v1.py`（graph、打亂）：搬運只在最大的矩陣乘法開始時放行一小塊（0.5 MB）→ decode 只慢 2.8–3.7%；放在 all-reduce 開始時 5.3–11.9%；全速 45–145%；塊放大到 1 MB 優勢消失。
 - **留給下個 session**：K4.2 / K4.3 接進服務迴圈（背景搬回、Flux 式放行；每層多個放行點提高速度）+ 長對話使用者（文件問答）；查 K2「存 KV 沒拖慢」與 K4.1 的矛盾。
+
+## 2026-10-19 · boss 兼 worker · 報告整理
+
+- 完整報告 `reports/20261019_kvtier_k1_k2.md`（K1 / K2 全部細節，每個數字附來源）；機制圖解頁 https://claude.ai/artifact/3RUzQ2kSwebvJhaKjrhTBN 。
+- 給教授的量測報告頁（Dashboard）https://claude.ai/artifact/Xn8qrYKMPiH6sFoKpgs4N7 ：所有數字來自 `results/report_prof_20261019/*.csv`，
+  由 `scripts/kvtier/export_report_v1.py` 從已提交的原始輸出重算（與各 analysis.txt 一致）。涵蓋 P1、K1、K2、K4.1、正確性、事前預測、更正與限制、下一步。
+- 文獻初查（論文方向）：KV 外存與多輪對話已有多篇（CachedAttention、SwiftCache…）；PCIe 爭用有 2025 年的多租戶研究，但沒找到「KV 搬運拖慢 TP decode」及其解法 → 建議以 K4 為論文主軸，待使用者確認論文形式。
