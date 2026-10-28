@@ -1,0 +1,26 @@
+test,test_zh,traffic,traffic_zh,ns,times_none
+pp_fsys,NVLink 互傳小旗標：寫入後用系統層級屏障,none,沒有搬運,2628.1,1.0
+pp_fsys,NVLink 互傳小旗標：寫入後用系統層級屏障,h2d_both,兩張卡都背景搬回,5480.2,2.09
+pp_fsys,NVLink 互傳小旗標：寫入後用系統層級屏障,d2h_both,兩張卡都背景存出,11966.5,4.55
+pp_fsys,NVLink 互傳小旗標：寫入後用系統層級屏障,d2h_gpu0,只有 GPU0 存出,6643.2,2.53
+pp_fsys,NVLink 互傳小旗標：寫入後用系統層級屏障,d2h_gpu1,只有 GPU1 存出,8480.8,3.23
+pp_fgpu,NVLink 互傳小旗標：寫入後用 GPU 層級屏障,none,沒有搬運,1098.8,1.0
+pp_fgpu,NVLink 互傳小旗標：寫入後用 GPU 層級屏障,h2d_both,兩張卡都背景搬回,1098.8,1.0
+pp_fgpu,NVLink 互傳小旗標：寫入後用 GPU 層級屏障,d2h_both,兩張卡都背景存出,1097.7,1.0
+pp_fgpu,NVLink 互傳小旗標：寫入後用 GPU 層級屏障,d2h_gpu0,只有 GPU0 存出,1097.7,1.0
+pp_fgpu,NVLink 互傳小旗標：寫入後用 GPU 層級屏障,d2h_gpu1,只有 GPU1 存出,1098.2,1.0
+pp_none,NVLink 互傳小旗標：不加屏障,none,沒有搬運,1102.8,1.0
+pp_none,NVLink 互傳小旗標：不加屏障,h2d_both,兩張卡都背景搬回,1102.8,1.0
+pp_none,NVLink 互傳小旗標：不加屏障,d2h_both,兩張卡都背景存出,1101.8,1.0
+pp_none,NVLink 互傳小旗標：不加屏障,d2h_gpu0,只有 GPU0 存出,1101.3,1.0
+pp_none,NVLink 互傳小旗標：不加屏障,d2h_gpu1,只有 GPU1 存出,1101.8,1.0
+hostread,GPU 讀一次主機記憶體,none,沒有搬運,1269.2,1.0
+hostread,GPU 讀一次主機記憶體,h2d_both,兩張卡都背景搬回,3204.1,2.52
+hostread,GPU 讀一次主機記憶體,d2h_both,兩張卡都背景存出,4710.9,3.71
+hostread,GPU 讀一次主機記憶體,d2h_gpu0,只有 GPU0 存出,1732.4,1.36
+hostread,GPU 讀一次主機記憶體,d2h_gpu1,只有 GPU1 存出,3681.8,2.9
+localspin,GPU 讀一次自己的記憶體（對照）,none,沒有搬運,19.5,1.0
+localspin,GPU 讀一次自己的記憶體（對照）,h2d_both,兩張卡都背景搬回,19.5,1.0
+localspin,GPU 讀一次自己的記憶體（對照）,d2h_both,兩張卡都背景存出,19.5,1.0
+localspin,GPU 讀一次自己的記憶體（對照）,d2h_gpu0,只有 GPU0 存出,19.5,1.0
+localspin,GPU 讀一次自己的記憶體（對照）,d2h_gpu1,只有 GPU1 存出,19.5,1.0

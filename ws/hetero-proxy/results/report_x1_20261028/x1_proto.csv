@@ -1,0 +1,10 @@
+protocol,traffic,traffic_zh,ar_us,vs_none_pct
+LL,none,沒有搬運,32.03,0.0
+LL,h2d_all,全部 GPU 背景搬回,54.24,70.2
+LL,d2h_all,全部 GPU 背景存出,214.44,590.6
+LL128,none,沒有搬運,45.77,0.0
+LL128,h2d_all,全部 GPU 背景搬回,87.34,92.7
+LL128,d2h_all,全部 GPU 背景存出,226.24,409.6
+Simple,none,沒有搬運,134.58,0.0
+Simple,h2d_all,全部 GPU 背景搬回,286.13,113.4
+Simple,d2h_all,全部 GPU 背景存出,422.69,212.0

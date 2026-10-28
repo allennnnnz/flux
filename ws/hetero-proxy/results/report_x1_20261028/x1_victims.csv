@@ -1,0 +1,21 @@
+victim,victim_zh,traffic,traffic_zh,ms,vs_none_pct,item_us,added_us
+tiny,極小 kernel（只量啟動）,none,沒有搬運,1.153,0.0,0.93,0.0
+tiny,極小 kernel（只量啟動）,h2d_all,全部 GPU 背景搬回,1.155,0.2,0.93,0.0
+tiny,極小 kernel（只量啟動）,d2h_all,全部 GPU 背景存出,1.194,3.6,0.93,0.0
+tiny,極小 kernel（只量啟動）,h2d_self,只有 GPU0 搬回,1.154,0.1,0.93,0.0
+tiny,極小 kernel（只量啟動）,h2d_others,只有其他 GPU 搬回,1.154,0.1,0.93,0.0
+gemm,decode 大小的矩陣乘法,none,沒有搬運,6.777,0.0,52.48,0.0
+gemm,decode 大小的矩陣乘法,h2d_all,全部 GPU 背景搬回,6.934,2.3,53.72,1.24
+gemm,decode 大小的矩陣乘法,d2h_all,全部 GPU 背景存出,6.839,0.9,52.74,0.26
+gemm,decode 大小的矩陣乘法,h2d_self,只有 GPU0 搬回,6.985,3.1,54.38,1.89
+gemm,decode 大小的矩陣乘法,h2d_others,只有其他 GPU 搬回,6.995,3.2,52.47,-0.01
+ar,NCCL 小 all-reduce,none,沒有搬運,4.125,0.0,31.94,0.0
+ar,NCCL 小 all-reduce,h2d_all,全部 GPU 背景搬回,6.965,68.8,53.84,21.9
+ar,NCCL 小 all-reduce,d2h_all,全部 GPU 背景存出,28.621,593.8,214.31,182.38
+ar,NCCL 小 all-reduce,h2d_self,只有 GPU0 搬回,4.787,16.0,34.05,2.11
+ar,NCCL 小 all-reduce,h2d_others,只有其他 GPU 搬回,7.476,81.2,58.03,26.09
+mix,模擬 decode 一步,none,沒有搬運,13.153,0.0,204.52,0.0
+mix,模擬 decode 一步,h2d_all,全部 GPU 背景搬回,20.631,56.9,317.04,112.53
+mix,模擬 decode 一步,d2h_all,全部 GPU 背景存出,39.756,202.3,604.79,400.28
+mix,模擬 decode 一步,h2d_self,只有 GPU0 搬回,15.609,18.7,236.4,31.88
+mix,模擬 decode 一步,h2d_others,只有其他 GPU 搬回,20.813,58.2,322.97,118.45
