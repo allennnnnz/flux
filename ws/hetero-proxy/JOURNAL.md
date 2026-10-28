@@ -191,3 +191,7 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - X1：推翻「kernel 啟動被延遲」的推論——graph 內極小 kernel 的間隔不變、GEMM 幾乎不變，受害的是 NCCL 小 all-reduce（+69% / +594%）。
 - X1b / X1c（CUDA C，load_inline；要加 pixi 的 lib 路徑才連得到 libcudart；peer access 用擴充自己開）：NVLink 互傳小旗標只有在用系統層級屏障時才被拖慢（×2–4.6）；GPU 層級或不加屏障完全不受影響。
 - NCCL 三種協定都受影響 → 下一步看 NCCL 原始碼、寫 GPU 層級同步的 all-reduce。
+- 報告更新：量測報告頁（Dashboard）第 3 版——「原因」卡片改成系統層級屏障（x1_fence 圖）、加 X1 受害者表與協定表、撤回啟動空檔說法；
+  說明頁 https://claude.ai/artifact/3RUzQ2kSwebvJhaKjrhTBN 第 2 版——更正「kernel 啟動空檔變大 10 倍」三處、進度表加 X1、註明改題。
+- 拓撲（`results/xpcie/topology_20261028.txt`）：GPU0/1、2/3、4/5、6/7 各兩張共用一個 PCIe 交換器與一條 Gen4 x16 上行（root port 09:02.0 等）。
+  解釋 X1b/X1c 的跨卡現象：只有 GPU1 存出，GPU0 讀主機 ×2.9、系統屏障互傳 ×3.2——GPU0 的請求在共用上行裡排在 GPU1 的寫入後面（推論）。
