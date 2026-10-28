@@ -1,0 +1,16 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[rank1]:[W1028 15:23:40.764337164 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank3]:[W1028 15:23:41.030231267 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank7]:[W1028 15:23:41.030936124 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[progress] round 25/100, 18 s
+[progress] round 50/100, 36 s
+[progress] round 75/100, 55 s
+[progress] round 100/100, 73 s
+[x1] tiny  none    1.153 ms, item    0.93 us | h2d_all    1.155 ms (  +0.2%), item    0.93 us (+  0.00) | d2h_all    1.194 ms (  +3.6%), item    0.93 us (+  0.00) | h2d_self    1.154 ms (  +0.1%), item    0.93 us (+  0.00) | h2d_others    1.154 ms (  +0.1%), item    0.93 us (+  0.00)
+[x1] gemm  none    6.777 ms, item   52.48 us | h2d_all    6.934 ms (  +2.3%), item   53.72 us (+  1.24) | d2h_all    6.839 ms (  +0.9%), item   52.74 us (+  0.26) | h2d_self    6.985 ms (  +3.1%), item   54.38 us (+  1.89) | h2d_others    6.995 ms (  +3.2%), item   52.47 us (+ -0.01)
+[x1] ar    none    4.125 ms, item   31.94 us | h2d_all    6.965 ms ( +68.8%), item   53.84 us (+ 21.90) | d2h_all   28.621 ms (+593.8%), item  214.31 us (+182.38) | h2d_self    4.787 ms ( +16.0%), item   34.05 us (+  2.11) | h2d_others    7.476 ms ( +81.2%), item   58.03 us (+ 26.09)
+[x1] mix   none   13.153 ms, item  204.52 us | h2d_all   20.631 ms ( +56.9%), item  317.04 us (+112.53) | d2h_all   39.756 ms (+202.3%), item  604.79 us (+400.28) | h2d_self   15.609 ms ( +18.7%), item  236.40 us (+ 31.88) | h2d_others   20.813 ms ( +58.2%), item  322.97 us (+118.45)
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/xpcie/x1_v1/guard.log

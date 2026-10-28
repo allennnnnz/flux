@@ -1,0 +1,3 @@
+[x1c] pp_fsys   none   2628.1 ns | h2d_both   5480.2 ns (x 2.09) | d2h_both  11966.5 ns (x 4.55) | d2h_gpu0   6643.2 ns (x 2.53) | d2h_gpu1   8480.8 ns (x 3.23)
+[x1c] pp_fgpu   none   1098.8 ns | h2d_both   1098.8 ns (x 1.00) | d2h_both   1097.7 ns (x 1.00) | d2h_gpu0   1097.7 ns (x 1.00) | d2h_gpu1   1098.2 ns (x 1.00)
+[x1c] pp_none   none   1102.8 ns | h2d_both   1102.8 ns (x 1.00) | d2h_both   1101.8 ns (x 1.00) | d2h_gpu0   1101.3 ns (x 1.00) | d2h_gpu1   1101.8 ns (x 1.00)

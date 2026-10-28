@@ -1,0 +1,2 @@
+[x1] ar    none   17.261 ms, item  134.58 us | h2d_all   36.837 ms (+113.4%), item  286.13 us (+151.56) | d2h_all   53.862 ms (+212.0%), item  422.69 us (+288.11) | h2d_self   24.824 ms ( +43.8%), item  189.83 us (+ 55.25) | h2d_others   36.898 ms (+113.8%), item  286.75 us (+152.18)
+[x1] mix   none   26.646 ms, item  415.22 us | h2d_all   45.253 ms ( +69.8%), item  704.17 us (+288.95) | d2h_all   59.374 ms (+122.8%), item  934.24 us (+519.01) | h2d_self   31.138 ms ( +16.9%), item  479.96 us (+ 64.74) | h2d_others   45.357 ms ( +70.2%), item  705.89 us (+290.67)

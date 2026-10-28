@@ -183,3 +183,11 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - 給教授的量測報告頁（Dashboard）https://claude.ai/artifact/Xn8qrYKMPiH6sFoKpgs4N7 ：所有數字來自 `results/report_prof_20261019/*.csv`，
   由 `scripts/kvtier/export_report_v1.py` 從已提交的原始輸出重算（與各 analysis.txt 一致）。涵蓋 P1、K1、K2、K4.1、正確性、事前預測、更正與限制、下一步。
 - 文獻初查（論文方向）：KV 外存與多輪對話已有多篇（CachedAttention、SwiftCache…）；PCIe 爭用有 2025 年的多租戶研究，但沒找到「KV 搬運拖慢 TP decode」及其解法 → 建議以 K4 為論文主軸，待使用者確認論文形式。
+
+## 2026-10-28 · boss 兼 worker · 新題目 X 系列：PCIe 搬運干擾 TP 推論
+
+- 教授建議不做 KV cache 題目（太多人做）。改題：PCIe 搬運對 TP 推論的干擾與 Flux 式排程（K4.1 的發現與 KV 無關）。計劃 X1–X5 寫入 STATUS §0、PROJECT。
+- 工具：Triton kernel 內用 `%globaltimer` 打時間戳（graph 內可用、解析度約 1 µs），不再依賴在本機 8 卡下不可靠的 nsys。
+- X1：推翻「kernel 啟動被延遲」的推論——graph 內極小 kernel 的間隔不變、GEMM 幾乎不變，受害的是 NCCL 小 all-reduce（+69% / +594%）。
+- X1b / X1c（CUDA C，load_inline；要加 pixi 的 lib 路徑才連得到 libcudart；peer access 用擴充自己開）：NVLink 互傳小旗標只有在用系統層級屏障時才被拖慢（×2–4.6）；GPU 層級或不加屏障完全不受影響。
+- NCCL 三種協定都受影響 → 下一步看 NCCL 原始碼、寫 GPU 層級同步的 all-reduce。

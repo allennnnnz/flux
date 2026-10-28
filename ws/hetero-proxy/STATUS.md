@@ -50,6 +50,17 @@
     我們的差異：NVLink 機器（通訊不走 PCIe）、機制是 kernel 啟動延遲、GPU 端訊號驅動的放行。
 - 已有基礎：`results/kvtier/k4/`（interference_v2、place_v1、diag_v1_nsys/gaps.txt）、`results/e2e/c_diag`、`scripts/kvtier/k4_place_v1.py`（graph 內計數器放行）、`k2_engine_v2.py`。
 
+- **X1 結果（2026-10-28，`results/xpcie/`，guard 全 CLEAN）——干擾的真正機制是「系統層級記憶體屏障」，不是 kernel 啟動延遲**：
+  - `x1_v1`（`scripts/xpcie/x1_dispatch_v1.py`，CUDA graph、100 輪打亂；每個 kernel 開頭用 `%globaltimer` 打時間戳）：背景 PCIe 搬運時，
+    **極小 kernel 的啟動間隔完全不變**（0.93 µs）、decode 大小的 GEMM 只 +1–3%，**NCCL 小 all-reduce 搬回 +69%、存出 +594%**；只有其他 GPU 在搬也 +81%
+    （all-reduce 等最慢的那張卡）；模擬 decode 一步 +57% / +202%（與 K4.1 一致）。
+    → K4.1 / STATUS 先前的推論「GPU 啟動 kernel 被延遲」**撤回**（那是逐個發 kernel + nsys 的現象）；預測 P1–P3 不成立、P4 成立。
+  - `x1b_v1`（`x1b_latency_v1.py`，CUDA C 小 kernel、GPU0↔GPU1）：NVLink 互傳小旗標來回 2.6 → 5.2 µs（搬回）/ 11.2 µs（存出）；GPU 讀主機記憶體 1.3 → 3.2 / 4.7 µs；讀本卡記憶體不變。
+  - `x1c_v1`（`x1c_fence_v1.py`）：**同樣的 NVLink 來回，寫入後用系統層級屏障（`__threadfence_system`）：2.6 → 5.5 / 12.0 µs；改用 GPU 層級屏障或不加屏障：1.1 µs，完全不受影響**。
+    → NVLink 本身不受 PCIe 影響；被拖慢的是系統層級的記憶體排序（推論：它要等 PCIe 上排隊的資料；如何進一步驗證：看 NCCL 各協定在哪裡用系統層級的排序）。
+  - `x1_proto_{LL,LL128,Simple}`（`NCCL_PROTO`，30 輪）：三種協定都受影響（存出時 +591% / +410% / +212%）→ 不能用 NCCL 設定避開。
+  - 下一步：看 NCCL 原始碼找系統層級排序在哪；寫一個只用 GPU 層級同步（旗標與資料同一次寫入，LL 式）的 all-reduce，測是否不受 PCIe 影響——若是，得到不必限制搬運的第二種解法。
+
 **最新（2026-10-16）—— CPU 當 KV 外存（K 系列）**：使用者決定先在本機 CPU 上做出**真正的加速**（晶片短期拿不到），選 P1 的 T3（KV 外存），
 同意「計劃好就開始做」。
 - 情境：多輪對話，GPU 放不下所有對話的 KV。現有做法（vLLM / SGLang 預設）：被擠掉的對話回來時整段重算 prefill。
