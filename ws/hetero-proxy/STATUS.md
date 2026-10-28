@@ -3,14 +3,14 @@
 **本 workstream 唯一權威。** 第 1 節由 boss 寫入，worker 不改；第 2 節起由 worker 維護。
 
 建立：2026-09-23（boss）
-最後更新：2026-10-16（boss 兼 worker：E2E A / B / C、P1 完成；開始 KV 外存 K 系列）
-狀態：**協同已證實、尚無加速；現在：CPU 當 KV 外存，做出第一個端到端加速**
+最後更新：2026-10-28（boss 兼 worker：教授建議不做 KV cache 題目 → 新題目 X 系列：PCIe 搬運對 TP 推論的干擾與 Flux 式排程）
+狀態：**KV 外存（K1 / K2）完成並保留為背景；現在：X 系列（PCIe 干擾），X1 機制確認進行中**
 
 ---
 
 ## 0. 快速跟上（新 session 先讀這節；每次收工更新）
 
-最後更新：2026-10-16
+最後更新：2026-10-28
 
 **教授新方向（2026-10-06）**：讓 PCIe 也能用 Flux 的邏輯做通訊 / 計算重疊，配合 NVLink 相連的運算環境；
 節點外多一顆只有 PCIe 的不同廠牌晶片也要能協同運作、用 PCIe 溝通。這正是本 workstream 第 1 節的目標，故由本 ws 承接。
@@ -31,6 +31,24 @@
 （ctypes 直接呼叫 libcuda，全部事先排進 stream，不需主機執行緒）；接收端 GPU 用每塊一個旗標的 Triton GEMM（Flux 的 tile 等旗標）。
 兩個不同的後端都接上且正確：CPU（獨立程序扮晶片）與 A100 代理（GPU2，NVLink 計數器增量 0）。
 交棒切塊重疊實測：level 0 → level 1 快 **2.3–2.8×**（模擬計算 / 真實計算）。使用者要求下一步用**真實模型端到端**驗證（見下）。
+
+**最新（2026-10-28）—— 新題目 X 系列：PCIe 搬運對 TP 推論的干擾與 Flux 式訊號驅動排程**
+（教授 2026-10 建議不做 KV cache 題目：太多人在做。K1 / K2 的結果保留當背景；K4.1 的發現與 KV 無關，成為新題目的起點。）
+- **要講的故事**：大家以為 NVLink 機器上 TP 的通訊走 NVLink、PCIe 上做什麼都不影響它。K4.1 量到：背景大量 PCIe 搬運讓 TP 的 decode 慢 45–145%，
+  原因是 GPU 啟動 kernel 的空檔變大約 10×（推論，待 X1 確認）；借用 Flux 的旗標機制、讓 GPU 在長 kernel 期間才放行小塊搬運，干擾壓到約 3%。
+  KV 只是會在背景搬資料的情境之一；主案例改為**背景載入權重**（非同步 RL 的權重同步、服務中途換模型 / 載入 LoRA）。
+- **研究問題**：Q1 現象有多大、在哪些條件下出現；Q2 原因是什麼（kernel 啟動被延遲？NVLink 被拖慢？kernel 本身變慢？）；
+  Q3 Flux 式排程和簡單做法（限速、低優先權 stream、只在 decode 步之間搬、停下來等）比，「別人慢多少 vs 搬多快」的取捨曲線誰最好；Q4 真實服務裡整體效果。
+- **步驟**（每步先登記預測，guard + tmux，graph + 打亂交錯）：
+  - **X1 機制確認**（2–3 天）：CUDA graph 內跑合成工作——N 個極小 kernel（N 變化）、只有 NCCL 小 all-reduce、只有 decode 大小的 GEMM、混合——背景加 PCIe 搬運；
+    用 GPU 時鐘（`%globaltimer`）在每個 kernel 開頭打時間戳，直接在 GPU 上量 kernel 之間的空檔（不靠 nsys：8 卡 torchrun 下 nsys 兩次寫不出報告）。
+    另做單卡（無 NCCL）、只有其他卡在搬（是本卡還是整台主機的問題）。
+  - **X2 普遍性**（約 2 天）：方向、塊大小、總速率、幾張卡同時搬、NUMA 本地 / 遠端、批次大小、TP8 / TP4 / TP2。
+  - **X3 排程器**（3–4 天）：把 K4.1 的放行機制做成通用元件（每層多個放行點、依量到的時間窗決定塊大小、速率旋鈕），與限速、低優先權 stream、步間搬運、停下來等比較，畫取捨曲線。
+  - **X4 案例研究**（約 1 週）：在 K2 服務迴圈（`k2_engine_v2`）上，一邊服務、一邊在背景載入新權重（每卡約 8 GB）；比較各排程對使用者首字 / 每字間隔與載入完成時間的影響；KV 搬回當第二個案例。
+  - **X5 文獻回顧與寫作**：相近工作 ChunkFlow（arXiv 2605.11335：PCIe-only 機器、diffusion、預取與集合通訊搶同一條 PCIe）、ConCCL / DMA collectives（AMD）、NCCL 2.28 copy-engine collectives；
+    我們的差異：NVLink 機器（通訊不走 PCIe）、機制是 kernel 啟動延遲、GPU 端訊號驅動的放行。
+- 已有基礎：`results/kvtier/k4/`（interference_v2、place_v1、diag_v1_nsys/gaps.txt）、`results/e2e/c_diag`、`scripts/kvtier/k4_place_v1.py`（graph 內計數器放行）、`k2_engine_v2.py`。
 
 **最新（2026-10-16）—— CPU 當 KV 外存（K 系列）**：使用者決定先在本機 CPU 上做出**真正的加速**（晶片短期拿不到），選 P1 的 T3（KV 外存），
 同意「計劃好就開始做」。
