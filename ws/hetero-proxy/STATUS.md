@@ -4,7 +4,7 @@
 
 建立：2026-09-23（boss）
 最後更新：2026-10-28（boss 兼 worker：教授建議不做 KV cache 題目 → 新題目 X 系列：PCIe 搬運對 TP 推論的干擾與 Flux 式排程）
-狀態：**KV 外存（K1 / K2）完成並保留為背景；現在：X 系列（PCIe 干擾），X1 機制確認進行中**
+狀態：**KV 外存（K1 / K2）完成並保留為背景；現在：X 系列（PCIe 干擾），X1 / X1d 完成：NCCL 主因是 graph 內的 event 節點（`NCCL_GRAPH_MIXING_SUPPORT=0` 消除），Simple 另受系統層級屏障影響**
 
 ---
 
@@ -35,7 +35,9 @@
 **最新（2026-10-28）—— 新題目 X 系列：PCIe 搬運對 TP 推論的干擾與 Flux 式訊號驅動排程**
 （教授 2026-10 建議不做 KV cache 題目：太多人在做。K1 / K2 的結果保留當背景；K4.1 的發現與 KV 無關，成為新題目的起點。）
 - **要講的故事**：大家以為 NVLink 機器上 TP 的通訊走 NVLink、PCIe 上做什麼都不影響它。K4.1 量到：背景大量 PCIe 搬運讓 TP 的 decode 慢 45–145%，
-  原因不是 kernel 啟動（X1 撤回該推論），而是 GPU 間同步的系統層級排序被 PCIe 流量拖慢（Simple 協定已證實，LL 待 X1d；機制已見於 NVIDIA/nccl #2218）；借用 Flux 的旗標機制、讓 GPU 在長 kernel 期間才放行小塊搬運，干擾壓到約 3%。
+  原因不是 kernel 啟動（X1 撤回該推論）。X1d：主因是 NCCL 預設（`NCCL_GRAPH_MIXING_SUPPORT=1`）在 graph 內每個操作前後加的 event 等待／記錄節點，記錄節點被背景搬運拖慢 4–5 倍；
+  關掉後 LL / LL128 的干擾從 +410–594% 降到 +3–5%、decode 一步 +197–202% → +2.3–2.5%。Simple 協定每段有系統層級屏障（×2.7，機制已見於 NVIDIA/nccl #2218），關掉仍 +203%。
+  K4.1 的 Flux 式放行（約 +3%）要和「關 mixing、不限速」重新比較（待做，K4.1 是在 mixing=1 下量的）。
   KV 只是會在背景搬資料的情境之一；主案例改為**背景載入權重**（非同步 RL 的權重同步、服務中途換模型 / 載入 LoRA）。
 - **研究問題**：Q1 現象有多大、在哪些條件下出現；Q2 原因是什麼（kernel 啟動被延遲？NVLink 被拖慢？kernel 本身變慢？）；
   Q3 Flux 式排程和簡單做法（限速、低優先權 stream、只在 decode 步之間搬、停下來等）比，「別人慢多少 vs 搬多快」的取捨曲線誰最好；Q4 真實服務裡整體效果。
@@ -70,6 +72,43 @@
       但 LL 實測 +70% / +591%。→ 「NCCL 變慢 = 系統層級屏障變慢」對 Simple 成立、對 LL / LL128 **未證實**（推論候選：kernel 結束時硬體做的系統層級排序、或其他經 PCIe 的存取）。
       如何驗證（X1d）：graph 內連發「寫一個字到對端 GPU 就結束」的極小 kernel，看背景搬運時是否變慢；背景改成 NVLink P2P 搬運（不走 PCIe）看屏障是否仍變慢；
       背景放在同交換器（GPU1）與不同交換器（GPU2）比較；改背景塊大小看是否隨排隊量變化；確認 2.21.5 原始碼與 2.19.3 是否不同。
+      → **X1d 已回答（見下）**：LL 不是被屏障拖慢，是 graph 內 NCCL 加的 event 節點；2.21.5 與 2.19.3 的屏障位置相同（LL128 在 sm80 的 GPU 層級、Simple 的 `prims_simple.h:179/367`）。
+
+- **X1d 結果（2026-10-28，`results/xpcie/x1d_v1` 100 輪 + `x1d_rep1–4` 各 20 輪（5 個獨立程序）、`x1e_*`、`x1_nomix*`、`x1_mix{1,0}_rep`；guard 全 CLEAN、時脈 1410 MHz 無降頻、背景在 ≥ 95% 的案例中撐到受測 kernel 結束）**：
+  腳本 `scripts/xpcie/x1d_scope_v1.py`（單一程序控制 GPU0/1/2，CUDA C kernel 內用 `%globaltimer` 量）、`x1e_graphdump_v1.py`、`run_x1d_v1.sh`、`run_x1d_rep_v1.sh`；表格 `results/report_x1_20261028/x1d_scope.csv`、`x1_nomix.csv`（`export_x1d_v1.py`）。
+  - **NCCL 在 graph 內的包法**（`x1e_v1/*.dot`、NCCL 2.21.5 `misc/strongstream.cc:181-229`）：每個 all-reduce kernel 前一個 EVENT_WAIT、後一個 EVENT_RECORD 節點（同一個 serialEvent），
+    來自預設 `NCCL_GRAPH_MIXING_SUPPORT=1`；NCCL log 確認 16×5120 bf16 用 Ring + LL（5 blocks × 512 threads）。設成 0 後 graph 只剩 kernel 節點（`x1e_nomix`）。
+  - **單卡受測項（GPU0，ns／項，5 程序一致）**：
+    | 受測 | 沒搬 | GPU0 存出 | GPU0 搬回 | 只有 GPU1 存出（同交換器） | 只有 GPU2 存出（不同交換器） | GPU0 經 NVLink 搬給 GPU2 |
+    | --- | --- | --- | --- | --- | --- | --- |
+    | 極小 kernel＋event 記錄節點（`tiny_evrec`） | 1918–2246 | 9760–9814（×4.3–5.1） | — | — | — | — |
+    | event 等待＋kernel＋event 記錄（`tiny_ev`，NCCL 的包法） | 1914–2296 | 9797–9864（×4.3–5.1） | ×2.1–2.5 | ×1.3–1.4 | ×1.0 | ×1.8–2.1 |
+    | 寫對端後系統層級屏障（`fs_sys`，單獨） | 2457–2470 | ×2.64–2.67 | ×1.48 | ×2.31–2.32 | ×1.00–1.01 | ×1.81–2.15 |
+    | 寫對端後 GPU 層級屏障（`fs_gpu`） | 352–357 | ×1.00 | ×1.00 | ×1.00 | ×1.00 | ×1.08 |
+    | 極小 kernel（只寫本卡 / 寫對端不加屏障） | 957 / 1090–1095 | ×1.00 | ×1.00 | ×1.00 | ×1.00 | ×1.00 / ×1.03 |
+    | LL 式 16 KiB 互傳（無屏障，`llpp`） | 5688–6002 | ×0.93–1.00 | ×0.99–1.04 | ×0.99–1.04 | ×0.99–1.00 | ×0.95–1.06 |
+    背景頻寬：PCIe 存出 23.3 GB/s、搬回 21.1、GPU1/GPU2 存出 19.5–19.6、64 KiB 小塊 12.9、NVLink 274 GB/s（錨點：PCIe 單向 ~22、單對 peer copy 270 → 皆在 20% 內）。
+  - **NCCL 端（8 卡，`x1_dispatch_v1.py`，GPU0 每項間隔 / rank-max 時間）**：
+    | 協定 | mixing | all-reduce 沒搬 | 全部搬回 | 全部存出 | decode 一步 沒搬 | 全部搬回 | 全部存出 |
+    | --- | --- | --- | --- | --- | --- | --- | --- |
+    | LL（預設） | 1（`x1_v1` / `x1_mix1_rep`） | 31.9 µs | +69% / +38% | +594% / +513% | 204.5 µs | +57% / +55% | +202% / +197% |
+    | LL（預設） | 0（`x1_nomix` / `x1_mix0_rep`） | 23.6 µs | +4.3% / +3.4% | +5.1% / +4.8% | 155.0 µs | +3.2% / +3.2% | +2.5% / +2.3% |
+    | LL128 | 1 → 0 | 45.8 → 36.8 µs | +93% → +1.9% | +410% → +3.2% | 237.0 → 188.0 µs | +47% → +2.2% | +170% → +1.7% |
+    | Simple | 1 → 0 | 134.6 → 126.7 µs | +113% → +70% | +212% → +203% | 415.2 → 362.1 µs | +70% → +49% | +123% → +127% |
+    → 關 mixing **沒有背景搬運時也快 24–26%**（all-reduce 31.9 → 23.6 µs、decode 一步 204.5 → 155.0 µs；event 節點本身的開銷，與 PyTorch 論壇、TensorFold #597 的回報一致）。
+    殘留：只有其他 GPU 搬回 +17%（rank-max 時間；GPU0 每項間隔 +4.1 µs）。
+  - **事前預測**：D1 成立（同交換器 ×2.31、不同交換器 ×1.00）；**D2 不成立**（系統層級屏障也被本卡的 NVLink 搬運拖慢 ×1.8–2.2，不是 PCIe 獨有；但讀主機記憶體不受 NVLink 搬運影響）；
+    D3 成立（64 KiB 小塊 ×1.46 < 4 MiB ×2.66，但頻寬也較低 12.9 vs 23.3 GB/s，兩者混在一起）；D4 成立（LL 資料路徑不受影響）；**D5 不成立**（kernel 寫完對端就結束不會變慢：沒有隱藏的 kernel 結束排序）；
+    D6 大致成立（`fs_gpu` ≤ ×1.08；`pp_sys` 與 x1c 差 ≤ 9%）**但** `hostread` 在本卡存出時與 x1b 不符，見下；D7 成立；D8 成立。
+  - **自我一致性發現（不得丟棄）**：「GPU0 讀主機記憶體＋GPU0 自己存出」在不同程序是**雙峰**：1.70 µs（x1b、x1d_smoke、rep2、rep3）或 4.86–5.00 µs（x1d_v1、rep1、rep4），
+    同一程序內 100 輪都很穩定（x1d_v1 全距 4906–5092）。其他格子跨程序一致（≤ 3%，`fs_sys|nvl_g0` 例外 ×1.81–2.15）。原因未知（推論候選：主機緩衝區的實體頁位置、copy engine 指派）；
+    如何驗證：同一程序內重新配置主機緩衝區、或固定 copy engine 再量。不影響 NCCL 結論（NCCL 端兩次獨立程序一致）。
+  - **還沒解釋的**：8 卡 NCCL 在 mixing=1、全部存出時每次 all-reduce 多 157–182 µs，遠大於單卡 event 記錄節點多的 7.5 µs；放大的原因未知
+    （推論候選：8 張卡的 event 等待／記錄串成鏈、每卡等最慢的一張；或記錄節點要等正在搬的那一塊搬完——4 MiB ÷ 23 GB/s ≈ 180 µs 只是巧合也可能）。如何驗證：x1 背景改塊大小（1 / 4 / 16 MiB）看多出的時間是否跟著變。
+  - **意義**：(1) 對 LL / LL128（decode 大小的 all-reduce）有**零成本解法**：graph 專用 communicator + `NCCL_GRAPH_MIXING_SUPPORT=0`（限制：同一 communicator 不能混用 graph 與非 graph 的 NCCL 呼叫，
+    NCCL 文件 env.html）；(2) Simple（大訊息、prefill 大小）、自己用系統層級旗標的 all-reduce（推論：vLLM custom all-reduce 用 `ld.acquire.sys` / `st.release.sys`，待查證）、
+    以及不能關 mixing 的框架，仍需要排程類解法 → X3 的比較對象要加入「關 mixing」；(3) 新意：event 節點本身的開銷已有人回報，**被 PCIe 搬運放大 6 倍**與上述解法在初步搜尋中沒找到。
+  - 下一步候選（待使用者確認）：K4.1 在 mixing=0 下重量（Flux 式放行還有沒有必要）；查 vLLM / SGLang 的 TP all-reduce 實際走哪條路、是否用系統層級旗標並實測；塊大小實驗解釋 182 µs 的放大；Simple 協定大訊息（prefill）的干擾與解法。
 
 **最新（2026-10-16）—— CPU 當 KV 外存（K 系列）**：使用者決定先在本機 CPU 上做出**真正的加速**（晶片短期拿不到），選 P1 的 T3（KV 外存），
 同意「計劃好就開始做」。
@@ -325,6 +364,8 @@ Phase 3 的起點：為「PCIe-only 晶片 + A100 NVLink 域」的異質計算�
 | E2E v3–v5 正確性檢查的細節：「en_explain 只同 HF 5/64、因 HF top-2 差 0.625」與「Bmid 只在 code 第 18 字與 A 不同」 | `results/e2e/check/check_v3.json`–`check_v5.json`、§0 E2E 結果 | `Engine._capture` 錄 decode graph 前暖身 3 次、`pos` 緩衝區為 0 → 蓋掉 KV 第 0 個位置；check 模式每題每種設定第一次 decode 都會碰到（2026-10-16 由 KV 外存檢查 `results/kvtier/check_v1` 發現）。bench 計時不受影響（graph 在計時前建好）。en_explain 第 5 字的分歧是這個 bug 造成的，不是平手 | `scripts/e2e/qwen_tp_v6.py` 重驗（`results/e2e/check_v6/`，guard CLEAN）：A vs HF en_explain **50/64**、其餘 3 題 64/64；**Bfinal 與 A 4/4 題逐字相同**；Bmid 2/4 相同，另 2 題在近似平手處分歧（code 第 18 字 HF top-2 差 0.000；en_explain 第 50 字差 0.375，此處 Bmid 與 HF 相同、A 選了次高）（`hf_margin_v6_vsA.json`、`hf_margin_v6_vsHF.json`）。結論「B 的結果與 A 一致到數值誤差」不變 |
 | P1 T3「8k 前綴搬回約 27 ms vs 重算約 398 ms（~15×）」 | §0 P1、`results/hetero_roles/p1/analysis.txt` | 推估，重算用的是 8×1024 批次（非單一 8k 序列），也沒算新一輪本身的時間 | K 系列實測（`results/kvtier/bench_v3/analysis.txt`） |
 | kvtier v1 / v2 的首字時間（smoke 3 輪：理想 50–57 ms、Cake 比邊搬邊算慢） | `results/kvtier/bench_smoke/` | 逐個發 kernel 的 Python 開銷（約 45 ms）主導 128 token 的新一輪，重算也背同樣開銷 → 量到的是引擎開銷而非記憶體分層；事前預測 K3（理想 10–30 ms）因此不成立 | `scripts/kvtier/kvtier_v3.py`（全部計時路徑錄成 CUDA graph，hxb 計數器在 graph 內逐層把關） |
+| X1「干擾機制是系統層級記憶體屏障」（套用到全部 NCCL） | §0 X1 結果、報告頁「原因」卡片（2026-10-28 第 3 版） | LL / LL128 沒有系統層級屏障；X1d：關 `NCCL_GRAPH_MIXING_SUPPORT` 後干擾消失（+594% → +5%） | NCCL LL / LL128：graph 內 event 記錄節點被搬運拖慢；Simple：每段的系統層級屏障（X1d） |
+| x1c / 說明「系統屏障慢是因為等 PCIe 排隊」（PCIe 獨有） | §0 X1 x1c 推論、對使用者的說明 | X1d：本卡經 NVLink 的 copy engine 搬運也讓系統屏障慢 ×1.8–2.2（D2 不成立） | 系統屏障被本卡任何 copy engine 流量與同交換器鄰卡的 PCIe 流量拖慢（X1d） |
 
 ## 4. 下一步（worker 維護）
 

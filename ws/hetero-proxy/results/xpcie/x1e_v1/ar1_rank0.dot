@@ -1,0 +1,30 @@
+digraph dot {
+subgraph cluster_1 {
+label="graph_1" graph[style="dashed"];
+"graph_1_node_0"[style="solid" shape="rectangle" label="0 (topoId: 2)
+EVENT_WAIT
+node handle: 0x0000578090F1C610
+event: 0x00007028AC21AA00
+"];
+
+"graph_1_node_1"[style="bold" shape="record" label="{KERNEL
+| {ID | 1 (topoId: 1) | _Z40ncclDevKernel_AllReduce_Sum_bf16_RING_LLP11ncclDevCommmP8ncclWork\<\<\<5,512,82240\>\>\>}
+| {{node handle | func handle} | {0x0000578090F1CE88 | 0x000057808F145A80}}
+| {accessPolicyWindow | {base_ptr | num_bytes | hitRatio | hitProp | missProp} | {0x0000000000000000 | 0 | 0.000000 | N | N}}
+| {cooperative | 0}
+| {priority | 0}
+| {cluster dim | (0,0,0)}
+| {preferred cluster dim | (0,0,0)}
+| {cluster scheduling policy preference | 1}
+}"];
+
+"graph_1_node_2"[style="solid" shape="rectangle" label="2 (topoId: 0)
+EVENT_RECORD
+node handle: 0x0000578090F1D700
+event: 0x00007028AC21AA00
+"];
+
+"graph_1_node_0" -> "graph_1_node_1" [headlabel=0];
+"graph_1_node_1" -> "graph_1_node_2" [headlabel=0];
+}
+}

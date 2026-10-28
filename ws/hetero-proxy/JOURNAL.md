@@ -201,3 +201,10 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   - NCCL 2.19.3 原始碼（repo 附的，非 2.21.5）：Simple 每段前有 sys 屏障；LL128 在 A100 用 GPU 層級；LL 沒有屏障——但 LL 實測同樣受害 → NCCL 部分的原因**未證實**。
   - 報告頁「原因」卡片目前寫成已確定，需要在 X1d 之後修正（**待辦**）。
 - **留給下個 session**：X1d（對端寫入的極小 kernel、NVLink 背景搬運、同 / 不同交換器、塊大小）待使用者同意後跑。
+- **X1d（使用者同意後執行）**：`x1d_scope_v1.py`（單一程序控制 GPU0/1/2）、`x1e_graphdump_v1.py`、`run_x1d_v1.sh`、`run_x1d_rep_v1.sh`，全部 guard CLEAN。
+  - 試跑後發現 NCCL 在 graph 內每個 all-reduce 前後各加一個 event 節點（`NCCL_GRAPH_MIXING_SUPPORT=1` 預設）→ 加了 `tiny_ev` / `tiny_evrec` 受測項與 D7 / D8 預測（正式跑之前）。
+  - 結果：event 記錄節點被本卡存出拖慢 ×4.3–5.1；`NCCL_GRAPH_MIXING_SUPPORT=0` 讓 LL all-reduce 的干擾 +594% → +5%、decode 一步 +202% → +2.5%（兩次獨立程序重現），沒搬運時也快 24–26%。
+    Simple 仍 +203%（每段系統層級屏障）。系統屏障也被本卡 NVLink 搬運拖慢（D2 不成立）、被同交換器鄰卡拖慢（D1 成立）。LL 資料路徑與 kernel 結束都不受影響（D4 成立、D5 不成立）。
+  - 自我一致性：「讀主機記憶體＋本卡存出」跨程序雙峰（1.7 / 5.0 µs），程序內穩定 → 記為發現，原因未知。
+  - 撤回表加兩條（「全部 NCCL 都是系統屏障」、「系統屏障慢是 PCIe 獨有」）。報告頁的「原因」卡片要依 X1d 更新（**待辦**）。
+- **留給下個 session**：與使用者確認方向——K4.1 在 mixing=0 下重量、vLLM / SGLang 實際的 all-reduce 路徑、塊大小實驗解釋 182 µs 放大、Simple / prefill 大小的干擾。

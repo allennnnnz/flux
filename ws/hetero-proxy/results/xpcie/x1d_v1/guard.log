@@ -1,0 +1,3 @@
+2026-10-28 16:26:50Z [css-host-158] START guard=v2 uid=1001045 cmd=env CUDA_MODULE_LOADING=EAGER pixi run --manifest-path pixi.toml /home/rogerlee/.venvs/hetero-proxy-hf/bin/python ws/hetero-proxy/scripts/xpcie/x1d_scope_v1.py --rounds 100 --out ws/hetero-proxy/results/xpcie/x1d_v1
+2026-10-28 16:26:51Z [css-host-158] PREFLIGHT gpu_procs=[] foreign_cpu=[] foreign_root=[] self_cpu=[] other_users_logged_in=['twyang']
+2026-10-28 16:29:45Z [css-host-158] END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 foreign_root_samples=0 self_cpu_warnings=0 window=None..None users_logged_in_at_end=['twyang']

@@ -1,0 +1,12 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[rank4]:[W1028 16:38:52.413154005 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank3]:[W1028 16:38:52.419712473 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[progress] round 25/30, 18 s
+[x1] tiny  none    1.082 ms, item    1.02 us | h2d_all    1.083 ms (  +0.1%), item    1.02 us (+  0.00) | d2h_all    1.117 ms (  +3.2%), item    1.02 us (+  0.00) | h2d_self    1.082 ms (  +0.0%), item    1.02 us (+  0.00) | h2d_others    1.084 ms (  +0.2%), item    1.02 us (+  0.00)
+[x1] gemm  none    6.784 ms, item   52.53 us | h2d_all    6.941 ms (  +2.3%), item   53.74 us (+  1.21) | d2h_all    6.839 ms (  +0.8%), item   52.81 us (+  0.28) | h2d_self    6.993 ms (  +3.1%), item   54.43 us (+  1.89) | h2d_others    7.007 ms (  +3.3%), item   52.52 us (+ -0.01)
+[x1] ar    none    3.052 ms, item   23.60 us | h2d_all    3.156 ms (  +3.4%), item   24.16 us (+  0.56) | d2h_all    3.198 ms (  +4.8%), item   24.06 us (+  0.46) | h2d_self    3.428 ms ( +12.3%), item   23.22 us (+ -0.38) | h2d_others    3.560 ms ( +16.7%), item   27.62 us (+  4.02)
+[x1] mix   none    9.954 ms, item  155.10 us | h2d_all   10.276 ms (  +3.2%), item  159.31 us (+  4.20) | d2h_all   10.187 ms (  +2.3%), item  157.26 us (+  2.15) | h2d_self   10.480 ms (  +5.3%), item  156.55 us (+  1.45) | h2d_others   10.666 ms (  +7.2%), item  166.30 us (+ 11.20)
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/xpcie/x1_mix0_rep/guard.log

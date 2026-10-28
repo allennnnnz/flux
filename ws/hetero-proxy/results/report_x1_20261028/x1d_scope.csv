@@ -1,0 +1,71 @@
+victim,victim_zh,traffic,traffic_zh,ns,times_none,outlast_frac,bg_gbs
+fs_sys,GPU0 寫對端後用系統層級屏障（單獨）,none,沒有搬運,2469.9,1.0,1.0,
+fs_sys,GPU0 寫對端後用系統層級屏障（單獨）,d2h_g0,GPU0 自己存出,6586.9,2.67,1.0,23.3
+fs_sys,GPU0 寫對端後用系統層級屏障（單獨）,h2d_g0,GPU0 自己搬回,3646.5,1.48,1.0,21.1
+fs_sys,GPU0 寫對端後用系統層級屏障（單獨）,d2h_g0_64k,GPU0 存出（64 KiB 小塊）,3602.4,1.46,1.0,12.4
+fs_sys,GPU0 寫對端後用系統層級屏障（單獨）,d2h_g1,只有 GPU1 存出（同一個 PCIe 交換器）,5703.2,2.31,1.0,19.5
+fs_sys,GPU0 寫對端後用系統層級屏障（單獨）,d2h_g2,只有 GPU2 存出（不同交換器）,2484.2,1.01,1.0,19.6
+fs_sys,GPU0 寫對端後用系統層級屏障（單獨）,nvl_g0,GPU0 經 NVLink 搬給 GPU2（不走 PCIe）,4818.4,1.95,1.0,274.0
+fs_gpu,GPU0 寫對端後用 GPU 層級屏障（單獨）,none,沒有搬運,357.4,1.0,1.0,
+fs_gpu,GPU0 寫對端後用 GPU 層級屏障（單獨）,d2h_g0,GPU0 自己存出,356.4,1.0,1.0,23.3
+fs_gpu,GPU0 寫對端後用 GPU 層級屏障（單獨）,h2d_g0,GPU0 自己搬回,355.3,0.99,1.0,21.1
+fs_gpu,GPU0 寫對端後用 GPU 層級屏障（單獨）,d2h_g0_64k,GPU0 存出（64 KiB 小塊）,356.4,1.0,1.0,12.9
+fs_gpu,GPU0 寫對端後用 GPU 層級屏障（單獨）,d2h_g1,只有 GPU1 存出（同一個 PCIe 交換器）,357.4,1.0,1.0,19.5
+fs_gpu,GPU0 寫對端後用 GPU 層級屏障（單獨）,d2h_g2,只有 GPU2 存出（不同交換器）,358.4,1.0,1.0,19.6
+fs_gpu,GPU0 寫對端後用 GPU 層級屏障（單獨）,nvl_g0,GPU0 經 NVLink 搬給 GPU2（不走 PCIe）,385.0,1.08,1.0,274.8
+pp_sys,GPU0↔GPU1 互傳旗標＋系統層級屏障,none,沒有搬運,2860.5,1.0,1.0,
+pp_sys,GPU0↔GPU1 互傳旗標＋系統層級屏障,d2h_g0,GPU0 自己存出,6723.1,2.35,1.0,23.3
+pp_sys,GPU0↔GPU1 互傳旗標＋系統層級屏障,h2d_g0,GPU0 自己搬回,3806.7,1.33,1.0,21.1
+pp_sys,GPU0↔GPU1 互傳旗標＋系統層級屏障,d2h_g0_64k,GPU0 存出（64 KiB 小塊）,3671.0,1.28,1.0,12.5
+pp_sys,GPU0↔GPU1 互傳旗標＋系統層級屏障,d2h_g1,只有 GPU1 存出（同一個 PCIe 交換器）,8500.2,2.97,1.0,19.5
+pp_sys,GPU0↔GPU1 互傳旗標＋系統層級屏障,d2h_g2,只有 GPU2 存出（不同交換器）,2901.0,1.01,1.0,19.6
+pp_sys,GPU0↔GPU1 互傳旗標＋系統層級屏障,nvl_g0,GPU0 經 NVLink 搬給 GPU2（不走 PCIe）,5001.2,1.75,1.0,274.0
+hostread,GPU0 讀一次主機記憶體,none,沒有搬運,1303.6,1.0,1.0,
+hostread,GPU0 讀一次主機記憶體,d2h_g0,GPU0 自己存出,4998.1,3.83,1.0,23.3
+hostread,GPU0 讀一次主機記憶體,h2d_g0,GPU0 自己搬回,2025.5,1.55,1.0,21.1
+hostread,GPU0 讀一次主機記憶體,d2h_g0_64k,GPU0 存出（64 KiB 小塊）,1648.1,1.26,1.0,12.9
+hostread,GPU0 讀一次主機記憶體,d2h_g1,只有 GPU1 存出（同一個 PCIe 交換器）,4460.0,3.42,1.0,19.5
+hostread,GPU0 讀一次主機記憶體,d2h_g2,只有 GPU2 存出（不同交換器）,1303.6,1.0,1.0,19.6
+hostread,GPU0 讀一次主機記憶體,nvl_g0,GPU0 經 NVLink 搬給 GPU2（不走 PCIe）,1304.6,1.0,1.0,274.4
+llpp,GPU0↔GPU1 互傳 16 KiB（LL 式，無屏障）,none,沒有搬運,5840.9,1.0,1.0,
+llpp,GPU0↔GPU1 互傳 16 KiB（LL 式，無屏障）,d2h_g0,GPU0 自己存出,5851.1,1.0,1.0,23.3
+llpp,GPU0↔GPU1 互傳 16 KiB（LL 式，無屏障）,h2d_g0,GPU0 自己搬回,5795.8,0.99,1.0,21.1
+llpp,GPU0↔GPU1 互傳 16 KiB（LL 式，無屏障）,d2h_g0_64k,GPU0 存出（64 KiB 小塊）,5883.9,1.01,1.0,12.9
+llpp,GPU0↔GPU1 互傳 16 KiB（LL 式，無屏障）,d2h_g1,只有 GPU1 存出（同一個 PCIe 交換器）,5856.3,1.0,1.0,19.5
+llpp,GPU0↔GPU1 互傳 16 KiB（LL 式，無屏障）,d2h_g2,只有 GPU2 存出（不同交換器）,5844.0,1.0,1.0,19.6
+llpp,GPU0↔GPU1 互傳 16 KiB（LL 式，無屏障）,nvl_g0,GPU0 經 NVLink 搬給 GPU2（不走 PCIe）,5954.6,1.02,1.0,274.0
+tiny_local,graph：極小 kernel 寫本卡,none,沒有搬運,956.9,1.0,1.0,
+tiny_local,graph：極小 kernel 寫本卡,d2h_g0,GPU0 自己存出,956.9,1.0,1.0,23.3
+tiny_local,graph：極小 kernel 寫本卡,h2d_g0,GPU0 自己搬回,956.9,1.0,1.0,21.1
+tiny_local,graph：極小 kernel 寫本卡,d2h_g0_64k,GPU0 存出（64 KiB 小塊）,956.9,1.0,1.0,12.9
+tiny_local,graph：極小 kernel 寫本卡,d2h_g1,只有 GPU1 存出（同一個 PCIe 交換器）,956.9,1.0,1.0,19.5
+tiny_local,graph：極小 kernel 寫本卡,d2h_g2,只有 GPU2 存出（不同交換器）,956.9,1.0,1.0,19.6
+tiny_local,graph：極小 kernel 寫本卡,nvl_g0,GPU0 經 NVLink 搬給 GPU2（不走 PCIe）,957.9,1.0,1.0,274.3
+tiny_peer,graph：極小 kernel 寫對端（無屏障）,none,沒有搬運,1095.1,1.0,1.0,
+tiny_peer,graph：極小 kernel 寫對端（無屏障）,d2h_g0,GPU0 自己存出,1094.1,1.0,1.0,23.3
+tiny_peer,graph：極小 kernel 寫對端（無屏障）,h2d_g0,GPU0 自己搬回,1093.1,1.0,1.0,21.1
+tiny_peer,graph：極小 kernel 寫對端（無屏障）,d2h_g0_64k,GPU0 存出（64 KiB 小塊）,1094.1,1.0,1.0,12.9
+tiny_peer,graph：極小 kernel 寫對端（無屏障）,d2h_g1,只有 GPU1 存出（同一個 PCIe 交換器）,1095.1,1.0,1.0,19.5
+tiny_peer,graph：極小 kernel 寫對端（無屏障）,d2h_g2,只有 GPU2 存出（不同交換器）,1096.1,1.0,1.0,19.6
+tiny_peer,graph：極小 kernel 寫對端（無屏障）,nvl_g0,GPU0 經 NVLink 搬給 GPU2（不走 PCIe）,1123.1,1.03,1.0,274.3
+tiny_peer_fsys,graph：極小 kernel 寫對端＋系統層級屏障,none,沒有搬運,3436.4,1.0,1.0,
+tiny_peer_fsys,graph：極小 kernel 寫對端＋系統層級屏障,d2h_g0,GPU0 自己存出,7594.9,2.21,1.0,23.3
+tiny_peer_fsys,graph：極小 kernel 寫對端＋系統層級屏障,h2d_g0,GPU0 自己搬回,4559.0,1.33,1.0,21.1
+tiny_peer_fsys,graph：極小 kernel 寫對端＋系統層級屏障,d2h_g0_64k,GPU0 存出（64 KiB 小塊）,4858.7,1.41,1.0,12.8
+tiny_peer_fsys,graph：極小 kernel 寫對端＋系統層級屏障,d2h_g1,只有 GPU1 存出（同一個 PCIe 交換器）,6654.0,1.94,1.0,19.5
+tiny_peer_fsys,graph：極小 kernel 寫對端＋系統層級屏障,d2h_g2,只有 GPU2 存出（不同交換器）,3433.4,1.0,1.0,19.6
+tiny_peer_fsys,graph：極小 kernel 寫對端＋系統層級屏障,nvl_g0,GPU0 經 NVLink 搬給 GPU2（不走 PCIe）,5766.1,1.68,1.0,274.2
+tiny_ev,graph：event 等待＋極小 kernel＋event 記錄（NCCL 的包法）,none,沒有搬運,2295.7,1.0,1.0,
+tiny_ev,graph：event 等待＋極小 kernel＋event 記錄（NCCL 的包法）,d2h_g0,GPU0 自己存出,9825.1,4.28,1.0,23.3
+tiny_ev,graph：event 等待＋極小 kernel＋event 記錄（NCCL 的包法）,h2d_g0,GPU0 自己搬回,4801.2,2.09,1.0,20.4
+tiny_ev,graph：event 等待＋極小 kernel＋event 記錄（NCCL 的包法）,d2h_g0_64k,GPU0 存出（64 KiB 小塊）,4418.8,1.92,1.0,12.7
+tiny_ev,graph：event 等待＋極小 kernel＋event 記錄（NCCL 的包法）,d2h_g1,只有 GPU1 存出（同一個 PCIe 交換器）,3016.4,1.31,1.0,19.5
+tiny_ev,graph：event 等待＋極小 kernel＋event 記錄（NCCL 的包法）,d2h_g2,只有 GPU2 存出（不同交換器）,2284.2,0.99,1.0,19.6
+tiny_ev,graph：event 等待＋極小 kernel＋event 記錄（NCCL 的包法）,nvl_g0,GPU0 經 NVLink 搬給 GPU2（不走 PCIe）,4036.9,1.76,1.0,274.1
+tiny_evrec,graph：極小 kernel＋event 記錄,none,沒有搬運,1917.9,1.0,1.0,
+tiny_evrec,graph：極小 kernel＋event 記錄,d2h_g0,GPU0 自己存出,9771.0,5.09,1.0,23.3
+tiny_evrec,graph：極小 kernel＋event 記錄,h2d_g0,GPU0 自己搬回,4794.7,2.5,1.0,20.4
+tiny_evrec,graph：極小 kernel＋event 記錄,d2h_g0_64k,GPU0 存出（64 KiB 小塊）,3978.9,2.07,1.0,12.7
+tiny_evrec,graph：極小 kernel＋event 記錄,d2h_g1,只有 GPU1 存出（同一個 PCIe 交換器）,2938.9,1.53,1.0,19.5
+tiny_evrec,graph：極小 kernel＋event 記錄,d2h_g2,只有 GPU2 存出（不同交換器）,1943.9,1.01,1.0,19.6
+tiny_evrec,graph：極小 kernel＋event 記錄,nvl_g0,GPU0 經 NVLink 搬給 GPU2（不走 PCIe）,3837.2,2.0,1.0,274.3

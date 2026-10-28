@@ -1,0 +1,19 @@
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/site-packages/torch/utils/cpp_extension.py:2059: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
+If this is not desired, please set os.environ['TORCH_CUDA_ARCH_LIST'].
+  warnings.warn(
+[x1d] fs_sys         none    2455.6 ns | d2h_g0    6490.1 (x 2.64, out 1.00) | h2d_g0    3632.1 (x 1.48, out 1.00) | d2h_g0_64k    3598.3 (x 1.47, out 1.00) | d2h_g1    5664.8 (x 2.31, out 1.00) | d2h_g2    2435.1 (x 0.99, out 1.00) | nvl_g0    4240.4 (x 1.73, out 1.00)
+[x1d] fs_gpu         none     352.3 ns | d2h_g0     352.3 (x 1.00, out 1.00) | h2d_g0     350.2 (x 0.99, out 1.00) | d2h_g0_64k     351.2 (x 1.00, out 1.00) | d2h_g1     351.2 (x 1.00, out 1.00) | d2h_g2     351.2 (x 1.00, out 1.00) | nvl_g0     378.9 (x 1.08, out 1.00)
+[x1d] pp_sys         none    2992.1 ns | d2h_g0    6706.2 (x 2.24, out 1.00) | h2d_g0    3763.2 (x 1.26, out 1.00) | d2h_g0_64k    3676.2 (x 1.23, out 1.00) | d2h_g1    8432.6 (x 2.82, out 1.00) | d2h_g2    3008.5 (x 1.01, out 1.00) | nvl_g0    4431.9 (x 1.48, out 1.00)
+[x1d] hostread       none    1257.5 ns | d2h_g0    1735.7 (x 1.38, out 1.00) | h2d_g0    1987.6 (x 1.58, out 1.00) | d2h_g0_64k    1357.8 (x 1.08, out 1.00) | d2h_g1    4483.1 (x 3.57, out 1.00) | d2h_g2    1257.5 (x 1.00, out 1.00) | nvl_g0    1263.6 (x 1.00, out 1.00)
+[x1d] llpp           none    5890.0 ns | d2h_g0    6055.9 (x 1.03, out 1.00) | h2d_g0    5988.4 (x 1.02, out 1.00) | d2h_g0_64k    6035.5 (x 1.02, out 1.00) | d2h_g1    6025.2 (x 1.02, out 1.00) | d2h_g2    6037.5 (x 1.03, out 1.00) | nvl_g0    6117.4 (x 1.04, out 1.00)
+[x1d] tiny_local     none     956.9 ns | d2h_g0     956.9 (x 1.00, out 1.00) | h2d_g0     956.9 (x 1.00, out 1.00) | d2h_g0_64k     956.9 (x 1.00, out 1.00) | d2h_g1     956.9 (x 1.00, out 1.00) | d2h_g2     956.9 (x 1.00, out 1.00) | nvl_g0     957.9 (x 1.00, out 1.00)
+[x1d] tiny_peer      none    1089.1 ns | d2h_g0    1089.1 (x 1.00, out 1.00) | h2d_g0    1087.1 (x 1.00, out 1.00) | d2h_g0_64k    1089.1 (x 1.00, out 1.00) | d2h_g1    1089.1 (x 1.00, out 1.00) | d2h_g2    1090.1 (x 1.00, out 1.00) | nvl_g0    1116.1 (x 1.02, out 1.00)
+[x1d] tiny_peer_fsys none    3449.4 ns | d2h_g0    7549.4 (x 2.19, out 1.00) | h2d_g0    4527.4 (x 1.31, out 1.00) | d2h_g0_64k    4886.8 (x 1.42, out 1.00) | d2h_g1    6691.5 (x 1.94, out 1.00) | d2h_g2    3448.4 (x 1.00, out 1.00) | nvl_g0    6263.1 (x 1.82, out 1.00)
+[x1d-bg] d2h_g0      median    23.3 GB/s
+[x1d-bg] h2d_g0      median    21.1 GB/s
+[x1d-bg] d2h_g0_64k  median    12.9 GB/s
+[x1d-bg] d2h_g1      median    19.5 GB/s
+[x1d-bg] d2h_g2      median    19.6 GB/s
+[x1d-bg] nvl_g0      median   274.9 GB/s
+[x1d-clock] modal 1410 MHz, dropped 0 of 168 cases
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/xpcie/x1d_smoke/guard.log

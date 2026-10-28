@@ -1,0 +1,13 @@
+[run] ws/hetero-proxy/results/xpcie/x1d_rep1 16:34:51
+2026-10-28 16:35:37Z [css-host-158] END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 foreign_root_samples=0 self_cpu_warnings=0 window=None..None users_logged_in_at_end=['twyang']
+[run] ws/hetero-proxy/results/xpcie/x1d_rep2 16:35:37
+2026-10-28 16:36:23Z [css-host-158] END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 foreign_root_samples=0 self_cpu_warnings=0 window=None..None users_logged_in_at_end=['twyang']
+[run] ws/hetero-proxy/results/xpcie/x1d_rep3 16:36:23
+2026-10-28 16:37:09Z [css-host-158] END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 foreign_root_samples=0 self_cpu_warnings=0 window=None..None users_logged_in_at_end=['twyang']
+[run] ws/hetero-proxy/results/xpcie/x1d_rep4 16:37:09
+2026-10-28 16:37:55Z [css-host-158] END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 foreign_root_samples=0 self_cpu_warnings=0 window=None..None users_logged_in_at_end=['twyang']
+[run] ws/hetero-proxy/results/xpcie/x1_mix1_rep 16:37:55
+2026-10-28 16:38:37Z [css-host-158] END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 foreign_root_samples=0 self_cpu_warnings=0 window=None..None users_logged_in_at_end=['twyang']
+[run] ws/hetero-proxy/results/xpcie/x1_mix0_rep 16:38:37
+2026-10-28 16:39:18Z [css-host-158] END rc=0 CLEAN foreign_gpu_samples=0 foreign_cpu_samples=0 foreign_root_samples=0 self_cpu_warnings=0 window=None..None users_logged_in_at_end=['twyang']
+ALLDONE

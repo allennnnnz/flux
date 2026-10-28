@@ -1,0 +1,74 @@
+digraph dot {
+subgraph cluster_4 {
+label="graph_4" graph[style="dashed"];
+"graph_4_node_0"[style="bold" shape="record" label="{KERNEL
+| {ID | 0 (topoId: 5) | _stamp\<\<\<1,128,0\>\>\>}
+| {{node handle | func handle} | {0x0000578090F1F068 | 0x0000578090F71AA0}}
+| {accessPolicyWindow | {base_ptr | num_bytes | hitRatio | hitProp | missProp} | {0x0000000000000000 | 0 | 0.000000 | N | N}}
+| {cooperative | 0}
+| {priority | 0}
+| {cluster dim | (0,0,0)}
+| {preferred cluster dim | (0,0,0)}
+| {cluster scheduling policy preference | 1}
+}"];
+
+"graph_4_node_1"[style="solid" shape="rectangle" label="1 (topoId: 6)
+EVENT_WAIT
+node handle: 0x0000578090F1E7F0
+event: 0x00007028AC21AA00
+"];
+
+"graph_4_node_2"[style="bold" shape="record" label="{KERNEL
+| {ID | 2 (topoId: 4) | _Z40ncclDevKernel_AllReduce_Sum_bf16_RING_LLP11ncclDevCommmP8ncclWork\<\<\<5,512,82240\>\>\>}
+| {{node handle | func handle} | {0x0000578090F1DF78 | 0x000057808F145A80}}
+| {accessPolicyWindow | {base_ptr | num_bytes | hitRatio | hitProp | missProp} | {0x0000000000000000 | 0 | 0.000000 | N | N}}
+| {cooperative | 0}
+| {priority | 0}
+| {cluster dim | (0,0,0)}
+| {preferred cluster dim | (0,0,0)}
+| {cluster scheduling policy preference | 1}
+}"];
+
+"graph_4_node_3"[style="solid" shape="rectangle" label="3 (topoId: 3)
+EVENT_RECORD
+node handle: 0x0000578090F209D0
+event: 0x00007028AC21AA00
+"];
+
+"graph_4_node_4"[style="bold" shape="record" label="{KERNEL
+| {ID | 4 (topoId: 2) | _stamp\<\<\<1,128,0\>\>\>}
+| {{node handle | func handle} | {0x0000578090F20158 | 0x0000578090F6C0F0}}
+| {accessPolicyWindow | {base_ptr | num_bytes | hitRatio | hitProp | missProp} | {0x0000000000000000 | 0 | 0.000000 | N | N}}
+| {cooperative | 0}
+| {priority | 0}
+| {cluster dim | (0,0,0)}
+| {preferred cluster dim | (0,0,0)}
+| {cluster scheduling policy preference | 1}
+}"];
+
+"graph_4_node_5"[style="bold" shape="record" label="{KERNEL
+| {ID | 5 (topoId: 1) | _Z40ncclDevKernel_AllReduce_Sum_bf16_RING_LLP11ncclDevCommmP8ncclWork\<\<\<5,512,82240\>\>\>}
+| {{node handle | func handle} | {0x0000578090F1F8E0 | 0x000057808F145A80}}
+| {accessPolicyWindow | {base_ptr | num_bytes | hitRatio | hitProp | missProp} | {0x0000000000000000 | 0 | 0.000000 | N | N}}
+| {cooperative | 0}
+| {priority | 0}
+| {cluster dim | (0,0,0)}
+| {preferred cluster dim | (0,0,0)}
+| {cluster scheduling policy preference | 1}
+}"];
+
+"graph_4_node_6"[style="solid" shape="rectangle" label="6 (topoId: 0)
+EVENT_RECORD
+node handle: 0x0000578090F1D700
+event: 0x00007028AC21AA00
+"];
+
+"graph_4_node_0" -> "graph_4_node_2" [headlabel=0];
+"graph_4_node_1" -> "graph_4_node_2" [headlabel=1];
+"graph_4_node_2" -> "graph_4_node_3" [headlabel=0];
+"graph_4_node_2" -> "graph_4_node_4" [headlabel=0];
+"graph_4_node_3" -> "graph_4_node_5" [headlabel=1];
+"graph_4_node_4" -> "graph_4_node_5" [headlabel=0];
+"graph_4_node_5" -> "graph_4_node_6" [headlabel=0];
+}
+}
