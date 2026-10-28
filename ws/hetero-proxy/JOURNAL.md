@@ -195,3 +195,9 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   說明頁 https://claude.ai/artifact/3RUzQ2kSwebvJhaKjrhTBN 第 2 版——更正「kernel 啟動空檔變大 10 倍」三處、進度表加 X1、註明改題。
 - 拓撲（`results/xpcie/topology_20261028.txt`）：GPU0/1、2/3、4/5、6/7 各兩張共用一個 PCIe 交換器與一條 Gen4 x16 上行（root port 09:02.0 等）。
   解釋 X1b/X1c 的跨卡現象：只有 GPU1 存出，GPU0 讀主機 ×2.9、系統屏障互傳 ×3.2——GPU0 的請求在共用上行裡排在 GPU1 的寫入後面（推論）。
+- 使用者質疑「快的 NVLink 為何要等 PCIe、難道沒人遇過」→ 查文獻與 NCCL 原始碼（不佔 GPU）：
+  - **NVIDIA/nccl #2218（2026-06）已有人找到同一個屏障機制**（改 GPU 層級屏障影響大減；NVIDIA 工程師：sys membar 要確保所有流量在系統 POC 可見，對無關流量敏感）。
+    #1023（2023）維護者還說走 NVLink 不該受干擾。→ 機制不是我們的貢獻，STATUS 的故事與差異已改。
+  - NCCL 2.19.3 原始碼（repo 附的，非 2.21.5）：Simple 每段前有 sys 屏障；LL128 在 A100 用 GPU 層級；LL 沒有屏障——但 LL 實測同樣受害 → NCCL 部分的原因**未證實**。
+  - 報告頁「原因」卡片目前寫成已確定，需要在 X1d 之後修正（**待辦**）。
+- **留給下個 session**：X1d（對端寫入的極小 kernel、NVLink 背景搬運、同 / 不同交換器、塊大小）待使用者同意後跑。

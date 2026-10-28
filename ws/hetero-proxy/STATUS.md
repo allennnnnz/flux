@@ -35,7 +35,7 @@
 **最新（2026-10-28）—— 新題目 X 系列：PCIe 搬運對 TP 推論的干擾與 Flux 式訊號驅動排程**
 （教授 2026-10 建議不做 KV cache 題目：太多人在做。K1 / K2 的結果保留當背景；K4.1 的發現與 KV 無關，成為新題目的起點。）
 - **要講的故事**：大家以為 NVLink 機器上 TP 的通訊走 NVLink、PCIe 上做什麼都不影響它。K4.1 量到：背景大量 PCIe 搬運讓 TP 的 decode 慢 45–145%，
-  原因是 GPU 啟動 kernel 的空檔變大約 10×（推論，待 X1 確認）；借用 Flux 的旗標機制、讓 GPU 在長 kernel 期間才放行小塊搬運，干擾壓到約 3%。
+  原因不是 kernel 啟動（X1 撤回該推論），而是 GPU 間同步的系統層級排序被 PCIe 流量拖慢（Simple 協定已證實，LL 待 X1d；機制已見於 NVIDIA/nccl #2218）；借用 Flux 的旗標機制、讓 GPU 在長 kernel 期間才放行小塊搬運，干擾壓到約 3%。
   KV 只是會在背景搬資料的情境之一；主案例改為**背景載入權重**（非同步 RL 的權重同步、服務中途換模型 / 載入 LoRA）。
 - **研究問題**：Q1 現象有多大、在哪些條件下出現；Q2 原因是什麼（kernel 啟動被延遲？NVLink 被拖慢？kernel 本身變慢？）；
   Q3 Flux 式排程和簡單做法（限速、低優先權 stream、只在 decode 步之間搬、停下來等）比，「別人慢多少 vs 搬多快」的取捨曲線誰最好；Q4 真實服務裡整體效果。
@@ -47,7 +47,7 @@
   - **X3 排程器**（3–4 天）：把 K4.1 的放行機制做成通用元件（每層多個放行點、依量到的時間窗決定塊大小、速率旋鈕），與限速、低優先權 stream、步間搬運、停下來等比較，畫取捨曲線。
   - **X4 案例研究**（約 1 週）：在 K2 服務迴圈（`k2_engine_v2`）上，一邊服務、一邊在背景載入新權重（每卡約 8 GB）；比較各排程對使用者首字 / 每字間隔與載入完成時間的影響；KV 搬回當第二個案例。
   - **X5 文獻回顧與寫作**：相近工作 ChunkFlow（arXiv 2605.11335：PCIe-only 機器、diffusion、預取與集合通訊搶同一條 PCIe）、ConCCL / DMA collectives（AMD）、NCCL 2.28 copy-engine collectives；
-    我們的差異：NVLink 機器（通訊不走 PCIe）、機制是 kernel 啟動延遲、GPU 端訊號驅動的放行。
+    我們的差異：NVLink 機器（通訊不走 PCIe）、TP 推論小 all-reduce 的量化與 LL 也受害、GPU 端訊號驅動的放行（屏障機制本身已見於 NVIDIA/nccl #2218，不是我們的發現）。
 - 已有基礎：`results/kvtier/k4/`（interference_v2、place_v1、diag_v1_nsys/gaps.txt）、`results/e2e/c_diag`、`scripts/kvtier/k4_place_v1.py`（graph 內計數器放行）、`k2_engine_v2.py`。
 
 - **X1 結果（2026-10-28，`results/xpcie/`，guard 全 CLEAN）——干擾的真正機制是「系統層級記憶體屏障」，不是 kernel 啟動延遲**：
@@ -60,6 +60,16 @@
     → NVLink 本身不受 PCIe 影響；被拖慢的是系統層級的記憶體排序（推論：它要等 PCIe 上排隊的資料；如何進一步驗證：看 NCCL 各協定在哪裡用系統層級的排序）。
   - `x1_proto_{LL,LL128,Simple}`（`NCCL_PROTO`，30 輪）：三種協定都受影響（存出時 +591% / +410% / +212%）→ 不能用 NCCL 設定避開。
   - 下一步：看 NCCL 原始碼找系統層級排序在哪；寫一個只用 GPU 層級同步（旗標與資料同一次寫入，LL 式）的 all-reduce，測是否不受 PCIe 影響——若是，得到不必限制搬運的第二種解法。
+  - **原始碼與文獻（2026-10-28，不佔 GPU）——修正上面兩點的範圍**：
+    - **機制不是新發現**：NVIDIA/nccl issue #2218（2026-06，V100 / H200，256 MiB all-gather 背景 D2H 時頻寬 −8–10%）的提問者已發現「系統層級屏障在背景 D2H 時延遲大增，
+      改成 GPU 層級屏障影響大減」；NVIDIA 工程師回覆 sys 範圍的 membar 要確保「所有記憶體流量在系統層級的 POC 可見」，所以貴且對無關流量敏感，並認為 LL / LL128 較不受影響；
+      2026-08 無修正關閉。更早：#1023（2023，維護者 sjeaugey：「走 NVLink 的話看不出 D2H 為何會干擾」）、PyTorch dev-discuss（H100，D2H offload 拖慢 all-gather）。
+      → 「找到機制」不能當貢獻；可主張的是：TP 推論小 all-reduce 的量化（+69% / +594%，遠大於 #2218 的大訊息 −10%）、LL 也同樣受害（與 NVIDIA 的預期相反）、共用交換器的跨卡傳播、解法。
+    - **NCCL LL 的受害原因還沒找到**：本 repo 附的 NCCL 2.19.3 原始碼（`3rdparty/nccl`，非實際執行的 2.21.5）：Simple 每送一段前 `fence_acq_rel_sys()`（`prims_simple.h:182`）→ 與 x1c 一致；
+      LL128 在 sm80 用 GPU 層級 `__threadfence()`（`prims_ll128.h:84-89`，sys 只在 sm90+）；LL 完全沒有屏障（旗標在資料裡，`prims_ll.h:133`）；graph 模式工作描述在 GPU 記憶體（`enqueue.cc` persistent）。
+      但 LL 實測 +70% / +591%。→ 「NCCL 變慢 = 系統層級屏障變慢」對 Simple 成立、對 LL / LL128 **未證實**（推論候選：kernel 結束時硬體做的系統層級排序、或其他經 PCIe 的存取）。
+      如何驗證（X1d）：graph 內連發「寫一個字到對端 GPU 就結束」的極小 kernel，看背景搬運時是否變慢；背景改成 NVLink P2P 搬運（不走 PCIe）看屏障是否仍變慢；
+      背景放在同交換器（GPU1）與不同交換器（GPU2）比較；改背景塊大小看是否隨排隊量變化；確認 2.21.5 原始碼與 2.19.3 是否不同。
 
 **最新（2026-10-16）—— CPU 當 KV 外存（K 系列）**：使用者決定先在本機 CPU 上做出**真正的加速**（晶片短期拿不到），選 P1 的 T3（KV 外存），
 同意「計劃好就開始做」。
