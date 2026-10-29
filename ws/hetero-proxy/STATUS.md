@@ -20,7 +20,8 @@
   只有 GPU0（tp_rank 0）和 CPU 交換資料（`kt_ep_wrapper.py` 第 299、322、361–383 行）；GPU 等 CPU 用 `cudaLaunchHostFunc` 回呼（`cpuinfer.h` 第 96、121 行）；專家分配靜態；8 卡在單一請求時只比 1 卡快 26%（LMSYS 部落格）。
 - 可改良處（全為推論）：H1 每個插槽和自己 NUMA 的 GPU 交換、用上 4 條上行線、CPU 部分和併入既有的 NVLink all-reduce；H2 回呼換成 hxb 計數器；H3 TP 下每卡只搬專家的 1/8，多線同時搬 → 「裝置算 vs 搬到 GPU」分界點下移；
   H4 用 X 系列知識避免搬運拖慢 NCCL；H5 慢的一端換成任何 PCIe 裝置（hxb）。
-- **下一步（待使用者同意）**：另建 venv 裝 SGLang＋kt-kernel（本機 Xeon 8358 無 AMX，有 AVX-512），TP8 跑小 MoE，量 rank 0 / rank 1 每層 MoE 的時間組成（交換、回呼、CPU 計算、其他卡等待）＋回呼 vs 計數器微基準 → 決定 H1/H2 或 H3 為主軸。
+- **改良主軸（推論，報告第 6 節）**：8 卡經 4 條上行線各搬專家的 1/8（約 90 GB/s vs 單線 19），和 CPU 同時分工算冷門專家 → 估約 1.9×（單卡單線只有 1.19×）；先做 1–2 天的否證實驗：CPU 算＋8 卡搬同時進行，量兩邊速度與 DRAM 互搶。
+- **下一步（待使用者同意）**：否證實驗；之後另建 venv 裝 SGLang＋kt-kernel（本機 Xeon 8358 無 AMX，有 AVX-512），TP8 跑小 MoE，量 rank 0 / rank 1 每層 MoE 的時間組成（交換、回呼、CPU 計算、其他卡等待）＋回呼 vs 計數器微基準 → 決定 H1/H2 或 H3 為主軸。
 
 
 **教授新方向（2026-10-06）**：讓 PCIe 也能用 Flux 的邏輯做通訊 / 計算重疊，配合 NVLink 相連的運算環境；

@@ -77,3 +77,23 @@ H1–H4 合起來就是一個排程問題：每一層、每一個專家，決定
 - MoNDE：https://arxiv.org/abs/2405.18832 ；DynaNDE：https://arxiv.org/abs/2609.00407 （只讀摘要）；CXL GPU–NDP：https://arxiv.org/abs/2512.04476
 - MoE-Infinity：https://arxiv.org/abs/2401.14361 ；2606.10493：https://www.emergentmind.com/papers/2606.10493 （只讀摘要頁）
 - CAP：https://arxiv.org/abs/2607.05116 （只讀摘要）；Predictable LLM Serving：https://arxiv.org/abs/2508.20274 ；Memory Offloading w/ SLO：https://arxiv.org/abs/2502.08182 ；Harvest：https://arxiv.org/abs/2602.00328 （只讀摘要）
+
+## 6. 改良的主軸（2026-10-29 補，回答「打算怎麼改良」；全為推論）
+
+**核心**：8 卡時 GPU 大多在等 CPU 算冷門專家。用 4 條上行線同時把一部分冷門專家搬進 GPU 算，讓「CPU 算」和「8 卡搬來算」同時進行、同時做完。
+
+估算（P1 T2 `results/hetero_roles/p1/analysis.txt` 是單卡單線，約 19 GB/s：Mixtral 專家 352 MB 搬＋算 18.2 ms；CPU 算 4 token 3.45 ms）：
+- 8 卡各搬 1/8、4 條線約 90 GB/s（K1：8 卡同時每卡 9–12 GB/s）→ 搬＋算約 18.2 / 4.7 ≈ 3.9 ms，和 CPU 算差不多。
+- 兩邊分工的處理速度：1/3.45 + 1/3.9 ≈ 0.55 個專家/ms，只用 CPU 是 0.29 → 約 1.9×。單卡單線只有 1/3.45 + 1/18.2 → 約 1.19×。
+  → 多出來的上行線是 8 卡伺服器才有的資源；KTransformers 只經 GPU0 一條線，用不到。
+- 「裝置算 vs 搬到 GPU」分界從 P1 的每專家約 32 token 降到約 4–8 token。
+- 未計：主機 DRAM 被 CPU 計算和 DMA 同時讀的互搶、每塊 1/8 變小後的固定開銷、搬運拖慢 NCCL（X 系列）。
+
+組成：
+1. 排程器：每層依 router 結果（每個冷門專家的 token 數）決定 CPU 算或 8 卡搬來算，讓兩邊同時結束。時間模型要包含同一交換器兩卡互搶、DRAM 互搶。
+2. 權重擺放與 TP 切法一致：專家中間維切 8 份；第 0–3 份放插槽 0 的記憶體，第 4–7 份放插槽 1。CPU 算時各插槽算自己那半（同 KTransformers）；GPU k 搬第 k 份，都在本地 NUMA。
+3. H1＋H2：每個插槽和本地 GPU 交換；回呼換 hxb 計數器。
+4. H4：`NCCL_GRAPH_MIXING_SUPPORT=0`；搬運用 GPU 端計數器放行；活化值交換優先於權重搬運。
+
+**最便宜的否證實驗（1–2 天，不需裝 SGLang）**：同一時間 (a) CPU 兩個插槽算 k 個專家，(b) 8 卡各搬 1/8 的另外 m 個專家。量兩邊各自的速度和互搶程度，看約 1.9× 是否成立。
+不成立（例如 DRAM 互搶吃掉大半），主軸就退回 H1 / H2。
