@@ -34,7 +34,7 @@
   - 真實模型：本機已有 **Kimi-K2.6**（`~/.cache/huggingface`，555 GB，DeepSeek-V3 架構，384 專家、專家 7168×2048 = M0 的形狀，int4 group 32；2026-05-02 由同帳號下載，只讀使用）；
     8×80 GB 放進去幾乎沒有 KV 空間 → 需要把部分專家放 CPU，是真實的動機。KTransformers 支援 Kimi-K2 系列，RAWINT4 可在本機 CPU（AVX512BW / VNNI）跑。
   - Apex（2610.23006）全文確認：1 張 A6000＋1 顆 Xeon 8358P、單條 PCIe；沒有多線、NUMA、互搶。
-- **下一步（待使用者同意）**：M1 = kt-kernel RAWINT4 在本機量 Kimi-K2.6 專家的 CPU 速度（決定落在 1.1× 還是 2× 區間）；M2 = 另建 venv 裝 SGLang＋kt-kernel，TP8 跑 Kimi-K2.6，量每層時間組成；之後再另建 venv 裝 SGLang＋kt-kernel（本機 Xeon 8358 無 AMX，有 AVX-512），TP8 跑小 MoE，量 rank 0 / rank 1 每層 MoE 的時間組成（交換、回呼、CPU 計算、其他卡等待）＋回呼 vs 計數器微基準 → 決定 H1/H2 或 H3 為主軸。
+- **下一步（待使用者同意）**：M1 = kt-kernel RAWINT4 在本機量 Kimi-K2.6 專家的 CPU 速度（決定落在 1.1× 還是 2× 區間）；M2 = 另建 venv 裝 SGLang＋kt-kernel，TP8 跑 Kimi-K2.6，量每層時間組成（rank 0 / rank 1 的交換、回呼、CPU 計算、其他卡等待；本機 Xeon 8358 無 AMX，有 AVX-512）＋回呼 vs 計數器微基準。
 
 
 **教授新方向（2026-10-06）**：讓 PCIe 也能用 Flux 的邏輯做通訊 / 計算重疊，配合 NVLink 相連的運算環境；
