@@ -1,0 +1,56 @@
+M0 (2026-10-29) m0_split_v1.py, 30 rounds x 34 conditions, window 0.5 s, order shuffled per round; guard CLEAN;
+GPU0 SM clock modal 1410 MHz; CPU scaling_cur_freq median 3300 MHz both sockets. NUMA: 256/256 sampled pages of every
+pool on the intended node (stdout.txt). All numbers: medians over rounds from m0_split_v1.json "summary".
+
+GPU only, host -> device, aggregate (per GPU)
+  g1 GPU0 alone (half of it from node 1)      21.3 GB/s                   (PCIe anchor ~22)
+  pair_same GPU0+GPU1 (same switch)           25.2 GB/s (12.6 each)
+  pair_diff GPU0+GPU2 (same socket, 2 switches) 41.9 GB/s (20.9 / 21.0)
+  g4 GPUs 0,2,4,6 (one per switch)            73.8 GB/s (18.4 each)
+  g8 all 8                                    85.4 GB/s (10.7 each)       (K1 anchor 10.1-12.2 per GPU)
+  -> limits: one GPU ~21, one switch uplink ~25, one socket ~42 (pair_diff); 8 GPUs = 2 sockets x ~42.
+     g4 already reaches 86% of g8. (qwen235 shapes: same within 1%.)
+
+CPU only (two sockets, 28 threads each, bf16 weights, fp32 math; per socket GB/s of weights)
+  dsv3     n=1 138.3/139.7   n=4 107.6/107.7   n=16 36.5/37.2   (read anchor 172-176; P1 Mixtral n=1 139)
+  qwen235  n=1 128.7/125.3   n=4  98.4/ 98.0   n=16 35.0/35.4
+
+CPU + GPU at the same time: gain = (CPU experts/s + GPU experts/s, both measured together) / CPU-only experts/s,
+paired within a round [p10, p90]; "ideal" = same with each side's solo rate (no interference)
+  dsv3 n=1   g1 1.023 [1.015,1.040] ideal 1.077 | g4 1.092 ideal 1.267 | g8 1.101 [1.092,1.115] ideal 1.309
+  dsv3 n=4   g1 1.061 [1.036,1.088] ideal 1.099 | g4 1.211 ideal 1.343 | g8 1.238 [1.213,1.299] ideal 1.398
+  dsv3 n=16  g1 1.257 ideal 1.297 | g4 1.910 ideal 2.026 | g8 2.034 [1.961,2.096] ideal 2.191
+  qwen n=1   g1 1.038 | g4 1.125 | g8 1.140 [1.131,1.153] ideal 1.337
+  qwen n=4   g1 1.083 | g4 1.257 | g8 1.282 [1.261,1.315] ideal 1.432
+  qwen n=16  g1 1.269 | g4 1.932 | g8 2.081 [2.013,2.155] ideal 2.197
+  interference with g8 (dsv3 n=1 / n=4 / n=16): CPU x0.859 / x0.901 / x0.981, GPU copies x0.784 / x0.826 / x0.886;
+  per-socket DRAM read (CPU + DMA from that node) 152-154 / 132-135 / 74 GB/s.
+
+Predictions (script header, registered before any run)
+  M1 g8 80-95 GB/s, 9-12 per GPU: HOLDS (85.4, 10.7). g4 within 15% of g8: HOLDS (-13.6%). g1 18-22: HOLDS (21.3).
+     pair_same 20-25: just above (25.2). pair_diff 38-46: HOLDS (41.9).
+  M2 CPU dsv3 n=1 125-150 per socket: HOLDS (138-140).
+  M3 CPU drops 10-25%: HOLDS (14%). GPU drops <= 10%: FAILS (22% at n=1, 17% at n=4).
+     Per-socket DRAM <= 1.1 x anchor: HOLDS (154 < 172).
+  M4 dsv3 g8 1.15-1.30 at n=1 and n=4: FAILS at n=1 (1.10), HOLDS at n=4 (1.24). g1 1.03-1.08: just below at n=1 (1.02),
+     HOLDS at n=4 (1.06).
+  M5 n=16 g8 > 1.5: HOLDS (2.03), overstated (this CPU kernel is compute-bound at n=16), not used for the decision.
+  Decision rule: gain(g8, dsv3, n=4) >= 1.20 and gain(g8) - gain(g1) >= 0.10 -> MET (1.238, p10 1.213; 0.177) -> go.
+
+Findings beyond the predictions
+  F1 Interference is NOT a DRAM bandwidth cap. With g8 at n=1 the socket reads only 152-154 GB/s in total, below
+     CPU alone (138) + DMA alone (~43) = 181 and below the read anchor 172. Both sides slow down although the memory
+     bandwidth is not saturated. Inference: DMA reads raise memory latency for the CPU kernel, and the CPU's
+     traffic delays the DMA reads (memory-controller / mesh / IIO queueing). How to verify: CPU read-bandwidth kernel
+     at 8-28 threads with and without g8; DMA from a socket whose cores are idle vs busy.
+  F2 Interference eats a large part of the gain: dsv3 n=1 ideal 1.31 -> 1.10, n=4 1.40 -> 1.24. A split scheduler that
+     uses solo rates (Apex-style, 2610.23006, single GPU) would over-assign to the GPU path; the cost model must
+     include interference.
+  F3 The extra links are the gain: one link (g1, = a one-GPU system) gives 1.02-1.08 at n=1-4; four or eight links
+     give 1.09-1.28. g4 (one GPU per switch) gets about 90% of g8's gain.
+  F4 n dependence follows the CPU kernel: the more compute-bound the CPU side (larger n, or a heavier dequant such as
+     int4), the larger the gain. Inference: kt-kernel's int4 path on this CPU (no AVX512_BF16, no AMX) is
+     compute-heavier than this bf16 kernel, so Kimi-K2.6 int4 would sit between the n=1 and n=16 rows. How to verify:
+     time kt-kernel RAWINT4 on the Kimi-K2.6 expert shape (7168 x 2048) on this machine.
+Limits: GPU-side SwiGLU not included (~10 us per slice, inference); CPU kernel is P1's, not kt-kernel; synthetic
+weights; steady-state throughput, not per-layer latency with routing on the critical path.

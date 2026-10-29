@@ -1,0 +1,49 @@
+[m0] NUMA pages: {"gpu_pool_dsv3_node0": {"N0": 256}, "gpu_pool_dsv3_node1": {"N1": 256}, "gpu_pool_qwen235_node0": {"N0": 256}, "gpu_pool_qwen235_node1": {"N1": 256}, "cpu_pool_dsv3_node1": {"N1": 256}, "cpu_pool_qwen235_node1": {"N1": 256}, "cpu_pool_dsv3_node0": {"N0": 256}, "cpu_pool_qwen235_node0": {"N0": 256}}
+[m0] round -1 done (0 records)
+[m0] round 0 done (34 records)
+[m0] round 1 done (68 records)
+[m0] round 2 done (102 records)
+[m0] round 3 done (136 records)
+[m0] round 4 done (170 records)
+[m0] round 5 done (204 records)
+[m0] round 6 done (238 records)
+[m0] round 7 done (272 records)
+[m0] round 8 done (306 records)
+[m0] round 9 done (340 records)
+[m0] round 10 done (374 records)
+[m0] round 11 done (408 records)
+[m0] round 12 done (442 records)
+[m0] round 13 done (476 records)
+[m0] round 14 done (510 records)
+[m0] round 15 done (544 records)
+[m0] round 16 done (578 records)
+[m0] round 17 done (612 records)
+[m0] round 18 done (646 records)
+[m0] round 19 done (680 records)
+[m0] round 20 done (714 records)
+[m0] round 21 done (748 records)
+[m0] round 22 done (782 records)
+[m0] round 23 done (816 records)
+[m0] round 24 done (850 records)
+[m0] round 25 done (884 records)
+[m0] round 26 done (918 records)
+[m0] round 27 done (952 records)
+[m0] round 28 done (986 records)
+[m0] round 29 done (1020 records)
+dsv3|gpu_only|g1: {"agg_gbps": 21.345746127959522, "per_gpu_gbps": {"0": 21.345746127959522}, "rounds": 30}
+dsv3|gpu_only|g4: {"agg_gbps": 73.81232617576802, "per_gpu_gbps": {"0": 18.44482477448675, "2": 18.44495330981998, "4": 18.448615096205316, "6": 18.474966437133908}, "rounds": 30}
+dsv3|gpu_only|g8: {"agg_gbps": 85.43541551519212, "per_gpu_gbps": {"0": 10.66692793167903, "1": 10.666907996469696, "2": 10.666868840353647, "3": 10.666925752573004, "4": 10.679666137264682, "5": 10.674339873752176, "6": 10.710164679552747, "7": 10.714433859780959}, "rounds": 30}
+dsv3|gpu_only|pair_same: {"agg_gbps": 25.23471605376762, "per_gpu_gbps": {"0": 12.617785250499288, "1": 12.616603571381255}, "rounds": 30}
+dsv3|gpu_only|pair_diff: {"agg_gbps": 41.894589354328865, "per_gpu_gbps": {"0": 20.912805561121957, "2": 20.979822538942766}, "rounds": 30}
+dsv3|n1: {"cpu_alone_eps": 3140.1143022947635, "cpu_alone_gbps_per_socket": {"0": 138.2912367750074, "1": 139.68496334511835}, "rounds": 30, "g1": {"gain": 1.0229538393468531, "gain_ideal": 1.0771684442618312, "cpu_rate_vs_alone": 0.9611482098969601, "gpu_rate_vs_alone": 0.8058758970793745, "dram_read_gbps_per_socket": {"0": 141.21315487262757, "1": 143.2900513418649}, "gain_p10": 1.0147739604453176, "gain_p90": 1.0397419583189338, "rounds": 30}, "g4": {"gain": 1.0916182248694448, "gain_ideal": 1.2665185843151603, "cpu_rate_vs_alone": 0.8797865531721261, "gpu_rate_vs_alone": 0.79718536035852, "dram_read_gbps_per_socket": {"0": 150.63149708733482, "1": 152.2711086525744}, "gain_p10": 1.079636838821205, "gain_p90": 1.103258103323553, "rounds": 30}, "g8": {"gain": 1.1011164516508987, "gain_ideal": 1.3088557969243895, "cpu_rate_vs_alone": 0.8589656141466322, "gpu_rate_vs_alone": 0.7844174305178349, "dram_read_gbps_per_socket": {"0": 152.1740158698229, "1": 153.95903466472748}, "gain_p10": 1.0916653900219397, "gain_p90": 1.1154585733122566, "rounds": 30}}
+dsv3|n4: {"cpu_alone_eps": 2443.026379562104, "cpu_alone_gbps_per_socket": {"0": 107.63631040522948, "1": 107.7383584449536}, "rounds": 30, "g1": {"gain": 1.061392994797607, "gain_ideal": 1.0992164368213975, "cpu_rate_vs_alone": 0.9762949566111279, "gpu_rate_vs_alone": 0.8568275132007391, "dram_read_gbps_per_socket": {"0": 112.50837836572464, "1": 114.62046006957056}, "gain_p10": 1.035594297657585, "gain_p90": 1.0879759549023231, "rounds": 30}, "g4": {"gain": 1.2113473026438815, "gain_ideal": 1.342888952641224, "cpu_rate_vs_alone": 0.9237098367614132, "gpu_rate_vs_alone": 0.8443511795823445, "dram_read_gbps_per_socket": {"0": 129.89375046098536, "1": 132.12450629884484}, "gain_p10": 1.1868092853779049, "gain_p90": 1.2723928026311648, "rounds": 30}, "g8": {"gain": 1.2383277872232803, "gain_ideal": 1.3979961022358613, "cpu_rate_vs_alone": 0.9010858844064766, "gpu_rate_vs_alone": 0.8257597315898823, "dram_read_gbps_per_socket": {"0": 132.1532712331085, "1": 135.1658201875829}, "gain_p10": 1.2134773251842428, "gain_p90": 1.2989542821709155, "rounds": 30}}
+dsv3|n16: {"cpu_alone_eps": 816.0447078867733, "cpu_alone_gbps_per_socket": {"0": 36.45105657893008, "1": 37.20420987395579}, "rounds": 30, "g1": {"gain": 1.2565486822136216, "gain_ideal": 1.2969333322578753, "cpu_rate_vs_alone": 0.9885650811697964, "gpu_rate_vs_alone": 0.9158491292657014, "dram_read_gbps_per_socket": {"0": 45.44147250321241, "1": 46.25307097275766}, "gain_p10": 1.217665989903025, "gain_p90": 1.307715294570442, "rounds": 30}, "g4": {"gain": 1.9100629586268825, "gain_ideal": 2.026401087227153, "cpu_rate_vs_alone": 0.979835304960312, "gpu_rate_vs_alone": 0.9096944645527816, "dram_read_gbps_per_socket": {"0": 68.87869295463452, "1": 70.13822671514609}, "gain_p10": 1.843516225842846, "gain_p90": 1.9617733541076399, "rounds": 30}, "g8": {"gain": 2.0339609203632323, "gain_ideal": 2.191116642981167, "cpu_rate_vs_alone": 0.9809329817797119, "gpu_rate_vs_alone": 0.8855624106624462, "dram_read_gbps_per_socket": {"0": 74.2333150924462, "1": 74.37661052458859}, "gain_p10": 1.961328710802994, "gain_p90": 2.095811589517465, "rounds": 30}}
+qwen235|gpu_only|g1: {"agg_gbps": 21.236285400991136, "per_gpu_gbps": {"0": 21.236285400991136}, "rounds": 30}
+qwen235|gpu_only|g4: {"agg_gbps": 73.10772016634283, "per_gpu_gbps": {"0": 18.26926573366403, "2": 18.269301710826845, "4": 18.27108152673701, "6": 18.298435859178184}, "rounds": 30}
+qwen235|gpu_only|g8: {"agg_gbps": 84.67222253293758, "per_gpu_gbps": {"0": 10.578373612297955, "1": 10.578411886806531, "2": 10.578261807817952, "3": 10.578360312678084, "4": 10.589306781178232, "5": 10.585924915168697, "6": 10.594891944984706, "7": 10.5949200382578}, "rounds": 30}
+qwen235|gpu_only|pair_same: {"agg_gbps": 25.151902586819112, "per_gpu_gbps": {"0": 12.575777112645238, "1": 12.576005079172099}, "rounds": 30}
+qwen235|gpu_only|pair_diff: {"agg_gbps": 41.4523392968147, "per_gpu_gbps": {"0": 20.69989313628808, "2": 20.753674651849714}, "rounds": 30}
+qwen235|n1: {"cpu_alone_eps": 6638.422409834246, "cpu_alone_gbps_per_socket": {"0": 128.67567272817791, "1": 125.29602750265838}, "rounds": 30, "g1": {"gain": 1.0375741375146605, "gain_ideal": 1.08473779354712, "cpu_rate_vs_alone": 0.9667166887559606, "gpu_rate_vs_alone": 0.8364530627246338, "dram_read_gbps_per_socket": {"0": 131.9659084350763, "1": 130.03986913031093}, "gain_p10": 1.0335278035793227, "gain_p90": 1.0508970701021685, "rounds": 30}, "g4": {"gain": 1.1246300199360377, "gain_ideal": 1.2915364534438138, "cpu_rate_vs_alone": 0.8829783359944389, "gpu_rate_vs_alone": 0.8292084611931734, "dram_read_gbps_per_socket": {"0": 142.5065875475849, "1": 140.96198094605242}, "gain_p10": 1.1210436023730146, "gain_p90": 1.1420114500397842, "rounds": 30}, "g8": {"gain": 1.139670680991671, "gain_ideal": 1.3370388676602887, "cpu_rate_vs_alone": 0.8656665473978998, "gpu_rate_vs_alone": 0.8139031718349008, "dram_read_gbps_per_socket": {"0": 144.65877639549691, "1": 142.93706467005845}, "gain_p10": 1.1310281069659611, "gain_p90": 1.1528600519218453, "rounds": 30}}
+qwen235|n4: {"cpu_alone_eps": 5115.169612325431, "cpu_alone_gbps_per_socket": {"0": 98.39472419288438, "1": 97.9787167514383}, "rounds": 30, "g1": {"gain": 1.0829183130420894, "gain_ideal": 1.1099659458085243, "cpu_rate_vs_alone": 0.9874586178619813, "gpu_rate_vs_alone": 0.8766888229830135, "dram_read_gbps_per_socket": {"0": 106.04562159462297, "1": 105.5218662167332}, "gain_p10": 1.044445168462553, "gain_p90": 1.1070283674827475, "rounds": 30}, "g4": {"gain": 1.2574615180107558, "gain_ideal": 1.3783587628414091, "cpu_rate_vs_alone": 0.9340127962029945, "gpu_rate_vs_alone": 0.8668393138605409, "dram_read_gbps_per_socket": {"0": 122.06972555461357, "1": 122.73072047529236}, "gain_p10": 1.2342487765298888, "gain_p90": 1.2913880569669167, "rounds": 30}, "g8": {"gain": 1.2819934940979558, "gain_ideal": 1.4321730188433497, "cpu_rate_vs_alone": 0.9100190567517913, "gpu_rate_vs_alone": 0.8501029404692366, "dram_read_gbps_per_socket": {"0": 124.3856106514396, "1": 124.55167695508152}, "gain_p10": 1.2612563361766962, "gain_p90": 1.3145878490433043, "rounds": 30}}
+qwen235|n16: {"cpu_alone_eps": 1849.2209284135333, "cpu_alone_gbps_per_socket": {"0": 34.9976324827386, "1": 35.35738396778167}, "rounds": 30, "g1": {"gain": 1.2691363615654652, "gain_ideal": 1.304287342497319, "cpu_rate_vs_alone": 0.9813259174001814, "gpu_rate_vs_alone": 0.9302627723172683, "dram_read_gbps_per_socket": {"0": 43.50666660497497, "1": 44.29036292627541}, "gain_p10": 1.2178894001801377, "gain_p90": 1.321217131621443, "rounds": 30}, "g4": {"gain": 1.9324285370316803, "gain_ideal": 2.0468172019217397, "cpu_rate_vs_alone": 0.971855126600207, "gpu_rate_vs_alone": 0.9237215961931577, "dram_read_gbps_per_socket": {"0": 67.12010076927238, "1": 67.7746573359294}, "gain_p10": 1.8898810994554625, "gain_p90": 2.0223306904283724, "rounds": 30}, "g8": {"gain": 2.081169905659231, "gain_ideal": 2.197397754438822, "cpu_rate_vs_alone": 0.9760832051545563, "gpu_rate_vs_alone": 0.9030030824367113, "dram_read_gbps_per_socket": {"0": 71.53016824612003, "1": 72.65424038162627}, "gain_p10": 2.012711891170448, "gain_p90": 2.1551978441045496, "rounds": 30}}
+[m0] done

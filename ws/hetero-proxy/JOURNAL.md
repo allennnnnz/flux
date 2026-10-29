@@ -222,3 +222,11 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   - 本機：2× Xeon Platinum 8358（無 AMX）、主機記憶體 1.5 TB、磁碟剩 672 GB。
 - 文獻工具：scratchpad 用 `pip install --target` 裝 pypdf 讀 PDF（本機無 pdftotext / pdftoppm）；GitHub 原始碼用 sparse clone（無 gh）。
 - **留給下個 session**：等使用者同意第一步（另建 venv 裝 SGLang＋kt-kernel，TP8 小 MoE，量每層 MoE 的時間組成＋回呼 vs 計數器微基準）。
+- 使用者：「打算怎麼改良」→ 主軸：CPU 算一部分冷門專家，同時 8 卡各經自己的 PCIe 線搬另一部分的 1/8 來算（報告第 6 節）；P1 單插槽數字估約 1.9×。
+- 使用者：「開始驗證這個題目能不能做，目標是快速生出一份論文」→ M0（`scripts/moehy/m0_split_v1.py`、`run_m0_v1.sh`，tmux＋guard）：
+  - 寫腳本時發現 P1 的 CPU 只用一個插槽，KTransformers 用兩個 → 1.9× 偏高；事前預測改登記 1.15–1.30×（跑之前）。
+  - 冒煙測試（`results/moehy/m0_smoke/`）：/proc/self/numa_maps 會把相鄰的配置合成一段，NUMA 頁數混在一起 → 改用 libnuma move_pages 逐頁抽樣（正式跑 256/256 頁都在指定節點；冒煙的 NUMA 欄位不可信）。
+  - 正式 30 輪（`results/moehy/m0_v1/`，guard CLEAN）：4 token 1.24×（單線 1.06×）、1 token 1.10×、16 token 2.03×（CPU kernel 受計算限制，偏高）；互搶吃掉約一半理想增益，且不是 DRAM 頻寬被吃滿。判定規則達成 → 可做。
+  - 主機→GPU 頻寬上限：卡 21、交換器 25、插槽 42、8 卡 85 GB/s → 寫入 `common/cost_model/params.json`（h2d_topology_m0、cpu_dma_interference_m0）。
+  - 可行性：本機已有 Kimi-K2.6（555 GB int4，專家 7168×2048），8×80 GB 放不下＋KV → 真實動機；kt-kernel 的 RAWINT4 支援本機 CPU；Apex 全文確認單卡單線。
+- **留給下個 session**：使用者同意後 M1（kt-kernel RAWINT4 量 Kimi-K2.6 專家 CPU 速度）、M2（SGLang＋kt-kernel TP8 跑 Kimi-K2.6、量每層時間組成）。

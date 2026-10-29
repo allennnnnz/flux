@@ -549,5 +549,19 @@
       "GemmRS_multinode": "runs but node-0 ranks return wrong results (max abs err ~ value scale)",
       "source": "ws/fusion-dispatch/results/e4_flux_smoke/"
     }
+  },
+
+  "h2d_topology_m0": {
+    "per_gpu_alone": {"value": 21.3, "unit": "GB/s", "source": "ws/hetero-proxy/results/moehy/m0_v1/ (m0_split_v1.json summary; analysis.txt)", "date": "2026-10-29", "method": "cuMemcpyAsync pinned host -> device, NUMA-local host memory, 11 MB pieces, depth 4, 30 shuffled rounds x 0.5 s, median of per-window CUDA-event rates; guard CLEAN; not yet audited", "status": "measured"},
+    "same_switch_pair_total": {"value": 25.2, "unit": "GB/s", "source": "ws/hetero-proxy/results/moehy/m0_v1/ (m0_split_v1.json summary; analysis.txt)", "date": "2026-10-29", "method": "GPU0+GPU1; cuMemcpyAsync pinned host -> device, NUMA-local host memory, 11 MB pieces, depth 4, 30 shuffled rounds x 0.5 s, median of per-window CUDA-event rates; guard CLEAN; not yet audited", "status": "measured"},
+    "one_socket_two_switches_total": {"value": 41.9, "unit": "GB/s", "source": "ws/hetero-proxy/results/moehy/m0_v1/ (m0_split_v1.json summary; analysis.txt)", "date": "2026-10-29", "method": "GPU0+GPU2; cuMemcpyAsync pinned host -> device, NUMA-local host memory, 11 MB pieces, depth 4, 30 shuffled rounds x 0.5 s, median of per-window CUDA-event rates; guard CLEAN; not yet audited", "status": "measured"},
+    "four_gpus_one_per_switch_total": {"value": 73.8, "unit": "GB/s", "source": "ws/hetero-proxy/results/moehy/m0_v1/ (m0_split_v1.json summary; analysis.txt)", "date": "2026-10-29", "method": "GPUs 0,2,4,6; cuMemcpyAsync pinned host -> device, NUMA-local host memory, 11 MB pieces, depth 4, 30 shuffled rounds x 0.5 s, median of per-window CUDA-event rates; guard CLEAN; not yet audited", "status": "measured"},
+    "all_8_total": {"value": 85.4, "unit": "GB/s", "per_gpu": 10.7, "source": "ws/hetero-proxy/results/moehy/m0_v1/ (m0_split_v1.json summary; analysis.txt)", "date": "2026-10-29", "method": "cuMemcpyAsync pinned host -> device, NUMA-local host memory, 11 MB pieces, depth 4, 30 shuffled rounds x 0.5 s, median of per-window CUDA-event rates; guard CLEAN; not yet audited", "status": "measured"},
+    "note": "limits: one GPU ~21, one switch uplink ~25, one socket ~42 GB/s host->device; anchors PCIe ~22 single, K1 10.1-12.2 per GPU with 8"
+  },
+
+  "cpu_dma_interference_m0": {
+    "dsv3_n1": {"value": {"cpu_alone_GBps_per_socket": 139, "cpu_rate_with_8gpu_dma": 0.859, "dma_rate_with_cpu": 0.784, "dram_read_total_GBps_per_socket": 153}, "unit": "GB/s and ratios", "source": "ws/hetero-proxy/results/moehy/m0_v1/ (m0_split_v1.json summary; analysis.txt)", "date": "2026-10-29", "method": "2 sockets x 28 threads, bf16 SwiGLU expert 7168x2048 (hxb_moe_expert), 1 token, NUMA-local pools, while 8 GPUs pull other experts' 1/8 slices; paired per round", "status": "measured"},
+    "dsv3_n4": {"value": {"cpu_alone_GBps_per_socket": 107.7, "cpu_rate_with_8gpu_dma": 0.901, "dma_rate_with_cpu": 0.826}, "unit": "GB/s and ratios", "source": "ws/hetero-proxy/results/moehy/m0_v1/ (m0_split_v1.json summary; analysis.txt)", "date": "2026-10-29", "method": "same, 4 tokens", "status": "measured"}
   }
 }
