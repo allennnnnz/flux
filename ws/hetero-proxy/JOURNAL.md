@@ -209,3 +209,16 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   - 撤回表加兩條（「全部 NCCL 都是系統屏障」、「系統屏障慢是 PCIe 獨有」）。
   - 報告更新：量測報告頁第 4 版（「原因」卡片改成 mixing 開／關對照圖＋單卡拆解表＋三協定表；屏障圖改成 Simple 的原因；比喻、限制、下一步更正；新資料集 x1d_scope、x1_nomix，所有新數字綁資料集）；說明頁第 3 版（干擾原因、進度表加 X1d、新意降為「中」、論文主軸）。
 - **留給下個 session**：與使用者確認方向——K4.1 在 mixing=0 下重量、vLLM / SGLang 實際的 all-reduce 路徑、塊大小實驗解釋 182 µs 放大、Simple / prefill 大小的干擾。
+
+## 2026-10-29 · boss 兼 worker · 選題：MoE 專家「多 GPU＋PCIe 裝置」混合推論（文獻與原始碼調查，未佔 GPU）
+
+- 使用者：關掉 NCCL 設定不算貢獻，要排程相關的論文題目。提了四個候選（A 背景載入權重、B MoE 異質排程、C 異質 TP 切分、D fusion-dispatch），推薦 A。
+- 使用者要求說明 A 的細節 → 細算後自我更正三點：(1) 每卡 8 GB 以 9–12 GB/s 約 0.7–0.9 秒搬完，停機載入不到 1 秒，問題太小；
+  (2)「一半 PCIe、一半 NVLink 交換」錯誤——TP 下每卡要的資料不同，4 條上行線都滿時轉送不增加頻寬；(3)「prefill 關設定後仍慢約 2 倍」錯誤——+203% 是強迫小訊息走 Simple，真模型 prefill 在 K4.1 只 +6.7%。
+  → 建議把 A 併入 B：PCIe 上有持續、在關鍵路徑上的流量（冷門專家放在 PCIe 裝置）。使用者第一次說明看不懂，改用廚房比喻重講。
+- 使用者：「查一下別人有沒有在做，可以直接從人家做法中去改善」→ 文獻＋讀 KTransformers / SGLang 原始碼，報告 `reports/20261029_lit_moe_hybrid.md`。
+  - 單 GPU＋CPU 很擠；GPU＋NDP（MoNDE、DynaNDE）是單一加速器；KTransformers＋SGLang（TP8＋CPU 專家）是最接近且開源的改良對象。
+  - 原始碼確認：只有 tp_rank 0 和 CPU 交換；GPU 用 `cudaLaunchHostFunc` 回呼等 CPU；專家分配靜態；kt-kernel 已支援昇騰、摩爾線程、沐曦、AMD 當「GPU 端」，慢的一端一律是 CPU。
+  - 本機：2× Xeon Platinum 8358（無 AMX）、主機記憶體 1.5 TB、磁碟剩 672 GB。
+- 文獻工具：scratchpad 用 `pip install --target` 裝 pypdf 讀 PDF（本機無 pdftotext / pdftoppm）；GitHub 原始碼用 sparse clone（無 gh）。
+- **留給下個 session**：等使用者同意第一步（另建 venv 裝 SGLang＋kt-kernel，TP8 小 MoE，量每層 MoE 的時間組成＋回呼 vs 計數器微基準）。

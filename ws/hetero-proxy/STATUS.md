@@ -3,14 +3,25 @@
 **本 workstream 唯一權威。** 第 1 節由 boss 寫入，worker 不改；第 2 節起由 worker 維護。
 
 建立：2026-09-23（boss）
-最後更新：2026-10-28（boss 兼 worker：教授建議不做 KV cache 題目 → 新題目 X 系列：PCIe 搬運對 TP 推論的干擾與 Flux 式排程）
-狀態：**KV 外存（K1 / K2）完成並保留為背景；現在：X 系列（PCIe 干擾），X1 / X1d 完成：NCCL 主因是 graph 內的 event 節點（`NCCL_GRAPH_MIXING_SUPPORT=0` 消除），Simple 另受系統層級屏障影響**
+最後更新：2026-10-29（boss 兼 worker：選題——MoE 專家「多 GPU＋PCIe 裝置」混合推論的文獻與開源實作調查）
+狀態：**X1 / X1d 完成（NCCL 主因是 graph 內的 event 節點，`NCCL_GRAPH_MIXING_SUPPORT=0` 消除）；使用者認為關設定不算貢獻 → 選題中：以 KTransformers＋SGLang 的 8 卡做法為改良對象（待使用者同意第一步）**
 
 ---
 
 ## 0. 快速跟上（新 session 先讀這節；每次收工更新）
 
-最後更新：2026-10-28
+最後更新：2026-10-29
+
+**最新（2026-10-29）—— 選題：MoE 專家放在 PCIe 裝置上，8 張 NVLink GPU 一起用**（`reports/20261029_lit_moe_hybrid.md`）
+- 為什麼換：使用者認為「關掉 NCCL 一個設定」不算貢獻；背景載入權重（X4 的主案例）細算後問題太小——每卡 8 GB 以 9–12 GB/s 約 0.7–0.9 秒就搬完（推論，用 K1 頻寬算），
+  而且 4 條上行線都滿時經 NVLink 轉送不會多出頻寬（10-28 回覆中「一半 PCIe、一半 NVLink 交換」的說法錯誤）。排程要有意義，PCIe 上必須有**持續、在關鍵路徑上**的流量 → MoE 冷門專家放在 PCIe 裝置（現在是 CPU，將來是國產晶片）。
+- 文獻：1 張 GPU＋CPU 已很擠（Fiddler、KTransformers SOSP'25、HybriMoE、DALI、LayerScope、Adaptive Expert Assignment…）；GPU＋記憶體端運算裝置（MoNDE、DynaNDE）最像國產晶片的角色，但都是單一加速器。
+  **最接近本機環境且開源的是 KTransformers 併入 SGLang 的 8 卡版本**——讀原始碼（sglang `d213124`、ktransformers `c987331`）確認：
+  只有 GPU0（tp_rank 0）和 CPU 交換資料（`kt_ep_wrapper.py` 第 299、322、361–383 行）；GPU 等 CPU 用 `cudaLaunchHostFunc` 回呼（`cpuinfer.h` 第 96、121 行）；專家分配靜態；8 卡在單一請求時只比 1 卡快 26%（LMSYS 部落格）。
+- 可改良處（全為推論）：H1 每個插槽和自己 NUMA 的 GPU 交換、用上 4 條上行線、CPU 部分和併入既有的 NVLink all-reduce；H2 回呼換成 hxb 計數器；H3 TP 下每卡只搬專家的 1/8，多線同時搬 → 「裝置算 vs 搬到 GPU」分界點下移；
+  H4 用 X 系列知識避免搬運拖慢 NCCL；H5 慢的一端換成任何 PCIe 裝置（hxb）。
+- **下一步（待使用者同意）**：另建 venv 裝 SGLang＋kt-kernel（本機 Xeon 8358 無 AMX，有 AVX-512），TP8 跑小 MoE，量 rank 0 / rank 1 每層 MoE 的時間組成（交換、回呼、CPU 計算、其他卡等待）＋回呼 vs 計數器微基準 → 決定 H1/H2 或 H3 為主軸。
+
 
 **教授新方向（2026-10-06）**：讓 PCIe 也能用 Flux 的邏輯做通訊 / 計算重疊，配合 NVLink 相連的運算環境；
 節點外多一顆只有 PCIe 的不同廠牌晶片也要能協同運作、用 PCIe 溝通。這正是本 workstream 第 1 節的目標，故由本 ws 承接。
