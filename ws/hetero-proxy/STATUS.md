@@ -22,7 +22,9 @@
 - 文獻（三路獨立搜尋，報告附錄）：同一機制只見於 NVIDIA/nccl #2218（V100/H200，−8–11%，已關沒修）與 PyTorch 論壇（H100），**沒有論文**；ChunkFlow 是純 PCIe 機器。
   跨節點的 GDR 讀繞路、HSDP／壓縮、rail 感知、RL 權重同步、TP decode all-reduce 都已擠或已做。fusion-dispatch 仍有空間（TokenWeave 用固定門檻、FlashOverlap 不會退回不融合）。
 - **建議**：主題目 T（訓練時 offload 干擾的量測＋排程器，單機即可、10 週計劃見報告 5.5，第 1 週先在真實 FSDP2 / activation offload 訓練步驟裡量干擾占比，≥ 10% 才繼續）；備案 F；M 第三。
-- **待使用者決定**：選 T / F / M；T 的框架與模型大小；159 上的 SGLang 是否為使用者自己開的。
+- **待使用者決定**：選 T / F / M；T 的框架與模型大小。**使用者 10-30：只用 158**（跨節點與 159 不列入）。
+- T 的 offload 做法（對使用者的說明，推論待第 1 週驗證）：主情境 = 單機全參數微調 Qwen2.5-32B（本機有權重），TP8＋序列平行（每層集合通訊 [序列, 5120] bf16：序列 4096 → 40 MiB、2048 → 20 MiB，落在 T1 受害最重的區間），
+  Adam 狀態放主機（梯度 GPU→主機、更新後權重主機→GPU），可選 activation offload；自寫 PyTorch 2.6 訓練迴圈（沿用 e2e 的 TP8 程式，每筆搬運自己控制），FSDP2 `CPUOffloadPolicy` 當現成框架對照（但它每層的集合通訊 ≥ 數百 MB，預期受害小）。
 
 **之前（2026-10-29）—— 選題：MoE 專家放在 PCIe 裝置上，8 張 NVLink GPU 一起用**（`reports/20261029_lit_moe_hybrid.md`）
 - 為什麼換：使用者認為「關掉 NCCL 一個設定」不算貢獻；背景載入權重（X4 的主案例）細算後問題太小——每卡 8 GB 以 9–12 GB/s 約 0.7–0.9 秒就搬完（推論，用 K1 頻寬算），
