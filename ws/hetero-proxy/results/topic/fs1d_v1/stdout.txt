@@ -1,0 +1,9 @@
+{"case": "L-QKV", "M": 1024, "copies": 0.1818, "gemm": 0.15, "both_c": 0.1783, "both_g": 0.1577, "copy_slowdown": 0.9806, "gemm_slowdown": 1.0512, "shard_MB": 2.0972, "copy_GBps_alone_per_gpu": 80.7449}
+{"case": "L-QKV", "M": 2048, "copies": 0.2338, "gemm": 0.2836, "both_c": 0.2235, "both_g": 0.2908, "copy_slowdown": 0.956, "gemm_slowdown": 1.0253, "shard_MB": 4.1943, "copy_GBps_alone_per_gpu": 125.5909}
+{"case": "L-QKV", "M": 8192, "copies": 0.5515, "gemm": 0.7516, "both_c": 0.5164, "both_g": 0.7578, "copy_slowdown": 0.9363, "gemm_slowdown": 1.0082, "shard_MB": 16.7772, "copy_GBps_alone_per_gpu": 212.9582}
+{"case": "Q-QKV", "M": 2048, "copies": 0.1914, "gemm": 0.1521, "both_c": 0.1802, "both_g": 0.1577, "copy_slowdown": 0.9416, "gemm_slowdown": 1.037, "shard_MB": 2.6214, "copy_GBps_alone_per_gpu": 95.885}
+{"case": "Q-GU", "M": 1024, "copies": 0.1803, "gemm": 0.3343, "both_c": 0.1744, "both_g": 0.341, "copy_slowdown": 0.9671, "gemm_slowdown": 1.0199, "shard_MB": 1.3107, "copy_GBps_alone_per_gpu": 50.8865}
+{"case": "L-GU", "M": 1024, "copies": 0.2019, "gemm": 0.663, "both_c": 0.1831, "both_g": 0.6697, "copy_slowdown": 0.9069, "gemm_slowdown": 1.01, "shard_MB": 2.0972, "copy_GBps_alone_per_gpu": 72.7254}
+{"case": "G-FC1", "M": 1024, "copies": 0.2104, "gemm": 0.7414, "both_c": 0.1991, "both_g": 0.7496, "copy_slowdown": 0.9462, "gemm_slowdown": 1.011, "shard_MB": 3.1457, "copy_GBps_alone_per_gpu": 104.6503}
+{"case": "G-FC1", "M": 8192, "copies": 0.7969, "gemm": 5.2869, "both_c": 0.7994, "both_g": 5.2797, "copy_slowdown": 1.0031, "gemm_slowdown": 0.9986, "shard_MB": 25.1658, "copy_GBps_alone_per_gpu": 221.0498}
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/topic/fs1d_v1/guard.log

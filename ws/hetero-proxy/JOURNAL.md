@@ -264,3 +264,12 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   建議改評估 M 在批次較大的 decode／服務情境（基準 KT TP8 只用一條上行線、冷專家由 CPU 算），先做與 T 同樣的事前登記驗證；需使用者同意安裝 SGLang＋kt-kernel。記憶檔新增 topic-preferences。
 - 使用者問「除了決策器，能否改 Flux 的排程邏輯」→ 用 fusion-dispatch 既有資料算 Flux 的重疊效率（中位數 40%、離理想 1.30×、最多 1.72×；M ≤ 2048 與小 N 層最差，有融合比串行還慢的點）；
   讀原始碼確認 A100 AG 是依序拉、tile 也依序輪轉（順序已對齊）→ 推論問題在「一份資料的 tile 少於一波」與靜態 stream-K。新選項 FS 寫入 STATUS §0；建議先做不需重編的 profiling() 實驗與文獻檢查。
+
+## 2026-10-30（晚）· boss 兼 worker · 選項 FS（改 Flux 排程）驗證第 1、2 步
+
+- 事前登記 `reports/20261030_fs_validation_plan.md`（b36ff5b），補充 1–3 各在對應實驗跑之前提交（d5ebb38、b3d9a18、e448d27）。
+- FS1：`profiling()` 試遍 64 種 sm80 bf16 設定（32 DP＋32 SK）；M ≤ 2048 最佳設定仍 1.35× 理想、只拿回 29%。
+- 文獻（背景搜尋＋親讀 Syncopate）：部分已做；Syncopate 在 H100、無小 M 對 Flux 數字；ParallelKittens 說是 copy engine 的問題。
+- FS1b：Flux AG 與 GEMM 同時跑 1.30× → 發現 AG 開頭的屏障是 kernel，可能被 GEMM 擋住 → 標為混淆；FS1c 延後 GEMM 仍 1.28×，但 AG 被拖慢 2.8–8.6× 與「大 M 時融合接近理想」矛盾；
+  FS1d 完全不用 Flux：copy engine 與 cuBLAS 同時跑互不拖慢 → 硬體互搶不成立，問題在 Flux 的 AG 路徑。
+- 結果報告 `reports/20261030_fs_validation_result.md`；待使用者同意第 3 步。

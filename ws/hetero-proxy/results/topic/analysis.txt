@@ -161,3 +161,27 @@ Reproducibility: v3b default runs repeat v3 within 0.3% (gdpu 4096 x1 naive 94.3
 Pre-registered predictions: gimm 2048 PCIe-bound - not testable (2048 excluded) but 4096 PCIe-bound (prediction said
 5-15% loss at 4096/8192: 0.3% / 6.0%, partly wrong); act loss 10-25% - NOT confirmed (6.1% / 2.1%); window recovers
 >= 50% - confirmed in 4 of 6 cases with loss >= 5%; LL128 recovers 30-60% - roughly confirmed (halves).
+
+== FS validation (option FS: improve Flux's own scheduling); plan reports/20261030_fs_validation_plan.md (+ addenda 1-3)
+All runs guard CLEAN; Flux outputs allclose to cuBLAS at every point. 6 layers (G-FC1, G-QKV, L-GU, L-QKV, Q-GU, Q-QKV) x
+M = 512..8192, TP8 bf16, All2All + use_read, CUDA_DEVICE_MAX_CONNECTIONS=8. Clocks in the power-capped 1155-1410 MHz range
+(items interleaved per point, so ratios are paired); spot anchors vs fusion-dispatch final_ag_points (1410 MHz) within 20%,
+GEMM differences explained by clock (e.g. G-FC1 2048 GEMM 1.437 at 1155 MHz vs 1.229 at 1410).
+FS1 (fs1_profile_v1.py, fs1_v1/fs1_table.md): AGKernel.profiling() over all 64 compiled sm80 bf16 configs (32 DP + 32 SK).
+  M <= 2048 (n=18): default/ideal median 1.49x; best config/ideal median 1.35x (max 1.62x); config recovers median 29%.
+  M >= 4096 (n=12): default 1.17x -> best 1.08x. P1 (best/ideal >= 1.15 at M<=2048) CONFIRMED; P2 (best ~ default at
+  M>=4096 except trap shapes) PARTLY wrong (Q-GU 4096/8192 also gained ~10%).
+FS1b (fs1b_concurrent_v1.py): Flux AllGatherOp.run (side stream) + gemm_only (main) with no waiting: M<=2048 median 1.30x of
+  ideal. CONFOUNDED: AllGatherOp.run starts with a barrier kernel (nvshmemx_barrier_all_on_stream, src/ths_op/flux_shm.cc:501)
+  that can queue behind the GEMM; many points ~ AG + GEMM added. Not used.
+FS1c (fs1c_concurrent_v2.py): GEMM launch delayed ~40 us (measured, subtracted): M<=2048 concurrent/ideal median 1.28x
+  (max 1.76x); per-stream: Flux AG slowed median 2.8x (M>=4096: 5.7x), GEMM 1.11x / 1.00x. Inconsistent with fused reaching
+  1.01-1.07x of ideal at M>=4096 (a 5-8x slower AG inside fused could not give that).
+FS1d (fs1d_ce_vs_gemm_v1.py, one process, 8 GPUs, no Flux): copy-engine peer copies (push, 7 shards per GPU) concurrent with
+  cuBLAS GEMM: copy slowdown 0.91-1.00x, GEMM slowdown 1.00-1.05x over 8 cases (shards 1.3-25 MB). Copy rate alone 51-221
+  GB/s/GPU (small shards overhead-bound; 16.8 MB: 213 vs anchor Flux All2All 188, ok).
+  -> copy-engine / GEMM hardware contention is NOT the cause here (ParallelKittens' explanation does not hold on this machine);
+     the slowdown appears only on Flux's all-gather path -> the gap is inside Flux's mechanism (barrier kernel, per-piece
+     stream write ops, pull reads, per-tile sys-scope waits: not yet separated). Caveat: FS1d pushes, Flux pulls.
+  Pre-registered FS1b/c rule (<= 1.15) formally FAILED; FS1d shows that test measures Flux's AG path, not hardware.
+  Prediction for FS1d (copy slowdown <= 1.5x) CONFIRMED.

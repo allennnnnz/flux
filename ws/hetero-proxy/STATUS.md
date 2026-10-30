@@ -26,6 +26,9 @@
   推論的原因：M 小時一份資料的 tile 數 < 一波（M=1024、n=6144、tile 128×256：每份 24 個 tile vs 108 個 SM）→ 第一波就要等 4–5 份；靜態 stream-K 讓 CTA 卡在還沒到的 tile；登錄表選到 PCIe 的 config（陷阱表）。
   可改：依「資料是否已到」動態分派 tile、依 (形狀, M) 選 tile 大小／切法、第一份資料切更細、通訊受限的層把 AG 提早到前一個運算。`AGKernel.profiling()` 有 pybind（`src/pybind/ag_gemm.cc:90`）可先不重編就看「只換 config」能拿回多少；`build.sh --arch 80` 可只編 sm80。
   推論的上限：運算層級中位數 1.2–1.3×、chunked prefill 大小最多 1.5–1.7×；prefill 端到端約 1.15–1.3×（未量）。文獻威脅：TileLink、Triton-distributed、FlashOverlap、PyTorch async-TP（未查）。此方向即從未開始的 `ws/diag-overlap`。
+- **FS 驗證第 1、2 步完成（10-30 晚）**（`reports/20261030_fs_validation_result.md`）：換最佳設定只拿回 29%（M ≤ 2048 仍是理想的 1.35×）；不用 Flux 時 copy engine 與 GEMM 同時跑互不拖慢（FS1d，0.91–1.00×）；
+  只有 Flux 的 all-gather 會被拖慢（2.8×）→ 差距在 Flux 機制內、可用軟體修，原因未拆開。文獻：Syncopate（OSDI'26，H100、無小 M 對 Flux）最接近。可望單一運算約 1.3×、prefill 約 1.15–1.25×（推論）。
+  **待使用者同意第 3 步**（不重編的原因拆解＋重編打時間戳＋原型；事前登記 ≥ 1.15×）。
 - 10-30 使用者問目前有哪些選項 → 回覆總表：M（待驗證、潛在提升最大）、T（已驗證、最多 1.09×）、F（最多約 1.1×）、F＋T、新想法 O（PCIe 受限的 offload 訓練：壓縮搬運量；
   由 V3 gimm 4096 推上限約 1.3×，推論，未查文獻）；排除：KV（教授）、跨節點（只用 158）、改設定類、已擠的題目。
 - **使用者 10-30（驗證後）**：要「較明顯的效能提升」→ T 的上限（整步最多 1.09×；單次通訊可從 ×2–3 變慢恢復；activation offload 的前向 32.8 → 28.5 ms，快 13%）不夠當主賣點。
