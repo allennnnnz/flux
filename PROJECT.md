@@ -2,7 +2,7 @@
 
 **boss session 專屬。** worker 只讀。
 
-最後更新：2026-10-03（gpu1 盤點）
+最後更新：2026-10-30（選題重找）
 
 閱讀順序：`CLAUDE.md` → 本檔 → `ws/<你的 workstream>/STATUS.md` → 該 JOURNAL 最近條目。
 Phase 0 背景：`docs/PHASE0_FINDINGS.md`（設計規則）；細節才看 `docs/PHASE0_STATUS.md`。
@@ -34,7 +34,7 @@ G4 之後的事後分析（`ws/fusion-dispatch/reports/20261003_g4_flux_value.md
 | --- | --- | --- | --- | --- | --- |
 | `ws/fusion-dispatch` | **最高**（D-006、D-007、D-008） | 查表版決策器完成並驗證；**第三階段：泛用決策器，G0–G4 完成（`reports/20261003_g4_dispatcher.md`：op 0.17%、block 0.02%），下一步：跨機器驗證（gpu1 盤點完成：V100 PCIe，Flux 不能跑，待決定範圍）**；F4 延後；待 auditor。新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-03 |
 | `ws/diag-overlap` | 第二 | 未開始 | — | 未指派 | — |
-| `ws/hetero-proxy` | **最高（2026-10-06 教授指派）** | PCIe 異質協同：介面原型 hxb 完成；真實模型上 PCIe 晶片能與 NVLink 協同（每字代價 0.3–0.8 ms），但尚未加速（晶片被串在路線上）；C（PCIe 額外通道）因干擾 NVLink 無效益；2026-10-15 初步測試主流角色：MoE 專家外放有用（比搬權重快 5–7×）、attention 外放對低頻寬裝置無用；**2026-10-16 第一個加速實證：CPU 當 KV 外存，被擠掉的對話回來時經 PCIe 逐層搬回、邊搬邊算——單一請求比重算快 3.6×（1k）–19×（32k），逐位元正確；多人服務（K2）輕負載首字快 2.15×、重負載首字中位數快 35×、吞吐量 +7.5%，外存的尾端受 GPU 上正在生成的對話數限制**；**2026-10-28 教授建議不做 KV 題目 → 新題目 X 系列：PCIe 搬運對 TP 推論的干擾（K4.1：背景搬運讓 decode 慢 45–145%）與 Flux 式訊號驅動排程（壓到約 3%）**；**X1d（2026-10-28）：NCCL 小 all-reduce 被拖慢的主因是 NCCL 預設在 CUDA graph 內每個操作前後加的 event 節點（`NCCL_GRAPH_MIXING_SUPPORT=1`），關掉後 decode 一步的干擾 +197–202% → +2.3–2.5%、沒搬運時也快 24%；Simple 協定另受系統層級屏障影響（機制已見於 NVIDIA/nccl #2218）**；**2026-10-29 選題：使用者認為關設定不算貢獻 → MoE 冷門專家放在 PCIe 裝置、8 張 NVLink GPU 一起用；以 KTransformers＋SGLang 的 8 卡做法為改良對象（原始碼確認只有 GPU0 和 CPU 交換、用 CPU 回呼等待），M0 驗證通過（CPU 算＋8 卡經 4 條上行線搬來算：4 token 1.24×、單線只有 1.06×；互搶吃掉約一半理想增益），真實模型用本機已有的 Kimi-K2.6（`reports/20261029_lit_moe_hybrid.md`、`results/moehy/m0_v1/`）**；新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-29 |
+| `ws/hetero-proxy` | **最高（2026-10-06 教授指派）** | PCIe 異質協同：介面原型 hxb 完成；真實模型上 PCIe 晶片能與 NVLink 協同（每字代價 0.3–0.8 ms），但尚未加速（晶片被串在路線上）；C（PCIe 額外通道）因干擾 NVLink 無效益；2026-10-15 初步測試主流角色：MoE 專家外放有用（比搬權重快 5–7×）、attention 外放對低頻寬裝置無用；**2026-10-16 第一個加速實證：CPU 當 KV 外存，被擠掉的對話回來時經 PCIe 逐層搬回、邊搬邊算——單一請求比重算快 3.6×（1k）–19×（32k），逐位元正確；多人服務（K2）輕負載首字快 2.15×、重負載首字中位數快 35×、吞吐量 +7.5%，外存的尾端受 GPU 上正在生成的對話數限制**；**2026-10-28 教授建議不做 KV 題目 → 新題目 X 系列：PCIe 搬運對 TP 推論的干擾（K4.1：背景搬運讓 decode 慢 45–145%）與 Flux 式訊號驅動排程（壓到約 3%）**；**X1d（2026-10-28）：NCCL 小 all-reduce 被拖慢的主因是 NCCL 預設在 CUDA graph 內每個操作前後加的 event 節點（`NCCL_GRAPH_MIXING_SUPPORT=1`），關掉後 decode 一步的干擾 +197–202% → +2.3–2.5%、沒搬運時也快 24%；Simple 協定另受系統層級屏障影響（機制已見於 NVIDIA/nccl #2218）**；**2026-10-30 選題重找（使用者：通訊優化、推論或訓練、10 週一篇架構完整的論文）：T1 實測 8 卡背景 GPU→主機搬運讓 16–32 MiB 集合通訊慢 2–3 倍、只要一個交換器（2 卡）在搬就幾乎一樣、最好的 NCCL 協定隨搬運翻轉 → 推薦題目 T「訓練時 offload 干擾的量測＋排程器」（單機即可），備案 F「fusion-dispatch 成文」，MoE 第三；待使用者決定（`ws/hetero-proxy/reports/20261030_topic_search.md`）**；之前 2026-10-29 選題：使用者認為關設定不算貢獻 → MoE 冷門專家放在 PCIe 裝置、8 張 NVLink GPU 一起用；以 KTransformers＋SGLang 的 8 卡做法為改良對象（原始碼確認只有 GPU0 和 CPU 交換、用 CPU 回呼等待），M0 驗證通過（CPU 算＋8 卡經 4 條上行線搬來算：4 token 1.24×、單線只有 1.06×；互搶吃掉約一半理想增益），真實模型用本機已有的 Kimi-K2.6（`reports/20261029_lit_moe_hybrid.md`、`results/moehy/m0_v1/`）**；新 session 先讀其 STATUS §0 | — | boss 兼 worker | 2026-10-29 |
 | `ws/cost-model` | 第三 | 模型目標由 fusion-dispatch 第三階段執行；預測器 v1 已建於 `common/cost_model/predictor/`（G1），校準參數檔在 `common/cost_model/hw_profiles/`（G2）（D-008） | — | 未指派 | 2026-10-02 |
 
 各 workstream 的目標、步驤、成功標準寫在各自的 `STATUS.md` 第 1 節，由 boss 在建立時
@@ -77,6 +77,7 @@ worker 在 JOURNAL 標「需 boss 裁決」的事項會被 boss 搬到這裡。
 | 2026-09-30 → 10-02 更新 | Phase 0 E.1「Flux AG 比 NCCL 快 13–22%」：原腳本 10/02 完全重現；與本 ws 的差異來自 SM 時脈狀態（原腳本量 NCCL 時 GPU 在 1155 MHz；NCCL 受 SM 時脈影響、Flux copy engine 不受）。**建議改寫為「依時脈狀態而定」，不撤回**。 | fusion-dispatch 驗證報告 V6 | 待裁決 |
 | 2026-10-02 | 量測一律經 `common/measure/exclusive_guard.py`（使用者要求確保獨佔）。建議寫入 `CLAUDE.md` 5.1。 | fusion-dispatch 驗證報告 V12 | **已處理 2026-10-03**：寫入 `CLAUDE.md` 5.1 第 11 條（D-009） |
 | 2026-09-30 | Flux `AGKernel.forward` 不能被 CUDA graph capture（cp_stream 未 join）；`use_cuda_core_local` / CUDA-core AG 皆不支援 bf16。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch F0.4、F2 報告 | **已處理 2026-10-03**：寫入陷阱表（D-009） |
+| 2026-10-30 | **論文主題目三選一**：T（訓練時主機↔GPU 搬運拖慢 NVLink 集合通訊：量測＋干擾模型＋協定選擇＋搬運節拍器，接進 FSDP2 / DeepSpeed）、F（fusion-dispatch 成文）、M（MoE 冷門專家）。另：css-host-159 的 8 卡被使用者帳號的 SGLang 服務佔用、少一張網卡（rail 5/6） | `ws/hetero-proxy/reports/20261030_topic_search.md` 第 7 節 | 待使用者決定 |
 | 2026-10-02 | **給 ws/diag-overlap 的假說**（fusion-dispatch G1）[推論]：<br>• 現象：Phase 0 N=4096（每卡 n=512、K=12288、M=4096）幾乎不重疊。<br>• 原因：融合 GEMM 只有 128 個 tile（1.19 波），預設 config 是 stream-K，每個 block 都要等最晚到的 shard。<br>• 模型對沒看過的 P0-4096 / P0-8192 預測藏住 3% / 70%，實測 7% / 65%。<br>• 預測：換 data-parallel + RasterAlongN config 可降到 0.54–0.58 ms（目標 < 0.55）。<br>• 驗證：指定 config 量 A 與 gemm_only，並用 nsys 看 CTA 開始時間。 | fusion-dispatch G1 報告 3.5 | 待 diag-overlap 進場時處理 |
 | 2026-10-02 | Flux 登錄表 `// PCIE` 區段的 config 優先生效（emplace 第一筆），在本機 NVLink 上 GEMM 比 cuBLAS 慢 1.23–1.58×（G-FC1 M=1024、L-GU / L-QKV M=4096）。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch G1 報告第 4 節 | **已處理 2026-10-03**：寫入陷阱表（D-009） |
 | 2026-10-02 | 同一 process 內先建立再銷毀一組 Flux op（AGKernel / AllGatherOp）、再建第二組，會隨機卡死（所有 rank 卡在 synchronize，GPU 空轉）；一組一個 process 即正常。建議加進 `CLAUDE.md` 陷阱表。 | fusion-dispatch G2 報告第 3 節 | **已處理 2026-10-03**：寫入陷阱表（D-009） |
@@ -90,7 +91,7 @@ worker 在 JOURNAL 標「需 boss 裁決」的事項會被 boss 搬到這裡。
    - 決定 F4（vLLM 端到端，用決策器 v2）/ G6（總報告）的先後；
    - 安排 auditor 審 E0、E1–E3、G1–G4 報告。
 1. 指派第一個 worker session 到 `ws/diag-overlap`。
-2. `ws/hetero-proxy`（**2026-10-06 起為主線**，教授指派）：H0、I1–I4 完成（2026-10-09，未審）。**2026-10-14 定案 E2E 計劃**（STATUS §0）：Qwen2.5-32B 真實權重，A = 8 卡 NCCL、B = 8 卡 + CPU（PCIe）、C = 8 卡 NVLink + PCIe 同時傳；已告知使用者 B 預期稍慢、C 本機預期最多約 +0.5%（推論）。之後：I3 / I4 報告、auditor。待教授確認晶片型號。
+2. `ws/hetero-proxy`（**2026-10-06 起為主線**，教授指派）：**2026-10-30 選題重找，等使用者在 T / F / M 中選一個；選 T 則第 1 週先做否證實驗（真實訓練步驟中干擾占比 ≥ 10%）。** 以下為較早的狀態——H0、I1–I4 完成（2026-10-09，未審）。**2026-10-14 定案 E2E 計劃**（STATUS §0）：Qwen2.5-32B 真實權重，A = 8 卡 NCCL、B = 8 卡 + CPU（PCIe）、C = 8 卡 NVLink + PCIe 同時傳；已告知使用者 B 預期稍慢、C 本機預期最多約 +0.5%（推論）。之後：I3 / I4 報告、auditor。待教授確認晶片型號。
 3. 兩者各有第一份 report 後，安排 auditor。
 4. 第一批 auditor 通過的結論寫進 `DECISIONS.md`，並更新 `params.json`。
 

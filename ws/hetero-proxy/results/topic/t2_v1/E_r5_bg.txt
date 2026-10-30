@@ -1,0 +1,1 @@
+gpu0_d2h_GBps=10.74 gpu1_d2h_GBps=10.74 total=21.48

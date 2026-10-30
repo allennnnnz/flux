@@ -1,0 +1,45 @@
+case=E round=1 p0_Gbps=30.51 bg: gpu0_d2h_GBps=10.73 gpu1_d2h_GBps=10.73 total=21.45
+case=G round=1 p0_Gbps=29.88 p1_Gbps=29.89
+case=F round=1 p0_Gbps=22.96 p1_Gbps=22.69 bg: gpu0_d2h_GBps=10.51 gpu1_d2h_GBps=10.52 total=21.03
+case=A round=1 p0_Gbps=100.86
+case=D round=1 p0_Gbps=97.41
+case=B round=1 p0_Gbps=47.99
+case=C round=1 p0_Gbps=48.29
+case=H round=1 p0_Gbps=31.40 p1_Gbps=31.40
+case=I round=1 bg: gpu0_d2h_GBps=13.11 gpu1_d2h_GBps=13.11 total=26.22
+case=F round=2 p0_Gbps=23.02 p1_Gbps=22.75 bg: gpu0_d2h_GBps=10.62 gpu1_d2h_GBps=10.62 total=21.24
+case=G round=2 p0_Gbps=29.88 p1_Gbps=29.90
+case=A round=2 p0_Gbps=100.62
+case=E round=2 p0_Gbps=30.57 bg: gpu0_d2h_GBps=10.73 gpu1_d2h_GBps=10.73 total=21.46
+case=D round=2 p0_Gbps=97.41
+case=H round=2 p0_Gbps=31.42 p1_Gbps=31.41
+case=B round=2 p0_Gbps=47.73
+case=C round=2 p0_Gbps=48.32
+case=I round=2 bg: gpu0_d2h_GBps=13.11 gpu1_d2h_GBps=13.11 total=26.23
+case=G round=3 p0_Gbps=29.88 p1_Gbps=29.88
+case=A round=3 p0_Gbps=101.05
+case=F round=3 p0_Gbps=23.02 p1_Gbps=22.73 bg: gpu0_d2h_GBps=10.49 gpu1_d2h_GBps=10.50 total=20.99
+case=E round=3 p0_Gbps=30.56 bg: gpu0_d2h_GBps=10.79 gpu1_d2h_GBps=10.79 total=21.57
+case=D round=3 p0_Gbps=97.43
+case=I round=3 bg: gpu0_d2h_GBps=13.12 gpu1_d2h_GBps=13.12 total=26.24
+case=B round=3 p0_Gbps=47.88
+case=H round=3 p0_Gbps=31.42 p1_Gbps=31.40
+case=C round=3 p0_Gbps=48.45
+case=H round=4 p0_Gbps=31.37 p1_Gbps=31.39
+case=G round=4 p0_Gbps=29.89 p1_Gbps=29.89
+case=F round=4 p0_Gbps=22.85 p1_Gbps=22.59 bg: gpu0_d2h_GBps=10.54 gpu1_d2h_GBps=10.54 total=21.08
+case=E round=4 p0_Gbps=30.56 bg: gpu0_d2h_GBps=10.74 gpu1_d2h_GBps=10.74 total=21.48
+case=D round=4 p0_Gbps=97.47
+case=C round=4 p0_Gbps=48.54
+case=A round=4 p0_Gbps=100.71
+case=B round=4 p0_Gbps=47.77
+case=I round=4 bg: gpu0_d2h_GBps=13.12 gpu1_d2h_GBps=13.12 total=26.24
+case=I round=5 bg: gpu0_d2h_GBps=13.12 gpu1_d2h_GBps=13.12 total=26.24
+case=G round=5 p0_Gbps=29.89 p1_Gbps=29.91
+case=F round=5 p0_Gbps=22.83 p1_Gbps=22.57 bg: gpu0_d2h_GBps=10.55 gpu1_d2h_GBps=10.55 total=21.10
+case=E round=5 p0_Gbps=30.58 bg: gpu0_d2h_GBps=10.74 gpu1_d2h_GBps=10.74 total=21.48
+case=D round=5 p0_Gbps=97.39
+case=B round=5 p0_Gbps=48.04
+case=H round=5 p0_Gbps=31.40 p1_Gbps=31.41
+case=C round=5 p0_Gbps=48.59
+case=A round=5 p0_Gbps=100.86

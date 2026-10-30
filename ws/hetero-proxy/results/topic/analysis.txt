@@ -1,0 +1,73 @@
+topic search 2026-10-30 — environment experiments T1 / T1b / T2 (css-host-158, single node)
+All runs inside common/measure/exclusive_guard_v2.py: every guard log ends CLEAN (other users logged in: ce107, twyang; no foreign GPU/CPU samples).
+torch 2.6.0+cu124, NCCL 2.21.5, CUDA_DEVICE_MAX_CONNECTIONS=8, eager (no CUDA graph). SM clock modal 1410 MHz, no window dropped.
+Not audited.
+
+== T1: training-size NCCL collectives while host<->GPU copies run (scripts/topic/t1_bigcoll_pcie_v1.py, run_t1_v1.sh)
+Method: torchrun 8 ranks; per round every (op, size, mode) window once in shuffled order (same order on all ranks), 30 rounds;
+window = barrier, side stream enqueues 16 MiB pinned-host copies (NUMA-local, cudaHostAlloc via torch) that outlast the
+collectives, main stream 2 warm-up + 10 timed calls between CUDA events; per-call time = rank-max; ratio paired with the
+same round's no-copy window (median, p10/p90 in t1_summary.txt). Copy rate during collectives from per-chunk events.
+size = full tensor per rank (all_reduce input, reduce_scatter input, all_gather output), bf16.
+
+t1_v1_default (all 8 GPUs copy), ratio = time with copies / time without:
+  size     AR h2d  AR d2h | RS h2d  RS d2h | AG h2d  AG d2h
+  1 MiB    1.10    1.68   | 1.03    1.45   | 1.06    1.59
+  4 MiB    1.09    1.41   | 1.20    1.62   | 1.16    1.64
+  16 MiB   1.05    1.18   | 1.52    3.02   | 1.45    2.89
+  32 MiB   1.08    2.03   | 1.11    1.93   | 1.13    2.06
+  64 MiB   1.03    1.38   | 1.05    1.38   | 1.07    1.43
+  128 MiB  1.01    1.05   | 1.02    1.08   | 1.01    1.08
+  256 MiB  1.01    1.02   | 1.01    1.03   | 1.01    1.03
+  Added time per call shrinks with size (RS d2h: 16 MiB +0.26 ms, 64 MiB +0.12 ms, 256 MiB +0.04 ms) -> not a fixed per-call cost.
+  Copies are not slowed: copy rate during collectives 12.4-12.9 GB/s/GPU vs copy-only 12.6 (h2d) / 13.0 (d2h).
+
+t1_v1_Simple / t1_v1_LL128 (NCCL_PROTO forced): default == Simple at >= 16 MiB (same times), LL/LL128 below.
+  Simple d2h: x2.6-2.8 at 1-4 MiB, x2.9-3.1 at 16 MiB, x1.9-2.1 at 32 MiB, x1.4 at 64 MiB, <= x1.08 at >= 128 MiB.
+  LL128 d2h:  x1.5-1.8 at 1-4 MiB, x1.18-1.34 at 16 MiB, x1.10-1.19 at 32 MiB, x1.06-1.10 at 64 MiB.
+  Absolute time under d2h (ms, no-copy x ratio): best protocol flips with traffic.
+    RS 16 MiB: Simple 0.128x2.96=0.38  vs LL128 0.132x1.29=0.17  -> LL128 2.2x faster
+    AR 32 MiB: Simple 0.368x2.03=0.75  vs LL128 0.388x1.10=0.43  -> LL128 1.75x faster
+    AR 64 MiB: Simple 0.590x1.38=0.82  vs LL128 0.738x1.06=0.78  -> about equal
+    AR 128 MiB: Simple 1.168x1.05=1.22 vs LL128 1.438x1.04=1.49  -> Simple better
+  Without copies NCCL's default (Simple) is the faster one at >= 16 MiB, so NCCL's choice is wrong only while copies run.
+
+== T1b: only some GPUs copy (run_t1b_v1.sh; default NCCL; sizes 4/16/32/64/256 MiB; 30 rounds)
+  copying GPUs     RS16 d2h  AG16 d2h  AR32 d2h  RS32 d2h  AR64 d2h   copy rate (copy-only, per GPU)
+  GPU0 only        1.84      1.86      1.26      1.25      1.06       d2h 23.9, h2d 21.7 GB/s
+  GPU0+GPU1        2.88      2.81      1.97      1.88      1.35       d2h 13.1, h2d 12.7 GB/s (one PCIe switch)
+  all 8            3.02      2.89      2.03      1.93      1.38       d2h 13.0, h2d 12.6 GB/s
+  -> one saturated switch uplink (2 GPUs) gives nearly the full slowdown of all 8 GPUs copying; the collective is held by
+     the slowest rank (inference). h2d with GPU0 only: <= x1.12.
+  NOTE: t1_summary.txt of t1b says "8 GPUs at once" for copy-only rates; only the listed GPUs copied (label fixed in the
+  script afterwards).
+
+== Anchors / self-consistency (CLAUDE.md 5.1.2, 5.1.3, 5.1.10)
+  copy rates: GPU0 alone h2d 21.7 vs M0 21.3 (ok); one switch pair h2d 25.3 / d2h 26.1 vs M0 pair 25.2 (ok).
+  OPEN DISCREPANCY: all 8 GPUs h2d 12.6/GPU = 101 GB/s total (d2h 104) vs M0 all_8_total 85.4 (+18-22%). M0 also saw
+    4 GPUs (one per switch) at 18.5 each (< 21.3 alone), T1 does not reach that limit. Differences: M0 cuMemcpyAsync
+    11 MB pieces depth 4 from its own host pools; T1 torch cudaHostAlloc buffers, 16 MiB, one stream per GPU.
+    Hypothesis (not verified): host-buffer allocation/registration differs. Verify: run M0's copy loop on T1's buffers
+    and vice versa. The interference ratios do not depend on this number.
+  NCCL no-copy busbw vs nccl-tests (t1_anchor_nccltests/, same NCCL 2.21.5 from the pixi env, single process -g 8, 50 iters):
+    AR 256 MiB 216.5 vs 192.9 (+12%); RS 256 206 vs 186 (+11%); AG 256 196 vs 180 (+9%); AR 32 MiB 160 vs 142 (+12%).
+    Within 20%; nccl-tests runs 8 GPUs from one thread, T1 one process per GPU (different launch path). Not resolved.
+
+== T2: RoCE loopback on the GPU0/GPU1 switch (NIC 1d:00.0/.1 = mlx5_0/mlx5_1) (scripts/topic/t2_rdma_paths_v1.sh)
+Method: ib_write_bw client and server on the same port (NIC reads source, writes destination), 1 MiB messages, 4 s,
+tclass 104, 5 rounds shuffled; background GPU->host copies from t2_copy_bg_v1.py (rate over the middle of its run).
+All 5 rounds within 1% of each other.
+  A host -> host, 1 port                               100.8 Gb/s   (anchor ib_write_bw host 98.05: ok)
+  B GPU0 -> GPU1 (NIC reads GPU), 1 QP                  47.9 Gb/s
+  C same, 8 QPs                                         48.4 Gb/s   -> read cap is not per-QP
+  D host -> GPU1                                        97.4 Gb/s   -> host-sourced send at line rate when the uplink is idle
+  E host -> GPU1 + GPU0/GPU1 copying to host            30.5 Gb/s   (copies 21.5 GB/s total)
+  F 2 ports host -> GPU + GPU0/GPU1 copying to host     22.9 + 22.7 Gb/s (copies 21.1 GB/s)
+  G 2 ports GPU -> GPU (NIC reads GPU), 1 QP            29.9 + 29.9 Gb/s = 7.5 GB/s per switch
+  H same, 8 QPs                                         31.4 + 31.4 Gb/s
+  I GPU0+GPU1 copying to host only                      26.2 GB/s total
+  -> A NIC reading host memory collapses (97 -> 30 Gb/s) while the GPUs on its switch write to host; staging sends
+     through host memory is not a free win. Inference (not verified): NIC read requests wait behind the GPUs' posted
+     writes in the same upstream direction (PCIe ordering) or in switch arbitration.
+  Anchor deviation: B 47.9 vs E4 cross-node 56 Gb/s (-14%); G 7.5 GB/s per switch vs E4 9.5 (-21%). Loopback makes the
+    same NIC and switch also carry the destination writes; do NOT quote T2 GPU-read numbers as cross-node numbers.

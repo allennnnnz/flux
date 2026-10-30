@@ -230,3 +230,18 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   - 主機→GPU 頻寬上限：卡 21、交換器 25、插槽 42、8 卡 85 GB/s → 寫入 `common/cost_model/params.json`（h2d_topology_m0、cpu_dma_interference_m0）。
   - 可行性：本機已有 Kimi-K2.6（555 GB int4，專家 7168×2048），8×80 GB 放不下＋KV → 真實動機；kt-kernel 的 RAWINT4 支援本機 CPU；Apex 全文確認單卡單線。
 - **留給下個 session**：使用者同意後 M1（kt-kernel RAWINT4 量 Kimi-K2.6 專家 CPU 速度）、M2（SGLang＋kt-kernel TP8 跑 Kimi-K2.6、量每層時間組成）。
+
+## 2026-10-30 · boss 兼 worker · 選題重找（通訊優化、推論或訓練、10 週論文）＋環境實驗 T1 / T1b / T2
+
+- 使用者：重新找適合這台環境的題目，可以先看拓撲、做一點環境實驗；通訊優化，推論或訓練都可；10 週內一篇架構完整的論文，不必頂會。
+- 拓撲：每個 PCIe 交換器 = 2 GPU＋1 張雙埠 100 GbE 網卡（PXB）；158 的 rail 4 已有 IP。159：8 卡被使用者帳號 `rogerlee` 的 SGLang 服務佔用（DP4×TP2，已跑 80 分鐘），且只剩 6 個網卡埠（GPU4/5 交換器的網卡不見）→ 沒有做跨節點量測。
+- 三個背景文獻搜尋（推論側、跨節點、單機訓練），刻意找「已做過」的證據；重點與網址整理在報告附錄。
+- T1（`scripts/topic/t1_bigcoll_pcie_v1.py`、`run_t1_v1.sh`）：8 卡背景 d2h 讓 16 MiB RS/AG ×2.9–3.0、32 MiB ×2、64 MiB ×1.4，≥ 128 MiB ≤ ×1.08；h2d ≤ ×1.5。
+  強制 Simple / LL128：16 MiB 以上預設就是 Simple；LL128 鈍感，有 d2h 時 RS 16 MiB 快 2.2×，128 MiB 又是 Simple 好。
+  冒煙時發現「每卡自己整段的平均速度」被先搬完的卡灌水 → 改成只算中間一半；改了仍是 12.6–13.0 GB/s／卡（8 卡 101–104），比 M0 的 85.4 高 18–22%，未解，記在 analysis.txt。
+- T1b（加 `--bg_ranks`）：只有 GPU0＋GPU1 搬 ≈ 8 卡都搬；只有 GPU0 搬 RS 16 MiB ×1.84。
+- T2（`t2_rdma_paths_v1.sh`、`t2_copy_bg_v1.py`，同埠迴環）：GDR 讀 48 Gb/s（8 QP 一樣）；主機來源 97.4，但同交換器兩卡 d2h 時掉到 30.5。原本以為上下行方向不同不會互搶——錯。
+- nccl-tests 錨點：要用 pixi 的 libcudart.so.12 與 libnccl（系統 /usr/local/cuda 是 13.x、nccl-tests 連系統 libnccl）；T1 無搬運頻寬比 nccl-tests 高 9–12%。
+- 報告 `reports/20261030_topic_search.md`：推薦 T（訓練時 offload 干擾的量測＋排程器）、備案 F（fusion-dispatch 成文）、M 第三；跨節點題目不建議當主線。
+- 撤回表加一條：「背景搬運對大訊息影響小（約 7%）」只對 ≥ 128 MiB 或 h2d 成立。
+- **留給下個 session**：等使用者選題。若選 T：第 1 週否證實驗（真實 FSDP2 CPU offload、TP＋SP activation offload 訓練步驟中干擾占比 ≥ 10%），獨立 venv 裝訓練框架；同時解 101 vs 85 GB/s。

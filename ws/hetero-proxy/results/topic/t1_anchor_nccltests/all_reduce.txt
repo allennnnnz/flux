@@ -1,0 +1,27 @@
+# nThread 1 nGpus 8 minBytes 4194304 maxBytes 268435456 step: 2(factor) warmup iters: 10 iters: 50 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 522528 on css-host-158 device  0 [0000:10:00] NVIDIA A100-SXM4-80GB
+#  Rank  1 Group  0 Pid 522528 on css-host-158 device  1 [0000:16:00] NVIDIA A100-SXM4-80GB
+#  Rank  2 Group  0 Pid 522528 on css-host-158 device  2 [0000:49:00] NVIDIA A100-SXM4-80GB
+#  Rank  3 Group  0 Pid 522528 on css-host-158 device  3 [0000:4d:00] NVIDIA A100-SXM4-80GB
+#  Rank  4 Group  0 Pid 522528 on css-host-158 device  4 [0000:8a:00] NVIDIA A100-SXM4-80GB
+#  Rank  5 Group  0 Pid 522528 on css-host-158 device  5 [0000:8f:00] NVIDIA A100-SXM4-80GB
+#  Rank  6 Group  0 Pid 522528 on css-host-158 device  6 [0000:c6:00] NVIDIA A100-SXM4-80GB
+#  Rank  7 Group  0 Pid 522528 on css-host-158 device  7 [0000:ca:00] NVIDIA A100-SXM4-80GB
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)       
+     4194304       2097152  bfloat16     sum      -1    99.40   42.19   73.84      0    97.18   43.16   75.53      0
+     8388608       4194304  bfloat16     sum      -1    153.9   54.49   95.36      0    151.5   55.39   96.93      0
+    16777216       8388608  bfloat16     sum      -1    252.2   66.53  116.43      0    250.8   66.90  117.07      0
+    33554432      16777216  bfloat16     sum      -1    412.8   81.28  142.24      0    410.8   81.69  142.96      0
+    67108864      33554432  bfloat16     sum      -1    656.6  102.20  178.85      0    654.5  102.54  179.44      0
+   134217728      67108864  bfloat16     sum      -1   1328.8  101.01  176.76      0   1326.5  101.18  177.07      0
+   268435456     134217728  bfloat16     sum      -1   2435.1  110.24  192.91      0   2175.6  123.38  215.92      0
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 141.522 
+#
+
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/topic/t1_anchor_nccltests/guard_all_reduce.log

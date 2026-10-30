@@ -3,16 +3,28 @@
 **本 workstream 唯一權威。** 第 1 節由 boss 寫入，worker 不改；第 2 節起由 worker 維護。
 
 建立：2026-09-23（boss）
-最後更新：2026-10-29（boss 兼 worker：選題——MoE 專家「多 GPU＋PCIe 裝置」混合推論的文獻與開源實作調查）
-狀態：**新題目：MoE 冷門專家「CPU 算＋8 張 GPU 經 4 條 PCIe 上行線搬來算」的分工排程（改良 KTransformers＋SGLang 與 Apex）。M0 驗證通過事前判定規則（2026-10-29）；X 系列成為論文的特性量測章節**
+最後更新：2026-10-30（boss 兼 worker：選題重找——通訊優化、推論或訓練、10 週論文；環境實驗 T1 / T1b / T2＋三路文獻檢查）
+狀態：**選題待使用者決定。推薦 T：訓練時主機↔GPU 搬運讓 NVLink 集合通訊慢 2–3 倍（T1 實測）→ 干擾模型＋協定選擇＋搬運節拍器；備案 F：fusion-dispatch 成文；MoE 冷門專家（M0 通過）降為第三**
 
 ---
 
 ## 0. 快速跟上（新 session 先讀這節；每次收工更新）
 
-最後更新：2026-10-29
+最後更新：2026-10-30
 
-**最新（2026-10-29）—— 選題：MoE 專家放在 PCIe 裝置上，8 張 NVLink GPU 一起用**（`reports/20261029_lit_moe_hybrid.md`）
+**最新（2026-10-30）—— 選題重找（使用者：通訊優化，推論或訓練皆可，10 週內一篇架構完整的論文）**（`reports/20261030_topic_search.md`）
+- 拓撲：每個 PCIe 交換器 = 2 張 GPU＋1 張雙埠 100 GbE 網卡、一條 Gen4 x16 上行。**159 目前被使用者帳號的 SGLang 服務（DP4×TP2）佔滿 8 卡，且少一張網卡（rail 5/6）** → 跨節點題目環境風險高。
+- **T1**（`scripts/topic/t1_bigcoll_pcie_v1.py`、`results/topic/t1_v1_*`，30 輪打亂、guard CLEAN、eager）：8 卡背景 GPU→主機搬運讓 16 MiB reduce-scatter / all-gather 慢 **×2.9–3.0**、32 MiB ×1.9–2.1、64 MiB ×1.4，128 MiB 以上 ≤ ×1.08；主機→GPU 小得多（≤ ×1.5）。搬運本身不受影響。
+  強制協定：16 MiB 以上預設 = Simple；LL128 鈍感得多（16 MiB ×1.2–1.3）→ 有 d2h 時 RS 16 MiB LL128 比 Simple 快 2.2×、AR 32 MiB 快 1.75×，128 MiB Simple 仍較好——**最好的協定隨背景搬運翻轉**。
+- **T1b**（`results/topic/t1b_v1_bg0`、`_bg0_1`）：**只有同一交換器的 GPU0＋GPU1 在搬，就幾乎等於 8 卡都在搬**（RS 16 MiB ×2.88 vs ×3.02）；只有 GPU0 搬也有 ×1.84。
+- **T2**（`scripts/topic/t2_rdma_paths_v1.sh`、`results/topic/t2_v1`，單機 RoCE 迴環）：網卡讀 GPU 47.9 Gb/s、8 個 QP 也 48.4（不是 QP 數的問題）；網卡讀主機滿速 97.4，但同交換器兩張 GPU 往主機搬時掉到 30.5 → 「經主機中轉繞過讀取上限」不是免費的（而且 MVAPICH / UCX / NCCL 已有），不推薦。
+- 錨點：單卡與交換器上限和 M0 相符；**未解**：8 卡同時搬 101–104 GB/s vs M0 85.4（+18–22%），NCCL 無搬運頻寬比 nccl-tests 高 9–12%（`results/topic/analysis.txt`）。
+- 文獻（三路獨立搜尋，報告附錄）：同一機制只見於 NVIDIA/nccl #2218（V100/H200，−8–11%，已關沒修）與 PyTorch 論壇（H100），**沒有論文**；ChunkFlow 是純 PCIe 機器。
+  跨節點的 GDR 讀繞路、HSDP／壓縮、rail 感知、RL 權重同步、TP decode all-reduce 都已擠或已做。fusion-dispatch 仍有空間（TokenWeave 用固定門檻、FlashOverlap 不會退回不融合）。
+- **建議**：主題目 T（訓練時 offload 干擾的量測＋排程器，單機即可、10 週計劃見報告 5.5，第 1 週先在真實 FSDP2 / activation offload 訓練步驟裡量干擾占比，≥ 10% 才繼續）；備案 F；M 第三。
+- **待使用者決定**：選 T / F / M；T 的框架與模型大小；159 上的 SGLang 是否為使用者自己開的。
+
+**之前（2026-10-29）—— 選題：MoE 專家放在 PCIe 裝置上，8 張 NVLink GPU 一起用**（`reports/20261029_lit_moe_hybrid.md`）
 - 為什麼換：使用者認為「關掉 NCCL 一個設定」不算貢獻；背景載入權重（X4 的主案例）細算後問題太小——每卡 8 GB 以 9–12 GB/s 約 0.7–0.9 秒就搬完（推論，用 K1 頻寬算），
   而且 4 條上行線都滿時經 NVLink 轉送不會多出頻寬（10-28 回覆中「一半 PCIe、一半 NVLink 交換」的說法錯誤）。排程要有意義，PCIe 上必須有**持續、在關鍵路徑上**的流量 → MoE 冷門專家放在 PCIe 裝置（現在是 CPU，將來是國產晶片）。
 - 文獻：1 張 GPU＋CPU 已很擠（Fiddler、KTransformers SOSP'25、HybriMoE、DALI、LayerScope、Adaptive Expert Assignment…）；GPU＋記憶體端運算裝置（MoNDE、DynaNDE）最像國產晶片的角色，但都是單一加速器。
@@ -390,6 +402,7 @@ Phase 3 的起點：為「PCIe-only 晶片 + A100 NVLink 域」的異質計算�
 | P1 T3「8k 前綴搬回約 27 ms vs 重算約 398 ms（~15×）」 | §0 P1、`results/hetero_roles/p1/analysis.txt` | 推估，重算用的是 8×1024 批次（非單一 8k 序列），也沒算新一輪本身的時間 | K 系列實測（`results/kvtier/bench_v3/analysis.txt`） |
 | kvtier v1 / v2 的首字時間（smoke 3 輪：理想 50–57 ms、Cake 比邊搬邊算慢） | `results/kvtier/bench_smoke/` | 逐個發 kernel 的 Python 開銷（約 45 ms）主導 128 token 的新一輪，重算也背同樣開銷 → 量到的是引擎開銷而非記憶體分層；事前預測 K3（理想 10–30 ms）因此不成立 | `scripts/kvtier/kvtier_v3.py`（全部計時路徑錄成 CUDA graph，hxb 計數器在 graph 內逐層把關） |
 | X1「干擾機制是系統層級記憶體屏障」（套用到全部 NCCL） | §0 X1 結果、報告頁「原因」卡片（2026-10-28 第 3 版） | LL / LL128 沒有系統層級屏障；X1d：關 `NCCL_GRAPH_MIXING_SUPPORT` 後干擾消失（+594% → +5%） | NCCL LL / LL128：graph 內 event 記錄節點被搬運拖慢；Simple：每段的系統層級屏障（X1d） |
+| 「背景搬運對 prefill／大訊息集合通訊影響小（約 +7%）」（10-29 選題時的說法，以 K4.1 prefill 2048 字 +6.7% 為據） | §0 10-29「(3)」、JOURNAL 10-29 | 只對 ≥ 128 MiB 或主機→GPU 成立；T1：GPU→主機搬運時 16–64 MiB 的 RS / AG / AR 慢 ×1.4–3.0（eager、30 輪、guard CLEAN） | `results/topic/analysis.txt`：影響依大小、協定、方向而定 |
 | x1c / 說明「系統屏障慢是因為等 PCIe 排隊」（PCIe 獨有） | §0 X1 x1c 推論、對使用者的說明 | X1d：本卡經 NVLink 的 copy engine 搬運也讓系統屏障慢 ×1.8–2.2（D2 不成立） | 系統屏障被本卡任何 copy engine 流量與同交換器鄰卡的 PCIe 流量拖慢（X1d） |
 
 ## 4. 下一步（worker 維護）
