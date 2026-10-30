@@ -38,3 +38,11 @@ TileLink、Triton-distributed、FlashOverlap、PyTorch async-TP、Megatron／Tra
 - 判讀：同時跑 ≈ ideal → 硬體資源不是限制，差距來自融合 kernel 的等待／排程（FS 可做）；同時跑 ≈ fused → 差距是資源互搶（FS 不成立）。
 - 預測：M ≤ 2048 時，同時跑 / ideal 的中位數 ≤ 1.10（大部分差距來自排程）。
 - 判定規則補一條：**繼續**需要 FS1b 在 M ≤ 2048 的中位數 ≤ 1.15。
+
+## 補充 2（FS1b 跑完後、FS1c 跑之前）：FS1b 有混淆，改做 FS1c
+
+- FS1b 結果：M ≤ 2048 時「同時跑 / 理想」中位數 1.30×（未過 ≤ 1.15）。但多個點「同時跑」≈ AG＋GEMM 相加（例 L-QKV M=8192 1.26 vs 1.31），像是被串行而不是互搶。
+- 原因（讀原始碼）：`AllGatherOp.run` 一開始的跨卡屏障是 kernel（`flux_barrier_all_on_stream` → `nvshmemx_barrier_all_on_stream`，`src/ths_op/flux_shm.cc:501`）；
+  FS1b 在另一條 stream 緊接著發 GEMM，GEMM 若先佔滿 SM，屏障 kernel 要等 GEMM 結束 → 整個 AG 被排到 GEMM 後面。FS1b 標為「有混淆、不用於判定」。
+- **FS1c**：同 FS1b，但 GEMM 前先在 main stream 放約 30 µs 的 GPU sleep（只佔一個 SM），讓屏障先跑；總時間扣掉量到的 sleep 時間；並在同時跑時分別量 AG 與 GEMM 各自的時間，與單獨跑比。
+- 預測：FS1c 的「同時跑 / 理想」在 M ≤ 2048 中位數 ≤ 1.15；同時跑時 GEMM 變慢 ≤ 10%。判定規則不變（≤ 1.15 才繼續）。
