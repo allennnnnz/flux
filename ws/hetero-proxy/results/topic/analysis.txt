@@ -185,3 +185,24 @@ FS1d (fs1d_ce_vs_gemm_v1.py, one process, 8 GPUs, no Flux): copy-engine peer cop
      stream write ops, pull reads, per-tile sys-scope waits: not yet separated). Caveat: FS1d pushes, Flux pulls.
   Pre-registered FS1b/c rule (<= 1.15) formally FAILED; FS1d shows that test measures Flux's AG path, not hardware.
   Prediction for FS1d (copy slowdown <= 1.5x) CONFIRMED.
+
+== FS step 3 (plan reports/20261030_fs_step3_plan.md)
+E1 (fs3_e1_gemmswap_v1.py, fs3_e1_v1/): Flux AG next to cuBLAS still slowed median 2.6x (next to Flux gemm_only 2.8x) ->
+  prediction (<= 1.3x) WRONG; and the AG keeps ending right when the GEMM ends (G-FC1 8192: 5.5 vs 5.1 ms) -> the
+  concurrency setup holds part of the AG behind the GEMM; concurrency tests are not trustworthy for this question.
+Existing fusion-dispatch nsys timelines of REAL fused runs (ws/fusion-dispatch/results/e2_nsys, v8_nsys, parse files):
+  comm inside fused ~ comm alone (+0-20%: L-QKV 2048 270 vs 250 us; G-QKV 2048 311 vs 307; L-GU 512 160 vs 146)
+  -> the copy-engine AG is NOT slowed inside the fused kernel; hardware contention ruled out (with FS1d).
+  GEMM tail after the last shard: L-QKV 2048 211 us (GEMM alone 218), G-QKV 2048 1054 (1015), L-GU 512 296 (296),
+  L-QKV 4096 235 (555). Earlier reading "no useful work during comm" was too strong: with ~1.5 waves of 128x128 tiles,
+  one tile takes ~150 us on one SM vs ~36 us between shard arrivals, so the post-arrival tail is >= ~one tile-time
+  regardless of order (inference).
+3b prototype P1 (src/ag_gemm/sm80_all_gather_gemm_threadblock_swizzle.hpp, FLUX_FS_ARRIVAL=1: move stream-K's SK
+  region from the first (local-shard) tiles to the last-arriving shard, DP tiles in arrival order):
+  D-006: tag pre-fs-mod, libs backed up (~/opt/flux-lib-backup-20261030), incremental rebuild+install 220 s; default path
+  bitwise identical to before (fs3_bitwise: 192/192 output hashes, deterministic run-to-run 192/192). libflux_cuda.so
+  size 125.9 -> 128.5 MB (unexplained; outputs identical).
+  A/B (fs3_ab_v1.py, fs3_ab_v1/, 10 rounds interleaved, guard CLEAN, both modes allclose to cuBLAS): the switch changed
+  the computation in only 3/30 points (others: no SK region or column-major order, inferred from identical bytes); where
+  it applied it was SLOWER (G-FC1 1024 0.91x, G-QKV 512 0.87x, G-QKV 4096 0.84x). Median speedup M<=2048 1.003x,
+  M>=4096 0.999x. Pre-registered prototype rule (>= 1.15x go, < 1.05x no) -> P1 FAILS.

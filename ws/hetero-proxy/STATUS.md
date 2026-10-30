@@ -26,6 +26,9 @@
   推論的原因：M 小時一份資料的 tile 數 < 一波（M=1024、n=6144、tile 128×256：每份 24 個 tile vs 108 個 SM）→ 第一波就要等 4–5 份；靜態 stream-K 讓 CTA 卡在還沒到的 tile；登錄表選到 PCIe 的 config（陷阱表）。
   可改：依「資料是否已到」動態分派 tile、依 (形狀, M) 選 tile 大小／切法、第一份資料切更細、通訊受限的層把 AG 提早到前一個運算。`AGKernel.profiling()` 有 pybind（`src/pybind/ag_gemm.cc:90`）可先不重編就看「只換 config」能拿回多少；`build.sh --arch 80` 可只編 sm80。
   推論的上限：運算層級中位數 1.2–1.3×、chunked prefill 大小最多 1.5–1.7×；prefill 端到端約 1.15–1.3×（未量）。文獻威脅：TileLink、Triton-distributed、FlashOverlap、PyTorch async-TP（未查）。此方向即從未開始的 `ws/diag-overlap`。
+- **FS 第 3 步（10-30 深夜）**：nsys（fusion-dispatch 既有）顯示融合中通訊不慢、最後一份資料到後 GEMM 還要跑約一個 tile 的時間；
+  原型 P1（stream-K 合作區段移到最後到的資料，`FLUX_FS_ARRIVAL=1`，預設關閉時逐位元相同 192/192，重編 220 s）只影響 3/30 點且變慢 → 中位數 1.00×，**依規則不成立**。
+  Flux 原始碼已改（開關預設關）、tag `pre-fs-mod`、函式庫備份在 `~/opt/flux-lib-backup-20261030`。**待使用者決定**：限時再試一個原型（強制 split-K／小 tile）、停 FS 改驗證 M、或回 T／F。
 - **FS 驗證第 1、2 步完成（10-30 晚）**（`reports/20261030_fs_validation_result.md`）：換最佳設定只拿回 29%（M ≤ 2048 仍是理想的 1.35×）；不用 Flux 時 copy engine 與 GEMM 同時跑互不拖慢（FS1d，0.91–1.00×）；
   只有 Flux 的 all-gather 會被拖慢（2.8×）→ 差距在 Flux 機制內、可用軟體修，原因未拆開。文獻：Syncopate（OSDI'26，H100、無小 M 對 Flux）最接近。可望單一運算約 1.3×、prefill 約 1.15–1.25×（推論）。
   **待使用者同意第 3 步**（不重編的原因拆解＋重編打時間戳＋原型；事前登記 ≥ 1.15×）。

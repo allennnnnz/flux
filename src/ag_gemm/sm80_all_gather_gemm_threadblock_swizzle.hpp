@@ -17,6 +17,8 @@
 
 #pragma once
 
+#include <cstdlib>
+
 #include "cutlass/cutlass.h"
 #include "cutlass/gemm/threadblock/threadblock_swizzle_streamk.h"
 #include "flux/utils.h"
@@ -43,10 +45,15 @@ struct AGThreadblockSwizzleStreamKRankOffset : public ThreadblockSwizzleStreamK 
   int tile_m_offset;
   int tiled_m;
   int local_tiled_m;
+  // ws/hetero-proxy FS step 3 (2026-10-30): arrival-aware tile order, enabled by FLUX_FS_ARRIVAL=1 (read on the
+  // host when the swizzle is built). Default 0 = original Flux behaviour (bitwise identical, 192/192 hashes).
+  // Result: no speedup (applies to 3/30 tested points, slower there); kept off for audit.
+  // ws/hetero-proxy/results/topic/analysis.txt "FS step 3".
+  int fs_arrival = 0;
 
   /// Constructor
   CUTLASS_HOST_DEVICE
-  AGThreadblockSwizzleStreamKRankOffset() {}
+  AGThreadblockSwizzleStreamKRankOffset() : fs_arrival(0) {}
 
   AGThreadblockSwizzleStreamKRankOffset(
       GemmUniversalMode const mode_,
@@ -96,12 +103,25 @@ struct AGThreadblockSwizzleStreamKRankOffset : public ThreadblockSwizzleStreamK 
 
     tiled_m = ThreadblockSwizzleStreamK::tiled_shape().m();
     local_tiled_m = tiled_m / nnodes;
+
+    const char *fs_env = std::getenv("FLUX_FS_ARRIVAL");
+    fs_arrival = (fs_env != nullptr && fs_env[0] == '1') ? 1 : 0;
   }
 
   /// Obtains the calling threadblock's tiled coordinates for the given tile index
   CUTLASS_DEVICE
   GemmCoord
   get_tile_offset(int tile_idx) const {
+    // FS arrival-aware order: stream-K puts its cooperative (SK) region on tile indices [0, sk_tiles), which the
+    // rank rotation below maps to the local / earliest shards. Move the SK region to the LAST rows (the last-arriving
+    // shard) and run the DP tiles in arrival order, so the post-arrival tail is split across many blocks.
+    if (fs_arrival && raster_order == 0 && nnodes == 1) {
+      int total = ThreadblockSwizzleStreamK::tiled_shape().m() * ThreadblockSwizzleStreamK::tiled_shape().n();
+      int sk = ThreadblockSwizzleStreamK::sk_tiles;
+      if (sk > 0 && sk < total && tile_idx < total) {
+        tile_idx = (tile_idx < sk) ? (total - sk + tile_idx) : (tile_idx - sk);
+      }
+    }
     auto coord = (raster_order == 0)
                      ? ThreadblockSwizzleStreamK::get_tile_offset_row_major(tile_idx)
                      : ThreadblockSwizzleStreamK::get_tile_offset(tile_idx);

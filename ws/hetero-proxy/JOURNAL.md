@@ -273,3 +273,12 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - FS1b：Flux AG 與 GEMM 同時跑 1.30× → 發現 AG 開頭的屏障是 kernel，可能被 GEMM 擋住 → 標為混淆；FS1c 延後 GEMM 仍 1.28×，但 AG 被拖慢 2.8–8.6× 與「大 M 時融合接近理想」矛盾；
   FS1d 完全不用 Flux：copy engine 與 cuBLAS 同時跑互不拖慢 → 硬體互搶不成立，問題在 Flux 的 AG 路徑。
 - 結果報告 `reports/20261030_fs_validation_result.md`；待使用者同意第 3 步。
+
+## 2026-10-30（深夜）· boss 兼 worker · FS 第 3 步
+
+- 事前登記 `reports/20261030_fs_step3_plan.md`（aaf9eb7）。
+- E1：Flux AG 旁邊換成 cuBLAS 仍慢 2.6× → 同時跑的測試有假象（AG 結束時間總是貼著 GEMM 結束）；改用 fusion-dispatch 既有 nsys：融合中通訊不慢、最後一份到後 GEMM 尾巴長。
+- 讀 CUTLASS stream-K：合作區段 = 最後不滿一波的 tile，放在最前面的 tile 編號；Flux 的輪轉把它對到自己那份 → 原型 P1 把它移到最後到的那份。
+- D-006：先存修改前輸出雜湊（兩次 192/192 相同）、tag `pre-fs-mod`、備份函式庫；改 swizzle（環境變數開關）、增量重編 220 s、預設路徑 192/192 逐位元相同。
+- A/B：只有 3/30 點真的改到且變慢；中位數 1.00× → P1 不成立。我原本「通訊期間 GEMM 沒做事」的解讀太強，修正為 tile 粒度（約 150 µs）遠大於資料間隔（約 36 µs）。
+- 待使用者決定下一步（再試一個原型／改驗證 M／回 T、F）。
