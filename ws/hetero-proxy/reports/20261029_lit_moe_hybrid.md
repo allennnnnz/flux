@@ -97,3 +97,14 @@ H1–H4 合起來就是一個排程問題：每一層、每一個專家，決定
 
 **最便宜的否證實驗（1–2 天，不需裝 SGLang）**：同一時間 (a) CPU 兩個插槽算 k 個專家，(b) 8 卡各搬 1/8 的另外 m 個專家。量兩邊各自的速度和互搶程度，看約 1.9× 是否成立。
 不成立（例如 DRAM 互搶吃掉大半），主軸就退回 H1 / H2。
+
+## 7. 補充（2026-10-30）：KTransformers 已有的「多線搬運」與動態放置
+
+讀 ktransformers `c987331` 的 `doc/en/Kimi-K2.5.md`、`kt-kernel/README.md`、`kt-kernel/fp8_layerwise_transport.{hpp,cpp}`：
+- **Layerwise GPU prefill**（`--kt-gpu-prefill-token-threshold`，只用於 RAWINT4 / FP8）：prefill 的 token 數超過門檻時，把整層專家搬進 GPU 算，需要多一層 MoE 的 VRAM（Kimi-K2-Thinking 約 9 GB）。
+  FP8 版的傳輸是 TP 感知的：rank 0 當生產者，CPU 把專家寫進每個 rank 各自的主機槽（`all_rank_host_ptrs` [slot][rank][kind]）；每個 rank 自己做 H2D（`h2d_ns[rank]`），同步用共享記憶體裡的原子旗標。
+  → **「長 prefill 時每張卡經自己的線搬整層」KTransformers 已經有**（至少 FP8 版）。報告第 3 節的 H3 只剩 decode／中等批次的部分是新的。
+- `--kt-enable-dynamic-expert-update`：prefill 時依實際路由統計更新哪些專家放 GPU；`--kt-expert-placement-strategy`：uniform / frequency / front-loading / random。
+- Kimi 系列用原始 int4 權重，CPU 與 GPU 共用同一個資料夾（`--kt-method RAWINT4 --kt-weight-path <model>`），不用轉檔；SGLang 用 kvcache-ai 的 fork（`pip install kt-kernel sglang-kt`），建議 CUDA 12.8+。
+- 我們剩下的差別：(1) decode 時每層「CPU 算＋多線搬」**同時**分工，不是整層全有或全無；(2) 把 CPU 和 DMA 互搶記憶體算進排程（M0 F1/F2）；
+  (3) 權重事先按 rank 放在 NUMA 本地的釘住記憶體，搬運不經 CPU 寫入那一步（他們的生產者每層要由 CPU 先寫一次，多一份記憶體流量，推論）；(4) PCIe 搬運對 NCCL 的干擾（X 系列）。
