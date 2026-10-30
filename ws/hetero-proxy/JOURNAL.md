@@ -262,3 +262,5 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - 結果報告 `reports/20261030_t_validation_result.md`：有條件值得；待使用者在 T / F / F＋T 中選。
 - 使用者問「最後能提出多少效能提升」並表示要有較明顯的提升 → T 的上限：整步最多 1.09×（3–8%）、單次通訊恢復 2–3 倍、activation offload 前向快 13%；不夠。
   建議改評估 M 在批次較大的 decode／服務情境（基準 KT TP8 只用一條上行線、冷專家由 CPU 算），先做與 T 同樣的事前登記驗證；需使用者同意安裝 SGLang＋kt-kernel。記憶檔新增 topic-preferences。
+- 使用者問「除了決策器，能否改 Flux 的排程邏輯」→ 用 fusion-dispatch 既有資料算 Flux 的重疊效率（中位數 40%、離理想 1.30×、最多 1.72×；M ≤ 2048 與小 N 層最差，有融合比串行還慢的點）；
+  讀原始碼確認 A100 AG 是依序拉、tile 也依序輪轉（順序已對齊）→ 推論問題在「一份資料的 tile 少於一波」與靜態 stream-K。新選項 FS 寫入 STATUS §0；建議先做不需重編的 profiling() 實驗與文獻檢查。

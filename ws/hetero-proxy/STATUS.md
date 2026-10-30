@@ -18,6 +18,14 @@
 - 事前規則：1 成立（24% / 11%）、2 成立、3 部分（6 個 ≥ 5% 情境中 4 個收回 61–81%；最大損失那格只有 LL128 拿回 8%，窗口與混合排程都更糟）、4 成立。
 - 預測錯的：V1a「25% 限速仍剩一半減速」（實際約 1/10–1/5）、V1b「通道多較不敏感」（相反）、V3「activation offload 損失 10–25%」（6.1% / 2.1%）。
 - **待使用者決定**：做 T（特性量測為主、整步 3–8%）、改做 F、或 F＋T 合併（成本模型加干擾項）。
+- **10-30 新選項 FS：改 Flux 自己的排程**（使用者問：除了決策器，能否改 Flux 的排程邏輯）。用既有資料算（`ws/fusion-dispatch/results/final_ag_points.csv`，gpu 模式，M ≥ 512，40 點）：
+  Flux 融合只做到可能重疊的**中位數 40%**；融合時間是理想值 max(Flux AG 單獨, GEMM 單獨) 的**中位數 1.30×、最多 1.72×**（以較快的 GEMM 算：1.37× / 1.89×）；
+  M ≤ 2048（chunked prefill 的大小）與 N 小的層（L-QKV）最差；有幾點融合比「先 AG 再 GEMM」還慢（G-FC1 M=3072：2.73 vs 2.21 ms；G-QKV M=2048：1.30 vs 1.19）。
+  原始碼：A100 的 All2All＋use_read 是單一 stream **依序**拉 7 份（rank+1、rank+2…，每份切 SPLIT 塊各設旗標，`src/coll/ths_op/all_gather_op.cc:533-575`）；
+  GEMM tile 也從自己那份開始依序輪轉（`src/ag_gemm/sm80_all_gather_gemm_threadblock_swizzle.hpp:113-127`）→ 順序已對齊；
+  推論的原因：M 小時一份資料的 tile 數 < 一波（M=1024、n=6144、tile 128×256：每份 24 個 tile vs 108 個 SM）→ 第一波就要等 4–5 份；靜態 stream-K 讓 CTA 卡在還沒到的 tile；登錄表選到 PCIe 的 config（陷阱表）。
+  可改：依「資料是否已到」動態分派 tile、依 (形狀, M) 選 tile 大小／切法、第一份資料切更細、通訊受限的層把 AG 提早到前一個運算。`AGKernel.profiling()` 有 pybind（`src/pybind/ag_gemm.cc:90`）可先不重編就看「只換 config」能拿回多少；`build.sh --arch 80` 可只編 sm80。
+  推論的上限：運算層級中位數 1.2–1.3×、chunked prefill 大小最多 1.5–1.7×；prefill 端到端約 1.15–1.3×（未量）。文獻威脅：TileLink、Triton-distributed、FlashOverlap、PyTorch async-TP（未查）。此方向即從未開始的 `ws/diag-overlap`。
 - 10-30 使用者問目前有哪些選項 → 回覆總表：M（待驗證、潛在提升最大）、T（已驗證、最多 1.09×）、F（最多約 1.1×）、F＋T、新想法 O（PCIe 受限的 offload 訓練：壓縮搬運量；
   由 V3 gimm 4096 推上限約 1.3×，推論，未查文獻）；排除：KV（教授）、跨節點（只用 158）、改設定類、已擠的題目。
 - **使用者 10-30（驗證後）**：要「較明顯的效能提升」→ T 的上限（整步最多 1.09×；單次通訊可從 ×2–3 變慢恢復；activation offload 的前向 32.8 → 28.5 ms，快 13%）不夠當主賣點。
