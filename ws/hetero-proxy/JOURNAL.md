@@ -260,3 +260,5 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
   2048 token 變異大（推論：CPU 發 kernel 受限），不列入判定。
 - 文獻再查：ChunkFlow §2.3 明寫 NVLink 機器上兩者不干擾（沒量過）；PyTorch 論壇的 rank skew 只解釋同步搬運那一次，非同步仍慢、未解。
 - 結果報告 `reports/20261030_t_validation_result.md`：有條件值得；待使用者在 T / F / F＋T 中選。
+- 使用者問「最後能提出多少效能提升」並表示要有較明顯的提升 → T 的上限：整步最多 1.09×（3–8%）、單次通訊恢復 2–3 倍、activation offload 前向快 13%；不夠。
+  建議改評估 M 在批次較大的 decode／服務情境（基準 KT TP8 只用一條上行線、冷專家由 CPU 算），先做與 T 同樣的事前登記驗證；需使用者同意安裝 SGLang＋kt-kernel。記憶檔新增 topic-preferences。
