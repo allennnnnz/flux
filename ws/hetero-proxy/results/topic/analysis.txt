@@ -71,3 +71,25 @@ All 5 rounds within 1% of each other.
      writes in the same upstream direction (PCIe ordering) or in switch arbitration.
   Anchor deviation: B 47.9 vs E4 cross-node 56 Gb/s (-14%); G 7.5 GB/s per switch vs E4 9.5 (-21%). Loopback makes the
     same NIC and switch also carry the destination writes; do NOT quote T2 GPU-read numbers as cross-node numbers.
+
+== T3: Flux fused kernels vs NCCL+cuBLAS under GPU->host copies (scripts/topic/t3_flux_vs_hostcopy_v1.py; t3_v1/)
+Method: ./launch.sh (8 ranks), CUDA_DEVICE_MAX_CONNECTIONS=8, eager; Qwen2.5-32B layer shapes, TP8 + sequence parallel,
+M = 4096 tokens; Flux AG = All2All + use_read; same window / pairing as T1, 30 rounds; d2h8 = all 8 GPUs copy,
+d2h2 = GPU0+GPU1 only. Fused output == NCCL path (allclose 0.05) on all ranks. Guard CLEAN. 1-5 windows per item dropped
+for SM clock < 95% of modal 1410 MHz.
+  item (per call)       none ms   d2h8          d2h2       | fused advantage (nccl/fused) none -> d2h8
+  AG gate_up fused      1.198     x1.11 1.331   x1.10      |
+  AG gate_up nccl+mm    1.264     x1.23 1.556   x1.22      | 1.06 -> 1.17
+  AG qkv fused          0.335     x2.12 0.711   x2.13      |
+  AG qkv nccl+mm        0.459     x1.65 0.757   x1.61      | 1.37 -> 1.06
+  RS down fused         0.629     x1.07 0.675   x1.06      |
+  RS down mm+nccl       0.767     x1.36 1.043   x1.33      | 1.22 -> 1.55
+  RS o_proj fused       0.260     x1.21 0.313   x1.25      |
+  RS o_proj mm+nccl     0.368     x1.72 0.632   x1.66      | 1.42 -> 2.02
+  GEMM alone            x1.00-1.09 (copies barely touch the GEMM)
+  -> When the GEMM is long (gate_up, down), Flux's tile overlap keeps the slowed communication under the GEMM
+     (x1.07-1.11 vs NCCL x1.23-1.36). When the GEMM is short (qkv: comm-bound), the slowed copy-engine all-gather is
+     exposed and Flux is hurt MORE than NCCL (x2.12 vs x1.65). Flux waits/releases every tile with system-scope
+     acquire/fence (include/flux/cuda/system_barrier.hpp:41-52) - inference, not isolated, that this is the cause.
+  Anchors: NCCL AG 40 MiB = nccl+mm - mm = 0.249 ms -> 147 GB/s busbw, between T1 AG 32 MiB (140) and 64 MiB (176): ok.
+           mm gate_up 290 GFLOP / 1.015 ms = 286 TFLOPS (92% of 312 peak; high but plausible for this large GEMM).

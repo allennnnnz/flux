@@ -245,3 +245,6 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - 報告 `reports/20261030_topic_search.md`：推薦 T（訓練時 offload 干擾的量測＋排程器）、備案 F（fusion-dispatch 成文）、M 第三；跨節點題目不建議當主線。
 - 撤回表加一條：「背景搬運對大訊息影響小（約 7%）」只對 ≥ 128 MiB 或 h2d 成立。
 - **留給下個 session**：等使用者選題。若選 T：第 1 週否證實驗（真實 FSDP2 CPU offload、TP＋SP activation offload 訓練步驟中干擾占比 ≥ 10%），獨立 venv 裝訓練框架；同時解 101 vs 85 GB/s。
+- （續 10-30）使用者決定只用 158；問 offload 怎麼做、為何選 T → 說明主情境（Qwen2.5-32B 全參數微調、TP8＋SP、Adam 狀態放主機）並記入 STATUS。
+- 使用者問「搬運能否結合 Flux 的切割」→ 先讀 Flux 同步：每個 tile 用 `ld.acquire.sys` / `fence.acq_rel.sys`（`system_barrier.hpp:41-52`）→ T3（`t3_flux_vs_hostcopy_v1.py`，30 輪、guard CLEAN、融合結果 = NCCL 路徑）：
+  大 GEMM 層 Flux 吸收干擾（×1.07–1.11 vs NCCL ×1.23–1.36）、qkv 小 GEMM 層 Flux 更慘（×2.12 vs ×1.65）；融合優勢隨搬運改變。報告加 5.7 節：每層「融合與否＋搬運窗口＋Flux 式切塊放行＋協定」的合併架構。

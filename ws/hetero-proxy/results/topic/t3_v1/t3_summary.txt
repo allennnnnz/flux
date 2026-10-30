@@ -1,0 +1,13 @@
+T3 summary: rank-max per-call ms; ratio = paired same round; modal clock 1410 MHz (windows < 95% dropped); fused==nccl allclose on all ranks: True
+AG_gate_up|fused       none   1.198 ms | d2h8 x1.111 [1.103-1.115] ->   1.331 ms | d2h2 x1.104 [1.098-1.108] ->   1.323 ms  (n=29, dropped 2, uncovered 0)
+AG_gate_up|nccl        none   1.264 ms | d2h8 x1.231 [1.221-1.238] ->   1.556 ms | d2h2 x1.216 [1.210-1.231] ->   1.536 ms  (n=30, dropped 2, uncovered 0)
+AG_gate_up|gemm        none   1.015 ms | d2h8 x1.005 [0.994-1.011] ->   1.020 ms | d2h2 x1.002 [0.994-1.016] ->   1.017 ms  (n=28, dropped 4, uncovered 0)
+AG_qkv|fused           none   0.335 ms | d2h8 x2.123 [2.077-2.246] ->   0.711 ms | d2h2 x2.134 [2.071-2.223] ->   0.715 ms  (n=28, dropped 4, uncovered 0)
+AG_qkv|nccl            none   0.459 ms | d2h8 x1.651 [1.630-1.675] ->   0.757 ms | d2h2 x1.613 [1.590-1.637] ->   0.740 ms  (n=29, dropped 2, uncovered 0)
+AG_qkv|gemm            none   0.209 ms | d2h8 x1.088 [1.076-1.111] ->   0.228 ms | d2h2 x1.063 [1.055-1.078] ->   0.222 ms  (n=29, dropped 2, uncovered 0)
+RS_down|fused          none   0.629 ms | d2h8 x1.074 [1.066-1.079] ->   0.675 ms | d2h2 x1.064 [1.055-1.071] ->   0.669 ms  (n=30, dropped 2, uncovered 0)
+RS_down|nccl           none   0.767 ms | d2h8 x1.359 [1.345-1.369] ->   1.043 ms | d2h2 x1.333 [1.325-1.344] ->   1.023 ms  (n=30, dropped 5, uncovered 0)
+RS_down|gemm           none   0.528 ms | d2h8 x1.016 [1.002-1.026] ->   0.536 ms | d2h2 x1.009 [0.994-1.011] ->   0.532 ms  (n=30, dropped 1, uncovered 0)
+RS_o_proj|fused        none   0.260 ms | d2h8 x1.206 [1.172-1.246] ->   0.313 ms | d2h2 x1.254 [1.230-1.303] ->   0.326 ms  (n=30, dropped 2, uncovered 0)
+RS_o_proj|nccl         none   0.368 ms | d2h8 x1.717 [1.690-1.746] ->   0.632 ms | d2h2 x1.656 [1.628-1.702] ->   0.609 ms  (n=29, dropped 2, uncovered 0)
+RS_o_proj|gemm         none   0.124 ms | d2h8 x1.057 [1.046-1.067] ->   0.132 ms | d2h2 x1.057 [1.046-1.064] ->   0.131 ms  (n=29, dropped 2, uncovered 0)

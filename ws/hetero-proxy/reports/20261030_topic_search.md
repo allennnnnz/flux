@@ -176,6 +176,27 @@ NCCL、PyTorch、DeepSpeed 的排程都不知道這件事。
 - **審稿說「只是換成 LL128」** → T1 已顯示 128 MiB 以上 LL128 較慢、只換協定不夠；要用消融證明節拍器＋選擇一起才最好。
 - **機制講不清楚**（沒有 ncu、沒有 sudo）→ 論文以「可預測、可避開」為主，機制寫成有證據的推論。
 
+### 5.7 與 Flux 的切割結合（T3，2026-10-30 使用者提問後加做）
+
+量測：`scripts/topic/t3_flux_vs_hostcopy_v1.py`、`results/topic/t3_v1/`（Qwen2.5-32B 的層形狀，TP8＋序列平行，4096 token；30 輪打亂、guard CLEAN；融合結果與 NCCL 路徑一致）。
+
+| 運算（每次） | 沒搬運 | 8 卡往主機搬 | 融合比不融合快（沒搬 → 有搬） |
+| --- | --- | --- | --- |
+| AG gate_up（大 GEMM）Flux 融合 / NCCL＋mm | 1.20 / 1.26 ms | ×1.11 / ×1.23 | 1.06× → 1.17× |
+| AG qkv（小 GEMM，通訊為主） | 0.34 / 0.46 ms | **×2.12** / ×1.65 | 1.37× → 1.06× |
+| RS down（大 GEMM） | 0.63 / 0.77 ms | ×1.07 / ×1.36 | 1.22× → 1.55× |
+| RS o_proj | 0.26 / 0.37 ms | ×1.21 / ×1.72 | 1.42× → 2.02× |
+| 只有 GEMM | — | ×1.00–1.09 | — |
+
+意思：
+1. **GEMM 夠大時，Flux 的切割本身就是緩衝**：通訊雖然變慢，仍被 GEMM 蓋住（×1.07–1.11，NCCL ×1.23–1.36）。
+2. **GEMM 太小時，Flux 受害比 NCCL 更重**（qkv ×2.12）：被拖慢的 copy engine all-gather 直接露出來。Flux 每個 tile 都用系統層級的 acquire / fence（`include/flux/cuda/system_barrier.hpp:41-52`）——是否為原因未隔離（推論）。
+3. **「該不該融合」會隨有沒有搬運改變**：o_proj 的融合優勢從 1.42× 變 2.02×，qkv 從 1.37× 掉到 1.06×。
+
+→ 架構可以合成一件事：每一層決定 (a) 融合或不融合（fusion-dispatch 的成本模型加一項干擾）、(b) PCIe 搬運放在哪個窗口——放在大的融合 GEMM 期間（會被吸收），避開 qkv / 注意力這類通訊為主的窗口、
+(c) 用 Flux 的方式切割搬運本身：梯度依 tile／小塊切開，由 GPU 端訊號在 GEMM 算完那一塊時放行（如同 Flux 的 GEMM+RS 在 epilogue 把每個 tile 送給別張卡，只是這裡送去主機、而且挑時間）、(d) 不融合的 NCCL 依干擾選協定。
+訓練要用的反向（dgrad 與 AG/RS 對偶、wgrad 需要已收集的輸入）要自己接，屬工程；AGKernel 不能錄 CUDA graph（eager 訓練不受影響）；一組 op 建好不要銷毀（陷阱表）。
+
 ---
 
 ## 6. 備案 F：fusion-dispatch 寫成論文

@@ -1,0 +1,19 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/hetero-proxy/scripts/topic/t3_flux_vs_hostcopy_v1.py --out ws/hetero-proxy/results/topic/t3_smoke --rounds 2
+W1030 02:55:47.212000 524557 site-packages/torch/distributed/run.py:792] 
+W1030 02:55:47.212000 524557 site-packages/torch/distributed/run.py:792] *****************************************
+W1030 02:55:47.212000 524557 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1030 02:55:47.212000 524557 site-packages/torch/distributed/run.py:792] *****************************************
+T3 summary: rank-max per-call ms; ratio = paired same round; modal clock 1410 MHz (windows < 95% dropped); fused==nccl allclose on all ranks: True
+AG_gate_up|fused       none   1.195 ms | d2h8 x1.109 [1.108-1.110] ->   1.326 ms | d2h2 x1.104 [1.103-1.106] ->   1.320 ms  (n=2, dropped 0, uncovered 0)
+AG_gate_up|nccl        none   1.268 ms | d2h8 x1.226 [1.225-1.227] ->   1.555 ms | d2h2 x1.218 [1.212-1.223] ->   1.544 ms  (n=2, dropped 0, uncovered 0)
+AG_gate_up|gemm        none   1.015 ms | d2h8 x1.010 [1.006-1.015] ->   1.026 ms | d2h2 x1.012 [1.001-1.022] ->   1.027 ms  (n=2, dropped 0, uncovered 0)
+AG_qkv|fused           none   0.337 ms | d2h8 x2.111 [2.102-2.120] ->   0.711 ms | d2h2 x2.107 [2.083-2.130] ->   0.710 ms  (n=2, dropped 0, uncovered 0)
+AG_qkv|nccl            none   0.458 ms | d2h8 x1.646 [1.641-1.651] ->   0.754 ms | d2h2 x1.586 [1.585-1.588] ->   0.727 ms  (n=2, dropped 0, uncovered 0)
+AG_qkv|gemm            none   0.210 ms | d2h8 x1.086 [1.084-1.089] ->   0.228 ms | d2h2 x1.064 [1.062-1.066] ->   0.223 ms  (n=2, dropped 0, uncovered 0)
+RS_down|fused          none   0.628 ms | d2h8 x1.073 [1.069-1.076] ->   0.674 ms | d2h2 x1.059 [1.057-1.061] ->   0.665 ms  (n=2, dropped 0, uncovered 0)
+RS_down|nccl           none   0.768 ms | d2h8 x1.386 [1.349-1.422] ->   1.064 ms | d2h2 x1.318 [1.318-1.318] ->   1.013 ms  (n=2, dropped 0, uncovered 0)
+RS_down|gemm           none   0.529 ms | d2h8 x1.012 [1.009-1.016] ->   0.536 ms | d2h2 x1.007 [1.004-1.010] ->   0.533 ms  (n=2, dropped 0, uncovered 0)
+RS_o_proj|fused        none   0.257 ms | d2h8 x1.219 [1.218-1.220] ->   0.313 ms | d2h2 x1.280 [1.269-1.291] ->   0.329 ms  (n=2, dropped 0, uncovered 0)
+RS_o_proj|nccl         none   0.364 ms | d2h8 x1.735 [1.726-1.745] ->   0.632 ms | d2h2 x1.655 [1.626-1.684] ->   0.603 ms  (n=2, dropped 0, uncovered 0)
+RS_o_proj|gemm         none   0.125 ms | d2h8 x1.059 [1.059-1.059] ->   0.132 ms | d2h2 x1.053 [1.046-1.059] ->   0.131 ms  (n=2, dropped 0, uncovered 0)
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/topic/t3_smoke/guard.log
