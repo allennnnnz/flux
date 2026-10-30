@@ -1,0 +1,5 @@
+V3 gdpu seq=2048 layers=8 micro=4 grad MB/GPU=975 act MB/GPU(offloaded, last layer kept)=99 window budget total MB=1672; modal clock 1410; dropped windows 0
+variant  step_ms(med)  ratio_vs_none[p10-p90]  compute_ms  coll_sum_ms(rank-max)  fwd_ms
+none       231.44  x1.000 [1.000-1.000]     231.44     103.21     27.92  n=20
+naive      237.15  x1.027 [0.982-1.098]     237.15     101.23     33.85  n=20
+window     253.53  x1.098 [1.061-1.161]     253.53     121.36     35.71  n=20

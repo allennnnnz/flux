@@ -1,0 +1,12 @@
+W1030 03:32:45.211000 592959 site-packages/torch/distributed/run.py:792] 
+W1030 03:32:45.211000 592959 site-packages/torch/distributed/run.py:792] *****************************************
+W1030 03:32:45.211000 592959 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1030 03:32:45.211000 592959 site-packages/torch/distributed/run.py:792] *****************************************
+V3 gdpu seq=4096 layers=8 micro=1 grad MB/GPU=975 act MB/GPU(offloaded, last layer kept)=198 window budget total MB=785; modal clock 1395; dropped windows 0
+variant  step_ms(med)  ratio_vs_none[p10-p90]  compute_ms  coll_sum_ms(rank-max)  fwd_ms
+none        75.99  x1.000 [1.000-1.000]      75.99      16.51     27.84  n=20
+naive       94.39  x1.242 [1.236-1.248]      94.39      29.84     39.47  n=20
+serial     152.69  x2.010 [2.001-2.018]      77.65      16.67     29.34  n=20
+window     103.53  x1.362 [1.355-1.369]      79.15      17.18     29.72  n=20
+hybrid     106.44  x1.402 [1.396-1.407]      86.58      20.61     32.80  n=20
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/topic/v3b/gdpu_s4096_m1/guard.log

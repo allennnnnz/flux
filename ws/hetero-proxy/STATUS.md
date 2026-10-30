@@ -12,7 +12,15 @@
 
 最後更新：2026-10-30
 
-**最新（2026-10-30）—— 選題重找（使用者：通訊優化，推論或訓練皆可，10 週內一篇架構完整的論文）**（`reports/20261030_topic_search.md`）
+**最新（2026-10-30 下午）—— 題目 T 的驗證（使用者：先確認值得投入再規劃）**（計劃 `reports/20261030_t_validation_plan.md`、結果 `reports/20261030_t_validation_result.md`、數字 `results/topic/analysis.txt`）
+- **結論：有條件值得**——現象真實且新（最新 NCCL 2.32.3 仍 ×1.9–2.8；ChunkFlow 2026 §2.3 明寫 NVLink 機器上不會干擾）、改設定修不掉（通道數沒用、限速更糟、LL128 大訊息慢 23–29%）；
+  但真實訓練步驟（V3：TP8＋SP、Qwen2.5-32B 層、梯度已對 fp32 參考）裡 naive 只慢 1–6%，峰值 24%（延遲更新梯度 offload、4096 token × 1 micro-batch，搬運 ≈ 計算），能拿回的整步時間 3–8%。
+- 事前規則：1 成立（24% / 11%）、2 成立、3 部分（6 個 ≥ 5% 情境中 4 個收回 61–81%；最大損失那格只有 LL128 拿回 8%，窗口與混合排程都更糟）、4 成立。
+- 預測錯的：V1a「25% 限速仍剩一半減速」（實際約 1/10–1/5）、V1b「通道多較不敏感」（相反）、V3「activation offload 損失 10–25%」（6.1% / 2.1%）。
+- **待使用者決定**：做 T（特性量測為主、整步 3–8%）、改做 F、或 F＋T 合併（成本模型加干擾項）。
+- 環境：NCCL 2.32.3 裝在 `~/opt/nccl-2.32.3`，在 pixi 環境內以 `LD_PRELOAD` 使用（`torch.cuda.nccl.version()` 只報編譯版本，實際版本要用 ctypes `ncclGetVersion`）。
+
+**之前（2026-10-30 上午）—— 選題重找（使用者：通訊優化，推論或訓練皆可，10 週內一篇架構完整的論文）**（`reports/20261030_topic_search.md`）
 - 拓撲：每個 PCIe 交換器 = 2 張 GPU＋1 張雙埠 100 GbE 網卡、一條 Gen4 x16 上行。**159 目前被使用者帳號的 SGLang 服務（DP4×TP2）佔滿 8 卡，且少一張網卡（rail 5/6）** → 跨節點題目環境風險高。
 - **T1**（`scripts/topic/t1_bigcoll_pcie_v1.py`、`results/topic/t1_v1_*`，30 輪打亂、guard CLEAN、eager）：8 卡背景 GPU→主機搬運讓 16 MiB reduce-scatter / all-gather 慢 **×2.9–3.0**、32 MiB ×1.9–2.1、64 MiB ×1.4，128 MiB 以上 ≤ ×1.08；主機→GPU 小得多（≤ ×1.5）。搬運本身不受影響。
   強制協定：16 MiB 以上預設 = Simple；LL128 鈍感得多（16 MiB ×1.2–1.3）→ 有 d2h 時 RS 16 MiB LL128 比 Simple 快 2.2×、AR 32 MiB 快 1.75×，128 MiB Simple 仍較好——**最好的協定隨背景搬運翻轉**。

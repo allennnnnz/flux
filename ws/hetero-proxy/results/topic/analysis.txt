@@ -93,3 +93,71 @@ for SM clock < 95% of modal 1410 MHz.
      acquire/fence (include/flux/cuda/system_barrier.hpp:41-52) - inference, not isolated, that this is the cause.
   Anchors: NCCL AG 40 MiB = nccl+mm - mm = 0.249 ms -> 147 GB/s busbw, between T1 AG 32 MiB (140) and 64 MiB (176): ok.
            mm gate_up 290 GFLOP / 1.015 ms = 286 TFLOPS (92% of 312 peak; high but plausible for this large GEMM).
+
+== Validation V1 / V2 (plan: reports/20261030_t_validation_plan.md; scripts/topic/t1_bigcoll_pcie_v2.py, run_v1v2_v1.sh)
+t1 v2: 4 MiB copy pieces, paced modes d2h_<duty%> (GPU sleep between pieces), runtime NCCL version recorded.
+30 rounds each, all 6 guards CLEAN.
+V1a pacing (all 8 GPUs, NCCL 2.21.5), ratio vs none:
+  op/size      d2h_100  d2h_50  d2h_25  h2d_100
+  AR 16 MiB    1.17     1.13    1.07    1.05     (AR 16 MiB default = LL128, see T1)
+  AR 32 MiB    1.97     1.40    1.19    1.09
+  AR 64 MiB    1.39     1.25    1.10    1.03
+  RS 16 MiB    2.86     1.52    1.21    1.52
+  RS 32 MiB    1.93     1.39    1.18    1.13
+  RS 64 MiB    1.39     1.23    1.12    1.07
+  -> slowdown shrinks roughly with copy rate (RS 16: excess 1.86 -> 0.52 -> 0.21). Prediction "25% duty still >= half
+     of the full slowdown" NOT confirmed.
+V1b channel count (sizes 16-256 MiB, d2h_100):
+  base:   RS16 x2.96 RS32 x1.93 AR32 x1.98 AR64 x1.37, >=128 MiB <= x1.08
+  min32:  faster idle at 32 MiB (AR 0.307 vs 0.366 ms) but MORE sensitive: RS16 x3.04 RS32 x2.25 AR32 x2.32 AG32 x2.27
+  max4:   2.5-4x slower idle (AR 256 MiB 6.78 vs 2.17 ms), less sensitive (RS16 x1.45, RS32 x1.10, >=64 MiB ~x1.0);
+          absolute time under copies still worse than base (RS 32 MiB 0.50 vs 0.41 ms).
+  -> no channel setting fixes it. Prediction "more channels -> less sensitive (16 MiB <= x1.5)" NOT confirmed; the
+     fence-latency-hidden-by-parallel-channels hypothesis (T1 note) is refuted. Mechanism still open.
+V2 NCCL 2.32.3 (runtime 23203, LD_PRELOAD into the pixi env; torch.cuda.nccl.version() reports the compile-time 2.21.5):
+  default: RS16 x2.78 AG16 x2.74 AR32 x1.94 RS32 x1.88 AG32 x1.86 x64 x1.35-1.39, >=128 MiB <= x1.06  -> NOT fixed.
+  LL128:   16-32 MiB x1.07-1.24 under copies; idle cost at >=128 MiB: AR 128 1.439 vs 1.174 ms (+23%),
+           AR 256 2.799 vs 2.189 (+28%), RS 256 1.480 vs 1.143 (+29%).
+  -> criterion 4a (latest NCCL still >= x1.5 at 16-32 MiB) met; global LL128 has a >= 10% cost at large sizes.
+
+== Literature re-check V5 (2026-10-30)
+- ChunkFlow (arXiv 2605.11335v1, 2x H100 PCIe Gen5, no NVLink measured) section 2.3: "On NVLink-equipped systems,
+  inter-GPU collectives use a dedicated high-bandwidth fabric ... so the two do not directly interfere." Our T1 / V2
+  contradict this on 8x A100 NVSwitch.
+- PyTorch dev-discuss 2120 (P5 8x H100, torch 2.2, NCCL 2.19.4): rank skew explained only the synchronous-copy spike;
+  with async copies "I still observe slowness in NCCL when overlapping with DtoH copies"; escalated to NCCL, no cause.
+- NVIDIA/nccl #2218 (closed Aug 2026, no fix), NCCL 2.31/2.32 release notes: nothing on this.
+- No 2025-2026 paper found that quantifies or schedules offload traffic against NVLink collectives in training.
+
+== V3 training-step prototype (scripts/topic/v3_step_v2.py, v3_step_v3.py; results/topic/v3/, v3b/; run_v3_v2.sh, run_v3_hybrid_v1.sh)
+TP8 + SP Qwen2.5-32B layers (8 layers, no RoPE), hand-written TP autograd, flash attention; gradients checked against a
+single-GPU fp32 reference (v3_check/check.txt: PASS, worst rel max err 0.034, bf16). 20 rounds per case, variants
+interleaved, rank-max step = max(compute end, copy end). 26 + 8 guarded runs, all CLEAN. Tables: v3/v3_table.md
+(loss vs optimistic lower bound), v3/v3_recoverable.json (vs best variant actually achieved).
+Smoke runs (results/topic/v3_smoke_*, v3v2_smoke_*) are not used: v1 window stalled on leftovers (fixed in v2).
+Copy volumes per GPU: gradients 975 MB per 8 layers (= 7.8 GB for 64 layers); activation 'a' 28 MB/layer at 4096 tokens.
+copy_time (serial - none) = 76-77 ms for 975 MB -> 12.7 GB/s/GPU (anchor T1 12.6-13.0: ok).
+
+Default NCCL, step ms (none / naive / window / best variant) and loss of naive vs none:
+  act  4096:  76.9 / 81.6 / 77.9 / 77.9 window          naive +6.1%   recoverable 4.6% of naive
+  act  8192: 153.8 / 157.1 / 154.5 / window             naive +2.1%   recoverable 1.6%
+  gimm 4096: 75.7 / ~76 / - : PCIe-bound (copy 76 ms > backward), naive = lower bound, nothing to recover
+  gimm 8192: 151.9 / 161.0 / 160.0 / window             naive +6.0%   recoverable 0.6% (grads arrive late; window cannot place them)
+  gimm 16384: 324.7 / 328.0 / 327.4                    naive +1.0%
+  gdpu 4096 x1: 76.2 / 94.4 / 103.7 / 86.8 LL128 naive  naive +23.9%  recoverable 8.1% (balanced: copy 77 ms ~ step 76 ms;
+                 the link must run during collectives; window spills past the step end; hybrid 106.4 also worse)
+  gdpu 4096 x2: 155.4 / 172.8 / 158.7 / 158.4 hybrid    naive +11.2%  recoverable 8.3%
+  gdpu 4096 x4: 315.4 / 332.2 / 318.6 / 316.5 hybrid    naive +5.3%   recoverable 4.7%
+  gdpu 8192 x1: 152.9 / 160.9 / 156.0 / window          naive +5.2%   recoverable 3.0%
+  gdpu 8192 x4: 626.6 / 632.9 / 629.1                   naive +1.0%
+  2048-token cases excluded from the verdict: p10-p90 spread 10-30% and LL128 changed the no-copy step by -10% / +31%
+  (likely CPU-launch-bound at this size; not verified).
+In-step collective time (coll_sum, rank-max): e.g. gdpu 4096 x1 naive 29.9 vs none 16.6 ms; act 4096 naive 20.9 vs 17.0;
+window keeps it at 17.4 / 17.6. Forward of act 4096: naive 32.8 vs none 28.2 ms (+16%), window 28.5.
+Rate limiting (paced50 / paced25) is worse than naive in every case >= 4096 tokens (e.g. gdpu 4096 x2: 193 / 320 vs 173 ms).
+LL128 (separate processes): no-copy step +1.2-3.6% slower at >= 4096 tokens; halves the naive loss; best variant only in
+the balanced case.
+Reproducibility: v3b default runs repeat v3 within 0.3% (gdpu 4096 x1 naive 94.39 vs 94.36, window 103.53 vs 103.67).
+Pre-registered predictions: gimm 2048 PCIe-bound - not testable (2048 excluded) but 4096 PCIe-bound (prediction said
+5-15% loss at 4096/8192: 0.3% / 6.0%, partly wrong); act loss 10-25% - NOT confirmed (6.1% / 2.1%); window recovers
+>= 50% - confirmed in 4 of 6 cases with loss >= 5%; LL128 recovers 30-60% - roughly confirmed (halves).

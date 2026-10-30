@@ -248,3 +248,15 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - （續 10-30）使用者決定只用 158；問 offload 怎麼做、為何選 T → 說明主情境（Qwen2.5-32B 全參數微調、TP8＋SP、Adam 狀態放主機）並記入 STATUS。
 - 使用者問「搬運能否結合 Flux 的切割」→ 先讀 Flux 同步：每個 tile 用 `ld.acquire.sys` / `fence.acq_rel.sys`（`system_barrier.hpp:41-52`）→ T3（`t3_flux_vs_hostcopy_v1.py`，30 輪、guard CLEAN、融合結果 = NCCL 路徑）：
   大 GEMM 層 Flux 吸收干擾（×1.07–1.11 vs NCCL ×1.23–1.36）、qkv 小 GEMM 層 Flux 更慘（×2.12 vs ×1.65）；融合優勢隨搬運改變。報告加 5.7 節：每層「融合與否＋搬運窗口＋Flux 式切塊放行＋協定」的合併架構。
+
+## 2026-10-30（下午）· boss 兼 worker · 題目 T 的驗證
+
+- 使用者：先規劃並做足夠的實驗，確認整體值得投入，再開始規劃。
+- 事前登記：`reports/20261030_t_validation_plan.md`（四條判定規則，跑之前提交 8e1fca8）。
+- V1 / V2（`t1_bigcoll_pcie_v2.py`）：限速照比例減輕；通道數 32 更敏感、4 很慢；NCCL 2.32.3（`~/opt/nccl-2.32.3`、LD_PRELOAD）仍 ×1.9–2.8；LL128 大訊息慢 23–29%。
+- V3 訓練步驟原型（`v3_step_v1/v2/v3.py`）：手寫 TP8＋SP autograd，梯度對 fp32 參考 PASS。
+  v1 的窗口排程在 activation offload 卡住（最後幾層的資料還沒搬完反向就要用）→ v2 加放行點、最後一層不搬、加限速對照；v3 加混合排程（失敗）。
+  結果：naive 損失 1–6%，峰值 24%（延遲更新、4096 × 1）；窗口排程收回 61–81%（4/6 情境）；最平衡的那格沒有好解（鏈路必須在通訊時也搬）。
+  2048 token 變異大（推論：CPU 發 kernel 受限），不列入判定。
+- 文獻再查：ChunkFlow §2.3 明寫 NVLink 機器上兩者不干擾（沒量過）；PyTorch 論壇的 rank skew 只解釋同步搬運那一次，非同步仍慢、未解。
+- 結果報告 `reports/20261030_t_validation_result.md`：有條件值得；待使用者在 T / F / F＋T 中選。

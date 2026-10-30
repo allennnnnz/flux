@@ -1,0 +1,15 @@
+W1030 03:09:55.602000 542325 site-packages/torch/distributed/run.py:792] 
+W1030 03:09:55.602000 542325 site-packages/torch/distributed/run.py:792] *****************************************
+W1030 03:09:55.602000 542325 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1030 03:09:55.602000 542325 site-packages/torch/distributed/run.py:792] *****************************************
+check seq=512 layers=2: output rel max err 0.0140
+  layer 0 wqkv: worst rel max err over ranks so far 0.0200
+  layer 0 wo: worst rel max err over ranks so far 0.0200
+  layer 0 wgu: worst rel max err over ranks so far 0.0200
+  layer 0 wdown: worst rel max err over ranks so far 0.0200
+  layer 1 wqkv: worst rel max err over ranks so far 0.0342
+  layer 1 wo: worst rel max err over ranks so far 0.0342
+  layer 1 wgu: worst rel max err over ranks so far 0.0342
+  layer 1 wdown: worst rel max err over ranks so far 0.0342
+RESULT PASS (threshold 0.05; bf16 TP vs fp32 reference)
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/topic/v3_check/guard.log

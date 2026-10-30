@@ -1,0 +1,7 @@
+NCCL runtime 22105; env 
+T1 summary (rank-max per-call time; ratio = same-round paired; modal SM clock 1410 MHz; windows with any rank < 95% modal dropped)
+reduce_scatter    16 MiB  none    0.133 ms ( 110.2 GB/s busbw) | d2h_100 x2.689 [p10 2.689 p90 2.689] n=1 copy 12.8 GB/s/GPU | d2h_50 x1.367 [p10 1.367 p90 1.367] n=1 copy 6.0 GB/s/GPU | d2h_25 x1.148 [p10 1.148 p90 1.148] n=1 copy nan GB/s/GPU  (uncovered 0, clock-dropped 3)
+reduce_scatter    64 MiB  none    0.352 ms ( 166.9 GB/s busbw) | d2h_100 x1.383 [p10 1.383 p90 1.383] n=1 copy 12.7 GB/s/GPU | d2h_50 x1.224 [p10 1.224 p90 1.224] n=1 copy 6.1 GB/s/GPU | d2h_25 x1.164 [p10 1.164 p90 1.164] n=1 copy 3.1 GB/s/GPU  (uncovered 0, clock-dropped 3)
+bg-only d2h_100: per-GPU rate (middle half of chunks) median 12.88 GB/s (copying ranks: all; n=2)
+bg-only d2h_50: per-GPU rate (middle half of chunks) median 6.30 GB/s (copying ranks: all; n=2)
+bg-only d2h_25: per-GPU rate (middle half of chunks) median 3.17 GB/s (copying ranks: all; n=2)

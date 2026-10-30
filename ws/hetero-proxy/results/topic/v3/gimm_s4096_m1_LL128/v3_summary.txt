@@ -1,0 +1,5 @@
+V3 gimm seq=4096 layers=8 micro=1 grad MB/GPU=975 act MB/GPU(offloaded, last layer kept)=198 window budget total MB=797; modal clock 1395; dropped windows 0
+variant  step_ms(med)  ratio_vs_none[p10-p90]  compute_ms  coll_sum_ms(rank-max)  fwd_ms
+none        77.60  x1.000 [1.000-1.000]      77.60      17.81     28.53  n=20
+naive      105.08  x1.354 [1.350-1.360]      83.94      19.65     28.68  n=20
+window     121.90  x1.572 [1.562-1.580]      79.65      18.13     28.58  n=20

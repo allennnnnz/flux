@@ -1,0 +1,34 @@
+W1030 03:08:43.557000 540449 site-packages/torch/distributed/run.py:792] 
+W1030 03:08:43.557000 540449 site-packages/torch/distributed/run.py:792] *****************************************
+W1030 03:08:43.557000 540449 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1030 03:08:43.557000 540449 site-packages/torch/distributed/run.py:792] *****************************************
+[rank1]:[W1030 03:08:48.249855779 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank3]:[W1030 03:08:48.797523230 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank5]:[W1030 03:08:48.921363219 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank6]:[W1030 03:08:48.925740542 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank7]:[W1030 03:08:48.933653152 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank0]:[W1030 03:08:48.948497333 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank2]:[W1030 03:08:49.989149974 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank4]:[W1030 03:08:49.009441663 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+NCCL runtime 23203; env NCCL_PROTO=LL128
+T1 summary (rank-max per-call time; ratio = same-round paired; modal SM clock 1410 MHz; windows with any rank < 95% modal dropped)
+all_reduce         4 MiB  none    0.076 ms (  97.0 GB/s busbw) | d2h_100 x1.396 [p10 1.204 p90 1.541] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+all_reduce        16 MiB  none    0.219 ms ( 134.0 GB/s busbw) | d2h_100 x1.115 [p10 1.071 p90 1.131] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+all_reduce        32 MiB  none    0.390 ms ( 150.6 GB/s busbw) | d2h_100 x1.075 [p10 1.056 p90 1.088] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+all_reduce        64 MiB  none    0.740 ms ( 158.6 GB/s busbw) | d2h_100 x1.045 [p10 1.034 p90 1.055] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+all_reduce       128 MiB  none    1.439 ms ( 163.2 GB/s busbw) | d2h_100 x1.030 [p10 1.025 p90 1.036] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+all_reduce       256 MiB  none    2.799 ms ( 167.8 GB/s busbw) | d2h_100 x1.023 [p10 1.020 p90 1.026] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+reduce_scatter     4 MiB  none    0.053 ms (  69.2 GB/s busbw) | d2h_100 x1.472 [p10 1.386 p90 1.804] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+reduce_scatter    16 MiB  none    0.128 ms ( 114.6 GB/s busbw) | d2h_100 x1.213 [p10 1.155 p90 1.300] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+reduce_scatter    32 MiB  none    0.216 ms ( 135.9 GB/s busbw) | d2h_100 x1.135 [p10 1.102 p90 1.164] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+reduce_scatter    64 MiB  none    0.400 ms ( 147.0 GB/s busbw) | d2h_100 x1.078 [p10 1.066 p90 1.099] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+reduce_scatter   128 MiB  none    0.771 ms ( 152.2 GB/s busbw) | d2h_100 x1.050 [p10 1.037 p90 1.054] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+reduce_scatter   256 MiB  none    1.480 ms ( 158.8 GB/s busbw) | d2h_100 x1.031 [p10 1.027 p90 1.036] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+all_gather         4 MiB  none    0.050 ms (  73.8 GB/s busbw) | d2h_100 x1.525 [p10 1.367 p90 1.780] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+all_gather        16 MiB  none    0.120 ms ( 122.6 GB/s busbw) | d2h_100 x1.236 [p10 1.214 p90 1.317] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+all_gather        32 MiB  none    0.210 ms ( 140.0 GB/s busbw) | d2h_100 x1.136 [p10 1.120 p90 1.145] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+all_gather        64 MiB  none    0.393 ms ( 149.6 GB/s busbw) | d2h_100 x1.076 [p10 1.064 p90 1.084] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+all_gather       128 MiB  none    0.755 ms ( 155.6 GB/s busbw) | d2h_100 x1.044 [p10 1.037 p90 1.055] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+all_gather       256 MiB  none    1.451 ms ( 161.9 GB/s busbw) | d2h_100 x1.032 [p10 1.028 p90 1.037] n=30 copy 12.8 GB/s/GPU  (uncovered 0, clock-dropped 0)
+bg-only d2h_100: per-GPU rate (middle half of chunks) median 12.85 GB/s (copying ranks: all; n=30)
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/topic/v2_nccl232_LL128/guard.log

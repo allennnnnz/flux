@@ -1,0 +1,10 @@
+check seq=512 layers=2: output rel max err 0.0140
+  layer 0 wqkv: worst rel max err over ranks so far 0.0200
+  layer 0 wo: worst rel max err over ranks so far 0.0200
+  layer 0 wgu: worst rel max err over ranks so far 0.0200
+  layer 0 wdown: worst rel max err over ranks so far 0.0200
+  layer 1 wqkv: worst rel max err over ranks so far 0.0342
+  layer 1 wo: worst rel max err over ranks so far 0.0342
+  layer 1 wgu: worst rel max err over ranks so far 0.0342
+  layer 1 wdown: worst rel max err over ranks so far 0.0342
+RESULT PASS (threshold 0.05; bf16 TP vs fp32 reference)

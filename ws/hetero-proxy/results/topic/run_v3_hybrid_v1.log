@@ -1,0 +1,17 @@
+[run] gdpu_s4096_m1 03:32:42
+  rc=0 CLEAN
+[run] gdpu_s4096_m2 03:33:12
+  rc=0 CLEAN
+[run] gdpu_s4096_m4 03:33:49
+  rc=0 CLEAN
+[run] gdpu_s8192_m1 03:34:45
+  rc=0 CLEAN
+[run] gdpu_s4096_m1_LL128 03:35:23
+  rc=0 CLEAN
+[run] gdpu_s4096_m2_LL128 03:35:52
+  rc=0 CLEAN
+[run] gdpu_s4096_m4_LL128 03:36:30
+  rc=0 CLEAN
+[run] gdpu_s8192_m1_LL128 03:37:26
+  rc=0 CLEAN
+ALLDONE
