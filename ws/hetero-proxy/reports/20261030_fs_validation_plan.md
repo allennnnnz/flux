@@ -30,3 +30,11 @@ TileLink、Triton-distributed、FlashOverlap、PyTorch async-TP、Megatron／Tra
 - **繼續到第 3 步（kernel 內時間戳＋改排程原型）**：M = 512–2048 時，最佳 config 之後仍剩中位數 ≥ 1.15× 的差距，**且**文獻中沒有已發表的方法在 A100 上把這個差距補起來。
 - **不做**：最佳 config 就把中位數差距壓到 < 1.10×（只是選 config 的問題），或已有論文做了同一件事。
 - 介於之間：寫明差多少，交使用者決定。
+
+## 補充（2026-10-30，文獻檢查回來後、FS1b 跑之前）：競爭解釋的區分實驗 FS1b
+
+文獻（ParallelKittens，arXiv 2511.13940）認為 Flux 這類用 copy engine 做 AG 的融合在小矩陣上變慢，是因為 copy engine 本身；若差距來自「GEMM 與 copy engine 同時跑時互相拖慢」，排程改不了。
+- **FS1b**：同一形狀，Flux AG（`AllGatherOp.run`，side stream）與 GEMM（`gemm_only`，main stream，讀另一份已收集好的輸入）**同時跑、彼此不等**，量兩者都結束的總時間；與 ideal = max(AG, GEMM) 及 fused 比較。
+- 判讀：同時跑 ≈ ideal → 硬體資源不是限制，差距來自融合 kernel 的等待／排程（FS 可做）；同時跑 ≈ fused → 差距是資源互搶（FS 不成立）。
+- 預測：M ≤ 2048 時，同時跑 / ideal 的中位數 ≤ 1.10（大部分差距來自排程）。
+- 判定規則補一條：**繼續**需要 FS1b 在 M ≤ 2048 的中位數 ≤ 1.15。
