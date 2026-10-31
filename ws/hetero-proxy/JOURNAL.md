@@ -282,3 +282,13 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - D-006：先存修改前輸出雜湊（兩次 192/192 相同）、tag `pre-fs-mod`、備份函式庫；改 swizzle（環境變數開關）、增量重編 220 s、預設路徑 192/192 逐位元相同。
 - A/B：只有 3/30 點真的改到且變慢；中位數 1.00× → P1 不成立。我原本「通訊期間 GEMM 沒做事」的解讀太強，修正為 tile 粒度（約 150 µs）遠大於資料間隔（約 36 µs）。
 - 待使用者決定下一步（再試一個原型／改驗證 M／回 T、F）。
+
+## 2026-10-31 · boss 兼 worker · 「兩個方法互補」的選題組合（文獻，未佔 GPU）
+
+- 使用者先問 M1 / M2 的做法（已說明：kt-kernel int4 速度、SGLang＋kt TP8 跑 Kimi-K2.6 量 CPU 佔比、預估 ≥ 1.15× 才做），接著改問「有沒有兩種方法可以結合、補彼此的弱點」。
+- 讀到另一個 session 10-30 的選題（T、F、F＋T、FS、O）與記憶檔 topic-preferences（要明顯端到端提升、只用 158、10 週）。
+- 搜尋：推測解碼 × MoE 卸載（5 篇）、micro-batch 交錯（SpecMoEOff、2606.10493、vLLM RFC #33869）、DuoDecoding / Dovetail、MoE-Lightning、SwiftSpec、HeteroReason。
+- 推算：由 LMSYS「單請求 8 卡只比 1 卡快 26%」得 8 卡時 CPU 段約佔 96%（推論）→ M 在 decode 的整體上限約 1.1×。
+- 本機 Qwen3.6-27B 自帶 1 層 MTP（index 有 15 個 `mtp.*` 權重）。
+- 報告 `reports/20261031_combo_topics.md`：推薦「草稿交給只有 PCIe 的裝置」（SwiftSpec × DuoDecoding）。
+- **留給下個 session**：使用者同意後做組合一的驗證（事前登記）。
