@@ -83,3 +83,30 @@ Supersedes: 無（補充 `20261030_topic_search.md`、`20261029_lit_moe_hybrid.m
 - SpecMoEOff：https://arxiv.org/abs/2508.21706 ；SP-MoE：https://arxiv.org/abs/2510.10302 ；SpecMoE：https://arxiv.org/abs/2604.10152 ；Specter：https://arxiv.org/abs/2511.14102 ；MoE-SpAc：https://arxiv.org/abs/2603.09983
 - 2606.10493：https://arxiv.org/abs/2606.10493 ；vLLM RFC：https://github.com/vllm-project/vllm/issues/33869
 - SpecBundle / SpecForge：https://lmsys.org/blog/2025-12-23-spec-bundle-phase-1
+
+## 6. 補充：使用者指出環境是「8 張 A100、全部 NVLink」（2026-10-31）
+
+組合一需要一個「只能走 PCIe 的裝置」；本機沒有，只能用 A100 假裝。如果草稿機也是 NVLink GPU，就是 SwiftSpec 本身。
+以全 NVLink 為條件重查（搜尋三次，只讀摘要或二手摘要）：
+
+| 互補組合 | 已有的工作 |
+|---|---|
+| 草稿與目標分開或同時跑（多卡推測解碼） | SwiftSpec（2506.11309）、Speculative Speculative Decoding（2603.03251，Kumar / Dao / May）、Mirror SD（2510.13161）、SpecStream（2609.33184，同卡限 TPC 並行草稿）、EasySpec（2502.02493）、DPara（2609.27396）、NebulaSD（2609.29364）、vLLM RFC #42109、Meta Llama at scale（2508.08192） |
+| MoE 層 TP ↔ EP 依批次在執行中切換 | **Moebius（2606.26607）**：單一權重副本、原地重新分片、decode 時切換 |
+| prefill / decode 同卡多工 | AInfer-PD（2609.00993）、semi-PD、Bullet 等 |
+| 通訊與計算重疊 | Flux、Comet、NanoFlow、TokenWeave、TileLink；FS 原型（10-30）不成立 |
+| CPU 計算＋GPU（主機記憶體） | KTransformers、Apex、PDScope（2610.39216）…；M 在 decode 的上限約 1.1×（第 3 節） |
+
+→ 在純 NVLink 單機推論上，「兩法互補＋明顯加速＋沒人做過」三個條件很難同時滿足；要快速出論文，需要放寬其中一個條件（第 7 節，待使用者選）。
+
+## 7. 可選的方向（待使用者選）
+
+| | 方向 | 放寬哪個條件 | 預期增益 | 時間 |
+|---|---|---|---|---|
+| A | F：融合 vs 不融合的決策器（本身就是兩法互補），實驗約八成已完成 | 增益不大 | 約 1.1×（10-30 推算） | 最快 |
+| B | 挑一篇 2026 新論文（例如 Moebius 切換時要暫停 decode、SwiftSpec 要專用 GPU），補它在 A100 上的弱點 | 新意要靠讀全文找 | 未知 | 中 |
+| C | 回到專案原本的異質方向（A100 代理晶片）：草稿機組合 | 接受「用 A100 模擬 PCIe 晶片」 | 對同 GPU 推測解碼 1.2–1.35×（推論） | 中 |
+
+來源補充：Moebius https://arxiv.org/abs/2606.26607 ；SSD https://arxiv.org/abs/2603.03251 ；Mirror SD https://arxiv.org/abs/2510.13161 ；SpecStream https://arxiv.org/abs/2609.33184 ；
+EasySpec https://arxiv.org/abs/2502.02493 ；DPara https://arxiv.org/abs/2609.27396 ；vLLM RFC #42109 https://github.com/vllm-project/vllm/issues/42109 ；Llama at scale https://arxiv.org/abs/2508.08192 ；
+PDScope https://arxiv.org/abs/2610.39216 ；AInfer-PD https://arxiv.org/abs/2609.00993 ；TensorRT-LLM MoE guide https://nvidia.github.io/TensorRT-LLM/developer-guide/moe-perf-guide.html

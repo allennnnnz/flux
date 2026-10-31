@@ -292,3 +292,5 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - 本機 Qwen3.6-27B 自帶 1 層 MTP（index 有 15 個 `mtp.*` 權重）。
 - 報告 `reports/20261031_combo_topics.md`：推薦「草稿交給只有 PCIe 的裝置」（SwiftSpec × DuoDecoding）。
 - **留給下個 session**：使用者同意後做組合一的驗證（事前登記）。
+- 使用者：「我現在的環境是多卡 GPU，全部 NVLink」→ 組合一要的 PCIe-only 裝置不存在（草稿放 NVLink GPU 即 SwiftSpec）。重查全 NVLink 的互補組合：
+  多卡推測解碼極擠；MoE TP↔EP 執行中切換 = Moebius（2606.26607）；P/D 多工、通訊重疊也有。報告第 6、7 節列三個方向（A 決策器、B 補新論文弱點、C 異質代理），待使用者選。

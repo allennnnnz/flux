@@ -18,6 +18,9 @@
   晶片不在關鍵路徑上（修掉 E2E B 的問題），是 P1 沒測過的新角色。預估（推論）：對不用推測解碼 2–3×、對同 GPU 推測解碼 1.2–1.35×。本機 Qwen3.6-27B 自帶 1 層 MTP 可當草稿。
 - 組合二 KTransformers × MoE-Lightning 流水線：由 LMSYS 數字推算 8 卡時 CPU 段約佔 decode 96%、Kimi decode 每專家 1–2 token → 整體約 1.09×（推論）→ 不推薦當主線；M 在 decode 的上限有限。
 - **下一步（待使用者同意）**：組合一的驗證——量同 GPU 推測解碼中草稿佔每步的比例、PCIe 裝置上的草稿速度與交接延遲；事前登記「對同 GPU 推測解碼預估 ≥ 1.2×」。
+- **使用者指出環境是 8 張 A100、全部 NVLink**（沒有 PCIe-only 裝置）→ 重查全 NVLink 的互補組合：多卡推測解碼極擠（SwiftSpec、SSD、Mirror SD、SpecStream、EasySpec…）、
+  MoE 的 TP ↔ EP 執行中切換已有 Moebius（2606.26607）、P/D 同卡多工與通訊重疊也都有人做（報告第 6 節）。
+  → 三條件（互補、明顯加速、沒人做過）難兼得；**待使用者選**：A＝F 決策器（最快、約 1.1×）、B＝補一篇 2026 新論文在 A100 上的弱點、C＝回異質方向用 A100 代理（草稿機，1.2–1.35× 推論）。
 
 
 **最新（2026-10-30 下午）—— 題目 T 的驗證（使用者：先確認值得投入再規劃）**（計劃 `reports/20261030_t_validation_plan.md`、結果 `reports/20261030_t_validation_result.md`、數字 `results/topic/analysis.txt`）
