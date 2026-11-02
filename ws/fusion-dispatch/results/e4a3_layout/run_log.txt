@@ -175,3 +175,6 @@ policy           regret   saving vs vLLM   worst point   right
   R1p               4.30%         -4.3%      6.9% at prefill M=1280    0/3
   R2                0.00%          0.0%      0.0% at prefill M=1280    3/3
   R3                4.30%         -4.3%      6.9% at prefill M=1280    0/3
+[E4a3] 2026-11-02 12:58:19 git: committed 002d9a8 fusion-dispatch E4a3: oracle + evaluation (fresh points, changed cross-node env) (auto JOURNAL entry)
+[E4a3] 2026-11-02 12:58:21 git: pushed 002d9a8
+[E4a3] 2026-11-02 12:58:21 done

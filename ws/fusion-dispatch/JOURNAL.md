@@ -829,3 +829,11 @@ policy           regret   saving vs vLLM   worst point   right
   R3                0.00%          1.1%      0.0% at prefill M=1280    3/3
 
 ```
+
+## 2026-11-02 · hetero-proxy 的 boss 兼 worker session · E4a3 結果（人工撰寫）
+
+- 16 分鐘跑完，四道 commit（67ec82c → 52d22f5 → 4092e58 → 002d9a8），每次跨節點執行兩台 CLEAN。
+- 合併 21 點（`scripts/e4a3_pool_v1.py` → `results/e4a3_layout/pooled_new.txt`）：決策器 0.24%、19/21；vLLM 預設 4.53%、最差 120.9%；R1p 6.36%；R3 3.18%。E1、E2、E3 成立。
+- 撰寫報告時我先寫了「R1p 在 E4a2 的 prefill 全對、這次翻掉」，核對 E4a2 的 eval 後發現 E4a2 也是 TP8 對、TP4 錯 → 已在報告更正，不是環境造成的翻轉。
+- 報告 `reports/20261102_e4a3_fresh_env.md`。下一步待使用者：決策器論文的其他缺口（Compass 對照、端到端、「為何不直接量」、auditor）。
+
