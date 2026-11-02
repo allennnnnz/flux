@@ -1,0 +1,36 @@
+{
+ "args": {
+  "model": "llama3-8b",
+  "Ms": "768,1024,1536,2048,3072,4096",
+  "ds": "2,4,8,16",
+  "rounds": 50,
+  "warmup": 5,
+  "pad_cycles": 400000,
+  "seed": 20261102,
+  "out_dir": "ws/fusion-dispatch/results/c1_compass/cal_llama3-8b_tp4"
+ },
+ "world": 4,
+ "ops": {
+  "qkv": [
+   "ag",
+   1536,
+   4096
+  ],
+  "gate_up": [
+   "ag",
+   7168,
+   4096
+  ],
+  "o": [
+   "rs",
+   4096,
+   1024
+  ],
+  "down": [
+   "rs",
+   4096,
+   3584
+  ]
+ },
+ "date": "2026-11-02 13:13:31"
+}

@@ -1,1 +1,98 @@
 [C1] 2026-11-02 13:12:35 start (pid 947923)
+[C1] 2026-11-02 13:12:35 git: committed 8f111a5 fusion-dispatch C1: setup (Compass decomposition dispatcher, selector re-implementation, block v5; pre-registered C1-1..4)
+[C1] 2026-11-02 13:12:37 git: pushed 8f111a5
+[C1] 2026-11-02 13:12:37 == 1. Compass calibration (op level, M=768,1024,1536,2048,3072,4096, d=1..16) and fit
+[run_xnode] 2026-11-02 13:13:01 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+wrote ws/fusion-dispatch/results/c1_compass/compass_params_c1_qwen2.5-32b_tp8.json: ag alpha=0.853 beta=0.0823 r2=0.41 n=48; rs alpha=0.857 beta=0.0534 r2=0.30 n=48
+[run_xnode] 2026-11-02 13:13:26 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+wrote ws/fusion-dispatch/results/c1_compass/compass_params_c1_qwen2.5-32b_tp4.json: ag alpha=1.055 beta=0.1120 r2=0.33 n=48; rs alpha=0.952 beta=0.0656 r2=0.26 n=48
+[run_xnode] 2026-11-02 13:13:47 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+wrote ws/fusion-dispatch/results/c1_compass/compass_params_c1_llama3-8b_tp4.json: ag alpha=0.982 beta=0.0999 r2=0.37 n=48; rs alpha=1.013 beta=0.0520 r2=0.23 n=48
+[C1] 2026-11-02 13:13:47 == 2. Compass choices for the E4a3 points (pre-registration)
+wrote ws/fusion-dispatch/results/c1_compass/compass_table_c1_qwen2.5-32b_tp8.json, ws/fusion-dispatch/results/c1_compass/compass_choices_c1_qwen2.5-32b_tp8.csv
+  decode  M=96    qkv      Tcomp 0.0297 Tcomm 0.1106 lambda   0.269 d_eq5=8 -> d=4
+  decode  M=96    gate_up  Tcomp 0.0768 Tcomm 0.1106 lambda   0.694 d_eq5=4 -> d=4
+  decode  M=96    o        Tcomp 0.0164 Tcomm 0.1137 lambda   0.144 d_eq5=16 -> d=4
+  decode  M=96    down     Tcomp 0.0481 Tcomm 0.1137 lambda   0.423 d_eq5=8 -> d=4
+  decode  M=160   qkv      Tcomp 0.0277 Tcomm 0.1454 lambda   0.190 d_eq5=8 -> d=4
+  decode  M=160   gate_up  Tcomp 0.0881 Tcomm 0.1454 lambda   0.606 d_eq5=4 -> d=4
+  decode  M=160   o        Tcomp 0.0205 Tcomm 0.1485 lambda   0.138 d_eq5=16 -> d=4
+  decode  M=160   down     Tcomp 0.0604 Tcomm 0.1485 lambda   0.407 d_eq5=8 -> d=4
+  decode  M=288   qkv      Tcomp 0.0338 Tcomm 0.2161 lambda   0.156 d_eq5=8 -> d=1
+  decode  M=288   gate_up  Tcomp 0.1341 Tcomm 0.2161 lambda   0.621 d_eq5=4 -> d=4
+  decode  M=288   o        Tcomp 0.0215 Tcomm 0.2181 lambda   0.099 d_eq5=16 -> d=4
+  decode  M=288   down     Tcomp 0.0635 Tcomm 0.2181 lambda   0.291 d_eq5=8 -> d=4
+  decode  M=416   qkv      Tcomp 0.0389 Tcomm 0.3282 lambda   0.119 d_eq5=8 -> d=1
+  decode  M=416   gate_up  Tcomp 0.1341 Tcomm 0.3282 lambda   0.409 d_eq5=4 -> d=4
+  decode  M=416   o        Tcomp 0.0277 Tcomm 0.3267 lambda   0.085 d_eq5=16 -> d=4
+  decode  M=416   down     Tcomp 0.0942 Tcomm 0.3267 lambda   0.288 d_eq5=8 -> d=4
+  prefill M=1280  qkv      Tcomp 0.0701 Tcomm 0.7980 lambda   0.088 d_eq5=16 -> d=1
+  prefill M=1280  gate_up  Tcomp 0.4188 Tcomm 0.7980 lambda   0.525 d_eq5=4 -> d=4
+  prefill M=1280  o        Tcomp 0.0448 Tcomm 0.7982 lambda   0.056 d_eq5=16 -> d=1
+  prefill M=1280  down     Tcomp 0.1923 Tcomm 0.7982 lambda   0.241 d_eq5=8 -> d=1
+  prefill M=2560  qkv      Tcomp 0.1137 Tcomm 1.5724 lambda   0.072 d_eq5=16 -> d=1
+  prefill M=2560  gate_up  Tcomp 0.7174 Tcomm 1.5724 lambda   0.456 d_eq5=4 -> d=4
+  prefill M=2560  o        Tcomp 0.0882 Tcomm 1.5672 lambda   0.056 d_eq5=16 -> d=1
+  prefill M=2560  down     Tcomp 0.3893 Tcomm 1.5672 lambda   0.248 d_eq5=8 -> d=1
+  prefill M=3584  qkv      Tcomp 0.1403 Tcomm 2.4371 lambda   0.058 d_eq5=16 -> d=1
+  prefill M=3584  gate_up  Tcomp 1.0132 Tcomm 2.4371 lambda   0.416 d_eq5=4 -> d=4
+  prefill M=3584  o        Tcomp 0.1195 Tcomm 2.4148 lambda   0.049 d_eq5=16 -> d=1
+  prefill M=3584  down     Tcomp 0.5767 Tcomm 2.4148 lambda   0.239 d_eq5=8 -> d=1
+wrote ws/fusion-dispatch/results/c1_compass/compass_table_c1_qwen2.5-32b_tp4.json, ws/fusion-dispatch/results/c1_compass/compass_choices_c1_qwen2.5-32b_tp4.csv
+  decode  M=96    qkv      Tcomp 0.0369 Tcomm 0.1321 lambda   0.279 d_eq5=4 -> d=1
+  decode  M=96    gate_up  Tcomp 0.1208 Tcomm 0.1321 lambda   0.915 d_eq5=4 -> d=4
+  decode  M=96    o        Tcomp 0.0236 Tcomm 0.1321 lambda   0.178 d_eq5=8 -> d=1
+  decode  M=96    down     Tcomp 0.0829 Tcomm 0.1321 lambda   0.628 d_eq5=4 -> d=4
+  decode  M=160   qkv      Tcomp 0.0389 Tcomm 0.1608 lambda   0.242 d_eq5=8 -> d=1
+  decode  M=160   gate_up  Tcomp 0.1413 Tcomm 0.1608 lambda   0.879 d_eq5=4 -> d=4
+  decode  M=160   o        Tcomp 0.0287 Tcomm 0.1567 lambda   0.183 d_eq5=8 -> d=1
+  decode  M=160   down     Tcomp 0.1024 Tcomm 0.1567 lambda   0.654 d_eq5=4 -> d=4
+  decode  M=288   qkv      Tcomp 0.0466 Tcomm 0.2212 lambda   0.211 d_eq5=8 -> d=1
+  decode  M=288   gate_up  Tcomp 0.2621 Tcomm 0.2212 lambda   1.185 d_eq5=2 -> d=2
+  decode  M=288   o        Tcomp 0.0307 Tcomm 0.2150 lambda   0.143 d_eq5=8 -> d=1
+  decode  M=288   down     Tcomp 0.1393 Tcomm 0.2150 lambda   0.648 d_eq5=4 -> d=4
+  decode  M=416   qkv      Tcomp 0.0502 Tcomm 0.2898 lambda   0.173 d_eq5=8 -> d=1
+  decode  M=416   gate_up  Tcomp 0.2755 Tcomm 0.2898 lambda   0.951 d_eq5=4 -> d=4
+  decode  M=416   o        Tcomp 0.0430 Tcomm 0.2852 lambda   0.151 d_eq5=8 -> d=1
+  decode  M=416   down     Tcomp 0.1874 Tcomm 0.2852 lambda   0.657 d_eq5=4 -> d=4
+  prefill M=1280  qkv      Tcomp 0.1142 Tcomm 0.9112 lambda   0.125 d_eq5=8 -> d=1
+  prefill M=1280  gate_up  Tcomp 0.7187 Tcomm 0.9112 lambda   0.789 d_eq5=4 -> d=4
+  prefill M=1280  o        Tcomp 0.0782 Tcomm 0.9146 lambda   0.086 d_eq5=16 -> d=1
+  prefill M=1280  down     Tcomp 0.3751 Tcomm 0.9146 lambda   0.410 d_eq5=8 -> d=1
+  prefill M=2560  qkv      Tcomp 0.2660 Tcomm 1.6749 lambda   0.159 d_eq5=8 -> d=1
+  prefill M=2560  gate_up  Tcomp 1.4428 Tcomm 1.6749 lambda   0.861 d_eq5=4 -> d=4
+  prefill M=2560  o        Tcomp 0.1569 Tcomm 1.6727 lambda   0.094 d_eq5=16 -> d=1
+  prefill M=2560  down     Tcomp 0.7638 Tcomm 1.6727 lambda   0.457 d_eq5=8 -> d=1
+  prefill M=3584  qkv      Tcomp 0.2806 Tcomm 2.1962 lambda   0.128 d_eq5=8 -> d=1
+  prefill M=3584  gate_up  Tcomp 2.0163 Tcomm 2.1962 lambda   0.918 d_eq5=4 -> d=4
+  prefill M=3584  o        Tcomp 0.2285 Tcomm 2.1647 lambda   0.106 d_eq5=16 -> d=1
+  prefill M=3584  down     Tcomp 1.1374 Tcomm 2.1647 lambda   0.525 d_eq5=4 -> d=4
+wrote ws/fusion-dispatch/results/c1_compass/compass_table_c1_llama3-8b_tp4.json, ws/fusion-dispatch/results/c1_compass/compass_choices_c1_llama3-8b_tp4.csv
+  decode  M=96    qkv      Tcomp 0.0307 Tcomm 0.1567 lambda   0.196 d_eq5=8 -> d=1
+  decode  M=96    gate_up  Tcomp 0.0932 Tcomm 0.1567 lambda   0.595 d_eq5=4 -> d=4
+  decode  M=96    o        Tcomp 0.0195 Tcomm 0.1587 lambda   0.123 d_eq5=16 -> d=1
+  decode  M=96    down     Tcomp 0.0445 Tcomm 0.1587 lambda   0.281 d_eq5=8 -> d=1
+  decode  M=160   qkv      Tcomp 0.0277 Tcomm 0.1459 lambda   0.189 d_eq5=8 -> d=1
+  decode  M=160   gate_up  Tcomp 0.0717 Tcomm 0.1459 lambda   0.491 d_eq5=4 -> d=4
+  decode  M=160   o        Tcomp 0.0195 Tcomm 0.1434 lambda   0.136 d_eq5=16 -> d=1
+  decode  M=160   down     Tcomp 0.0461 Tcomm 0.1434 lambda   0.321 d_eq5=8 -> d=1
+  decode  M=288   qkv      Tcomp 0.0369 Tcomm 0.1935 lambda   0.190 d_eq5=8 -> d=1
+  decode  M=288   gate_up  Tcomp 0.1101 Tcomm 0.1935 lambda   0.569 d_eq5=4 -> d=4
+  decode  M=288   o        Tcomp 0.0246 Tcomm 0.1905 lambda   0.129 d_eq5=16 -> d=1
+  decode  M=288   down     Tcomp 0.0594 Tcomm 0.1905 lambda   0.312 d_eq5=8 -> d=1
+  decode  M=416   qkv      Tcomp 0.0389 Tcomm 0.2437 lambda   0.160 d_eq5=8 -> d=1
+  decode  M=416   gate_up  Tcomp 0.2109 Tcomm 0.2437 lambda   0.866 d_eq5=4 -> d=4
+  decode  M=416   o        Tcomp 0.0358 Tcomm 0.2401 lambda   0.149 d_eq5=16 -> d=1
+  decode  M=416   down     Tcomp 0.0860 Tcomm 0.2401 lambda   0.358 d_eq5=8 -> d=1
+  prefill M=1280  qkv      Tcomp 0.0929 Tcomm 0.5985 lambda   0.155 d_eq5=8 -> d=1
+  prefill M=1280  gate_up  Tcomp 0.3381 Tcomm 0.5985 lambda   0.565 d_eq5=4 -> d=4
+  prefill M=1280  o        Tcomp 0.0619 Tcomm 0.5925 lambda   0.104 d_eq5=16 -> d=1
+  prefill M=1280  down     Tcomp 0.1914 Tcomm 0.5925 lambda   0.323 d_eq5=8 -> d=1
+  prefill M=2560  qkv      Tcomp 0.2080 Tcomm 1.4049 lambda   0.148 d_eq5=8 -> d=1
+  prefill M=2560  gate_up  Tcomp 0.6817 Tcomm 1.4049 lambda   0.485 d_eq5=4 -> d=4
+  prefill M=2560  o        Tcomp 0.0999 Tcomm 1.4457 lambda   0.069 d_eq5=16 -> d=1
+  prefill M=2560  down     Tcomp 0.3042 Tcomm 1.4457 lambda   0.210 d_eq5=8 -> d=1
+  prefill M=3584  qkv      Tcomp 0.2198 Tcomm 1.8760 lambda   0.117 d_eq5=8 -> d=1
+  prefill M=3584  gate_up  Tcomp 0.9197 Tcomm 1.8760 lambda   0.490 d_eq5=4 -> d=4
+  prefill M=3584  o        Tcomp 0.1403 Tcomm 1.8752 lambda   0.075 d_eq5=16 -> d=1
+  prefill M=3584  down     Tcomp 0.4975 Tcomm 1.8752 lambda   0.265 d_eq5=8 -> d=1

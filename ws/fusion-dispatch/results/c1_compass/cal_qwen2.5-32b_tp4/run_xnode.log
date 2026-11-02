@@ -1,0 +1,2 @@
+[run_xnode] 2026-11-02 13:13:02 start: nproc_per_node=2 env=vllm ws/fusion-dispatch/scripts/calibrate_compass_v1.py --model qwen2.5-32b --Ms 768,1024,1536,2048,3072,4096 --rounds 50 --out_dir ws/fusion-dispatch/results/c1_compass/cal_qwen2.5-32b_tp4
+[run_xnode] 2026-11-02 13:13:26 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)

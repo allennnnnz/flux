@@ -1,0 +1,36 @@
+{
+ "args": {
+  "model": "qwen2.5-32b",
+  "Ms": "768,1024,1536,2048,3072,4096",
+  "ds": "2,4,8,16",
+  "rounds": 50,
+  "warmup": 5,
+  "pad_cycles": 400000,
+  "seed": 20261102,
+  "out_dir": "ws/fusion-dispatch/results/c1_compass/cal_qwen2.5-32b_tp4"
+ },
+ "world": 4,
+ "ops": {
+  "qkv": [
+   "ag",
+   1792,
+   5120
+  ],
+  "gate_up": [
+   "ag",
+   13824,
+   5120
+  ],
+  "o": [
+   "rs",
+   5120,
+   1280
+  ],
+  "down": [
+   "rs",
+   5120,
+   6912
+  ]
+ },
+ "date": "2026-11-02 13:13:06"
+}
