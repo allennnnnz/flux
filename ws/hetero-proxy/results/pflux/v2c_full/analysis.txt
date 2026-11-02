@@ -1,0 +1,22 @@
+pflux V2c analysis (ws/hetero-proxy/results/pflux/v2c_full); NCCL [2, 21, 5]; wait flags 0 (0 = no remote-write flush support)
+NVLink Data Tx+Rx delta KiB per GPU {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0}
+C1 correctness: max |diff|/max|ref| rs_push 9.39e-03, rs_board 9.39e-03; board AG not bit-identical: none
+
+    M |  ag_nccl ag_board  ratio |  rs_nccl rs_board  push_T1  push_T2 T2 ratio | busbw RS nccl -> push_T2
+  256 |    0.351    0.270  1.30x |    0.398    0.418    0.461    0.377    1.06x |  5.76 ->  6.09 GB/s
+ 1024 |    1.233    0.895  1.38x |    1.272    1.457    1.627    1.202    1.06x |  7.21 ->  7.64 GB/s
+ 2048 |    2.460    1.736  1.42x |    2.504    2.851    3.202    2.311    1.08x |  7.33 ->  7.94 GB/s
+ 4096 |    4.861    3.419  1.42x |    4.970    5.717    6.420    4.578    1.09x |  7.38 ->  8.02 GB/s
+ 8192 |    9.718    6.782  1.43x |    9.877   11.361   12.897    9.052    1.09x |  7.43 ->  8.11 GB/s
+
+C2 rs_push at M=4096 3.9-4.6 ms, 1.08-1.28x: 4.578 ms, 1.086x -> HOLDS (lower edge of the ratio range)
+C3 T=2 fastest at M >= 2048: HOLDS (T1 is 1.36-1.42x slower: one thread cannot keep up)
+C4 reference items vs V2 at M=4096: ag_nccl -0.5%, ag_board/own/ovl/0 +0.0%, rs_nccl -0.5%, rs_board/ovl +0.4% -> HOLDS
+
+R2 recomputed (RS_b = min(rs_push, rs_board, rs_nccl); perfect-overlap upper bound; also no overlap):
+  M=  256: baseline   1.722 ms (comm 87.0%), no-overlap   1.517 (1.14x), upper   1.294 (1.33x)
+  M= 1024: baseline   5.573 ms (comm 89.9%), no-overlap   4.756 (1.17x), upper   4.193 (1.33x)
+  M= 2048: baseline  10.889 ms (comm 91.2%), no-overlap   9.057 (1.20x), upper   8.094 (1.35x)
+  M= 4096: baseline  21.553 ms (comm 91.2%), no-overlap  17.883 (1.21x), upper  15.994 (1.35x) <- R2
+  M= 8192: baseline  42.888 ms (comm 91.4%), no-overlap  35.367 (1.21x), upper  31.668 (1.35x)
+  -> R2 (recomputed) PASS (1.35x at M=4096); R2 as first registered (V2 items only) stays FAIL (1.29x)

@@ -1,0 +1,749 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[numa r0] {"ag_0_0": {"N0": 64}, "ag_0_1": {"N1": 64}, "rs_0": {"N0": 64}}
+css-host-158:838179:838179 [0] NCCL INFO Bootstrap : Using eth5:10.2.131.158<0>
+css-host-158:838179:838179 [0] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-158:838179:838179 [0] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-158:838179:838179 [0] NCCL INFO cudaDriverVersion 13040
+NCCL version 2.21.5+cuda12.4
+css-host-158:838183:838183 [4] NCCL INFO cudaDriverVersion 13040
+css-host-158:838183:838183 [4] NCCL INFO Bootstrap : Using eth5:10.2.131.158<0>
+css-host-158:838183:838183 [4] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-158:838183:838183 [4] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-158:838185:838185 [6] NCCL INFO cudaDriverVersion 13040
+css-host-158:838185:838185 [6] NCCL INFO Bootstrap : Using eth5:10.2.131.158<0>
+css-host-158:838182:838182 [3] NCCL INFO cudaDriverVersion 13040
+css-host-158:838185:838185 [6] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-158:838185:838185 [6] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-158:838182:838182 [3] NCCL INFO Bootstrap : Using eth5:10.2.131.158<0>
+css-host-158:838182:838182 [3] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-158:838182:838182 [3] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-158:838184:838184 [5] NCCL INFO cudaDriverVersion 13040
+css-host-158:838184:838184 [5] NCCL INFO Bootstrap : Using eth5:10.2.131.158<0>
+css-host-158:838184:838184 [5] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-158:838184:838184 [5] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-158:838180:838180 [1] NCCL INFO cudaDriverVersion 13040
+css-host-158:838180:838180 [1] NCCL INFO Bootstrap : Using eth5:10.2.131.158<0>
+css-host-158:838180:838180 [1] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-158:838180:838180 [1] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-158:838181:838181 [2] NCCL INFO cudaDriverVersion 13040
+css-host-158:838181:838181 [2] NCCL INFO Bootstrap : Using eth5:10.2.131.158<0>
+css-host-158:838181:838181 [2] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-158:838181:838181 [2] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-158:838186:838186 [7] NCCL INFO cudaDriverVersion 13040
+css-host-158:838186:838186 [7] NCCL INFO Bootstrap : Using eth5:10.2.131.158<0>
+css-host-158:838186:838186 [7] NCCL INFO NET/Plugin: No plugin found (libnccl-net.so)
+css-host-158:838186:838186 [7] NCCL INFO NET/Plugin: Using internal network plugin.
+css-host-158:838179:838368 [0] NCCL INFO NET/Socket : Using [0]eth5:10.2.131.158<0> [1]enp29s0f0np0:10.10.1.158<0> [2]enp29s0f1np1:10.10.2.158<0> [3]enp95s0f0np0:10.10.3.158<0> [4]enp95s0f1np1:10.10.4.158<0> [5]enp150s0f0np0:10.10.5.158<0> [6]enp150s0f1np1:10.10.6.158<0> [7]enp205s0f0np0:10.10.7.158<0> [8]enp205s0f1np1:10.10.8.158<0> [9]virbr1:192.168.100.1<0> [10]virbr0:192.168.122.1<0>
+css-host-158:838179:838368 [0] NCCL INFO Using non-device net plugin version 0
+css-host-158:838179:838368 [0] NCCL INFO Using network Socket
+css-host-158:838183:838381 [4] NCCL INFO NET/Socket : Using [0]eth5:10.2.131.158<0> [1]enp29s0f0np0:10.10.1.158<0> [2]enp29s0f1np1:10.10.2.158<0> [3]enp95s0f0np0:10.10.3.158<0> [4]enp95s0f1np1:10.10.4.158<0> [5]enp150s0f0np0:10.10.5.158<0> [6]enp150s0f1np1:10.10.6.158<0> [7]enp205s0f0np0:10.10.7.158<0> [8]enp205s0f1np1:10.10.8.158<0> [9]virbr1:192.168.100.1<0> [10]virbr0:192.168.122.1<0>
+css-host-158:838183:838381 [4] NCCL INFO Using non-device net plugin version 0
+css-host-158:838183:838381 [4] NCCL INFO Using network Socket
+css-host-158:838185:838382 [6] NCCL INFO NET/Socket : Using [0]eth5:10.2.131.158<0> [1]enp29s0f0np0:10.10.1.158<0> [2]enp29s0f1np1:10.10.2.158<0> [3]enp95s0f0np0:10.10.3.158<0> [4]enp95s0f1np1:10.10.4.158<0> [5]enp150s0f0np0:10.10.5.158<0> [6]enp150s0f1np1:10.10.6.158<0> [7]enp205s0f0np0:10.10.7.158<0> [8]enp205s0f1np1:10.10.8.158<0> [9]virbr1:192.168.100.1<0> [10]virbr0:192.168.122.1<0>
+css-host-158:838185:838382 [6] NCCL INFO Using non-device net plugin version 0
+css-host-158:838185:838382 [6] NCCL INFO Using network Socket
+css-host-158:838182:838383 [3] NCCL INFO NET/Socket : Using [0]eth5:10.2.131.158<0> [1]enp29s0f0np0:10.10.1.158<0> [2]enp29s0f1np1:10.10.2.158<0> [3]enp95s0f0np0:10.10.3.158<0> [4]enp95s0f1np1:10.10.4.158<0> [5]enp150s0f0np0:10.10.5.158<0> [6]enp150s0f1np1:10.10.6.158<0> [7]enp205s0f0np0:10.10.7.158<0> [8]enp205s0f1np1:10.10.8.158<0> [9]virbr1:192.168.100.1<0> [10]virbr0:192.168.122.1<0>
+css-host-158:838182:838383 [3] NCCL INFO Using non-device net plugin version 0
+css-host-158:838182:838383 [3] NCCL INFO Using network Socket
+css-host-158:838184:838384 [5] NCCL INFO NET/Socket : Using [0]eth5:10.2.131.158<0> [1]enp29s0f0np0:10.10.1.158<0> [2]enp29s0f1np1:10.10.2.158<0> [3]enp95s0f0np0:10.10.3.158<0> [4]enp95s0f1np1:10.10.4.158<0> [5]enp150s0f0np0:10.10.5.158<0> [6]enp150s0f1np1:10.10.6.158<0> [7]enp205s0f0np0:10.10.7.158<0> [8]enp205s0f1np1:10.10.8.158<0> [9]virbr1:192.168.100.1<0> [10]virbr0:192.168.122.1<0>
+css-host-158:838184:838384 [5] NCCL INFO Using non-device net plugin version 0
+css-host-158:838184:838384 [5] NCCL INFO Using network Socket
+css-host-158:838180:838385 [1] NCCL INFO NET/Socket : Using [0]eth5:10.2.131.158<0> [1]enp29s0f0np0:10.10.1.158<0> [2]enp29s0f1np1:10.10.2.158<0> [3]enp95s0f0np0:10.10.3.158<0> [4]enp95s0f1np1:10.10.4.158<0> [5]enp150s0f0np0:10.10.5.158<0> [6]enp150s0f1np1:10.10.6.158<0> [7]enp205s0f0np0:10.10.7.158<0> [8]enp205s0f1np1:10.10.8.158<0> [9]virbr1:192.168.100.1<0> [10]virbr0:192.168.122.1<0>
+css-host-158:838180:838385 [1] NCCL INFO Using non-device net plugin version 0
+css-host-158:838180:838385 [1] NCCL INFO Using network Socket
+css-host-158:838186:838387 [7] NCCL INFO NET/Socket : Using [0]eth5:10.2.131.158<0> [1]enp29s0f0np0:10.10.1.158<0> [2]enp29s0f1np1:10.10.2.158<0> [3]enp95s0f0np0:10.10.3.158<0> [4]enp95s0f1np1:10.10.4.158<0> [5]enp150s0f0np0:10.10.5.158<0> [6]enp150s0f1np1:10.10.6.158<0> [7]enp205s0f0np0:10.10.7.158<0> [8]enp205s0f1np1:10.10.8.158<0> [9]virbr1:192.168.100.1<0> [10]virbr0:192.168.122.1<0>
+css-host-158:838186:838387 [7] NCCL INFO Using non-device net plugin version 0
+css-host-158:838186:838387 [7] NCCL INFO Using network Socket
+css-host-158:838181:838386 [2] NCCL INFO NET/Socket : Using [0]eth5:10.2.131.158<0> [1]enp29s0f0np0:10.10.1.158<0> [2]enp29s0f1np1:10.10.2.158<0> [3]enp95s0f0np0:10.10.3.158<0> [4]enp95s0f1np1:10.10.4.158<0> [5]enp150s0f0np0:10.10.5.158<0> [6]enp150s0f1np1:10.10.6.158<0> [7]enp205s0f0np0:10.10.7.158<0> [8]enp205s0f1np1:10.10.8.158<0> [9]virbr1:192.168.100.1<0> [10]virbr0:192.168.122.1<0>
+css-host-158:838181:838386 [2] NCCL INFO Using non-device net plugin version 0
+css-host-158:838181:838386 [2] NCCL INFO Using network Socket
+css-host-158:838181:838386 [2] NCCL INFO ncclCommInitRank comm 0x597ca08b64d0 rank 2 nranks 8 cudaDev 2 nvmlDev 2 busId 49000 commId 0x41e34056bffe10c4 - Init START
+css-host-158:838182:838383 [3] NCCL INFO ncclCommInitRank comm 0x62c682600540 rank 3 nranks 8 cudaDev 3 nvmlDev 3 busId 4d000 commId 0x41e34056bffe10c4 - Init START
+css-host-158:838183:838381 [4] NCCL INFO ncclCommInitRank comm 0x5ad512ce4490 rank 4 nranks 8 cudaDev 4 nvmlDev 4 busId 8a000 commId 0x41e34056bffe10c4 - Init START
+css-host-158:838185:838382 [6] NCCL INFO ncclCommInitRank comm 0x5bfa70228750 rank 6 nranks 8 cudaDev 6 nvmlDev 6 busId c6000 commId 0x41e34056bffe10c4 - Init START
+css-host-158:838184:838384 [5] NCCL INFO ncclCommInitRank comm 0x58e0389c60a0 rank 5 nranks 8 cudaDev 5 nvmlDev 5 busId 8f000 commId 0x41e34056bffe10c4 - Init START
+css-host-158:838180:838385 [1] NCCL INFO ncclCommInitRank comm 0x56bfc1ef0830 rank 1 nranks 8 cudaDev 1 nvmlDev 1 busId 16000 commId 0x41e34056bffe10c4 - Init START
+css-host-158:838179:838368 [0] NCCL INFO ncclCommInitRank comm 0x557743f85320 rank 0 nranks 8 cudaDev 0 nvmlDev 0 busId 10000 commId 0x41e34056bffe10c4 - Init START
+css-host-158:838186:838387 [7] NCCL INFO ncclCommInitRank comm 0x5c8a0b36f9e0 rank 7 nranks 8 cudaDev 7 nvmlDev 7 busId ca000 commId 0x41e34056bffe10c4 - Init START
+css-host-158:838185:838382 [6] NCCL INFO NCCL_P2P_LEVEL set by environment to LOC
+css-host-158:838185:838382 [6] NCCL INFO === System : maxBw 24.0 totalBw 240.0 ===
+css-host-158:838185:838382 [6] NCCL INFO CPU/0-0 (1/1/2)
+css-host-158:838185:838382 [6] NCCL INFO + PCI[5000.0] - NIC/0-0
+css-host-158:838185:838382 [6] NCCL INFO + PCI[24.0] - PCI/0-a000 (1000c0101000ffff)
+css-host-158:838185:838382 [6] NCCL INFO               + PCI[24.0] - PCI/0-e000 (1000c01010de13b8)
+css-host-158:838185:838382 [6] NCCL INFO                             + PCI[24.0] - GPU/0-10000 (0)
+css-host-158:838185:838382 [6] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838185:838382 [6] NCCL INFO               + PCI[24.0] - PCI/0-14000 (1000c01010de13b8)
+css-host-158:838185:838382 [6] NCCL INFO                             + PCI[24.0] - GPU/0-16000 (1)
+css-host-158:838185:838382 [6] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838185:838382 [6] NCCL INFO               + PCI[24.0] - NIC/0-1d000
+css-host-158:838185:838382 [6] NCCL INFO + PCI[24.0] - PCI/0-43000 (1000c0101000ffff)
+css-host-158:838185:838382 [6] NCCL INFO               + PCI[24.0] - PCI/0-47000 (1000c01010de13b8)
+css-host-158:838185:838382 [6] NCCL INFO                             + PCI[24.0] - GPU/0-49000 (2)
+css-host-158:838185:838382 [6] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838185:838382 [6] NCCL INFO               + PCI[24.0] - PCI/0-4b000 (1000c01010de13b8)
+css-host-158:838185:838382 [6] NCCL INFO                             + PCI[24.0] - GPU/0-4d000 (3)
+css-host-158:838185:838382 [6] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838185:838382 [6] NCCL INFO               + PCI[24.0] - NIC/0-5f000
+css-host-158:838185:838382 [6] NCCL INFO + SYS[10.0] - CPU/1
+css-host-158:838185:838382 [6] NCCL INFO + PCI[3.0] - NIC/0-7d000
+css-host-158:838185:838382 [6] NCCL INFO CPU/0-1 (1/1/2)
+css-host-158:838185:838382 [6] NCCL INFO + PCI[24.0] - PCI/0-84000 (1000c0101000ffff)
+css-host-158:838185:838382 [6] NCCL INFO               + PCI[24.0] - PCI/0-88000 (1000c01010de13b8)
+css-host-158:838185:838382 [6] NCCL INFO                             + PCI[24.0] - GPU/0-8a000 (4)
+css-host-158:838185:838382 [6] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838185:838382 [6] NCCL INFO               + PCI[24.0] - PCI/0-8d000 (1000c01010de13b8)
+css-host-158:838185:838382 [6] NCCL INFO                             + PCI[24.0] - GPU/0-8f000 (5)
+css-host-158:838185:838382 [6] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838185:838382 [6] NCCL INFO               + PCI[24.0] - NIC/0-96000
+css-host-158:838185:838382 [6] NCCL INFO + PCI[24.0] - PCI/0-c0000 (1000c0101000ffff)
+css-host-158:838185:838382 [6] NCCL INFO               + PCI[24.0] - PCI/0-c4000 (1000c01010de13b8)
+css-host-158:838185:838382 [6] NCCL INFO                             + PCI[24.0] - GPU/0-c6000 (6)
+css-host-158:838185:838382 [6] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838185:838382 [6] NCCL INFO               + PCI[24.0] - PCI/0-c8000 (1000c01010de13b8)
+css-host-158:838185:838382 [6] NCCL INFO                             + PCI[24.0] - GPU/0-ca000 (7)
+css-host-158:838185:838382 [6] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838185:838382 [6] NCCL INFO               + PCI[24.0] - NIC/0-cd000
+css-host-158:838185:838382 [6] NCCL INFO + SYS[10.0] - CPU/0
+css-host-158:838185:838382 [6] NCCL INFO ==========================================
+css-host-158:838185:838382 [6] NCCL INFO GPU/10000 :GPU/0-10000 (0/5000.0/LOC) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838185:838382 [6] NCCL INFO GPU/16000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (0/5000.0/LOC) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838185:838382 [6] NCCL INFO GPU/49000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (0/5000.0/LOC) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838185:838382 [6] NCCL INFO GPU/4D000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (0/5000.0/LOC) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838185:838382 [6] NCCL INFO GPU/8A000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (0/5000.0/LOC) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838185:838382 [6] NCCL INFO GPU/8F000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (0/5000.0/LOC) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838185:838382 [6] NCCL INFO GPU/C6000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (0/5000.0/LOC) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838185:838382 [6] NCCL INFO GPU/CA000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (0/5000.0/LOC) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838185:838382 [6] NCCL INFO Setting affinity for GPU 6 to 3000,00000000
+css-host-158:838185:838382 [6] NCCL INFO NVLS multicast support is not available on dev 6
+css-host-158:838185:838382 [6] NCCL INFO Pattern 4, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838185:838382 [6] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838185:838382 [6] NCCL INFO Pattern 1, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838185:838382 [6] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838183:838381 [4] NCCL INFO NCCL_P2P_LEVEL set by environment to LOC
+css-host-158:838183:838381 [4] NCCL INFO === System : maxBw 24.0 totalBw 240.0 ===
+css-host-158:838183:838381 [4] NCCL INFO CPU/0-0 (1/1/2)
+css-host-158:838183:838381 [4] NCCL INFO + PCI[5000.0] - NIC/0-0
+css-host-158:838183:838381 [4] NCCL INFO + PCI[24.0] - PCI/0-a000 (1000c0101000ffff)
+css-host-158:838183:838381 [4] NCCL INFO               + PCI[24.0] - PCI/0-e000 (1000c01010de13b8)
+css-host-158:838183:838381 [4] NCCL INFO                             + PCI[24.0] - GPU/0-10000 (0)
+css-host-158:838183:838381 [4] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838183:838381 [4] NCCL INFO               + PCI[24.0] - PCI/0-14000 (1000c01010de13b8)
+css-host-158:838183:838381 [4] NCCL INFO                             + PCI[24.0] - GPU/0-16000 (1)
+css-host-158:838183:838381 [4] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838183:838381 [4] NCCL INFO               + PCI[24.0] - NIC/0-1d000
+css-host-158:838183:838381 [4] NCCL INFO + PCI[24.0] - PCI/0-43000 (1000c0101000ffff)
+css-host-158:838183:838381 [4] NCCL INFO               + PCI[24.0] - PCI/0-47000 (1000c01010de13b8)
+css-host-158:838183:838381 [4] NCCL INFO                             + PCI[24.0] - GPU/0-49000 (2)
+css-host-158:838183:838381 [4] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838183:838381 [4] NCCL INFO               + PCI[24.0] - PCI/0-4b000 (1000c01010de13b8)
+css-host-158:838183:838381 [4] NCCL INFO                             + PCI[24.0] - GPU/0-4d000 (3)
+css-host-158:838183:838381 [4] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838183:838381 [4] NCCL INFO               + PCI[24.0] - NIC/0-5f000
+css-host-158:838183:838381 [4] NCCL INFO + SYS[10.0] - CPU/1
+css-host-158:838183:838381 [4] NCCL INFO + PCI[3.0] - NIC/0-7d000
+css-host-158:838183:838381 [4] NCCL INFO CPU/0-1 (1/1/2)
+css-host-158:838183:838381 [4] NCCL INFO + PCI[24.0] - PCI/0-84000 (1000c0101000ffff)
+css-host-158:838183:838381 [4] NCCL INFO               + PCI[24.0] - PCI/0-88000 (1000c01010de13b8)
+css-host-158:838183:838381 [4] NCCL INFO                             + PCI[24.0] - GPU/0-8a000 (4)
+css-host-158:838183:838381 [4] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838183:838381 [4] NCCL INFO               + PCI[24.0] - PCI/0-8d000 (1000c01010de13b8)
+css-host-158:838183:838381 [4] NCCL INFO                             + PCI[24.0] - GPU/0-8f000 (5)
+css-host-158:838183:838381 [4] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838183:838381 [4] NCCL INFO               + PCI[24.0] - NIC/0-96000
+css-host-158:838183:838381 [4] NCCL INFO + PCI[24.0] - PCI/0-c0000 (1000c0101000ffff)
+css-host-158:838183:838381 [4] NCCL INFO               + PCI[24.0] - PCI/0-c4000 (1000c01010de13b8)
+css-host-158:838183:838381 [4] NCCL INFO                             + PCI[24.0] - GPU/0-c6000 (6)
+css-host-158:838183:838381 [4] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838183:838381 [4] NCCL INFO               + PCI[24.0] - PCI/0-c8000 (1000c01010de13b8)
+css-host-158:838183:838381 [4] NCCL INFO                             + PCI[24.0] - GPU/0-ca000 (7)
+css-host-158:838183:838381 [4] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838183:838381 [4] NCCL INFO               + PCI[24.0] - NIC/0-cd000
+css-host-158:838183:838381 [4] NCCL INFO + SYS[10.0] - CPU/0
+css-host-158:838183:838381 [4] NCCL INFO ==========================================
+css-host-158:838183:838381 [4] NCCL INFO GPU/10000 :GPU/0-10000 (0/5000.0/LOC) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838183:838381 [4] NCCL INFO GPU/16000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (0/5000.0/LOC) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838183:838381 [4] NCCL INFO GPU/49000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (0/5000.0/LOC) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838183:838381 [4] NCCL INFO GPU/4D000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (0/5000.0/LOC) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838183:838381 [4] NCCL INFO GPU/8A000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (0/5000.0/LOC) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838183:838381 [4] NCCL INFO GPU/8F000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (0/5000.0/LOC) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838183:838381 [4] NCCL INFO GPU/C6000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (0/5000.0/LOC) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838183:838381 [4] NCCL INFO GPU/CA000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (0/5000.0/LOC) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838183:838381 [4] NCCL INFO Setting affinity for GPU 4 to 0300,00000000
+css-host-158:838183:838381 [4] NCCL INFO NVLS multicast support is not available on dev 4
+css-host-158:838179:838368 [0] NCCL INFO NCCL_P2P_LEVEL set by environment to LOC
+css-host-158:838183:838381 [4] NCCL INFO Pattern 4, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838183:838381 [4] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838183:838381 [4] NCCL INFO Pattern 1, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838183:838381 [4] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838179:838368 [0] NCCL INFO === System : maxBw 24.0 totalBw 240.0 ===
+css-host-158:838179:838368 [0] NCCL INFO CPU/0-0 (1/1/2)
+css-host-158:838179:838368 [0] NCCL INFO + PCI[5000.0] - NIC/0-0
+css-host-158:838179:838368 [0] NCCL INFO + PCI[24.0] - PCI/0-a000 (1000c0101000ffff)
+css-host-158:838179:838368 [0] NCCL INFO               + PCI[24.0] - PCI/0-e000 (1000c01010de13b8)
+css-host-158:838179:838368 [0] NCCL INFO                             + PCI[24.0] - GPU/0-10000 (0)
+css-host-158:838179:838368 [0] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838179:838368 [0] NCCL INFO               + PCI[24.0] - PCI/0-14000 (1000c01010de13b8)
+css-host-158:838179:838368 [0] NCCL INFO                             + PCI[24.0] - GPU/0-16000 (1)
+css-host-158:838179:838368 [0] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838179:838368 [0] NCCL INFO               + PCI[24.0] - NIC/0-1d000
+css-host-158:838179:838368 [0] NCCL INFO + PCI[24.0] - PCI/0-43000 (1000c0101000ffff)
+css-host-158:838179:838368 [0] NCCL INFO               + PCI[24.0] - PCI/0-47000 (1000c01010de13b8)
+css-host-158:838179:838368 [0] NCCL INFO                             + PCI[24.0] - GPU/0-49000 (2)
+css-host-158:838179:838368 [0] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838179:838368 [0] NCCL INFO               + PCI[24.0] - PCI/0-4b000 (1000c01010de13b8)
+css-host-158:838179:838368 [0] NCCL INFO                             + PCI[24.0] - GPU/0-4d000 (3)
+css-host-158:838179:838368 [0] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838179:838368 [0] NCCL INFO               + PCI[24.0] - NIC/0-5f000
+css-host-158:838179:838368 [0] NCCL INFO + SYS[10.0] - CPU/1
+css-host-158:838179:838368 [0] NCCL INFO + PCI[3.0] - NIC/0-7d000
+css-host-158:838179:838368 [0] NCCL INFO CPU/0-1 (1/1/2)
+css-host-158:838179:838368 [0] NCCL INFO + PCI[24.0] - PCI/0-84000 (1000c0101000ffff)
+css-host-158:838179:838368 [0] NCCL INFO               + PCI[24.0] - PCI/0-88000 (1000c01010de13b8)
+css-host-158:838179:838368 [0] NCCL INFO                             + PCI[24.0] - GPU/0-8a000 (4)
+css-host-158:838179:838368 [0] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838179:838368 [0] NCCL INFO               + PCI[24.0] - PCI/0-8d000 (1000c01010de13b8)
+css-host-158:838179:838368 [0] NCCL INFO                             + PCI[24.0] - GPU/0-8f000 (5)
+css-host-158:838179:838368 [0] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838179:838368 [0] NCCL INFO               + PCI[24.0] - NIC/0-96000
+css-host-158:838179:838368 [0] NCCL INFO + PCI[24.0] - PCI/0-c0000 (1000c0101000ffff)
+css-host-158:838179:838368 [0] NCCL INFO               + PCI[24.0] - PCI/0-c4000 (1000c01010de13b8)
+css-host-158:838179:838368 [0] NCCL INFO                             + PCI[24.0] - GPU/0-c6000 (6)
+css-host-158:838179:838368 [0] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838179:838368 [0] NCCL INFO               + PCI[24.0] - PCI/0-c8000 (1000c01010de13b8)
+css-host-158:838179:838368 [0] NCCL INFO                             + PCI[24.0] - GPU/0-ca000 (7)
+css-host-158:838179:838368 [0] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838179:838368 [0] NCCL INFO               + PCI[24.0] - NIC/0-cd000
+css-host-158:838179:838368 [0] NCCL INFO + SYS[10.0] - CPU/0
+css-host-158:838179:838368 [0] NCCL INFO ==========================================
+css-host-158:838179:838368 [0] NCCL INFO GPU/10000 :GPU/0-10000 (0/5000.0/LOC) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838179:838368 [0] NCCL INFO GPU/16000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (0/5000.0/LOC) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838179:838368 [0] NCCL INFO GPU/49000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (0/5000.0/LOC) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838179:838368 [0] NCCL INFO GPU/4D000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (0/5000.0/LOC) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838179:838368 [0] NCCL INFO GPU/8A000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (0/5000.0/LOC) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838179:838368 [0] NCCL INFO GPU/8F000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (0/5000.0/LOC) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838179:838368 [0] NCCL INFO GPU/C6000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (0/5000.0/LOC) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838179:838368 [0] NCCL INFO GPU/CA000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (0/5000.0/LOC) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838179:838368 [0] NCCL INFO Setting affinity for GPU 0 to 03
+css-host-158:838179:838368 [0] NCCL INFO NVLS multicast support is not available on dev 0
+css-host-158:838179:838368 [0] NCCL INFO Pattern 4, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838179:838368 [0] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838179:838368 [0] NCCL INFO Pattern 1, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838179:838368 [0] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838184:838384 [5] NCCL INFO NCCL_P2P_LEVEL set by environment to LOC
+css-host-158:838184:838384 [5] NCCL INFO === System : maxBw 24.0 totalBw 240.0 ===
+css-host-158:838184:838384 [5] NCCL INFO CPU/0-0 (1/1/2)
+css-host-158:838184:838384 [5] NCCL INFO + PCI[5000.0] - NIC/0-0
+css-host-158:838184:838384 [5] NCCL INFO + PCI[24.0] - PCI/0-a000 (1000c0101000ffff)
+css-host-158:838184:838384 [5] NCCL INFO               + PCI[24.0] - PCI/0-e000 (1000c01010de13b8)
+css-host-158:838184:838384 [5] NCCL INFO                             + PCI[24.0] - GPU/0-10000 (0)
+css-host-158:838184:838384 [5] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838184:838384 [5] NCCL INFO               + PCI[24.0] - PCI/0-14000 (1000c01010de13b8)
+css-host-158:838184:838384 [5] NCCL INFO                             + PCI[24.0] - GPU/0-16000 (1)
+css-host-158:838184:838384 [5] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838184:838384 [5] NCCL INFO               + PCI[24.0] - NIC/0-1d000
+css-host-158:838184:838384 [5] NCCL INFO + PCI[24.0] - PCI/0-43000 (1000c0101000ffff)
+css-host-158:838184:838384 [5] NCCL INFO               + PCI[24.0] - PCI/0-47000 (1000c01010de13b8)
+css-host-158:838184:838384 [5] NCCL INFO                             + PCI[24.0] - GPU/0-49000 (2)
+css-host-158:838184:838384 [5] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838184:838384 [5] NCCL INFO               + PCI[24.0] - PCI/0-4b000 (1000c01010de13b8)
+css-host-158:838184:838384 [5] NCCL INFO                             + PCI[24.0] - GPU/0-4d000 (3)
+css-host-158:838184:838384 [5] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838184:838384 [5] NCCL INFO               + PCI[24.0] - NIC/0-5f000
+css-host-158:838184:838384 [5] NCCL INFO + SYS[10.0] - CPU/1
+css-host-158:838184:838384 [5] NCCL INFO + PCI[3.0] - NIC/0-7d000
+css-host-158:838184:838384 [5] NCCL INFO CPU/0-1 (1/1/2)
+css-host-158:838184:838384 [5] NCCL INFO + PCI[24.0] - PCI/0-84000 (1000c0101000ffff)
+css-host-158:838184:838384 [5] NCCL INFO               + PCI[24.0] - PCI/0-88000 (1000c01010de13b8)
+css-host-158:838184:838384 [5] NCCL INFO                             + PCI[24.0] - GPU/0-8a000 (4)
+css-host-158:838184:838384 [5] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838184:838384 [5] NCCL INFO               + PCI[24.0] - PCI/0-8d000 (1000c01010de13b8)
+css-host-158:838184:838384 [5] NCCL INFO                             + PCI[24.0] - GPU/0-8f000 (5)
+css-host-158:838184:838384 [5] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838184:838384 [5] NCCL INFO               + PCI[24.0] - NIC/0-96000
+css-host-158:838184:838384 [5] NCCL INFO + PCI[24.0] - PCI/0-c0000 (1000c0101000ffff)
+css-host-158:838184:838384 [5] NCCL INFO               + PCI[24.0] - PCI/0-c4000 (1000c01010de13b8)
+css-host-158:838184:838384 [5] NCCL INFO                             + PCI[24.0] - GPU/0-c6000 (6)
+css-host-158:838184:838384 [5] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838184:838384 [5] NCCL INFO               + PCI[24.0] - PCI/0-c8000 (1000c01010de13b8)
+css-host-158:838184:838384 [5] NCCL INFO                             + PCI[24.0] - GPU/0-ca000 (7)
+css-host-158:838184:838384 [5] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838184:838384 [5] NCCL INFO               + PCI[24.0] - NIC/0-cd000
+css-host-158:838184:838384 [5] NCCL INFO + SYS[10.0] - CPU/0
+css-host-158:838184:838384 [5] NCCL INFO ==========================================
+css-host-158:838184:838384 [5] NCCL INFO GPU/10000 :GPU/0-10000 (0/5000.0/LOC) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838184:838384 [5] NCCL INFO GPU/16000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (0/5000.0/LOC) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838184:838384 [5] NCCL INFO GPU/49000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (0/5000.0/LOC) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838184:838384 [5] NCCL INFO GPU/4D000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (0/5000.0/LOC) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838184:838384 [5] NCCL INFO GPU/8A000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (0/5000.0/LOC) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838184:838384 [5] NCCL INFO GPU/8F000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (0/5000.0/LOC) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838184:838384 [5] NCCL INFO GPU/C6000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (0/5000.0/LOC) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838184:838384 [5] NCCL INFO GPU/CA000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (0/5000.0/LOC) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838184:838384 [5] NCCL INFO Setting affinity for GPU 5 to 0c00,00000000
+css-host-158:838184:838384 [5] NCCL INFO NVLS multicast support is not available on dev 5
+css-host-158:838184:838384 [5] NCCL INFO Pattern 4, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838184:838384 [5] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838184:838384 [5] NCCL INFO Pattern 1, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838184:838384 [5] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838182:838383 [3] NCCL INFO NCCL_P2P_LEVEL set by environment to LOC
+css-host-158:838186:838387 [7] NCCL INFO NCCL_P2P_LEVEL set by environment to LOC
+css-host-158:838180:838385 [1] NCCL INFO NCCL_P2P_LEVEL set by environment to LOC
+css-host-158:838181:838386 [2] NCCL INFO NCCL_P2P_LEVEL set by environment to LOC
+css-host-158:838182:838383 [3] NCCL INFO === System : maxBw 24.0 totalBw 240.0 ===
+css-host-158:838182:838383 [3] NCCL INFO CPU/0-0 (1/1/2)
+css-host-158:838182:838383 [3] NCCL INFO + PCI[5000.0] - NIC/0-0
+css-host-158:838182:838383 [3] NCCL INFO + PCI[24.0] - PCI/0-a000 (1000c0101000ffff)
+css-host-158:838182:838383 [3] NCCL INFO               + PCI[24.0] - PCI/0-e000 (1000c01010de13b8)
+css-host-158:838182:838383 [3] NCCL INFO                             + PCI[24.0] - GPU/0-10000 (0)
+css-host-158:838182:838383 [3] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838182:838383 [3] NCCL INFO               + PCI[24.0] - PCI/0-14000 (1000c01010de13b8)
+css-host-158:838182:838383 [3] NCCL INFO                             + PCI[24.0] - GPU/0-16000 (1)
+css-host-158:838182:838383 [3] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838182:838383 [3] NCCL INFO               + PCI[24.0] - NIC/0-1d000
+css-host-158:838182:838383 [3] NCCL INFO + PCI[24.0] - PCI/0-43000 (1000c0101000ffff)
+css-host-158:838182:838383 [3] NCCL INFO               + PCI[24.0] - PCI/0-47000 (1000c01010de13b8)
+css-host-158:838182:838383 [3] NCCL INFO                             + PCI[24.0] - GPU/0-49000 (2)
+css-host-158:838182:838383 [3] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838182:838383 [3] NCCL INFO               + PCI[24.0] - PCI/0-4b000 (1000c01010de13b8)
+css-host-158:838182:838383 [3] NCCL INFO                             + PCI[24.0] - GPU/0-4d000 (3)
+css-host-158:838182:838383 [3] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838182:838383 [3] NCCL INFO               + PCI[24.0] - NIC/0-5f000
+css-host-158:838182:838383 [3] NCCL INFO + SYS[10.0] - CPU/1
+css-host-158:838182:838383 [3] NCCL INFO + PCI[3.0] - NIC/0-7d000
+css-host-158:838182:838383 [3] NCCL INFO CPU/0-1 (1/1/2)
+css-host-158:838182:838383 [3] NCCL INFO + PCI[24.0] - PCI/0-84000 (1000c0101000ffff)
+css-host-158:838182:838383 [3] NCCL INFO               + PCI[24.0] - PCI/0-88000 (1000c01010de13b8)
+css-host-158:838182:838383 [3] NCCL INFO                             + PCI[24.0] - GPU/0-8a000 (4)
+css-host-158:838182:838383 [3] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838182:838383 [3] NCCL INFO               + PCI[24.0] - PCI/0-8d000 (1000c01010de13b8)
+css-host-158:838182:838383 [3] NCCL INFO                             + PCI[24.0] - GPU/0-8f000 (5)
+css-host-158:838182:838383 [3] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838182:838383 [3] NCCL INFO               + PCI[24.0] - NIC/0-96000
+css-host-158:838182:838383 [3] NCCL INFO + PCI[24.0] - PCI/0-c0000 (1000c0101000ffff)
+css-host-158:838182:838383 [3] NCCL INFO               + PCI[24.0] - PCI/0-c4000 (1000c01010de13b8)
+css-host-158:838182:838383 [3] NCCL INFO                             + PCI[24.0] - GPU/0-c6000 (6)
+css-host-158:838186:838387 [7] NCCL INFO === System : maxBw 24.0 totalBw 240.0 ===
+css-host-158:838182:838383 [3] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838186:838387 [7] NCCL INFO CPU/0-0 (1/1/2)
+css-host-158:838182:838383 [3] NCCL INFO               + PCI[24.0] - PCI/0-c8000 (1000c01010de13b8)
+css-host-158:838186:838387 [7] NCCL INFO + PCI[5000.0] - NIC/0-0
+css-host-158:838182:838383 [3] NCCL INFO                             + PCI[24.0] - GPU/0-ca000 (7)
+css-host-158:838186:838387 [7] NCCL INFO + PCI[24.0] - PCI/0-a000 (1000c0101000ffff)
+css-host-158:838182:838383 [3] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838186:838387 [7] NCCL INFO               + PCI[24.0] - PCI/0-e000 (1000c01010de13b8)
+css-host-158:838182:838383 [3] NCCL INFO               + PCI[24.0] - NIC/0-cd000
+css-host-158:838186:838387 [7] NCCL INFO                             + PCI[24.0] - GPU/0-10000 (0)
+css-host-158:838182:838383 [3] NCCL INFO + SYS[10.0] - CPU/0
+css-host-158:838186:838387 [7] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838182:838383 [3] NCCL INFO ==========================================
+css-host-158:838186:838387 [7] NCCL INFO               + PCI[24.0] - PCI/0-14000 (1000c01010de13b8)
+css-host-158:838182:838383 [3] NCCL INFO GPU/10000 :GPU/0-10000 (0/5000.0/LOC) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838186:838387 [7] NCCL INFO                             + PCI[24.0] - GPU/0-16000 (1)
+css-host-158:838182:838383 [3] NCCL INFO GPU/16000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (0/5000.0/LOC) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838186:838387 [7] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838182:838383 [3] NCCL INFO GPU/49000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (0/5000.0/LOC) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838186:838387 [7] NCCL INFO               + PCI[24.0] - NIC/0-1d000
+css-host-158:838182:838383 [3] NCCL INFO GPU/4D000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (0/5000.0/LOC) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838186:838387 [7] NCCL INFO + PCI[24.0] - PCI/0-43000 (1000c0101000ffff)
+css-host-158:838182:838383 [3] NCCL INFO GPU/8A000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (0/5000.0/LOC) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838186:838387 [7] NCCL INFO               + PCI[24.0] - PCI/0-47000 (1000c01010de13b8)
+css-host-158:838182:838383 [3] NCCL INFO GPU/8F000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (0/5000.0/LOC) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838186:838387 [7] NCCL INFO                             + PCI[24.0] - GPU/0-49000 (2)
+css-host-158:838182:838383 [3] NCCL INFO GPU/C6000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (0/5000.0/LOC) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838186:838387 [7] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838182:838383 [3] NCCL INFO GPU/CA000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (0/5000.0/LOC) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838186:838387 [7] NCCL INFO               + PCI[24.0] - PCI/0-4b000 (1000c01010de13b8)
+css-host-158:838182:838383 [3] NCCL INFO Setting affinity for GPU 3 to c0
+css-host-158:838186:838387 [7] NCCL INFO                             + PCI[24.0] - GPU/0-4d000 (3)
+css-host-158:838182:838383 [3] NCCL INFO NVLS multicast support is not available on dev 3
+css-host-158:838186:838387 [7] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838186:838387 [7] NCCL INFO               + PCI[24.0] - NIC/0-5f000
+css-host-158:838186:838387 [7] NCCL INFO + SYS[10.0] - CPU/1
+css-host-158:838186:838387 [7] NCCL INFO + PCI[3.0] - NIC/0-7d000
+css-host-158:838186:838387 [7] NCCL INFO CPU/0-1 (1/1/2)
+css-host-158:838186:838387 [7] NCCL INFO + PCI[24.0] - PCI/0-84000 (1000c0101000ffff)
+css-host-158:838186:838387 [7] NCCL INFO               + PCI[24.0] - PCI/0-88000 (1000c01010de13b8)
+css-host-158:838186:838387 [7] NCCL INFO                             + PCI[24.0] - GPU/0-8a000 (4)
+css-host-158:838186:838387 [7] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838186:838387 [7] NCCL INFO               + PCI[24.0] - PCI/0-8d000 (1000c01010de13b8)
+css-host-158:838186:838387 [7] NCCL INFO                             + PCI[24.0] - GPU/0-8f000 (5)
+css-host-158:838186:838387 [7] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838186:838387 [7] NCCL INFO               + PCI[24.0] - NIC/0-96000
+css-host-158:838186:838387 [7] NCCL INFO + PCI[24.0] - PCI/0-c0000 (1000c0101000ffff)
+css-host-158:838186:838387 [7] NCCL INFO               + PCI[24.0] - PCI/0-c4000 (1000c01010de13b8)
+css-host-158:838186:838387 [7] NCCL INFO                             + PCI[24.0] - GPU/0-c6000 (6)
+css-host-158:838180:838385 [1] NCCL INFO === System : maxBw 24.0 totalBw 240.0 ===
+css-host-158:838186:838387 [7] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838180:838385 [1] NCCL INFO CPU/0-0 (1/1/2)
+css-host-158:838186:838387 [7] NCCL INFO               + PCI[24.0] - PCI/0-c8000 (1000c01010de13b8)
+css-host-158:838180:838385 [1] NCCL INFO + PCI[5000.0] - NIC/0-0
+css-host-158:838186:838387 [7] NCCL INFO                             + PCI[24.0] - GPU/0-ca000 (7)
+css-host-158:838180:838385 [1] NCCL INFO + PCI[24.0] - PCI/0-a000 (1000c0101000ffff)
+css-host-158:838186:838387 [7] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838180:838385 [1] NCCL INFO               + PCI[24.0] - PCI/0-e000 (1000c01010de13b8)
+css-host-158:838186:838387 [7] NCCL INFO               + PCI[24.0] - NIC/0-cd000
+css-host-158:838180:838385 [1] NCCL INFO                             + PCI[24.0] - GPU/0-10000 (0)
+css-host-158:838186:838387 [7] NCCL INFO + SYS[10.0] - CPU/0
+css-host-158:838180:838385 [1] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838186:838387 [7] NCCL INFO ==========================================
+css-host-158:838180:838385 [1] NCCL INFO               + PCI[24.0] - PCI/0-14000 (1000c01010de13b8)
+css-host-158:838180:838385 [1] NCCL INFO                             + PCI[24.0] - GPU/0-16000 (1)
+css-host-158:838180:838385 [1] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838186:838387 [7] NCCL INFO GPU/10000 :GPU/0-10000 (0/5000.0/LOC) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838180:838385 [1] NCCL INFO               + PCI[24.0] - NIC/0-1d000
+css-host-158:838180:838385 [1] NCCL INFO + PCI[24.0] - PCI/0-43000 (1000c0101000ffff)
+css-host-158:838180:838385 [1] NCCL INFO               + PCI[24.0] - PCI/0-47000 (1000c01010de13b8)
+css-host-158:838186:838387 [7] NCCL INFO GPU/16000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (0/5000.0/LOC) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838180:838385 [1] NCCL INFO                             + PCI[24.0] - GPU/0-49000 (2)
+css-host-158:838180:838385 [1] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838180:838385 [1] NCCL INFO               + PCI[24.0] - PCI/0-4b000 (1000c01010de13b8)
+css-host-158:838186:838387 [7] NCCL INFO GPU/49000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (0/5000.0/LOC) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838180:838385 [1] NCCL INFO                             + PCI[24.0] - GPU/0-4d000 (3)
+css-host-158:838180:838385 [1] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838180:838385 [1] NCCL INFO               + PCI[24.0] - NIC/0-5f000
+css-host-158:838186:838387 [7] NCCL INFO GPU/4D000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (0/5000.0/LOC) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838180:838385 [1] NCCL INFO + SYS[10.0] - CPU/1
+css-host-158:838180:838385 [1] NCCL INFO + PCI[3.0] - NIC/0-7d000
+css-host-158:838180:838385 [1] NCCL INFO CPU/0-1 (1/1/2)
+css-host-158:838186:838387 [7] NCCL INFO GPU/8A000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (0/5000.0/LOC) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838180:838385 [1] NCCL INFO + PCI[24.0] - PCI/0-84000 (1000c0101000ffff)
+css-host-158:838180:838385 [1] NCCL INFO               + PCI[24.0] - PCI/0-88000 (1000c01010de13b8)
+css-host-158:838180:838385 [1] NCCL INFO                             + PCI[24.0] - GPU/0-8a000 (4)
+css-host-158:838186:838387 [7] NCCL INFO GPU/8F000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (0/5000.0/LOC) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838180:838385 [1] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838180:838385 [1] NCCL INFO               + PCI[24.0] - PCI/0-8d000 (1000c01010de13b8)
+css-host-158:838180:838385 [1] NCCL INFO                             + PCI[24.0] - GPU/0-8f000 (5)
+css-host-158:838186:838387 [7] NCCL INFO GPU/C6000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (0/5000.0/LOC) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838180:838385 [1] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838180:838385 [1] NCCL INFO               + PCI[24.0] - NIC/0-96000
+css-host-158:838180:838385 [1] NCCL INFO + PCI[24.0] - PCI/0-c0000 (1000c0101000ffff)
+css-host-158:838186:838387 [7] NCCL INFO GPU/CA000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (0/5000.0/LOC) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838180:838385 [1] NCCL INFO               + PCI[24.0] - PCI/0-c4000 (1000c01010de13b8)
+css-host-158:838180:838385 [1] NCCL INFO                             + PCI[24.0] - GPU/0-c6000 (6)
+css-host-158:838186:838387 [7] NCCL INFO Setting affinity for GPU 7 to c000,00000000
+css-host-158:838180:838385 [1] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838186:838387 [7] NCCL INFO NVLS multicast support is not available on dev 7
+css-host-158:838180:838385 [1] NCCL INFO               + PCI[24.0] - PCI/0-c8000 (1000c01010de13b8)
+css-host-158:838180:838385 [1] NCCL INFO                             + PCI[24.0] - GPU/0-ca000 (7)
+css-host-158:838180:838385 [1] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838180:838385 [1] NCCL INFO               + PCI[24.0] - NIC/0-cd000
+css-host-158:838180:838385 [1] NCCL INFO + SYS[10.0] - CPU/0
+css-host-158:838180:838385 [1] NCCL INFO ==========================================
+css-host-158:838180:838385 [1] NCCL INFO GPU/10000 :GPU/0-10000 (0/5000.0/LOC) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838180:838385 [1] NCCL INFO GPU/16000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (0/5000.0/LOC) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838180:838385 [1] NCCL INFO GPU/49000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (0/5000.0/LOC) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838180:838385 [1] NCCL INFO GPU/4D000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (0/5000.0/LOC) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838180:838385 [1] NCCL INFO GPU/8A000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (0/5000.0/LOC) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838180:838385 [1] NCCL INFO GPU/8F000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (0/5000.0/LOC) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838180:838385 [1] NCCL INFO GPU/C6000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (0/5000.0/LOC) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838180:838385 [1] NCCL INFO GPU/CA000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (0/5000.0/LOC) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838180:838385 [1] NCCL INFO Setting affinity for GPU 1 to 0c
+css-host-158:838180:838385 [1] NCCL INFO NVLS multicast support is not available on dev 1
+css-host-158:838181:838386 [2] NCCL INFO === System : maxBw 24.0 totalBw 240.0 ===
+css-host-158:838181:838386 [2] NCCL INFO CPU/0-0 (1/1/2)
+css-host-158:838181:838386 [2] NCCL INFO + PCI[5000.0] - NIC/0-0
+css-host-158:838181:838386 [2] NCCL INFO + PCI[24.0] - PCI/0-a000 (1000c0101000ffff)
+css-host-158:838181:838386 [2] NCCL INFO               + PCI[24.0] - PCI/0-e000 (1000c01010de13b8)
+css-host-158:838181:838386 [2] NCCL INFO                             + PCI[24.0] - GPU/0-10000 (0)
+css-host-158:838181:838386 [2] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838181:838386 [2] NCCL INFO               + PCI[24.0] - PCI/0-14000 (1000c01010de13b8)
+css-host-158:838181:838386 [2] NCCL INFO                             + PCI[24.0] - GPU/0-16000 (1)
+css-host-158:838181:838386 [2] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838181:838386 [2] NCCL INFO               + PCI[24.0] - NIC/0-1d000
+css-host-158:838181:838386 [2] NCCL INFO + PCI[24.0] - PCI/0-43000 (1000c0101000ffff)
+css-host-158:838181:838386 [2] NCCL INFO               + PCI[24.0] - PCI/0-47000 (1000c01010de13b8)
+css-host-158:838181:838386 [2] NCCL INFO                             + PCI[24.0] - GPU/0-49000 (2)
+css-host-158:838181:838386 [2] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838181:838386 [2] NCCL INFO               + PCI[24.0] - PCI/0-4b000 (1000c01010de13b8)
+css-host-158:838181:838386 [2] NCCL INFO                             + PCI[24.0] - GPU/0-4d000 (3)
+css-host-158:838181:838386 [2] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838181:838386 [2] NCCL INFO               + PCI[24.0] - NIC/0-5f000
+css-host-158:838181:838386 [2] NCCL INFO + SYS[10.0] - CPU/1
+css-host-158:838181:838386 [2] NCCL INFO + PCI[3.0] - NIC/0-7d000
+css-host-158:838181:838386 [2] NCCL INFO CPU/0-1 (1/1/2)
+css-host-158:838181:838386 [2] NCCL INFO + PCI[24.0] - PCI/0-84000 (1000c0101000ffff)
+css-host-158:838181:838386 [2] NCCL INFO               + PCI[24.0] - PCI/0-88000 (1000c01010de13b8)
+css-host-158:838181:838386 [2] NCCL INFO                             + PCI[24.0] - GPU/0-8a000 (4)
+css-host-158:838181:838386 [2] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838181:838386 [2] NCCL INFO               + PCI[24.0] - PCI/0-8d000 (1000c01010de13b8)
+css-host-158:838181:838386 [2] NCCL INFO                             + PCI[24.0] - GPU/0-8f000 (5)
+css-host-158:838181:838386 [2] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838181:838386 [2] NCCL INFO               + PCI[24.0] - NIC/0-96000
+css-host-158:838181:838386 [2] NCCL INFO + PCI[24.0] - PCI/0-c0000 (1000c0101000ffff)
+css-host-158:838181:838386 [2] NCCL INFO               + PCI[24.0] - PCI/0-c4000 (1000c01010de13b8)
+css-host-158:838181:838386 [2] NCCL INFO                             + PCI[24.0] - GPU/0-c6000 (6)
+css-host-158:838181:838386 [2] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838181:838386 [2] NCCL INFO               + PCI[24.0] - PCI/0-c8000 (1000c01010de13b8)
+css-host-158:838181:838386 [2] NCCL INFO                             + PCI[24.0] - GPU/0-ca000 (7)
+css-host-158:838181:838386 [2] NCCL INFO                                           + NVL[240.0] - NVS/0
+css-host-158:838181:838386 [2] NCCL INFO               + PCI[24.0] - NIC/0-cd000
+css-host-158:838181:838386 [2] NCCL INFO + SYS[10.0] - CPU/0
+css-host-158:838181:838386 [2] NCCL INFO ==========================================
+css-host-158:838181:838386 [2] NCCL INFO GPU/10000 :GPU/0-10000 (0/5000.0/LOC) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838181:838386 [2] NCCL INFO GPU/16000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (0/5000.0/LOC) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838181:838386 [2] NCCL INFO GPU/49000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (0/5000.0/LOC) GPU/0-4d000 (6/24.0/PHB) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838181:838386 [2] NCCL INFO GPU/4D000 :GPU/0-10000 (6/24.0/PHB) GPU/0-16000 (6/24.0/PHB) GPU/0-49000 (6/24.0/PHB) GPU/0-4d000 (0/5000.0/LOC) GPU/0-8a000 (7/10.0/SYS) GPU/0-8f000 (7/10.0/SYS) GPU/0-c6000 (7/10.0/SYS) GPU/0-ca000 (7/10.0/SYS) NVS/0-0 (1/240.0/NVL) CPU/0-0 (3/24.0/PHB) CPU/0-1 (4/10.0/SYS) 
+css-host-158:838181:838386 [2] NCCL INFO GPU/8A000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (0/5000.0/LOC) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838181:838386 [2] NCCL INFO GPU/8F000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (0/5000.0/LOC) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838181:838386 [2] NCCL INFO GPU/C6000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (0/5000.0/LOC) GPU/0-ca000 (6/24.0/PHB) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838181:838386 [2] NCCL INFO GPU/CA000 :GPU/0-10000 (7/10.0/SYS) GPU/0-16000 (7/10.0/SYS) GPU/0-49000 (7/10.0/SYS) GPU/0-4d000 (7/10.0/SYS) GPU/0-8a000 (6/24.0/PHB) GPU/0-8f000 (6/24.0/PHB) GPU/0-c6000 (6/24.0/PHB) GPU/0-ca000 (0/5000.0/LOC) NVS/0-0 (1/240.0/NVL) CPU/0-0 (4/10.0/SYS) CPU/0-1 (3/24.0/PHB) 
+css-host-158:838181:838386 [2] NCCL INFO Setting affinity for GPU 2 to 30
+css-host-158:838181:838386 [2] NCCL INFO NVLS multicast support is not available on dev 2
+css-host-158:838182:838383 [3] NCCL INFO Pattern 4, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838182:838383 [3] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838182:838383 [3] NCCL INFO Pattern 1, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838182:838383 [3] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838180:838385 [1] NCCL INFO Pattern 4, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838180:838385 [1] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838186:838387 [7] NCCL INFO Pattern 4, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838186:838387 [7] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838180:838385 [1] NCCL INFO Pattern 1, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838180:838385 [1] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838186:838387 [7] NCCL INFO Pattern 1, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838186:838387 [7] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838181:838386 [2] NCCL INFO Pattern 4, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838181:838386 [2] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838181:838386 [2] NCCL INFO Pattern 1, crossNic 0, nChannels 1, bw 10.000000/10.000000, type SYS/PIX, sameChannels 1
+css-host-158:838181:838386 [2] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3 GPU/4 GPU/5 GPU/6 GPU/7
+css-host-158:838179:838368 [0] NCCL INFO comm 0x557743f85320 rank 0 nRanks 8 nNodes 1 localRanks 8 localRank 0 MNNVL 0
+css-host-158:838185:838382 [6] NCCL INFO comm 0x5bfa70228750 rank 6 nRanks 8 nNodes 1 localRanks 8 localRank 6 MNNVL 0
+css-host-158:838184:838384 [5] NCCL INFO comm 0x58e0389c60a0 rank 5 nRanks 8 nNodes 1 localRanks 8 localRank 5 MNNVL 0
+css-host-158:838180:838385 [1] NCCL INFO comm 0x56bfc1ef0830 rank 1 nRanks 8 nNodes 1 localRanks 8 localRank 1 MNNVL 0
+css-host-158:838181:838386 [2] NCCL INFO comm 0x597ca08b64d0 rank 2 nRanks 8 nNodes 1 localRanks 8 localRank 2 MNNVL 0
+css-host-158:838186:838387 [7] NCCL INFO comm 0x5c8a0b36f9e0 rank 7 nRanks 8 nNodes 1 localRanks 8 localRank 7 MNNVL 0
+css-host-158:838179:838368 [0] NCCL INFO Tree 0 : -1 -> 0 -> 1/-1/-1
+css-host-158:838183:838381 [4] NCCL INFO comm 0x5ad512ce4490 rank 4 nRanks 8 nNodes 1 localRanks 8 localRank 4 MNNVL 0
+css-host-158:838182:838383 [3] NCCL INFO comm 0x62c682600540 rank 3 nRanks 8 nNodes 1 localRanks 8 localRank 3 MNNVL 0
+css-host-158:838185:838382 [6] NCCL INFO Ring 00 : 5 -> 6 -> 7
+css-host-158:838180:838385 [1] NCCL INFO Tree 0 : 0 -> 1 -> 2/-1/-1
+css-host-158:838184:838384 [5] NCCL INFO Ring 00 : 4 -> 5 -> 6
+css-host-158:838181:838386 [2] NCCL INFO Ring 00 : 1 -> 2 -> 3
+css-host-158:838179:838368 [0] NCCL INFO Tree 1 : -1 -> 0 -> 1/-1/-1
+css-host-158:838183:838381 [4] NCCL INFO Ring 00 : 3 -> 4 -> 5
+css-host-158:838185:838382 [6] NCCL INFO Ring 01 : 5 -> 6 -> 7
+css-host-158:838186:838387 [7] NCCL INFO Ring 00 : 6 -> 7 -> 0
+css-host-158:838180:838385 [1] NCCL INFO Tree 1 : 0 -> 1 -> 2/-1/-1
+css-host-158:838184:838384 [5] NCCL INFO Ring 01 : 4 -> 5 -> 6
+css-host-158:838182:838383 [3] NCCL INFO Ring 00 : 2 -> 3 -> 4
+css-host-158:838181:838386 [2] NCCL INFO Ring 01 : 1 -> 2 -> 3
+css-host-158:838179:838368 [0] NCCL INFO Channel 00/02 :    0   1   2   3   4   5   6   7
+css-host-158:838183:838381 [4] NCCL INFO Ring 01 : 3 -> 4 -> 5
+css-host-158:838185:838382 [6] NCCL INFO Trees [0] 7/-1/-1->6->5 [1] 7/-1/-1->6->5
+css-host-158:838186:838387 [7] NCCL INFO Ring 01 : 6 -> 7 -> 0
+css-host-158:838184:838384 [5] NCCL INFO Trees [0] 6/-1/-1->5->4 [1] 6/-1/-1->5->4
+css-host-158:838180:838385 [1] NCCL INFO Ring 00 : 0 -> 1 -> 2
+css-host-158:838182:838383 [3] NCCL INFO Ring 01 : 2 -> 3 -> 4
+css-host-158:838181:838386 [2] NCCL INFO Trees [0] 3/-1/-1->2->1 [1] 3/-1/-1->2->1
+css-host-158:838179:838368 [0] NCCL INFO Channel 01/02 :    0   1   2   3   4   5   6   7
+css-host-158:838183:838381 [4] NCCL INFO Trees [0] 5/-1/-1->4->3 [1] 5/-1/-1->4->3
+css-host-158:838185:838382 [6] NCCL INFO P2P Chunksize set to 131072
+css-host-158:838186:838387 [7] NCCL INFO Trees [0] -1/-1/-1->7->6 [1] -1/-1/-1->7->6
+css-host-158:838184:838384 [5] NCCL INFO P2P Chunksize set to 131072
+css-host-158:838180:838385 [1] NCCL INFO Ring 01 : 0 -> 1 -> 2
+css-host-158:838182:838383 [3] NCCL INFO Trees [0] 4/-1/-1->3->2 [1] 4/-1/-1->3->2
+css-host-158:838181:838386 [2] NCCL INFO P2P Chunksize set to 131072
+css-host-158:838179:838368 [0] NCCL INFO Ring 00 : 7 -> 0 -> 1
+css-host-158:838183:838381 [4] NCCL INFO P2P Chunksize set to 131072
+css-host-158:838186:838387 [7] NCCL INFO P2P Chunksize set to 131072
+css-host-158:838180:838385 [1] NCCL INFO Trees [0] 2/-1/-1->1->0 [1] 2/-1/-1->1->0
+css-host-158:838182:838383 [3] NCCL INFO P2P Chunksize set to 131072
+css-host-158:838179:838368 [0] NCCL INFO Ring 01 : 7 -> 0 -> 1
+css-host-158:838180:838385 [1] NCCL INFO P2P Chunksize set to 131072
+css-host-158:838179:838368 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1
+css-host-158:838179:838368 [0] NCCL INFO P2P Chunksize set to 131072
+css-host-158:838183:838381 [4] NCCL INFO Channel 00 : 4[4] -> 5[5] via SHM/direct/direct
+css-host-158:838183:838381 [4] NCCL INFO Channel 01 : 4[4] -> 5[5] via SHM/direct/direct
+css-host-158:838184:838384 [5] NCCL INFO Channel 00 : 5[5] -> 6[6] via SHM/direct/direct
+css-host-158:838184:838384 [5] NCCL INFO Channel 01 : 5[5] -> 6[6] via SHM/direct/direct
+css-host-158:838185:838382 [6] NCCL INFO Channel 00 : 6[6] -> 7[7] via SHM/direct/direct
+css-host-158:838179:838368 [0] NCCL INFO Channel 00 : 0[0] -> 1[1] via SHM/direct/direct
+css-host-158:838185:838382 [6] NCCL INFO Channel 01 : 6[6] -> 7[7] via SHM/direct/direct
+css-host-158:838180:838385 [1] NCCL INFO Channel 00 : 1[1] -> 2[2] via SHM/direct/direct
+css-host-158:838179:838368 [0] NCCL INFO Channel 01 : 0[0] -> 1[1] via SHM/direct/direct
+css-host-158:838182:838383 [3] NCCL INFO Channel 00 : 3[3] -> 4[4] via SHM/direct/direct
+css-host-158:838182:838383 [3] NCCL INFO Channel 01 : 3[3] -> 4[4] via SHM/direct/direct
+css-host-158:838180:838385 [1] NCCL INFO Channel 01 : 1[1] -> 2[2] via SHM/direct/direct
+css-host-158:838186:838387 [7] NCCL INFO Channel 00 : 7[7] -> 0[0] via SHM/direct/direct
+css-host-158:838181:838386 [2] NCCL INFO Channel 00 : 2[2] -> 3[3] via SHM/direct/direct
+css-host-158:838186:838387 [7] NCCL INFO Channel 01 : 7[7] -> 0[0] via SHM/direct/direct
+css-host-158:838181:838386 [2] NCCL INFO Channel 01 : 2[2] -> 3[3] via SHM/direct/direct
+css-host-158:838183:838381 [4] NCCL INFO Connected all rings
+css-host-158:838182:838383 [3] NCCL INFO Connected all rings
+css-host-158:838186:838387 [7] NCCL INFO Connected all rings
+css-host-158:838184:838384 [5] NCCL INFO Connected all rings
+css-host-158:838185:838382 [6] NCCL INFO Connected all rings
+css-host-158:838181:838386 [2] NCCL INFO Connected all rings
+css-host-158:838179:838368 [0] NCCL INFO Connected all rings
+css-host-158:838180:838385 [1] NCCL INFO Connected all rings
+css-host-158:838186:838387 [7] NCCL INFO Channel 00 : 7[7] -> 6[6] via SHM/direct/direct
+css-host-158:838186:838387 [7] NCCL INFO Channel 01 : 7[7] -> 6[6] via SHM/direct/direct
+css-host-158:838183:838381 [4] NCCL INFO Channel 00 : 4[4] -> 3[3] via SHM/direct/direct
+css-host-158:838183:838381 [4] NCCL INFO Channel 01 : 4[4] -> 3[3] via SHM/direct/direct
+css-host-158:838182:838383 [3] NCCL INFO Channel 00 : 3[3] -> 2[2] via SHM/direct/direct
+css-host-158:838182:838383 [3] NCCL INFO Channel 01 : 3[3] -> 2[2] via SHM/direct/direct
+css-host-158:838185:838382 [6] NCCL INFO Channel 00 : 6[6] -> 5[5] via SHM/direct/direct
+css-host-158:838185:838382 [6] NCCL INFO Channel 01 : 6[6] -> 5[5] via SHM/direct/direct
+css-host-158:838184:838384 [5] NCCL INFO Channel 00 : 5[5] -> 4[4] via SHM/direct/direct
+css-host-158:838184:838384 [5] NCCL INFO Channel 01 : 5[5] -> 4[4] via SHM/direct/direct
+css-host-158:838180:838385 [1] NCCL INFO Channel 00 : 1[1] -> 0[0] via SHM/direct/direct
+css-host-158:838180:838385 [1] NCCL INFO Channel 01 : 1[1] -> 0[0] via SHM/direct/direct
+css-host-158:838181:838386 [2] NCCL INFO Channel 00 : 2[2] -> 1[1] via SHM/direct/direct
+css-host-158:838181:838386 [2] NCCL INFO Channel 01 : 2[2] -> 1[1] via SHM/direct/direct
+css-host-158:838186:838387 [7] NCCL INFO Connected all trees
+css-host-158:838186:838387 [7] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-158:838186:838387 [7] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+css-host-158:838185:838382 [6] NCCL INFO Connected all trees
+css-host-158:838185:838382 [6] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-158:838185:838382 [6] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+css-host-158:838184:838384 [5] NCCL INFO Connected all trees
+css-host-158:838184:838384 [5] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-158:838184:838384 [5] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+css-host-158:838183:838381 [4] NCCL INFO Connected all trees
+css-host-158:838183:838381 [4] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-158:838183:838381 [4] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+css-host-158:838179:838368 [0] NCCL INFO Connected all trees
+css-host-158:838179:838368 [0] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-158:838179:838368 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+css-host-158:838180:838385 [1] NCCL INFO Connected all trees
+css-host-158:838180:838385 [1] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-158:838180:838385 [1] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+css-host-158:838182:838383 [3] NCCL INFO Connected all trees
+css-host-158:838182:838383 [3] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-158:838182:838383 [3] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+css-host-158:838181:838386 [2] NCCL INFO Connected all trees
+css-host-158:838181:838386 [2] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+css-host-158:838181:838386 [2] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+css-host-158:838183:838381 [4] NCCL INFO ncclCommInitRank comm 0x5ad512ce4490 rank 4 nranks 8 cudaDev 4 nvmlDev 4 busId 8a000 commId 0x41e34056bffe10c4 - Init COMPLETE
+css-host-158:838185:838382 [6] NCCL INFO ncclCommInitRank comm 0x5bfa70228750 rank 6 nranks 8 cudaDev 6 nvmlDev 6 busId c6000 commId 0x41e34056bffe10c4 - Init COMPLETE
+css-host-158:838184:838384 [5] NCCL INFO ncclCommInitRank comm 0x58e0389c60a0 rank 5 nranks 8 cudaDev 5 nvmlDev 5 busId 8f000 commId 0x41e34056bffe10c4 - Init COMPLETE
+css-host-158:838181:838386 [2] NCCL INFO ncclCommInitRank comm 0x597ca08b64d0 rank 2 nranks 8 cudaDev 2 nvmlDev 2 busId 49000 commId 0x41e34056bffe10c4 - Init COMPLETE
+css-host-158:838179:838368 [0] NCCL INFO ncclCommInitRank comm 0x557743f85320 rank 0 nranks 8 cudaDev 0 nvmlDev 0 busId 10000 commId 0x41e34056bffe10c4 - Init COMPLETE
+css-host-158:838180:838385 [1] NCCL INFO ncclCommInitRank comm 0x56bfc1ef0830 rank 1 nranks 8 cudaDev 1 nvmlDev 1 busId 16000 commId 0x41e34056bffe10c4 - Init COMPLETE
+css-host-158:838182:838383 [3] NCCL INFO ncclCommInitRank comm 0x62c682600540 rank 3 nranks 8 cudaDev 3 nvmlDev 3 busId 4d000 commId 0x41e34056bffe10c4 - Init COMPLETE
+css-host-158:838186:838387 [7] NCCL INFO ncclCommInitRank comm 0x5c8a0b36f9e0 rank 7 nranks 8 cudaDev 7 nvmlDev 7 busId ca000 commId 0x41e34056bffe10c4 - Init COMPLETE
+[warm r0] ungated pass done
+[check r0] {"ag_board/own/sep/1|256": true, "ag_board/own/sep/0|256": true, "ag_board/own/ovl/1|256": true, "ag_board/own/ovl/0|256": true, "ag_board/repl/sep/1|256": true, "ag_board/repl/sep/0|256": true, "ag_board/repl/ovl/1|256": true, "ag_board/repl/ovl/0|256": true, "ag_sm/own/sep|256": true, "ag_sm/own/ovl|256": true, "ag_sm/repl/sep|256": true, "ag_sm/repl/ovl|256": true, "rs_board/sep|256": 0.007352941203862429, "rs_sm/sep|256": 0.007352941203862429, "rs_board/ovl|256": 0.007352941203862429, "rs_sm/ovl|256": 0.007352941203862429, "ag_board/own/sep/1|1024": true, "ag_board/own/sep/0|1024": true, "ag_board/own/ovl/1|1024": true, "ag_board/own/ovl/0|1024": true, "ag_board/repl/sep/1|1024": true, "ag_board/repl/sep/0|1024": true, "ag_board/repl/ovl/1|1024": true, "ag_board/repl/ovl/0|1024": true, "ag_sm/own/sep|1024": true, "ag_sm/own/ovl|1024": true, "ag_sm/repl/sep|1024": true, "ag_sm/repl/ovl|1024": true, "rs_board/sep|1024": 0.009389671497046947, "rs_sm/sep|1024": 0.009389671497046947, "rs_board/ovl|1024": 0.009389671497046947, "rs_sm/ovl|1024": 0.009389671497046947, "ag_board/own/sep/1|2048": true, "ag_board/own/sep/0|2048": true, "ag_board/own/ovl/1|2048": true, "ag_board/own/ovl/0|2048": true, "ag_board/repl/sep/1|2048": true, "ag_board/repl/sep/0|2048": true, "ag_board/repl/ovl/1|2048": true, "ag_board/repl/ovl/0|2048": true, "ag_sm/own/sep|2048": true, "ag_sm/own/ovl|2048": true, "ag_sm/repl/sep|2048": true, "ag_sm/repl/ovl|2048": true, "rs_board/sep|2048": 0.008583690971136093, "rs_sm/sep|2048": 0.008583690971136093, "rs_board/ovl|2048": 0.008583690971136093, "rs_sm/ovl|2048": 0.008583690971136093, "ag_board/own/sep/1|4096": true, "ag_board/own/sep/0|4096": true, "ag_board/own/ovl/1|4096": true, "ag_board/own/ovl/0|4096": true, "ag_board/repl/sep/1|4096": true, "ag_board/repl/sep/0|4096": true, "ag_board/repl/ovl/1|4096": true, "ag_board/repl/ovl/0|4096": true, "ag_sm/own/sep|4096": true, "ag_sm/own/ovl|4096": true, "ag_sm/repl/sep|4096": true, "ag_sm/repl/ovl|4096": true, "rs_board/sep|4096": 0.008403361774981022, "rs_sm/sep|4096": 0.008403361774981022, "rs_board/ovl|4096": 0.008403361774981022, "rs_sm/ovl|4096": 0.008403361774981022, "ag_board/own/sep/1|8192": true, "ag_board/own/sep/0|8192": true, "ag_board/own/ovl/1|8192": true, "ag_board/own/ovl/0|8192": true, "ag_board/repl/sep/1|8192": true, "ag_board/repl/sep/0|8192": true, "ag_board/repl/ovl/1|8192": true, "ag_board/repl/ovl/0|8192": true, "ag_sm/own/sep|8192": true, "ag_sm/own/ovl|8192": true, "ag_sm/repl/sep|8192": true, "ag_sm/repl/ovl|8192": true, "rs_board/sep|8192": 0.007575757801532745, "rs_sm/sep|8192": 0.007575757801532745, "rs_board/ovl|8192": 0.007575757801532745, "rs_sm/ovl|8192": 0.007575757801532745}
+[timing r0] 2 rounds x 110 items in 0.9 s
+[nvlink] Data Tx+Rx delta KiB per GPU: {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0}
+[shm] ag_board/own/ovl/0|256              0.265 ms  (p10 0.240 p90 0.277, dropped 0)
+[shm] ag_board/own/ovl/1|256              0.269 ms  (p10 0.249 p90 0.252, dropped 0)
+[shm] ag_board/own/sep/0|256              0.274 ms  (p10 0.270 p90 0.278, dropped 0)
+[shm] ag_board/own/sep/1|256              0.284 ms  (p10 0.281 p90 0.287, dropped 0)
+[shm] ag_board/repl/ovl/0|256             0.309 ms  (p10 0.288 p90 0.296, dropped 0)
+[shm] ag_board/repl/ovl/1|256             0.296 ms  (p10 0.289 p90 0.299, dropped 0)
+[shm] ag_board/repl/sep/0|256             0.319 ms  (p10 0.314 p90 0.318, dropped 0)
+[shm] ag_board/repl/sep/1|256             0.316 ms  (p10 0.313 p90 0.313, dropped 0)
+[shm] ag_nccl|256                         0.354 ms  (p10 0.346 p90 0.362, dropped 0)
+[shm] ag_sm/own/ovl|256                   0.337 ms  (p10 0.333 p90 0.342, dropped 0)
+[shm] ag_sm/own/sep|256                   0.356 ms  (p10 0.344 p90 0.356, dropped 0)
+[shm] ag_sm/repl/ovl|256                  0.436 ms  (p10 0.393 p90 0.420, dropped 0)
+[shm] ag_sm/repl/sep|256                  0.449 ms  (p10 0.427 p90 0.444, dropped 0)
+[shm] gemm/fc1|256                        0.114 ms  (p10 0.112 p90 0.114, dropped 0)
+[shm] gemm/fc2|256                        0.063 ms  (p10 0.062 p90 0.062, dropped 0)
+[shm] gemm/o_proj|256                     0.020 ms  (p10 0.018 p90 0.022, dropped 0)
+[shm] gemm/qkv|256                        0.029 ms  (p10 0.029 p90 0.030, dropped 0)
+[shm] rs_board/ovl|256                    0.433 ms  (p10 0.428 p90 0.437, dropped 0)
+[shm] rs_board/sep|256                    0.512 ms  (p10 0.510 p90 0.514, dropped 0)
+[shm] rs_nccl|256                         0.394 ms  (p10 0.387 p90 0.387, dropped 0)
+[shm] rs_sm/ovl|256                       0.822 ms  (p10 0.769 p90 0.822, dropped 0)
+[shm] rs_sm/sep|256                       0.916 ms  (p10 0.896 p90 0.928, dropped 0)
+[shm] ag_board/own/ovl/0|1024             0.917 ms  (p10 0.915 p90 0.916, dropped 0)
+[shm] ag_board/own/ovl/1|1024             0.939 ms  (p10 0.930 p90 0.940, dropped 0)
+[shm] ag_board/own/sep/0|1024             0.894 ms  (p10 0.874 p90 0.892, dropped 0)
+[shm] ag_board/own/sep/1|1024             0.946 ms  (p10 0.928 p90 0.959, dropped 0)
+[shm] ag_board/repl/ovl/0|1024            1.021 ms  (p10 1.014 p90 1.020, dropped 0)
+[shm] ag_board/repl/ovl/1|1024            1.058 ms  (p10 1.049 p90 1.052, dropped 0)
+[shm] ag_board/repl/sep/0|1024            1.046 ms  (p10 1.003 p90 1.043, dropped 0)
+[shm] ag_board/repl/sep/1|1024            1.085 ms  (p10 1.049 p90 1.092, dropped 0)
+[shm] ag_nccl|1024                        1.244 ms  (p10 1.228 p90 1.233, dropped 0)
+[shm] ag_sm/own/ovl|1024                  1.046 ms  (p10 1.019 p90 1.040, dropped 0)
+[shm] ag_sm/own/sep|1024                  1.073 ms  (p10 1.027 p90 1.062, dropped 0)
+[shm] ag_sm/repl/ovl|1024                 1.362 ms  (p10 1.283 p90 1.316, dropped 0)
+[shm] ag_sm/repl/sep|1024                 1.367 ms  (p10 1.357 p90 1.368, dropped 0)
+[shm] gemm/fc1|1024                       0.261 ms  (p10 0.260 p90 0.261, dropped 0)
+[shm] gemm/fc2|1024                       0.181 ms  (p10 0.180 p90 0.181, dropped 0)
+[shm] gemm/o_proj|1024                    0.048 ms  (p10 0.047 p90 0.048, dropped 0)
+[shm] gemm/qkv|1024                       0.073 ms  (p10 0.072 p90 0.073, dropped 0)
+[shm] rs_board/ovl|1024                   1.467 ms  (p10 1.456 p90 1.478, dropped 0)
+[shm] rs_board/sep|1024                   1.646 ms  (p10 1.631 p90 1.660, dropped 0)
+[shm] rs_nccl|1024                        1.289 ms  (p10 1.280 p90 1.295, dropped 0)
+[shm] rs_sm/ovl|1024                      2.470 ms  (p10 2.271 p90 2.335, dropped 0)
+[shm] rs_sm/sep|1024                      2.691 ms  (p10 2.619 p90 2.702, dropped 0)
+[shm] ag_board/own/ovl/0|2048             1.739 ms  (p10 1.711 p90 1.767, dropped 0)
+[shm] ag_board/own/ovl/1|2048             1.832 ms  (p10 1.832 p90 1.832, dropped 0)
+[shm] ag_board/own/sep/0|2048             1.738 ms  (p10 1.706 p90 1.717, dropped 0)
+[shm] ag_board/own/sep/1|2048             1.871 ms  (p10 1.849 p90 1.885, dropped 0)
+[shm] ag_board/repl/ovl/0|2048            1.956 ms  (p10 1.943 p90 1.967, dropped 0)
+[shm] ag_board/repl/ovl/1|2048            2.005 ms  (p10 1.949 p90 1.995, dropped 0)
+[shm] ag_board/repl/sep/0|2048            1.994 ms  (p10 1.961 p90 1.978, dropped 0)
+[shm] ag_board/repl/sep/1|2048            2.140 ms  (p10 2.063 p90 2.106, dropped 0)
+[shm] ag_nccl|2048                        2.470 ms  (p10 2.421 p90 2.454, dropped 0)
+[shm] ag_sm/own/ovl|2048                  2.001 ms  (p10 1.987 p90 2.014, dropped 0)
+[shm] ag_sm/own/sep|2048                  2.026 ms  (p10 2.021 p90 2.031, dropped 0)
+[shm] ag_sm/repl/ovl|2048                 2.545 ms  (p10 2.266 p90 2.456, dropped 0)
+[shm] ag_sm/repl/sep|2048                 2.506 ms  (p10 2.486 p90 2.526, dropped 0)
+[shm] gemm/fc1|2048                       0.514 ms  (p10 0.513 p90 0.513, dropped 0)
+[shm] gemm/fc2|2048                       0.270 ms  (p10 0.268 p90 0.269, dropped 0)
+[shm] gemm/o_proj|2048                    0.070 ms  (p10 0.069 p90 0.069, dropped 0)
+[shm] gemm/qkv|2048                       0.111 ms  (p10 0.110 p90 0.111, dropped 0)
+[shm] rs_board/ovl|2048                   2.867 ms  (p10 2.840 p90 2.895, dropped 0)
+[shm] rs_board/sep|2048                   3.196 ms  (p10 3.164 p90 3.223, dropped 0)
+[shm] rs_nccl|2048                        2.530 ms  (p10 2.518 p90 2.542, dropped 0)
+[shm] rs_sm/ovl|2048                      4.425 ms  (p10 4.284 p90 4.438, dropped 0)
+[shm] rs_sm/sep|2048                      4.985 ms  (p10 4.974 p90 4.988, dropped 0)
+[shm] ag_board/own/ovl/0|4096             3.442 ms  (p10 3.430 p90 3.440, dropped 0)
+[shm] ag_board/own/ovl/1|4096             3.545 ms  (p10 3.494 p90 3.595, dropped 0)
+[shm] ag_board/own/sep/0|4096             3.483 ms  (p10 3.476 p90 3.489, dropped 0)
+[shm] ag_board/own/sep/1|4096             3.650 ms  (p10 3.591 p90 3.702, dropped 0)
+[shm] ag_board/repl/ovl/0|4096            3.831 ms  (p10 3.799 p90 3.839, dropped 0)
+[shm] ag_board/repl/ovl/1|4096            3.899 ms  (p10 3.865 p90 3.932, dropped 0)
+[shm] ag_board/repl/sep/0|4096            3.946 ms  (p10 3.917 p90 3.975, dropped 0)
+[shm] ag_board/repl/sep/1|4096            4.143 ms  (p10 3.991 p90 4.050, dropped 0)
+[shm] ag_nccl|4096                        4.849 ms  (p10 4.848 p90 4.851, dropped 0)
+[shm] ag_sm/own/ovl|4096                  3.846 ms  (p10 3.822 p90 3.870, dropped 0)
+[shm] ag_sm/own/sep|4096                  3.866 ms  (p10 3.842 p90 3.886, dropped 0)
+[shm] ag_sm/repl/ovl|4096                 4.903 ms  (p10 4.541 p90 4.700, dropped 0)
+[shm] ag_sm/repl/sep|4096                 4.749 ms  (p10 4.723 p90 4.758, dropped 0)
+[shm] gemm/fc1|4096                       1.019 ms  (p10 1.017 p90 1.017, dropped 0)
+[shm] gemm/fc2|4096                       0.530 ms  (p10 0.527 p90 0.528, dropped 0)
+[shm] gemm/o_proj|4096                    0.127 ms  (p10 0.126 p90 0.126, dropped 0)
+[shm] gemm/qkv|4096                       0.212 ms  (p10 0.211 p90 0.212, dropped 0)
+[shm] rs_board/ovl|4096                   5.676 ms  (p10 5.655 p90 5.687, dropped 0)
+[shm] rs_board/sep|4096                   6.313 ms  (p10 6.308 p90 6.315, dropped 0)
+[shm] rs_nccl|4096                        4.965 ms  (p10 4.961 p90 4.968, dropped 0)
+[shm] rs_sm/ovl|4096                      8.610 ms  (p10 7.900 p90 8.476, dropped 0)
+[shm] rs_sm/sep|4096                      9.261 ms  (p10 9.158 p90 9.201, dropped 0)
+[shm] ag_board/own/ovl/0|8192             6.768 ms  (p10 6.758 p90 6.773, dropped 0)
+[shm] ag_board/own/ovl/1|8192             7.181 ms  (p10 7.177 p90 7.185, dropped 0)
+[shm] ag_board/own/sep/0|8192             6.852 ms  (p10 6.848 p90 6.854, dropped 0)
+[shm] ag_board/own/sep/1|8192             7.305 ms  (p10 7.137 p90 7.293, dropped 0)
+[shm] ag_board/repl/ovl/0|8192            7.625 ms  (p10 7.522 p90 7.606, dropped 0)
+[shm] ag_board/repl/ovl/1|8192            7.720 ms  (p10 7.515 p90 7.858, dropped 0)
+[shm] ag_board/repl/sep/0|8192            7.851 ms  (p10 7.810 p90 7.889, dropped 0)
+[shm] ag_board/repl/sep/1|8192            8.422 ms  (p10 8.381 p90 8.462, dropped 0)
+[shm] ag_nccl|8192                        9.725 ms  (p10 9.635 p90 9.754, dropped 0)
+[shm] ag_sm/own/ovl|8192                  7.540 ms  (p10 7.517 p90 7.562, dropped 0)
+[shm] ag_sm/own/sep|8192                  7.548 ms  (p10 7.529 p90 7.567, dropped 0)
+[shm] ag_sm/repl/ovl|8192                 9.495 ms  (p10 8.972 p90 9.083, dropped 0)
+[shm] ag_sm/repl/sep|8192                 9.185 ms  (p10 9.147 p90 9.194, dropped 0)
+[shm] gemm/fc1|8192                       2.025 ms  (p10 2.022 p90 2.023, dropped 0)
+[shm] gemm/fc2|8192                       1.049 ms  (p10 1.046 p90 1.048, dropped 0)
+[shm] gemm/o_proj|8192                    0.238 ms  (p10 0.237 p90 0.238, dropped 0)
+[shm] gemm/qkv|8192                       0.384 ms  (p10 0.382 p90 0.383, dropped 0)
+[shm] rs_board/ovl|8192                  11.327 ms  (p10 11.289 p90 11.356, dropped 0)
+[shm] rs_board/sep|8192                  12.442 ms  (p10 12.413 p90 12.458, dropped 0)
+[shm] rs_nccl|8192                        9.878 ms  (p10 9.873 p90 9.878, dropped 0)
+[shm] rs_sm/ovl|8192                     16.960 ms  (p10 16.583 p90 16.598, dropped 0)
+[shm] rs_sm/sep|8192                     17.780 ms  (p10 17.776 p90 17.785, dropped 0)
+css-host-158:838179:838179 [0] NCCL INFO comm 0x557743f85320 rank 0 nranks 8 cudaDev 0 busId 10000 - Destroy COMPLETE
+css-host-158:838180:838180 [1] NCCL INFO comm 0x56bfc1ef0830 rank 1 nranks 8 cudaDev 1 busId 16000 - Destroy COMPLETE
+css-host-158:838186:838186 [7] NCCL INFO comm 0x5c8a0b36f9e0 rank 7 nranks 8 cudaDev 7 busId ca000 - Destroy COMPLETE
+css-host-158:838185:838185 [6] NCCL INFO comm 0x5bfa70228750 rank 6 nranks 8 cudaDev 6 busId c6000 - Destroy COMPLETE
+css-host-158:838183:838183 [4] NCCL INFO comm 0x5ad512ce4490 rank 4 nranks 8 cudaDev 4 busId 8a000 - Destroy COMPLETE
+css-host-158:838182:838182 [3] NCCL INFO comm 0x62c682600540 rank 3 nranks 8 cudaDev 3 busId 4d000 - Destroy COMPLETE
+css-host-158:838184:838184 [5] NCCL INFO comm 0x58e0389c60a0 rank 5 nranks 8 cudaDev 5 busId 8f000 - Destroy COMPLETE
+css-host-158:838181:838181 [2] NCCL INFO comm 0x597ca08b64d0 rank 2 nranks 8 cudaDev 2 busId 49000 - Destroy COMPLETE
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 1) log=ws/hetero-proxy/results/pflux/v2_smoke/guard_shm.log

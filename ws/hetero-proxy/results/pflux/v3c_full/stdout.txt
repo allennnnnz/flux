@@ -1,0 +1,14 @@
+[v3c] gdr mappings: {"0": {"va": 136065100808192, "base": 136065100808192, "mapped_size": 33554432, "mapping_type": 1}, "1": {"va": 136064918355968, "base": 136064918355968, "mapped_size": 33554432, "mapping_type": 1}, "2": {"va": 136065058865152, "base": 136065058865152, "mapped_size": 33554432, "mapping_type": 1}, "3": {"va": 136062770872320, "base": 136062770872320, "mapped_size": 33554432, "mapping_type": 1}, "4": {"va": 136062911381504, "base": 136062911381504, "mapped_size": 33554432, "mapping_type": 1}, "5": {"va": 136060623388672, "base": 136060623388672, "mapped_size": 33554432, "mapping_type": 1}, "6": {"va": 136060763897856, "base": 136060763897856, "mapped_size": 33554432, "mapping_type": 1}, "7": {"va": 136058475905024, "base": 136058475905024, "mapped_size": 33554432, "mapping_type": 1}}
+[v3c] push correctness per GPU: {0: True, 1: True, 2: True, 3: True, 4: True, 5: True, 6: True, 7: True}
+[v3c] g0|push_T=1|ce_d2h=0         per-GPU GB/s  push(H2D)  14.1- 14.1  CE D2H     -     
+[v3c] g0|push_T=2|ce_d2h=0         per-GPU GB/s  push(H2D)  19.7- 19.7  CE D2H     -     
+[v3c] g0|push_T=4|ce_d2h=0         per-GPU GB/s  push(H2D)  19.7- 19.7  CE D2H     -     
+[v3c] g0|push_T=8|ce_d2h=0         per-GPU GB/s  push(H2D)  19.0- 19.0  CE D2H     -     
+[v3c] g0|push_T=4|ce_d2h=1         per-GPU GB/s  push(H2D)  19.6- 19.6  CE D2H  18.9- 18.9
+[v3c] g0|push_T=0|ce_d2h=1         per-GPU GB/s  push(H2D)     -       CE D2H  23.6- 23.6
+[v3c] g8|push_T=2|ce_d2h=0         per-GPU GB/s  push(H2D)   9.9- 10.3  CE D2H     -       (sum   80.7 /    0.0)
+[v3c] g8|push_T=2|ce_d2h=1         per-GPU GB/s  push(H2D)   9.8- 10.0  CE D2H   9.4- 10.9  (sum   79.0 /   80.4)
+[v3c] g8|push_T=4|ce_d2h=0         per-GPU GB/s  push(H2D)   8.8-  9.6  CE D2H     -       (sum   72.5 /    0.0)
+[v3c] g8|push_T=4|ce_d2h=1         per-GPU GB/s  push(H2D)   8.9-  9.7  CE D2H   9.3- 10.8  (sum   73.6 /   80.7)
+[v3c] g8|push_T=0|ce_d2h=1         per-GPU GB/s  push(H2D)     -       CE D2H  11.2- 13.0  (sum    0.0 /   97.0)
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/pflux/v3c_full/guard.log

@@ -1,0 +1,87 @@
+pflux V2 analysis (ws/hetero-proxy/results/pflux/v2_full); tags ['shm', 'shmce']; times = rank-max of per-rank medians (ms)
+[shm] NCCL [2, 21, 5] env {'NCCL_DEBUG': 'INFO', 'NCCL_DEBUG_SUBSYS': 'INIT,GRAPH', 'NCCL_IB_DISABLE': '1', 'NCCL_NET_DISABLE_INTRA': '1', 'NCCL_P2P_DISABLE': '1'}
+[shm] clock modal 1410 min 1410 samples 635; rounds dropped (max over items) 0
+[shm] NVLink Data Tx+Rx delta KiB per GPU {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0}
+[shm] correctness: board AG not bit-identical to NCCL AG: none; board RS max |diff|/max|ref| = 1.03e-02
+[shmce] NCCL [2, 21, 5] env {'NCCL_DEBUG': 'INFO', 'NCCL_DEBUG_SUBSYS': 'INIT,GRAPH', 'NCCL_IB_DISABLE': '1', 'NCCL_NET_DISABLE_INTRA': '1', 'NCCL_P2P_DISABLE': '1', 'NCCL_SHM_USE_CUDA_MEMCPY': '1'}
+[shmce] clock modal 1410 min 1410 samples 791; rounds dropped (max over items) 0
+[shmce] NVLink Data Tx+Rx delta KiB per GPU {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0}
+[shmce] correctness: board AG not bit-identical to NCCL AG: none; board RS max |diff|/max|ref| = 1.03e-02
+
+Self-consistency (our items in both tags; max |shm/shmce - 1| over sizes >= 1024):
+  ag_board/own/ovl/0             0.3%
+  ag_board/own/ovl/1             0.4%
+  ag_board/own/sep/0             0.3%
+  ag_board/own/sep/1             0.5%
+  ag_board/repl/ovl/0            0.3%
+  ag_board/repl/ovl/1            0.6%
+  ag_board/repl/sep/0            0.7%
+  ag_board/repl/sep/1            1.0%
+  ag_sm/own/ovl                  0.6%
+  ag_sm/own/sep                  0.3%
+  ag_sm/repl/ovl                 1.0%
+  ag_sm/repl/sep                 0.4%
+  rs_board/ovl                   0.4%
+  rs_board/sep                   0.4%
+  rs_sm/ovl                      0.6%
+  rs_sm/sep                      0.2%
+
+All-gather (output [M, 5120] bf16):
+    M   MiB |  ncclAG_shm ncclAG_shmce |    own/ovl/0    own/ovl/1    own/sep/0    own/sep/1   repl/ovl/0   repl/ovl/1   repl/sep/0   repl/sep/1 ag_sm/own/ovl ag_sm/own/sep ag_sm/repl/ovl ag_sm/repl/sep | best  ratio  busbw(nccl->ours)
+  256   2.5 |       0.352       0.578 |        0.269        0.267        0.272        0.271        0.296        0.295        0.307        0.308        0.342        0.353        0.433        0.446 | own/ovl/1  1.32x    6.5->  8.6 GB/s
+ 1024  10.0 |       1.244       1.410 |        0.891        0.942        0.898        0.947        1.008        1.042        1.042        1.094        1.065        1.073        1.359        1.351 | own/ovl/0  1.40x    7.4-> 10.3 GB/s
+ 2048  20.0 |       2.471       2.610 |        1.727        1.821        1.744        1.856        1.954        2.017        2.009        2.127        1.993        2.006        2.538        2.495 | own/ovl/0  1.43x    7.4-> 10.6 GB/s
+ 4096  40.0 |       4.886       5.105 |        3.418        3.582        3.428        3.666        3.842        3.936        3.942        4.195        3.851        3.865        4.877        4.756 | own/ovl/0  1.43x    7.5-> 10.7 GB/s
+ 8192  80.0 |       9.745      10.025 |        6.786        7.175        6.810        7.392        7.637        7.765        7.814        8.417        7.559        7.584        9.566        9.240 | own/ovl/0  1.44x    7.5-> 10.8 GB/s
+
+Reduce-scatter (input [M, 5120] bf16):
+  256 | nccl shm=0.398 shmce=0.594 | ovl=0.426 sep=0.507 rs_sm/ovl=0.784 rs_sm/sep=0.907 | ratio 0.94x
+ 1024 | nccl shm=1.284 shmce=1.545 | ovl=1.477 sep=1.664 rs_sm/ovl=2.391 rs_sm/sep=2.695 | ratio 0.87x
+ 2048 | nccl shm=2.522 shmce=3.071 | ovl=2.875 sep=3.209 rs_sm/ovl=4.427 rs_sm/sep=4.955 | ratio 0.88x
+ 4096 | nccl shm=4.993 shmce=6.073 | ovl=5.694 sep=6.295 rs_sm/ovl=8.441 rs_sm/sep=9.239 | ratio 0.88x
+ 8192 | nccl shm=9.919 shmce=12.021 | ovl=11.361 sep=12.458 rs_sm/ovl=16.817 rs_sm/sep=17.847 | ratio 0.87x
+
+GEMM (cuBLAS bf16, F.linear, per-rank TP8 shapes; rank-max, conservative over tags):
+  256 | qkv=0.031 o_proj=0.020 fc1=0.114 fc2=0.061 | sum 0.226
+ 1024 | qkv=0.073 o_proj=0.049 fc1=0.261 fc2=0.181 | sum 0.564
+ 2048 | qkv=0.110 o_proj=0.070 fc1=0.514 fc2=0.270 | sum 0.964
+ 4096 | qkv=0.213 o_proj=0.127 fc1=1.019 fc2=0.530 | sum 1.889
+ 8192 | qkv=0.384 o_proj=0.239 fc1=2.026 fc2=1.050 | sum 3.699
+
+R1: best board AG vs best NCCL AG >= 1.2x at 20 MiB (M=2048) and 40 MiB (M=4096)
+    M=2048: 1.43x, M=4096: 1.43x -> PASS
+R2: per-layer estimate (perfect overlap upper bound) >= 1.3x at M=4096; also no-overlap version
+    M=  256: baseline   1.726 ms (comm 86.9%), ours no-overlap   1.556 (1.11x), ours upper   1.330 (1.30x)
+    M= 1024: baseline   5.621 ms (comm 90.0%), ours no-overlap   4.915 (1.14x), ours upper   4.351 (1.29x)
+    M= 2048: baseline  10.950 ms (comm 91.2%), ours no-overlap   9.462 (1.16x), ours upper   8.498 (1.29x)
+    M= 4096: baseline  21.646 ms (comm 91.3%), ours no-overlap  18.711 (1.16x), ours upper  16.822 (1.29x) <- R2
+    M= 8192: baseline  43.027 ms (comm 91.4%), ours no-overlap  37.109 (1.16x), ours upper  33.411 (1.29x)
+    -> FAIL (1.29x)
+
+Verdict against the registered predictions (v2_hostboard_v1.py header), written 2026-11-02 after the full run:
+  P1 ag_nccl busbw 7.0-8.0 at 20-80 MiB: 7.4-7.5 -> HOLDS; shmce within 15% of shm at 20-80 MiB: 3-6% -> HOLDS
+     (shmce is 64% slower at 2.5 MiB).
+  P2 best ag_board at 40 MiB ~3.8 ms, 1.1-1.45x: 3.418 ms, 1.43x -> HOLDS (upper end).
+     10.7 GB/s equals the M0 8-GPU H2D anchor (85.4 / 8 = 10.7) -> the board AG runs at the download ceiling.
+  P3 repl >= own by 0-20%: WRONG. own is 11-12% faster (3.418 vs 3.842 at 40 MiB): reading 4 of 7 shards across the
+     socket costs less than uploading twice.
+  P4 |sep - ovl| < 10%: HOLDS (0.3%) - the own upload is 1/8 of the traffic, so the same-GPU overlap window is short.
+  P5 rs_board does not beat rs_nccl: HOLDS (0.87-0.88x). sep 6.295 ms at 40 MiB vs predicted ~6.2.
+     Consistency: rs_board/ovl moves 35 MiB each way in 5.694 ms = 6.45 GB/s per direction = the Phase 0 contended
+     H2D anchor 6.46 (params.json pcie_bidirectional). rs_board/sep: download 35 MiB at 10.7 -> 3.43 ms, leaving
+     2.87 ms for the 35 MiB upload = 12.8 GB/s per GPU (102 GB/s aggregate = T1's 101-104 D2H aggregate).
+     NCCL RS (SM copies, ring) sustains 7.35 GB/s busbw with both directions in flight.
+  P6 gemm within +-25% of FLOP estimates at M=4096: o_proj +15%, fc1 -15%, fc2 -12% hold; qkv 0.213 vs 0.16 (+33%)
+     -> WRONG for qkv (small N=896 runs well below peak).
+  P7 NVLink delta < 1 MiB per GPU: 0 KiB on all 8 GPUs in both tags -> HOLDS.
+  P8 SM copies (Triton, 32 CTAs): ag_sm/own/sep within 15% of CE: +12.7% holds; ag_sm/repl/sep +21% wrong;
+     ag_sm ovl >= CE ovl: wrong (SM 13% slower); rs_sm/ovl >= 1.3x rs_board/ovl: WRONG - SM is 1.48x SLOWER
+     (8.441 vs 5.694 ms). The nvbandwidth #53 SM result (~21.5/21.5 bidirectional) did not carry over to this
+     kernel; untested whether the CTA count / block size is the limit (inference).
+  R1 PASS (1.43x at 20 and 40 MiB).
+  R2 FAIL (1.29x < 1.30x at M=4096): the board RS is slower than NCCL, so only the two all-gathers improve.
+     Per layer, comm is 91% of the baseline; without overlap ours is 1.16x.
+  R3 not triggered (R1 passed).
+  Meaning: the transfer idea works for all-gather; the reduce-scatter is the blocker. CE copies collapse to the
+  contended rate when a GPU sends and receives at once, NCCL's SM ring does not collapse as much. Whether RS can beat
+  NCCL needs a bidirectional transfer that avoids the collapse (tuned SM copies, or CPU-pushed H2D via GDRCopy).

@@ -1,0 +1,56 @@
+[v3] g0|d2h=ce|h2d=-                          per-GPU GB/s  D2H  23.6- 23.6  H2D     -    
+[v3] g0|d2h=-|h2d=ce                          per-GPU GB/s  D2H     -      H2D  21.5- 21.5
+[v3] g0|d2h=ce|h2d=ce                         per-GPU GB/s  D2H  22.0- 22.0  H2D  12.6- 12.6
+[v3] g0|d2h=sm32x2048w4|h2d=-                 per-GPU GB/s  D2H  13.5- 13.5  H2D     -    
+[v3] g0|d2h=-|h2d=sm32x2048w4                 per-GPU GB/s  D2H     -      H2D  18.2- 18.2
+[v3] g0|d2h=sm32x2048w4|h2d=sm32x2048w4       per-GPU GB/s  D2H  10.9- 10.9  H2D   9.5-  9.5
+[v3] g0|d2h=sm64x2048w4|h2d=-                 per-GPU GB/s  D2H  12.4- 12.4  H2D     -    
+[v3] g0|d2h=-|h2d=sm64x2048w4                 per-GPU GB/s  D2H     -      H2D  17.5- 17.5
+[v3] g0|d2h=sm64x2048w4|h2d=sm64x2048w4       per-GPU GB/s  D2H   6.9-  6.9  H2D   6.8-  6.8
+[v3] g0|d2h=sm108x2048w4|h2d=-                per-GPU GB/s  D2H   8.8-  8.8  H2D     -    
+[v3] g0|d2h=-|h2d=sm108x2048w4                per-GPU GB/s  D2H     -      H2D  15.9- 15.9
+[v3] g0|d2h=sm108x2048w4|h2d=sm108x2048w4     per-GPU GB/s  D2H   4.1-  4.1  H2D   4.0-  4.0
+[v3] g0|d2h=sm216x2048w4|h2d=-                per-GPU GB/s  D2H   3.8-  3.8  H2D     -    
+[v3] g0|d2h=-|h2d=sm216x2048w4                per-GPU GB/s  D2H     -      H2D  14.6- 14.6
+[v3] g0|d2h=sm216x2048w4|h2d=sm216x2048w4     per-GPU GB/s  D2H   2.8-  2.8  H2D   2.8-  2.8
+[v3] g0|d2h=sm108x8192w8|h2d=-                per-GPU GB/s  D2H   3.1-  3.1  H2D     -    
+[v3] g0|d2h=-|h2d=sm108x8192w8                per-GPU GB/s  D2H     -      H2D  13.6- 13.6
+[v3] g0|d2h=sm108x8192w8|h2d=sm108x8192w8     per-GPU GB/s  D2H   2.5-  2.5  H2D   2.5-  2.5
+[v3] g0|d2h=sm216x8192w8|h2d=-                per-GPU GB/s  D2H   2.7-  2.7  H2D     -    
+[v3] g0|d2h=-|h2d=sm216x8192w8                per-GPU GB/s  D2H     -      H2D  13.2- 13.2
+[v3] g0|d2h=sm216x8192w8|h2d=sm216x8192w8     per-GPU GB/s  D2H   2.3-  2.3  H2D   2.4-  2.4
+[v3] g0|d2h=sm108x2048w4|h2d=ce               per-GPU GB/s  D2H   8.3-  8.3  H2D   6.4-  6.4
+[v3] g0|d2h=ce|h2d=sm108x2048w4               per-GPU GB/s  D2H   9.9-  9.9  H2D  15.6- 15.6
+[v3] g0|d2h=sm216x8192w8|h2d=ce               per-GPU GB/s  D2H   2.7-  2.7  H2D   2.5-  2.5
+[v3] g0|d2h=ce|h2d=sm216x8192w8               per-GPU GB/s  D2H   8.7-  8.7  H2D  13.0- 13.0
+[v3] g8|d2h=ce|h2d=-                          per-GPU GB/s  D2H  11.2- 13.0  H2D     -      (sum   97.1 /    0.0)
+[v3] g8|d2h=-|h2d=ce                          per-GPU GB/s  D2H     -      H2D  11.0- 12.6  (sum    0.0 /   94.5)
+[v3] g8|d2h=ce|h2d=ce                         per-GPU GB/s  D2H   9.4- 12.0  H2D   5.8-  7.2  (sum   85.6 /   52.0)
+[v3] g8|d2h=sm108x2048w4|h2d=-                per-GPU GB/s  D2H   2.5-  3.1  H2D     -      (sum   22.4 /    0.0)
+[v3] g8|d2h=-|h2d=sm108x2048w4                per-GPU GB/s  D2H     -      H2D   6.6-  7.5  (sum    0.0 /   56.3)
+[v3] g8|d2h=sm108x2048w4|h2d=sm108x2048w4     per-GPU GB/s  D2H   1.3-  1.5  H2D   1.3-  1.5  (sum   11.0 /   11.0)
+[v3] g8|d2h=sm216x2048w4|h2d=-                per-GPU GB/s  D2H   1.2-  1.5  H2D     -      (sum   10.5 /    0.0)
+[v3] g8|d2h=-|h2d=sm216x2048w4                per-GPU GB/s  D2H     -      H2D   6.0-  6.6  (sum    0.0 /   50.2)
+[v3] g8|d2h=sm216x2048w4|h2d=sm216x2048w4     per-GPU GB/s  D2H   1.0-  1.1  H2D   1.0-  1.1  (sum    8.4 /    8.4)
+[v3] g8|d2h=sm216x8192w8|h2d=-                per-GPU GB/s  D2H   1.0-  1.1  H2D     -      (sum    8.3 /    0.0)
+[v3] g8|d2h=-|h2d=sm216x8192w8                per-GPU GB/s  D2H     -      H2D   5.4-  5.9  (sum    0.0 /   45.3)
+[v3] g8|d2h=sm216x8192w8|h2d=sm216x8192w8     per-GPU GB/s  D2H   0.8-  1.0  H2D   0.8-  1.0  (sum    7.2 /    7.3)
+[v3] g8|d2h=sm108x2048w4|h2d=ce               per-GPU GB/s  D2H   2.4-  2.9  H2D   2.0-  2.5  (sum   20.9 /   18.0)
+[v3] g8|d2h=ce|h2d=sm108x2048w4               per-GPU GB/s  D2H   4.3-  4.9  H2D   6.5-  7.3  (sum   37.0 /   55.0)
+[v3] g8|d2h=sm216x8192w8|h2d=ce               per-GPU GB/s  D2H   0.9-  1.1  H2D   0.9-  1.0  (sum    8.1 /    7.7)
+[v3] g8|d2h=ce|h2d=sm216x8192w8               per-GPU GB/s  D2H   3.8-  4.2  H2D   5.3-  5.8  (sum   31.7 /   44.6)
+
+V3 verdict (predictions in v3_bidir_v1.py header; 50 rounds, guard CLEAN; per-GPU medians, each direction timed on its own stream):
+  Q1 CE GPU0: H2D alone 21.5 (~22 holds), D2H alone 23.6 (~22.5, +5%), both at once H2D 12.6 / D2H 22.0.
+     The H2D part is WRONG (predicted 6-9): one GPU alone collapses less than the Phase 0 anchor 6.46 (nsys per-copy,
+     params.json pcie_bidirectional) and the Phase 0 nvbandwidth 8.88; it is close to nvbandwidth issue #53's 11.3.
+     UNRESOLVED anchor deviation (>20%): sizes / duty cycle differ (32 MiB x 4 here vs Phase 0's large copies); not
+     investigated. On 8 GPUs at once the collapse is deeper: H2D 5.8-7.2 per GPU (sum 52.0 vs 94.5 alone), which is
+     what V2's board reduce-scatter hit (6.45).
+  Q2 SM H2D alone >= 18: 18.2 with 32 CTAs (holds, barely; more CTAs are slower: 14.6 at 216). SM both ways >= 15:
+     WRONG (best 10.9 / 9.5 at 32 CTAs).
+  Q3 SM 32x2048 both ways <= 12 per direction: HOLDS (10.9 / 9.5).
+  Q4 8 GPUs, best SM or mixed setting >= 9 GB/s per GPU both ways: WRONG (best mixed CE-D2H + SM-H2D: 4.3-4.9 / 6.5-7.3).
+  Unexplained: SM stores to host (D2H by kernel) get slower with more CTAs (13.5 GB/s at 32 CTAs -> 3.8 at 216 on one
+  GPU; 1.0-1.5 per GPU on 8 GPUs). The issue #53 SM result (~21.5 / 21.5) is not reproduced by this Triton kernel.
+  Decision (registered): Q4 fails -> try CPU-pushed H2D (V3c).

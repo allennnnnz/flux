@@ -1,0 +1,4 @@
+[gdr r5] mapping_type 1 can_flush_remote_writes 0 push cpus [44, 45, 46, 47] main cpus [34, 35]
+[warm r5] ungated pass done
+[check r5] {"ag_board/own/ovl/0|256": true, "rs_board/ovl|256": 0.008733624592423439, "rs_push/T1|256": 0.008733624592423439, "rs_push/T2|256": 0.008733624592423439, "ag_board/own/ovl/0|1024": true, "rs_board/ovl|1024": 0.008474576286971569, "rs_push/T1|1024": 0.008474576286971569, "rs_push/T2|1024": 0.008474576286971569, "ag_board/own/ovl/0|2048": true, "rs_board/ovl|2048": 0.008695651777088642, "rs_push/T1|2048": 0.008695651777088642, "rs_push/T2|2048": 0.008695651777088642, "ag_board/own/ovl/0|4096": true, "rs_board/ovl|4096": 0.007352941203862429, "rs_push/T1|4096": 0.007352941203862429, "rs_push/T2|4096": 0.007352941203862429, "ag_board/own/ovl/0|8192": true, "rs_board/ovl|8192": 0.008196720853447914, "rs_push/T1|8192": 0.008196720853447914, "rs_push/T2|8192": 0.008196720853447914}
+[timing r5] 200 rounds x 50 items in 30.5 s

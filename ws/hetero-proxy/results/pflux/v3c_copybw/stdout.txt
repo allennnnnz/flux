@@ -1,0 +1,19 @@
+== gdrcopy_copybw GPU0, 32 MiB, cpu+mem on node 0
+user-space pointer:0x7e8dc2000000
+writing test, size=33554432 offset=0 num_iters=50
+write BW: 15076.8MB/s
+reading test, size=33554432 offset=0 num_iters=5
+read BW: 410.3MB/s
+unmapping buffer
+unpinning buffer
+closing gdrdrv
+== gdrcopy_copybw GPU4, 32 MiB, cpu+mem on node 1
+user-space pointer:0x7ac3187fd000
+writing test, size=33554432 offset=0 num_iters=50
+write BW: 18267.7MB/s
+reading test, size=33554432 offset=0 num_iters=5
+read BW: 422.399MB/s
+unmapping buffer
+unpinning buffer
+closing gdrdrv
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/hetero-proxy/results/pflux/v3c_copybw/guard.log

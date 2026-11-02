@@ -1,0 +1,5 @@
+[shm] exit=0 guard=CLEAN
+     30 via SHM/direct/direct
+[shmce] exit=0 guard=CLEAN
+     30 via SHM/CE/direct
+DONE

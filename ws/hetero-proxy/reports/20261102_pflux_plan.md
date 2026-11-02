@@ -4,6 +4,8 @@ Supersedes: 無
 
 本文件沒有新量測。所有預估標「推論」，第 1 週的驗證會逐項確認。
 
+> **第 1 週驗證結果**（2026-11-02）：`reports/20261102_pflux_week1_result.md`——AG 1.42×、RS（CPU 推）1.09×、單層上限 1.35×；第 3 節的 1.3–1.55× 改為 1.2–1.35×（推論）。
+
 ## 1. 目標
 
 在 GPU 之間**沒有 P2P、只能經主機記憶體**的 PCIe 上，讓 TP 的通訊和 GEMM 以 tile 為單位重疊，並把搬運本身變快。
@@ -181,7 +183,17 @@ GPU i：stream 等計數器 ≥ 本輪值 → copy engine 下載那一塊 → �
 - 上傳和下載仍可能有一小段重疊，要排成「先傳自己那份、再開始下載」。
 - V100 上有沒有同樣的不對稱，未知。
 
-**相近做法（新意的界線）**：
-- CPU 的 MPI 共享記憶體集合通訊早就用「公告欄」式做法。
-- ThunderEP（2609.40093，只讀摘要）在 PCIe 消費級 GPU 上，把主機記憶體當共用媒介，做 MoE 的 all-to-all。
-- → 招數 1 單獨不算全新。我們的貢獻要放在「TP 的 AG / RS＋tile 級邊收邊算＋避開這個不對稱的排程」的組合上。
+**相近做法（新意的界線）**（2026-11-02 文獻子代理讀全文後更正，見 `reports/20261102_lit_hostboard.md`）：
+- **更正**：先前寫「ThunderEP 做 MoE 的 all-to-all」是錯的。ThunderEP（2609.40093，全文已讀）把 dispatch / combine 寫成 dense **AG＋RS**，在 6× RTX 4090/5090（無 P2P、單 NUMA）上，用的正是「每卡寫一次、其他卡直接讀」。
+  - 搬運：DMA。
+  - 同步：主機旗標，由 GPU thread 輪詢。
+  - 粒度：一個來源的資料整份到了才開始算。
+  - 結果：AG 1 GB 比 NCCL 快 1.27–1.53×，RS 大訊息打平，prefill 端到端最多 1.66×。
+  - 它**刻意讓上傳和下載同時跑**，以吃滿全雙工；沒有回報同卡雙向崩落。
+- CPU 的 MPI（MPICH release_gather、Open MPI XHC）早就是「共享 buffer＋單調計數器＋讀完 ack」。
+- NCCL 的 CE collectives 用同一套「copy engine＋WAIT_VALUE」同步，但沒有 NVLink 時明確關閉（`ce_coll.cc` L195-205）。
+- → **招數 1（上傳一次、大家下載）不是新的。** 可能的新意縮到三點：
+  1. TP GEMM 的 tile 級旗標融合（ThunderEP 是整份 shard，用主機端 CUDA event 串）；
+  2. 不需要主機或 GPU 輪詢執行緒的 stream memory op；
+  3. 針對 A100 HGX（兩卡共交換器、雙 NUMA）同卡雙向崩落的排程。這一點前人沒有，ThunderEP 的平台沒有這個現象。
+- 新線索：nvbandwidth issue #53（與本機同 CPU、同拓撲）顯示崩落只發生在 copy engine，**SM 搬運雙向約 21.5 / 21.5**。V2 已加入 SM 搬運的變體（P8）。
