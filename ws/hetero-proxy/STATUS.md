@@ -26,6 +26,7 @@
 - **待使用者**：向教授報告後選定方向；機器 B（V100 PCIe）能否用；選 A 則先做驗證第 1、2 步。
 - **A 的做法（計劃，`reports/20261102_pflux_plan.md`）**：三個元件——搬運層（AG 上傳一次大家下載；RS 天生雙向，做法待 V2b 決定）、等旗標 GEMM（hxb `chunk_gemm`）、選擇器（fusion-dispatch 成本模型）。
   只走 PCIe 時 prefill 約 9 成時間在通訊（推論）→ 端到端約 1.3×（只有 AG 變快）到 1.55×（RS 也變快）。第 1 週只量搬運（V1 上限、V2 AG、V2b RS），判定 V2 ≥ 1.2× 且重算後層 ≥ 1.3× 才繼續。
+  使用者問 V100 機器（機器 B）是否更好 → 計劃 §8：當第二平台較好、不當主平台（真 PCIe、P2P 混合拓撲、通訊:計算約 1:1 是重疊最有用的區間〔推論〕；但 Flux / FlashOverlap 不能跑、Triton 在 sm70 未確認、共用機器）。第 1 週加半天 gpu1 量錨點與比例、第 9 週重跑。
 
 **最新（2026-11-02）—— 本機可變成「只走 PCIe」的慢連線環境（NCCL 限定）**（`results/pcieonly/check_v1/analysis.txt`，guard 全 CLEAN）
 - 使用者問：8 張 A100 能否限制 GPU 之間只走 PCIe、變成慢連線環境？→ 可以（不需 sudo），但只對 NCCL：
