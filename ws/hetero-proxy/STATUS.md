@@ -3,14 +3,25 @@
 **本 workstream 唯一權威。** 第 1 節由 boss 寫入，worker 不改；第 2 節起由 worker 維護。
 
 建立：2026-09-23（boss）
-最後更新：2026-10-31（boss 兼 worker：「兩個方法互補」的選題組合文獻檢查）
+最後更新：2026-11-02（boss 兼 worker：PCIe-only 模式實測；重疊策略文獻調查進行中）
 狀態：**選題待使用者決定。推薦 T：訓練時主機↔GPU 搬運讓 NVLink 集合通訊慢 2–3 倍（T1 實測）→ 干擾模型＋協定選擇＋搬運節拍器；備案 F：fusion-dispatch 成文；MoE 冷門專家（M0 通過）降為第三**
 
 ---
 
 ## 0. 快速跟上（新 session 先讀這節；每次收工更新）
 
-最後更新：2026-10-31
+最後更新：2026-11-02
+
+**最新（2026-11-02）—— 本機可變成「只走 PCIe」的慢連線環境（NCCL 限定）**（`results/pcieonly/check_v1/analysis.txt`，guard 全 CLEAN）
+- 使用者問：8 張 A100 能否限制 GPU 之間只走 PCIe、變成慢連線環境？→ 可以（不需 sudo），但只對 NCCL：
+  `NCCL_P2P_DISABLE=1 NCCL_IB_DISABLE=1 NCCL_NET_DISABLE_INTRA=1` → 30 條連線全走 SHM（經主機記憶體），128 MiB busbw 7.4–7.6 GB/s，NVLink 同腳本 168–191 → **慢 23–25 倍**；
+  加 `NCCL_SHM_USE_CUDA_MEMCPY=1` 改用 copy engine（不佔 SM），大訊息 6.2–7.5、小訊息較慢。
+- 陷阱：只關 P2P 時 NCCL 讓 16/40 條連線走網卡 RoCE 迴環 → 逾時（rails 不同網段）；只關 IB 時那 16 條改走 TCP socket（3.5 GB/s，不是 PCIe）。
+- 限制：Flux、NVSHMEM、SymmetricMemory／async TP、vLLM custom all-reduce 直接用對端指標，無法改走 PCIe（推論；FlashOverlap 論文寫 Flux 需要 P2P）→ 慢連線模式下可比的是「不重疊／切塊／訊號式（NCCL）」。
+- 意義：同一顆 GPU、只有連線變 → 文獻調查發現沒人做過的「受控頻寬軸」；也讓 fusion-dispatch 決策器的「慢連線」場景能只用 158 重現（原本靠跨節點 159）。
+- 文獻調查（使用者貼的前期調查任務，10-31 開始）：硬體／頻寬／SM 分配那一路完成（最接近的競爭者 **Compass**，arXiv 2609.10549，2026-06：8×A6000 成對 NVLink＋PCIe，選擇融合 vs 切塊，288 情境 92.67% 選對，Flux 在該機器比不重疊慢——已親自核對全文）；
+  引用追蹤（Q1/Q2）與能耗／工具兩路在 session 結束時中斷，未完成，報告未寫。
+
 
 **最新（2026-10-31）—— 使用者：找「兩個方法互補」合成一個題目**（`reports/20261031_combo_topics.md`，未做 GPU 量測）
 - 單卡上的「兩法合一」幾乎都已被做完（推測解碼 × MoE 卸載至少 5 篇；CPU 算＋搬專家同時做有 Apex、vLLM RFC）。

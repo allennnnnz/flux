@@ -1,0 +1,53 @@
+{
+ "tag": "shm_intra",
+ "env": {
+  "NCCL_DEBUG": "INFO",
+  "NCCL_DEBUG_SUBSYS": "INIT,GRAPH",
+  "NCCL_IB_DISABLE": "1",
+  "NCCL_NET_DISABLE_INTRA": "1",
+  "NCCL_P2P_DISABLE": "1"
+ },
+ "nccl": [
+  2,
+  21,
+  5
+ ],
+ "results": {
+  "all_reduce|1MiB": {
+   "ms": 0.5002239942550659,
+   "busbw_GBps": 3.668372611219292
+  },
+  "all_gather|1MiB": {
+   "ms": 1.0045440196990967,
+   "busbw_GBps": 7.306829622258514
+  },
+  "reduce_scatter|1MiB": {
+   "ms": 0.23347200453281403,
+   "busbw_GBps": 3.929824485106722
+  },
+  "all_reduce|16MiB": {
+   "ms": 3.8993918895721436,
+   "busbw_GBps": 7.529411977933181
+  },
+  "all_gather|16MiB": {
+   "ms": 15.540224075317383,
+   "busbw_GBps": 7.557195535328951
+  },
+  "reduce_scatter|16MiB": {
+   "ms": 2.011648178100586,
+   "busbw_GBps": 7.297530532332464
+  },
+  "all_reduce|128MiB": {
+   "ms": 30.76710319519043,
+   "busbw_GBps": 7.634161152900382
+  },
+  "all_gather|128MiB": {
+   "ms": 123.34233856201172,
+   "busbw_GBps": 7.617206767387857
+  },
+  "reduce_scatter|128MiB": {
+   "ms": 15.789055824279785,
+   "busbw_GBps": 7.438095938542735
+  }
+ }
+}

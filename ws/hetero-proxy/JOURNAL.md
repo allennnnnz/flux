@@ -294,3 +294,14 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - **留給下個 session**：使用者同意後做組合一的驗證（事前登記）。
 - 使用者：「我現在的環境是多卡 GPU，全部 NVLink」→ 組合一要的 PCIe-only 裝置不存在（草稿放 NVLink GPU 即 SwiftSpec）。重查全 NVLink 的互補組合：
   多卡推測解碼極擠；MoE TP↔EP 執行中切換 = Moebius（2606.26607）；P/D 多工、通訊重疊也有。報告第 6、7 節列三個方向（A 決策器、B 補新論文弱點、C 異質代理），待使用者選。
+
+## 2026-10-31 ~ 11-02 · boss 兼 worker · 決策器題目評估、重疊策略文獻調查、PCIe-only 模式
+
+- 使用者貼上前期文獻調查任務（Flux 起點；候選題目：通訊重、計算輕的 TP 算子上比較融合／訊號式／不重疊，決策模型 × 頻寬 × SM 分配，含能耗；機器 A = 158、機器 B = 4× V100 PCIe）。
+  發現機器 B 即 10-03 盤點過的 gpu1（Flux 不支援 sm70、無 bf16 tensor core）；候選題目與 fusion-dispatch 決策器高度重疊。
+- 三路背景調查：硬體／頻寬／SM 那路完成——Compass（2609.10549）最接近（已親自核對全文：A6000 成對 NVLink、融合 vs 切塊、92.67%、Flux 比不重疊慢）；
+  沒有論文在 Volta＋PCIe 上評估；所有「頻寬影響」比較都同時換了 GPU 世代（頻寬與算力混在一起）；SM 分配只在固定高頻寬硬體上研究。另兩路（引用追蹤、能耗／工具）中斷未完成。
+- 使用者問「決策器缺什麼才能成論文」→ 回答：缺簡單規則會失敗的場景、選項太少、為何不直接量、端到端、定位、auditor。
+- 使用者問「8 張 A100 能否只走 PCIe、變慢連線」→ `scripts/pcieonly/pcie_only_check_v1.py`、`run_check_v1.sh`（all / noib / intra 三段，guard CLEAN）：
+  只關 P2P → RoCE 迴環逾時；再關 IB → 16 條走 TCP socket（3.5 GB/s）；再加 NET_DISABLE_INTRA → 全 SHM，busbw 7.4–7.6 GB/s（NVLink 168–191，慢 23–25×）。寫入 params.json（nccl_pcie_only_mode）。
+- **留給下個 session**：使用者決定是否以「同一台 A100 的 NVLink vs PCIe-only ＋ V100」做決策器論文；文獻調查剩引用追蹤與能耗／工具兩路。

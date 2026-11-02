@@ -1,0 +1,20 @@
+PCIe-only check (2026-11-02), pcie_only_check_v1.py, 8 ranks, NCCL 2.21.5, bf16, 20 iterations per point, rank-max median of
+CUDA-event times, busbw in the nccl-tests convention; every run guard CLEAN. Transport from NCCL_DEBUG=INFO "via" lines.
+
+Mode (env)                                                   transport (connections)      busbw at 128 MiB  AR / AG / RS (GB/s)
+nvlink (default)                                             P2P (360)                    174.0 / 191.4 / 168.4
+shm, shm_ce (P2P_DISABLE=1 [+SHM_USE_CUDA_MEMCPY=1])         SHM 24 + NET/IB 16 -> FAILED: RoCE loopback ibv_modify_qp errno 110 (rails are separate subnets)
+net (P2P_DISABLE=1 SHM_DISABLE=1)                            NET/IB 32 -> FAILED (same)
+shm_noib (+IB_DISABLE=1)                                     SHM 24 + NET/Socket 16       3.5 / 3.5 / 3.5   (TCP sockets are the bottleneck; not PCIe)
+shm_intra (P2P_DISABLE=1 IB_DISABLE=1 NET_DISABLE_INTRA=1)   SHM/direct (30)              7.6 / 7.6 / 7.4   -> 23-25x below NVLink
+shmce_intra (same + SHM_USE_CUDA_MEMCPY=1)                   SHM/CE (30)                  6.8 / 7.5 / 6.2   (copy engines instead of SMs)
+Small sizes: shm_intra 1 MiB AR 0.50 ms, 16 MiB AR 3.9 ms; shmce_intra 1 MiB AR 1.18 ms (CE path slower when small).
+
+Anchor: per-GPU simultaneous host send + receive 5.95-7.3 GB/s (I2 v2) / 5.87-6.46 (Phase 0): shm_intra 7.4-7.6 is +2-29%,
+at the upper edge (ring SHM moves each direction through host memory at once). Not audited.
+Caveat: the nvlink small-size numbers (1 MiB AR 0.264 ms) are far above known NVSwitch latency; this script measures with a
+barrier before each call and eager launches, so only the 16-128 MiB rows are used. Use nccl-tests for small sizes.
+Meaning: with three NCCL variables the same 8x A100 becomes a "PCIe without P2P" machine for NCCL traffic (~7.5 GB/s busbw,
+like going through host memory on a PCIe-only box). Paths that use peer pointers directly (Flux, NVSHMEM, PyTorch
+SymmetricMemory / async TP, vLLM custom all-reduce) cannot be redirected and need P2P (inference; FlashOverlap 2504.19519 states
+Flux requires P2P access).

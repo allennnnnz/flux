@@ -1,0 +1,54 @@
+{
+ "tag": "shmce_intra",
+ "env": {
+  "NCCL_DEBUG": "INFO",
+  "NCCL_DEBUG_SUBSYS": "INIT,GRAPH",
+  "NCCL_IB_DISABLE": "1",
+  "NCCL_NET_DISABLE_INTRA": "1",
+  "NCCL_P2P_DISABLE": "1",
+  "NCCL_SHM_USE_CUDA_MEMCPY": "1"
+ },
+ "nccl": [
+  2,
+  21,
+  5
+ ],
+ "results": {
+  "all_reduce|1MiB": {
+   "ms": 1.1796480417251587,
+   "busbw_GBps": 1.5555555005342272
+  },
+  "all_gather|1MiB": {
+   "ms": 1.2600319385528564,
+   "busbw_GBps": 5.82527456282577
+  },
+  "reduce_scatter|1MiB": {
+   "ms": 0.5841920375823975,
+   "busbw_GBps": 1.5705520462020854
+  },
+  "all_reduce|16MiB": {
+   "ms": 4.494848251342773,
+   "busbw_GBps": 6.531950882041251
+  },
+  "all_gather|16MiB": {
+   "ms": 15.66771125793457,
+   "busbw_GBps": 7.495703109828809
+  },
+  "reduce_scatter|16MiB": {
+   "ms": 2.4447999000549316,
+   "busbw_GBps": 6.004607575315328
+  },
+  "all_reduce|128MiB": {
+   "ms": 34.57484817504883,
+   "busbw_GBps": 6.793407242479331
+  },
+  "all_gather|128MiB": {
+   "ms": 124.81996154785156,
+   "busbw_GBps": 7.527034012422921
+  },
+  "reduce_scatter|128MiB": {
+   "ms": 19.02694320678711,
+   "busbw_GBps": 6.172326827469993
+  }
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "tag": "nvlink",
+ "env": {
+  "NCCL_DEBUG": "INFO",
+  "NCCL_DEBUG_SUBSYS": "INIT,GRAPH"
+ },
+ "nccl": [
+  2,
+  21,
+  5
+ ],
+ "results": {
+  "all_reduce|1MiB": {
+   "ms": 0.26419198513031006,
+   "busbw_GBps": 6.945736825039945
+  },
+  "all_gather|1MiB": {
+   "ms": 0.22937600314617157,
+   "busbw_GBps": 31.99999956108098
+  },
+  "reduce_scatter|1MiB": {
+   "ms": 0.16383999586105347,
+   "busbw_GBps": 5.600000141467902
+  },
+  "all_reduce|16MiB": {
+   "ms": 0.40806400775909424,
+   "busbw_GBps": 71.9498104261455
+  },
+  "all_gather|16MiB": {
+   "ms": 0.8023040294647217,
+   "busbw_GBps": 146.3790629075533
+  },
+  "reduce_scatter|16MiB": {
+   "ms": 0.2534399926662445,
+   "busbw_GBps": 57.92323399934831
+  },
+  "all_reduce|128MiB": {
+   "ms": 1.3496320247650146,
+   "busbw_GBps": 174.03338072160471
+  },
+  "all_gather|128MiB": {
+   "ms": 4.907520294189453,
+   "busbw_GBps": 191.44578925377132
+  },
+  "reduce_scatter|128MiB": {
+   "ms": 0.6973440051078796,
+   "busbw_GBps": 168.41115882516527
+  }
+ }
+}
