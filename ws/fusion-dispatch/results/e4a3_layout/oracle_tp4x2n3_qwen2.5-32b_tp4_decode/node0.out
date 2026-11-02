@@ -1,0 +1,28 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING 11-02 12:55:08 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 12:55:08 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 12:55:08 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 12:55:08 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 12:55:08 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 12:55:08 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 12:55:08 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 12:55:08 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 12:55:08 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 12:55:08 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 12:55:08 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 12:55:08 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 12:55:09 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 11-02 12:55:09 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+vLLM custom AR present=True disabled=True fully_connected=None max_size=None; pynccl disabled=False
+[decode graph L=4 M=96] kept 189  tp_ar=4.5568  tp_ar_vllm=5.0330  sp_nccl=4.5865  best=tp_ar  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0134}
+[decode graph L=4 M=160] kept 200  tp_ar=7.1711  tp_ar_vllm=8.2017  sp_nccl=4.2993  best=sp_nccl  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0132}
+[decode graph L=4 M=288] kept 200  tp_ar=5.7810  tp_ar_vllm=5.8071  sp_nccl=6.3396  best=tp_ar  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0121}
+[decode graph L=4 M=416] kept 200  tp_ar=7.3882  tp_ar_vllm=7.3902  sp_nccl=7.9227  best=tp_ar  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0126}
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/e4a3_layout/oracle_tp4x2n3_qwen2.5-32b_tp4_decode/guard_node0.log

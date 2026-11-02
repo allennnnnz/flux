@@ -1,0 +1,19 @@
+group,policy,regret,saving_vs_vllm,worst_rel,worst_point,right,n
+all,decider,0.00000,0.08919,0.0000,decode 96,7,7
+all,decider_model,0.00000,0.08919,0.0000,decode 96,7,7
+all,R1,0.09792,0.00000,1.2085,decode 288,4,7
+all,R1p,0.13251,-0.03150,1.2085,decode 288,1,7
+all,R2,0.09792,0.00000,1.2085,decode 288,4,7
+all,R3,0.04049,0.05231,0.0906,decode 416,3,7
+decode,decider,0.00000,0.33410,0.0000,decode 96,4,4
+decode,decider_model,0.00000,0.33410,0.0000,decode 96,4,4
+decode,R1,0.50172,0.00000,1.2085,decode 288,1,4
+decode,R1p,0.50172,0.00000,1.2085,decode 288,1,4
+decode,R2,0.50172,0.00000,1.2085,decode 288,1,4
+decode,R3,0.03026,0.31394,0.0906,decode 416,3,4
+prefill,decider,0.00000,0.00000,0.0000,prefill 1280,3,3
+prefill,decider_model,0.00000,0.00000,0.0000,prefill 1280,3,3
+prefill,R1,0.00000,0.00000,0.0000,prefill 1280,3,3
+prefill,R1p,0.04298,-0.04298,0.0693,prefill 1280,0,3
+prefill,R2,0.00000,0.00000,0.0000,prefill 1280,3,3
+prefill,R3,0.04298,-0.04298,0.0693,prefill 1280,0,3

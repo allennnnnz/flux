@@ -725,3 +725,107 @@ policy           regret   saving vs vLLM   worst point   right
 - `launch_xnode.sh` 加 `XNODE_HCAS_158/159`；錨點 4+4 busbw 13.8–14.9（預測 13–16，成立）。
 - `e4a_layout_v2.py` 加 `E4A_NEW_DECODE/PREFILL` 環境變數（預設不變）；`run_e4a3_v1.sh` 由 E4a2 版改出，事先登記 E1–E3。
 
+
+## 2026-11-02 · E4a3 自動流程完成（run_e4a3_v1.sh 自動追加；結論待人工撰寫）
+
+```
+E4a2 tp4x2n3 llama3-8b TP=4 set=new (FRESH points, pre-registered)
+phase        M     vLLM       SP        best       model       final  pred dT  meas dT probe
+decode      96    4.046    3.680     sp_nccl     sp_nccl     sp_nccl    0.174    0.366 0
+decode     160    6.137    3.404     sp_nccl     sp_nccl     sp_nccl    0.688    2.733 0
+decode     288   10.872    4.923     sp_nccl     sp_nccl     sp_nccl    1.461    5.949 0
+decode     416    6.027    6.573  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.097   -0.546 0
+prefill   1280   11.828   12.647  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.072   -0.820 1
+prefill   2560   26.582   28.286  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.389   -1.704 0
+prefill   3584   35.956   36.628  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.199   -0.672 1
+
+policy           regret   saving vs vLLM   worst point   right
+[all] 7 points
+  decider           0.00%          8.9%      0.0% at decode M=96      7/7
+  decider_model     0.00%          8.9%      0.0% at decode M=96      7/7
+  R1                9.79%          0.0%    120.9% at decode M=288     4/7
+  R1p              13.25%         -3.2%    120.9% at decode M=288     1/7
+  R2                9.79%          0.0%    120.9% at decode M=288     4/7
+  R3                4.05%          5.2%      9.1% at decode M=416     3/7
+[decode] 4 points
+  decider           0.00%         33.4%      0.0% at decode M=96      4/4
+  decider_model     0.00%         33.4%      0.0% at decode M=96      4/4
+  R1               50.17%          0.0%    120.9% at decode M=288     1/4
+  R1p              50.17%          0.0%    120.9% at decode M=288     1/4
+  R2               50.17%          0.0%    120.9% at decode M=288     1/4
+  R3                3.03%         31.4%      9.1% at decode M=416     3/4
+[prefill] 3 points
+  decider           0.00%          0.0%      0.0% at prefill M=1280    3/3
+  decider_model     0.00%          0.0%      0.0% at prefill M=1280    3/3
+  R1                0.00%          0.0%      0.0% at prefill M=1280    3/3
+  R1p               4.30%         -4.3%      6.9% at prefill M=1280    0/3
+  R2                0.00%          0.0%      0.0% at prefill M=1280    3/3
+  R3                4.30%         -4.3%      6.9% at prefill M=1280    0/3
+
+E4a2 tp4x2n3 qwen2.5-32b TP=4 set=new (FRESH points, pre-registered)
+phase        M     vLLM       SP        best       model       final  pred dT  meas dT probe
+decode      96    5.033    4.587     sp_nccl     sp_nccl     sp_nccl    0.402    0.446 0
+decode     160    8.202    4.299     sp_nccl     sp_nccl     sp_nccl    0.971    3.902 0
+decode     288    5.807    6.340  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.086   -0.532 0
+decode     416    7.390    7.923  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.084   -0.532 0
+prefill   1280   16.898   18.564  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.476   -1.666 0
+prefill   2560   34.108   34.716  tp_ar_vllm  tp_ar_vllm     sp_nccl   -0.051   -0.607 1
+prefill   3584   48.358   49.597  tp_ar_vllm     sp_nccl  tp_ar_vllm    0.083   -1.239 1
+
+policy           regret   saving vs vLLM   worst point   right
+[all] 7 points
+  decider           0.50%          3.0%      1.8% at prefill M=2560    6/7
+  decider_model     1.02%          2.5%      2.6% at prefill M=3584    6/7
+  R1                3.58%          0.0%     90.8% at decode M=160     5/7
+  R1p               6.47%         -2.8%     90.8% at decode M=160     2/7
+  R2                3.58%          0.0%     90.8% at decode M=160     5/7
+  R3                3.77%         -0.2%      9.9% at prefill M=1280    2/7
+[decode] 4 points
+  decider           0.00%         16.5%      0.0% at decode M=96      4/4
+  decider_model     0.00%         16.5%      0.0% at decode M=96      4/4
+  R1               19.69%          0.0%     90.8% at decode M=160     2/4
+  R1p              19.69%          0.0%     90.8% at decode M=160     2/4
+  R2               19.69%          0.0%     90.8% at decode M=160     2/4
+  R3                4.82%         12.4%      9.2% at decode M=288     2/4
+[prefill] 3 points
+  decider           0.61%         -0.6%      1.8% at prefill M=2560    2/3
+  decider_model     1.25%         -1.2%      2.6% at prefill M=3584    2/3
+  R1                0.00%          0.0%      0.0% at prefill M=1280    3/3
+  R1p               3.53%         -3.5%      9.9% at prefill M=1280    0/3
+  R2                0.00%          0.0%      0.0% at prefill M=1280    3/3
+  R3                3.53%         -3.5%      9.9% at prefill M=1280    0/3
+
+E4a2 tp8x2n3 qwen2.5-32b TP=8 set=new (FRESH points, pre-registered)
+phase        M     vLLM       SP        best       model       final  pred dT  meas dT probe
+decode      96    1.973    2.323  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.113   -0.350 0
+decode     160    2.788    3.082  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.097   -0.294 0
+decode     288    4.407    4.572  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.075   -0.165 0
+decode     416    5.872    6.805  tp_ar_vllm  tp_ar_vllm  tp_ar_vllm   -0.218   -0.933 0
+prefill   1280   15.295   15.124     sp_nccl     sp_nccl     sp_nccl    0.032    0.171 1
+prefill   2560   29.438   28.819     sp_nccl     sp_nccl     sp_nccl    0.072    0.620 1
+prefill   3584   43.304   43.169     sp_nccl  tp_ar_vllm  tp_ar_vllm   -0.181    0.136 1
+
+policy           regret   saving vs vLLM   worst point   right
+[all] 7 points
+  decider           0.13%          0.8%      0.3% at prefill M=3584    6/7
+  decider_model     0.13%          0.8%      0.3% at prefill M=3584    6/7
+  R1                0.91%          0.0%      2.1% at prefill M=2560    4/7
+  R1p               0.00%          0.9%      0.0% at decode M=96      7/7
+  R2                0.91%          0.0%      2.1% at prefill M=2560    4/7
+  R3                1.71%         -0.8%     17.7% at decode M=96      3/7
+[decode] 4 points
+  decider           0.00%          0.0%      0.0% at decode M=96      4/4
+  decider_model     0.00%          0.0%      0.0% at decode M=96      4/4
+  R1                0.00%          0.0%      0.0% at decode M=96      4/4
+  R1p               0.00%          0.0%      0.0% at decode M=96      4/4
+  R2                0.00%          0.0%      0.0% at decode M=96      4/4
+  R3               11.58%        -11.6%     17.7% at decode M=96      0/4
+[prefill] 3 points
+  decider           0.16%          0.9%      0.3% at prefill M=3584    2/3
+  decider_model     0.16%          0.9%      0.3% at prefill M=3584    2/3
+  R1                1.06%          0.0%      2.1% at prefill M=2560    0/3
+  R1p               0.00%          1.1%      0.0% at prefill M=1280    3/3
+  R2                1.06%          0.0%      2.1% at prefill M=2560    0/3
+  R3                0.00%          1.1%      0.0% at prefill M=1280    3/3
+
+```
