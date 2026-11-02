@@ -1,0 +1,63 @@
+torchrun --node_rank=0 --nproc_per_node=8 --nnodes=1 --rdzv_endpoint=127.0.0.1:23456 ws/fusion-dispatch/scripts/probe_gemm_v1.py --model qwen2.5-32b --Ms 96,160,288,416,1280,2560,3584 --out_dir ws/fusion-dispatch/results/e4a3_layout/gemm
+W1102 12:42:45.118000 872084 site-packages/torch/distributed/run.py:792] 
+W1102 12:42:45.118000 872084 site-packages/torch/distributed/run.py:792] *****************************************
+W1102 12:42:45.118000 872084 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1102 12:42:45.118000 872084 site-packages/torch/distributed/run.py:792] *****************************************
+[qwen2.5-32b_tp8 qkv M=96 gpu] kept 50/50  c_cublas=0.02970  c_fluxgemm=0.07782
+[qwen2.5-32b_tp8 qkv M=96 steady] kept 20/20  c_cublas=0.01856  c_fluxgemm=0.06090
+[qwen2.5-32b_tp8 qkv M=160 gpu] kept 50/50  c_cublas=0.02765  c_fluxgemm=0.06246
+[qwen2.5-32b_tp8 qkv M=160 steady] kept 20/20  c_cublas=0.02426  c_fluxgemm=0.05766
+[qwen2.5-32b_tp8 qkv M=288 gpu] kept 50/50  c_cublas=0.03379  c_fluxgemm=0.05837
+[qwen2.5-32b_tp8 qkv M=288 steady] kept 20/20  c_cublas=0.02566  c_fluxgemm=0.05139
+[qwen2.5-32b_tp8 qkv M=416 gpu] kept 50/50  c_cublas=0.03891  c_fluxgemm=0.05530
+[qwen2.5-32b_tp8 qkv M=416 steady] kept 20/20  c_cublas=0.03440  c_fluxgemm=0.04960
+[qwen2.5-32b_tp8 qkv M=1280 gpu] kept 50/50  c_cublas=0.07270  c_fluxgemm=0.07270
+[qwen2.5-32b_tp8 qkv M=1280 steady] kept 20/20  c_cublas=0.07014  c_fluxgemm=0.06605
+[qwen2.5-32b_tp8 qkv M=2560 gpu] kept 50/50  c_cublas=0.11162  c_fluxgemm=0.12186
+[qwen2.5-32b_tp8 qkv M=2560 steady] kept 20/20  c_cublas=0.11373  c_fluxgemm=0.12125
+[qwen2.5-32b_tp8 qkv M=3584 gpu] kept 50/50  c_cublas=0.13517  c_fluxgemm=0.17920
+[qwen2.5-32b_tp8 qkv M=3584 steady] kept 20/20  c_cublas=0.14032  c_fluxgemm=0.17843
+[qwen2.5-32b_tp8 gate_up M=96 gpu] kept 50/50  c_cublas=0.07680  c_fluxgemm=0.08602
+[qwen2.5-32b_tp8 gate_up M=96 steady] kept 20/20  c_cublas=0.06243  c_fluxgemm=0.07750
+[qwen2.5-32b_tp8 gate_up M=160 gpu] kept 50/50  c_cublas=0.08806  c_fluxgemm=0.09421
+[qwen2.5-32b_tp8 gate_up M=160 steady] kept 20/20  c_cublas=0.07997  c_fluxgemm=0.08346
+[qwen2.5-32b_tp8 gate_up M=288 gpu] kept 50/50  c_cublas=0.13414  c_fluxgemm=0.15565
+[qwen2.5-32b_tp8 gate_up M=288 steady] kept 20/20  c_cublas=0.13315  c_fluxgemm=0.14698
+[qwen2.5-32b_tp8 gate_up M=416 gpu] kept 50/50  c_cublas=0.13414  c_fluxgemm=0.15258
+[qwen2.5-32b_tp8 gate_up M=416 steady] kept 20/20  c_cublas=0.14221  c_fluxgemm=0.15734
+[qwen2.5-32b_tp8 gate_up M=1280 gpu] kept 50/50  c_cublas=0.38605  c_fluxgemm=0.35635
+[qwen2.5-32b_tp8 gate_up M=1280 steady] kept 20/20  c_cublas=0.41878  c_fluxgemm=0.37910
+[qwen2.5-32b_tp8 gate_up M=2560 gpu] kept 50/50  c_cublas=0.64614  c_fluxgemm=0.70451
+[qwen2.5-32b_tp8 gate_up M=2560 steady] kept 20/20  c_cublas=0.71741  c_fluxgemm=0.77427
+[qwen2.5-32b_tp8 gate_up M=3584 gpu] kept 50/50  c_cublas=0.91648  c_fluxgemm=1.00762
+[qwen2.5-32b_tp8 gate_up M=3584 steady] kept 17/20  c_cublas=1.01325  c_fluxgemm=1.09299
+[qwen2.5-32b_tp8 o M=96 gpu] kept 50/50  c_cublas=0.01638  c_fluxgemm_only=0.02355
+[qwen2.5-32b_tp8 o M=96 steady] kept 20/20  c_cublas=0.01766  c_fluxgemm_only=0.02106
+[qwen2.5-32b_tp8 o M=160 gpu] kept 50/50  c_cublas=0.02048  c_fluxgemm_only=0.02355
+[qwen2.5-32b_tp8 o M=160 steady] kept 20/20  c_cublas=0.02374  c_fluxgemm_only=0.02205
+[qwen2.5-32b_tp8 o M=288 gpu] kept 50/50  c_cublas=0.02150  c_fluxgemm_only=0.03277
+[qwen2.5-32b_tp8 o M=288 steady] kept 20/20  c_cublas=0.03981  c_fluxgemm_only=0.03312
+[qwen2.5-32b_tp8 o M=416 gpu] kept 50/50  c_cublas=0.02765  c_fluxgemm_only=0.03072
+[qwen2.5-32b_tp8 o M=416 steady] kept 20/20  c_cublas=0.02490  c_fluxgemm_only=0.02803
+[qwen2.5-32b_tp8 o M=1280 gpu] kept 50/50  c_cublas=0.04915  c_fluxgemm_only=0.05427
+[qwen2.5-32b_tp8 o M=1280 steady] kept 20/20  c_cublas=0.04483  c_fluxgemm_only=0.05328
+[qwen2.5-32b_tp8 o M=2560 gpu] kept 50/50  c_cublas=0.09011  c_fluxgemm_only=0.09626
+[qwen2.5-32b_tp8 o M=2560 steady] kept 20/20  c_cublas=0.08819  c_fluxgemm_only=0.09600
+[qwen2.5-32b_tp8 o M=3584 gpu] kept 50/50  c_cublas=0.11674  c_fluxgemm_only=0.12902
+[qwen2.5-32b_tp8 o M=3584 steady] kept 20/20  c_cublas=0.11949  c_fluxgemm_only=0.13242
+[qwen2.5-32b_tp8 down M=96 gpu] kept 50/50  c_cublas=0.04813  c_fluxgemm_only=0.05530
+[qwen2.5-32b_tp8 down M=96 steady] kept 20/20  c_cublas=0.03597  c_fluxgemm_only=0.04726
+[qwen2.5-32b_tp8 down M=160 gpu] kept 50/50  c_cublas=0.06042  c_fluxgemm_only=0.07475
+[qwen2.5-32b_tp8 down M=160 steady] kept 20/20  c_cublas=0.05149  c_fluxgemm_only=0.06528
+[qwen2.5-32b_tp8 down M=288 gpu] kept 50/50  c_cublas=0.06349  c_fluxgemm_only=0.10854
+[qwen2.5-32b_tp8 down M=288 steady] kept 20/20  c_cublas=0.05494  c_fluxgemm_only=0.11536
+[qwen2.5-32b_tp8 down M=416 gpu] kept 50/50  c_cublas=0.09421  c_fluxgemm_only=0.09728
+[qwen2.5-32b_tp8 down M=416 steady] kept 20/20  c_cublas=0.09011  c_fluxgemm_only=0.09850
+[qwen2.5-32b_tp8 down M=1280 gpu] kept 50/50  c_cublas=0.18227  c_fluxgemm_only=0.20275
+[qwen2.5-32b_tp8 down M=1280 steady] kept 20/20  c_cublas=0.19226  c_fluxgemm_only=0.22419
+[qwen2.5-32b_tp8 down M=2560 gpu] kept 50/50  c_cublas=0.35635  c_fluxgemm_only=0.38912
+[qwen2.5-32b_tp8 down M=2560 steady] kept 20/20  c_cublas=0.38934  c_fluxgemm_only=0.41933
+[qwen2.5-32b_tp8 down M=3584 gpu] kept 50/50  c_cublas=0.53094  c_fluxgemm_only=0.55603
+[qwen2.5-32b_tp8 down M=3584 steady] kept 20/20  c_cublas=0.57667  c_fluxgemm_only=0.59757
+wrote gemm_qwen2.5-32b_tp8.csv (14 s after init)
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=ws/fusion-dispatch/results/e4a3_layout/gemm/guard_qwen2.5-32b_tp8.log

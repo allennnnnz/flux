@@ -1,0 +1,8 @@
+model,tp,phase,M,t_tp_pred_ms,t_sp_pred_ms,delta_ms,decider_model,probe,R1,R1p,R2,R3
+qwen2.5-32b,4,decode,96,1.2362,0.8339,0.4022,sp_nccl,0,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,decode,160,1.9594,0.9886,0.9708,sp_nccl,0,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,decode,288,1.3102,1.3958,-0.0855,tp_ar_vllm,0,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,decode,416,1.6687,1.7528,-0.0841,tp_ar_vllm,0,tp_ar_vllm,tp_ar_vllm,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,prefill,1280,4.4945,4.9706,-0.4761,tp_ar_vllm,0,tp_ar_vllm,sp_nccl,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,prefill,2560,9.3301,9.3810,-0.0509,tp_ar_vllm,1,tp_ar_vllm,sp_nccl,tp_ar_vllm,sp_nccl
+qwen2.5-32b,4,prefill,3584,12.5424,12.4593,0.0830,sp_nccl,1,tp_ar_vllm,sp_nccl,tp_ar_vllm,sp_nccl

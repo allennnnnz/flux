@@ -1,1 +1,39 @@
 [E4a3] 2026-11-02 12:42:40 start (pid 871755)
+[E4a3] 2026-11-02 12:42:40 git: committed 67ec82c fusion-dispatch E4a3: setup (frozen E4a2 method, fresh M points, changed cross-node env: 6 rails, GPUs 0,1,6,7 / 0,6; pre-registered E1-E3)
+[E4a3] 2026-11-02 12:42:42 git: pushed 67ec82c
+[E4a3] 2026-11-02 12:42:42 == 1. single-GPU cuBLAS at the new M (96,160,288,416,1280,2560,3584), css-host-158
+[E4a3] 2026-11-02 12:43:14 gemm tp8 qwen2.5-32b exit 0 END rc=0 CLEAN
+[E4a3] 2026-11-02 12:43:38 gemm tp4 qwen2.5-32b exit 0 END rc=0 CLEAN
+[E4a3] 2026-11-02 12:43:58 gemm tp4 llama3-8b exit 0 END rc=0 CLEAN
+[E4a3] 2026-11-02 12:43:58 == 2. cross-node calibration at exact sizes
+[run_xnode] 2026-11-02 12:46:59 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+[run_xnode] 2026-11-02 12:52:05 done: node0 rc=0 (END rc=0 CLEAN); node1 rc=0 (END rc=0 CLEAN)
+wrote common/cost_model/hw_profiles/xnode158-159_tp8x2n3_gpu_block.json  (W=8, 22 AR sizes)
+wrote common/cost_model/hw_profiles/xnode158-159_tp8x2n3_steady_block.json  (W=8, 22 AR sizes)
+wrote common/cost_model/hw_profiles/xnode158-159_tp4x2n3_gpu_block.json  (W=4, 40 AR sizes)
+wrote common/cost_model/hw_profiles/xnode158-159_tp4x2n3_steady_block.json  (W=4, 40 AR sizes)
+[E4a3] 2026-11-02 12:52:05 == 3. model decisions (new points) and sanity predictions (old points)
+wrote ws/fusion-dispatch/results/e4a3_layout/predictions_tp8x2n3_qwen2.5-32b_tp8_new.csv
+  decode  M=96    TP+AR 0.5483  SP 0.6613  delta  -0.1130 -> tp_ar_vllm probe=0  (R1p tp_ar_vllm)
+  decode  M=160   TP+AR 0.7299  SP 0.8268  delta  -0.0969 -> tp_ar_vllm probe=0  (R1p tp_ar_vllm)
+  decode  M=288   TP+AR 1.0899  SP 1.1647  delta  -0.0749 -> tp_ar_vllm probe=0  (R1p tp_ar_vllm)
+  decode  M=416   TP+AR 1.4314  SP 1.6492  delta  -0.2178 -> tp_ar_vllm probe=0  (R1p tp_ar_vllm)
+  prefill M=1280  TP+AR 3.9718  SP 3.9395  delta   0.0322 -> sp_nccl    probe=1  (R1p sp_nccl)
+  prefill M=2560  TP+AR 7.6926  SP 7.6208  delta   0.0718 -> sp_nccl    probe=1  (R1p sp_nccl)
+  prefill M=3584  TP+AR 11.4147  SP 11.5957  delta  -0.1811 -> tp_ar_vllm probe=1  (R1p sp_nccl)
+wrote ws/fusion-dispatch/results/e4a3_layout/predictions_tp4x2n3_qwen2.5-32b_tp4_new.csv
+  decode  M=96    TP+AR 1.2362  SP 0.8339  delta   0.4022 -> sp_nccl    probe=0  (R1p tp_ar_vllm)
+  decode  M=160   TP+AR 1.9594  SP 0.9886  delta   0.9708 -> sp_nccl    probe=0  (R1p tp_ar_vllm)
+  decode  M=288   TP+AR 1.3102  SP 1.3958  delta  -0.0855 -> tp_ar_vllm probe=0  (R1p tp_ar_vllm)
+  decode  M=416   TP+AR 1.6687  SP 1.7528  delta  -0.0841 -> tp_ar_vllm probe=0  (R1p tp_ar_vllm)
+  prefill M=1280  TP+AR 4.4945  SP 4.9706  delta  -0.4761 -> tp_ar_vllm probe=0  (R1p sp_nccl)
+  prefill M=2560  TP+AR 9.3301  SP 9.3810  delta  -0.0509 -> tp_ar_vllm probe=1  (R1p sp_nccl)
+  prefill M=3584  TP+AR 12.5424  SP 12.4593  delta   0.0830 -> sp_nccl    probe=1  (R1p sp_nccl)
+wrote ws/fusion-dispatch/results/e4a3_layout/predictions_tp4x2n3_llama3-8b_tp4_new.csv
+  decode  M=96    TP+AR 1.0336  SP 0.8597  delta   0.1739 -> sp_nccl    probe=0  (R1p tp_ar_vllm)
+  decode  M=160   TP+AR 1.4729  SP 0.7853  delta   0.6875 -> sp_nccl    probe=0  (R1p tp_ar_vllm)
+  decode  M=288   TP+AR 2.5033  SP 1.0426  delta   1.4608 -> sp_nccl    probe=0  (R1p tp_ar_vllm)
+  decode  M=416   TP+AR 1.2882  SP 1.3848  delta  -0.0966 -> tp_ar_vllm probe=0  (R1p tp_ar_vllm)
+  prefill M=1280  TP+AR 3.0221  SP 3.0942  delta  -0.0721 -> tp_ar_vllm probe=1  (R1p sp_nccl)
+  prefill M=2560  TP+AR 6.6527  SP 7.0418  delta  -0.3892 -> tp_ar_vllm probe=0  (R1p sp_nccl)
+  prefill M=3584  TP+AR 9.1422  SP 9.3414  delta  -0.1993 -> tp_ar_vllm probe=1  (R1p sp_nccl)
