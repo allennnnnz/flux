@@ -1,0 +1,3 @@
+E4a3 anchor prediction (registered 2026-11-02 before the run): NCCL 4+4 (GPUs 0,1,6,7 per node, rails 1,2,7,8,
+per-host HCA lists) all_gather / reduce_scatter / all_reduce busbw at 256 MiB and 1 GiB: 13-16 GB/s
+(E4 anchor 2026-10-03 with GPUs 0,1,4,5: 14.69-14.83, results/e4_anchor_nccl/tc104_ch16_ppn4). Outside +-20% -> suspect the setup.

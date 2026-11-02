@@ -27,6 +27,14 @@ NODE_RANK=$1; NPROC=$2; ENVK=$3; GLOG=$4; shift 4
 FLUX=/home/rogerlee/flux
 VENV=/home/rogerlee/venvs/vllm085-flux
 HCAS="mlx5_0,mlx5_1,mlx5_2,mlx5_4,mlx5_5,mlx5_6,mlx5_7"
+# 2026-11-02 (E4a3): css-host-159 lost the enp150s0 NIC (rails 5/6) and its rail 7/8 ports are now named mlx5_4/5,
+# while css-host-158's mlx5_3 (rail 4) has an address again -> the device names of a rail differ between the nodes.
+# XNODE_HCAS_158 / XNODE_HCAS_159 override the list per host (defaults unchanged); choose GPUs whose PXB NIC exists on
+# both nodes (XNODE_GPUS), otherwise a GPU on one node talks to a different rail (separate subnets, no routing).
+case "$(hostname)" in
+  css-host-158) HCAS=${XNODE_HCAS_158:-$HCAS};;
+  css-host-159) HCAS=${XNODE_HCAS_159:-$HCAS};;
+esac
 case "${XNODE_GPUS:-}" in
   "") case $NPROC in 8) GPUS=0,1,2,3,4,5,6,7;; 4) GPUS=0,1,4,5;; 2) GPUS=0,4;; 1) GPUS=0;; *) GPUS=$(seq -s, 0 $((NPROC - 1)));; esac;;
   *) GPUS=$XNODE_GPUS;;

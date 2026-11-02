@@ -38,6 +38,10 @@ OLD = os.path.join(WS, "results", "e4a_layout")
 HIDDEN = {"qwen2.5-32b": 5120, "llama3-8b": 4096}
 SETS = {"new": {"decode": [64, 192, 320, 448], "prefill": [768, 1536, 3072]},
         "old": {"decode": [32, 128, 256, 384, 512], "prefill": [1024, 2048, 4096]}}
+# E4a3 (2026-11-02): another set of fresh points through the same frozen method; defaults above unchanged (E4a2).
+for _ph, _env in (("decode", "E4A_NEW_DECODE"), ("prefill", "E4A_NEW_PREFILL")):
+    if os.environ.get(_env):
+        SETS["new"][_ph] = [int(x) for x in os.environ[_env].split(",")]
 MODE = {"decode": "gpu", "prefill": "steady"}
 EPS = 0.03
 DEPLOY = ["tp_ar_vllm", "sp_nccl"]

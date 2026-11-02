@@ -717,3 +717,11 @@ policy           regret   saving vs vLLM   worst point   right
 - 假說：`GemmRS_multinode` 連續兩次呼叫節點內 GemmRS 之間沒有同步（sm80 的 forward_barrier 是空操作），跑得快的 rank 把第二次的資料寫進還在複製第一次結果的 rank → 只有保留第一次結果的節點 0 算錯（與症狀吻合）。
 - 測試腳本 `scripts/xnode_flux_rs_smoke_v2.py`；159 被同帳號的 `sglang::server` 佔用（8 卡各約 74 GB），守衛在 preflight 中止 → **假說未驗證**（`results/e4_flux_smoke/rsmn_v2_barrier_ppn4/README.md`）。
 - 教授指派新方向（PCIe 通道 + 異質晶片），主線轉到 `ws/hetero-proxy`；本 ws 的跨節點 Flux 工作暫停。
+
+## 2026-11-02 · hetero-proxy 的 boss 兼 worker session · E4a3 啟動
+
+- 使用者：159 現在沒人用，測跨節點慢連線上決策器的表現（並同意使用 159）。
+- 唯讀檢查：159 GPU 全閒置；RDMA 只剩 mlx5_0–5（enp150s0 不見，rail 7/8 改名 mlx5_4/5）；158 的 mlx5_3 有 IPv4 了；兩台 GPU↔NIC 拓撲相同（159 的 GPU4/5 沒有 PXB 網卡）。
+- `launch_xnode.sh` 加 `XNODE_HCAS_158/159`；錨點 4+4 busbw 13.8–14.9（預測 13–16，成立）。
+- `e4a_layout_v2.py` 加 `E4A_NEW_DECODE/PREFILL` 環境變數（預設不變）；`run_e4a3_v1.sh` 由 E4a2 版改出，事先登記 E1–E3。
+
