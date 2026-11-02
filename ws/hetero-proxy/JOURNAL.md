@@ -305,3 +305,13 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - 使用者問「8 張 A100 能否只走 PCIe、變慢連線」→ `scripts/pcieonly/pcie_only_check_v1.py`、`run_check_v1.sh`（all / noib / intra 三段，guard CLEAN）：
   只關 P2P → RoCE 迴環逾時；再關 IB → 16 條走 TCP socket（3.5 GB/s）；再加 NET_DISABLE_INTRA → 全 SHM，busbw 7.4–7.6 GB/s（NVLink 168–191，慢 23–25×）。寫入 params.json（nccl_pcie_only_mode）。
 - **留給下個 session**：使用者決定是否以「同一台 A100 的 NVLink vs PCIe-only ＋ V100」做決策器論文；文獻調查剩引用追蹤與能耗／工具兩路。
+
+## 2026-11-02 · boss 兼 worker · PCIe 版 Flux 構想、搬運干擾文獻、選項總表（未佔 GPU）
+
+- 使用者問「參考 Flux 切 tile 做 PCIe 版」→ 估算：只走 PCIe 時通訊遠長於計算，只靠重疊上限低（FC1 約 1.25×、QKV 約 1.03×）；
+  主賣點改為「上傳一次大家下載」＋拓撲感知＋copy engine＋hxb tile 旗標 → 估 FC1 約 1.75×、QKV 約 1.45×（推論，未驗證）。對手 FlashOverlap、Compass、TCCL。
+- 使用者問「一邊搬運一邊推論互相影響，沒人做過嗎」→ 搜尋：只有 NCCL #2218 / #1023、PyTorch 論壇；論文只碰邊（ChunkFlow、Predictable LLM Serving、Multipath Memory Access）；
+  NVLink 機器上端到端多半小或可用設定修，嚴重的是搬運和通訊走同一條 PCIe → 併入 PCIe 版 Flux 的排程。
+- 使用者要向教授報告 → STATUS §0 寫入選項總表 A–E（推薦 A，B 併入當選擇器）。
+- **留給下個 session**：等使用者報告教授後的決定；選 A 則先做驗證第 1、2 步（事前登記，guard＋tmux）。
+
