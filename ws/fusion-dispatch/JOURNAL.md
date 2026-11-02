@@ -842,4 +842,6 @@ policy           regret   saving vs vLLM   worst point   right
 - 重讀 Compass 全文（WebFetch arxiv html）：選擇器是封閉式成本模型（公式 2–8，O(1)），候選只有「融合（自家 kernel）」與「切 d 塊」；沒有開源；只在序列平行的切法內選。
 - 實作：`decomp_v1.py`（切塊，c10d async 集合通訊＋GEMM 交錯）、`validate_block_v5.py`、`calibrate_compass_v1.py`（每運算 comp / comm / dec<d>）、`compass_model_v1.py`（fit / predict / report）、`run_c1_v1.sh`。
 - 冒煙測試（3–5 輪，已在登記中揭露）：結果正確；切塊確實有重疊（gate_up M=2048：1.98 → 1.64 ms）；M=1280 prefill 切越多越慢；decode M=96 d=4 慢 3 倍；選擇器用冒煙參數在 decode 多選 d=4 → 登記兩種 Compass（照字面／只在 prefill 用）。
+- C1 v1 標準答案在第一組（Qwen TP8 decode graph）卡死 30 分鐘：c10d async 集合通訊錄進 CUDA graph 重播後，對齊 all_reduce 逾時。停止程序時，第一次用 pgrep 樣式誤殺自己的 shell；第二次自動權限擋下「用 nvidia-smi 列的 PID 直接殺」，改成先逐一確認擁有者與指令再停。
+- 改寫 v2（PyNccl＋side stream），壓力測試剛開始使用者就要求暫停 → 兩台確認無殘留。**留給下個 session**：先跑 v6 decode 壓力測試（200 輪 × 4 點），不卡才重跑 C1（v2 流程要重新校準與登記）。
 

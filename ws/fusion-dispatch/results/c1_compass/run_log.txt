@@ -96,3 +96,6 @@ wrote ws/fusion-dispatch/results/c1_compass/compass_table_c1_llama3-8b_tp4.json,
   prefill M=3584  gate_up  Tcomp 0.9197 Tcomm 1.8760 lambda   0.490 d_eq5=4 -> d=4
   prefill M=3584  o        Tcomp 0.1403 Tcomm 1.8752 lambda   0.075 d_eq5=16 -> d=1
   prefill M=3584  down     Tcomp 0.4975 Tcomm 1.8752 lambda   0.265 d_eq5=8 -> d=1
+[C1] 2026-11-02 13:13:48 git: committed f53a231 fusion-dispatch C1: Compass calibration, fitted eta(d), pre-registered Compass choices (before the oracle run)
+[C1] 2026-11-02 13:13:49 git: pushed f53a231
+[C1] 2026-11-02 13:13:49 == 3. oracle: vLLM default, SP d=1, SP d=2/4/8/16, Compass (200 rounds, interleaved; decode in CUDA graphs)

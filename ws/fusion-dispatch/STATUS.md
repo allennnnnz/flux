@@ -17,6 +17,9 @@
   融合 kernel 拿不到，跨節點也不能跑 → 在此環境 Compass＝「序列平行，每個運算選切塊數 d」。兩邊吃同一組 GEMM 實測與通訊曲線。
 - `validate_block_v5.py` 新增 `sp_dec<d>`、`sp_compass`（decode 也能錄進 CUDA graph，冒煙測試過）。
 - 事先登記 C1-1..4（`scripts/run_c1_v1.sh` 開頭）；在 E4a3 的 21 點，decode 與 prefill 都用所有做法交錯重量標準答案。tmux `c1`，結果 `results/c1_compass/`。
+- **C1 v1 中止（13:13–13:43）**：校準與 Compass 選擇已登記（`f53a231`）；標準答案第一組（Qwen TP8 decode，CUDA graph）**卡死**——c10d 非同步集合通訊錄進 graph 後重播 200 輪時，每輪的對齊 all_reduce 逾時（`results/c1_compass/oracle_c1_qwen2.5-32b_tp8_decode/node*.out`）。已手動停止（只停自己的程序）。
+- **C1 v2 已寫好未跑**：`decomp_v2.py`（PyNccl＋專用 stream＋event，vLLM 在 graph 內的做法）、`validate_block_v6.py`（加 `sp_dec1`）、`calibrate_compass_v2.py`。壓力測試開跑後使用者要求暫停（2026-11-02），兩台已確認無殘留程序。
+- **使用者 11-02：先暫停實驗，準備隔天向教授報告「同卡同時上傳下載會崩落」的發現。**
 
 **最新（2026-11-02，由 hetero-proxy 的 boss 兼 worker session 執行；使用者：159 沒人用，趕快測跨節點慢連線上的決策器）**：
 - E4a3 = 凍結的 E4a2 方法（`e4a_layout_v2.py`）在**另一組新點**（decode 96/160/288/416、prefill 1280/2560/3584）、**變動後的跨節點環境**上重測。

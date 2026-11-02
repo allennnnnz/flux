@@ -1,0 +1,96 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING 11-02 13:14:01 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:14:01 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:14:01 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:14:02 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:14:02 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:14:02 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:14:02 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:14:02 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:14:02 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:14:02 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:14:02 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:14:02 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:14:02 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:14:02 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:14:02 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:14:02 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:14:02 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:14:02 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:14:02 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:14:02 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:14:02 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:14:02 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:14:02 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:14:02 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:14:02 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 11-02 13:14:02 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 11-02 13:14:02 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 11-02 13:14:02 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+vLLM custom AR present=True disabled=True fully_connected=None max_size=None; pynccl disabled=False
+[rank2]:[E1102 13:24:03.955452162 ProcessGroupNCCL.cpp:629] [Rank 2] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1313, OpType=_REDUCE_SCATTER_BASE, NumelIn=245760, NumelOut=30720, Timeout(ms)=600000) ran for 600032 milliseconds before timing out.
+[rank2]:[E1102 13:24:03.958048637 ProcessGroupNCCL.cpp:2168] [PG ID 1 PG GUID 1 Rank 2]  failure detected by watchdog at work sequence id: 1313 PG status: last enqueued work: 1313, last completed work: 1312
+[rank2]:[E1102 13:24:03.958093904 ProcessGroupNCCL.cpp:667] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank0]:[E1102 13:24:03.966410952 ProcessGroupNCCL.cpp:629] [Rank 0] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1313, OpType=_REDUCE_SCATTER_BASE, NumelIn=245760, NumelOut=30720, Timeout(ms)=600000) ran for 600047 milliseconds before timing out.
+[rank0]:[E1102 13:24:03.967439258 ProcessGroupNCCL.cpp:2168] [PG ID 1 PG GUID 1 Rank 0]  failure detected by watchdog at work sequence id: 1313 PG status: last enqueued work: 1313, last completed work: 1312
+[rank0]:[E1102 13:24:03.967493635 ProcessGroupNCCL.cpp:667] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank3]:[E1102 13:24:04.010276134 ProcessGroupNCCL.cpp:629] [Rank 3] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1313, OpType=_REDUCE_SCATTER_BASE, NumelIn=245760, NumelOut=30720, Timeout(ms)=600000) ran for 600090 milliseconds before timing out.
+[rank3]:[E1102 13:24:04.012274393 ProcessGroupNCCL.cpp:2168] [PG ID 1 PG GUID 1 Rank 3]  failure detected by watchdog at work sequence id: 1313 PG status: last enqueued work: 1313, last completed work: 1312
+[rank3]:[E1102 13:24:04.012344895 ProcessGroupNCCL.cpp:667] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank1]:[E1102 13:24:04.017706784 ProcessGroupNCCL.cpp:629] [Rank 1] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1314, OpType=ALLREDUCE, NumelIn=1, NumelOut=1, Timeout(ms)=600000) ran for 600060 milliseconds before timing out.
+[rank1]:[E1102 13:24:04.018707840 ProcessGroupNCCL.cpp:2168] [PG ID 1 PG GUID 1 Rank 1]  failure detected by watchdog at work sequence id: 1314 PG status: last enqueued work: 1314, last completed work: 1313
+[rank1]:[E1102 13:24:04.018770112 ProcessGroupNCCL.cpp:667] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank1]:[W1102 13:24:04.344045403 CUDAGraph.cpp:133] Warning: Waiting for pending NCCL work to finish before starting graph capture. (function operator())
+[rank0]:[E1102 13:37:55.825721860 ProcessGroupNCCL.cpp:1753] [PG ID 1 PG GUID 1 Rank 0] ProcessGroupNCCL's watchdog got stuck for 480 seconds without making progress in monitoring enqueued collectives. This typically indicates a NCCL/CUDA API (e.g., CudaEventDestroy) hang blocking the watchdog, and could be triggered by another thread holding the GIL inside a CUDA api (for example, CudaEventDestroy), or other deadlock-prone behaviors.If you suspect the watchdog is not actually stuck and a longer timeout would help, you can either increase the timeout (TORCH_NCCL_HEARTBEAT_TIMEOUT_SEC) to a larger value or disable the heartbeat monitor (TORCH_NCCL_ENABLE_MONITORING=0).If either of aforementioned helps, feel free to file an issue to PyTorch about the short timeout or false positive abort; otherwise, please attempt to debug the hang. 
+[rank2]:[E1102 13:37:56.018212524 ProcessGroupNCCL.cpp:1753] [PG ID 1 PG GUID 1 Rank 2] ProcessGroupNCCL's watchdog got stuck for 480 seconds without making progress in monitoring enqueued collectives. This typically indicates a NCCL/CUDA API (e.g., CudaEventDestroy) hang blocking the watchdog, and could be triggered by another thread holding the GIL inside a CUDA api (for example, CudaEventDestroy), or other deadlock-prone behaviors.If you suspect the watchdog is not actually stuck and a longer timeout would help, you can either increase the timeout (TORCH_NCCL_HEARTBEAT_TIMEOUT_SEC) to a larger value or disable the heartbeat monitor (TORCH_NCCL_ENABLE_MONITORING=0).If either of aforementioned helps, feel free to file an issue to PyTorch about the short timeout or false positive abort; otherwise, please attempt to debug the hang. 
+[rank3]:[E1102 13:37:56.059518644 ProcessGroupNCCL.cpp:1753] [PG ID 1 PG GUID 1 Rank 3] ProcessGroupNCCL's watchdog got stuck for 480 seconds without making progress in monitoring enqueued collectives. This typically indicates a NCCL/CUDA API (e.g., CudaEventDestroy) hang blocking the watchdog, and could be triggered by another thread holding the GIL inside a CUDA api (for example, CudaEventDestroy), or other deadlock-prone behaviors.If you suspect the watchdog is not actually stuck and a longer timeout would help, you can either increase the timeout (TORCH_NCCL_HEARTBEAT_TIMEOUT_SEC) to a larger value or disable the heartbeat monitor (TORCH_NCCL_ENABLE_MONITORING=0).If either of aforementioned helps, feel free to file an issue to PyTorch about the short timeout or false positive abort; otherwise, please attempt to debug the hang. 
+[rank1]:[E1102 13:37:56.059606073 ProcessGroupNCCL.cpp:1753] [PG ID 1 PG GUID 1 Rank 1] ProcessGroupNCCL's watchdog got stuck for 480 seconds without making progress in monitoring enqueued collectives. This typically indicates a NCCL/CUDA API (e.g., CudaEventDestroy) hang blocking the watchdog, and could be triggered by another thread holding the GIL inside a CUDA api (for example, CudaEventDestroy), or other deadlock-prone behaviors.If you suspect the watchdog is not actually stuck and a longer timeout would help, you can either increase the timeout (TORCH_NCCL_HEARTBEAT_TIMEOUT_SEC) to a larger value or disable the heartbeat monitor (TORCH_NCCL_ENABLE_MONITORING=0).If either of aforementioned helps, feel free to file an issue to PyTorch about the short timeout or false positive abort; otherwise, please attempt to debug the hang. 
+W1102 13:43:27.530000 949696 torch/distributed/elastic/agent/server/api.py:719] Received 15 death signal, shutting down workers
+W1102 13:43:27.532000 949696 torch/distributed/elastic/multiprocessing/api.py:897] Sending process 949764 closing signal SIGTERM
+W1102 13:43:27.532000 949696 torch/distributed/elastic/multiprocessing/api.py:897] Sending process 949765 closing signal SIGTERM
+W1102 13:43:27.532000 949696 torch/distributed/elastic/multiprocessing/api.py:897] Sending process 949766 closing signal SIGTERM
+W1102 13:43:27.532000 949696 torch/distributed/elastic/multiprocessing/api.py:897] Sending process 949767 closing signal SIGTERM
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/run.py", line 922, in <module>
+    main()
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 260, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/elastic/metrics/api.py", line 137, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py", line 711, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 83, in _terminate_process_handler
+    sigval = signal.Signals(signum)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/enum.py", line 688, in __call__
+    def __call__(cls, value, names=None, *, module=None, qualname=None, type=None, start=1, boundary=None):
+
+  File "/home/rogerlee/venvs/vllm085-flux/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 949696 got signal: 15

@@ -1,0 +1,52 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING 11-02 08:14:01 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 08:14:01 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 08:14:01 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 08:14:01 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 08:14:01 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 08:14:01 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 08:14:01 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 08:14:01 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 08:14:01 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 08:14:01 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 08:14:01 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 08:14:01 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 08:14:02 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 08:14:02 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 08:14:02 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 08:14:02 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 08:14:02 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 08:14:02 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 08:14:02 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 08:14:02 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 08:14:02 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 08:14:02 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 08:14:02 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 08:14:02 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 08:14:02 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 11-02 08:14:02 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 11-02 08:14:02 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 11-02 08:14:02 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+[rank6]:[E1102 08:24:03.143811125 ProcessGroupNCCL.cpp:629] [Rank 6] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1313, OpType=_REDUCE_SCATTER_BASE, NumelIn=245760, NumelOut=30720, Timeout(ms)=600000) ran for 600033 milliseconds before timing out.
+[rank6]:[E1102 08:24:03.146152130 ProcessGroupNCCL.cpp:2168] [PG ID 1 PG GUID 1 Rank 6]  failure detected by watchdog at work sequence id: 1313 PG status: last enqueued work: 1313, last completed work: 1312
+[rank6]:[E1102 08:24:03.146182955 ProcessGroupNCCL.cpp:667] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank5]:[E1102 08:24:04.192674667 ProcessGroupNCCL.cpp:629] [Rank 5] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1313, OpType=_REDUCE_SCATTER_BASE, NumelIn=245760, NumelOut=30720, Timeout(ms)=600000) ran for 600032 milliseconds before timing out.
+[rank5]:[E1102 08:24:04.193104674 ProcessGroupNCCL.cpp:2168] [PG ID 1 PG GUID 1 Rank 5]  failure detected by watchdog at work sequence id: 1313 PG status: last enqueued work: 1313, last completed work: 1312
+[rank5]:[E1102 08:24:04.193133522 ProcessGroupNCCL.cpp:667] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank7]:[E1102 08:24:04.197414685 ProcessGroupNCCL.cpp:629] [Rank 7] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1313, OpType=_REDUCE_SCATTER_BASE, NumelIn=245760, NumelOut=30720, Timeout(ms)=600000) ran for 600088 milliseconds before timing out.
+[rank7]:[E1102 08:24:04.198305684 ProcessGroupNCCL.cpp:2168] [PG ID 1 PG GUID 1 Rank 7]  failure detected by watchdog at work sequence id: 1313 PG status: last enqueued work: 1313, last completed work: 1312
+[rank7]:[E1102 08:24:04.198347671 ProcessGroupNCCL.cpp:667] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank4]:[E1102 08:24:04.240022126 ProcessGroupNCCL.cpp:629] [Rank 4] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1313, OpType=_REDUCE_SCATTER_BASE, NumelIn=245760, NumelOut=30720, Timeout(ms)=600000) ran for 600081 milliseconds before timing out.
+[rank4]:[E1102 08:24:04.240990476 ProcessGroupNCCL.cpp:2168] [PG ID 1 PG GUID 1 Rank 4]  failure detected by watchdog at work sequence id: 1313 PG status: last enqueued work: 1313, last completed work: 1312
+[rank4]:[E1102 08:24:04.241052285 ProcessGroupNCCL.cpp:667] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank4]:[E1102 08:37:55.888525146 ProcessGroupNCCL.cpp:1753] [PG ID 1 PG GUID 1 Rank 4] ProcessGroupNCCL's watchdog got stuck for 480 seconds without making progress in monitoring enqueued collectives. This typically indicates a NCCL/CUDA API (e.g., CudaEventDestroy) hang blocking the watchdog, and could be triggered by another thread holding the GIL inside a CUDA api (for example, CudaEventDestroy), or other deadlock-prone behaviors.If you suspect the watchdog is not actually stuck and a longer timeout would help, you can either increase the timeout (TORCH_NCCL_HEARTBEAT_TIMEOUT_SEC) to a larger value or disable the heartbeat monitor (TORCH_NCCL_ENABLE_MONITORING=0).If either of aforementioned helps, feel free to file an issue to PyTorch about the short timeout or false positive abort; otherwise, please attempt to debug the hang. 
+[rank5]:[E1102 08:37:55.988391993 ProcessGroupNCCL.cpp:1753] [PG ID 1 PG GUID 1 Rank 5] ProcessGroupNCCL's watchdog got stuck for 480 seconds without making progress in monitoring enqueued collectives. This typically indicates a NCCL/CUDA API (e.g., CudaEventDestroy) hang blocking the watchdog, and could be triggered by another thread holding the GIL inside a CUDA api (for example, CudaEventDestroy), or other deadlock-prone behaviors.If you suspect the watchdog is not actually stuck and a longer timeout would help, you can either increase the timeout (TORCH_NCCL_HEARTBEAT_TIMEOUT_SEC) to a larger value or disable the heartbeat monitor (TORCH_NCCL_ENABLE_MONITORING=0).If either of aforementioned helps, feel free to file an issue to PyTorch about the short timeout or false positive abort; otherwise, please attempt to debug the hang. 
+[rank6]:[E1102 08:37:55.994101969 ProcessGroupNCCL.cpp:1753] [PG ID 1 PG GUID 1 Rank 6] ProcessGroupNCCL's watchdog got stuck for 480 seconds without making progress in monitoring enqueued collectives. This typically indicates a NCCL/CUDA API (e.g., CudaEventDestroy) hang blocking the watchdog, and could be triggered by another thread holding the GIL inside a CUDA api (for example, CudaEventDestroy), or other deadlock-prone behaviors.If you suspect the watchdog is not actually stuck and a longer timeout would help, you can either increase the timeout (TORCH_NCCL_HEARTBEAT_TIMEOUT_SEC) to a larger value or disable the heartbeat monitor (TORCH_NCCL_ENABLE_MONITORING=0).If either of aforementioned helps, feel free to file an issue to PyTorch about the short timeout or false positive abort; otherwise, please attempt to debug the hang. 
+[rank7]:[E1102 08:37:55.151315389 ProcessGroupNCCL.cpp:1753] [PG ID 1 PG GUID 1 Rank 7] ProcessGroupNCCL's watchdog got stuck for 480 seconds without making progress in monitoring enqueued collectives. This typically indicates a NCCL/CUDA API (e.g., CudaEventDestroy) hang blocking the watchdog, and could be triggered by another thread holding the GIL inside a CUDA api (for example, CudaEventDestroy), or other deadlock-prone behaviors.If you suspect the watchdog is not actually stuck and a longer timeout would help, you can either increase the timeout (TORCH_NCCL_HEARTBEAT_TIMEOUT_SEC) to a larger value or disable the heartbeat monitor (TORCH_NCCL_ENABLE_MONITORING=0).If either of aforementioned helps, feel free to file an issue to PyTorch about the short timeout or false positive abort; otherwise, please attempt to debug the hang. 
