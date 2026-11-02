@@ -1,0 +1,8 @@
+model,tp,phase,M,decider_model,decider,note
+llama3-8b,4,decode,96,sp_nccl,sp_nccl,
+llama3-8b,4,decode,160,sp_nccl,sp_nccl,
+llama3-8b,4,decode,288,sp_nccl,sp_nccl,
+llama3-8b,4,decode,416,tp_ar_vllm,tp_ar_vllm,
+llama3-8b,4,prefill,1280,tp_ar_vllm,tp_ar_vllm,probe tp_ar_vllm=11.8159 sp_nccl=12.9316
+llama3-8b,4,prefill,2560,tp_ar_vllm,tp_ar_vllm,
+llama3-8b,4,prefill,3584,tp_ar_vllm,tp_ar_vllm,probe tp_ar_vllm=36.2117 sp_nccl=36.2327
