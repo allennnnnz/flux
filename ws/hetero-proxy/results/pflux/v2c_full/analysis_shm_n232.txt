@@ -1,0 +1,34 @@
+pflux V2c analysis (ws/hetero-proxy/results/pflux/v2c_full, tag shm_n232); NCCL build [2, 21, 5] runtime 23203; wait flags 0 (0 = no remote-write flush support)
+NVLink Data Tx+Rx delta KiB per GPU {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0}
+C1 correctness: max |diff|/max|ref| rs_push 9.39e-03, rs_board 9.39e-03; board AG not bit-identical: none
+
+    M |  ag_nccl ag_board  ratio |  rs_nccl rs_board  push_T1  push_T2 T2 ratio | busbw RS nccl -> push_T2
+  256 |    0.347    0.269  1.29x |    0.398    0.418    0.471    0.376    1.06x |  5.76 ->  6.10 GB/s
+ 1024 |    1.122    0.893  1.26x |    1.179    1.460    1.633    1.194    0.99x |  7.78 ->  7.68 GB/s
+ 2048 |    2.242    1.725  1.30x |    2.350    2.860    3.208    2.314    1.02x |  7.81 ->  7.93 GB/s
+ 4096 |    4.432    3.410  1.30x |    4.611    5.713    6.440    4.571    1.01x |  7.96 ->  8.03 GB/s
+ 8192 |    8.801    6.775  1.30x |    9.181   11.328   12.910    9.053    1.01x |  7.99 ->  8.11 GB/s
+
+C2 rs_push at M=4096 3.9-4.6 ms, 1.08-1.28x: 4.571 ms, 1.009x -> HOLDS (lower edge of the ratio range)
+C3 T=2 fastest at M >= 2048: HOLDS (T1 is 1.36-1.42x slower: one thread cannot keep up)
+C4 reference items vs V2 at M=4096: ag_nccl -9.3%, ag_board/own/ovl/0 -0.2%, rs_nccl -7.6%, rs_board/ovl +0.3% -> WRONG
+
+R2 recomputed (RS_b = min(rs_push, rs_board, rs_nccl); perfect-overlap upper bound; also no overlap):
+  M=  256: baseline   1.713 ms (comm 87.0%), no-overlap   1.511 (1.13x), upper   1.289 (1.33x)
+  M= 1024: baseline   5.165 ms (comm 89.1%), no-overlap   4.706 (1.10x), upper   4.142 (1.25x)
+  M= 2048: baseline  10.145 ms (comm 90.5%), no-overlap   9.038 (1.12x), upper   8.077 (1.26x)
+  M= 4096: baseline  19.975 ms (comm 90.5%), no-overlap  17.852 (1.12x), upper  15.963 (1.25x) <- R2
+  M= 8192: baseline  39.662 ms (comm 90.7%), no-overlap  35.353 (1.12x), upper  31.656 (1.25x)
+  -> R2 (recomputed) FAIL (1.25x at M=4096); R2 as first registered (V2 items only) stays FAIL (1.29x)
+
+Notes for this tag (NCCL 2.32.3 preloaded; written 2026-11-02 after the run):
+  C2 / C4 above were registered against the NCCL 2.21.5 baseline; here they only show that the NCCL items got faster
+  (AG -9.3%, RS -7.6% at M=4096) while our items did not change (<= 0.3%). C2's HOLDS label checks the ms range only;
+  the ratio (1.009x) is OUTSIDE its 1.08-1.28x range.
+  N1 NCCL 2.32.3 busbw within 6.5-8.5 GB/s: AG 8.28, RS 7.96 at 40 MiB -> HOLDS.
+     Board AG >= 1.3x at 20-80 MiB: 1.2997 / 1.2997 / 1.2990 -> WRONG by a hair (at the threshold).
+  R2 against NCCL 2.32.3: upper bound 1.25x, no overlap 1.12x at M=4096 -> FAIL. The reduce-scatter only ties the
+  newer NCCL (1.01x); the all-gather keeps 1.30x.
+  What would change it (inference, not measured): V3c sustained ~10 GB/s per GPU each way, the RS here moves 8.0 GB/s
+  (one-block pipeline fill, Python pushers). At 10 GB/s the RS takes ~3.67 ms -> upper bound ~1.41x, no overlap
+  ~1.25x against NCCL 2.32.3. How to verify: chunked uploads (pushers start after the first chunk) + pushers in C.

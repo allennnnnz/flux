@@ -1,5 +1,6 @@
 # hetero-proxy pflux: analysis of v2c_rspush_v1.py output (v2c_shm.json). Applies C1-C4 and the recomputed R2
-# registered in the header of v2c_rspush_v1.py. Usage: python3 analyze_v2c_v1.py <results dir>  (writes analysis.txt)
+# registered in the header of v2c_rspush_v1.py. Usage: python3 analyze_v2c_v1.py <results dir> [tag]
+# (tag shm -> analysis.txt; any other tag, e.g. shm_n232 = NCCL 2.32.3 preloaded -> analysis_<tag>.txt)
 import json
 import os
 import sys
@@ -11,11 +12,12 @@ V2_REF = {"ag_nccl": 4.886, "ag_board/own/ovl/0": 3.418, "rs_nccl": 4.993, "rs_b
 
 def main():
     d = sys.argv[1]
-    r = json.load(open(os.path.join(d, "v2c_shm.json")))
+    tag = sys.argv[2] if len(sys.argv) > 2 else "shm"
+    r = json.load(open(os.path.join(d, f"v2c_{tag}.json")))
     ms = lambda n, M: r["results"][f"{n}|{M}"]["ms_rankmax"]
     L = []
     p = L.append
-    p(f"pflux V2c analysis ({d}); NCCL {r['nccl']}; wait flags {r['wait_flags']} (0 = no remote-write flush support)")
+    p(f"pflux V2c analysis ({d}, tag {tag}); NCCL build {r['nccl']} runtime {r.get('nccl_runtime', 'not recorded')}; wait flags {r['wait_flags']} (0 = no remote-write flush support)")
     p(f"NVLink Data Tx+Rx delta KiB per GPU {r['nvlink_delta_KiB']}")
     errs = {k: v for c in r["checks"] for k, v in c.items() if k.startswith("rs_")}
     bad_ag = [k for c in r["checks"] for k, v in c.items() if k.startswith("ag_") and v is not True]
@@ -58,7 +60,7 @@ def main():
       "R2 as first registered (V2 items only) stays FAIL (1.29x)")
     out = "\n".join(L)
     print(out)
-    open(os.path.join(d, "analysis.txt"), "w").write(out + "\n")
+    open(os.path.join(d, "analysis.txt" if tag == "shm" else f"analysis_{tag}.txt"), "w").write(out + "\n")
 
 
 if __name__ == "__main__":

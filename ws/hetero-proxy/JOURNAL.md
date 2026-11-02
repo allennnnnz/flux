@@ -327,4 +327,5 @@ Append-only。每條：日期、角色、做了什麼、卡在哪、留給下個
 - V2c（`v2c_rspush_v1.py`）：RS（CE 上傳＋CPU 推）1.06–1.09×；R2 重算 1.35×（上限）、1.21×（不重疊）。
 - params.json 新增 `host_board_pcie_only`。
 - **留給下個 session**：等使用者同意第 2 週；先補 NCCL 2.32.3 基準與 nsys；查單卡雙向錨點差 2× 的原因。
+- 補量 NCCL 2.32.3（LD_PRELOAD，`run_v2c_v1.sh full n232`，runtime 23203）：NCCL 快 8–9% → AG 1.30×、RS 1.01×、單層上限 1.25×（R2 對最新版不通過）。N1 的「AG ≥ 1.3×」差一點不成立（1.299）。已在報告 §0、§3.1 與 STATUS 寫明，主結論改用最新版基準。
 

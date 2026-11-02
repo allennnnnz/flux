@@ -21,6 +21,10 @@
 #   C3 T=2 is the fastest pusher count at M >= 2048 (V3c smoke on 8 GPUs: T=2 9.7-11.0, T=4 8.8-9.4 GB/s).
 #   C4 reference items reproduce V2 within 5% (ag_nccl 4.886, ag_board/own/ovl/0 3.418, rs_nccl 4.993,
 #      rs_board/ovl 5.694 ms at M=4096).
+#   N1 (added 2026-11-02 before the run with NCCL 2.32.3 preloaded, tag shm_n232): the SHM ring still relays every
+#      chunk through host memory with each GPU sending and receiving at once, so NCCL 2.32.3 AG / RS busbw stays
+#      within 6.5-8.5 GB/s (2.21.5: 7.4-7.5) and the board AG keeps >= 1.3x at 20-80 MiB. If 2.32.3 reaches >= 10 GB/s
+#      the all-gather advantage is gone.
 # Decision (V3 rule): R2 recomputed with RS_b = min(rs_push, rs_board, rs_nccl) >= 1.3x at M=4096 -> the plan can go
 # to week 2 (after the user agrees); otherwise stop at the all-gather-only result.
 # Usage (repo root): scripts/pflux/run_v2c_v1.sh (guard + tmux)
@@ -77,6 +81,14 @@ libcu = ctypes.CDLL("libcuda.so.1")
 libcu.cuPointerSetAttribute.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_uint64]
 libcu.cuDeviceGetAttribute.argtypes = [ctypes.POINTER(ctypes.c_int), ctypes.c_int, ctypes.c_int]
 libcu.cuStreamWaitValue64_v2.argtypes = [ctypes.c_void_p, ctypes.c_uint64, ctypes.c_uint64, ctypes.c_uint]
+
+
+def nccl_runtime():
+    """Version of the libnccl actually loaded (torch.cuda.nccl.version() reports the build-time one; LD_PRELOAD may
+    replace it, e.g. NCCL 2.32.3 in ~/opt)."""
+    v = ctypes.c_int()
+    ctypes.CDLL("libnccl.so.2").ncclGetVersion(ctypes.byref(v))
+    return v.value
 
 
 def node_of(rank):
@@ -455,7 +467,7 @@ def main():
         nv1 = nvlink_counters()
         nvd = {g_: nv1[1][g_] - nv0[1][g_] for g_ in range(8)}
         json.dump(dict(tag=args.tag, args=vars(args), env={k: v for k, v in os.environ.items() if k.startswith("NCCL_")},
-                       nccl=torch.cuda.nccl.version(), wait_flags=wait_flags, results=res, checks=checks,
+                       nccl=torch.cuda.nccl.version(), nccl_runtime=nccl_runtime(), wait_flags=wait_flags, results=res, checks=checks,
                        nvlink_delta_KiB=nvd), open(os.path.join(args.out, f"v2c_{args.tag}.json"), "w"), indent=1)
         say(f"[nvlink] Data Tx+Rx delta KiB per GPU: {nvd}")
         for k, v in sorted(res.items(), key=lambda kv: (int(kv[0].split('|')[1]), kv[0])):
