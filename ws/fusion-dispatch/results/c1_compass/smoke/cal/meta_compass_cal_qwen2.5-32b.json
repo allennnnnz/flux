@@ -1,0 +1,36 @@
+{
+ "args": {
+  "model": "qwen2.5-32b",
+  "Ms": "2048",
+  "ds": "2,4,8,16",
+  "rounds": 5,
+  "warmup": 2,
+  "pad_cycles": 400000,
+  "seed": 20261102,
+  "out_dir": "ws/fusion-dispatch/results/c1_compass/smoke/cal"
+ },
+ "world": 8,
+ "ops": {
+  "qkv": [
+   "ag",
+   896,
+   5120
+  ],
+  "gate_up": [
+   "ag",
+   6912,
+   5120
+  ],
+  "o": [
+   "rs",
+   5120,
+   640
+  ],
+  "down": [
+   "rs",
+   5120,
+   3456
+  ]
+ },
+ "date": "2026-11-02 13:10:00"
+}

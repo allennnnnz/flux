@@ -1,0 +1,207 @@
+{
+ "args": {
+  "phase": "prefill",
+  "mode": "eager",
+  "Ms": "1280",
+  "model": "qwen2.5-32b",
+  "table_g4": "ws/fusion-dispatch/results/g4_block_tables/table_g4_qwen2.5-32b_tp8_prefill.json",
+  "table_g3": "ws/fusion-dispatch/results/g4_block_tables/table_g3_qwen2.5-32b_tp8_prefill.json",
+  "policies": "tp_ar_vllm,sp_nccl,sp_dec2,sp_dec4,sp_dec8,sp_dec16,sp_compass",
+  "tag": "",
+  "L": 4,
+  "ctx": 1024,
+  "rounds": 3,
+  "warmup": 2,
+  "pad_cycles": 400000,
+  "rel_tol": 0.05,
+  "seed": 20260930,
+  "car_big_mib": 0,
+  "decomp_ds": "2,4,8,16",
+  "compass_table": "ws/fusion-dispatch/results/c1_compass/smoke/table_smoke.json",
+  "out_dir": "ws/fusion-dispatch/results/c1_compass/smoke/block"
+ },
+ "model": [
+  5120,
+  40,
+  8,
+  128,
+  27648
+ ],
+ "world": 8,
+ "table_g4_digest": "9d7a8957da1bb29c8f549c5744eed544dd27ff95f45c5645de5b412521fe7327",
+ "table_g3_digest": "512b7dced918fa71b3ba459e4c8ae4f2534e17f6a48c28f52530df17b461ba75",
+ "table_meta": {
+  "model": "qwen2.5-32b",
+  "world": 8,
+  "phase": "prefill",
+  "mode": "steady",
+  "graph": false,
+  "method": "g4",
+  "eps": 0.10143487172823906,
+  "probes_pending": [
+   {
+    "kind": "ag",
+    "key": "896x5120",
+    "layer": "qkv",
+    "M": 2048,
+    "margin": 0.0208,
+    "candidates": [
+     "B",
+     "A"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "6912x5120",
+    "layer": "gate_up",
+    "M": 2048,
+    "margin": 0.0157,
+    "candidates": [
+     "B",
+     "A"
+    ]
+   },
+   {
+    "kind": "ag",
+    "key": "6912x5120",
+    "layer": "gate_up",
+    "M": 4096,
+    "margin": 0.0226,
+    "candidates": [
+     "A",
+     "B"
+    ]
+   }
+  ],
+  "probes_applied": 3,
+  "probes_changed_first_choice": 2
+ },
+ "date": "2026-11-02 13:09:36",
+ "cases": {
+  "1280": {
+   "check": {
+    "tp_ar_vllm": {
+     "max_abs_err": 0.0,
+     "rel_err": 0.0,
+     "ok_all_ranks": true
+    },
+    "sp_nccl": {
+     "max_abs_err": 0.875,
+     "rel_err": 0.021604938271604937,
+     "ok_all_ranks": true
+    },
+    "sp_dec2": {
+     "max_abs_err": 1.0625,
+     "rel_err": 0.026234567901234566,
+     "ok_all_ranks": true
+    },
+    "sp_dec4": {
+     "max_abs_err": 1.0625,
+     "rel_err": 0.026234567901234566,
+     "ok_all_ranks": true
+    },
+    "sp_dec8": {
+     "max_abs_err": 1.0546875,
+     "rel_err": 0.026041666666666668,
+     "ok_all_ranks": true
+    },
+    "sp_dec16": {
+     "max_abs_err": 1.0625,
+     "rel_err": 0.026234567901234566,
+     "ok_all_ranks": true
+    },
+    "sp_compass": {
+     "max_abs_err": 1.125,
+     "rel_err": 0.027777777777777776,
+     "ok_all_ranks": true
+    }
+   },
+   "counts": {
+    "sp_nccl": {
+     "ag:nccl": 8,
+     "rs:nccl": 8
+    },
+    "sp_flux": {},
+    "sp_rsflux": {},
+    "sp_g4": {},
+    "sp_g3": {},
+    "sp_dec2": {
+     "ag:2": 8,
+     "rs:2": 8
+    },
+    "sp_dec4": {
+     "ag:4": 8,
+     "rs:4": 8
+    },
+    "sp_dec8": {
+     "ag:8": 8,
+     "rs:8": 8
+    },
+    "sp_dec16": {
+     "ag:16": 8,
+     "rs:16": 8
+    },
+    "sp_compass": {
+     "ag:4": 4,
+     "rs:2": 4,
+     "ag:2": 4,
+     "rs:4": 4
+    }
+   },
+   "misses": {},
+   "kept": 3,
+   "median_ms": {
+    "tp_ar": 15.323136329650879,
+    "tp_ar_vllm": 15.403008460998535,
+    "sp_nccl": 15.180800437927246,
+    "sp_dec2": 15.936511993408203,
+    "sp_dec4": 16.17305564880371,
+    "sp_dec8": 20.147199630737305,
+    "sp_dec16": 34.312191009521484,
+    "sp_compass": 15.890432357788086
+   },
+   "dispatch_minus_policy_p10_p50_p90": {
+    "tp_ar": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "tp_ar_vllm": [
+     -0.10547256469726562,
+     -0.07987213134765625,
+     0.48230457305908203
+    ],
+    "sp_nccl": [
+     -0.7096319198608398,
+     0.1587200164794922,
+     0.7208957672119141
+    ],
+    "sp_dec2": [
+     -0.6768636703491211,
+     -0.6594562530517578,
+     0.07680034637451172
+    ],
+    "sp_dec4": [
+     -0.9011201858520508,
+     -0.8959999084472656,
+     -0.22732830047607422
+    ],
+    "sp_dec8": [
+     -4.914176940917969,
+     -4.593663215637207,
+     -4.2455034255981445
+    ],
+    "sp_dec16": [
+     -20.830209732055664,
+     -18.941950798034668,
+     -18.410494804382324
+    ],
+    "sp_compass": [
+     -0.6133766174316406,
+     -0.44851207733154297,
+     -0.0747518539428711
+    ]
+   }
+  }
+ }
+}

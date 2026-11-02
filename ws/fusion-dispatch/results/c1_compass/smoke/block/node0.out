@@ -1,0 +1,41 @@
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING:root:Failed to load NVSHMEM libs
+WARNING 11-02 13:09:36 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:09:36 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:09:36 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:09:36 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:09:36 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:09:36 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:09:36 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:09:36 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:09:36 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:09:36 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:09:36 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:09:36 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:09:36 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:09:36 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:09:36 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:09:36 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:09:36 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:09:36 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:09:36 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:09:36 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:09:36 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:09:36 [config.py:4136] Current vLLM config is not set.
+WARNING 11-02 13:09:36 [config.py:1957] max_model_len was is not set. Defaulting to arbitrary value of 8192.
+WARNING 11-02 13:09:36 [config.py:1963] max_num_seqs was is not set. Defaulting to arbitrary value of 128.
+WARNING 11-02 13:09:36 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 11-02 13:09:36 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 11-02 13:09:36 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+WARNING 11-02 13:09:36 [custom_all_reduce.py:84] Custom allreduce is disabled because this process group spans across nodes.
+vLLM custom AR present=True disabled=True fully_connected=None max_size=None; pynccl disabled=False
+[prefill eager L=4 M=1280] kept 3  tp_ar=15.3231  tp_ar_vllm=15.4030  sp_nccl=15.1808  sp_dec2=15.9365  sp_dec4=16.1731  sp_dec8=20.1472  sp_dec16=34.3122  sp_compass=15.8904  best=sp_nccl  g4 counts={} g3 counts={} misses={}  check={'tp_ar_vllm': 0.0, 'sp_nccl': 0.0216, 'sp_dec2': 0.0262, 'sp_dec4': 0.0262, 'sp_dec8': 0.026, 'sp_dec16': 0.0262, 'sp_compass': 0.0278}
+/home/rogerlee/flux/.pixi/envs/default/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[exclusive_guard_v2 css-host-158] CLEAN (foreign GPU 0, CPU 0, root 0; self warnings 0) log=/home/rogerlee/flux/ws/fusion-dispatch/results/c1_compass/smoke/block/guard_node0.log

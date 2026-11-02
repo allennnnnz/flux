@@ -837,3 +837,9 @@ policy           regret   saving vs vLLM   worst point   right
 - 撰寫報告時我先寫了「R1p 在 E4a2 的 prefill 全對、這次翻掉」，核對 E4a2 的 eval 後發現 E4a2 也是 TP8 對、TP4 錯 → 已在報告更正，不是環境造成的翻轉。
 - 報告 `reports/20261102_e4a3_fresh_env.md`。下一步待使用者：決策器論文的其他缺口（Compass 對照、端到端、「為何不直接量」、auditor）。
 
+## 2026-11-02 · hetero-proxy 的 boss 兼 worker session · C1（和 Compass 比）啟動
+
+- 重讀 Compass 全文（WebFetch arxiv html）：選擇器是封閉式成本模型（公式 2–8，O(1)），候選只有「融合（自家 kernel）」與「切 d 塊」；沒有開源；只在序列平行的切法內選。
+- 實作：`decomp_v1.py`（切塊，c10d async 集合通訊＋GEMM 交錯）、`validate_block_v5.py`、`calibrate_compass_v1.py`（每運算 comp / comm / dec<d>）、`compass_model_v1.py`（fit / predict / report）、`run_c1_v1.sh`。
+- 冒煙測試（3–5 輪，已在登記中揭露）：結果正確；切塊確實有重疊（gate_up M=2048：1.98 → 1.64 ms）；M=1280 prefill 切越多越慢；decode M=96 d=4 慢 3 倍；選擇器用冒煙參數在 decode 多選 d=4 → 登記兩種 Compass（照字面／只在 prefill 用）。
+
