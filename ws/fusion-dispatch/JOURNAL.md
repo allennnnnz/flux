@@ -845,3 +845,9 @@ policy           regret   saving vs vLLM   worst point   right
 - C1 v1 標準答案在第一組（Qwen TP8 decode graph）卡死 30 分鐘：c10d async 集合通訊錄進 CUDA graph 重播後，對齊 all_reduce 逾時。停止程序時，第一次用 pgrep 樣式誤殺自己的 shell；第二次自動權限擋下「用 nvidia-smi 列的 PID 直接殺」，改成先逐一確認擁有者與指令再停。
 - 改寫 v2（PyNccl＋side stream），壓力測試剛開始使用者就要求暫停 → 兩台確認無殘留。**留給下個 session**：先跑 v6 decode 壓力測試（200 輪 × 4 點），不卡才重跑 C1（v2 流程要重新校準與登記）。
 
+## 2026-11-03 · hetero-proxy 的 boss 兼 worker session · 跨 rail 連通性（使用者問：沒有 NVSHMEM 跨節點就不能 P2P 嗎）
+
+- 從 158 的 rail 1 網卡（enp29s0f0np0）ping 159 的 rail 2 / 3 / 7 位址：全部 100% 掉包；同 rail（10.10.1.159）通。158 路由表只有 8 條直連網段，沒有閘道 → **rail 之間在 L2、L3 都不通**（實體是交換器或對接線，未確認）。
+- 意義：NCCL 沒事，因為它跨節點天生 rail 對齊（同號 GPU、同條 rail），需要時用 NVLink 在本機轉手（PXN）；NVSHMEM（Flux 跨節點 AG 用）要求任兩 GPU 直連 → 只能擠一張網卡。
+- 可行解（待使用者）：(a) 管理員打通 rail 路由；(b) 不靠路由的分層做法：節點內 Flux＋節點間同 rail（Flux 的 GemmRS_multinode 就是這種，但結果錯，要修；AG 需自寫分層版）。
+
